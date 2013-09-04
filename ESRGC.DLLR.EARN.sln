@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ESRGC.DLLR.EARN", "ESRGC.DLLR.EARN\ESRGC.DLLR.EARN.csproj", "{4BDD46BE-B768-4FC9-AA1E-B96AD31F58F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ESRGC.DLLR.EARN.Tests", "ESRGC.DLLR.EARN.Tests\ESRGC.DLLR.EARN.Tests.csproj", "{32574DB7-D0F8-49A2-9E7A-969A390584C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ESRGC.DLLR.EARN.Domain", "ESRGC.DLLR.EARN.Domain\ESRGC.DLLR.EARN.Domain.csproj", "{77981CA6-31D5-43AA-92A1-9404C2FCE4AC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4BDD46BE-B768-4FC9-AA1E-B96AD31F58F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BDD46BE-B768-4FC9-AA1E-B96AD31F58F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BDD46BE-B768-4FC9-AA1E-B96AD31F58F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BDD46BE-B768-4FC9-AA1E-B96AD31F58F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32574DB7-D0F8-49A2-9E7A-969A390584C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32574DB7-D0F8-49A2-9E7A-969A390584C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32574DB7-D0F8-49A2-9E7A-969A390584C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32574DB7-D0F8-49A2-9E7A-969A390584C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77981CA6-31D5-43AA-92A1-9404C2FCE4AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77981CA6-31D5-43AA-92A1-9404C2FCE4AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77981CA6-31D5-43AA-92A1-9404C2FCE4AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77981CA6-31D5-43AA-92A1-9404C2FCE4AC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
