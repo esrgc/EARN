@@ -6,7 +6,9 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Data.Entity;
-using ESRGC.MSGIC.Membership.Domain.DAL;
+using ESRGC.DLLR.EARN.Domain.DAL;
+using ESRGC.DLLR.EARN.Infrastructure;
+using System.Web.Optimization;
 
 namespace ESRGC.DLLR.EARN
 {
@@ -20,8 +22,10 @@ namespace ESRGC.DLLR.EARN
       WebApiConfig.Register(GlobalConfiguration.Configuration);
       FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
       RouteConfig.RegisterRoutes(RouteTable.Routes);
+      BundleConfig.RegisterBundles(BundleTable.Bundles);
 
       Database.SetInitializer(new DataInitializer());
+      DependencyResolver.SetResolver(new NinjectDependencyResolver());
     }
   }
 }

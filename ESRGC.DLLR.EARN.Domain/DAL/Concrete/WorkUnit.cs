@@ -5,7 +5,7 @@ using System.Text;
 using ESRGC.DLLR.EARN.Domain.DAL.Abstract;
 using ESRGC.DLLR.EARN.Domain.DAL;
 
-namespace ESRGC.MSGIC.Membership.Domain.DAL.Concrete
+namespace ESRGC.DLLR.EARN.Domain.DAL.Concrete
 {
   public class WorkUnit : IWorkUnit, IDisposable
   {

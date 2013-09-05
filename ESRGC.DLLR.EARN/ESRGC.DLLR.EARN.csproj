@@ -16,6 +16,7 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>false</UseIISExpress>
+    <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,16 +36,25 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.0.0-rc1\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.0.0-rc1\lib\net40\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.3.0.1.10\lib\net40\Ninject.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -52,6 +62,9 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.0\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -64,9 +77,6 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.4.5.6\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http">
       <Private>True</Private>
@@ -109,22 +119,49 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="WebGrease">
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Client\css\site.css" />
+    <Content Include="Client\css\stickyFooter.css" />
+    <Content Include="Client\images\ajax-loader-fb.gif" />
+    <Content Include="Client\images\empty_profile.gif" />
+    <Content Include="Client\images\error.jpg" />
+    <Content Include="Client\images\esrgc.png" />
+    <Content Include="Client\images\valid.png" />
+    <Content Include="Client\jsLib\bootstrap-3.0\css\bootstrap-theme.css" />
+    <Content Include="Client\jsLib\bootstrap-3.0\css\bootstrap-theme.min.css" />
+    <Content Include="Client\jsLib\bootstrap-3.0\css\bootstrap.css" />
+    <Content Include="Client\jsLib\bootstrap-3.0\css\bootstrap.min.css" />
+    <Content Include="Client\jsLib\bootstrap-3.0\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Client\jsLib\bootstrap-3.0\js\bootstrap.js" />
+    <Content Include="Client\jsLib\bootstrap-3.0\js\bootstrap.min.js" />
+    <Content Include="Client\js\bootstrapValidation.js" />
     <Content Include="Client\js\dx.min.js" />
     <Content Include="Global.asax" />
     <Content Include="Client\jsLib\jquery\jquery-2.0.3-vsdoc.js" />
     <Content Include="Client\jsLib\jquery\jquery-2.0.3.js" />
     <Content Include="Client\jsLib\jquery\jquery-2.0.3.min.js" />
+    <Content Include="Client\jsLib\jqueryValidate\jquery.validate-vsdoc.js" />
+    <Content Include="Client\jsLib\jqueryValidate\jquery.validate.js" />
+    <Content Include="Client\jsLib\jqueryValidate\jquery.validate.min.js" />
+    <Content Include="Client\jsLib\jqueryValidate\jquery.validate.unobtrusive.js" />
+    <Content Include="Client\jsLib\jqueryValidate\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Client\js\modernizr-2.6.2.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -137,18 +174,20 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Client\apps\" />
-    <Folder Include="Client\css\" />
-    <Folder Include="Client\images\" />
-    <Folder Include="Controllers\" />
-    <Folder Include="Infrastructure\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Shared\" />
+    <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Client\jsLib\bootstrap-3.0\fonts\glyphicons-halflings-regular.eot" />
+    <None Include="Client\jsLib\bootstrap-3.0\fonts\glyphicons-halflings-regular.ttf" />
+    <None Include="Client\jsLib\bootstrap-3.0\fonts\glyphicons-halflings-regular.woff" />
     <None Include="Client\jsLib\jquery\jquery-2.0.3.min.map" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ESRGC.DLLR.EARN.Domain\ESRGC.DLLR.EARN.Domain.csproj">

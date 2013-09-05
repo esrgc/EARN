@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using ESRGC.DLLR.EARN.Domain.DAL.Abstract;
 
-namespace ESRGC.MSGIC.Membership.Domain.DAL
+namespace ESRGC.DLLR.EARN.Domain.DAL
 {
     public class PasswordInitializer
     {

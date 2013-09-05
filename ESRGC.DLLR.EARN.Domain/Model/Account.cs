@@ -1,0 +1,60 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.ComponentModel.DataAnnotations;
+using ESRGC.DLLR.EARN.Domain.ValidationAttributes;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace ESRGC.DLLR.EARN.Domain.Model
+{
+  public class Account
+  {
+    public Account() {
+      AcceptNotification = false;//default value
+    }
+
+    public int AccountID { get; set; }
+
+    [MaxLength(50)]
+    [EmailValidation(ErrorMessage = "Invalid email address")]
+    [DataType(DataType.EmailAddress)]
+    [Display(Name = "Email address *")]
+    public string EmailAddress { get; set; }
+
+    [MaxLength(32)]
+    [DataType(DataType.Password)]
+    public byte[] Password { get; set; }
+
+    [MaxLength(32)]
+    [ScaffoldColumn(false)]
+    public string InitialPassword { get; set; }
+
+    [ScaffoldColumn(false)]
+    public int? ContactID { get; set; }
+    public virtual Contact Contact { get; set; }
+
+    [MaxLength(20)]
+    public string Role { get; set; }
+
+    public bool Active { get; set; }
+    [MaxLength(50)]
+    public string SecretQuestion { get; set; }
+
+    [MaxLength(50)]
+    [DataType(DataType.Password)]
+    public byte[] AnswerToSecretQuestion { get; set; }
+
+    [Display(Name = "Member since")]
+    public DateTime? MemberSince { get; set; }
+
+    [Display(Name = "Last login")]
+    public DateTime? LastLogin { get; set; }
+
+    public bool? AcceptNotification { get; set; }
+
+    [Display(Name = "Last update")]
+    public DateTime? LastUpdate { get; set; }
+
+  }
+}
