@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Ninject;
+using ESRGC.DLLR.EARN.Domain.DAL.Abstract;
+using ESRGC.DLLR.EARN.Domain.DAL.Concrete;
+using ESRGC.DLLR.EARN.Domain.DAL;
 
 namespace ESRGC.DLLR.EARN.Infrastructure
 {
@@ -15,8 +18,11 @@ namespace ESRGC.DLLR.EARN.Infrastructure
       addBindings();
     }
 
-    void addBindings() { 
-      
+    void addBindings() {
+      _kernel
+        .Bind<IWorkUnit>()
+        .To<WorkUnit>()
+        .WithConstructorArgument("context", new DomainContext());
     }
 
     public object GetService(Type serviceType) {

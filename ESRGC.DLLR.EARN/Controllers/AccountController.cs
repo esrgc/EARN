@@ -7,7 +7,7 @@ using ESRGC.DLLR.EARN.Models;
 
 namespace ESRGC.DLLR.EARN.Controllers
 {
-  public class AccountController : Controller
+  public class AccountController : BaseController
   {
     //
     // GET: /Account/
