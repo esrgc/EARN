@@ -19,7 +19,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     [MaxLength(50)]
     [EmailValidation(ErrorMessage = "Invalid email address")]
     [DataType(DataType.EmailAddress)]
-    [Display(Name = "Email address *")]
+    [Display(Name = "Email address")]
     public string EmailAddress { get; set; }
 
     [MaxLength(32)]
@@ -44,6 +44,20 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     [MaxLength(50)]
     [DataType(DataType.Password)]
     public byte[] AnswerToSecretQuestion { get; set; }
+
+    [MaxLength(50)]
+    public string SecretQuestion2 { get; set; }
+
+    [MaxLength(50)]
+    [DataType(DataType.Password)]
+    public byte[] AnswerToSecretQuestion2 { get; set; }
+
+    [MaxLength(50)]
+    public string SecretQuestion3 { get; set; }
+
+    [MaxLength(50)]
+    [DataType(DataType.Password)]
+    public byte[] AnswerToSecretQuestion3 { get; set; }
 
     [Display(Name = "Member since")]
     public DateTime? MemberSince { get; set; }
