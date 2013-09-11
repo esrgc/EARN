@@ -16,6 +16,7 @@ namespace ESRGC.DLLR.EARN.Domain.DAL
     }
     public DbSet<Account> Accounts { get; set; }
     public DbSet<Contact> Contacts { get; set; }
+    public DbSet<Picture> Pictures { get; set; }
 
     protected override void OnModelCreating(DbModelBuilder modelBuilder) {
       modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();

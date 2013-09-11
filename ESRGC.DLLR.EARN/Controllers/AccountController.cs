@@ -7,35 +7,37 @@ using ESRGC.DLLR.EARN.Models;
 
 namespace ESRGC.DLLR.EARN.Controllers
 {
+  [Authorize]
   public class AccountController : BaseController
   {
-    //
-    // GET: /Account/
-
     public ActionResult Index() {
       return View();
     }
-
+    [AllowAnonymous]
     public ActionResult SignUp() {
       return View();
     }
+
     [HttpPost]
+    [AllowAnonymous]
     public ActionResult SignUp(SignUpModel model) {
       return View();
     }
-
+    [AllowAnonymous]
     public ActionResult SignIn() {
       return View();
     }
 
     [HttpPost]
-    public ActionResult SignIn(SignInModel model) { 
+    [AllowAnonymous]
+    public ActionResult SignIn(SignInModel model) {
       return View();
     }
 
-    public ActionResult SignOut(){
+    public ActionResult SignOut() {
       return View();
     }
+
 
 
   }

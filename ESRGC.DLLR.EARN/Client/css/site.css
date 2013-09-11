@@ -1,31 +1,30 @@
-﻿header
-{
+﻿html, body {
+    height: 100%;
+}
+header {
     margin-top: 60px;
 }
 
-.list-container > ul
-{
+.list-container > ul {
 }
 
-.list-container > ul > li
-{
+.list-container > ul > li {
     padding: 10px 0;
     border-bottom: 1px solid #EEEEEE;
 }
-.footer > .container
-{
+.footer {
+}
+.footer > .container {
     border-top: 1px solid #eeeeee;
-    padding-top: 30px;
+    padding: 20px 15px 0 15px;
 }
 
-.wrapper > .container
-{
-    padding-top: 50px;
+.wrapper > .container {
+    /*padding-top: 10px;*/
 }
 
 /*Panel*/
-.panel
-{
+.panel {
     min-height: 150px;
     margin-bottom: 20px;
     border: 1px solid #dfdfdf;
@@ -44,13 +43,11 @@
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
-.panel.in
-{
+.panel.in {
     border: 1px solid #eeeeee;
 }
 
-.panel-title
-{
+.panel-title {
     margin: 0;
     padding: 12px 14px;
     background-color: #f1f1f1;
@@ -67,27 +64,22 @@
     box-shadow: 0 1px 0 #fff;
 }
 
-.panel-content
-{
+.panel-content {
     padding: 20px 15px 15px 15px;
     font-size: 13px;
 }
 
-.pagination
-{
+.pagination {
     text-align: center;
 }
 
-.panel-inner
-{
+.panel-inner {
 }
 
-.panel .label
-{
+.panel .label {
 }
 
-.panel .label-close
-{
+.panel .label-close {
     /*font-size: 20px;     font-weight: bold;     line-height: 20px;*/
     color: #000000;
     text-shadow: 0 1px 0 #ffffff;
@@ -98,8 +90,7 @@
     margin-left: 5px;
 }
 
-.panel .label-close:hover
-{
+.panel .label-close:hover {
     color: #000000;
     text-decoration: none;
     cursor: pointer;
@@ -107,19 +98,16 @@
     filter: alpha(opacity=60);
 }
 
-.panel a:hover
-{
+.panel a:hover {
     text-decoration: none;
 }
 
-.message-box
-{
+.message-box {
     text-align: center;
     font-weight: bold;
 }
 
-.post
-{
+.post {
     margin: 0 0 10px 0;
     padding: 15px;
     border: 1px solid #D2D2D2;
@@ -129,40 +117,33 @@
     position: relative;
 }
 
-.post > p
-{
+.post > p {
     margin: 10px 0;
 }
 
-.post h5
-{
+.post h5 {
     margin-top: 0;
 }
 
-.affix-top
-{
+.affix-top {
     top: 100px;
 }
 
-.inline-container > .list-container
-{
+.inline-container > .list-container {
     margin: 0 5px 0 0;
 }
 
-.inline-container > div
-{
+.inline-container > div {
     display: inline-block;
     float: left;
 }
 
-.clear
-{
+.clear {
     clear: both;
 }
 
 /*validation*/
-label.valid
-{
+label.valid {
     width: 24px;
     height: 24px;
     background: url(images/valid.png) center center no-repeat !important;
@@ -170,8 +151,7 @@ label.valid
     text-indent: -9999px !important;
 }
 
-label.error
-{
+label.error {
     background: url(images/error.jpg) left center no-repeat;
     font-weight: bold;
     color: red;

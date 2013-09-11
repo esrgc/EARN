@@ -15,5 +15,9 @@ namespace ESRGC.DLLR.EARN.Controllers
       _workUnit = workUnit;
     }
 
+    [Authorize]
+    public FileContentResult ProfilePicture(int pictureId) {
+      return null;
+    }
   }
 }

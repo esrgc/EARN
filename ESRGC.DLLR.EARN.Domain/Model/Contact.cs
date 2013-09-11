@@ -32,10 +32,10 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     [Display(Name = "Job title")]
     public string JobTitle { get; set; }
     
-    [ScaffoldColumn(false)]
-    [Display(Name = "Company")]
-    public int? CompanyID { get; set; }
-    public virtual Company Company { get; set; }
+    //[ScaffoldColumn(false)]
+    //[Display(Name = "Company")]
+    //public int? CompanyID { get; set; }
+    //public virtual Company Company { get; set; }
     
     [Display(Name = "Department")]
     public string Department { get; set; }

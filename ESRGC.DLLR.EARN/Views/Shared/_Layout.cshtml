@@ -11,7 +11,7 @@
     <!--Custom page CSS goes here-->
     @RenderSection("pageCSS", required: false)
 </head>
-<body>
+<body lang="en">
     <div class="wrapper">
         <!--nav bar-->
         @Html.Partial("Navigation")
@@ -34,7 +34,8 @@
     <div class="footer" id="footer">
         <div class="container">
             <div class="row text-center">
-                @RenderSection("footer", required: false)    
+                @*@RenderSection("footer", required: false)*@    
+                Footer content
             </div>
         </div>
     </div>
