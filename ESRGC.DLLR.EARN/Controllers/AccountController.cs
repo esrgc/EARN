@@ -11,6 +11,7 @@ namespace ESRGC.DLLR.EARN.Controllers
   public class AccountController : BaseController
   {
     public ActionResult Index() {
+      
       return View();
     }
     [AllowAnonymous]

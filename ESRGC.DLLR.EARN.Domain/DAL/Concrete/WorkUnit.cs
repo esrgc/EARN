@@ -4,17 +4,18 @@ using System.Linq;
 using System.Text;
 using ESRGC.DLLR.EARN.Domain.DAL.Abstract;
 using ESRGC.DLLR.EARN.Domain.DAL;
+using ESRGC.DLLR.EARN.Domain.Model;
 
 namespace ESRGC.DLLR.EARN.Domain.DAL.Concrete
 {
   public class WorkUnit : IWorkUnit, IDisposable
   {
     DomainContext _context;
-    //IRepository<Contact> _contactRepo;
+    IRepository<Contact> _contactRepo;
     //IRepository<Caucus> _caucusRepo;
     //IRepository<Company> _companyRepo;
     //IRepository<SubCommittee> _subCommittRepo;
-    //IRepository<Account> _accountRepo;
+    IRepository<Account> _accountRepo;
     //IRepository<Picture> _pictureRepo;
     //IRepository<MembershipType> _membershipType;
     //IRepository<Subscription> _subscriptionRepo;
@@ -35,14 +36,14 @@ namespace ESRGC.DLLR.EARN.Domain.DAL.Concrete
       _context.Dispose();
     }
 
-    //public IRepository<Model.Contact> ContactRepository {
-    //  get {
-    //    if (_contactRepo == null) {
-    //      _contactRepo = new Repository<Contact>(_context);
-    //    }
-    //    return _contactRepo;
-    //  }
-    //}
+    public IRepository<Model.Contact> ContactRepository {
+      get {
+        if (_contactRepo == null) {
+          _contactRepo = new Repository<Contact>(_context);
+        }
+        return _contactRepo;
+      }
+    }
 
     //public IRepository<Model.Caucus> CaucusRepository {
     //  get {
@@ -70,13 +71,13 @@ namespace ESRGC.DLLR.EARN.Domain.DAL.Concrete
     //}
 
 
-    //public IRepository<Account> AccountRepository {
-    //  get {
-    //    if (_accountRepo == null)
-    //      _accountRepo = new Repository<Account>(_context);
-    //    return _accountRepo;
-    //  }
-    //}
+    public IRepository<Account> AccountRepository {
+      get {
+        if (_accountRepo == null)
+          _accountRepo = new Repository<Account>(_context);
+        return _accountRepo;
+      }
+    }
 
     //public IRepository<Picture> PictureRepository {
     //  get {
