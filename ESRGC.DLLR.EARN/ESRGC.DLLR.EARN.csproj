@@ -151,6 +151,8 @@
     <Content Include="Client\images\empty_profile.gif" />
     <Content Include="Client\images\error.jpg" />
     <Content Include="Client\images\esrgc.png" />
+    <Content Include="Client\images\MDlogo.gif" />
+    <Content Include="Client\images\SalisburyUniversity.jpg" />
     <Content Include="Client\images\valid.png" />
     <Content Include="Client\jsLib\bootstrap-3.0\css\bootstrap-theme.css" />
     <Content Include="Client\jsLib\bootstrap-3.0\css\bootstrap-theme.min.css" />
@@ -161,6 +163,7 @@
     <Content Include="Client\jsLib\bootstrap-3.0\js\bootstrap.min.js" />
     <Content Include="Client\js\bootstrapValidation.js" />
     <Content Include="Client\js\dx.min.js" />
+    <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Client\jsLib\jquery\jquery-2.0.3-vsdoc.js" />
     <Content Include="Client\jsLib\jquery\jquery-2.0.3.js" />
@@ -196,8 +199,9 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Navigation.cshtml" />
+    <Content Include="Views\Shared\navBar.cshtml" />
     <Content Include="Views\Account\SignUp.cshtml" />
+    <Content Include="Views\Account\SignIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ESRGC.DLLR.EARN.Domain\ESRGC.DLLR.EARN.Domain.csproj">

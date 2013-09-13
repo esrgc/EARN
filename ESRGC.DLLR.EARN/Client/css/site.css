@@ -4,7 +4,11 @@
 header {
     margin-top: 60px;
 }
-
+.navbar {
+    webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    border-radius: 0 !important;
+}
 .list-container > ul {
 }
 
@@ -13,6 +17,8 @@ header {
     border-bottom: 1px solid #EEEEEE;
 }
 .footer {
+    border-top: 1px solid #eeeeee;
+    position: relative;
 }
 .footer > .container {
     border-top: 1px solid #eeeeee;
@@ -22,7 +28,9 @@ header {
 .wrapper > .container {
     /*padding-top: 10px;*/
 }
-
+.body-content {
+    
+}
 /*Panel*/
 .panel {
     min-height: 150px;
@@ -140,6 +148,17 @@ header {
 
 .clear {
     clear: both;
+}
+.site-logo {
+    padding: 10px 5px;
+    vertical-align: middle;
+    width: 150px;
+    height: auto;
+}
+.form-signin {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
 }
 
 /*validation*/

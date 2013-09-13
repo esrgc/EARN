@@ -9,9 +9,13 @@
 @section header {
     <div class="jumbotron">
         <div class="container">
-            <h1>App title</h1>
-            <p>Description goes here</p>
-            <p><a class="btn btn-lg btn-primary">Learn more</a></p>
+            <h2>The EARN Maryland Program</h2>
+            <p>Maryland’s new workforce training initiative</p>
+            <p>
+                <a class="btn btn-lg btn-primary" target="_blank" href="http://www.dllr.maryland.gov/earn">Learn more <i class="icon-external-link"></i></a>
+                <a class="btn btn-lg btn-success" href="@Url.Action("SignUp", "Account")">Become a member <i class="icon-edit"></i></a>
+                <a class="btn btn-lg btn-success" href="@Url.Action("SignIn", "Account")">Member sign in <i class="icon-signin"></i></a>
+            </p>
         </div>
     </div>
 }
