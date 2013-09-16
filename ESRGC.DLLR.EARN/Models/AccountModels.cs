@@ -88,7 +88,7 @@ namespace ESRGC.DLLR.EARN.Models
     public class SignUpModel
     {
         
-        [Required]
+        [Required(ErrorMessage="Please enter a valid email address")]
         [EmailValidation(ErrorMessage = "Invalid email address")]
         [DataType(DataType.EmailAddress)]
         [Display(Name = "Email address")]

@@ -1,11 +1,84 @@
-﻿@{
-    ViewBag.Title = "New Member";
+﻿@model ESRGC.DLLR.EARN.Models.SignUpModel
+@{
+    ViewBag.Title = "Sign up";
+    ViewBag.Header = "Sign up";
 }
-
-@section scripts {}
-
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval-unobtrusive")    
+}
 @section header {
-
+    <h4>@ViewBag.Header <i class="icon-large icon-edit"></i>
+    </h4>
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("index", "Home")">Home</a></li>
+        <li class="active">@ViewBag.Header</li>
+    </ul>
 }
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
 
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <strong>New member</strong> <span class="label label-default">(All fields are required)</span>
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm("SignUp", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
+                    @Html.ValidationSummary(true)
+                    <div class="form-group">
+                        <label for="Email" class="col-md-3 control-label">Email</label>
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(x => x.Email, new { @class = "form-control", placeholder = "Email" })
+                            <span class="help-block">
+                                @Html.ValidationMessageFor(x => x.Email)
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Password" class="col-md-3 control-label">Password</label>
+                        <div class="col-md-6">
+                            @Html.PasswordFor(x => x.Password, new { @class = "form-control", placeholder = "Password" })
+                            <span class="help-block">@Html.ValidationMessageFor(x => x.Password)</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="ConfirmPassword" class="col-md-3 control-label">Confirm password</label>
+                        <div class="col-md-6">
+                            @Html.PasswordFor(x=>x.ConfirmPassword, new { @class="form-control", placeholder="Confirm your password"})
+                            <span class="help-block">@Html.ValidationMessageFor(x => x.ConfirmPassword)</span>
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="SecretQuestion">Sercurity question</label>
+                        <div class="col-md-6">
+                            @Html.DropDownListFor(x => x.SecretQuestion, new SelectList(Model.SecretQuestions), "Select a question", new { @class = "form-control" })
+                            <span class="help-block">@Html.ValidationMessageFor(x => x.SecretQuestion)</span>
+                        </div>
 
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="SecretAnswer">Secret answer</label>
+                        <div class="col-md-6">
+                            @Html.PasswordFor(x=>x.SecretAnswer, new {@class="form-control", placeholder="Secret answer"})
+                            <span class="help-block">@Html.ValidationMessageFor(x => x.SecretAnswer)</span>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="ConfirmAnswer">Confirm answer</label>
+                        <div class="col-md-6">
+                            @Html.PasswordFor(x=>x.ConfirmAnswer, new {@class="form-control", placeholder="Confirm answer"})
+                            <span class="help-block">@Html.ValidationMessageFor(x => x.ConfirmAnswer)</span>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-6 col-md-offset-3">
+                            <input class="btn btn-primary" type="submit" value="Sign up" />
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

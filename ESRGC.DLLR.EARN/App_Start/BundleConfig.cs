@@ -21,7 +21,8 @@ namespace ESRGC.DLLR.EARN
       ));
       bundles.Add(new ScriptBundle("~/bundles/jqueryval-unobtrusive").Include(
         "~/Client/jsLib/jqueryValidate/jquery.validate.*",
-        "~/Client/jsLib/jqueryValidate/jquery.validate.unobtrusive*"
+        "~/Client/jsLib/jqueryValidate/jquery.validate.unobtrusive*",
+        "~/Client/js/bootstrapValidation.js"
       ));
 
       //css bundles
