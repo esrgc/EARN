@@ -19,5 +19,9 @@ namespace ESRGC.DLLR.EARN.Controllers
     public FileContentResult ProfilePicture(int pictureId) {
       return null;
     }
+
+    public void updateTempDataMessage(string message) {
+      TempData["message"] = message;
+    }
   }
 }

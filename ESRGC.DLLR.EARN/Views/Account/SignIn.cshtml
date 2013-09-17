@@ -1,7 +1,11 @@
 ﻿@{
     ViewBag.Title = "SignIn";
 }
-
+@section header{
+    
+}
 <div class="row">
-    <div class="form-signin"></div>    
+    <div class="col-sm-6 col-sm-offset-3">
+        @Html.Partial("quickSignin")
+    </div>
 </div>

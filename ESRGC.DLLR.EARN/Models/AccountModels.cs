@@ -67,9 +67,6 @@ namespace ESRGC.DLLR.EARN.Models
     public class SignInModel
     {
         [Required]
-        [Display(Name = "User name")]
-        public string UserName { get; set; }
-        [Required]
         [EmailValidation(ErrorMessage = "Invalid email address")]
         [Display(Name = "Email")]
         public string Email { get; set; }
@@ -81,8 +78,6 @@ namespace ESRGC.DLLR.EARN.Models
 
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
-
-        public string logOnType { get; set; }
     }
 
     public class SignUpModel

@@ -19,10 +19,12 @@ header {
 .footer {
     border-top: 1px solid #eeeeee;
     position: relative;
+    background: #f6f6f6;
 }
 .footer > .container {
     border-top: 1px solid #eeeeee;
     padding: 20px 15px 0 15px;
+    
 }
 
 .wrapper > .container {
@@ -176,4 +178,12 @@ label.error {
     padding: 2px 8px;
     margin-top: 2px;
     text-indent: 15px;
+}
+.validation-summary-errors {
+    width:auto;
+    margin: 0 auto;
+    color: #f00;
+}
+.validation-summary-errors > ul {
+    list-style: none;
 }

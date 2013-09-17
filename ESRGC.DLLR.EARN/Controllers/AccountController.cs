@@ -55,7 +55,7 @@ namespace ESRGC.DLLR.EARN.Controllers
             newAccount.AnswerToSecretQuestion = SHA1PasswordSecurity.encrypt(model.SecretAnswer.ToUpper());//use upper case
             //add role
             newAccount.Role = "user";//by default user is assigned to the account
-           
+
             newAccount.LastLogin = DateTime.Now;
             newAccount.MemberSince = DateTime.Now;
             newAccount.LastUpdate = DateTime.Now;
@@ -70,7 +70,7 @@ namespace ESRGC.DLLR.EARN.Controllers
             //notifyNewAccount(newAccount);
             //updateTempDataMessage("Your account has been created. Please create a new contact for your account");
             //redirect to create new user contact
-            
+
             return RedirectToAction("Create", "Contact");
           }
           catch (Exception) {
@@ -89,17 +89,43 @@ namespace ESRGC.DLLR.EARN.Controllers
     }
     [AllowAnonymous]
     public ActionResult SignIn() {
+      //sign out any previous session
+      FormsAuthentication.SignOut();
       return View();
     }
 
     [HttpPost]
     [AllowAnonymous]
-    public ActionResult SignIn(SignInModel model) {
-      return View();
+    public ActionResult SignIn(SignInModel model, string returnUrl) {
+      if (ModelState.IsValid) {
+        if (Authentication.authenticate(_workUnit, model)) {
+          //authenticate user
+          FormsAuthentication.SetAuthCookie(model.Email, model.RememberMe);
+          //return to previous url
+          if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
+              && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\")) {
+            return Redirect(returnUrl);
+          }
+          else {
+            return RedirectToAction("Index", "Home");
+          }
+        }
+        else
+          ModelState.AddModelError("", "The username/email or password provided is incorrect.");
+      }
+
+      // If we got this far, something failed, redisplay form
+      return View(model);
     }
 
     public ActionResult SignOut() {
-      return View();
+      //record last login
+      var account = _workUnit.AccountRepository.Entities.First(x => x.EmailAddress == User.Identity.Name);
+      account.LastLogin = DateTime.Now;
+      _workUnit.AccountRepository.UpdateEntity(account);
+      _workUnit.saveChanges();
+      FormsAuthentication.SignOut();
+      return RedirectToAction("Index", "Home");
     }
 
 

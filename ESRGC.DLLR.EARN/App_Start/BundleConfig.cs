@@ -26,10 +26,9 @@ namespace ESRGC.DLLR.EARN
       ));
 
       //css bundles
-      bundles.Add(new StyleBundle("~/Styles/css").Include(
-        "~/Client/css/site.css",
+      bundles.Add(new StyleBundle("~/Styles/css").Include(       
         "~/Client/jsLib/bootstrap-3.0/css/bootstrap*",
-        "~/Client/css/stickyFooter.css"
+        "~/Client/css/*.css"
       ));
     }
   }
