@@ -55,6 +55,11 @@
     <Compile Include="DAL\DataInitializer.cs" />
     <Compile Include="DAL\DomainContext.cs" />
     <Compile Include="DAL\PasswordInitializer.cs" />
+    <Compile Include="Migrations\201309161930168_InitialCreate.cs" />
+    <Compile Include="Migrations\201309161930168_InitialCreate.Designer.cs">
+      <DependentUpon>201309161930168_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\Organization.cs" />
     <Compile Include="Model\Contact.cs" />
@@ -68,6 +73,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Helpers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201309161930168_InitialCreate.resx">
+      <DependentUpon>201309161930168_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
