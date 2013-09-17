@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ESRGC.DLLR.EARN", "ESRGC.DLLR.EARN\ESRGC.DLLR.EARN.csproj", "{4BDD46BE-B768-4FC9-AA1E-B96AD31F58F8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ESRGC.DLLR.EARN.Tests", "ESRGC.DLLR.EARN.Tests\ESRGC.DLLR.EARN.Tests.csproj", "{32574DB7-D0F8-49A2-9E7A-969A390584C6}"

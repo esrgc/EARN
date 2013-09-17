@@ -17,14 +17,11 @@
         <!--nav bar-->
         @Html.Partial("navBar")
         <!--Page content-->
-        <div class="container" id="pageContent">
-            
+        <div id="pageContent">
             <!--Logo-->
             @*<img src="@Url.Content("~/Content/images/MSGIC-logo.jpg")" class="site-logo" />*@
             <!--Header-->
-            <header class="page-header">
-                @RenderSection("header", required: false)
-            </header>
+            @RenderSection("header", required: false)
             <section class="body-content">
                 @*@Html.Partial("messagePartial") *@
                 @RenderBody()

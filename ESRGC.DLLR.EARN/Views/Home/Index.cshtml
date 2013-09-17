@@ -9,65 +9,73 @@
 @section header {
     <div class="jumbotron">
         <div class="container">
-            <h2>The EARN Maryland Program</h2>
-            <p class="lead">Maryland’s new workforce training initiative</p>
-            <p>
-                <a class="btn btn-lg btn-primary" target="_blank" href="http://www.dllr.maryland.gov/earn">Learn more <i class="icon-external-link"></i></a>
+            <div class="row">
+                <div class="col-sm-8 col-xs-12">
+                    <h2>The EARN Maryland Program</h2>
+                    <p><small>Maryland’s new workforce training initiative</small></p>
+                    <p>
+                        <a class="btn btn-lg btn-primary" target="_blank" href="http://www.dllr.maryland.gov/earn">Learn more <i class="icon-external-link"></i></a>
+                        @if (!Request.IsAuthenticated) {
+                            <a class="btn btn-lg btn-success" href="@Url.Action("SignUp", "Account")">Become a member <i class="icon-edit"></i></a>
+                        }
+                    </p>
+                </div>
                 @if (!Request.IsAuthenticated) {
-                    <a class="btn btn-lg btn-success" href="@Url.Action("SignUp", "Account")">Become a member <i class="icon-edit"></i></a>
-                    <a class="btn btn-lg btn-success" href="@Url.Action("SignIn", "Account")">Member sign in <i class="icon-signin"></i></a>
+                    <div class="col-sm-4 col-xs-12">
+                        @Html.Partial("quickSignin")
+                    </div>
                 }
-            </p>
+            </div>
         </div>
     </div>
 }
-
-<div class="row">
-    <div class="col-md-6 col-sm-12">
-        <div class="well">
-            <h5>Column heading 1</h5>
-            <p>
-                fefkn felkj flekjlkviwho  vwhohw onkfkjvwoi vowen oivenwo
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="well">
+                <h5>Column heading 1</h5>
+                <p>
+                    fefkn felkj flekjlkviwho  vwhohw onkfkjvwoi vowen oivenwo
                 dslkfj ineoi vcnoewi ncowein cwoenc owencioen kcwjoeicj 
                 cwjoeicoweicj oicej wocie coei cwoie oqic wonciowenfafo
                 fowei cvose soijf soiejfa'okfjalsdk fej iaofje 'soifj 
-            </p>
+                </p>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="well">
+                <h5>Column heading 2</h5>
+                <p>
+                    fefkn felkj flekjlkviwho  vwhohw onkfkjvwoi vowen oivenwo
+                dslkfj ineoi vcnoewi ncowein cwoenc owencioen kcwjoeicj 
+                cwjoeicoweicj oicej wocie coei cwoie oqic wonciowenfafo
+                fowei cvose soijf soiejfa'okfjalsdk fej iaofje 'soifj 
+                </p>
+            </div>
         </div>
     </div>
-    <div class="col-md-6 col-sm-12">
-        <div class="well">
-            <h5>Column heading 2</h5>
-            <p>
-                fefkn felkj flekjlkviwho  vwhohw onkfkjvwoi vowen oivenwo
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="well">
+                <h5>Column heading 3</h5>
+                <p>
+                    fefkn felkj flekjlkviwho  vwhohw onkfkjvwoi vowen oivenwo
                 dslkfj ineoi vcnoewi ncowein cwoenc owencioen kcwjoeicj 
                 cwjoeicoweicj oicej wocie coei cwoie oqic wonciowenfafo
                 fowei cvose soijf soiejfa'okfjalsdk fej iaofje 'soifj 
-            </p>
+                </p>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="well">
+                <h5>Column heading 4</h5>
+                <p>
+                    fefkn felkj flekjlkviwho  vwhohw onkfkjvwoi vowen oivenwo
+                dslkfj ineoi vcnoewi ncowein cwoenc owencioen kcwjoeicj 
+                cwjoeicoweicj oicej wocie coei cwoie oqic wonciowenfafo
+                fowei cvose soijf soiejfa'okfjalsdk fej iaofje 'soifj 
+                </p>
+            </div>
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-6 col-sm-12">
-        <div class="well">
-            <h5>Column heading 3</h5>
-            <p>
-                fefkn felkj flekjlkviwho  vwhohw onkfkjvwoi vowen oivenwo
-                dslkfj ineoi vcnoewi ncowein cwoenc owencioen kcwjoeicj 
-                cwjoeicoweicj oicej wocie coei cwoie oqic wonciowenfafo
-                fowei cvose soijf soiejfa'okfjalsdk fej iaofje 'soifj 
-            </p>
-        </div>
-    </div>
-    <div class="col-md-6 col-sm-12">
-        <div class="well">
-            <h5>Column heading 4</h5>
-            <p>
-                fefkn felkj flekjlkviwho  vwhohw onkfkjvwoi vowen oivenwo
-                dslkfj ineoi vcnoewi ncowein cwoenc owencioen kcwjoeicj 
-                cwjoeicoweicj oicej wocie coei cwoie oqic wonciowenfafo
-                fowei cvose soijf soiejfa'okfjalsdk fej iaofje 'soifj 
-            </p>
-        </div>
-    </div>
-</div>
-

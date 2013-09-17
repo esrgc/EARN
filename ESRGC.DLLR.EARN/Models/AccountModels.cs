@@ -101,21 +101,21 @@ namespace ESRGC.DLLR.EARN.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        public List<string> SecretQuestions { get; set; }
-        [Required]
-        [Display(Name = "Security question")]
-        public string SecretQuestion { get; set; }
+        //public List<string> SecretQuestions { get; set; }
+        //[Required]
+        //[Display(Name = "Security question")]
+        //public string SecretQuestion { get; set; }
 
-        [Required]
-        [DataType(DataType.Password)]
-        [Display(Name = "Secret answer")]
-        public string SecretAnswer { get; set; }
+        //[Required]
+        //[DataType(DataType.Password)]
+        //[Display(Name = "Secret answer")]
+        //public string SecretAnswer { get; set; }
 
-        [Required]
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirm answer")]
-        [Compare("SecretAnswer", ErrorMessage = "The answer and confirmation answer do not match.")]
-        public string ConfirmAnswer { get; set; }
+        //[Required]
+        //[DataType(DataType.Password)]
+        //[Display(Name = "Confirm answer")]
+        //[Compare("SecretAnswer", ErrorMessage = "The answer and confirmation answer do not match.")]
+        //public string ConfirmAnswer { get; set; }
     }
 
     public class UserEditModel

@@ -23,7 +23,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     [AllowAnonymous]
     public ActionResult SignUp() {
       var signUpModel = new SignUpModel() {
-        SecretQuestions = Utility.SecurityQuestions
+        //SecretQuestions = Utility.SecurityQuestions
       };
       //render form
       return View(signUpModel);
@@ -36,13 +36,12 @@ namespace ESRGC.DLLR.EARN.Controllers
         var existingEmails = _workUnit.AccountRepository.Entities.Where(x => x.EmailAddress == model.Email);
         if (existingEmails.Count() > 0) {
           ModelState.AddModelError("", model.Email + " has already been in use. Please try again with a different email address");
-          model.SecretQuestions = Utility.SecurityQuestions;
           return View(model);
         }
         //we're good to go
         var newAccount = new Account() {
           EmailAddress = model.Email,
-          SecretQuestion = model.SecretQuestion,
+          //SecretQuestion = model.SecretQuestion,
           InitialPassword = Utility.RandomString(8)
         };
         //check password
@@ -52,7 +51,7 @@ namespace ESRGC.DLLR.EARN.Controllers
             var encryptedPassword = SHA1PasswordSecurity.encrypt(model.Password);
             newAccount.Password = encryptedPassword;
             //encrypt secret answer for password recovery
-            newAccount.AnswerToSecretQuestion = SHA1PasswordSecurity.encrypt(model.SecretAnswer.ToUpper());//use upper case
+            //newAccount.AnswerToSecretQuestion = SHA1PasswordSecurity.encrypt(model.SecretAnswer.ToUpper());//use upper case
             //add role
             newAccount.Role = "user";//by default user is assigned to the account
 
@@ -84,7 +83,6 @@ namespace ESRGC.DLLR.EARN.Controllers
       }
 
       // If we got this far, something failed, redisplay form
-      model.SecretQuestions = Utility.SecurityQuestions;//repopulate the questions
       return View(model);
     }
     [AllowAnonymous]
