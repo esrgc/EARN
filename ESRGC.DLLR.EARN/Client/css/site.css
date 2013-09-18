@@ -1,4 +1,5 @@
 ﻿html, body {
+    padding-top: 40px;
     height: 100%;
 }
 
@@ -14,7 +15,6 @@ header {
 
 .list-container > ul {
 }
-
     .list-container > ul > li {
         padding: 10px 0;
         border-bottom: 1px solid #EEEEEE;
@@ -42,84 +42,7 @@ header {
     color: #FFFFFF;
     background: #3d4241;
 }
-/*Panel*/
-/*.panel {
-    min-height: 150px;
-    margin-bottom: 20px;
-    border: 1px solid #dfdfdf;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    -webkit-background-clip: padding-box;
-    -moz-background-clip: padding;
-    background-clip: padding-box; 
-    -webkit-transition: (border,height) 0.35s ease;
-    -moz-transition: (border,height) 0.35s ease;
-    -o-transition: (border,height) 0.35s ease;
-    transition: (border,height) 0.35s ease;
-    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-    -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-}
 
-.panel.in {
-    border: 1px solid #eeeeee;
-}
-
-.panel-title {
-    margin: 0;
-    padding: 12px 14px;
-    background-color: #f1f1f1;
-    border-bottom: 1px solid #EBEBEB;
-    -webkit-border-radius: 5px 5px 0 0;
-    -moz-border-radius: 5px 5px 0 0;
-    border-radius: 5px 5px 0 0;
-    font-size: 15px;
-    font-weight: normal;
-    line-height: 1;
-    border-bottom: 1px solid #dfdfdf;
-    text-shadow: #fff 1px 1px 1px;
-    -webkit-box-shadow: 0 1px 0 #fff;
-    box-shadow: 0 1px 0 #fff;
-}
-
-.panel-content {
-    padding: 20px 15px 15px 15px;
-    font-size: 13px;
-}
-
-.pagination {
-    text-align: center;
-}
-
-.panel-inner {
-}
-
-.panel .label {
-}
-
-.panel .label-close {
-    color: #000000;
-    text-shadow: 0 1px 0 #ffffff;
-    opacity: 0.4;
-    filter: alpha(opacity=40);
-    border-left: 1px solid white;
-    padding-left: 5px;
-    margin-left: 5px;
-}
-
-.panel .label-close:hover {
-    color: #000000;
-    text-decoration: none;
-    cursor: pointer;
-    opacity: 0.6;
-    filter: alpha(opacity=60);
-}
-
-.panel a:hover {
-    text-decoration: none;
-}
-*/
 .message-box {
     text-align: center;
     font-weight: bold;
@@ -146,7 +69,9 @@ header {
 .affix-top {
     top: 100px;
 }
-
+.pagination {
+    text-align: center;
+}
 .inline-container > .list-container {
     margin: 0 5px 0 0;
 }

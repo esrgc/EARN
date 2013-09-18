@@ -2,12 +2,12 @@
 @model SignInModel
 @Html.ValidationSummary()
 
-<form class="form-signin" action="@Url.Action("SignIn", "Account")" method="post" role="form">
-    <input type="text" name="Email" id="email" class="form-control" placeholder="Email address" autofocus=""/>
-    <input type="password" name="Password" id="password" class="form-control" placeholder="Password"/>
-    <label class="checkbox">
-        @Html.CheckBoxFor(x=>x.RememberMe)
-        Remember me
-    </label>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-</form>
+    <form class="quick-form" action="@Url.Action("SignIn", "Account")" method="post" role="form">
+        <input type="text" name="Email" id="email" class="form-control" placeholder="Email address" autofocus=""/>
+        <input type="password" name="Password" id="password" class="form-control" placeholder="Password"/>
+        <label class="checkbox">
+            @Html.CheckBoxFor(x=>x.RememberMe)
+            Remember me
+        </label>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    </form>

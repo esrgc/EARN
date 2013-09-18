@@ -12,17 +12,17 @@
             <div class="row">
                 <div class="col-sm-8 col-xs-12">
                     <h2>The EARN Maryland Program</h2>
-                    <p><small>Maryland’s new workforce training initiative</small></p>
+                    <p>Industry lead partnerships, creating jobs.</p>
                     <p>
                         <a class="btn btn-lg btn-primary" target="_blank" href="http://www.dllr.maryland.gov/earn">Learn more <i class="icon-external-link"></i></a>
-                        @if (!Request.IsAuthenticated) {
+                       @* @if (!Request.IsAuthenticated) {
                             <a class="btn btn-lg btn-success" href="@Url.Action("SignUp", "Account")">Become a member <i class="icon-edit"></i></a>
-                        }
+                        }*@
                     </p>
                 </div>
                 @if (!Request.IsAuthenticated) {
                     <div class="col-sm-4 col-xs-12">
-                        @Html.Partial("quickSignin")
+                        @Html.Partial("quickSignup")
                     </div>
                 }
             </div>
@@ -35,7 +35,7 @@
             <div class="well">
                 <h5>Column heading 1</h5>
                 <p>
-                    fefkn felkj flekjlkviwho  vwhohw onkfkjvwoi vowen oivenwo
+                fefkn felkj flekjlkviwho  vwhohw onkfkjvwoi vowen oivenwo
                 dslkfj ineoi vcnoewi ncowein cwoenc owencioen kcwjoeicj 
                 cwjoeicoweicj oicej wocie coei cwoie oqic wonciowenfafo
                 fowei cvose soijf soiejfa'okfjalsdk fej iaofje 'soifj 

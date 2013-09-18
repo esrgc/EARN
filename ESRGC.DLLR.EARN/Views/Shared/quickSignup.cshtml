@@ -1,0 +1,21 @@
+﻿@using ESRGC.DLLR.EARN.Models
+@model SignUpModel
+
+<form class="quick-form" action="@Url.Action("SignUp", "Account")" method="post" role="form">
+    @Html.TextBoxFor(x => x.Email, 
+        new { 
+            @class="form-control" ,
+            placeholder = ModelMetadata.FromLambdaExpression<SignUpModel, string>(x=>x.Email, ViewData).DisplayName
+        })
+    @Html.PasswordFor(x => x.Password, 
+        new { 
+            @class="form-control" ,
+            placeholder = ModelMetadata.FromLambdaExpression<SignUpModel, string>(x=>x.Password, ViewData).DisplayName
+        })
+    @Html.PasswordFor(x => x.ConfirmPassword, 
+        new { 
+            @class="form-control" ,
+            placeholder = ModelMetadata.FromLambdaExpression<SignUpModel, string>(x=>x.ConfirmPassword, ViewData).DisplayName
+        })
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up for EARN</button>
+</form>
