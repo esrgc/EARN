@@ -11,7 +11,7 @@
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse navbar-ex1-collapse">
-        <div class="">
+        <div class="container">
             <ul class="nav navbar-nav">
                 <li><a href="@Url.Action("index", "Home")"><i class="icon-home"></i> Home</a></li>
                 <li><a href="#"><i class="icon-envelope"></i> Contact Us</a></li>
@@ -50,7 +50,7 @@
                 else {
                     <li>
                         @*<a href="@Url.Action("SignIn", "Account")"><i class="icon-signin"></i> Sign In</a>*@
-                        @if(ViewBag.Title != "Sign In"){
+                        @if(ViewBag.Title != "Sign In" && ViewBag.Title != "Sign Up"){
                             <div class="navbar-form">
                                 @Html.Partial("inlineSignin")
                             </div>

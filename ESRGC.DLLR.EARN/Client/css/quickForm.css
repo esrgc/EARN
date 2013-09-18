@@ -4,11 +4,11 @@
 
 .quick-form {
     max-width: 350px;
-    padding: 15px;
+    padding: 20px;
     font-size: 14px;
     line-height: 20px;
     background: #fff;
-    border: 1 solid #808080;
+    /*border: 1px solid #808080;*/
     border-radius: 4px;
     color: #5d6467;
 }
@@ -40,15 +40,19 @@
         margin-bottom: -1px;
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
+        border-bottom: none;
     }
 
     .quick-form input:not(:first-of-type):not(:last-of-type) {
         margin: 0;
         border-radius: 0;
+        border-top: none;
+        border-bottom: none;
     }
 
     .quick-form input:last-of-type {
         margin-bottom: 10px;
         border-top-left-radius: 0;
         border-top-right-radius: 0;
+        border-top: none;
     }
