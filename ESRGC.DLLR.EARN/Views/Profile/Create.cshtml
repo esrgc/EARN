@@ -1,0 +1,35 @@
+﻿@model ESRGC.DLLR.EARN.Domain.Model.Profile
+
+@{
+    ViewBag.Title = "User Profile";
+    ViewBag.Header = "Create profile";
+}
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval-unobtrusive")
+}
+@section header {
+    <div class="container">
+        <header class="page-header">
+            <h3>@ViewBag.Header <i class="icon-large icon-user"></i></h3>
+            @*<ul class="breadcrumb">
+                <li><a href="@Url.Action("index", "Home")">Home</a></li>
+                <li class="active">@ViewBag.Header</li>
+            </ul>*@
+        </header>
+    </div>
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <form class="" action="@Url.Action("Create")" method="post" role="form">
+                <fieldset>
+                    <legend>Organization</legend>
+                </fieldset>
+                <fieldset>
+                    <legend>Point of Contact</legend>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>

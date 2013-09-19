@@ -72,7 +72,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     [DataType(DataType.PhoneNumber)]
     [RegularExpression(@"^[01]?[- .]?(\([2-9]\d{2}\)|[2-9]\d{2})[- .]?\d{3}[- .]?\d{4}$", ErrorMessage = "Invalid fax number")]
     [Display(Name = "Fax")]
-    public string FAX { get; set; }
+    public string Fax { get; set; }
     
     [DataType(DataType.PhoneNumber)]
     [RegularExpression(@"^[01]?[- .]?(\([2-9]\d{2}\)|[2-9]\d{2})[- .]?\d{3}[- .]?\d{4}$", ErrorMessage = "Invalid phone number")]
@@ -97,24 +97,10 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     [Display(Name = "Last update")]
     public DateTime LastUpdate { get; set; }
     
-    
-    [Display(Name = "Floor")]
-    public string FLOOR { get; set; }
+    public string Floor { get; set; }
 
     [Display(Name = "Building")]
     public string Building { get; set; }
-        /// <summary>
-    /// For location based app
-    /// </summary>
-    ///
     
-    [ScaffoldColumn(false)]
-    public double? lat { get; set; }
-    [ScaffoldColumn(false)]
-    public double? lon { get; set; }
-    
-    [ScaffoldColumn(false)]
-    public int? PictureID { get; set; }
-    public virtual Picture ProfilePicture { get; set; }
   }
 }

@@ -70,7 +70,7 @@ namespace ESRGC.DLLR.EARN.Controllers
             //updateTempDataMessage("Your account has been created. Please create a new contact for your account");
             //redirect to create new user contact
 
-            return RedirectToAction("Create", "Contact");
+            return RedirectToAction("Create", "Profile");
           }
           catch (Exception) {
             ModelState.AddModelError("", "Error saving data to database. Please try again later");

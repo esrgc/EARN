@@ -34,7 +34,7 @@
             </form>*@
             <ul class="nav navbar-nav navbar-right">
                 @if (Request.IsAuthenticated) { 
-                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i>@User.Identity.Name
+                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> @User.Identity.Name
                         <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="#">Action</a></li>
@@ -48,7 +48,7 @@
                     
                 }
                 else {
-                    if (ViewBag.Title != "Sign In" && ViewBag.Title != "Sign Up") {
+                    if (ViewBag.showSignin == true) {
                     <li>
                         <div class="navbar-form">
                             @Html.Partial("inlineSignin")

@@ -17,7 +17,10 @@ namespace ESRGC.DLLR.EARN.Domain.DAL
     public DbSet<Account> Accounts { get; set; }
     public DbSet<Contact> Contacts { get; set; }
     public DbSet<Picture> Pictures { get; set; }
-
+    public DbSet<Profile> Profiles { get; set; }
+    public DbSet<Organization> Organizations { get; set; }
+    public DbSet<UserGroup> UserGroups { get; set; }
+    public DbSet<Industry> Industry { get; set; }
     protected override void OnModelCreating(DbModelBuilder modelBuilder) {
       modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
       //modelBuilder.Conventions.Remove<IncludeMetadataConvention>();
