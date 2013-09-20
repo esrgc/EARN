@@ -1,5 +1,5 @@
-﻿@model ESRGC.DLLR.EARN.Domain.Model.Profile
-
+﻿@using ESRGC.DLLR.EARN.Models
+@model CreateProfile
 @{
     ViewBag.Title = "User Profile";
     ViewBag.Header = "Create profile";
@@ -21,15 +21,153 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
-            <form class="" action="@Url.Action("Create")" method="post" role="form">
-                <fieldset>
-                    <legend>Organization</legend>
-                </fieldset>
-                <fieldset>
-                    <legend>Point of Contact</legend>
-                </fieldset>
-            </form>
+        <div class="col-md-10 col-md-offset-1">
+            <div class="window-panel">
+                <div class="window-panel-title">
+                    <strong>Tell us about yourself</strong>
+                </div>
+                <div class="window-panel-content">
+                    @Html.ValidationSummary(true)
+                    <form class="form-horizontal" action="@Url.Action("Create")" method="post" role="form">
+                        <fieldset>
+                            <legend>Organization</legend>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="Organization.Name">Name</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(x => x.Organization.Name, 
+                                    new { 
+                                        @class = "form-control" , 
+                                        placeholder = ModelMetadata.FromLambdaExpression(x=>x.Organization.Name, ViewData).DisplayName}
+                                    )
+                                    <div class="help-block">@Html.ValidationMessageFor(x => x.Organization.Name)</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="Oranization.IndustryID">Industry</label>
+                                <div class="col-sm-6">
+                                    @Html.DropDownListFor(
+                                        x => x.Organization.IndustryID,
+                                        new SelectList(Model.Industries, "IndustryID", "Name"),
+                                        "--select an industry--",
+                                        new { @class = "form-control col-sm-4" }
+                                    )
+                                    <div class="help-block">@Html.ValidationMessageFor(x => x.Organization.IndustryID)</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="Organization.Website">Website</label>
+                                <div class="col-sm-6">
+                                    @Html.TextBoxFor(x => x.Organization.Website, new { 
+                                        @class = "form-control" , 
+                                        placeholder = ModelMetadata.FromLambdaExpression(x=>x.Organization.Website, ViewData).Description}
+                                    )
+                                    <div class="help-block">@Html.ValidationMessageFor(x => x.Organization.Website)</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="Organization.Description">Description</label>
+                                <div class="col-sm-9">
+                                    @Html.TextAreaFor(x => x.Organization.Description, new { 
+                                        @class = "form-control", 
+                                        style = "min-height: 150px;", 
+                                        placeholder = ModelMetadata.FromLambdaExpression(x=>x.Organization.Description, ViewData).Description
+                                    })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-8 col-sm-offset-2">
+                                    <label class="" for="UserGroupID">User group (select primary role)</label>
+                                    @foreach (var i in Model.UserGroups) { 
+                                        <div class="radio">
+                                            <label>@Html.RadioButtonFor(x => x.UserGroupID, i.Name)
+                                                @i.Name - <span>@i.Description</span>
+                                            </label>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Point of Contact</legend>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="Contact.FirstName">First name</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(x => x.Contact.FirstName, new { @class = "form-control input-sm" })
+                                    <div class="help-block">@Html.ValidationMessageFor(x => x.Contact.FirstName)</div>
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="Contact.LastName">Last name</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(x => x.Contact.LastName, new { @class = "form-control input-sm" })
+                                    <div class="help-block">@Html.ValidationMessageFor(x => x.Contact.LastName)</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="Contact.Address">Address</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(x => x.Contact.StreetAddress, new { @class = "form-control input-sm" })
+                                    <div class="help-block">@Html.ValidationMessageFor(x => x.Contact.StreetAddress)</div>
+                                </div>                               
+                            
+                                <label class="control-label col-sm-2" for="Contact.Building">Bldg/Room</label>
+                                <div class="col-sm-2">
+                                    @Html.TextBoxFor(x => x.Contact.Building, new { @class = "form-control input-sm" })
+                                    <div class="help-block">@Html.ValidationMessageFor(x => x.Contact.Building)</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="Contact.Department">Department</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(x => x.Contact.Department, new { @class = "form-control input-sm" })
+                                    <div class="help-block">@Html.ValidationMessageFor(x => x.Contact.Department)</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="Contact.City">City</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(x=>x.Contact.City,new { @class = "form-control input-sm" })
+                                    <div class="help-block">@Html.ValidationMessageFor(x => x.Contact.City)</div>
+                                </div>
+                           
+                                <label class="control-label col-sm-2" for="Contact.State">State</label>
+                                <div class="col-sm-2">
+                                    @Html.TextBoxFor(x=>x.Contact.State,new { @class = "form-control input-sm" })
+                                    <div class="help-block">@Html.ValidationMessageFor(x => x.Contact.State)</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="Contact.Zip">Zip</label>
+                                <div class="col-sm-2">
+                                    @Html.TextBoxFor(x=>x.Contact.Zip, new { @class = "form-control input-sm" })
+                                    <div class="help-block">@Html.ValidationMessageFor(x => x.Contact.Zip)</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="Contact.Phone">Phone</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(x=>x.Contact.Phone,new { @class = "form-control input-sm" })
+                                    <div class="help-block">@Html.ValidationMessageFor(x => x.Contact.Phone)</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="Contact.Email">Email</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(x=>x.Contact.Email,new { @class = "form-control input-sm" })
+                                    <div class="help-block">@Html.ValidationMessageFor(x => x.Contact.Email)</div>
+                                </div>
+                            </div>
+
+                        </fieldset>
+                        <div class="form-group">
+                            <div class="col-sm-6 col-sm-offset-2">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
         </div>
     </div>
+</div>
 </div>

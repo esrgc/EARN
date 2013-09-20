@@ -13,7 +13,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     /// For location based app
     /// </summary>
     ///
-
+    public int ProfileId { get; set; }
     [ScaffoldColumn(false)]
     public double? lat { get; set; }
     [ScaffoldColumn(false)]
@@ -30,5 +30,8 @@ namespace ESRGC.DLLR.EARN.Domain.Model
 
     public int OrganizationID { get; set; }
     public virtual Organization Organization { get; set; }
+
+    public int UserGroupID { get; set; }
+    public virtual UserGroup UserGroup { get; set; }
   }
 }
