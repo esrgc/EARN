@@ -55,13 +55,9 @@
     <Compile Include="DAL\DataInitializer.cs" />
     <Compile Include="DAL\DomainContext.cs" />
     <Compile Include="DAL\PasswordInitializer.cs" />
-    <Compile Include="Migrations\201309161930168_InitialCreate.cs" />
-    <Compile Include="Migrations\201309161930168_InitialCreate.Designer.cs">
-      <DependentUpon>201309161930168_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201309201921271_profile-data.cs" />
-    <Compile Include="Migrations\201309201921271_profile-data.Designer.cs">
-      <DependentUpon>201309201921271_profile-data.cs</DependentUpon>
+    <Compile Include="Migrations\201309232115159_init.cs" />
+    <Compile Include="Migrations\201309232115159_init.Designer.cs">
+      <DependentUpon>201309232115159_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
@@ -82,11 +78,8 @@
     <Folder Include="Helpers\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201309161930168_InitialCreate.resx">
-      <DependentUpon>201309161930168_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201309201921271_profile-data.resx">
-      <DependentUpon>201309201921271_profile-data.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201309232115159_init.resx">
+      <DependentUpon>201309232115159_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

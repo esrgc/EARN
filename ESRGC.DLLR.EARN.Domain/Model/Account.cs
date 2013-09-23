@@ -53,5 +53,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     [Display(Name = "Last update")]
     public DateTime? LastUpdate { get; set; }
 
+    public int? ProfileID { get; set; }
+    public virtual Profile Profile { get; set; }
   }
 }

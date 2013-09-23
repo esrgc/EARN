@@ -1,4 +1,4 @@
-﻿@using ESRGC.DLLR.EARN.Models
+﻿    @using ESRGC.DLLR.EARN.Models
 @model CreateProfile
 @{
     ViewBag.Title = "User Profile";
@@ -37,8 +37,9 @@
                                     @Html.TextBoxFor(x => x.Organization.Name, 
                                     new { 
                                         @class = "form-control" , 
-                                        placeholder = ModelMetadata.FromLambdaExpression(x=>x.Organization.Name, ViewData).DisplayName}
+                                        placeholder = "Organization Name"}
                                     )
+                                    <span class="label label-danger">Required</span>
                                     <div class="help-block">@Html.ValidationMessageFor(x => x.Organization.Name)</div>
                                 </div>
                             </div>
@@ -51,6 +52,7 @@
                                         "--select an industry--",
                                         new { @class = "form-control col-sm-4" }
                                     )
+                                    <span class="label label-danger">Required</span>
                                     <div class="help-block">@Html.ValidationMessageFor(x => x.Organization.IndustryID)</div>
                                 </div>
                             </div>
@@ -77,9 +79,12 @@
                             <div class="form-group">
                                 <div class="col-sm-8 col-sm-offset-2">
                                     <label class="" for="UserGroupID">User group (select primary role)</label>
+                                    <span class="label label-danger">Required</span>
                                     @foreach (var i in Model.UserGroups) { 
                                         <div class="radio">
-                                            <label>@Html.RadioButtonFor(x => x.UserGroupID, i.Name)
+                                            <label>
+                                                @*@Html.RadioButtonFor(x => x.UserGroupID, i.Name)*@
+                                                <input class="required" type="radio" name="UserGroupID" value="@i.UserGroupID"/>
                                                 @i.Name - <span>@i.Description</span>
                                             </label>
                                         </div>
@@ -92,69 +97,85 @@
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="Contact.FirstName">First name</label>
                                 <div class="col-sm-4">
-                                    @Html.TextBoxFor(x => x.Contact.FirstName, new { @class = "form-control input-sm" })
+                                    @Html.TextBoxFor(x => x.Contact.FirstName, new { @class = "form-control input-sm" , placeholder =  "First name"})
+                                    <span class="label label-danger">Required</span>
                                     <div class="help-block">@Html.ValidationMessageFor(x => x.Contact.FirstName)</div>
+                                </div>                                
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="Contact.Middle">Middle</label>
+                                <div class="col-sm-2">
+                                    @Html.TextBoxFor(x=>x.Contact.Middle, new { @class= "form-control input-sm", placeholder =  "Middle"})
+                                    <div class="help-block">@Html.ValidationMessageFor(x=>x.Contact.Middle)</div>
                                 </div>
-
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="Contact.LastName">Last name</label>
                                 <div class="col-sm-4">
-                                    @Html.TextBoxFor(x => x.Contact.LastName, new { @class = "form-control input-sm" })
+                                    @Html.TextBoxFor(x => x.Contact.LastName, new { @class = "form-control input-sm", placeholder =  "Last name" })
+                                    <span class="label label-danger">Required</span>
                                     <div class="help-block">@Html.ValidationMessageFor(x => x.Contact.LastName)</div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="Contact.Address">Address</label>
                                 <div class="col-sm-4">
-                                    @Html.TextBoxFor(x => x.Contact.StreetAddress, new { @class = "form-control input-sm" })
+                                    @Html.TextBoxFor(x => x.Contact.StreetAddress, new { @class = "form-control input-sm", placeholder =  "Street address" })
+                                    <span class="label label-danger">Required</span>
                                     <div class="help-block">@Html.ValidationMessageFor(x => x.Contact.StreetAddress)</div>
                                 </div>                               
-                            
+                            </div>
+                            <div class="form-group">
                                 <label class="control-label col-sm-2" for="Contact.Building">Bldg/Room</label>
                                 <div class="col-sm-2">
-                                    @Html.TextBoxFor(x => x.Contact.Building, new { @class = "form-control input-sm" })
+                                    @Html.TextBoxFor(x => x.Contact.Building, new { @class = "form-control input-sm", placeholder =  "Building/Room" })
                                     <div class="help-block">@Html.ValidationMessageFor(x => x.Contact.Building)</div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="Contact.Department">Department</label>
                                 <div class="col-sm-4">
-                                    @Html.TextBoxFor(x => x.Contact.Department, new { @class = "form-control input-sm" })
+                                    @Html.TextBoxFor(x => x.Contact.Department, new { @class = "form-control input-sm", placeholder =  "Department" })
                                     <div class="help-block">@Html.ValidationMessageFor(x => x.Contact.Department)</div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="Contact.City">City</label>
                                 <div class="col-sm-4">
-                                    @Html.TextBoxFor(x=>x.Contact.City,new { @class = "form-control input-sm" })
+                                    @Html.TextBoxFor(x=>x.Contact.City,new { @class = "form-control input-sm", placeholder =  "Salisbury" })
+                                    <span class="label label-danger">Required</span>
                                     <div class="help-block">@Html.ValidationMessageFor(x => x.Contact.City)</div>
                                 </div>
-                           
+                            </div>
+                            <div class="form-group">
                                 <label class="control-label col-sm-2" for="Contact.State">State</label>
                                 <div class="col-sm-2">
-                                    @Html.TextBoxFor(x=>x.Contact.State,new { @class = "form-control input-sm" })
+                                    @Html.TextBoxFor(x=>x.Contact.State,new { @class = "form-control input-sm", placeholder =  "MD" })
+                                    <span class="label label-danger">Required</span>
                                     <div class="help-block">@Html.ValidationMessageFor(x => x.Contact.State)</div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="Contact.Zip">Zip</label>
                                 <div class="col-sm-2">
-                                    @Html.TextBoxFor(x=>x.Contact.Zip, new { @class = "form-control input-sm" })
+                                    @Html.TextBoxFor(x=>x.Contact.Zip, new { @class = "form-control input-sm", placeholder =  "21804" })
+                                    <span class="label label-danger">Required</span>
                                     <div class="help-block">@Html.ValidationMessageFor(x => x.Contact.Zip)</div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="Contact.Phone">Phone</label>
                                 <div class="col-sm-4">
-                                    @Html.TextBoxFor(x=>x.Contact.Phone,new { @class = "form-control input-sm" })
+                                    @Html.TextBoxFor(x=>x.Contact.Phone,new { @class = "form-control input-sm", placeholder =  "321-654-9876" })
+                                    <span class="label label-danger">Required</span>
                                     <div class="help-block">@Html.ValidationMessageFor(x => x.Contact.Phone)</div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="Contact.Email">Email</label>
                                 <div class="col-sm-4">
-                                    @Html.TextBoxFor(x=>x.Contact.Email,new { @class = "form-control input-sm" })
+                                    @Html.TextBoxFor(x=>x.Contact.Email,new { @class = "form-control input-sm", placeholder =  "abc@somedomain.com" })
+                                    <span class="label label-danger">Required</span>
                                     <div class="help-block">@Html.ValidationMessageFor(x => x.Contact.Email)</div>
                                 </div>
                             </div>

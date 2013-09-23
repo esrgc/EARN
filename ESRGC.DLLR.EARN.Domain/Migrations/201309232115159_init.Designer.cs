@@ -7,13 +7,13 @@ namespace ESRGC.DLLR.EARN.Domain.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.0.0-rc1-20726")]
-    public sealed partial class profiledata : IMigrationMetadata
+    public sealed partial class init : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(profiledata));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(init));
         
         string IMigrationMetadata.Id
         {
-            get { return "201309201921271_profile-data"; }
+            get { return "201309232115159_init"; }
         }
         
         string IMigrationMetadata.Source

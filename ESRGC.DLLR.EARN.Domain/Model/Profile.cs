@@ -13,7 +13,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     /// For location based app
     /// </summary>
     ///
-    public int ProfileId { get; set; }
+    public int ProfileID { get; set; }
     [ScaffoldColumn(false)]
     public double? lat { get; set; }
     [ScaffoldColumn(false)]
@@ -27,7 +27,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     //Navigation properties
     public int ContactID { get; set; }
     public virtual Contact Contact { get; set; }
-
+    [Display(Name="Organization")]
     public int OrganizationID { get; set; }
     public virtual Organization Organization { get; set; }
 

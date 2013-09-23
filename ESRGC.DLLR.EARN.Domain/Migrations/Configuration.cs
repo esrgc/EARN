@@ -1,19 +1,21 @@
+using System;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
+using System.Linq;
+using ESRGC.DLLR.EARN.Domain.DAL;
+using ESRGC.DLLR.EARN.Domain.Model;
+
 namespace ESRGC.DLLR.EARN.Domain.Migrations
 {
-  using System;
-  using System.Data.Entity;
-  using System.Data.Entity.Migrations;
-  using System.Linq;
-  using ESRGC.DLLR.EARN.Domain.Model;
-
-  internal sealed class Configuration : DbMigrationsConfiguration<ESRGC.DLLR.EARN.Domain.DAL.DomainContext>
+  
+  internal sealed class Configuration : DbMigrationsConfiguration<DomainContext>
   {
     public Configuration() {
       AutomaticMigrationsEnabled = false;
       ContextKey = "ESRGC.DLLR.EARN.Domain.DAL.DomainContext";
     }
 
-    protected override void Seed(ESRGC.DLLR.EARN.Domain.DAL.DomainContext context) {
+    protected override void Seed(DomainContext context) {
       //  This method will be called after migrating to the latest version.
 
       //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
@@ -26,6 +28,9 @@ namespace ESRGC.DLLR.EARN.Domain.Migrations
       //      new person { fullname = "rowan miller" }
       //    );
       //
+      
+      context.UserGroups.RemoveRange(context.UserGroups.ToList());
+      context.Industry.RemoveRange(context.Industry.ToList());
       context.UserGroups.AddOrUpdate(
         new UserGroup { Name = "Industry member", Description = "Seeking employees e.g healthcare representative" },
         new UserGroup { Name = "Convener", Description = "facilities partnership e.g. chamber of commerce" },

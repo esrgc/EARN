@@ -9,20 +9,23 @@ namespace ESRGC.DLLR.EARN.Domain.Model
 {
   public class Contact
   {
+    public Contact() {
+      LastUpdate = DateTime.Now;
+    }
     [ScaffoldColumn(false)]
     public int ContactID { get; set; }
     
     [Display(Name = "Title")]
     public string NameTitle { get; set; }
     
-    [Required(ErrorMessage = "Please enter Firstname")]
+    [Required(ErrorMessage = "Please enter first name")]
     [Display(Name = "First name *")]
     public string FirstName { get; set; }
     
     [Display(Name = "Middle init.")]
     public string Middle { get; set; }
     
-    [Required(ErrorMessage = "Please enter Lastname")]
+    [Required(ErrorMessage = "Please enter last name")]
     [Display(Name = "Last name *")]
     public string LastName { get; set; }
     
@@ -43,18 +46,19 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     [Display(Name = "P.O. Box/Mail stop")]
     public string MailStop { get; set; }
     
+    [Required]
     [Display(Name = "Street address")]
     public string StreetAddress { get; set; }
     
     [Display(Name = "Address 2")]
     public string StreetAddress2 { get; set; }
-    
+    [Required]
     [Display(Name = "City")]
     public string City { get; set; }
-    
+    [Required]
     [Display(Name = "State")]
     public string State { get; set; }
-    
+    [Required]
     [Display(Name = "Zip")]
     public string Zip { get; set; }
     
