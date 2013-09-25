@@ -15,6 +15,9 @@ namespace ESRGC.DLLR.EARN.Domain.DAL.Abstract
     IRepository<Organization> OrganizationRepository { get; }
     IRepository<UserGroup> UserGroupRepository { get; }
     IRepository<Industry> IndustryRepository { get; }
+    IRepository<Tag> TagRepository { get; }
+    IRepository<ProfileTag> ProfileTagRepository { get; }
+
     void saveChanges();
     void Dispose();
   }

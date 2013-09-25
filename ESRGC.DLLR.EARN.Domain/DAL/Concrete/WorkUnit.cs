@@ -18,6 +18,8 @@ namespace ESRGC.DLLR.EARN.Domain.DAL.Concrete
     IRepository<Organization> _organizationRepo;
     IRepository<Industry> _industryRepo;
     IRepository<UserGroup> _userGroupRepo;
+    IRepository<Tag> _tagRepo;
+    IRepository<ProfileTag> _profileTagRepo;
 
     public WorkUnit(DomainContext context) {
       _context = context;
@@ -75,6 +77,16 @@ namespace ESRGC.DLLR.EARN.Domain.DAL.Concrete
         if (_industryRepo == null)
           _industryRepo = new Repository<Industry>(_context);
         return _industryRepo;
+      }
+    }
+    public IRepository<Tag> TagRepository {
+      get {
+        return _tagRepo ?? (_tagRepo = new Repository<Tag>(_context));
+      }
+    }
+    public IRepository<ProfileTag> ProfileTagRepository {
+      get {
+        return _profileTagRepo ?? (_profileTagRepo = new Repository<ProfileTag>(_context));
       }
     }
     #endregion

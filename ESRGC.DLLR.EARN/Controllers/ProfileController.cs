@@ -20,10 +20,15 @@ namespace ESRGC.DLLR.EARN.Controllers
       if (CurrentAccount.Profile == null) {
         return RedirectToAction("Create");
       }
-
+      
       return View(CurrentAccount.Profile);
     }
     public ActionResult Create() {
+      //if (CurrentAccount.Profile != null) {
+      //  updateTempDataMessage("Profile already created!");
+      //  return RedirectToAction("Index");
+      //}
+      
       var industries = _workUnit.IndustryRepository.Entities.OrderBy(x => x.Name).ToList();
       var userGroups = _workUnit.UserGroupRepository.Entities.OrderBy(x => x.Name).ToList();
       return View(new CreateProfile() { Industries = industries, UserGroups = userGroups });
@@ -31,6 +36,10 @@ namespace ESRGC.DLLR.EARN.Controllers
 
     [HttpPost]
     public ActionResult Create(CreateProfile profile) {
+      if (CurrentAccount.Profile != null) {
+        updateTempDataMessage("Profile already created!");
+        return RedirectToAction("Index");
+      }
       if (ModelState.IsValid) {
         //insert organization
         _workUnit.OrganizationRepository.InsertEntity(profile.Organization);

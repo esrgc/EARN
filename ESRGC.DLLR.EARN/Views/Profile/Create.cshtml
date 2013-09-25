@@ -33,13 +33,13 @@
                             <legend>Organization</legend>
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="Organization.Name">Name</label>
-                                <div class="col-sm-4">
+                                <div class="col-sm-8">
                                     @Html.TextBoxFor(x => x.Organization.Name, 
                                     new { 
                                         @class = "form-control" , 
                                         placeholder = "Organization Name"}
                                     )
-                                    <span class="label label-danger">Required</span>
+                                    <span class="label label-default">Required</span>
                                     <div class="help-block">@Html.ValidationMessageFor(x => x.Organization.Name)</div>
                                 </div>
                             </div>
@@ -52,7 +52,7 @@
                                         "--select an industry--",
                                         new { @class = "form-control col-sm-4" }
                                     )
-                                    <span class="label label-danger">Required</span>
+                                    <span class="label label-default">Required</span>
                                     <div class="help-block">@Html.ValidationMessageFor(x => x.Organization.IndustryID)</div>
                                 </div>
                             </div>
@@ -79,7 +79,7 @@
                             <div class="form-group">
                                 <div class="col-sm-8 col-sm-offset-2">
                                     <label class="" for="UserGroupID">User group (select primary role)</label>
-                                    <span class="label label-danger">Required</span>
+                                    <span class="label label-default">Required</span>
                                     @foreach (var i in Model.UserGroups) { 
                                         <div class="radio">
                                             <label>
@@ -98,7 +98,7 @@
                                 <label class="control-label col-sm-2" for="Contact.FirstName">First name</label>
                                 <div class="col-sm-4">
                                     @Html.TextBoxFor(x => x.Contact.FirstName, new { @class = "form-control input-sm" , placeholder =  "First name"})
-                                    <span class="label label-danger">Required</span>
+                                    <span class="label label-default">Required</span>
                                     <div class="help-block">@Html.ValidationMessageFor(x => x.Contact.FirstName)</div>
                                 </div>                                
                             </div>
@@ -113,21 +113,21 @@
                                 <label class="control-label col-sm-2" for="Contact.LastName">Last name</label>
                                 <div class="col-sm-4">
                                     @Html.TextBoxFor(x => x.Contact.LastName, new { @class = "form-control input-sm", placeholder =  "Last name" })
-                                    <span class="label label-danger">Required</span>
+                                    <span class="label label-default">Required</span>
                                     <div class="help-block">@Html.ValidationMessageFor(x => x.Contact.LastName)</div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="Contact.Address">Address</label>
-                                <div class="col-sm-4">
+                                <div class="col-sm-6">
                                     @Html.TextBoxFor(x => x.Contact.StreetAddress, new { @class = "form-control input-sm", placeholder =  "Street address" })
-                                    <span class="label label-danger">Required</span>
+                                    <span class="label label-default">Required</span>
                                     <div class="help-block">@Html.ValidationMessageFor(x => x.Contact.StreetAddress)</div>
                                 </div>                               
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="Contact.Building">Bldg/Room</label>
-                                <div class="col-sm-2">
+                                <div class="col-sm-3">
                                     @Html.TextBoxFor(x => x.Contact.Building, new { @class = "form-control input-sm", placeholder =  "Building/Room" })
                                     <div class="help-block">@Html.ValidationMessageFor(x => x.Contact.Building)</div>
                                 </div>
@@ -143,7 +143,7 @@
                                 <label class="control-label col-sm-2" for="Contact.City">City</label>
                                 <div class="col-sm-4">
                                     @Html.TextBoxFor(x=>x.Contact.City,new { @class = "form-control input-sm", placeholder =  "Salisbury" })
-                                    <span class="label label-danger">Required</span>
+                                    <span class="label label-default">Required</span>
                                     <div class="help-block">@Html.ValidationMessageFor(x => x.Contact.City)</div>
                                 </div>
                             </div>
@@ -151,7 +151,7 @@
                                 <label class="control-label col-sm-2" for="Contact.State">State</label>
                                 <div class="col-sm-2">
                                     @Html.TextBoxFor(x=>x.Contact.State,new { @class = "form-control input-sm", placeholder =  "MD" })
-                                    <span class="label label-danger">Required</span>
+                                    <span class="label label-default">Required</span>
                                     <div class="help-block">@Html.ValidationMessageFor(x => x.Contact.State)</div>
                                 </div>
                             </div>
@@ -159,7 +159,7 @@
                                 <label class="control-label col-sm-2" for="Contact.Zip">Zip</label>
                                 <div class="col-sm-2">
                                     @Html.TextBoxFor(x=>x.Contact.Zip, new { @class = "form-control input-sm", placeholder =  "21804" })
-                                    <span class="label label-danger">Required</span>
+                                    <span class="label label-default">Required</span>
                                     <div class="help-block">@Html.ValidationMessageFor(x => x.Contact.Zip)</div>
                                 </div>
                             </div>
@@ -167,7 +167,7 @@
                                 <label class="control-label col-sm-2" for="Contact.Phone">Phone</label>
                                 <div class="col-sm-4">
                                     @Html.TextBoxFor(x=>x.Contact.Phone,new { @class = "form-control input-sm", placeholder =  "321-654-9876" })
-                                    <span class="label label-danger">Required</span>
+                                    <span class="label label-default">Required</span>
                                     <div class="help-block">@Html.ValidationMessageFor(x => x.Contact.Phone)</div>
                                 </div>
                             </div>
@@ -175,7 +175,7 @@
                                 <label class="control-label col-sm-2" for="Contact.Email">Email</label>
                                 <div class="col-sm-4">
                                     @Html.TextBoxFor(x=>x.Contact.Email,new { @class = "form-control input-sm", placeholder =  "abc@somedomain.com" })
-                                    <span class="label label-danger">Required</span>
+                                    <span class="label label-default">Required</span>
                                     <div class="help-block">@Html.ValidationMessageFor(x => x.Contact.Email)</div>
                                 </div>
                             </div>

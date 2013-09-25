@@ -20,7 +20,10 @@ namespace ESRGC.DLLR.EARN.Domain.DAL
     public DbSet<Profile> Profiles { get; set; }
     public DbSet<Organization> Organizations { get; set; }
     public DbSet<UserGroup> UserGroups { get; set; }
-    public DbSet<Industry> Industry { get; set; }
+    public DbSet<Industry> Industries { get; set; }
+    public DbSet<Tag> Tags { get; set; }
+    public DbSet<ProfileTag> ProfileTags { get; set; }
+
     protected override void OnModelCreating(DbModelBuilder modelBuilder) {
       modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
       //modelBuilder.Conventions.Remove<IncludeMetadataConvention>();

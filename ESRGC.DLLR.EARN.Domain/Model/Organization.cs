@@ -12,15 +12,29 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     [Required(ErrorMessage="Please enter your organization name!")]
     [Display(Name="Name")]
     public string Name { get; set; }
+
     [MaxLength(50)]
     [Display(Description="www.someorganization.org")]
+    [DataType(DataType.Url)]
     public string Website { get; set; }
+
     [MaxLength(300)]
     [Display(Description="Please describe your organization")]
+    [DataType(DataType.MultilineText)]
     public string Description { get; set; }
+
     [Display(Name="Industry")]
     [Required(ErrorMessage="Please select an industry!")]
     public int IndustryID { get; set; }
     public virtual Industry Industry { get; set; }
+
+    [DataType(DataType.Url)]
+    public string FacebookLink { get; set; }
+
+    [DataType(DataType.Url)]
+    public string LinkedInLink { get; set; }
+
+    [DataType(DataType.Url)]
+    public string TwitterLink { get; set; }
   }
 }

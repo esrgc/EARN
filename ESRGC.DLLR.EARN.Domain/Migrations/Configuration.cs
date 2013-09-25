@@ -30,13 +30,13 @@ namespace ESRGC.DLLR.EARN.Domain.Migrations
       //
       
       context.UserGroups.RemoveRange(context.UserGroups.ToList());
-      context.Industry.RemoveRange(context.Industry.ToList());
+      context.Industries.RemoveRange(context.Industries.ToList());
       context.UserGroups.AddOrUpdate(
         new UserGroup { Name = "Industry member", Description = "Seeking employees e.g healthcare representative" },
         new UserGroup { Name = "Convener", Description = "facilities partnership e.g. chamber of commerce" },
         new UserGroup { Name = "Strategic partner", Description = "Providing skilled workforce e.g. training center" }
       );
-      context.Industry.AddOrUpdate(
+      context.Industries.AddOrUpdate(
         new Industry { Name = "Accommodation and Food Services" },
         new Industry { Name = "Administrative and Support Services" },
         new Industry { Name = "Agriculture, Forestry, Fishing, and Hunting" },

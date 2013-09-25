@@ -67,9 +67,6 @@ namespace ESRGC.DLLR.EARN.Domain.Migrations
                 c => new
                     {
                         ProfileID = c.Int(nullable: false, identity: true),
-                        lat = c.Double(),
-                        lon = c.Double(),
-                        location = c.Geometry(),
                         PictureID = c.Int(),
                         ContactID = c.Int(nullable: false),
                         OrganizationID = c.Int(nullable: false),
@@ -94,6 +91,9 @@ namespace ESRGC.DLLR.EARN.Domain.Migrations
                         Website = c.String(maxLength: 50),
                         Description = c.String(maxLength: 300),
                         IndustryID = c.Int(nullable: false),
+                        FacebookLink = c.String(),
+                        LinkedInLink = c.String(),
+                        TwitterLink = c.String(),
                     })
                 .PrimaryKey(t => t.OrganizationID)
                 .ForeignKey("dbo.Industry", t => t.IndustryID, cascadeDelete: true)
@@ -128,6 +128,18 @@ namespace ESRGC.DLLR.EARN.Domain.Migrations
                     })
                 .PrimaryKey(t => t.UserGroupID);
             
+            CreateTable(
+                "dbo.Tag",
+                c => new
+                    {
+                        TagID = c.Int(nullable: false, identity: true),
+                        Name = c.String(nullable: false, maxLength: 20),
+                        Description = c.String(),
+                        Geometry = c.Geometry(),
+                        Discriminator = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => t.TagID);
+            
         }
         
         public override void Down()
@@ -146,6 +158,7 @@ namespace ESRGC.DLLR.EARN.Domain.Migrations
             DropIndex("dbo.Organization", new[] { "IndustryID" });
             DropIndex("dbo.Profile", new[] { "ContactID" });
             DropIndex("dbo.Account", new[] { "ContactID" });
+            DropTable("dbo.Tag");
             DropTable("dbo.UserGroup");
             DropTable("dbo.Picture");
             DropTable("dbo.Industry");

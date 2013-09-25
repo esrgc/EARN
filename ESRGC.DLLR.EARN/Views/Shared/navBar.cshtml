@@ -7,22 +7,21 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="@Url.Action("index", "Home")">EARN Maryland</a>
+        <a class="navbar-brand" href="@Url.Action("index", "Home")">EARN MD</a>
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse navbar-ex1-collapse">
-        <div class="container">
+        @*<div class="container">*@
             <ul class="nav navbar-nav">
-                @*<li><a href="@Url.Action("index", "Home")"><i class="icon-home"></i> Home</a></li>*@
-                <li><a href="#"><i class="icon-envelope"></i> Contact Us</a></li>
-                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown
+                <li><a href="#"><i class="icon-group"></i> Members</a></li>
+                <li><a href="#"><i class="icon-coffee"></i> Partnerships</a></li>
+                                
+                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-plus"></i> More
                     <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
+                        <li><a href="#"><i class="icon-cloud"></i> Resources</a></li>
+                        <li><a href="#"><i class="icon-envelope"></i> Contact Us</a></li>
                         <li><a href="#">Something else here</a></li>
-                        <li><a href="#">Separated link</a></li>
-                        <li><a href="#">One more separated link</a></li>
                     </ul>
                 </li>
             </ul>
@@ -37,7 +36,7 @@
                     <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> @User.Identity.Name
                         <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
+                            <li><a href="@Url.Action("Index","Profile")">Profile</a></li>
                             <li><a href="#">Another action</a></li>
                             <li><a href="#">Something else here</a></li>
                             <li><a href="#">Separated link</a></li>
@@ -60,7 +59,7 @@
                 }
 
             </ul>
-        </div>
+        @*</div>*@
     </div>
     <!-- /.navbar-collapse -->
 </nav>
