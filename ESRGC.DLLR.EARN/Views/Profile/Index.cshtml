@@ -8,7 +8,7 @@
 @section header{
     <div class="container">
         <header class="page-header">
-            <h3>@ViewBag.Header <i class="icon-large icon-user"></i></h3>
+            <h3>@ViewBag.Header <i class="icon-large icon-briefcase"></i></h3>
             <ul class="breadcrumb">
                 <li><a href="@Url.Action("index", "Home")">Home</a></li>
                 <li class="active">@ViewBag.Header</li>
@@ -17,10 +17,51 @@
     </div>
 }
 
-<div class="container">
+<div class="container profile-area">
+    <!--Profile header-->
+   
+    <div class="row">
+        <div class="col-sm-3">
+            <!--logo-->
+            <div class="profile-picture">
+                @if (Model.PictureID != null) { 
+                    <img class="img-thumbnail" src="@Url.Action("ProfilePicture", new { pictureId = Model.PictureID })"/>
+                }
+                else {
+                    <img class="img-thumbnail" src="@Url.Content("~/Client/images/empty_profile.gif")"/>
+                }
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <!--organization header-->
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="">
+                        <h3>@Model.Organization.Name</h3>
+                        <a href="http://@Model.Organization.Website" target="_blank">@Model.Organization.Website</a>
+                        <p>@Model.UserGroup.Name</p>
+                    </div>
+                </div>
+                <div class="col-sm-4 text-align-right">
+                    <p class="text-info">@Model.Industry.Name</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <!--tags-->
+                    <div class="well"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Profile detail-->
     <div class="row">
         <div class="col-sm-12">
-           @Html.Partial("Organization", Model.Organization)
+            <div class="well">
+                <p class="lead">
+                    @Model.Organization.Description
+                </p>
+            </div>
         </div>
     </div>
 </div>

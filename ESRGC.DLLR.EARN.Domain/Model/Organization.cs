@@ -22,12 +22,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     [Display(Description="Please describe your organization")]
     [DataType(DataType.MultilineText)]
     public string Description { get; set; }
-
-    [Display(Name="Industry")]
-    [Required(ErrorMessage="Please select an industry!")]
-    public int IndustryID { get; set; }
-    public virtual Industry Industry { get; set; }
-
+    
     [DataType(DataType.Url)]
     public string FacebookLink { get; set; }
 

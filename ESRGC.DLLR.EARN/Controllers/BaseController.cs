@@ -17,8 +17,15 @@ namespace ESRGC.DLLR.EARN.Controllers
     }
 
     [Authorize]
-    public FileContentResult ProfilePicture(int pictureId) {
-      return null;
+    public ActionResult ProfilePicture(int pictureId) {
+      try {
+        var pic = _workUnit.PictureRepository.GetEntityByID(pictureId);
+
+        return File(pic.ImageData, pic.ImageMimeType);
+      }
+      catch (Exception) {
+        return null;
+      }
     }
     
     public void updateTempDataMessage(string message) {

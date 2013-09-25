@@ -44,16 +44,16 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-sm-2" for="Oranization.IndustryID">Industry</label>
+                                <label class="control-label col-sm-2" for="IndustryID">Industry</label>
                                 <div class="col-sm-6">
                                     @Html.DropDownListFor(
-                                        x => x.Organization.IndustryID,
+                                        x => x.IndustryID,
                                         new SelectList(Model.Industries, "IndustryID", "Name"),
                                         "--select an industry--",
                                         new { @class = "form-control col-sm-4" }
                                     )
                                     <span class="label label-default">Required</span>
-                                    <div class="help-block">@Html.ValidationMessageFor(x => x.Organization.IndustryID)</div>
+                                    <div class="help-block">@Html.ValidationMessageFor(x => x.IndustryID)</div>
                                 </div>
                             </div>
                             <div class="form-group">

@@ -1,0 +1,12 @@
+﻿.profile-picture {
+    max-width: 200px;
+    margin: 0 0 10px 0;
+}
+.profile-area h3,
+.profile-area h4,
+.profile-area h5 {
+    margin-top: 0;
+}
+.well {
+    min-height: 100px;
+}

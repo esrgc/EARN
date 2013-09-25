@@ -15,6 +15,7 @@ namespace ESRGC.DLLR.EARN.Models
     public ICollection<Industry> Industries { get; set; }
     public ICollection<UserGroup> UserGroups { get; set; }
     public int UserGroupID { get; set; }
+    public int IndustryID { get; set; }
     public Contact Contact { get; set; }
   }
 }

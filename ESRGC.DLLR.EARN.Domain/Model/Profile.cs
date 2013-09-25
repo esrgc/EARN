@@ -34,5 +34,10 @@ namespace ESRGC.DLLR.EARN.Domain.Model
 
     public int UserGroupID { get; set; }
     public virtual UserGroup UserGroup { get; set; }
+
+    [Display(Name = "Industry")]
+    [Required(ErrorMessage = "Please select an industry!")]
+    public int IndustryID { get; set; }
+    public virtual Industry Industry { get; set; }
   }
 }

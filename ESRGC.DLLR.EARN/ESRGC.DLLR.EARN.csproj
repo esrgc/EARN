@@ -152,11 +152,13 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Client\css\profile.css" />
     <Content Include="Client\css\quickForm.css" />
     <Content Include="Client\css\site.css" />
     <Content Include="Client\css\stickyFooter.css" />
     <Content Include="Client\css\windowPanel.css" />
     <Content Include="Client\images\ajax-loader-fb.gif" />
+    <Content Include="Client\images\EARN_logo_200w.jpg" />
     <Content Include="Client\images\empty_profile.gif" />
     <Content Include="Client\images\error.jpg" />
     <Content Include="Client\images\esrgc.png" />
@@ -218,6 +220,8 @@
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Profile\Create.cshtml" />
     <Content Include="Views\Shared\messagePartial.cshtml" />
+    <Content Include="Views\Profile\_organization.cshtml" />
+    <Content Include="Views\Profile\_tag.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ESRGC.DLLR.EARN.Domain\ESRGC.DLLR.EARN.Domain.csproj">

@@ -49,7 +49,8 @@ namespace ESRGC.DLLR.EARN.Controllers
         var p = new Profile() {
           Contact = profile.Contact,
           Organization = profile.Organization,
-          UserGroupID = profile.UserGroupID
+          UserGroupID = profile.UserGroupID,
+          IndustryID = profile.IndustryID
         };
 
         _workUnit.ProfileRepository.InsertEntity(p);
