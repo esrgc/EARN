@@ -59,6 +59,10 @@
     <Compile Include="Migrations\201309252124307_init.Designer.cs">
       <DependentUpon>201309252124307_init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201309261838440_profile-lastupdate.cs" />
+    <Compile Include="Migrations\201309261838440_profile-lastupdate.Designer.cs">
+      <DependentUpon>201309261838440_profile-lastupdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\GeoTag.cs" />
@@ -83,6 +87,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201309252124307_init.resx">
       <DependentUpon>201309252124307_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201309261838440_profile-lastupdate.resx">
+      <DependentUpon>201309261838440_profile-lastupdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,12 +1,28 @@
 ﻿.profile-picture {
-    max-width: 200px;
-    margin: 0 0 10px 0;
+    max-width: 15%;
+    margin: 0 10px 10px 0;
 }
-.profile-area h3,
+
+.organization-detail .profile-area h3,
 .profile-area h4,
 .profile-area h5 {
     margin-top: 0;
 }
-.well {
-    min-height: 100px;
+
+.profile-container {
+    min-width: 85%;
 }
+
+@media (min-width: 700px) {
+}
+
+@media (min-width: 1000px) {
+}
+.placeholder {
+    padding: 15px
+}
+/*.tab-pane > .post {
+    border-top: none;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}*/

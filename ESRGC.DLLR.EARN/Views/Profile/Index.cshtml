@@ -1,4 +1,5 @@
-﻿@model ESRGC.DLLR.EARN.Domain.Model.Profile
+﻿@using ESRGC.DLLR.EARN.Helpers
+@model ESRGC.DLLR.EARN.Domain.Model.Profile
 
 @{
     ViewBag.Title = "Profile";
@@ -9,47 +10,63 @@
     <div class="container">
         <header class="page-header">
             <h3>@ViewBag.Header <i class="icon-large icon-briefcase"></i></h3>
-            <ul class="breadcrumb">
+            @*<ul class="breadcrumb">
                 <li><a href="@Url.Action("index", "Home")">Home</a></li>
                 <li class="active">@ViewBag.Header</li>
-            </ul>
+            </ul>*@
         </header>
     </div>
 }
 
-<div class="container profile-area">
+<div class="container">
     <!--Profile header-->
-   
+    <div class="text-right"><small>Last update @Html.TimeSpan(@Model.LastUpdate)</small></div>
     <div class="row">
-        <div class="col-sm-3">
-            <!--logo-->
-            <div class="profile-picture">
-                @if (Model.PictureID != null) { 
-                    <img class="img-thumbnail" src="@Url.Action("ProfilePicture", new { pictureId = Model.PictureID })"/>
-                }
-                else {
-                    <img class="img-thumbnail" src="@Url.Content("~/Client/images/empty_profile.gif")"/>
-                }
-            </div>
-        </div>
-        <div class="col-sm-9">
-            <!--organization header-->
-            <div class="row">
-                <div class="col-sm-8">
-                    <div class="">
-                        <h3>@Model.Organization.Name</h3>
-                        <a href="http://@Model.Organization.Website" target="_blank">@Model.Organization.Website</a>
-                        <p>@Model.UserGroup.Name</p>
+        <div class="col-sm-12">
+            <div class="well">
+                <div class="post">
+                    <div class="inline-container profile-area">
+                        <div class="profile-picture">
+                            @if (Model.PictureID != null) { 
+                                <img class="img-thumbnail" src="@Url.Action("ProfilePicture", new { pictureId = Model.PictureID })"/>
+                            }
+                            else {
+                                <img class="img-thumbnail" src="@Url.Content("~/Client/images/empty_profile.gif")"/>
+                            }
+                        </div>
+                        <div class="row profile-container">
+                            <div class="col-sm-7">
+                                <div class="">
+                                    <h4>
+                                        <span>@Model.Organization.Name</span>
+                                        <a class="btn btn-info btn-xs" href="http://@Model.Organization.Website" target="_blank" title="Organization website">
+                                            <i class="icon-link"></i>
+                                        </a>
+                                        <br />
+                                        <small>@Model.UserGroup.Name</small><br />
+                                    </h4>
+                                    <ul class="list-inline list-unstyled">
+                                        <li><a target="_blank" href="http://@Model.Organization.FacebookLink"><i class="icon-large icon-facebook-sign"></i></a></li>
+                                        <li><a target="_blank" href="http://@Model.Organization.TwitterLink"><i class="icon-large icon-twitter-sign"></i></a></li>
+                                        <li><a target="_blank" href="http://@Model.Organization.LinkedInLink"><i class="icon-large icon-linkedin-sign"></i></a></li>
+                                    </ul>
+                                    <p>@Model.Industry.Name</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+                                <h5>Search tags</h5>
+                                <ul class="list-unstyled list-inline">
+                                    <li><span class="label label-default">computer</span></li>
+                                    <li><span class="label label-default">Technology</span></li>
+                                    <li><span class="label label-default">C#</span></li>
+                                    <li><span class="label label-default">VB</span></li>
+                                    <li><span class="label label-default">.NET</span></li>
+                                </ul>
+                            </div>
+                        </div>
+
                     </div>
-                </div>
-                <div class="col-sm-4 text-align-right">
-                    <p class="text-info">@Model.Industry.Name</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12">
-                    <!--tags-->
-                    <div class="well"></div>
+                    <div class="clear"></div>
                 </div>
             </div>
         </div>
@@ -57,10 +74,45 @@
     <!--Profile detail-->
     <div class="row">
         <div class="col-sm-12">
-            <div class="well">
-                <p class="lead">
-                    @Model.Organization.Description
-                </p>
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#summary" data-toggle="tab">Summary</a></li>
+                <li><a href="#needs" data-toggle="tab">Needs</a></li>
+                <li><a href="#contacts" data-toggle="tab">Contacts</a></li>
+                <li><a href="#partnership" data-toggle="tab">Parnerships</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="summary">
+                    <div class="placeholder">
+                        <h4>Point of Contact</h4>
+                        <div >
+                            <address>
+                                @Model.Contact.NameTitle 
+                                <strong>@Model.Contact.FirstName @Model.Contact.Middle @Model.Contact.LastName</strong>
+                                @Model.Contact.NameExtension <br />
+                                @Model.Contact.StreetAddress
+                                @Model.Contact.Building
+                                @Model.Contact.Department<br />
+                                @Model.Contact.City, @Model.Contact.State @Model.Contact.Zip<br />
+                                <abbr title="Phone">P:</abbr> @Html.DisplayPhoneText(Model.Contact.Phone)
+                            </address>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="needs">
+                    <div>
+                        <h4>Needs</h4>
+                    </div>
+                </div>
+                <div class="tab-pane" id="contacts">
+                    <div>
+                        <h4>Contacts</h4>
+                    </div>
+                </div>
+                <div class="tab-pane" id="partnership">
+                    <div>
+                        <h3>Partnership is coming soon...</h3>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

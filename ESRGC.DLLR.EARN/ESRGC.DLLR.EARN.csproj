@@ -141,6 +141,7 @@
     </Compile>
     <Compile Include="Helpers\Authentication.cs" />
     <Compile Include="Helpers\EmailHelper.cs" />
+    <Compile Include="Helpers\HtmlHelperExt.cs" />
     <Compile Include="Helpers\SHA1PasswordSecurity.cs" />
     <Compile Include="Helpers\Utility.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
@@ -222,6 +223,7 @@
     <Content Include="Views\Shared\messagePartial.cshtml" />
     <Content Include="Views\Profile\_organization.cshtml" />
     <Content Include="Views\Profile\_tag.cshtml" />
+    <Content Include="Views\Profile\profileNavbar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ESRGC.DLLR.EARN.Domain\ESRGC.DLLR.EARN.Domain.csproj">

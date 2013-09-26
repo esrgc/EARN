@@ -39,5 +39,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     [Required(ErrorMessage = "Please select an industry!")]
     public int IndustryID { get; set; }
     public virtual Industry Industry { get; set; }
+
+    public DateTime? LastUpdate { get; set; }
   }
 }
