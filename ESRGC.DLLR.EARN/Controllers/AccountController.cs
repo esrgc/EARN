@@ -88,8 +88,9 @@ namespace ESRGC.DLLR.EARN.Controllers
     [AllowAnonymous]
     public ActionResult SignIn() {
       //sign out any previous session
+
       FormsAuthentication.SignOut();
-      return View();
+      return View(new SignInModel());
     }
 
     [HttpPost]

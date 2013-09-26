@@ -28,11 +28,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     [MaxLength(32)]
     [ScaffoldColumn(false)]
     public string InitialPassword { get; set; }
-
-    [ScaffoldColumn(false)]
-    public int? ContactID { get; set; }
-    public virtual Contact Contact { get; set; }
-
+       
     [MaxLength(20)]
     public string Role { get; set; }
 

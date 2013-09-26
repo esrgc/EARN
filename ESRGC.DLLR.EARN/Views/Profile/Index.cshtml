@@ -93,7 +93,8 @@
                                 @Model.Contact.Building
                                 @Model.Contact.Department<br />
                                 @Model.Contact.City, @Model.Contact.State @Model.Contact.Zip<br />
-                                <abbr title="Phone">P:</abbr> @Html.DisplayPhoneText(Model.Contact.Phone)
+                                <abbr title="Phone">P:</abbr> @Html.DisplayPhoneText(Model.Contact.Phone)<br />
+                                <a href="mailto:@Model.Contact.Email">@Model.Contact.Email</a>
                             </address>
                         </div>
                     </div>
@@ -110,7 +111,7 @@
                 </div>
                 <div class="tab-pane" id="partnership">
                     <div>
-                        <h3>Partnership is coming soon...</h3>
+                        <h4>Partnership is coming soon...</h4>
                     </div>
                 </div>
             </div>

@@ -15,7 +15,6 @@ namespace ESRGC.DLLR.EARN.Domain.Migrations
                         EmailAddress = c.String(maxLength: 50),
                         Password = c.Binary(maxLength: 32),
                         InitialPassword = c.String(maxLength: 32),
-                        ContactID = c.Int(),
                         Role = c.String(maxLength: 20),
                         Active = c.Boolean(nullable: false),
                         SecretQuestion = c.String(maxLength: 50),
@@ -26,10 +25,32 @@ namespace ESRGC.DLLR.EARN.Domain.Migrations
                         ProfileID = c.Int(),
                     })
                 .PrimaryKey(t => t.AccountID)
-                .ForeignKey("dbo.Contact", t => t.ContactID)
                 .ForeignKey("dbo.Profile", t => t.ProfileID)
-                .Index(t => t.ContactID)
                 .Index(t => t.ProfileID);
+            
+            CreateTable(
+                "dbo.Profile",
+                c => new
+                    {
+                        ProfileID = c.Int(nullable: false, identity: true),
+                        PictureID = c.Int(),
+                        ContactID = c.Int(nullable: false),
+                        OrganizationID = c.Int(nullable: false),
+                        UserGroupID = c.Int(nullable: false),
+                        IndustryID = c.Int(nullable: false),
+                        LastUpdate = c.DateTime(),
+                    })
+                .PrimaryKey(t => t.ProfileID)
+                .ForeignKey("dbo.Contact", t => t.ContactID, cascadeDelete: true)
+                .ForeignKey("dbo.Industry", t => t.IndustryID, cascadeDelete: true)
+                .ForeignKey("dbo.Organization", t => t.OrganizationID, cascadeDelete: true)
+                .ForeignKey("dbo.Picture", t => t.PictureID)
+                .ForeignKey("dbo.UserGroup", t => t.UserGroupID, cascadeDelete: true)
+                .Index(t => t.ContactID)
+                .Index(t => t.IndustryID)
+                .Index(t => t.OrganizationID)
+                .Index(t => t.PictureID)
+                .Index(t => t.UserGroupID);
             
             CreateTable(
                 "dbo.Contact",
@@ -61,29 +82,6 @@ namespace ESRGC.DLLR.EARN.Domain.Migrations
                         Building = c.String(),
                     })
                 .PrimaryKey(t => t.ContactID);
-            
-            CreateTable(
-                "dbo.Profile",
-                c => new
-                    {
-                        ProfileID = c.Int(nullable: false, identity: true),
-                        PictureID = c.Int(),
-                        ContactID = c.Int(nullable: false),
-                        OrganizationID = c.Int(nullable: false),
-                        UserGroupID = c.Int(nullable: false),
-                        IndustryID = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.ProfileID)
-                .ForeignKey("dbo.Contact", t => t.ContactID, cascadeDelete: true)
-                .ForeignKey("dbo.Industry", t => t.IndustryID, cascadeDelete: true)
-                .ForeignKey("dbo.Organization", t => t.OrganizationID, cascadeDelete: true)
-                .ForeignKey("dbo.Picture", t => t.PictureID)
-                .ForeignKey("dbo.UserGroup", t => t.UserGroupID, cascadeDelete: true)
-                .Index(t => t.ContactID)
-                .Index(t => t.IndustryID)
-                .Index(t => t.OrganizationID)
-                .Index(t => t.PictureID)
-                .Index(t => t.UserGroupID);
             
             CreateTable(
                 "dbo.Industry",
@@ -170,7 +168,6 @@ namespace ESRGC.DLLR.EARN.Domain.Migrations
             DropForeignKey("dbo.Profile", "IndustryID", "dbo.Industry");
             DropForeignKey("dbo.Organization", "Industry_IndustryID", "dbo.Industry");
             DropForeignKey("dbo.Profile", "ContactID", "dbo.Contact");
-            DropForeignKey("dbo.Account", "ContactID", "dbo.Contact");
             DropIndex("dbo.ProfileTag", new[] { "TagID" });
             DropIndex("dbo.ProfileTag", new[] { "ProfileID" });
             DropIndex("dbo.Account", new[] { "ProfileID" });
@@ -180,15 +177,14 @@ namespace ESRGC.DLLR.EARN.Domain.Migrations
             DropIndex("dbo.Profile", new[] { "IndustryID" });
             DropIndex("dbo.Organization", new[] { "Industry_IndustryID" });
             DropIndex("dbo.Profile", new[] { "ContactID" });
-            DropIndex("dbo.Account", new[] { "ContactID" });
             DropTable("dbo.Tag");
             DropTable("dbo.ProfileTag");
             DropTable("dbo.UserGroup");
             DropTable("dbo.Picture");
             DropTable("dbo.Organization");
             DropTable("dbo.Industry");
-            DropTable("dbo.Profile");
             DropTable("dbo.Contact");
+            DropTable("dbo.Profile");
             DropTable("dbo.Account");
         }
     }

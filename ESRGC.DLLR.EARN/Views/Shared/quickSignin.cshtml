@@ -4,11 +4,17 @@
 <form class="quick-form" action="@Url.Action("SignIn", "Account")" method="post" role="form">
     <input type="text" name="Email" id="email" class="form-control" placeholder="Email address" autofocus="" value="@Model.Email"/>
     <input type="password" name="Password" id="password" class="form-control" placeholder="Password" />
+    <span class="help-block">
+        <a href="#" class="pull-right"><small>Forgot your password?</small></a>
+    </span>
     <label class="checkbox">
         @Html.CheckBoxFor(x => x.RememberMe)
         Remember me
     </label>
     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-    <span class="help-block"><a href="#"><small>Forgot your password?</small></a></span>
+    
+    <span class="help-block">
+        Not a member? <a href="@Url.Action("SignUp")"><small>Sign up for EARN Maryland Connect</small></a>
+    </span>
 
 </form>
