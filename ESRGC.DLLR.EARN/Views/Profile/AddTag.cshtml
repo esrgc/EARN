@@ -1,0 +1,93 @@
+﻿@using ESRGC.DLLR.EARN.Domain.Model
+@model ICollection<Tag>
+
+@{
+    ViewBag.Title = "Search Tag";
+    ViewBag.Header = "Add your search tags";
+}
+
+@section header{
+    <div class="container">
+        <header class="page-header">
+            <h3>@ViewBag.Header <i class="icon-large icon-tags"></i></h3>
+            @*<ul class="breadcrumb">
+                <li><a href="@Url.Action("index", "Home")">Home</a></li>
+                <li class="active">@ViewBag.Header</li>
+            </ul>*@
+        </header>
+    </div>
+}
+
+@section scripts {
+    <script type="text/javascript" src="@Url.Content("~/Client/jsLib/typeahead.js/typeahead.min.js")"></script>
+    <script type="text/javascript">
+        $(function () {
+            var tagArray = [];
+            var tagExists = function (tag) {
+                for (var i = 0; i < tagArray.length; i++) {
+                    if (tagArray[i] == tag)
+                        return true;
+                }
+                return false;
+            };
+            $('#tagInput').typeahead({
+                name: 'test',
+                local: ['iphone', 'iphone 5s', 'iphone 5', 'C#', '.NET'],
+                limit: 10
+            });
+            $('.typeahead.input-sm').siblings('input.tt-hint').addClass('hint-small');
+            $('.typeahead.input-lg').siblings('input.tt-hint').addClass('hint-large');
+            $('button[type="submit"]').on('click', function () { $('form').submit(); });
+            $('button[type="button"]').on('click', function (e) {
+                var value = $('input#tagInput').val();
+                if (value != '' && !tagExists(value)) {
+                    tagArray.push(value);
+                    $('input#tagInput').val('');
+                    $('#tagList').append('<li><span class="label label-default">' + value + '</span></li>');
+                    $('form').append('<input type="hidden" name="tags" value="' + value + '"/>')
+                }
+                else {
+                    console.log('Tag already exists');
+                }
+            });
+            //$('input:text').focus(function () { $(this).select(); });
+        });
+    </script>
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1">
+            <div class="window-panel">
+                <div class="window-panel-title">
+                    <strong>Tell us what you are looking for</strong>
+                </div>
+                <div class="window-panel-content">
+                    <div class="">
+                        <form class="form-inline" role="form">
+                            <div class="form-group">
+                                <input type="text"
+                                    class="form-control typeahead"
+                                    placeholder="Searchable Tags e.g. GIS, Engineer"
+                                    name="tag"
+                                    id="tagInput" />
+                            </div>
+                            <button type="button" class="btn btn-primary">Add a tag <i class="icon-tag"></i></button>
+                        </form>
+                        <p>Searchable tags are used to help others search for you, and what you require.</p>
+                    </div>
+                    <hr />
+                    <h5>Your tags</h5>
+                    <div class="post">
+                        <ul class="list-unstyled list-inline" id="tagList">
+                        </ul>
+                    </div>
+                    <div class="pull-right">
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

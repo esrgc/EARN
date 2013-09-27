@@ -15,6 +15,7 @@ header {
 
 .list-container > ul {
 }
+
     .list-container > ul > li {
         padding: 10px 0;
         border-bottom: 1px solid #EEEEEE;
@@ -53,7 +54,7 @@ header {
     padding: 15px;
     border: 1px solid #D2D2D2;
     border-radius: 5px;
-    text-shadow: 1px 1px 1px #E1E1E1;
+    /*text-shadow: 1px 1px 1px #E1E1E1;*/
     background: #FFFFFF;
     position: relative;
 }
@@ -69,9 +70,11 @@ header {
 .affix-top {
     top: 100px;
 }
+
 .pagination {
     text-align: center;
 }
+
 .inline-container > .list-container {
     margin: 0 5px 0 0;
 }
@@ -120,3 +123,4 @@ label.error {
     .validation-summary-errors > ul {
         list-style: circle;
     }
+

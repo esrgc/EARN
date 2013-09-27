@@ -157,6 +157,7 @@
     <Content Include="Client\css\quickForm.css" />
     <Content Include="Client\css\site.css" />
     <Content Include="Client\css\stickyFooter.css" />
+    <Content Include="Client\css\typeahead.css" />
     <Content Include="Client\css\windowPanel.css" />
     <Content Include="Client\images\ajax-loader-fb.gif" />
     <Content Include="Client\images\EARN_logo_200w.jpg" />
@@ -173,6 +174,8 @@
     <Content Include="Client\jsLib\bootstrap-3.0\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Client\jsLib\bootstrap-3.0\js\bootstrap.js" />
     <Content Include="Client\jsLib\bootstrap-3.0\js\bootstrap.min.js" />
+    <Content Include="Client\jsLib\typeahead.js\typeahead.js" />
+    <Content Include="Client\jsLib\typeahead.js\typeahead.min.js" />
     <Content Include="Client\js\bootstrapValidation.js" />
     <Content Include="Client\js\dx.min.js" />
     <Content Include="favicon.ico" />
@@ -224,6 +227,7 @@
     <Content Include="Views\Profile\_organization.cshtml" />
     <Content Include="Views\Profile\_tag.cshtml" />
     <Content Include="Views\Profile\profileNavbar.cshtml" />
+    <Content Include="Views\Profile\AddTag.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ESRGC.DLLR.EARN.Domain\ESRGC.DLLR.EARN.Domain.csproj">

@@ -20,7 +20,16 @@ namespace ESRGC.DLLR.EARN.Controllers
       if (CurrentAccount.Profile == null) {
         return RedirectToAction("Create");
       }
-      
+
+      int countTag = _workUnit
+        .ProfileTagRepository
+        .Entities
+        .Where(x => x.ProfileID == CurrentAccount.ProfileID)
+        .Count();
+
+      if (countTag == 0)
+        return RedirectToAction("AddTag");
+
       return View(CurrentAccount.Profile);
     }
     public ActionResult Create() {
@@ -28,7 +37,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       //  updateTempDataMessage("Profile already created!");
       //  return RedirectToAction("Index");
       //}
-      
+
       var industries = _workUnit.IndustryRepository.Entities.OrderBy(x => x.Name).ToList();
       var userGroups = _workUnit.UserGroupRepository.Entities.OrderBy(x => x.Name).ToList();
       return View(new CreateProfile() { Industries = industries, UserGroups = userGroups });
@@ -65,6 +74,20 @@ namespace ESRGC.DLLR.EARN.Controllers
 
         return RedirectToAction("index");
       }
+      return View();
+    }
+
+    public ActionResult AddTag() {
+      var preExistingTags = _workUnit.TagRepository.Entities.ToList();
+      return View(preExistingTags);
+    }
+    [HttpPost]
+    public ActionResult AddTag(ICollection<string> tags) {
+      return View();
+    }
+
+    [HttpPost]
+    public ActionResult AddTagAjax(string tagName, string description) {
       return View();
     }
   }
