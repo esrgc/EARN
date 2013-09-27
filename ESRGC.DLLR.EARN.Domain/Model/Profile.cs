@@ -41,5 +41,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public virtual Industry Industry { get; set; }
 
     public DateTime? LastUpdate { get; set; }
+
+    public virtual ICollection<ProfileTag> ProfileTags { get; set; }
   }
 }

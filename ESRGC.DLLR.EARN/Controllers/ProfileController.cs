@@ -78,11 +78,35 @@ namespace ESRGC.DLLR.EARN.Controllers
     }
 
     public ActionResult AddTag() {
-      var preExistingTags = _workUnit.TagRepository.Entities.ToList();
-      return View(preExistingTags);
+      if (CurrentAccount.Profile == null)
+        return RedirectToAction("Create");
+
+      ViewBag.preExistingTags = _workUnit.TagRepository.Entities.ToList();
+      ViewBag.currentTags = CurrentAccount.Profile.ProfileTags.ToList();
+     
+      return View();
     }
+
     [HttpPost]
     public ActionResult AddTag(ICollection<string> tags) {
+      if (CurrentAccount.Profile == null)
+        return new EmptyResult();
+
+      if (ModelState.IsValid) {
+        foreach (var tag in tags) {
+          int count = _workUnit
+            .TagRepository
+            .Entities
+            .Where(x => x.Name.ToUpper() == tag.ToUpper()).Count();
+          if (count == 0) {//tag is new
+            var newTag = new Tag { Name = tag.ToUpper() };
+            _workUnit.TagRepository.InsertEntity(newTag);
+            _workUnit.ProfileTagRepository.InsertEntity(new ProfileTag { Profile = CurrentAccount.Profile, Tag = newTag });
+          }
+        }
+        _workUnit.saveChanges();
+        return RedirectToAction("index");
+      }
       return View();
     }
 
