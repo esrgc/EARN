@@ -35,7 +35,7 @@
                             }
                         </div>
                         <div class="row profile-container">
-                            <div class="col-sm-7">
+                            <div class="col-sm-6">
                                 <div class="">
                                     <h4>
                                         <span>@Model.Organization.Name</span>
@@ -53,15 +53,23 @@
                                     <p>@Model.Industry.Name</p>
                                 </div>
                             </div>
-                            <div class="col-sm-5">
-                                <h5>Search tags <i class="icon-tags"></i></h5>
-                                <ul class="list-unstyled list-inline">
-                                    <li><span class="label label-default">computer</span></li>
-                                    <li><span class="label label-default">Technology</span></li>
-                                    <li><span class="label label-default">C#</span></li>
-                                    <li><span class="label label-default">VB</span></li>
-                                    <li><span class="label label-default">.NET</span></li>
-                                </ul>
+                            <div class="col-sm-6">
+                                <div>                                    
+                                    <label>
+                                        Searchable tags <i class="icon-tags"></i> 
+                                        <a class="btn btn-default btn-xs" href="@Url.Action("AddTag")">Add more</a>
+                                    </label>
+                                    <ul class="list-unstyled list-inline tag-list">
+                                        @foreach (var i in Model.ProfileTags) { 
+                                            <li>
+                                                <span class="label label-default">
+                                                    @i.Tag.Name
+                                                    @*<button type="button" class="close" aria-hidden="true">&times;</button>*@
+                                                </span>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
                             </div>
                         </div>
 
@@ -84,16 +92,18 @@
                 <div class="tab-pane active" id="summary">
                     <div class="placeholder">
                         <h4>Point of Contact</h4>
-                        <div >
+                        <div>
                             <address>
-                                @Model.Contact.NameTitle 
+                                @Model.Contact.NameTitle
                                 <strong>@Model.Contact.FirstName @Model.Contact.Middle @Model.Contact.LastName</strong>
-                                @Model.Contact.NameExtension <br />
+                                @Model.Contact.NameExtension
+                                <br />
                                 @Model.Contact.StreetAddress
                                 @Model.Contact.Building
                                 @Model.Contact.Department<br />
                                 @Model.Contact.City, @Model.Contact.State @Model.Contact.Zip<br />
-                                <abbr title="Phone">P:</abbr> @Html.DisplayPhoneText(Model.Contact.Phone)<br />
+                                <abbr title="Phone">P:</abbr>
+                                @Html.DisplayPhoneText(Model.Contact.Phone)<br />
                                 <a href="mailto:@Model.Contact.Email">@Model.Contact.Email</a>
                             </address>
                         </div>

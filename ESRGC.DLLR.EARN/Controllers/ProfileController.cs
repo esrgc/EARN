@@ -59,7 +59,8 @@ namespace ESRGC.DLLR.EARN.Controllers
           Contact = profile.Contact,
           Organization = profile.Organization,
           UserGroupID = profile.UserGroupID,
-          IndustryID = profile.IndustryID
+          IndustryID = profile.IndustryID,
+          LastUpdate = DateTime.Now
         };
 
         _workUnit.ProfileRepository.InsertEntity(p);
@@ -76,14 +77,22 @@ namespace ESRGC.DLLR.EARN.Controllers
       }
       return View();
     }
+    /// <summary>
+    /// return a list of pre-existing tags
+    /// these are the tags that user accummulate
+    /// </summary>
+    /// <returns></returns>
+    public JsonResult Tags() {
+      var tags = _workUnit.TagRepository.Entities.OfType<Tag>().Select(x => x.Name).ToArray();
+      return Json(tags, JsonRequestBehavior.AllowGet);
+    }
 
     public ActionResult AddTag() {
       if (CurrentAccount.Profile == null)
         return RedirectToAction("Create");
+      if (CurrentAccount.Profile != null)
+        ViewBag.currentTags = CurrentAccount.Profile.ProfileTags.Select(x => x.Tag).ToList();
 
-      ViewBag.preExistingTags = _workUnit.TagRepository.Entities.ToList();
-      ViewBag.currentTags = CurrentAccount.Profile.ProfileTags.ToList();
-     
       return View();
     }
 
@@ -91,17 +100,31 @@ namespace ESRGC.DLLR.EARN.Controllers
     public ActionResult AddTag(ICollection<string> tags) {
       if (CurrentAccount.Profile == null)
         return new EmptyResult();
-
+      var profile = CurrentAccount.Profile;
       if (ModelState.IsValid) {
         foreach (var tag in tags) {
-          int count = _workUnit
-            .TagRepository
-            .Entities
-            .Where(x => x.Name.ToUpper() == tag.ToUpper()).Count();
-          if (count == 0) {//tag is new
+          Tag t = null;
+          try {
+            t = _workUnit.TagRepository.Entities.First(x => x.Name.ToUpper() == tag.ToUpper());
+          }
+          catch {
+            //tag doesn't exist
+          }
+
+          if (t == null) {//tag is new
             var newTag = new Tag { Name = tag.ToUpper() };
             _workUnit.TagRepository.InsertEntity(newTag);
-            _workUnit.ProfileTagRepository.InsertEntity(new ProfileTag { Profile = CurrentAccount.Profile, Tag = newTag });
+            _workUnit.ProfileTagRepository.InsertEntity(
+              new ProfileTag { Profile = profile, Tag = newTag }
+            );
+          }
+          else { //tag already exists
+            //check if tag is not already referenced in this current profile
+            if (t.ProfileTags.Where(x => x.ProfileID == profile.ProfileID).Count() == 0) {
+              //haven't been referenced so add it
+              _workUnit.ProfileTagRepository.InsertEntity(
+                new ProfileTag { Profile = profile, Tag = t });
+            }
           }
         }
         _workUnit.saveChanges();
@@ -113,6 +136,10 @@ namespace ESRGC.DLLR.EARN.Controllers
     [HttpPost]
     public ActionResult AddTagAjax(string tagName, string description) {
       return View();
+    }
+
+    public ActionResult RemoveTag(int tagID) {
+      return null;
     }
   }
 }
