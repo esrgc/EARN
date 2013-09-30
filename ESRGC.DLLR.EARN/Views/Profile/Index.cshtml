@@ -54,21 +54,28 @@
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <div>                                    
-                                    <label>
-                                        Searchable tags <i class="icon-tags"></i> 
-                                        <a class="btn btn-default btn-xs" href="@Url.Action("AddTag")">Add more</a>
-                                    </label>
-                                    <ul class="list-unstyled list-inline tag-list">
-                                        @foreach (var i in Model.ProfileTags) { 
-                                            <li>
-                                                <span class="label label-default">
-                                                    @i.Tag.Name
-                                                    @*<button type="button" class="close" aria-hidden="true">&times;</button>*@
-                                                </span>
-                                            </li>
-                                        }
-                                    </ul>
+                                <div class="post">                  
+                                    <div class="pull-right">
+                                        @*<div class="btn-group btn-group-xs">*@
+                                            <a title="Add tags" href="@Url.Action("AddTag")"><i class="icon-plus"></i></a>
+                                            <a title="Remove tags" href="@Url.Action("AddTag")"><i class="icon-trash"></i></a>
+                                        @*</div>*@
+                                    </div>                   
+                                    <div >
+                                        <label>Searchable tags <i class="icon-tags"></i></label>
+                                        <ul class="list-unstyled list-inline tag-list">
+                                            @foreach (var i in Model.ProfileTags) { 
+                                                <li>
+                                                    <span class="label label-default">
+                                                        @i.Tag.Name
+                                                        @*<button type="button" class="close" aria-hidden="true">&times;</button>*@
+                                                    </span>
+                                                </li>
+                                            }
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="clearfix"></div>
                                 </div>
                             </div>
                         </div>
