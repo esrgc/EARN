@@ -120,16 +120,6 @@ namespace ESRGC.DLLR.EARN.Domain.Migrations
                 .PrimaryKey(t => t.PictureID);
             
             CreateTable(
-                "dbo.UserGroup",
-                c => new
-                    {
-                        UserGroupID = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        Description = c.String(),
-                    })
-                .PrimaryKey(t => t.UserGroupID);
-            
-            CreateTable(
                 "dbo.ProfileTag",
                 c => new
                     {
@@ -155,31 +145,41 @@ namespace ESRGC.DLLR.EARN.Domain.Migrations
                     })
                 .PrimaryKey(t => t.TagID);
             
+            CreateTable(
+                "dbo.UserGroup",
+                c => new
+                    {
+                        UserGroupID = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        Description = c.String(),
+                    })
+                .PrimaryKey(t => t.UserGroupID);
+            
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.ProfileTag", "TagID", "dbo.Tag");
-            DropForeignKey("dbo.ProfileTag", "ProfileID", "dbo.Profile");
             DropForeignKey("dbo.Account", "ProfileID", "dbo.Profile");
             DropForeignKey("dbo.Profile", "UserGroupID", "dbo.UserGroup");
+            DropForeignKey("dbo.ProfileTag", "TagID", "dbo.Tag");
+            DropForeignKey("dbo.ProfileTag", "ProfileID", "dbo.Profile");
             DropForeignKey("dbo.Profile", "PictureID", "dbo.Picture");
             DropForeignKey("dbo.Profile", "OrganizationID", "dbo.Organization");
             DropForeignKey("dbo.Profile", "IndustryID", "dbo.Industry");
             DropForeignKey("dbo.Organization", "Industry_IndustryID", "dbo.Industry");
             DropForeignKey("dbo.Profile", "ContactID", "dbo.Contact");
-            DropIndex("dbo.ProfileTag", new[] { "TagID" });
-            DropIndex("dbo.ProfileTag", new[] { "ProfileID" });
             DropIndex("dbo.Account", new[] { "ProfileID" });
             DropIndex("dbo.Profile", new[] { "UserGroupID" });
+            DropIndex("dbo.ProfileTag", new[] { "TagID" });
+            DropIndex("dbo.ProfileTag", new[] { "ProfileID" });
             DropIndex("dbo.Profile", new[] { "PictureID" });
             DropIndex("dbo.Profile", new[] { "OrganizationID" });
             DropIndex("dbo.Profile", new[] { "IndustryID" });
             DropIndex("dbo.Organization", new[] { "Industry_IndustryID" });
             DropIndex("dbo.Profile", new[] { "ContactID" });
+            DropTable("dbo.UserGroup");
             DropTable("dbo.Tag");
             DropTable("dbo.ProfileTag");
-            DropTable("dbo.UserGroup");
             DropTable("dbo.Picture");
             DropTable("dbo.Organization");
             DropTable("dbo.Industry");

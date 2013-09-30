@@ -13,7 +13,7 @@ namespace ESRGC.DLLR.EARN.Domain.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201309262133250_init"; }
+            get { return "201309301702373_init"; }
         }
         
         string IMigrationMetadata.Source

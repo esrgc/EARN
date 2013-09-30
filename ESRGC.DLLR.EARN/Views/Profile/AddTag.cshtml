@@ -35,16 +35,7 @@
                 }
                 return false;
             };
-            $('#tagInput').typeahead({
-                name: 'test',
-                //local: ['iphone', 'iphone 5s', 'iphone 5', 'C#', '.NET'],
-                prefetch: 'tags',
-                limit: 20
-            });
-            $('.typeahead.input-sm').siblings('input.tt-hint').addClass('hint-small');
-            $('.typeahead.input-lg').siblings('input.tt-hint').addClass('hint-large');
-            $('button[type="submit"]').on('click', function () { $('form').submit(); });
-            $('button[type="button"]').on('click', function (e) {
+            var addTag = function () {
                 var value = $('input#tagInput').val().toUpperCase();
                 if (tagExists(value)) {
                     $('.status-text').text('The tag "' + value + '" has already been added. Please enter a different tag!');
@@ -61,6 +52,23 @@
                 else {
                     console.log('Tag already exists');
                 }
+            };
+            $('#tagInput').typeahead({
+                name: 'test',
+                //local: ['iphone', 'iphone 5s', 'iphone 5', 'C#', '.NET'],
+                prefetch: 'tags',
+                limit: 20
+            });
+            $('input#tagInput').on('keypress', function (e) {
+                if (e.keyCode == 13) {
+                    addTag();
+                }
+            });
+            $('.typeahead.input-sm').siblings('input.tt-hint').addClass('hint-small');
+            $('.typeahead.input-lg').siblings('input.tt-hint').addClass('hint-large');
+            $('button[type="submit"]').on('click', function () { $('form').submit(); });
+            $('button[type="button"]').on('click', function (e) {
+                addTag();
             });
             $('form').on('submit', function () {
                 if (tagArray.length == 0) {
@@ -95,7 +103,7 @@
                                     name="tag"
                                     id="tagInput" />
                             </div>
-                            <button type="button" class="btn btn-primary"><i class="icon-tag"></i> Add</button>
+                            <button type="button" class="btn btn-primary" id="addTagBtn"><i class="icon-tag"></i> Add</button>
                             @if (currentTags != null) {
                                 foreach (var i in currentTags) { 
                                     <input type="hidden" value="@i.Name" name="tags"/>

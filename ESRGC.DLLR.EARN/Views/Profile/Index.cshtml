@@ -98,9 +98,9 @@
                                 <strong>@Model.Contact.FirstName @Model.Contact.Middle @Model.Contact.LastName</strong>
                                 @Model.Contact.NameExtension
                                 <br />
-                                @Model.Contact.StreetAddress
-                                @Model.Contact.Building
-                                @Model.Contact.Department<br />
+                                @Model.Contact.StreetAddress <br/>
+                                @*<abbr title="Department">Dept:</abbr>@Model.Contact.Department
+                                <abbr title="Building">Bld:</abbr>@Model.Contact.Building<br />*@
                                 @Model.Contact.City, @Model.Contact.State @Model.Contact.Zip<br />
                                 <abbr title="Phone">P:</abbr>
                                 @Html.DisplayPhoneText(Model.Contact.Phone)<br />

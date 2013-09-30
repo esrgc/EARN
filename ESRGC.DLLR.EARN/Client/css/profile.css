@@ -9,24 +9,34 @@
     margin-top: 0;
 }
 
-.profile-container {
-    min-width: 85%;
-}
+/*.profile-container {
+    max-width: 85%;
+}*/
 
 @media (min-width: 700px) {
+    .profile-container {
+        max-width: 85%;
+        min-width: 85%;
+    }
 }
 
-@media (min-width: 1000px) {
+@media (max-width: 500px) {
+    .profile-container {
+        max-width: 100%;
+        min-width: 100%;
+    }
 }
+
 .placeholder {
-    padding: 15px
+    padding: 15px;
 }
 /*.tab-pane > .post {
     border-top: none;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }*/
+
 .tag-list > li {
     padding: 0 2px;
-    margin-bottom: 5px;    
+    margin-bottom: 5px;
 }

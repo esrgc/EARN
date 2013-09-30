@@ -1,5 +1,5 @@
 ﻿#tagInput {
-    min-width: 300px;
+    min-width: 280px;
 }
 .twitter-typeahead .tt-query,
 .twitter-typeahead .tt-hint {
@@ -36,7 +36,7 @@
 }
 
 .tt-dropdown-menu {
-  min-width: 300px;
+  min-width: 280px;
   margin-top: 2px;
   padding: 5px 0;
   background-color: #fff;

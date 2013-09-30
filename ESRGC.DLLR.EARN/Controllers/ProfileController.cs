@@ -90,7 +90,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     public ActionResult AddTag() {
       if (CurrentAccount.Profile == null)
         return RedirectToAction("Create");
-      if (CurrentAccount.Profile != null)
+      if (CurrentAccount.Profile.ProfileTags != null)
         ViewBag.currentTags = CurrentAccount.Profile.ProfileTags.Select(x => x.Tag).ToList();
 
       return View();
