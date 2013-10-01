@@ -16,7 +16,7 @@ namespace ESRGC.DLLR.EARN.Domain.DAL.Concrete
     IRepository<Picture> _pictureRepo;
     IRepository<Profile> _profileRepo;
     IRepository<Organization> _organizationRepo;
-    IRepository<Industry> _industryRepo;
+    IRepository<Community> _communityRepo;
     IRepository<UserGroup> _userGroupRepo;
     IRepository<Tag> _tagRepo;
     IRepository<ProfileTag> _profileTagRepo;
@@ -72,11 +72,11 @@ namespace ESRGC.DLLR.EARN.Domain.DAL.Concrete
       get { return _userGroupRepo ?? (_userGroupRepo = new Repository<UserGroup>(_context)); }
     }
 
-    public IRepository<Industry> IndustryRepository {
+    public IRepository<Community> CommunityRepository {
       get {
-        if (_industryRepo == null)
-          _industryRepo = new Repository<Industry>(_context);
-        return _industryRepo;
+        if (_communityRepo == null)
+          _communityRepo = new Repository<Community>(_context);
+        return _communityRepo;
       }
     }
     public IRepository<Tag> TagRepository {

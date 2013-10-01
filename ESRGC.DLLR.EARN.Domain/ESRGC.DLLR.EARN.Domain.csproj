@@ -55,14 +55,14 @@
     <Compile Include="DAL\DataInitializer.cs" />
     <Compile Include="DAL\DomainContext.cs" />
     <Compile Include="DAL\PasswordInitializer.cs" />
-    <Compile Include="Migrations\201309301702373_init.cs" />
-    <Compile Include="Migrations\201309301702373_init.Designer.cs">
-      <DependentUpon>201309301702373_init.cs</DependentUpon>
+    <Compile Include="Migrations\201310011450238_init.cs" />
+    <Compile Include="Migrations\201310011450238_init.Designer.cs">
+      <DependentUpon>201310011450238_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\GeoTag.cs" />
-    <Compile Include="Model\Industry.cs" />
+    <Compile Include="Model\Community.cs" />
     <Compile Include="Model\Organization.cs" />
     <Compile Include="Model\Contact.cs" />
     <Compile Include="Model\Picture.cs" />
@@ -81,8 +81,8 @@
     <Folder Include="Helpers\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201309301702373_init.resx">
-      <DependentUpon>201309301702373_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201310011450238_init.resx">
+      <DependentUpon>201310011450238_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

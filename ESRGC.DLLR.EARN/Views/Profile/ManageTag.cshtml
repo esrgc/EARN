@@ -2,7 +2,7 @@
 @model dynamic
 @{
     ViewBag.Title = "Search Tag";
-    ViewBag.Header = "Add your search tags";
+    ViewBag.Header = "Searchable tags";
 }
 
 @section header{
@@ -21,7 +21,7 @@
     <script type="text/javascript" src="@Url.Content("~/Client/jsLib/typeahead.js/typeahead.min.js")"></script>
     <script type="text/javascript">
         var tagArray = [];
-       
+
         $(function () {
             //preload tags array to match current tags
             $('input[name="tags"]').each(function (i) {
@@ -44,7 +44,18 @@
                 if (value != '') {
                     tagArray.push(value);
                     $('input#tagInput').val('').focus();
-                    $('#tagList').append('<li><span class="label label-default">' + value + '</span></li>');
+                    $('#tagList').append(
+                        [
+                            '<li class="tag">',
+                                '<div>',
+                                    '<span class="label label-default">',
+                                        value,
+                                        '<button class="close" value="'+ value +'">&times;</button>',
+                                    '</span>',
+                                '</div>',
+                            '</li>'
+                        ].join('')
+                    );
                     $('form').append('<input type="hidden" name="tags" value="' + value + '"/>')
                     $('.tt-hint').val('');
                     $('.status-text').text('');
@@ -52,6 +63,11 @@
                 else {
                     console.log('Tag already exists');
                 }
+            };
+            var removeTag = function (value) {
+                if (typeof value == 'undefined')
+                    return;
+                $('input[type="hidden"]').filter('[value="' + value + '"]').remove();
             };
             $('#tagInput').typeahead({
                 name: 'test',
@@ -63,7 +79,7 @@
                 if (e.keyCode == 13) {
                     addTag();
                 }
-            });
+            });            
             $('.typeahead.input-sm').siblings('input.tt-hint').addClass('hint-small');
             $('.typeahead.input-lg').siblings('input.tt-hint').addClass('hint-large');
             $('button[type="submit"]').on('click', function () { $('form').submit(); });
@@ -78,6 +94,15 @@
                 return true;
             });
             //$('input:text').focus(function () { $(this).select(); });
+            //remove button events
+            $(document).on('click', 'li.tag button', function (e) {
+                //get value and remove hidden fields
+                var value = $(this).val();
+                removeTag(value);
+                //finally remove the whole node
+                $(this).parents().filter('li').remove();
+                console.log('tag ' + value + ' removed');
+            });
         });
     </script>
 }
@@ -103,10 +128,10 @@
                                     name="tag"
                                     id="tagInput" />
                             </div>
-                            <button type="button" class="btn btn-primary" id="addTagBtn"><i class="icon-tag"></i> Add</button>
+                            <button type="button" class="btn btn-primary" id="addTagBtn"><i class="icon-tag"></i>Add</button>
                             @if (currentTags != null) {
                                 foreach (var i in currentTags) { 
-                                    <input type="hidden" value="@i.Name" name="tags"/>
+                                <input type="hidden" value="@i.Name" name="tags"/>
                                 }
                             }
                         </form>
@@ -118,7 +143,14 @@
                         <ul class="list-unstyled list-inline tag-list" id="tagList">
                             @if (currentTags != null) {
                                 foreach (var i in currentTags) { 
-                                    <li><span class="label label-default">@i.Name</span></li>
+                                <li class="tag">
+                                    <div>
+                                        <span class="label label-default">
+                                            @i.Name
+                                            <button class="close" value="@i.Name">&times;</button>
+                                        </span>
+                                    </div>
+                                </li>
                                 }
                             }
                         </ul>

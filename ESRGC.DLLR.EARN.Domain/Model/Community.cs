@@ -5,9 +5,9 @@ using System.Text;
 
 namespace ESRGC.DLLR.EARN.Domain.Model
 {
-  public class Industry
+  public class Community
   {
-    public int IndustryID { get; set; }
+    public int CommunityID { get; set; }
     public string Name { get; set; }
 
     public virtual ICollection<Organization> Organizations { get; set; }

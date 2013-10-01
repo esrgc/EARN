@@ -228,6 +228,7 @@
     <Content Include="Views\Profile\_tag.cshtml" />
     <Content Include="Views\Profile\profileNavbar.cshtml" />
     <Content Include="Views\Profile\AddTag.cshtml" />
+    <Content Include="Views\Profile\ManageTag.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ESRGC.DLLR.EARN.Domain\ESRGC.DLLR.EARN.Domain.csproj">

@@ -37,20 +37,46 @@ namespace ESRGC.DLLR.EARN.Domain.Migrations
                         ContactID = c.Int(nullable: false),
                         OrganizationID = c.Int(nullable: false),
                         UserGroupID = c.Int(nullable: false),
-                        IndustryID = c.Int(nullable: false),
+                        CommunityID = c.Int(nullable: false),
                         LastUpdate = c.DateTime(),
                     })
                 .PrimaryKey(t => t.ProfileID)
+                .ForeignKey("dbo.Community", t => t.CommunityID, cascadeDelete: true)
                 .ForeignKey("dbo.Contact", t => t.ContactID, cascadeDelete: true)
-                .ForeignKey("dbo.Industry", t => t.IndustryID, cascadeDelete: true)
                 .ForeignKey("dbo.Organization", t => t.OrganizationID, cascadeDelete: true)
                 .ForeignKey("dbo.Picture", t => t.PictureID)
                 .ForeignKey("dbo.UserGroup", t => t.UserGroupID, cascadeDelete: true)
+                .Index(t => t.CommunityID)
                 .Index(t => t.ContactID)
-                .Index(t => t.IndustryID)
                 .Index(t => t.OrganizationID)
                 .Index(t => t.PictureID)
                 .Index(t => t.UserGroupID);
+            
+            CreateTable(
+                "dbo.Community",
+                c => new
+                    {
+                        CommunityID = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                    })
+                .PrimaryKey(t => t.CommunityID);
+            
+            CreateTable(
+                "dbo.Organization",
+                c => new
+                    {
+                        OrganizationID = c.Int(nullable: false, identity: true),
+                        Name = c.String(nullable: false),
+                        Website = c.String(maxLength: 50),
+                        Description = c.String(maxLength: 1000),
+                        FacebookLink = c.String(),
+                        LinkedInLink = c.String(),
+                        TwitterLink = c.String(),
+                        Community_CommunityID = c.Int(),
+                    })
+                .PrimaryKey(t => t.OrganizationID)
+                .ForeignKey("dbo.Community", t => t.Community_CommunityID)
+                .Index(t => t.Community_CommunityID);
             
             CreateTable(
                 "dbo.Contact",
@@ -82,32 +108,6 @@ namespace ESRGC.DLLR.EARN.Domain.Migrations
                         Building = c.String(),
                     })
                 .PrimaryKey(t => t.ContactID);
-            
-            CreateTable(
-                "dbo.Industry",
-                c => new
-                    {
-                        IndustryID = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                    })
-                .PrimaryKey(t => t.IndustryID);
-            
-            CreateTable(
-                "dbo.Organization",
-                c => new
-                    {
-                        OrganizationID = c.Int(nullable: false, identity: true),
-                        Name = c.String(nullable: false),
-                        Website = c.String(maxLength: 50),
-                        Description = c.String(maxLength: 300),
-                        FacebookLink = c.String(),
-                        LinkedInLink = c.String(),
-                        TwitterLink = c.String(),
-                        Industry_IndustryID = c.Int(),
-                    })
-                .PrimaryKey(t => t.OrganizationID)
-                .ForeignKey("dbo.Industry", t => t.Industry_IndustryID)
-                .Index(t => t.Industry_IndustryID);
             
             CreateTable(
                 "dbo.Picture",
@@ -165,25 +165,25 @@ namespace ESRGC.DLLR.EARN.Domain.Migrations
             DropForeignKey("dbo.ProfileTag", "ProfileID", "dbo.Profile");
             DropForeignKey("dbo.Profile", "PictureID", "dbo.Picture");
             DropForeignKey("dbo.Profile", "OrganizationID", "dbo.Organization");
-            DropForeignKey("dbo.Profile", "IndustryID", "dbo.Industry");
-            DropForeignKey("dbo.Organization", "Industry_IndustryID", "dbo.Industry");
             DropForeignKey("dbo.Profile", "ContactID", "dbo.Contact");
+            DropForeignKey("dbo.Profile", "CommunityID", "dbo.Community");
+            DropForeignKey("dbo.Organization", "Community_CommunityID", "dbo.Community");
             DropIndex("dbo.Account", new[] { "ProfileID" });
             DropIndex("dbo.Profile", new[] { "UserGroupID" });
             DropIndex("dbo.ProfileTag", new[] { "TagID" });
             DropIndex("dbo.ProfileTag", new[] { "ProfileID" });
             DropIndex("dbo.Profile", new[] { "PictureID" });
             DropIndex("dbo.Profile", new[] { "OrganizationID" });
-            DropIndex("dbo.Profile", new[] { "IndustryID" });
-            DropIndex("dbo.Organization", new[] { "Industry_IndustryID" });
             DropIndex("dbo.Profile", new[] { "ContactID" });
+            DropIndex("dbo.Profile", new[] { "CommunityID" });
+            DropIndex("dbo.Organization", new[] { "Community_CommunityID" });
             DropTable("dbo.UserGroup");
             DropTable("dbo.Tag");
             DropTable("dbo.ProfileTag");
             DropTable("dbo.Picture");
-            DropTable("dbo.Organization");
-            DropTable("dbo.Industry");
             DropTable("dbo.Contact");
+            DropTable("dbo.Organization");
+            DropTable("dbo.Community");
             DropTable("dbo.Profile");
             DropTable("dbo.Account");
         }

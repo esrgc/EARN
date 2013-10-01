@@ -20,7 +20,7 @@ namespace ESRGC.DLLR.EARN.Domain.DAL
     public DbSet<Profile> Profiles { get; set; }
     public DbSet<Organization> Organizations { get; set; }
     public DbSet<UserGroup> UserGroups { get; set; }
-    public DbSet<Industry> Industries { get; set; }
+    public DbSet<Community> Communities { get; set; }
     public DbSet<Tag> Tags { get; set; }
     public DbSet<ProfileTag> ProfileTags { get; set; }
 

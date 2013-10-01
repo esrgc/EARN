@@ -50,18 +50,18 @@
                                         <li><a target="_blank" href="http://@Model.Organization.TwitterLink"><i class="icon-large icon-twitter-sign"></i></a></li>
                                         <li><a target="_blank" href="http://@Model.Organization.LinkedInLink"><i class="icon-large icon-linkedin-sign"></i></a></li>
                                     </ul>
-                                    <p>@Model.Industry.Name</p>
+                                    <p>@Model.Community.Name</p>
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <div class="post">                  
+                                <div class="post">
                                     <div class="pull-right">
                                         @*<div class="btn-group btn-group-xs">*@
-                                            <a title="Add tags" href="@Url.Action("AddTag")"><i class="icon-plus"></i></a>
-                                            <a title="Remove tags" href="@Url.Action("AddTag")"><i class="icon-trash"></i></a>
+                                        <a title="Add tags" href="@Url.Action("ManageTag")"><i class="icon-edit"></i></a>
+                                        @*<a title="Remove tags" href="@Url.Action("ManageTag")"><i class="icon-trash"></i></a>*@
                                         @*</div>*@
-                                    </div>                   
-                                    <div >
+                                    </div>
+                                    <div>
                                         <label>Searchable tags <i class="icon-tags"></i></label>
                                         <ul class="list-unstyled list-inline tag-list">
                                             @foreach (var i in Model.ProfileTags) { 
@@ -74,8 +74,6 @@
                                             }
                                         </ul>
                                     </div>
-                                    
-                                    <div class="clearfix"></div>
                                 </div>
                             </div>
                         </div>
@@ -105,7 +103,8 @@
                                 <strong>@Model.Contact.FirstName @Model.Contact.Middle @Model.Contact.LastName</strong>
                                 @Model.Contact.NameExtension
                                 <br />
-                                @Model.Contact.StreetAddress <br/>
+                                @Model.Contact.StreetAddress
+                                <br />
                                 @*<abbr title="Department">Dept:</abbr>@Model.Contact.Department
                                 <abbr title="Building">Bld:</abbr>@Model.Contact.Building<br />*@
                                 @Model.Contact.City, @Model.Contact.State @Model.Contact.Zip<br />

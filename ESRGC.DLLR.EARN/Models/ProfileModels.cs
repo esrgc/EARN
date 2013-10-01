@@ -12,10 +12,10 @@ namespace ESRGC.DLLR.EARN.Models
   {
 
     public Organization Organization { get; set; }
-    public ICollection<Industry> Industries { get; set; }
+    public ICollection<Community> Communities { get; set; }
     public ICollection<UserGroup> UserGroups { get; set; }
     public int UserGroupID { get; set; }
-    public int IndustryID { get; set; }
+    public int CommunityID { get; set; }
     public Contact Contact { get; set; }
   }
 }

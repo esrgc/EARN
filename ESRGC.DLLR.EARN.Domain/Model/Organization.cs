@@ -18,7 +18,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     [DataType(DataType.Url)]
     public string Website { get; set; }
 
-    [MaxLength(300)]
+    [MaxLength(1000)]
     [Display(Description="Please describe your organization")]
     [DataType(DataType.MultilineText)]
     public string Description { get; set; }
