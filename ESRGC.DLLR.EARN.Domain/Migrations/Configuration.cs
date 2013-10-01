@@ -29,35 +29,39 @@ namespace ESRGC.DLLR.EARN.Domain.Migrations
       //    );
       //
       
-      context.UserGroups.RemoveRange(context.UserGroups.ToList());
-      context.Communities.RemoveRange(context.Communities.ToList());
-      context.UserGroups.AddOrUpdate(
-        new UserGroup { Name = "Industry partner", Description = "Seeking employees e.g healthcare representative" },
-        new UserGroup { Name = "Facilitator", Description = "facilities partnership e.g. chamber of commerce" },
-        new UserGroup { Name = "Training partner", Description = "Providing skilled workforce e.g. training center" }
-      );
-      context.Communities.AddOrUpdate(
-        new Community { Name = "Accommodation and Food Services" },
-        new Community { Name = "Administrative and Support Services" },
-        new Community { Name = "Agriculture, Forestry, Fishing, and Hunting" },
-        new Community { Name = "Arts, Entertainment, and Recreation" },
-        new Community { Name = "Construction" },
-        new Community { Name = "Educational Services" },
-        new Community { Name = "Finance and Insurance" },
-        new Community { Name = "Government" },
-        new Community { Name = "Health Care and Social Assistance" },
-        new Community { Name = "Information" },
-        new Community { Name = "Management of Companies and Enterprises" },
-        new Community { Name = "Manufacturing" },
-        new Community { Name = "Mining, Quarrying, and oil and Gas Extraction" },
-        new Community { Name = "Professional, Scientific, and Technical Services" },
-        new Community { Name = "Real Estate and Rental and Leasing" },
-        new Community { Name = "Retail Trade" },
-        new Community { Name = "Self-Employed" },
-        new Community { Name = "Transportation and Warehousing" },
-        new Community { Name = "Utilities" },
-        new Community { Name = "Other Services (Except Public Administration)" }
-      );
+      //context.UserGroups.RemoveRange(context.UserGroups.ToList());
+      //context.Communities.RemoveRange(context.Communities.ToList());
+      if (context.UserGroups.Count() == 0) {
+        context.UserGroups.AddOrUpdate(
+          new UserGroup { Name = "Industry partner", Description = "Seeking employees e.g healthcare representative" },
+          new UserGroup { Name = "Facilitator", Description = "facilities partnership e.g. chamber of commerce" },
+          new UserGroup { Name = "Training partner", Description = "Providing skilled workforce e.g. training center" }
+        );
+      }
+      if (context.Communities.Count() == 0) {
+        context.Communities.AddOrUpdate(
+          new Community { Name = "Accommodation and Food Services" },
+          new Community { Name = "Administrative and Support Services" },
+          new Community { Name = "Agriculture, Forestry, Fishing, and Hunting" },
+          new Community { Name = "Arts, Entertainment, and Recreation" },
+          new Community { Name = "Construction" },
+          new Community { Name = "Educational Services" },
+          new Community { Name = "Finance and Insurance" },
+          new Community { Name = "Government" },
+          new Community { Name = "Health Care and Social Assistance" },
+          new Community { Name = "Information" },
+          new Community { Name = "Management of Companies and Enterprises" },
+          new Community { Name = "Manufacturing" },
+          new Community { Name = "Mining, Quarrying, and oil and Gas Extraction" },
+          new Community { Name = "Professional, Scientific, and Technical Services" },
+          new Community { Name = "Real Estate and Rental and Leasing" },
+          new Community { Name = "Retail Trade" },
+          new Community { Name = "Self-Employed" },
+          new Community { Name = "Transportation and Warehousing" },
+          new Community { Name = "Utilities" },
+          new Community { Name = "Other Services (Except Public Administration)" }
+        );
+      }
     }
   }
 }

@@ -58,3 +58,8 @@ li.tag .label {
     border-bottom-right-radius: 0;
     border-top-right-radius: 0;
 }
+.narative {
+    min-height: 250px;
+    min-width: 100%;
+    max-width:100%;
+}

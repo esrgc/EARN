@@ -59,6 +59,10 @@
     <Compile Include="Migrations\201310011450238_init.Designer.cs">
       <DependentUpon>201310011450238_init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201310012104061_Narative.cs" />
+    <Compile Include="Migrations\201310012104061_Narative.Designer.cs">
+      <DependentUpon>201310012104061_Narative.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\GeoTag.cs" />
@@ -83,6 +87,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201310011450238_init.resx">
       <DependentUpon>201310011450238_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201310012104061_Narative.resx">
+      <DependentUpon>201310012104061_Narative.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

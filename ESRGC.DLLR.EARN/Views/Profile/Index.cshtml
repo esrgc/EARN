@@ -97,21 +97,37 @@
                 <div class="tab-pane active" id="summary">
                     <div class="placeholder">
                         <h4>Point of Contact</h4>
-                        <div>
-                            <address>
-                                @Model.Contact.NameTitle
-                                <strong>@Model.Contact.FirstName @Model.Contact.Middle @Model.Contact.LastName</strong>
-                                @Model.Contact.NameExtension
-                                <br />
-                                @Model.Contact.StreetAddress
-                                <br />
-                                @*<abbr title="Department">Dept:</abbr>@Model.Contact.Department
-                                <abbr title="Building">Bld:</abbr>@Model.Contact.Building<br />*@
-                                @Model.Contact.City, @Model.Contact.State @Model.Contact.Zip<br />
-                                <abbr title="Phone">P:</abbr>
-                                @Html.DisplayPhoneText(Model.Contact.Phone)<br />
-                                <a href="mailto:@Model.Contact.Email">@Model.Contact.Email</a>
-                            </address>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <address>
+                                    @Model.Contact.NameTitle
+                                    <strong>@Model.Contact.FirstName @Model.Contact.Middle @Model.Contact.LastName</strong>
+                                    @Model.Contact.NameExtension
+                                    <br />
+                                    @Model.Contact.StreetAddress
+                                    <br />
+                                    @if (Model.Contact.Department != null) {
+                                        <abbr title="Department">Dept:</abbr>@Model.Contact.Department <br />
+                                    }
+                                    @if (Model.Contact.Building != null) {
+                                        <abbr title="Building">Bld:</abbr>@Model.Contact.Building<br />
+                                    }
+                                    @Model.Contact.City, @Model.Contact.State @Model.Contact.Zip<br />
+                                    <abbr title="Phone">P:</abbr>
+                                    @Html.DisplayPhoneText(Model.Contact.Phone)<br />
+                                    <a href="mailto:@Model.Contact.Email">@Model.Contact.Email</a>
+                                </address>
+
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <textarea class="narative">
+
+                                        </textarea>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

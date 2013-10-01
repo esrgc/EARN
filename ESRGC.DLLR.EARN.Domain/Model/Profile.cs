@@ -41,7 +41,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public virtual Community Community { get; set; }
 
     public DateTime? LastUpdate { get; set; }
-
+    public string Narative { get; set; }
     public virtual ICollection<ProfileTag> ProfileTags { get; set; }
   }
 }
