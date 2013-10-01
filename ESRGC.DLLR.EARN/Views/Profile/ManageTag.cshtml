@@ -64,15 +64,31 @@
                     console.log('Tag already exists');
                 }
             };
-            var removeTag = function (value) {
+            var removeTag = function (value, tag) {
                 if (typeof value == 'undefined')
                     return;
-                $('input[type="hidden"]').filter('[value="' + value + '"]').remove();
+                if (tagArray.length > 1) {
+                    tagArray.pop(value);
+                    $('input[type="hidden"]').filter('[value="' + value + '"]').remove();
+                    //finally remove the whole node
+                    tag.parents().filter('li').remove();
+                    console.log('tag ' + value + ' removed');
+                }
+                else {
+                    $('.status-text').text('Could not remove! You must have at least one tag in your profile.');
+                }
             };
             $('#tagInput').typeahead({
                 name: 'test',
                 //local: ['iphone', 'iphone 5s', 'iphone 5', 'C#', '.NET'],
-                prefetch: 'tags',
+                prefetch: {
+                    url: 'tags',
+                    ttl: 1
+                },
+                //remote: {
+                //    url: 'tags'
+                //    //ttl: 5000
+                //},
                 limit: 20
             });
             $('input#tagInput').on('keypress', function (e) {
@@ -98,10 +114,8 @@
             $(document).on('click', 'li.tag button', function (e) {
                 //get value and remove hidden fields
                 var value = $(this).val();
-                removeTag(value);
-                //finally remove the whole node
-                $(this).parents().filter('li').remove();
-                console.log('tag ' + value + ' removed');
+
+                removeTag(value, $(this));                
             });
         });
     </script>
@@ -128,7 +142,7 @@
                                     name="tag"
                                     id="tagInput" />
                             </div>
-                            <button type="button" class="btn btn-primary" id="addTagBtn"><i class="icon-tag"></i>Add</button>
+                            <button type="button" class="btn btn-primary" id="addTagBtn"><i class="icon-tag"></i> Add</button>
                             @if (currentTags != null) {
                                 foreach (var i in currentTags) { 
                                 <input type="hidden" value="@i.Name" name="tags"/>
@@ -157,7 +171,7 @@
                     </div>
                     <div><span id="" class="text-warning status-text"></span></div>
                     <div class="pull-right">
-                        <button class="btn btn-primary" type="submit">Save changes</button>
+                        <button class="btn btn-primary" type="submit"><i class="icon-save"></i> Save changes</button>
                     </div>
                     <div class="clear"></div>
                 </div>

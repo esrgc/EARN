@@ -101,6 +101,9 @@ namespace ESRGC.DLLR.EARN.Controllers
 
     [HttpPost]
     public ActionResult ManageTag(ICollection<string> tags) {
+      if (tags == null) {
+        return RedirectToAction("index");
+      }
       if (CurrentAccount.Profile == null)
         return new EmptyResult();
       var profile = CurrentAccount.Profile;
@@ -120,26 +123,32 @@ namespace ESRGC.DLLR.EARN.Controllers
         var newTags = tags.Where(x => !preExistingTags.Contains(x)).ToList();
 
         //remove tag references 
-        removedProfileTags.ForEach(x => _workUnit.ProfileTagRepository.DeleteEntity(x));
+        if (removedProfileTags != null) {
+          removedProfileTags.ForEach(x => _workUnit.ProfileTagRepository.DeleteEntity(x));
+        } 
         //add new references for preExisting tags but newly added to profile
-        addedTags.ForEach(x => {
-          try {
-            //get the tag 
-            var t = _workUnit.TagRepository.Entities.First(k => k.Name == x);
-            //create new reference
-            var reference = new ProfileTag { Profile = profile, Tag = t };
-            _workUnit.ProfileTagRepository.InsertEntity(reference);
-          }
-          catch {
-            //tag doesn't exist  
-          }
-        });
+        if (addedTags != null) {
+          addedTags.ForEach(x => {
+            try {
+              //get the tag 
+              var t = _workUnit.TagRepository.Entities.First(k => k.Name == x);
+              //create new reference
+              var reference = new ProfileTag { Profile = profile, Tag = t };
+              _workUnit.ProfileTagRepository.InsertEntity(reference);
+            }
+            catch {
+              //tag doesn't exist  
+            }
+          }); 
+        }
         //now add the new tags to tag table and create new refs for them
-        newTags.ForEach(x => {
-          var newTag = new Tag { Name = x };
-          _workUnit.TagRepository.InsertEntity(newTag);
-          _workUnit.ProfileTagRepository.InsertEntity(new ProfileTag { Profile = profile, Tag = newTag });
-        });
+        if (newTags != null) {
+          newTags.ForEach(x => {
+            var newTag = new Tag { Name = x };
+            _workUnit.TagRepository.InsertEntity(newTag);
+            _workUnit.ProfileTagRepository.InsertEntity(new ProfileTag { Profile = profile, Tag = newTag });
+          }); 
+        }
 
         //foreach (var tag in tags) {
         //  Tag t = null;
