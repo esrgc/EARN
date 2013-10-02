@@ -57,7 +57,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public string City { get; set; }
     [Required(ErrorMessage = "Please enter your state e.i. MD")]
     [Display(Name = "State")]
-    [StringLength(2)]
+    [StringLength(2, ErrorMessage="Please enter only abbreviation form of state e.i. MD, VA...ect.")]
     public string State { get; set; }
     [Required(ErrorMessage="Please enter zip code")]
     [Display(Name = "Zip")]

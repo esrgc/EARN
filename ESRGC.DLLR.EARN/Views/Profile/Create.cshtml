@@ -50,7 +50,7 @@
                                     @foreach (var i in Model.UserGroups) { 
                                         <div class="radio">
                                             <label>
-                                                @Html.RadioButtonFor(x => x.UserGroupID, i.Name, new {  })
+                                                @Html.RadioButtonFor(x => x.UserGroupID, i.UserGroupID, new {  })
                                                 <span>@i.Name - @i.Description</span>
                                             </label>
                                         </div>
@@ -64,7 +64,7 @@
                                     @Html.DropDownListFor(
                                         x => x.CommunityID,
                                         new SelectList(Model.Communities, "CommunityID", "Name"),
-                                        "--select an community--",
+                                        "--select a community--",
                                         new { @class = "form-control col-sm-4" }
                                     )
                                     <span class="label label-default">Required</span>
