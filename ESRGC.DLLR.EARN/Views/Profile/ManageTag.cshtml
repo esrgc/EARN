@@ -138,7 +138,7 @@
         <div class="col-sm-10 col-sm-offset-1">
             <div class="window-panel">
                 <div class="window-panel-title">
-                    <h4>Tell us what you are looking for</h4>
+                    <strong>Tell us what you are looking for</strong>
                 </div>
                 <div class="window-panel-content">
                     <div class="">
@@ -154,6 +154,7 @@
                                     id="tagInput" />
                             </div>
                             <button type="button" class="btn btn-primary" id="addTagBtn"><i class="icon-plus"></i> Add</button>
+                            <div><span id="" class="text-danger status-text"></span></div>
                             <p class="text-warning">
                                 Note that when entering tags using comma separated string the suggestion list 
                                 will only prompt for the first entry. 
@@ -192,7 +193,7 @@
                             }
                         </ul>
                     </div>
-                    <div><span id="" class="text-warning status-text"></span></div>
+                    
                     <div class="pull-right">
                         <button class="btn btn-primary" type="submit"><i class="icon-save"></i> Save changes</button>
                         @if (currentTags != null) {
