@@ -33,6 +33,15 @@
 
 .placeholder {
     padding: 15px;
+    /*border-top-color: transparent;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-left: 1px solid #dddddd;
+    border-right:1px solid #dddddd;
+    border-bottom:1px solid #dddddd;*/
+    min-height: 300px;
 }
 /*.tab-pane > .post {
     border-top: none;

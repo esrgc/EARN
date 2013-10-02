@@ -138,7 +138,7 @@
         <div class="col-sm-10 col-sm-offset-1">
             <div class="window-panel">
                 <div class="window-panel-title">
-                    <strong>Tell us what you are looking for</strong>
+                    <h4>Tell us what you are looking for</h4>
                 </div>
                 <div class="window-panel-content">
                     <div class="">
@@ -153,7 +153,7 @@
                                     name="tag"
                                     id="tagInput" />
                             </div>
-                            <button type="button" class="btn btn-primary" id="addTagBtn"><i class="icon-tag"></i>Add</button>
+                            <button type="button" class="btn btn-primary" id="addTagBtn"><i class="icon-plus"></i> Add</button>
                             <p class="text-warning">
                                 Note that when entering tags using comma separated string the suggestion list 
                                 will only prompt for the first entry. 
@@ -166,16 +166,16 @@
                             }
                         </form>
                         <br />
-                        <div class="post form-group">
-                            <p class="text-info">
-                                <strong>Note!</strong>
+                        <div class="alert alert-info">
+                            <p>
+                                <strong>Tip!</strong>
                                 Tags can be entered one at a time, or you can enter multiple tags by 
                                 a comma separated list e.g. GIS, Engineer, Developer...ect.                                                            
                             </p>                            
                         </div>
                     </div>
                     <hr />
-                    <h5>Your tags <small class="">(Please enter at least one tag to procceed)</small></h5>
+                    <h4>Your tags <small class="">(Please enter at least one tag to procceed)</small></h4>
                     <div class="post">
                         <ul class="list-unstyled list-inline tag-list" id="tagList">
                             @if (currentTags != null) {
@@ -194,7 +194,7 @@
                     </div>
                     <div><span id="" class="text-warning status-text"></span></div>
                     <div class="pull-right">
-                        <button class="btn btn-primary" type="submit"><i class="icon-save"></i>Save changes</button>
+                        <button class="btn btn-primary" type="submit"><i class="icon-save"></i> Save changes</button>
                         @if (currentTags != null) {
                             <a class="btn btn-default" href="@Url.Action("Index")">Cancel</a>
                         }

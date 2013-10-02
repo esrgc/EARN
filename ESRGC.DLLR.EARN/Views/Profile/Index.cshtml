@@ -37,20 +37,20 @@
                         <div class="row profile-container">
                             <div class="col-sm-12">
                                 <div class="">
-                                    <span class="pull-right"><i class="icon-pencil"></i> Edit</span>
+                                    <span class="pull-right"><a href="#"><i class="icon-pencil"></i> Edit</a></span>
                                     <h4>
                                         <span>@Model.Organization.Name</span>
-                                        
+
                                         <br />
                                         <small>@Model.UserGroup.Name</small>
                                         -
                                         <small>@Model.Community.Name</small>
                                     </h4>
                                     <ul class="list-inline list-unstyled">
-                                        <li><a target="_blank" href="http://@Model.Organization.FacebookLink"><i class="icon-large icon-facebook"></i></a></li>
-                                        <li><a target="_blank" href="http://@Model.Organization.TwitterLink"><i class="icon-large icon-twitter"></i></a></li>
-                                        <li><a target="_blank" href="http://@Model.Organization.LinkedInLink"><i class="icon-large icon-linkedin"></i></a></li>
                                         <li><a target="_blank" href="http://@Model.Organization.Website" title="Organization website"><i class="icon-link"></i></a></li>
+                                        <li><a target="_blank" href="http://@Model.Organization.FacebookLink" title="Facebook link"><i class="icon-large icon-facebook"></i></a></li>
+                                        <li><a target="_blank" href="http://@Model.Organization.TwitterLink" title="Twitter link"><i class="icon-large icon-twitter"></i></a></li>
+                                        <li><a target="_blank" href="http://@Model.Organization.LinkedInLink" title="LinkedIn link"><i class="icon-large icon-linkedin"></i></a></li>
                                     </ul>
                                     <p>@Model.Organization.Description</p>
                                 </div>
@@ -65,7 +65,7 @@
     </div>
     <!--Profile detail-->
     <div class="row">
-        <div class="col-sm-3">
+        <div class="col-sm-4">
             <div>
                 <div class="window-panel">
                     <div class="window-panel-title">
@@ -93,9 +93,9 @@
             <div>
                 <div class="window-panel">
                     <div class="window-panel-title">
-                        Point of Contact <i class="icon-envelope"></i>
+                        Contact <i class="icon-envelope"></i>
                         <span class="pull-right">
-                            <a title="Edit" href=""><i class="icon-pencil"></i></a>
+                            <a title="Edit" href="#"><i class="icon-pencil"></i></a>
                         </span>
                     </div>
                     <div class="window-panel-content">
@@ -117,13 +117,11 @@
                             @Html.DisplayPhoneText(Model.Contact.Phone)<br />
                             <a href="mailto:@Model.Contact.Email">@Model.Contact.Email</a>
                         </address>
-
-
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-sm-9">
+        <div class="col-sm-8">
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#summary" data-toggle="tab">Summary</a></li>
                 <li><a href="#needs" data-toggle="tab">Needs</a></li>
@@ -133,16 +131,19 @@
             <div class="tab-content">
                 <div class="tab-pane active" id="summary">
                     <div class="placeholder">
+                        <h4>Narative</h4>
                     </div>
                 </div>
                 <div class="tab-pane" id="needs">
                     <div class="placeholder">
-                        <h4>Needs</h4>
+                        <h4>Needs is coming soon...</h4>
                     </div>
                 </div>
                 <div class="tab-pane" id="contacts">
-                    <div class="placeholder"><div>
-                        <h4>Contacts</h4>
+                    <div class="placeholder">
+                        <div>
+                            <h4>Contacts is coming soon...</h4>
+                        </div>
                     </div>
                 </div>
                 <div class="tab-pane" id="partnership">
@@ -150,6 +151,7 @@
                         <h4>Partnership is coming soon...</h4>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
