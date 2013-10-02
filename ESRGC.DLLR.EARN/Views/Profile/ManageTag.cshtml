@@ -1,5 +1,4 @@
 ﻿@using ESRGC.DLLR.EARN.Domain.Model
-@model dynamic
 @{
     ViewBag.Title = "Search Tag";
     ViewBag.Header = "Searchable tags";
@@ -35,8 +34,8 @@
                 }
                 return false;
             };
-            var addTag = function () {
-                var value = $('input#tagInput').val().toUpperCase();
+            var addTag = function (value) {
+                value = value.toUpperCase();
                 if (tagExists(value)) {
                     $('.status-text').text('The tag "' + value + '" has already been added. Please enter a different tag!');
                     return;
@@ -62,6 +61,15 @@
                 }
                 else {
                     console.log('Tag already exists');
+                }
+            };
+            var addTags = function () {
+                var value = $('input#tagInput').val();
+                //separate the tags
+                var tags = value.split(',');
+                for (var i in tags) {
+                    var tag = tags[i].trim();
+                    addTag(tag);
                 }
             };
             var removeTag = function (value, tag) {
@@ -91,16 +99,18 @@
                 //},
                 limit: 20
             });
+            //capture 'enter' key event to add tags
             $('input#tagInput').on('keypress', function (e) {
                 if (e.keyCode == 13) {
-                    addTag();
+                    addTags();
                 }
             });            
             $('.typeahead.input-sm').siblings('input.tt-hint').addClass('hint-small');
             $('.typeahead.input-lg').siblings('input.tt-hint').addClass('hint-large');
             $('button[type="submit"]').on('click', function () { $('form').submit(); });
-            $('button[type="button"]').on('click', function (e) {
-                addTag();
+            //click event on add button
+            $('#addTagBtn').on('click', function (e) {
+                addTags();
             });
             $('form').on('submit', function () {
                 if (tagArray.length == 0) {
@@ -121,9 +131,7 @@
     </script>
 }
 @{
-    var preExistingTags = ViewBag.preExistingTags as List<Tag>;
-    var currentTags = ViewBag.currentTags as List<Tag>;
-    
+    var currentTags = ViewBag.currentTags as List<Tag>;    
 }
 <div class="container">
     <div class="row">
@@ -172,6 +180,9 @@
                     <div><span id="" class="text-warning status-text"></span></div>
                     <div class="pull-right">
                         <button class="btn btn-primary" type="submit"><i class="icon-save"></i> Save changes</button>
+                        @if(currentTags != null){
+                            <a class="btn btn-default" href="@Url.Action("Index")">Cancel</a>
+                        }
                     </div>
                     <div class="clear"></div>
                 </div>
