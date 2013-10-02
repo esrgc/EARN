@@ -143,6 +143,9 @@
                 <div class="window-panel-content">
                     <div class="">
                         <form class="form-inline" role="form" action="@Url.Action("ManageTag")" method="post">
+                            <p>
+                                Searchable tags are used to help others search for you, and what you require 
+                            </p>
                             <div class="form-group">
                                 <input type="text"
                                     class="form-control typeahead"
@@ -151,13 +154,20 @@
                                     id="tagInput" />
                             </div>
                             <button type="button" class="btn btn-primary" id="addTagBtn"><i class="icon-tag"></i> Add</button>
+                            <p class="text-info">
+                                Tags can be entered one at a time, or you can enter multiple tags by 
+                                a comma separated list of tags e.i. GIS, Engineer, Developer...ect.                                                            
+                            </p>
+                            <p class="text-warning">
+                                Note that when entering tags using comma separated string the suggestion list 
+                                will only prompt for the first entry. 
+                            </p>
                             @if (currentTags != null) {
                                 foreach (var i in currentTags) { 
                                 <input type="hidden" value="@i.Name" name="tags"/>
                                 }
                             }
                         </form>
-                        <p>Searchable tags are used to help others search for you, and what you require.</p>
                     </div>
                     <hr />
                     <h5>Your tags <small class="">(Please enter at least one tag to procceed)</small></h5>

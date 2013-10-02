@@ -43,14 +43,22 @@
                                             <i class="icon-link"></i>
                                         </a>
                                         <br />
-                                        <small>@Model.UserGroup.Name</small><br />
+                                        <small>@Model.UserGroup.Name</small> 
+                                        -
+                                        <small>@Model.Community.Name</small>
                                     </h4>
+                                                                        
                                     <ul class="list-inline list-unstyled">
                                         <li><a target="_blank" href="http://@Model.Organization.FacebookLink"><i class="icon-large icon-facebook-sign"></i></a></li>
                                         <li><a target="_blank" href="http://@Model.Organization.TwitterLink"><i class="icon-large icon-twitter-sign"></i></a></li>
                                         <li><a target="_blank" href="http://@Model.Organization.LinkedInLink"><i class="icon-large icon-linkedin-sign"></i></a></li>
                                     </ul>
-                                    <p>@Model.Community.Name</p>
+                                    @if(Model.Organization.Description.Length > 100){
+                                        <p>@Model.Organization.Description.Substring(0, 100)...<a href="#">more</a></p>
+                                    }
+                                    else{
+                                        <p>@Model.Organization.Description</p>
+                                    }
                                 </div>
                             </div>
                             <div class="col-sm-6">

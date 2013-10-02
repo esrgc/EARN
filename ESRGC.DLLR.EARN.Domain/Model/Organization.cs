@@ -21,6 +21,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     [MaxLength(1000)]
     [Display(Description="Please describe your organization")]
     [DataType(DataType.MultilineText)]
+    [Required(ErrorMessage="Please describe your organization")]
     public string Description { get; set; }
     
     [DataType(DataType.Url)]

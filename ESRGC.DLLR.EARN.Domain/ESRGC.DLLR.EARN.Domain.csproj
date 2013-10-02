@@ -63,6 +63,14 @@
     <Compile Include="Migrations\201310012104061_Narative.Designer.cs">
       <DependentUpon>201310012104061_Narative.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201310021623411_org-description-required.cs" />
+    <Compile Include="Migrations\201310021623411_org-description-required.Designer.cs">
+      <DependentUpon>201310021623411_org-description-required.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201310021643561_contactStateAbbrLength.cs" />
+    <Compile Include="Migrations\201310021643561_contactStateAbbrLength.Designer.cs">
+      <DependentUpon>201310021643561_contactStateAbbrLength.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\GeoTag.cs" />
@@ -90,6 +98,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201310012104061_Narative.resx">
       <DependentUpon>201310012104061_Narative.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201310021623411_org-description-required.resx">
+      <DependentUpon>201310021623411_org-description-required.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201310021643561_contactStateAbbrLength.resx">
+      <DependentUpon>201310021643561_contactStateAbbrLength.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

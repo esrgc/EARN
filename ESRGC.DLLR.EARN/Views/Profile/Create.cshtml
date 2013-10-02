@@ -44,6 +44,21 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <div class="col-sm-8 col-sm-offset-2">
+                                    <label class="control-label" for="UserGroupID">User group (select primary role)</label>
+                                    <span class="label label-default">Required</span>
+                                    @foreach (var i in Model.UserGroups) { 
+                                        <div class="radio">
+                                            <label>
+                                                @Html.RadioButtonFor(x => x.UserGroupID, i.Name, new {  })
+                                                <span>@i.Name - @i.Description</span>
+                                            </label>
+                                        </div>
+                                    }
+                                    <div class="help-block">@Html.ValidationMessageFor(x => x.UserGroupID)</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="control-label col-sm-2" for="CommunityID">Community</label>
                                 <div class="col-sm-6">
                                     @Html.DropDownListFor(
@@ -74,44 +89,26 @@
                                         style = "min-height: 150px;", 
                                         placeholder = ModelMetadata.FromLambdaExpression(x=>x.Organization.Description, ViewData).Description
                                     })
-                                </div>
-                                <div class="help-block">@Html.ValidationMessageFor(x=>x.Organization.Description)</div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-8 col-sm-offset-2">
-                                    <label class="" for="UserGroupID">User group (select primary role)</label>
                                     <span class="label label-default">Required</span>
-                                    @foreach (var i in Model.UserGroups) { 
-                                        <div class="radio">
-                                            <label>
-                                                @*@Html.RadioButtonFor(x => x.UserGroupID, i.Name)*@
-                                                <input class="required" type="radio" name="UserGroupID" value="@i.UserGroupID"/>
-                                                @i.Name - <span>@i.Description</span>
-                                            </label>
-                                        </div>
-                                    }
+                                    <div class="help-block">@Html.ValidationMessageFor(x=>x.Organization.Description)</div>
                                 </div>
-                            </div>
+                            </div>                            
                         </fieldset>
                         <fieldset>
                             <legend>Point of Contact</legend>
                             <div class="form-group">
-                                <label class="control-label col-sm-2" for="Contact.FirstName">First name</label>
+                                <label class="control-label col-sm-2" for="Contact.FirstName">Name</label>
                                 <div class="col-sm-4">
                                     @Html.TextBoxFor(x => x.Contact.FirstName, new { @class = "form-control input-sm" , placeholder =  "First name"})
                                     <span class="label label-default">Required</span>
                                     <div class="help-block">@Html.ValidationMessageFor(x => x.Contact.FirstName)</div>
                                 </div>                                
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="Contact.Middle">Middle</label>
+                                @*<label class="control-label col-sm-2" for="Contact.Middle">Middle</label>*@
                                 <div class="col-sm-2">
                                     @Html.TextBoxFor(x=>x.Contact.Middle, new { @class= "form-control input-sm", placeholder =  "Middle"})
                                     <div class="help-block">@Html.ValidationMessageFor(x=>x.Contact.Middle)</div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="Contact.LastName">Last name</label>
+                                @*<label class="control-label col-sm-2" for="Contact.LastName">Last name</label>*@
                                 <div class="col-sm-4">
                                     @Html.TextBoxFor(x => x.Contact.LastName, new { @class = "form-control input-sm", placeholder =  "Last name" })
                                     <span class="label label-default">Required</span>
@@ -141,23 +138,17 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-sm-2" for="Contact.City">City</label>
+                                <label class="control-label col-sm-2" for="Contact.City">City/State/Zip</label>
                                 <div class="col-sm-4">
                                     @Html.TextBoxFor(x=>x.Contact.City,new { @class = "form-control input-sm", placeholder =  "Salisbury" })
                                     <span class="label label-default">Required</span>
                                     <div class="help-block">@Html.ValidationMessageFor(x => x.Contact.City)</div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="Contact.State">State</label>
                                 <div class="col-sm-2">
                                     @Html.TextBoxFor(x=>x.Contact.State,new { @class = "form-control input-sm", placeholder =  "MD" })
                                     <span class="label label-default">Required</span>
                                     <div class="help-block">@Html.ValidationMessageFor(x => x.Contact.State)</div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="Contact.Zip">Zip</label>
                                 <div class="col-sm-2">
                                     @Html.TextBoxFor(x=>x.Contact.Zip, new { @class = "form-control input-sm", placeholder =  "21804" })
                                     <span class="label label-default">Required</span>
