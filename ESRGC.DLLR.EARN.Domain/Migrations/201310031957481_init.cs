@@ -114,7 +114,7 @@ namespace ESRGC.DLLR.EARN.Domain.Migrations
                         StreetAddress2 = c.String(),
                         City = c.String(nullable: false),
                         State = c.String(nullable: false, maxLength: 2),
-                        Zip = c.String(nullable: false),
+                        Zip = c.String(nullable: false, maxLength: 5),
                         Department = c.String(),
                         Building = c.String(),
                     })

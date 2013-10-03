@@ -2,10 +2,9 @@
 
 
 @*render options for dropdown*@
-<select class="form-control col-sm-4" data-val="true" data-val-required="Please select one." id="CategoryID" name="CategoryID">
-    <option value="">--select your category--</option>
-    @foreach (var i in Model) {    
-        <option value="@i.CategoryID" data-usergroupId="@i.UserGroupID">@i.Name</option>
-    }
-</select>
-<span class="label label-default">Required</span>
+
+<option value="">--select your category--</option>
+@foreach (var i in Model) {    
+    <option value="@i.CategoryID" data-usergroupId="@i.UserGroupID">@i.Name</option>
+}
+

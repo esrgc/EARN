@@ -11,6 +11,7 @@
             $(document).on('click', 'input[type="radio"]', function (e) {
                 var id = $(this).val()
                 $('#categoryOptions').load('subcategoryDropdown', { usergroupId: id });
+                $('#categoryOptions').removeAttr('disabled');
             });
         })
     </script>
@@ -81,16 +82,20 @@
                                     <div class="help-block">@Html.ValidationMessageFor(x => x.Organization.City)</div>
                                 </div>
                                 <div class="col-sm-2">
-                                    @Html.TextBoxFor(x => x.Organization.State, new { 
-                                        @class = "form-control input-sm", placeholder = "State", maxlength = "2" 
-                                    })
+                                    @Html.TextBoxFor(x => x.Organization.State, new {
+                                   @class = "form-control input-sm",
+                                   placeholder = "State",
+                                   maxlength = "2"
+                               })
                                     <span class="label label-default">Required</span>
                                     <div class="help-block">@Html.ValidationMessageFor(x => x.Organization.State)</div>
                                 </div>
                                 <div class="col-sm-2">
-                                    @Html.TextBoxFor(x => x.Organization.Zip, new { 
-                                        @class = "form-control input-sm", placeholder = "Zip", maxlength = "5" 
-                                    })
+                                    @Html.TextBoxFor(x => x.Organization.Zip, new {
+                                   @class = "form-control input-sm",
+                                   placeholder = "Zip",
+                                   maxlength = "5"
+                               })
                                     <span class="label label-default">Required</span>
                                     <div class="help-block">@Html.ValidationMessageFor(x => x.Organization.Zip)</div>
                                 </div>
@@ -119,40 +124,45 @@
                                         "--select your category--",
                                         new { @class = "form-control col-sm-4" }
                                     )*@
-                                    <div id="categoryOptions">
-                                        <select disabled class="form-control input-sm">
-                                            <option>Please select user group first</option>
-                                        </select>
-                                    </div>
-                                    
+
+                                    <select 
+                                        disabled 
+                                        class="form-control input-sm" 
+                                        data-val="true" 
+                                        data-val-required="Please select one." 
+                                        id="categoryOptions" 
+                                        name="CategoryID">
+                                        <option>Please select user group first</option>
+                                    </select>
+                                    <span class="label label-default">Required</span>
                                     <div class="help-block">@Html.ValidationMessageFor(x => x.CategoryID)</div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="Organization.Website">Website</label>
-                                <div class="col-sm-6">
-                                    @Html.TextBoxFor(x => x.Organization.Website, new {
-                                   @class = "form-control input-sm",
-                                   placeholder = ModelMetadata.FromLambdaExpression(x => x.Organization.Website, ViewData).Description
-                               }
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="Organization.Website">Website</label>
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(x => x.Organization.Website, new {
+                       @class = "form-control input-sm",
+                       placeholder = ModelMetadata.FromLambdaExpression(x => x.Organization.Website, ViewData).Description
+                   }
                                     )
-                                    <div class="help-block">@Html.ValidationMessageFor(x => x.Organization.Website)</div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="Organization.Description">Description</label>
-                                <div class="col-sm-9">
-                                    @Html.TextAreaFor(x => x.Organization.Description, new {
-                                       @class = "form-control input-sm",
-                                       style = "min-height: 150px;",
-                                       placeholder = ModelMetadata.FromLambdaExpression(x => x.Organization.Description, ViewData).Description
-                                   })
-                                    <span class="label label-default">Required</span>
-                                    <div class="help-block">@Html.ValidationMessageFor(x => x.Organization.Description)</div>
-                                </div>
-                            </div>
+                        <div class="help-block">@Html.ValidationMessageFor(x => x.Organization.Website)</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="Organization.Description">Description</label>
+                    <div class="col-sm-9">
+                        @Html.TextAreaFor(x => x.Organization.Description, new {
+                       @class = "form-control input-sm",
+                       style = "min-height: 150px;",
+                       placeholder = ModelMetadata.FromLambdaExpression(x => x.Organization.Description, ViewData).Description
+                   })
+                        <span class="label label-default">Required</span>
+                        <div class="help-block">@Html.ValidationMessageFor(x => x.Organization.Description)</div>
+                    </div>
+                </div>
 
-                        </fieldset>
+                </fieldset>
                         <fieldset>
                             <legend>Point of Contact</legend>
                             <div class="form-group">
@@ -192,15 +202,15 @@
                                 </div>
                             </div>
                         </fieldset>
-                        <hr />
-                        <div class="form-group">
-                            <div class="col-sm-6 col-sm-offset-2">
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
-                        </div>
-                    </form>
+                <hr />
+                <div class="form-group">
+                    <div class="col-sm-6 col-sm-offset-2">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
                 </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
 </div>
