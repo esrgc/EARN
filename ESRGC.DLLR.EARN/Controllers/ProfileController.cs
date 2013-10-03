@@ -38,9 +38,9 @@ namespace ESRGC.DLLR.EARN.Controllers
       //  return RedirectToAction("Index");
       //}
 
-      var communities = _workUnit.CommunityRepository.Entities.OrderBy(x => x.Name).ToList();
-      var userGroups = _workUnit.UserGroupRepository.Entities.OrderBy(x => x.Name).ToList();
-      return View(new CreateProfile() { Communities = communities, UserGroups = userGroups });
+      var categories = _workUnit.CategoryRepository.Entities.OrderBy(x => x.Name).ToList();
+      var userGroups = _workUnit.UserGroupRepository.Entities.OrderBy(x => x.UserGroupID).ToList();
+      return View(new CreateProfile() { Categories = categories, UserGroups = userGroups });
     }
 
     [HttpPost]
@@ -59,7 +59,7 @@ namespace ESRGC.DLLR.EARN.Controllers
           Contact = profile.Contact,
           Organization = profile.Organization,
           UserGroupID = profile.UserGroupID,
-          CommunityID = profile.CommunityID,
+          CategoryID = profile.CategoryID,
           LastUpdate = DateTime.Now
         };
 
@@ -76,10 +76,21 @@ namespace ESRGC.DLLR.EARN.Controllers
         return RedirectToAction("index");
       }
       //error
-      profile.Communities = _workUnit.CommunityRepository.Entities.OrderBy(x => x.Name).ToList();
+      profile.Categories = _workUnit.CategoryRepository.Entities.OrderBy(x => x.Name).ToList();
       profile.UserGroups = _workUnit.UserGroupRepository.Entities.OrderBy(x => x.Name).ToList();
       return View(profile);
     }
+
+    public PartialViewResult SubcategoryDropdown(int userGroupID) {
+      var subcats = _workUnit
+        .CategoryRepository
+        .Entities
+        .Where(x => x.UserGroupID == userGroupID || x.UserGroupID == null)
+        .ToList();
+
+      return PartialView(subcats);
+    }
+
     /// <summary>
     /// return a list of pre-existing tags
     /// these are the tags that user accummulate
@@ -107,12 +118,12 @@ namespace ESRGC.DLLR.EARN.Controllers
       if (CurrentAccount.Profile == null)
         return new EmptyResult();
       var profile = CurrentAccount.Profile;
-      
+
       if (ModelState.IsValid) {
         //preexisting tags
         var preExistingTags = _workUnit.TagRepository.Entities.Select(x => x.Name).ToList();
         //new tags to be added to both reference table and tag table
-        var newTags = tags.Where(x => !preExistingTags.Contains(x)).ToList();              
+        var newTags = tags.Where(x => !preExistingTags.Contains(x)).ToList();
 
         //now add the new tags to tag table and create new refs for them 
         //this list is exclusive from the current tag list
@@ -152,11 +163,25 @@ namespace ESRGC.DLLR.EARN.Controllers
             });
           }
         }
-                
+
         _workUnit.saveChanges();
         return RedirectToAction("index");
       }
       return View();
-    }       
+    }
+
+    [HttpPost]
+    public ActionResult EditAbout(string about) {
+      try {
+        var profile = CurrentAccount.Profile;
+        profile.About = about;
+        _workUnit.ProfileRepository.UpdateEntity(profile);
+        _workUnit.saveChanges();
+      }
+      catch (Exception) {
+        updateTempDataMessage("Error saving about text");
+      }
+      return RedirectToAction("index");
+    }
   }
 }

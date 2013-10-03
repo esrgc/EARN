@@ -3,16 +3,16 @@ namespace ESRGC.DLLR.EARN.Domain.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Narative : DbMigration
+    public partial class addresss : DbMigration
     {
         public override void Up()
         {
-            AddColumn("dbo.Profile", "Narative", c => c.String());
+            AlterColumn("dbo.Organization", "Zip", c => c.String(nullable: false, maxLength: 5));
         }
         
         public override void Down()
         {
-            DropColumn("dbo.Profile", "Narative");
+            AlterColumn("dbo.Organization", "Zip", c => c.String(nullable: false));
         }
     }
 }

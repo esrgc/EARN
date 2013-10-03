@@ -12,12 +12,12 @@ namespace ESRGC.DLLR.EARN.Models
   {
 
     public Organization Organization { get; set; }
-    public ICollection<Community> Communities { get; set; }
+    public ICollection<Category> Categories { get; set; }
     public ICollection<UserGroup> UserGroups { get; set; }
     [Required(ErrorMessage = "Please choose your user group")]
     public int UserGroupID { get; set; }
     [Required(ErrorMessage = "Please select one.")]
-    public int CommunityID { get; set; }
+    public int CategoryID { get; set; }
     public Contact Contact { get; set; }
   }
 }

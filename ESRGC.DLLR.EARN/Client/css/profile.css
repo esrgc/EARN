@@ -25,6 +25,7 @@
         max-width: 100%;
         min-width: 100%;
     }
+
     .profile-picture {
         max-width: 100px;
         margin: 0 10px 10px 0;
@@ -33,14 +34,15 @@
 
 .placeholder {
     padding: 15px;
-    /*border-top-color: transparent;
+    border-top-color: transparent;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     border-left: 1px solid #dddddd;
-    border-right:1px solid #dddddd;
-    border-bottom:1px solid #dddddd;*/
+    border-right: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+    background: #F4F4F4;
     min-height: 300px;
 }
 /*.tab-pane > .post {
@@ -71,8 +73,15 @@ li.tag .label {
     border-bottom-right-radius: 0;
     border-top-right-radius: 0;
 }
-.narative {
+
+.profile-tabs > ul > li.active > a,
+.profile-tabs > ul > li.active > a:hover {
+    background: #F4F4F4;
+}
+
+.about {
     min-height: 250px;
     min-width: 100%;
-    max-width:100%;
+    max-width: 100%;
+    margin-bottom: 5px;
 }

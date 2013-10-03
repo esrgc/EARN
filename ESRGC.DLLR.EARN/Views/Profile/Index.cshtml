@@ -44,7 +44,7 @@
                                         <br />
                                         <small>@Model.UserGroup.Name</small>
                                         -
-                                        <small>@Model.Community.Name</small>
+                                        <small>@Model.Category.Name</small>
                                     </h4>
                                     <ul class="list-inline list-unstyled">
                                         <li><a target="_blank" href="http://@Model.Organization.Website" title="Organization website"><i class="icon-link"></i></a></li>
@@ -104,15 +104,15 @@
                             <strong>@Model.Contact.FirstName @Model.Contact.Middle @Model.Contact.LastName</strong>
                             @Model.Contact.NameExtension
                             <br />
-                            @Model.Contact.StreetAddress
+                            @Model.Organization.StreetAddress
                             <br />
-                            @if (Model.Contact.Department != null) {
-                                <abbr title="Department">Dept:</abbr>@Model.Contact.Department <br />
+                            @if (Model.Organization.Department != null) {
+                                <abbr title="Department">Dept:</abbr>@Model.Organization.Department <br />
                             }
-                            @if (Model.Contact.Building != null) {
-                                <abbr title="Building">Bld:</abbr>@Model.Contact.Building<br />
+                            @if (Model.Organization.Building != null) {
+                                <abbr title="Building">Bld:</abbr>@Model.Organization.Building<br />
                             }
-                            @Model.Contact.City, @Model.Contact.State @Model.Contact.Zip<br />
+                            @Model.Organization.City, @Model.Organization.State @Model.Organization.Zip<br />
                             <abbr title="Phone">P:</abbr>
                             @Html.DisplayPhoneText(Model.Contact.Phone)<br />
                             <a href="mailto:@Model.Contact.Email">@Model.Contact.Email</a>
@@ -121,17 +121,27 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-8">
-            <ul class="nav nav-tabs">
+        <div class="col-sm-8 profile-tabs">
+            <ul class="nav nav-tabs ">
                 <li class="active"><a href="#summary" data-toggle="tab">Summary</a></li>
-                <li><a href="#needs" data-toggle="tab">Needs</a></li>
+                <li><a href="#needs" data-toggle="tab">Our needs</a></li>
                 <li><a href="#contacts" data-toggle="tab">Contacts</a></li>
                 <li><a href="#partnership" data-toggle="tab">Parnerships</a></li>
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="summary">
                     <div class="placeholder">
-                        <h4>Narative</h4>
+                        <form action="@Url.Action("EditAbout")" method="post">
+                            <h4>About</h4>
+                            @Html.TextAreaFor(x=>x.About, new {
+                                @class="form-control about",
+                                placeholder = ModelMetadata.FromLambdaExpression(x=>x.About,ViewData).Description
+                            })
+                            <div class="text-right">
+                                <button type="submit" class="btn btn-info btn-xs"><i class="icon-save"></i> Save</button>
+
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <div class="tab-pane" id="needs">

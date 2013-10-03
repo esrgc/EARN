@@ -18,27 +18,27 @@ namespace ESRGC.DLLR.EARN.Domain.DAL
         new UserGroup { Name = "Training partner", Description = "Providing skilled workforce e.g. training center" }
       });
 
-      context.Communities.AddRange(new List<Community>{
-        new Community { Name = "Accommodation and Food Services" },
-        new Community { Name = "Administrative and Support Services" },
-        new Community { Name = "Agriculture, Forestry, Fishing, and Hunting" },
-        new Community { Name = "Arts, Entertainment, and Recreation" },
-        new Community { Name = "Construction" },
-        new Community { Name = "Educational Services" },
-        new Community { Name = "Finance and Insurance" },
-        new Community { Name = "Government" },
-        new Community { Name = "Health Care and Social Assistance" },
-        new Community { Name = "Information" },
-        new Community { Name = "Management of Companies and Enterprises" },
-        new Community { Name = "Manufacturing" },
-        new Community { Name = "Mining, Quarrying, and oil and Gas Extraction" },
-        new Community { Name = "Professional, Scientific, and Technical Services" },
-        new Community { Name = "Real Estate and Rental and Leasing" },
-        new Community { Name = "Retail Trade" },
-        new Community { Name = "Self-Employed" },
-        new Community { Name = "Transportation and Warehousing" },
-        new Community { Name = "Utilities" },
-        new Community { Name = "Other Services (Except Public Administration)" }
+      context.Categories.AddRange(new List<Category>{
+        new Category { Name = "Accommodation and Food Services" },
+        new Category { Name = "Administrative and Support Services" },
+        new Category { Name = "Agriculture, Forestry, Fishing, and Hunting" },
+        new Category { Name = "Arts, Entertainment, and Recreation" },
+        new Category { Name = "Construction" },
+        new Category { Name = "Educational Services" },
+        new Category { Name = "Finance and Insurance" },
+        new Category { Name = "Government" },
+        new Category { Name = "Health Care and Social Assistance" },
+        new Category { Name = "Information" },
+        new Category { Name = "Management of Companies and Enterprises" },
+        new Category { Name = "Manufacturing" },
+        new Category { Name = "Mining, Quarrying, and oil and Gas Extraction" },
+        new Category { Name = "Professional, Scientific, and Technical Services" },
+        new Category { Name = "Real Estate and Rental and Leasing" },
+        new Category { Name = "Retail Trade" },
+        new Category { Name = "Self-Employed" },
+        new Category { Name = "Transportation and Warehousing" },
+        new Category { Name = "Utilities" },
+        new Category { Name = "Other Services (Except Public Administration)" }
       });
       
       //base.Seed(context);

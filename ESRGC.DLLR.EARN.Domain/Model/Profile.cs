@@ -35,13 +35,13 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public int UserGroupID { get; set; }
     public virtual UserGroup UserGroup { get; set; }
 
-    [Display(Name = "Industry")]
-    [Required(ErrorMessage = "Please select an industry!")]
-    public int CommunityID { get; set; }
-    public virtual Community Community { get; set; }
+    [Required(ErrorMessage = "Please select your category!")]
+    public int CategoryID { get; set; }
+    public virtual Category Category { get; set; }
 
     public DateTime? LastUpdate { get; set; }
-    public string Narative { get; set; }
+    [Display(Description="Description about why you're on this site.")]
+    public string About { get; set; }
     public virtual ICollection<ProfileTag> ProfileTags { get; set; }
   }
 }

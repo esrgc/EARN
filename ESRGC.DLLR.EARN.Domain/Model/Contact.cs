@@ -38,30 +38,10 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     //[ScaffoldColumn(false)]
     //[Display(Name = "Company")]
     //public int? CompanyID { get; set; }
-    //public virtual Company Company { get; set; }
-
-    [Display(Name = "Department")]
-    public string Department { get; set; }
+    //public virtual Company Company { get; set; }   
 
     [Display(Name = "P.O. Box/Mail stop")]
     public string MailStop { get; set; }
-
-    [Required(ErrorMessage = "Please enter your address")]
-    [Display(Name = "Street address")]
-    public string StreetAddress { get; set; }
-
-    [Display(Name = "Address 2")]
-    public string StreetAddress2 { get; set; }
-    [Required(ErrorMessage = "Please enter a city name")]
-    [Display(Name = "City")]
-    public string City { get; set; }
-    [Required(ErrorMessage = "Please enter your state e.i. MD")]
-    [Display(Name = "State")]
-    [StringLength(2, ErrorMessage="Please enter only abbreviation form of state e.i. MD, VA...ect.")]
-    public string State { get; set; }
-    [Required(ErrorMessage="Please enter zip code")]
-    [Display(Name = "Zip")]
-    public string Zip { get; set; }
 
     [MaxLength(20)]
     [Required(ErrorMessage = "Phone number is required")]
@@ -104,8 +84,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
 
     public string Floor { get; set; }
 
-    [Display(Name = "Building")]
-    public string Building { get; set; }
+    
 
   }
 }
