@@ -1,0 +1,11 @@
+﻿@import "variables.less";
+
+.rounded-corner (@radius: 5px) {
+    border-radius: @radius;
+}
+
+.box-shadow (@x, @y, @blur: 10px, @spread: 1px) {
+    -webkit-box-shadow: @x @y @blur rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: @x @y @blur rgba(0, 0, 0, 0.2);
+    box-shadow: @x @y @blur rgba(0, 0, 0, 0.2);
+}

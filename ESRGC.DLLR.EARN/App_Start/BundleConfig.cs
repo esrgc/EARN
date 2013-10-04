@@ -28,6 +28,7 @@ namespace ESRGC.DLLR.EARN
       //css bundles
       bundles.Add(new StyleBundle("~/Styles/css").Include(       
         "~/Client/jsLib/bootstrap-3.0/css/bootstrap*",
+        "~/Client/css/less/*.css",
         "~/Client/css/*.css"
       ));
     }

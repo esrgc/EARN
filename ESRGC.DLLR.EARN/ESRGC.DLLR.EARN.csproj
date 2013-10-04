@@ -154,12 +154,38 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Client\css\less\library.css">
+      <DependentUpon>library.less</DependentUpon>
+    </Content>
+    <Content Include="Client\css\less\library.min.css">
+      <DependentUpon>library.less</DependentUpon>
+    </Content>
+    <Content Include="Client\css\less\variables.css">
+      <DependentUpon>variables.less</DependentUpon>
+    </Content>
+    <Content Include="Client\css\less\variables.min.css">
+      <DependentUpon>variables.less</DependentUpon>
+    </Content>
+    <Content Include="Client\css\less\windowPanel.css">
+      <DependentUpon>windowPanel.less</DependentUpon>
+    </Content>
+    <Content Include="Client\css\less\windowPanel.min.css">
+      <DependentUpon>windowPanel.less</DependentUpon>
+    </Content>
     <Content Include="Client\css\profile.css" />
     <Content Include="Client\css\quickForm.css" />
-    <Content Include="Client\css\site.css" />
+    <Content Include="Client\css\less\variables.less" />
+    <Content Include="Client\css\less\library.less" />
+    <None Include="Client\css\site.oldcss" />
+    <Content Include="Client\css\less\site.css">
+      <DependentUpon>site.less</DependentUpon>
+    </Content>
+    <Content Include="Client\css\less\site.min.css">
+      <DependentUpon>site.less</DependentUpon>
+    </Content>
     <Content Include="Client\css\stickyFooter.css" />
     <Content Include="Client\css\typeahead.css" />
-    <Content Include="Client\css\windowPanel.css" />
+    <None Include="Client\css\less\windowPanel.less" />
     <Content Include="Client\images\ajax-loader-fb.gif" />
     <Content Include="Client\images\EARN_logo_200w.jpg" />
     <Content Include="Client\images\empty_profile.gif" />
@@ -207,6 +233,7 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Client\css\less\site.less" />
     <None Include="Client\jsLib\bootstrap-3.0\fonts\glyphicons-halflings-regular.eot" />
     <None Include="Client\jsLib\bootstrap-3.0\fonts\glyphicons-halflings-regular.ttf" />
     <None Include="Client\jsLib\bootstrap-3.0\fonts\glyphicons-halflings-regular.woff" />
@@ -231,6 +258,7 @@
     <Content Include="Views\Profile\AddTag.cshtml" />
     <Content Include="Views\Profile\ManageTag.cshtml" />
     <Content Include="Views\Profile\SubcategoryDropdown.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ESRGC.DLLR.EARN.Domain\ESRGC.DLLR.EARN.Domain.csproj">

@@ -1,4 +1,6 @@
-﻿html, body {
+﻿@import "library.less";
+
+html, body {
     /*padding-top: 40px;*/
     height: 100%;
 }
@@ -13,28 +15,24 @@ header {
     border-radius: 0 !important;
 }
 
-.list-container > ul {
-}
-
-    .list-container > ul > li {
+.list-container {
+    > ul > li {
         padding: 10px 0;
-        border-bottom: 1px solid #EEEEEE;
+        border-bottom: 1px solid @border-color;
     }
+}
 
 .footer {
-    border-top: 1px solid #eeeeee;
+    border-top: 1px solid @border-color;
     position: relative;
     background: #f6f6f6;
-}
 
-    .footer > .container {
-        border-top: 1px solid #eeeeee;
+    > .container {
+        border-top: 1px solid @border-color;
         padding: 20px 15px 0 15px;
     }
-
-.wrapper > .container {
-    /*padding-top: 10px;*/
 }
+
 
 .body-content {
 }
@@ -52,20 +50,20 @@ header {
 .post {
     margin: 0;
     padding: 15px;
-    border: 1px solid #D2D2D2;
-    border-radius: 5px;
+    border: 1px solid @base-color;
     /*text-shadow: 1px 1px 1px #E1E1E1;*/
     background: #FFFFFF;
     position: relative;
-}
+    .rounded-corner;
 
-    .post > p {
+    > p {
         margin: 10px 0;
     }
 
-    .post h5 {
+    h5 {
         margin-top: 0;
     }
+}
 
 .affix-top {
     top: 100px;
@@ -96,31 +94,32 @@ header {
 }
 
 /*validation*/
-label.valid {
-    width: 24px;
-    height: 24px;
-    background: url(images/valid.png) center center no-repeat !important;
-    display: inline-block;
-    text-indent: -9999px !important;
-}
-
-label.error {
-    background: url(images/error.jpg) left center no-repeat;
-    font-weight: bold;
-    color: red;
-    padding: 2px 8px;
-    margin-top: 2px;
-    text-indent: 15px;
-}
-
-.validation-summary-errors {
-    max-width: 450px;
-    padding: 15px;
-    margin: 0 auto;
-    color: #f00;
-}
-
-    .validation-summary-errors > ul {
-        list-style: circle;
+label {
+    .valid {
+        width: 24px;
+        height: 24px;
+        background: url(images/valid.png) center center no-repeat !important;
+        display: inline-block;
+        text-indent: -9999px !important;
     }
 
+    .error {
+        background: url(images/error.jpg) left center no-repeat;
+        font-weight: bold;
+        color: red;
+        padding: 2px 8px;
+        margin-top: 2px;
+        text-indent: 15px;
+    }
+
+    .validation-summary-errors {
+        max-width: 450px;
+        padding: 15px;
+        margin: 0 auto;
+        color: #f00;
+
+        > ul {
+            list-style: circle;
+        }
+    }
+}
