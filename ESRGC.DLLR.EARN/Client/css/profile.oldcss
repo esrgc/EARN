@@ -50,6 +50,7 @@
 
 .tag-list > li {
     padding: 2px;
+    font-size: 13px;
 }
 
 li.tag .close {

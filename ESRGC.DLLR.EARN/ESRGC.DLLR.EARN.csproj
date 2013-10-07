@@ -60,6 +60,9 @@
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.3.0.1.10\lib\net40\Ninject.dll</HintPath>
     </Reference>
+    <Reference Include="PagedList">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -154,11 +157,19 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Client\apps\search\app.js" />
+    <Content Include="Client\apps\search\controller\search.js" />
     <Content Include="Client\css\less\library.css">
       <DependentUpon>library.less</DependentUpon>
     </Content>
     <Content Include="Client\css\less\library.min.css">
       <DependentUpon>library.less</DependentUpon>
+    </Content>
+    <Content Include="Client\css\less\profile.css">
+      <DependentUpon>profile.less</DependentUpon>
+    </Content>
+    <Content Include="Client\css\less\profile.min.css">
+      <DependentUpon>profile.less</DependentUpon>
     </Content>
     <Content Include="Client\css\less\variables.css">
       <DependentUpon>variables.less</DependentUpon>
@@ -172,10 +183,11 @@
     <Content Include="Client\css\less\windowPanel.min.css">
       <DependentUpon>windowPanel.less</DependentUpon>
     </Content>
-    <Content Include="Client\css\profile.css" />
+    <None Include="Client\css\profile.oldcss" />
     <Content Include="Client\css\quickForm.css" />
     <Content Include="Client\css\less\variables.less" />
     <Content Include="Client\css\less\library.less" />
+    <Content Include="Client\css\less\profile.less" />
     <None Include="Client\css\site.oldcss" />
     <Content Include="Client\css\less\site.css">
       <DependentUpon>site.less</DependentUpon>
@@ -224,10 +236,13 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
+    <Content Include="Views\Search\SearchProfilePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Client\apps\" />
+    <Folder Include="Client\apps\search\model\" />
+    <Folder Include="Client\apps\search\store\" />
+    <Folder Include="Client\apps\search\view\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
