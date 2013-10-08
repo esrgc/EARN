@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using ESRGC.DLLR.EARN.Domain.DAL.Abstract;
 using ESRGC.DLLR.EARN.Domain.Model;
+using PagedList;
 
 namespace ESRGC.DLLR.EARN.Controllers
 {
@@ -13,17 +14,28 @@ namespace ESRGC.DLLR.EARN.Controllers
     public SearchController(IWorkUnit workUnit) : base(workUnit) { }
     //
     // GET: /Search/
-    public ActionResult Index(int? userGroupID, int? categoryID, List<string> tags) {
-      var profiles = _workUnit.ProfileRepository.Entities.OrderBy(x => x.Organization.Name).AsQueryable();
+    public ActionResult Index(
+      int? page,
+      int? size,
+      int? userGroupID,
+      int? categoryID,
+      List<string> tags) {
+      //collection of current filters
+      Dictionary<string, object> filters = new Dictionary<string, object>();
+
+      //all profiles
+      var profiles = _workUnit.ProfileRepository.Entities.AsQueryable();
 
       //filter by user group
       if (userGroupID != null) {
         profiles = profiles.Where(x => x.UserGroupID == userGroupID).AsQueryable();
+        filters.Add("userGroupID", userGroupID);
       }
 
       //filter by category
       if (categoryID != null) {
         profiles = profiles.Where(x => x.CategoryID == categoryID).AsQueryable();
+        filters.Add("categoryID", categoryID);
       }
 
       var result = new List<Profile>();
@@ -35,14 +47,23 @@ namespace ESRGC.DLLR.EARN.Controllers
           //accummulate search results for each tag
           result = resultSet.Union(result).ToList();
         });
-        ViewBag.tags = tags;
+        filters.Add("tags", tags);
       }
       else
         result = profiles.ToList();
-      
 
 
-      return View(result);
+      int pageIndex = page ?? 1;
+      int pageSize = size ?? 15;
+
+      var model = result
+        .OrderBy(x => x.Organization.Name) // ordered by organization name
+        .ToPagedList(pageIndex, pageSize);
+
+      //viewbag data
+      ViewBag.filters = filters;
+
+      return View(model);
     }
   }
 }

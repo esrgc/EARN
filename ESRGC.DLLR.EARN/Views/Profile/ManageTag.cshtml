@@ -43,16 +43,13 @@
                 if (value != '') {
                     tagArray.push(value);
                     $('input#tagInput').val('').focus();
-                    $('#tagList').append(
+                    $('.tag-list').append(
                         [
-                            '<li class="tag">',
-                                '<div>',
-                                    '<span class="label label-default">',
-                                        value,
-                                        '<button class="close" value="' + value + '">&times;</button>',
-                                    '</span>',
-                                '</div>',
-                            '</li>'
+                            '<div class="tag">',
+                                '<span class="label label-default">',
+                                    value + '&nbsp;<a data-value="'+value + '"><i class="icon-remove"></i></a>',
+                                '</span>',
+                            '</div>'
                         ].join('')
                     );
                     $('form').append('<input type="hidden" name="tags" value="' + value + '"/>')
@@ -79,7 +76,7 @@
                     tagArray.pop(value);
                     $('input[type="hidden"]').filter('[value="' + value + '"]').remove();
                     //finally remove the whole node
-                    tag.parents().filter('li').remove();
+                    tag.parents().filter('.tag').remove();
                     console.log('tag ' + value + ' removed');
                 }
                 else {
@@ -121,9 +118,9 @@
             });
             //$('input:text').focus(function () { $(this).select(); });
             //remove button events
-            $(document).on('click', 'li.tag button', function (e) {
+            $(document).on('click', '.tag a', function (e) {
                 //get value and remove hidden fields
-                var value = $(this).val();
+                var value = $(this).attr('data-value');
 
                 removeTag(value, $(this));
             });
@@ -153,7 +150,7 @@
                                     name="tag"
                                     id="tagInput" />
                             </div>
-                            <button type="button" class="btn btn-primary" id="addTagBtn"><i class="icon-plus"></i> Add</button>
+                            <button type="button" class="btn btn-primary" id="addTagBtn"><i class="icon-plus"></i>&nbsp;Add</button>
                             <div><span id="" class="text-danger status-text"></span></div>
                             <p class="text-warning">
                                 Note that when entering tags using comma separated string the suggestion list 
@@ -172,30 +169,17 @@
                                 <strong>Tip!</strong>
                                 Tags can be entered one at a time, or you can enter multiple tags by 
                                 a comma separated list e.g. GIS, Engineer, Developer...ect.                                                            
-                            </p>                            
+                            </p>
                         </div>
                     </div>
                     <hr />
                     <h4>Your tags <small class="">(Please enter at least one tag to procceed)</small></h4>
                     <div class="post">
-                        <ul class="list-unstyled list-inline tag-list" id="tagList">
-                            @if (currentTags != null) {
-                                foreach (var i in currentTags) { 
-                                <li class="tag">
-                                    <div>
-                                        <span class="label label-default">
-                                            @i.Name
-                                            <button class="close" value="@i.Name">&times;</button>
-                                        </span>
-                                    </div>
-                                </li>
-                                }
-                            }
-                        </ul>
+                        @Html.Partial("tagListPartial", currentTags)                        
                     </div>
                     <br />
                     <div class="pull-right">
-                        <button class="btn btn-primary" type="submit"><i class="icon-save"></i> Save changes</button>
+                        <button class="btn btn-primary" type="submit"><i class="icon-save"></i>&nbsp;Save changes</button>
                         @if (currentTags != null) {
                             <a class="btn btn-default" href="@Url.Action("Index")">Cancel</a>
                         }

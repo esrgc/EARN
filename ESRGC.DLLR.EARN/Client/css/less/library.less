@@ -5,7 +5,16 @@
 }
 
 .box-shadow (@x, @y, @blur: 10px, @spread: 1px) {
+    -webkit-box-shadow: @x @y @blur rgba(0, 0, 0, 0.2) inset;
+    -moz-box-shadow: @x @y @blur rgba(0, 0, 0, 0.2) inset;
+    box-shadow: @x @y @blur rgba(0, 0, 0, 0.2) inset;
+}
+.drop-shadow (@x, @y, @blur: 10px, @spread: 1px) {
     -webkit-box-shadow: @x @y @blur rgba(0, 0, 0, 0.2);
     -moz-box-shadow: @x @y @blur rgba(0, 0, 0, 0.2);
     box-shadow: @x @y @blur rgba(0, 0, 0, 0.2);
+}
+.panel-action (@margin: 5px, @padding: 5px) {
+    margin: @margin 0 0 0;
+    padding: @padding 0;
 }

@@ -1,52 +1,48 @@
 ﻿@model ESRGC.DLLR.EARN.Domain.Model.Profile
 
-<div class="row">
-    <div class="col-sm-12">
-        <div class="post profile-search-result">
-            <div class="inline-container profile-area">
-                <div class="profile-picture">
-                    @if (Model.PictureID != null) { 
-                        <img class="img-thumbnail" src="@Url.Action("ProfilePicture", new { pictureId = Model.PictureID })"/>
-                    }
-                    else {
-                        <img class="img-thumbnail" src="@Url.Content("~/Client/images/empty_profile.gif")"/>
-                    }
-                </div>
-                <div class="row profile-container">
-                    <div class="col-sm-8">
-                        <div class="">
-                            <h4>
-                                <span>@Model.Organization.Name</span>
-
-                                <br />
-                                <small>@Model.UserGroup.Name</small>
-                                -
-                                        <small>@Model.Category.Name</small>
-                            </h4>
-                            <ul class="list-inline list-unstyled">
-                                <li><a target="_blank" href="http://@Model.Organization.Website" title="Organization website"><i class="icon-link"></i></a></li>
-                                <li><a target="_blank" href="http://@Model.Organization.FacebookLink" title="Facebook link"><i class="icon-large icon-facebook"></i></a></li>
-                                <li><a target="_blank" href="http://@Model.Organization.TwitterLink" title="Twitter link"><i class="icon-large icon-twitter"></i></a></li>
-                                <li><a target="_blank" href="http://@Model.Organization.LinkedInLink" title="LinkedIn link"><i class="icon-large icon-linkedin"></i></a></li>
-                            </ul>
-                            <p>@Model.Organization.Description</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        @if (Model.ProfileTags != null) {
-                            <div class="inline-container">
-                                @foreach (var i in Model.ProfileTags.Select(x => x.Tag.Name)) { 
-                                    <div class="tag">
-                                        <span class="label label-default">@i</span>
-                                    </div>
-                                }
-                                <div class="clear"></div>
-                            </div>
+<div class="row profile-search-result">
+    <div class="col-sm-12 ">
+        <div class="placeholder-panel">
+            <div class="post">
+                <div class="inline-container profile-area">
+                    <div class="profile-picture">
+                        @if (Model.PictureID != null) { 
+                            <img class="img-thumbnail" src="@Url.Action("ProfilePicture", new { pictureId = Model.PictureID })"/>
+                        }
+                        else {
+                            <img class="img-thumbnail" src="@Url.Content("~/Client/images/empty_profile.gif")"/>
                         }
                     </div>
+                    <div class="row profile-container">
+                        <div class="col-sm-8">
+                            <div class="">
+                                <h4>
+                                    <span>@Model.Organization.Name</span>
+
+                                    <br />
+                                    <small>@Model.UserGroup.Name</small>
+                                    -
+                                <small>@Model.Category.Name</small>
+                                </h4>
+                                <ul class="list-inline list-unstyled">
+                                    <li><a target="_blank" href="http://@Model.Organization.Website" title="Organization website"><i class="icon-link"></i></a></li>
+                                    <li><a target="_blank" href="http://@Model.Organization.FacebookLink" title="Facebook link"><i class="icon-large icon-facebook"></i></a></li>
+                                    <li><a target="_blank" href="http://@Model.Organization.TwitterLink" title="Twitter link"><i class="icon-large icon-twitter"></i></a></li>
+                                    <li><a target="_blank" href="http://@Model.Organization.LinkedInLink" title="LinkedIn link"><i class="icon-large icon-linkedin"></i></a></li>
+                                </ul>
+                                <p>@Model.Organization.Description</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="help-block"><i class="icon-tags"></i>&nbsp;Tags</div>
+                            @if (Model.ProfileTags != null) {
+                                @Html.Partial("tagListStringDisplayPartial",  Model.ProfileTags.Select(x => x.Tag.Name))
+                            }
+                        </div>
+                    </div>
                 </div>
+                <div class="clear"></div>
             </div>
-            <div class="clear"></div>
         </div>
     </div>
 </div>

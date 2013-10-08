@@ -9,9 +9,11 @@ header {
     margin-top: 60px;
 }
 
+.page-header {
+    margin: 0 0 20px;
+}
+
 .navbar {
-    webkit-border-radius: 0 !important;
-    -moz-border-radius: 0 !important;
     border-radius: 0 !important;
 }
 
@@ -50,7 +52,7 @@ header {
 .post {
     margin: 0;
     padding: 15px;
-    border: 1px solid @base-color;
+    border: 1px solid @inner-border-color;
     /*text-shadow: 1px 1px 1px #E1E1E1;*/
     background: #FFFFFF;
     position: relative;
@@ -69,17 +71,22 @@ header {
     top: 100px;
 }
 
-.pagination {
+.pagination-container {
     text-align: center;
+    /*.pagination {
+        margin: 10px 0;
+    }*/
 }
 
-.inline-container > .list-container {
-    margin: 0 5px 0 0;
-}
+.inline-container {
+    > .list-container {
+        margin: 0 5px 0 0;
+    }
 
-.inline-container > div {
-    display: inline-block;
-    float: left;
+    > div {
+        display: inline-block;
+        float: left;
+    }
 }
 
 .clear {
@@ -111,15 +118,45 @@ label {
         margin-top: 2px;
         text-indent: 15px;
     }
+}
 
-    .validation-summary-errors {
-        max-width: 450px;
-        padding: 15px;
-        margin: 0 auto;
-        color: #f00;
+.validation-summary-errors {
+    max-width: 450px;
+    padding: 15px;
+    margin: 0 auto;
+    color: #f00;
 
-        > ul {
-            list-style: circle;
-        }
+    > ul {
+        list-style: none;
+    }
+}
+
+.placeholder-panel {
+    padding: 10px;
+    background: @base-color;
+    border: 1px solid @base-color;
+    .rounded-corner;
+    .drop-shadow(0, 0, 5px);
+}
+
+.panel-action-right {
+    .panel-action;
+    text-align: right;
+}
+
+.panel-action-left {
+    .panel-action;
+    text-align: left;
+}
+
+.panel-action-center {
+    .panel-action;
+    text-align: center;
+}
+
+a.link-icon {
+    text-decoration: none;
+    &:hover{
+        cursor: pointer;
     }
 }

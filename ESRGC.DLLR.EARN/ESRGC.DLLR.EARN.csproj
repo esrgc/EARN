@@ -63,6 +63,9 @@
     <Reference Include="PagedList">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
     </Reference>
+    <Reference Include="PagedList.Mvc">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -159,6 +162,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Client\apps\search\app.js" />
     <Content Include="Client\apps\search\controller\search.js" />
+    <Content Include="Client\apps\search\store\search.js" />
     <Content Include="Client\css\less\library.css">
       <DependentUpon>library.less</DependentUpon>
     </Content>
@@ -217,6 +221,7 @@
     <Content Include="Client\jsLib\typeahead.js\typeahead.min.js" />
     <Content Include="Client\js\bootstrapValidation.js" />
     <Content Include="Client\js\dx.min.js" />
+    <None Include="Client\css\PagedList.notusedcss" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Client\jsLib\jquery\jquery-2.0.3-vsdoc.js" />
@@ -237,11 +242,14 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\Search\SearchProfilePartial.cshtml" />
+    <Content Include="Views\Shared\tagListPartial.cshtml" />
+    <Content Include="Views\Shared\tagListDisplayPartial.cshtml" />
+    <Content Include="Views\Shared\tagListStringDisplayPartial.cshtml" />
+    <Content Include="Views\Shared\tagListStringPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Client\apps\search\model\" />
-    <Folder Include="Client\apps\search\store\" />
     <Folder Include="Client\apps\search\view\" />
   </ItemGroup>
   <ItemGroup>

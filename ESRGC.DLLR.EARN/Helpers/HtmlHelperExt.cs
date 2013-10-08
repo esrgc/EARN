@@ -29,8 +29,22 @@ namespace ESRGC.DLLR.EARN.Helpers
         routeValues[newFilterKey] = newFilterVal;
       else
         routeValues.Add(newFilterKey, newFilterVal);
+
+      string extraParams = "";
+      foreach (var i in routeDict) {
+        //checks if there are list of the same key
+        if (i.Value is List<string>) {
+          var paramList = i.Value as List<string>;
+          //loop through and genrate url params
+          foreach (var p in paramList) {
+            extraParams += "&" + i.Key + "=" + p;         
+          }
+          routeDict.Remove(i);
+        }
+      }
       //generate url
-      return helper.Action(actionName, routeValues);
+      var url = helper.CurrentSearchFilter(actionName, routeValues) + extraParams;
+      return url;
     }
 
     public static string CurrentSearchFilter(
