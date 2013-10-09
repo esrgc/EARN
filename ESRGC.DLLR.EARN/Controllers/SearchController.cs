@@ -39,15 +39,22 @@ namespace ESRGC.DLLR.EARN.Controllers
       }
 
       var result = new List<Profile>();
+      var tagNames = new List<string>();
       if (tags != null) {
         //matching by tags
         tags.ForEach(x => {
+          var tagName = x.ToUpper();
+          tagNames.Add(tagName);
           //find the profiles that match the tag
-          var resultSet = profiles.Where(p => p.ProfileTags.Select(t => t.Tag.Name).Contains(x)).ToList();
+          var resultSet = profiles.Where(
+            p => p.ProfileTags
+              .Select(t => t.Tag.Name)
+              .Contains(tagName)
+            ).ToList();
           //accummulate search results for each tag
           result = resultSet.Union(result).ToList();
         });
-        filters.Add("tags", tags);
+        filters.Add("tags", tagNames);
       }
       else
         result = profiles.ToList();

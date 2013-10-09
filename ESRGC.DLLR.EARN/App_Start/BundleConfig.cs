@@ -31,8 +31,8 @@ namespace ESRGC.DLLR.EARN
         "~/Client/jsLib/typeahead.js/typeahead.min.js",
         "~/Client/apps/search/controller/*.js",
         "~/Client/apps/search/store/*.js",
-        "~/Client/apps/search/model/*.js",
-        "~/Client/apps/search/view/*.js",
+        //"~/Client/apps/search/model/*.js",
+        //"~/Client/apps/search/view/*.js",
         "~/Client/apps/search/app.js"
       ));
       //css bundles

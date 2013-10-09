@@ -12,7 +12,7 @@ dx library
 
 dx.application({
     name: 'profileSearch',
-    stores: [],
+    stores: ['Search'],
     models: [],
     views: [],
     controllers: ['Search'],

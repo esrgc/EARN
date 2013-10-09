@@ -36,7 +36,7 @@
                         <div class="col-sm-4">
                             <div class="help-block"><i class="icon-tags"></i>&nbsp;Tags</div>
                             @if (Model.ProfileTags != null) {
-                                @Html.Partial("tagListStringDisplayPartial",  Model.ProfileTags.Select(x => x.Tag.Name))
+                                @Html.Partial("tagListLinkPartial",  Model.ProfileTags.Select(x => x.Tag.Name))
                             }
                         </div>
                     </div>

@@ -19,19 +19,17 @@ dx.defineController('Search', {
         tagInput: '#tagInput',
         submitBtn: 'button[type="submit"]',
         searchForm: 'form',
-        closeTagBtn: 'button[class="close"]',
+        closeTagBtn: '.tag a',
         pager: '.pagination',
         currentHiddenInput: 'input[name="tags"]',
         notificationLabel: '#statusText',
         searchResultTags: '#searchResult .tag',
-        keywordTags: '#keywords .tag'
+        keywordTags: '#keywords .tag',
+        pageContent: '#basicSearchPage'
     },
     control: {
-        submitBtn: {
-            click: 'onSubmitBtnClick'
-        },
-        closeTagBtn: {
-            click: 'onCloseTagBtnClick'
+        searchForm: {
+            submit: 'onSearchSubmit'
         }
     },
     initialize: function () {
@@ -45,7 +43,7 @@ dx.defineController('Search', {
         input.typeahead({
             name: 'tagSearch',
             prefetch: {
-                url: '../profile/tags',
+                url: 'profile/tags',
                 ttl: 1
             },
             limit: 20
@@ -56,31 +54,35 @@ dx.defineController('Search', {
         this.getCurrentHiddenInput().each(function (i) {
             scope.tagArray.push($(this).val());
         });
-        this.highlightMatchedTags();
-    },
-    onSubmitBtnClick: function (event, object) {
-        event.preventDefault();
-        var scope = this;
-        var inputValue = scope.getTagInput().val().toUpperCase();
-        if (scope.tagExists(inputValue)) {
-            scope.getNotificationLabel().text('Input tag has already been used for this search!');
-            return;
+        //store event handler
+        var store = dx.getStore('Search');
+        if (typeof store != 'undefined') {
+            store.on('load', scope.onSearchStoreLoad);
         }
-        if (inputValue == '') {
-            scope.getNotificationLabel().text('Please enter a tag first!');
-            return
-        };
-        dx.log(inputValue);
-        scope.tagArray.push(inputValue);
-        //submit form
-        var form = scope.getSearchForm();
-        form.append('<input type="hidden" value="' + inputValue + '" name="tags"/>');
-        form.submit();
     },
-    onCloseTagBtnClick: function (event, object) {
-        dx.log($(object).html());
+    //intercept submit event to use ajax to load content
+    onSearchSubmit: function (event, object) {
+        var scope = this;
+        event.preventDefault();
+        var params = scope.getFormData($(object));
+        dx.log(params)
+        var store = dx.getStore('Search');
+        if (typeof store != 'undefined') {
+            store.setParams(params);
+            
+            dx.log(store.constructParams());
+            store.loadContent();
+        }
     },
-
+    //////////////////////////////////////////////
+    //store event handlers
+    //////////////////////////////////////////////
+    onSearchStoreLoad: function(store, data){
+        var scope = dx.getController('Search');
+        var pageContainer = scope.getPageContent();//get page container
+        //replace content of page container with new content
+        pageContainer.replaceWith($(scope.getRef('pageContent'), data));
+    },
     //helpers
     tagExists: function (tag) {
         var tagArray = this.tagArray;
@@ -89,21 +91,8 @@ dx.defineController('Search', {
                 return true;
         }
         return false;
-    },
-    highlightMatchedTags: function () {
-        //highlight keywords
-        this.getKeywordTags().addClass('matched-tag');
-        //highlight matched tags in results
-        for (var i in this.tagArray) {
-            var value = this.tagArray[i];
-            this.getSearchResultTags().each(function (index) {
-                var tag = $(this).find('span').html();
-                if (tag == value) {
-                    $(this).addClass('matched-tag')
-                }
-            });
-        }
     }
+    
 });
 
 

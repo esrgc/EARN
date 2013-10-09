@@ -15,5 +15,6 @@ dx library
 */
 
 dx.defineStore('Search', {
-    url: 'index'
+    name: 'Search',
+    url: ''
 });

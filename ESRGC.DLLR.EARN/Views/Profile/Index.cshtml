@@ -81,7 +81,7 @@
                         </span>
                     </div>
                     <div class="window-panel-content">
-                        @Html.Partial("tagListDisplayPartial", Model.ProfileTags.Select(x => x.Tag).ToList())
+                        @Html.Partial("tagListDisplayPartial", Model.ProfileTags.Select(x => x.Tag.Name).ToList())
                     </div>
                 </div>
             </div>

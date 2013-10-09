@@ -175,7 +175,7 @@
                     <hr />
                     <h4>Your tags <small class="">(Please enter at least one tag to procceed)</small></h4>
                     <div class="post">
-                        @Html.Partial("tagListPartial", currentTags)                        
+                        @Html.Partial("tagListPartial", currentTags.Select(x=>x.Name).ToList())                        
                     </div>
                     <br />
                     <div class="pull-right">

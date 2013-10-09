@@ -17,58 +17,86 @@ namespace ESRGC.DLLR.EARN.Helpers
     /// <param name="routeDict">Current routing values</param>
     /// <param name="newFilter">New route value</param>
     /// <returns></returns>
-    public static string SearchFilter(
+    public static string AddSearchFilter(
         this UrlHelper helper,
         string actionName,
         IDictionary<string, object> routeDict,
         string newFilterKey,
-        string newFilterVal) {
+        object newFilterVal) {
 
       var routeValues = new RouteValueDictionary(routeDict);
-      if (routeValues.Keys.Contains(newFilterKey))
-        routeValues[newFilterKey] = newFilterVal;
+      if (routeValues.Keys.Contains(newFilterKey)) {
+        if (routeValues[newFilterKey] is IEnumerable<string>) {
+          var list = (routeValues[newFilterKey] as List<string>).ToList();
+          list.Add(newFilterVal as string);
+          routeValues[newFilterKey] = list;
+        }
+        else
+          routeValues[newFilterKey] = newFilterVal;
+      }
       else
         routeValues.Add(newFilterKey, newFilterVal);
 
-      string extraParams = "";
-      foreach (var i in routeDict) {
-        //checks if there are list of the same key
-        if (i.Value is List<string>) {
-          var paramList = i.Value as List<string>;
-          //loop through and genrate url params
-          foreach (var p in paramList) {
-            extraParams += "&" + i.Key + "=" + p;         
-          }
-          routeDict.Remove(i);
-        }
-      }
       //generate url
-      var url = helper.CurrentSearchFilter(actionName, routeValues) + extraParams;
-      return url;
+      return helper.GenerateLinkFromFilters(actionName, routeValues);
+
     }
 
-    public static string CurrentSearchFilter(
+    public static string GenerateLinkFromFilters(
         this UrlHelper helper,
         string actionName,
         IDictionary<string, object> routeDict) {
 
       var routeValues = new RouteValueDictionary(routeDict);
+      //check if there's sub list of filter under the same key
+      string extraParams = "";
+      var itemTobeRemoved = new List<string>();
+      foreach (var i in routeValues) {
+        //checks if there are list of the same key
+        if (i.Value is List<string>) {
+          itemTobeRemoved.Add(i.Key);
+          var paramList = i.Value as List<string>;
+          //loop through and genrate url params
+          foreach (var p in paramList) {
+            extraParams += "&" + i.Key + "=" + p;
+          }
+        }
+      }
+      //remove list items from route dictionary
+      itemTobeRemoved.ForEach(x => routeValues.Remove(x));
+
       //generate url
-      return helper.Action(actionName, routeValues);
+      if (routeValues.Count > 0)
+        return helper.Action(actionName, routeValues) + extraParams;
+      else if (extraParams.Length > 0)
+        return helper.Action(actionName, routeValues) + "?" + extraParams.Substring(1, extraParams.Length - 1);
+      else
+        return helper.Action(actionName, routeValues);
     }
 
-
-    public static string ClearSearchFilter(
+    public static string RemoveSearchFilter(
         this UrlHelper helper,
         string actionName,
         IDictionary<string, object> routeDict,
-        string removeKey) {
+        string removeKey,
+        string value) {
       //create new route dictionary
       var routeValues = new RouteValueDictionary(routeDict);
-      //remove key
-      routeValues.Remove(removeKey);
+      //checks if value is a list
+      if (routeValues.ContainsKey(removeKey)) {
+        var valueAtThatKey = routeValues[removeKey];
+        //if value at that key is a collection then only remove that one value
+        if (valueAtThatKey is IEnumerable<string>) {
+          var subList = (valueAtThatKey as List<string>).ToList();//copy to a new list
+          subList.Remove(value);
+          routeValues[removeKey] = subList;//reference the new list
+        }
+        else
+          //remove key
+          routeValues.Remove(removeKey);
+      }
       //generate url
-      return helper.Action(actionName, routeValues);
+      return helper.GenerateLinkFromFilters(actionName, routeValues);
     }
 
     public static string TimeSpan(this HtmlHelper helper, DateTime? timeInPast) {
