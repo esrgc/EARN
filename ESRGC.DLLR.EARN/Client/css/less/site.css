@@ -110,6 +110,9 @@ label .error {
   -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
+.transparent-placeholder-panel {
+  padding: 10px;
+}
 .panel-action-right {
   margin: 5px 0 0 0;
   padding: 5px 0;
@@ -125,9 +128,11 @@ label .error {
   padding: 5px 0;
   text-align: center;
 }
-a.link-icon {
+a.link-icon,
+.link-icon-container a {
   text-decoration: none;
 }
-a.link-icon:hover {
+a.link-icon:hover,
+.link-icon-container a:hover {
   cursor: pointer;
 }

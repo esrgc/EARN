@@ -1,4 +1,9 @@
-﻿.organization-detail .profile-area h3,
+﻿#socialNetworkLinks {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+.organization-detail .profile-area h3,
 .profile-area h4,
 .profile-area h5 {
   margin-top: 0;

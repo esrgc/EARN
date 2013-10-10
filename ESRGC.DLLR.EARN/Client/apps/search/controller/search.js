@@ -17,19 +17,25 @@ dx.defineController('Search', {
     tagArray: [],
     refs: {
         tagInput: '#tagInput',
-        submitBtn: 'button[type="submit"]',
+        goBtn: 'button[type="submit"]',
         searchForm: 'form',
-        closeTagBtn: '.tag a',
+        tagLinks: '.tag a, a#clearSearchLink',
         pager: '.pagination',
-        currentHiddenInput: 'input[name="tags"]',
+        currentHiddenInput: 'input[type="hidden"][name="tags"]',
+        hiddenInputHolder: '#hiddenInputHolder',
         notificationLabel: '#statusText',
-        searchResultTags: '#searchResult .tag',
+        searchResult: '#searchResult',
         keywordTags: '#keywords .tag',
-        pageContent: '#basicSearchPage'
+        pageContent: '#basicSearchPage',
+        queryTagHolder: '.tag-list-holder',
+        typeahead: '.tt-hint'
     },
     control: {
         searchForm: {
             submit: 'onSearchSubmit'
+        },
+        tagLinks: {
+            click: 'onTagLinkClick'
         }
     },
     initialize: function () {
@@ -57,19 +63,43 @@ dx.defineController('Search', {
         //store event handler
         var store = dx.getStore('Search');
         if (typeof store != 'undefined') {
+            store.on('beforeLoad', function () { scope.preloadState(); });
             store.on('load', scope.onSearchStoreLoad);
+        }
+    },
+    onTagLinkClick: function (event, object) {
+        event.preventDefault();
+        var url = $(object).attr('href');
+        var store = dx.getStore('Search');
+        if (typeof store != 'undefined') {
+            dx.log(url);
+            store.loadContentUrl(url);
         }
     },
     //intercept submit event to use ajax to load content
     onSearchSubmit: function (event, object) {
-        var scope = this;
         event.preventDefault();
+
+        var scope = this;
+        scope.updateStatus('');
+        var input = scope.getTagInput().val().toUpperCase();
+        if (input == '') {
+            scope.updateStatus('Please enter a tag first!');
+            return;
+        }
+        if (scope.tagExists(input)) {
+            scope.updateStatus('This tag has already been used for this search');
+            return;
+        }
+        else
+            scope.tagArray.push(input);
+
         var params = scope.getFormData($(object));
         dx.log(params)
         var store = dx.getStore('Search');
         if (typeof store != 'undefined') {
             store.setParams(params);
-            
+
             dx.log(store.constructParams());
             store.loadContent();
         }
@@ -77,11 +107,26 @@ dx.defineController('Search', {
     //////////////////////////////////////////////
     //store event handlers
     //////////////////////////////////////////////
-    onSearchStoreLoad: function(store, data){
+    onSearchStoreLoad: function (store, data) {
         var scope = dx.getController('Search');
-        var pageContainer = scope.getPageContent();//get page container
+        //var pageContainer = scope.getPageContent();//get page container
         //replace content of page container with new content
-        pageContainer.replaceWith($(scope.getRef('pageContent'), data));
+        //pageContainer.replaceWith($(scope.getRef('pageContent'), data));
+        var searchResult = scope.getSearchResult();
+        var queryTagHolder = scope.getQueryTagHolder();
+        var hiddenInputHolder = scope.getHiddenInputHolder();
+
+        //replace with new content
+        searchResult.replaceWith(scope.getSearchResult(data));
+        queryTagHolder.replaceWith(scope.getQueryTagHolder(data));
+        hiddenInputHolder.replaceWith(scope.getHiddenInputHolder(data));
+
+        //empty input box
+        scope.getTagInput().focus();
+        scope.getTagInput().val('')
+        scope.getTypeahead().val('');
+        //set state to loaded
+        scope.loadedState();
     },
     //helpers
     tagExists: function (tag) {
@@ -91,8 +136,19 @@ dx.defineController('Search', {
                 return true;
         }
         return false;
+    },
+    updateStatus: function (msg) {
+        this.getNotificationLabel().text(msg);
+    },
+    preloadState: function () {
+        dx.log('pre-load');
+        this.getGoBtn().find('i').addClass('icon-spin');
+    },
+    loadedState: function () {
+        dx.log('loaded');
+        this.getGoBtn().find('i').removeClass('icon-spin');
     }
-    
+
 });
 
 

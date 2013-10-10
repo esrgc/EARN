@@ -25,6 +25,11 @@
         <div class="col-sm-12">
             <div class="placeholder-panel">
                 <div class="post">
+                    <ul class="list-inline list-unstyled link-icon-container" id="socialNetworkLinks">
+                        <li><a target="_blank" href="http://@Model.Organization.FacebookLink" title="Facebook link"><i class="icon-large icon-facebook"></i></a></li>
+                        <li><a target="_blank" href="http://@Model.Organization.TwitterLink" title="Twitter link"><i class="icon-large icon-twitter"></i></a></li>
+                        <li><a target="_blank" href="http://@Model.Organization.LinkedInLink" title="LinkedIn link"><i class="icon-large icon-linkedin"></i></a></li>
+                    </ul>
                     <div class="inline-container profile-area">
                         <div class="profile-picture">
                             @if (Model.PictureID != null) { 
@@ -35,30 +40,23 @@
                             }
                         </div>
                         <div class="row profile-container">
-                            <div class="col-sm-6">
+                            <div class="col-sm-10">
                                 <div class="">
-                                    
                                     <h4>
                                         <span>@Model.Organization.Name</span>
-                                        <small><a class="link-icon" href="#"><i class="icon-pencil"></i></a></small>
-                                        <br />
+                                        <small><a class="link-icon" href="#">
+                                            <i class="icon-pencil"></i></a>
+                                        </small>
+                                        <br>
                                         <small>@Model.UserGroup.Name</small>
                                         -
                                         <small>@Model.Category.Name</small>
+                                        <br />
+                                        <small><a target="_blank" href="http://@Model.Organization.Website" title="Organization website">@Model.Organization.Website</a></small>
                                     </h4>
-                                    <ul class="list-inline list-unstyled">
-                                        <li><a target="_blank" href="http://@Model.Organization.Website" title="Organization website"><i class="icon-link"></i></a></li>
-                                        <li><a target="_blank" href="http://@Model.Organization.FacebookLink" title="Facebook link"><i class="icon-large icon-facebook"></i></a></li>
-                                        <li><a target="_blank" href="http://@Model.Organization.TwitterLink" title="Twitter link"><i class="icon-large icon-twitter"></i></a></li>
-                                        <li><a target="_blank" href="http://@Model.Organization.LinkedInLink" title="LinkedIn link"><i class="icon-large icon-linkedin"></i></a></li>
-                                    </ul>
                                     <p>@Model.Organization.Description</p>
                                 </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="placeholder-panel" style="min-height: 200px;">
-                                    <h4>Location map placeholder <small>(To be available)</small></h4>
-                                </div>
+
                             </div>
                         </div>
 
@@ -128,9 +126,9 @@
                         <form action="@Url.Action("EditAbout")" method="post">
                             <h4>About</h4>
                             @Html.TextAreaFor(x => x.About, new {
-                               @class = "form-control about",
-                               placeholder = ModelMetadata.FromLambdaExpression(x => x.About, ViewData).Description
-                            })
+                           @class = "form-control about",
+                           placeholder = ModelMetadata.FromLambdaExpression(x => x.About, ViewData).Description
+                       })
                             <div class="text-right">
                                 <button type="submit" class="btn btn-info btn-xs"><i class="icon-save"></i>&nbsp;Save</button>
 
