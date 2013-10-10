@@ -252,7 +252,8 @@
     <Content Include="Views\Search\SearchProfilePartial.cshtml" />
     <Content Include="Views\Shared\tagListPartial.cshtml" />
     <Content Include="Views\Shared\tagListDisplayPartial.cshtml" />
-    <Content Include="Views\Shared\tagListLinkPartial.cshtml" />
+    <Content Include="Views\Search\tagListLinkPartial.cshtml" />
+    <Content Include="Views\Search\Basic.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

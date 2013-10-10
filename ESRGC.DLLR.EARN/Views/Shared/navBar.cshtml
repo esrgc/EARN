@@ -14,7 +14,7 @@
         <div class="container">
             @if (User.Identity.IsAuthenticated) {
                 <ul class="nav navbar-nav">
-                    <li><a href="@Url.Action("Index", "Search")"><i class="icon-search"></i>&nbsp;Search</a></li>
+                    <li><a href="@Url.Action("Basic", "Search")"><i class="icon-search"></i>&nbsp;Search</a></li>
                     @*<li><a href="#"><i class="icon-coffee"></i>&nbsp;Partnerships</a></li>*@
 
                     <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-plus"></i>&nbsp;More

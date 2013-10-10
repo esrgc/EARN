@@ -14,7 +14,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     public SearchController(IWorkUnit workUnit) : base(workUnit) { }
     //
     // GET: /Search/
-    public ActionResult Index(
+    public ActionResult Basic(
       int? page,
       int? size,
       int? userGroupID,

@@ -8,7 +8,7 @@
     <div class="inline-container tag-list">
         @foreach (var i in Model) { 
             <div class="tag">
-                <span class="label label-default"><a href="@Url.AddSearchFilter("", filters, "tags", i)">@i</a></span>
+                <span class="label label-default"><a href="@Url.AddSearchFilter("Basic", filters, "tags", i)">@i</a></span>
             </div>
         }
     </div>
@@ -24,7 +24,7 @@
             }
             else {
             <div class="tag">
-                <span class="label label-default"><a href="@Url.AddSearchFilter("", filters, "tags", i)">@i</a></span>
+                <span class="label label-default"><a href="@Url.AddSearchFilter("Basic", filters, "tags", i)">@i</a></span>
             </div>
             }
         }
