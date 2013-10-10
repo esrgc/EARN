@@ -33,9 +33,11 @@ namespace ESRGC.DLLR.EARN.Domain.Migrations
       //context.Communities.RemoveRange(context.Communities.ToList());
       if (context.UserGroups.Count() == 0) {
         context.UserGroups.AddOrUpdate(
-          new UserGroup { Name = "Industry partner", Description = "Seeking employees e.g healthcare representative" },
-          new UserGroup { Name = "Facilitator", Description = "facilities partnership e.g. chamber of commerce" },
-          new UserGroup { Name = "Training provider", Description = "Providing skilled workforce e.g. training center" }
+          new UserGroup { Name = "Industry", Description = "e.g. Industry Associations, Employers, Chambers of Commerce" },
+          new UserGroup { Name = "Education and Training", Description = "e.g. Four-Year and Two-Year College or University, Community College, and Technical Colleges, K-12" },
+          new UserGroup { Name = "Workforce and Economic Development and Local Governments", Description = "e.g. Workforce Investment Board Members" },
+          new UserGroup { Name = "Nonprofits and Community Based Organizations", Description = "e.g. Job Training Advocacy Groups, Veterans Groups, Advocates for people with disabilities" },
+          new UserGroup { Name = "Other Strategic Partners", Description = "e.g. Labor unions, Social Service Providers." }
         );
         context.SaveChanges();
       }

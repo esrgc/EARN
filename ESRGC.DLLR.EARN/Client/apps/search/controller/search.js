@@ -74,7 +74,7 @@ dx.defineController('Search', {
         if (typeof store != 'undefined') {
             dx.log(url);
             store.loadContentUrl(url);
-        }
+        }       
     },
     //intercept submit event to use ajax to load content
     onSearchSubmit: function (event, object) {
@@ -127,6 +127,7 @@ dx.defineController('Search', {
         scope.getTypeahead().val('');
         //set state to loaded
         scope.loadedState();
+        scope.updateTagList();
     },
     //helpers
     tagExists: function (tag) {
@@ -147,6 +148,16 @@ dx.defineController('Search', {
     loadedState: function () {
         dx.log('loaded');
         this.getGoBtn().button('reset');
+    },
+    updateTagList: function () {
+        var currentTags = this.getCurrentHiddenInput();
+        this.tagArray = [];
+        var tagArray = this.tagArray;
+        currentTags.each(function (i, tag) {
+            var tagName = $(tag).val().toUpperCase();
+            dx.log(tagName);
+            tagArray.push(tagName);
+        });
     }
 
 });

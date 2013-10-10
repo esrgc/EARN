@@ -35,8 +35,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public int UserGroupID { get; set; }
     public virtual UserGroup UserGroup { get; set; }
 
-    [Required(ErrorMessage = "Please select your category!")]
-    public int CategoryID { get; set; }
+    public int? CategoryID { get; set; }
     public virtual Category Category { get; set; }
 
     public DateTime? LastUpdate { get; set; }

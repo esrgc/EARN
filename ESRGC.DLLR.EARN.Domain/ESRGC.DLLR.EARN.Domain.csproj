@@ -55,9 +55,9 @@
     <Compile Include="DAL\DataInitializer.cs" />
     <Compile Include="DAL\DomainContext.cs" />
     <Compile Include="DAL\PasswordInitializer.cs" />
-    <Compile Include="Migrations\201310031957481_init.cs" />
-    <Compile Include="Migrations\201310031957481_init.Designer.cs">
-      <DependentUpon>201310031957481_init.cs</DependentUpon>
+    <Compile Include="Migrations\201310102158151_init.cs" />
+    <Compile Include="Migrations\201310102158151_init.Designer.cs">
+      <DependentUpon>201310102158151_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
@@ -81,8 +81,8 @@
     <Folder Include="Helpers\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201310031957481_init.resx">
-      <DependentUpon>201310031957481_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201310102158151_init.resx">
+      <DependentUpon>201310102158151_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

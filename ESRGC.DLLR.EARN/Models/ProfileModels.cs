@@ -16,8 +16,7 @@ namespace ESRGC.DLLR.EARN.Models
     public ICollection<UserGroup> UserGroups { get; set; }
     [Required(ErrorMessage = "Please choose your user group")]
     public int UserGroupID { get; set; }
-    [Required(ErrorMessage = "Please select one.")]
-    public int CategoryID { get; set; }
+    public int? CategoryID { get; set; }
     public Contact Contact { get; set; }
   }
 }

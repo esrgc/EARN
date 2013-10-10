@@ -37,12 +37,12 @@ namespace ESRGC.DLLR.EARN.Domain.Migrations
                         ContactID = c.Int(nullable: false),
                         OrganizationID = c.Int(nullable: false),
                         UserGroupID = c.Int(nullable: false),
-                        CategoryID = c.Int(nullable: false),
+                        CategoryID = c.Int(),
                         LastUpdate = c.DateTime(),
                         About = c.String(),
                     })
                 .PrimaryKey(t => t.ProfileID)
-                .ForeignKey("dbo.Category", t => t.CategoryID, cascadeDelete: true)
+                .ForeignKey("dbo.Category", t => t.CategoryID)
                 .ForeignKey("dbo.Contact", t => t.ContactID, cascadeDelete: true)
                 .ForeignKey("dbo.Organization", t => t.OrganizationID, cascadeDelete: true)
                 .ForeignKey("dbo.Picture", t => t.PictureID)
