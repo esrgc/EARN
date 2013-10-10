@@ -28,7 +28,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     Basic search 
-                    <small class="pull-right"><a href="#" title="To be available">Advanced search</a></small>
+                    @*<small class="pull-right"><a href="#" title="To be available">Advanced search</a></small>*@
                 </div>
                 <div class="panel-body">
                     <div class="row">
@@ -53,8 +53,7 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-12">
-                                            <button type="submit" class="btn btn-primary btn-block">
-                                                <i class="icon-refresh"></i>&nbsp;Go</button>
+                                            <button type="submit" class="btn btn-primary btn-block" data-loading-text="Searching...">Go</button>
                                         </div>
                                     </div>
                                     <div id="hiddenInputHolder">
@@ -80,6 +79,14 @@
                                         }
                                     </div>
                                     <div class="clear"></div>
+
+                                </div>
+                                <div class="transparent-placeholder-panel">
+                                    <strong>Tips!</strong>&nbsp;
+                                    <small>Enter tags to focus search results to the organizations that best match your needs and interests.</small>
+                                    <small>Common tags include <strong>job sector titles</strong>
+                                        and any <strong>education, training, certifications</strong> or <strong>skills requirements</strong>
+                                        or <strong>offerings</strong>.</small>
                                 </div>
                             </div>
                         </div>

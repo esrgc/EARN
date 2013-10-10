@@ -75,7 +75,7 @@
                     <div class="window-panel-title">
                         Your tags <i class="icon-tags"></i>
                         <span class="pull-right">
-                            <a class="link-icon" title="Edit" href="@Url.Action("ManageTag")"><i class="icon-pencil"></i></a>
+                            <a class="link-icon" title="Edit" href="@Url.Action("ManageTag", "Tag")"><i class="icon-pencil"></i></a>
                         </span>
                     </div>
                     <div class="window-panel-content">
@@ -126,9 +126,9 @@
                         <form action="@Url.Action("EditAbout")" method="post">
                             <h4>About</h4>
                             @Html.TextAreaFor(x => x.About, new {
-                           @class = "form-control about",
-                           placeholder = ModelMetadata.FromLambdaExpression(x => x.About, ViewData).Description
-                       })
+                               @class = "form-control about",
+                               placeholder = ModelMetadata.FromLambdaExpression(x => x.About, ViewData).Description
+                           })
                             <div class="text-right">
                                 <button type="submit" class="btn btn-info btn-xs"><i class="icon-save"></i>&nbsp;Save</button>
 

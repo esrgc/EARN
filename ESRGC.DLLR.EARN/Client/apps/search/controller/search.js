@@ -49,7 +49,7 @@ dx.defineController('Search', {
         input.typeahead({
             name: 'tagSearch',
             prefetch: {
-                url: 'profile/tags',
+                url: '../tag/tags',
                 ttl: 1
             },
             limit: 20
@@ -122,7 +122,7 @@ dx.defineController('Search', {
         hiddenInputHolder.replaceWith(scope.getHiddenInputHolder(data));
 
         //empty input box
-        scope.getTagInput().focus();
+        //scope.getTagInput().focus();
         scope.getTagInput().val('')
         scope.getTypeahead().val('');
         //set state to loaded
@@ -142,11 +142,11 @@ dx.defineController('Search', {
     },
     preloadState: function () {
         dx.log('pre-load');
-        this.getGoBtn().find('i').addClass('icon-spin');
+        this.getGoBtn().button('loading');
     },
     loadedState: function () {
         dx.log('loaded');
-        this.getGoBtn().find('i').removeClass('icon-spin');
+        this.getGoBtn().button('reset');
     }
 
 });

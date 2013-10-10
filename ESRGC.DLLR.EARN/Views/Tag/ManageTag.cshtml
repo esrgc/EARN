@@ -87,7 +87,7 @@
                 name: 'test',
                 //local: ['iphone', 'iphone 5s', 'iphone 5', 'C#', '.NET'],
                 prefetch: {
-                    url: 'tags',
+                    url: '../tag/tags',
                     ttl: 1
                 },
                 //remote: {
@@ -127,7 +127,7 @@
     </script>
 }
 @{
-    var currentTags = ViewBag.currentTags as List<Tag>;    
+    var currentTags = ViewBag.currentTags as List<Tag> ?? new List<Tag>();    
 }
 <div class="container">
     <div class="row">
@@ -180,7 +180,7 @@
                     <div class="pull-right">
                         <button class="btn btn-primary" type="submit"><i class="icon-save"></i>&nbsp;Save changes</button>
                         @if (currentTags != null) {
-                            <a class="btn btn-default" href="@Url.Action("Index")">Cancel</a>
+                            <a class="btn btn-default" href="@Url.Action("Index", "Profile")">Cancel</a>
                         }
                     </div>
                     <div class="clear"></div>

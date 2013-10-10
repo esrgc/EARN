@@ -12,19 +12,20 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <div class="container">
-            <ul class="nav navbar-nav">
-                <li><a href="@Url.Action("Index", "Search")"><i class="icon-search"></i> Search</a></li>
-                <li><a href="#"><i class="icon-coffee"></i> Partnerships</a></li>
-                                
-                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-plus"></i> More
+            @if (User.Identity.IsAuthenticated) {
+                <ul class="nav navbar-nav">
+                    <li><a href="@Url.Action("Index", "Search")"><i class="icon-search"></i>&nbsp;Search</a></li>
+                    @*<li><a href="#"><i class="icon-coffee"></i>&nbsp;Partnerships</a></li>*@
+
+                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-plus"></i>&nbsp;More
                     <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#"><i class="icon-cloud"></i> Resources</a></li>
-                        <li><a href="#"><i class="icon-envelope"></i> Contact Us</a></li>
-                        <li><a href="#">Something else here</a></li>
-                    </ul>
-                </li>
-            </ul>
+                        <ul class="dropdown-menu">
+                            <li><a href="http://www.dllr.maryland.gov/earn/earnresources.shtml">Resources</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            }
             @* <form class="navbar-form navbar-left" role="search" action="">
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Search"/>
@@ -33,18 +34,13 @@
             </form>*@
             <ul class="nav navbar-nav navbar-right">
                 @if (Request.IsAuthenticated) { 
-                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> @User.Identity.Name
+                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i>&nbsp;@User.Identity.Name
                         <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="@Url.Action("Index","Profile")">Profile</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li><a href="#">Separated link</a></li>
+                            <li><a href="@Url.Action("Index", "Profile")">Profile</a></li>
+                            <li><a href="@Url.Action("SignOut", "Account")">Sign out</a></li>
                         </ul>
                     </li>
-                    <li class="divider-vertical"></li>
-                    <li><a href="@Url.Action("SignOut", "Account")" title="Sign out"><i class="icon-signout"></i></a></li>
-                    
                 }
                 else {
                     if (ViewBag.showSignin == true) {

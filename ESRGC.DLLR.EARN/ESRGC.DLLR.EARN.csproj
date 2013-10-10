@@ -143,6 +143,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\TagController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -163,6 +164,12 @@
     <Content Include="Client\apps\search\app.js" />
     <Content Include="Client\apps\search\controller\search.js" />
     <Content Include="Client\apps\search\store\search.js" />
+    <Content Include="Client\css\less\bootstrap-custom.css">
+      <DependentUpon>bootstrap-custom.less</DependentUpon>
+    </Content>
+    <Content Include="Client\css\less\bootstrap-custom.min.css">
+      <DependentUpon>bootstrap-custom.less</DependentUpon>
+    </Content>
     <Content Include="Client\css\less\library.css">
       <DependentUpon>library.less</DependentUpon>
     </Content>
@@ -187,6 +194,7 @@
     <Content Include="Client\css\less\windowPanel.min.css">
       <DependentUpon>windowPanel.less</DependentUpon>
     </Content>
+    <Content Include="Client\css\less\bootstrap-custom.less" />
     <None Include="Client\css\profile.oldcss" />
     <Content Include="Client\css\quickForm.css" />
     <Content Include="Client\css\less\variables.less" />
@@ -276,9 +284,8 @@
     <Content Include="Views\Shared\messagePartial.cshtml" />
     <Content Include="Views\Profile\_organization.cshtml" />
     <Content Include="Views\Profile\_tag.cshtml" />
-    <Content Include="Views\Profile\profileNavbar.cshtml" />
     <Content Include="Views\Profile\AddTag.cshtml" />
-    <Content Include="Views\Profile\ManageTag.cshtml" />
+    <Content Include="Views\Tag\ManageTag.cshtml" />
     <Content Include="Views\Profile\SubcategoryDropdown.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
   </ItemGroup>

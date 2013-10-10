@@ -13,13 +13,14 @@
             <div class="row">
                 <div class="col-sm-8 col-xs-12">
                     <h2>EARN Maryland Connect</h2>
-                    <h4>
-                        Industry lead partnerships, creating jobs<br />
+                    <h4>Industry-led partnerships, creating jobs<br />
                         <small>Bridging Maryland's skills gap</small>
                     </h4>
                     <p>
-                        <a class="btn btn-lg btn-primary" target="_blank" href="http://www.dllr.maryland.gov/earn"><i class="icon-external-link"></i> Learn more</a>
-                       @* @if (!Request.IsAuthenticated) {
+                        <a class="btn btn-lg btn-primary" target="_blank" href="http://www.dllr.maryland.gov/earn">
+                            <i class="icon-external-link"></i>&nbsp;Learn more
+                        </a>
+                        @* @if (!Request.IsAuthenticated) {
                             <a class="btn btn-lg btn-success" href="@Url.Action("SignUp", "Account")">Become a member <i class="icon-edit"></i></a>
                         }*@
                     </p>
@@ -35,51 +36,47 @@
 }
 <div class="container">
     <div class="row">
-        <div class="col-md-6 col-sm-12">
+        <div class="col-sm-12">
             <div class="well">
-                <h5>Promote</h5>
-                <p>
-                fefkn felkj flekjlkviwho  vwhohw onkfkjvwoi vowen oivenwo
-                dslkfj ineoi vcnoewi ncowein cwoenc owencioen kcwjoeicj 
-                cwjoeicoweicj oicej wocie coei cwoie oqic wonciowenfafo
-                fowei cvose soijf soiejfa'okfjalsdk fej iaofje 'soifj 
-                </p>
-            </div>
-        </div>
-        <div class="col-md-6 col-sm-12">
-            <div class="well">
-                <h5>Partner</h5>
-                <p>
-                    fefkn felkj flekjlkviwho  vwhohw onkfkjvwoi vowen oivenwo
-                dslkfj ineoi vcnoewi ncowein cwoenc owencioen kcwjoeicj 
-                cwjoeicoweicj oicej wocie coei cwoie oqic wonciowenfafo
-                fowei cvose soijf soiejfa'okfjalsdk fej iaofje 'soifj 
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6 col-sm-12">
-            <div class="well">
-                <h5>Progress</h5>
-                <p>
-                    fefkn felkj flekjlkviwho  vwhohw onkfkjvwoi vowen oivenwo
-                dslkfj ineoi vcnoewi ncowein cwoenc owencioen kcwjoeicj 
-                cwjoeicoweicj oicej wocie coei cwoie oqic wonciowenfafo
-                fowei cvose soijf soiejfa'okfjalsdk fej iaofje 'soifj 
-                </p>
-            </div>
-        </div>
-        <div class="col-md-6 col-sm-12">
-            <div class="well">
-                <h5>Column heading 4</h5>
-                <p>
-                    fefkn felkj flekjlkviwho  vwhohw onkfkjvwoi vowen oivenwo
-                dslkfj ineoi vcnoewi ncowein cwoenc owencioen kcwjoeicj 
-                cwjoeicoweicj oicej wocie coei cwoie oqic wonciowenfafo
-                fowei cvose soijf soiejfa'okfjalsdk fej iaofje 'soifj 
+                <p class="text-info">
+                    EARN Maryland Connect is a website designed to connect individuals and entities
+                    interested in participating in the EARN grant program. Potential users of the 
+                    site include industry employers and associates, higher education institutions, 
+                    non-profits, community based organizations, workforce investment boards, local government, 
+                    labor unions, etc. Users first create a profile to describe their organization including 
+                    details about what the organization is seeking in a partnership, or what the organization 
+                    can contribute to a partnership. Users can then search, review, and connect with other 
+                    EARN Maryland Connect users by industry and/or location. Once a partnership has been established, 
+                    the site can be used to share materials and documents relevant to the development of an EARN plan grant.
                 </p>
             </div>
         </div>
     </div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="termCondition" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Terms and conditions</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    By clicking “Sign up for EARN,” you understand that the information you provide will 
+                    be in the public domain and will be accessible to other EARN Maryland Connect users. 
+                    The information you provide will only be used by the Maryland Department of Labor, Licensing, and Regulation
+                     to facilitate the EARN program. The information within the EARN Maryland Connect system will not be distributed
+                     or shared for any purpose other than facilitating the EARN program.
+
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

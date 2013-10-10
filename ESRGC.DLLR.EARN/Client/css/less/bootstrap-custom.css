@@ -1,0 +1,8 @@
+﻿body.modal-open,
+.modal-open .navbar-fixed-top,
+.modal-open .navbar-fixed-bottom {
+  margin-right: 0;
+}
+.modal-dialog {
+  margin-top: 200px;
+}
