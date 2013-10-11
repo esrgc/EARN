@@ -1,4 +1,20 @@
-﻿.list-container > ul > li {
+﻿.placeholder-heading {
+  padding: 5px;
+  margin-bottom: 8px;
+  /*margin-left: -10px;*/
+
+  /*margin-right: -10px;*/
+
+  background: #3d4241;
+  font-size: 12px;
+  color: #ffffff;
+  font-weight: bold;
+  text-align: center;
+  /*border: 1px solid @border-color;*/
+
+  border-radius: 5px;
+}
+.list-container > ul > li {
   padding: 10px 0;
   border-bottom: 1px solid #dddddd;
 }
@@ -73,7 +89,7 @@ header {
 .site-logo {
   padding: 10px 5px;
   vertical-align: middle;
-  width: 150px;
+  width: 120px;
   height: auto;
 }
 /*validation*/
