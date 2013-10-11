@@ -38,7 +38,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     [HttpPost]
     public ActionResult ManageTag(ICollection<string> tags) {
       if (tags == null) {
-        return RedirectToAction("index", "profile");
+        return RedirectToAction("Detail", "profile");
       }
       var profile = CurrentAccount.Profile;
       if (profile == null)

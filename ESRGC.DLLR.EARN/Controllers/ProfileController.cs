@@ -15,8 +15,10 @@ namespace ESRGC.DLLR.EARN.Controllers
     public ProfileController(IWorkUnit workUnit)
       : base(workUnit) {
     }
-
     public ActionResult Index() {
+      return View();
+    }
+    public ActionResult Detail() {
       var profile = CurrentAccount.Profile;
       if (profile == null) {
         return RedirectToAction("Create");
@@ -48,7 +50,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     public ActionResult Create(CreateProfile profile) {
       if (CurrentAccount.Profile != null) {
         updateTempDataMessage("Profile already created!");
-        return RedirectToAction("Index");
+        return RedirectToAction("Detail");
       }
       if (ModelState.IsValid) {
         //insert organization
@@ -74,14 +76,14 @@ namespace ESRGC.DLLR.EARN.Controllers
           _workUnit.saveChanges();
         }
 
-        return RedirectToAction("index");
+        return RedirectToAction("Detail");
       }
       //error
       profile.Categories = _workUnit.CategoryRepository.Entities.OrderBy(x => x.Name).ToList();
       profile.UserGroups = _workUnit.UserGroupRepository.Entities.OrderBy(x => x.Name).ToList();
       return View(profile);
     }
-
+    //temporary removed from the form
     public PartialViewResult SubcategoryDropdown(int userGroupID) {
       var subcats = _workUnit
         .CategoryRepository
@@ -91,7 +93,12 @@ namespace ESRGC.DLLR.EARN.Controllers
 
       return PartialView(subcats);
     }
-
+    //public profile view
+    public ActionResult ViewProfile(int profileID, string returnUrl) {
+      var profile = _workUnit.ProfileRepository.GetEntityByID(profileID);
+      ViewBag.returnUrl = returnUrl;
+      return View(profile);
+    }
 
     [HttpPost]
     public ActionResult EditAbout(string about) {
@@ -104,7 +111,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       catch (Exception) {
         updateTempDataMessage("Error saving about text");
       }
-      return RedirectToAction("index");
+      return RedirectToAction("Detail");
     }
   }
 }

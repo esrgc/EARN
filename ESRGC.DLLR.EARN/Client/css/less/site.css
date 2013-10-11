@@ -1,19 +1,4 @@
-﻿html,
-body {
-  /*padding-top: 40px;*/
-
-  height: 100%;
-}
-header {
-  margin-top: 60px;
-}
-.page-header {
-  margin: 0 0 20px;
-}
-.navbar {
-  border-radius: 0 !important;
-}
-.list-container > ul > li {
+﻿.list-container > ul > li {
   padding: 10px 0;
   border-bottom: 1px solid #dddddd;
 }
@@ -25,14 +10,6 @@ header {
 .footer > .container {
   border-top: 1px solid #dddddd;
   padding: 20px 15px 0 15px;
-}
-.jumbotron {
-  color: #FFFFFF;
-  background: #3d4241;
-}
-.message-box {
-  text-align: center;
-  font-weight: bold;
 }
 .post {
   margin: 0;
@@ -50,16 +27,6 @@ header {
 .post h5 {
   margin-top: 0;
 }
-.affix-top {
-  top: 100px;
-}
-.pagination-container {
-  text-align: center;
-  /*.pagination {
-        margin: 10px 0;
-    }*/
-
-}
 .inline-container > .list-container {
   margin: 0 5px 0 0;
 }
@@ -69,6 +36,39 @@ header {
 }
 .clear {
   clear: both;
+}
+html,
+body {
+  /*padding-top: 40px;*/
+
+  height: 100%;
+}
+header {
+  margin-top: 60px;
+}
+.page-header {
+  margin: 0 0 20px;
+}
+.navbar {
+  border-radius: 0 !important;
+}
+.jumbotron {
+  color: #FFFFFF;
+  background: #3d4241;
+}
+.message-box {
+  text-align: center;
+  font-weight: bold;
+}
+.affix-top {
+  top: 100px;
+}
+.pagination-container {
+  text-align: center;
+  /*.pagination {
+        margin: 10px 0;
+    }*/
+
 }
 .site-logo {
   padding: 10px 5px;
@@ -112,6 +112,10 @@ label .error {
 }
 .transparent-placeholder-panel {
   padding: 10px;
+}
+.panel-action-default {
+  margin: 5px 0 0 0;
+  padding: 5px 0;
 }
 .panel-action-right {
   margin: 5px 0 0 0;

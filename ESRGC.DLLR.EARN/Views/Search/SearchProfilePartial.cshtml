@@ -1,5 +1,8 @@
 ﻿@model ESRGC.DLLR.EARN.Domain.Model.Profile
-
+@{
+    var filters = (ViewBag.filters as Dictionary<string, object>) ?? new Dictionary<string, object>();
+    var currentTags = filters.ContainsKey("tags") ? filters["tags"] as List<string> : new List<string>();
+}
 <div class="row profile-search-result">
     <div class="col-sm-12 ">
         <div class="placeholder-panel">
@@ -17,8 +20,11 @@
                         <div class="col-sm-8">
                             <div class="">
                                 <h4>
-                                    <span>@Model.Organization.Name</span>
-
+                                    <span>
+                                        <a title="View this profile" href="@Url.Action("ViewProfile", "Profile", new { Model.ProfileID, returnUrl = Url.GenerateLinkFromFilters("Basic", filters) })">
+                                            @Model.Organization.Name
+                                        </a>
+                                    </span>
                                     <br />
                                     <small>@Model.UserGroup.Name</small>
                                     @*-

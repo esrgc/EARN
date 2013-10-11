@@ -106,7 +106,7 @@ namespace ESRGC.DLLR.EARN.Controllers
             return Redirect(returnUrl);
           }
           else {
-            return RedirectToAction("Index", "Profile");
+            return RedirectToAction("Detail", "Profile");
           }
         }
         else

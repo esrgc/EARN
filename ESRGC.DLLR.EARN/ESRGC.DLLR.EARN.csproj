@@ -182,6 +182,12 @@
     <Content Include="Client\css\less\profile.min.css">
       <DependentUpon>profile.less</DependentUpon>
     </Content>
+    <Content Include="Client\css\less\quickForm.css">
+      <DependentUpon>quickForm.less</DependentUpon>
+    </Content>
+    <Content Include="Client\css\less\quickForm.min.css">
+      <DependentUpon>quickForm.less</DependentUpon>
+    </Content>
     <Content Include="Client\css\less\variables.css">
       <DependentUpon>variables.less</DependentUpon>
     </Content>
@@ -195,8 +201,9 @@
       <DependentUpon>windowPanel.less</DependentUpon>
     </Content>
     <Content Include="Client\css\less\bootstrap-custom.less" />
+    <Content Include="Client\css\less\quickForm.less" />
     <None Include="Client\css\profile.oldcss" />
-    <Content Include="Client\css\quickForm.css" />
+    <None Include="Client\css\quickForm.oldcss" />
     <Content Include="Client\css\less\variables.less" />
     <Content Include="Client\css\less\library.less" />
     <Content Include="Client\css\less\profile.less" />
@@ -254,6 +261,8 @@
     <Content Include="Views\Shared\tagListDisplayPartial.cshtml" />
     <Content Include="Views\Search\tagListLinkPartial.cshtml" />
     <Content Include="Views\Search\Basic.cshtml" />
+    <Content Include="Views\Profile\ViewProfile.cshtml" />
+    <Content Include="Views\Profile\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
