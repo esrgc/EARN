@@ -97,7 +97,7 @@ namespace ESRGC.DLLR.EARN.Controllers
         }
 
         _workUnit.saveChanges();
-        return RedirectToAction("index", "profile");
+        return RedirectToAction("Detail", "profile");
       }
       return View();
     }
