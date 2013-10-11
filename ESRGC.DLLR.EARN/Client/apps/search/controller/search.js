@@ -42,7 +42,6 @@ dx.defineController('Search', {
         var scope = this;
         //call base class' constructor
         dx.app.controller.Search.parent.initialize.apply(this, arguments);
-        dx.log('Search controller initialized');
 
         //get tag input and initialize type ahead
         var input = this.getTagInput();

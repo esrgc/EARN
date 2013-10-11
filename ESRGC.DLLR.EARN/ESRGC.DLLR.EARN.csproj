@@ -162,7 +162,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Client\apps\search\app.js" />
+    <Content Include="Client\apps\search\controller\map.js" />
     <Content Include="Client\apps\search\controller\search.js" />
+    <Content Include="Client\js\map\leafletViewer.js" />
+    <Content Include="Client\js\map\mapViewer.js" />
     <Content Include="Client\apps\search\store\search.js" />
     <Content Include="Client\css\less\bootstrap-custom.css">
       <DependentUpon>bootstrap-custom.less</DependentUpon>

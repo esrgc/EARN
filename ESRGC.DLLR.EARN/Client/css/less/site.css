@@ -156,3 +156,7 @@ a.link-icon:hover,
 .link-icon-container a:hover {
   cursor: pointer;
 }
+.map {
+  width: 100%;
+  min-height: 320px;
+}

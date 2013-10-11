@@ -15,10 +15,15 @@ dx.application({
     stores: ['Search'],
     models: [],
     views: [],
-    controllers: ['Search'],
+    controllers: ['Search', 'Map'],
     launch: function () {
         dx.log('Application initialized.');
-        
+        var app = dx.getApp();
+        //initialize the map
+        app.appData.mapViewer = new dx.app.LeafletViewer();
+        app.getMapViewer = function () {
+            return app.appData.mapViewer;
+        };
     }
 
 });

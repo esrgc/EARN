@@ -9,8 +9,8 @@
     <title>EARN Maryland - @ViewBag.Title</title>
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
     @Styles.Render("~/Styles/css")
-    <!--Custom page CSS goes here-->
-    @RenderSection("pageCSS", required: false)
+    <!--Custom page CSS or extra javascript goes here-->
+    @RenderSection("headContent", required: false)
 </head>
 <body lang="en">
     <div class="wrapper">
