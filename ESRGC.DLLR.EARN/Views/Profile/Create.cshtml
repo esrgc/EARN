@@ -39,6 +39,25 @@
                     @Html.ValidationSummary(true)
                     <form class="form-horizontal" action="@Url.Action("Create")" method="post" role="form">
                         <fieldset>
+                            <legend>Group</legend>
+                            <div class="form-group">
+                                <div class="col-sm-8 col-sm-offset-2">
+                                    <label class="control-label" for="UserGroupID">User group (select primary role)</label>
+                                    <span class="label label-default">Required</span>
+                                    @foreach (var i in Model.UserGroups) { 
+                                        <div class="radio">
+                                            <label>
+                                                @Html.RadioButtonFor(x => x.UserGroupID, i.UserGroupID, new { })
+                                                <span>@i.Name </span><small>- @i.Description</small>
+                                            </label>
+                                        </div>
+                                    }
+                                    <div class="help-block">@Html.ValidationMessageFor(x => x.UserGroupID)</div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
                             <legend>Organization</legend>
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="Organization.Name">Name</label>
@@ -83,49 +102,34 @@
                                 </div>
                                 <div class="col-sm-2">
                                     @Html.TextBoxFor(x => x.Organization.State, new {
-                                       @class = "form-control input-sm",
-                                       placeholder = "State",
-                                       maxlength = "2"
-                                    })
+                                   @class = "form-control input-sm",
+                                   placeholder = "State",
+                                   maxlength = "2"
+                               })
                                     <span class="label label-default">Required</span>
                                     <div class="help-block">@Html.ValidationMessageFor(x => x.Organization.State)</div>
                                 </div>
                                 <div class="col-sm-2">
                                     @Html.TextBoxFor(x => x.Organization.Zip, new {
-                                       @class = "form-control input-sm",
-                                       placeholder = "Zip",
-                                       maxlength = "5"
-                                    })
+                                   @class = "form-control input-sm",
+                                   placeholder = "Zip",
+                                   maxlength = "5"
+                               })
                                     <span class="label label-default">Required</span>
                                     <div class="help-block">@Html.ValidationMessageFor(x => x.Organization.Zip)</div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="col-sm-8 col-sm-offset-2">
-                                    <label class="control-label" for="UserGroupID">User group (select primary role)</label>
-                                    <span class="label label-default">Required</span>
-                                    @foreach (var i in Model.UserGroups) { 
-                                        <div class="radio">
-                                            <label>
-                                                @Html.RadioButtonFor(x => x.UserGroupID, i.UserGroupID, new { })
-                                                <span>@i.Name </span><small>- @i.Description</small>
-                                            </label>
-                                        </div>
-                                    }
-                                    <div class="help-block">@Html.ValidationMessageFor(x => x.UserGroupID)</div>
-                                </div>
-                            </div>
-                           @* <div class="form-group">
+                            @* <div class="form-group">
                                 <label class="control-label col-sm-2" for="CategoryID">Category</label>
                                 <div class="col-sm-6">*@
-                                    @*@Html.DropDownListFor(
+                            @*@Html.DropDownListFor(
                                         x => x.CategoryID,
                                         new SelectList(Model.Categories, "CategoryID", "Name"),
                                         "--select your category--",
                                         new { @class = "form-control col-sm-4" }
                                     )*@
 
-                                    @*<select 
+                            @*<select 
                                         disabled 
                                         class="form-control input-sm" 
                                         data-val="true" 
@@ -138,31 +142,61 @@
                                     <div class="help-block">@Html.ValidationMessageFor(x => x.CategoryID)</div>
                                 </div>
                             </div>*@
-                <div class="form-group">
-                    <label class="control-label col-sm-2" for="Organization.Website">Website</label>
-                    <div class="col-sm-6">
-                        @Html.TextBoxFor(x => x.Organization.Website, new {
-                       @class = "form-control input-sm",
-                       placeholder = ModelMetadata.FromLambdaExpression(x => x.Organization.Website, ViewData).Description
-                   }
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="Organization.Website">Website</label>
+                                <div class="col-sm-6">
+                                    @Html.TextBoxFor(x => x.Organization.Website, new {
+                                   @class = "form-control input-sm",
+                                   placeholder = ModelMetadata.FromLambdaExpression(x => x.Organization.Website, ViewData).Description
+                               }
                                     )
-                        <div class="help-block">@Html.ValidationMessageFor(x => x.Organization.Website)</div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-2" for="Organization.Description">Description</label>
-                    <div class="col-sm-9">
-                        @Html.TextAreaFor(x => x.Organization.Description, new {
-                       @class = "form-control input-sm",
-                       style = "min-height: 150px;",
-                       placeholder = ModelMetadata.FromLambdaExpression(x => x.Organization.Description, ViewData).Description
-                   })
-                        <span class="label label-default">Required</span>
-                        <div class="help-block">@Html.ValidationMessageFor(x => x.Organization.Description)</div>
-                    </div>
-                </div>
+                                    <div class="help-block">@Html.ValidationMessageFor(x => x.Organization.Website)</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="">
+                                    <i class="icon-twitter-sign icon-large"></i>
+                                    <i class="icon-facebook-sign icon-large"></i>
+                                    <i class="icon-linkedin-sign icon-large"></i>
+                                </label>
+                                <div class="col-sm-3">
+                                    @Html.TextBoxFor(x => x.Organization.TwitterLink, new {
+                                   @class = "form-control input-sm",
+                                   placeholder = "Twitter"
+                               })
+                                    <div class="help-block">@Html.ValidationMessageFor(x => x.Organization.TwitterLink)</div>
+                                </div>
+                           
+                                <div class="col-sm-3">
+                                    @Html.TextBoxFor(x => x.Organization.FacebookLink, new {
+                                   @class = "form-control input-sm",
+                                   placeholder = "FaceBook"
+                               })
+                                    <div class="help-block">@Html.ValidationMessageFor(x => x.Organization.FacebookLink)</div>
+                                </div>
+                            
+                                <div class="col-sm-3">
+                                    @Html.TextBoxFor(x => x.Organization.LinkedInLink, new {
+                                   @class = "form-control input-sm",
+                                   placeholder = "LinkedIn"
+                               })
+                                    <div class="help-block">@Html.ValidationMessageFor(x => x.Organization.LinkedInLink)</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="Organization.Description">Description</label>
+                                <div class="col-sm-9">
+                                    @Html.TextAreaFor(x => x.Organization.Description, new {
+                                   @class = "form-control input-sm",
+                                   style = "min-height: 150px;",
+                                   placeholder = ModelMetadata.FromLambdaExpression(x => x.Organization.Description, ViewData).Description
+                               })
+                                    <span class="label label-default">Required</span>
+                                    <div class="help-block">@Html.ValidationMessageFor(x => x.Organization.Description)</div>
+                                </div>
+                            </div>
 
-                </fieldset>
+                        </fieldset>
                         <fieldset>
                             <legend>Point of Contact</legend>
                             <div class="form-group">
@@ -196,21 +230,26 @@
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="Contact.Email">Email</label>
                                 <div class="col-sm-4">
-                                    @Html.TextBoxFor(x => x.Contact.Email, new { @class = "form-control input-sm", placeholder = "someone@somedomain.com" })
+                                    @Html.TextBoxFor(x => x.Contact.Email,
+                                        new {
+                                            type = "email",
+                                            @class = "form-control input-sm",
+                                            placeholder = "someone@somedomain.com"
+                                        })
                                     <span class="label label-default">Required</span>
                                     <div class="help-block">@Html.ValidationMessageFor(x => x.Contact.Email)</div>
                                 </div>
                             </div>
                         </fieldset>
-                <hr />
-                <div class="form-group">
-                    <div class="col-sm-6 col-sm-offset-2">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
+                        <hr />
+                        <div class="form-group">
+                            <div class="col-sm-6 col-sm-offset-2">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                </form>
             </div>
         </div>
     </div>
-</div>
 </div>

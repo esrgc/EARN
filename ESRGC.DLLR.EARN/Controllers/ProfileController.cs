@@ -113,5 +113,38 @@ namespace ESRGC.DLLR.EARN.Controllers
       }
       return RedirectToAction("Detail");
     }
+    
+    public ActionResult UploadImage() {
+      var profile = CurrentAccount.Profile;
+      if (profile == null)
+        return RedirectToAction("Detail");
+      return View(profile);
+    }
+    [HttpPost]
+    public ActionResult UploadImage(int profileID, HttpPostedFileBase dataInput) {
+      var profile = _workUnit.ProfileRepository.GetEntityByID(profileID);
+      if (dataInput == null)
+        ModelState.AddModelError("", "No data input. Please select a file to upload");
+      else {
+        var picture = new Picture() {
+          ImageMimeType = dataInput.ContentType,
+          ImageData = new byte[dataInput.ContentLength]
+        };
+        //read the input stream and store to picture object 
+        dataInput.InputStream.Read(picture.ImageData, 0, dataInput.ContentLength);
+
+        //store picture to database
+        _workUnit.PictureRepository.InsertEntity(picture);
+        if (profile.PictureID != null)//delete current picture
+          _workUnit.PictureRepository.DeleteByID(profile.PictureID);
+        _workUnit.saveChanges();
+        profile.PictureID = picture.PictureID;
+        _workUnit.saveChanges();
+        //changes done return to detail page
+        return RedirectToAction("Detail");
+      }
+      //error has occurred   
+      return View(profile);
+    }
   }
 }

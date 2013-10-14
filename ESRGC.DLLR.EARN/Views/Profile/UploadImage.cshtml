@@ -1,0 +1,62 @@
+﻿@model ESRGC.DLLR.EARN.Domain.Model.Profile
+
+@{
+    ViewBag.Title = "Profile Logo";
+    ViewBag.Header = "Upload Logo";
+}
+
+@section header{
+    <div class="container">
+        <header class="page-header">
+            <h3>@ViewBag.Header <i class="icon-large icon-image"></i></h3>
+        </header>
+    </div>
+}
+@section scripts {
+    <script type="text/javascript">
+        var startup = function () {
+            $(document).on('change', 'input#dataInput', { scope: this }, function (event) {
+                var file = $(this).val().split('\\').pop();
+                console.log(file);
+                $('#fileName').text(file);
+            });
+        }
+    </script>
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div class="window-panel">
+                <div class="window-panel-title">Select an image file to upload</div>
+                <div class="window-panel-content">
+                    <form class="form-horizontal" method="post" action="@Url.Action("UploadImage")" enctype="multipart/form-data">
+                        @Html.HiddenFor(x=>x.ProfileID)
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="file">File</label>
+                            <div class="col-sm-10">
+                                <div id="uploadBrowse" class="btn btn-success upload-container">
+                                    <div>
+                                        <i class="icon-folder-open"></i>&nbsp;Browse
+                                    </div>
+                                    <input type="file" name="dataInput" id="dataInput" class="file-input" />
+                                </div>
+                                <p class="form-control-static" id="fileName">
+                                    No file selected
+                                </p>
+                            </div>                            
+                        </div>
+                        
+                        <hr />
+                        <div class="form-group">
+                            <div class="col-sm-10 col-sm-offset-2">
+                                <button class="btn btn-primary" type="submit"><i class="icon-upload"></i>&nbsp;Upload</button>
+                                <a class="btn btn-default" href="@Url.Action("Detail")">Cancel</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

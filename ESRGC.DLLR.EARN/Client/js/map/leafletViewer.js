@@ -26,13 +26,13 @@ dx.app.LeafletViewer = dx.define({
         var osmAttrib = 'Map data © OpenStreetMap contributors';
         var osm = new L.TileLayer(osmUrl, {
             minZoom: 1,
-            maxZoom: 12,
+            maxZoom: 18,
             attribution: osmAttrib
         });
         this.features = new L.FeatureGroup([
-            new L.Marker([39.0, -76.70]),
-            new L.Marker([39.0, -76.20]),
-            new L.Marker([38.9, -76.0]),
+            new L.Marker([39.0, -76.70]).bindPopup('Some organization'),
+            new L.Marker([39.0, -76.20]).bindPopup('Abc company'),
+            new L.Marker([38.9, -76.0]).bindPopup('Eastern shore company'),
             new L.Marker([38.36, -75.59]).bindPopup('Salisbury University')
         ]);
         this.map = L.map('map', {
@@ -42,17 +42,17 @@ dx.app.LeafletViewer = dx.define({
             measureControl: true
         });
         //set up layer control
-        var baseMaps = {
-            'CloudMade': cmLayer,
-            'OpenStreetMap': osm
-        };
+        //var baseMaps = {
+        //    'CloudMade': cmLayer,
+        //    'OpenStreetMap': osm
+        //};
 
-        var overlayMaps = {
-            //other overlay layers go here
-            //feature layer
-            'Features': this.features
-        };
-        L.control.layers(baseMaps, overlayMaps).addTo(this.map);
+        //var overlayMaps = {
+        //    //other overlay layers go here
+        //    //feature layer
+        //    'Features': this.features
+        //};
+        //L.control.layers(baseMaps, overlayMaps).addTo(this.map);
         L.control.scale().addTo(this.map);
     },
     addPolygonToFeatureGroup: function (polygon) {

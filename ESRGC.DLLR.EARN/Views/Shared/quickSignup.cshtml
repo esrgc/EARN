@@ -4,6 +4,7 @@
 <form class="quick-form" action="@Url.Action("SignUp", "Account")" method="post" role="form">
     @Html.TextBoxFor(x => x.Email,
         new {
+            type = "email",
             @class = "form-control",
             placeholder = ModelMetadata.FromLambdaExpression<SignUpModel, string>(x => x.Email, ViewData).DisplayName
         })
@@ -18,6 +19,6 @@
             placeholder = ModelMetadata.FromLambdaExpression<SignUpModel, string>(x => x.ConfirmPassword, ViewData).DisplayName
         })
     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up for EARN</button>
-    <p><small><a href="#termCondition" data-toggle="modal">By clicking "Sign up for EARN", you agree to our terms and conditions.</a></small></p>
+    <p><small>By clicking "Sign up for EARN", you agree to our <a href="#termCondition" data-toggle="modal">terms and conditions.</a></small></p>
 </form>
 

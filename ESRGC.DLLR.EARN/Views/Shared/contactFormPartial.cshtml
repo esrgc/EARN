@@ -1,0 +1,42 @@
+﻿@model ESRGC.DLLR.EARN.Domain.Model.Contact
+<div class="form-group">
+    <label class="control-label col-sm-2" for="Contact.FirstName">Name</label>
+    <div class="col-sm-4">
+        @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control input-sm", placeholder = "First name" })
+        <span class="label label-default">Required</span>
+        <div class="help-block">@Html.ValidationMessageFor(x => x.FirstName)</div>
+    </div>
+    @*<label class="control-label col-sm-2" for="Contact.Middle">Middle</label>*@
+    <div class="col-sm-2">
+        @Html.TextBoxFor(x => x.Middle, new { @class = "form-control input-sm", placeholder = "Middle" })
+        <div class="help-block">@Html.ValidationMessageFor(x => x.Middle)</div>
+    </div>
+    @*<label class="control-label col-sm-2" for="Contact.LastName">Last name</label>*@
+    <div class="col-sm-4">
+        @Html.TextBoxFor(x => x.LastName, new { @class = "form-control input-sm", placeholder = "Last name" })
+        <span class="label label-default">Required</span>
+        <div class="help-block">@Html.ValidationMessageFor(x => x.LastName)</div>
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="control-label col-sm-2" for="Contact.Phone">Phone</label>
+    <div class="col-sm-4">
+        @Html.TextBoxFor(x => x.Phone, new { @class = "form-control input-sm", placeholder = "Contact phone number" })
+        <span class="label label-default">Required</span>
+        <div class="help-block">@Html.ValidationMessageFor(x => x.Phone)</div>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-sm-2" for="Contact.Email">Email</label>
+    <div class="col-sm-4">
+        @Html.TextBoxFor(x => x.Email,
+                                        new {
+                                            type = "email",
+                                            @class = "form-control input-sm",
+                                            placeholder = "someone@somedomain.com"
+                                        })
+        <span class="label label-default">Required</span>
+        <div class="help-block">@Html.ValidationMessageFor(x => x.Email)</div>
+    </div>
+</div>

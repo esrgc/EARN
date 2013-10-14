@@ -29,9 +29,11 @@
                                     <small>@Model.UserGroup.Name</small>
                                     @*-
                                     <small>@Model.Category.Name</small>*@
+                                    <br />
+                                    <small>
+                                        <a target="_blank" href="http://@Model.Organization.Website" title="Organization website">http://@Model.Organization.Website</a></small>
                                 </h4>
                                 <ul class="list-inline list-unstyled">
-                                    <li><a target="_blank" href="http://@Model.Organization.Website" title="Organization website"><i class="icon-link"></i></a></li>
                                     <li><a target="_blank" href="http://@Model.Organization.FacebookLink" title="Facebook link"><i class="icon-large icon-facebook"></i></a></li>
                                     <li><a target="_blank" href="http://@Model.Organization.TwitterLink" title="Twitter link"><i class="icon-large icon-twitter"></i></a></li>
                                     <li><a target="_blank" href="http://@Model.Organization.LinkedInLink" title="LinkedIn link"><i class="icon-large icon-linkedin"></i></a></li>
@@ -42,7 +44,7 @@
                         <div class="col-sm-4">
                             <div class="help-block"><i class="icon-tags"></i>&nbsp;Tags</div>
                             @if (Model.ProfileTags != null) {
-                                @Html.Partial("tagListLinkPartial",  Model.ProfileTags.Select(x => x.Tag.Name))
+                                @Html.Partial("tagListLinkPartial", Model.ProfileTags.Select(x => x.Tag.Name))
                             }
                         </div>
                     </div>

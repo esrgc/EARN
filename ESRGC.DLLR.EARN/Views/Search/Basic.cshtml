@@ -57,6 +57,27 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-12">
+                                            <div class="post tag-list-holder" id="keywords">
+                                                <a id="clearSearchLink" class="link-icon pull-right" title="Clear search" href="@Url.Action("Basic")"><i class="icon-remove"></i></a>
+                                                <div class="inline-container tag-list">
+                                                    @foreach (var i in currentTags) { 
+                                                        <div class="tag matched-tag">
+                                                            <span class="label label-default">
+                                                                @i&nbsp;
+                                                <a data-value="@i" 
+                                                    href="@Url.RemoveSearchFilter("Basic", filters, "tags", i)">
+                                                    <i class="icon-remove"></i>
+                                                </a>
+                                                            </span>
+                                                        </div>
+                                                    }
+                                                </div>
+                                                <div class="clear"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
                                             <button type="submit" class="btn btn-primary btn-block" data-loading-text="Searching...">Go</button>
                                         </div>
                                     </div>
@@ -66,24 +87,7 @@
                                         }
                                     </div>
                                 </form>
-                                <div class="post tag-list-holder" id="keywords">
-                                    <a id="clearSearchLink" class="link-icon pull-right" title="Clear search" href="@Url.Action("Basic")"><i class="icon-remove"></i></a>
-                                    <label>Keywords</label>
-                                    <div class="inline-container tag-list">
-                                        @foreach (var i in currentTags) { 
-                                            <div class="tag matched-tag">
-                                                <span class="label label-default">
-                                                    @i&nbsp;
-                                                <a data-value="@i" 
-                                                    href="@Url.RemoveSearchFilter("Basic", filters, "tags", i)">
-                                                    <i class="icon-remove"></i>
-                                                </a>
-                                                </span>
-                                            </div>
-                                        }
-                                    </div>
-                                    <div class="clear"></div>
-                                </div>
+
                                 <div class="text-info transparent-placeholder-panel">
                                     <strong>Tips!</strong>&nbsp;
                                     <small>Enter tags to focus search results to the organizations that best match your needs and interests.</small>

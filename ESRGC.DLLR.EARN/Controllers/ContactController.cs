@@ -8,6 +8,7 @@ using ESRGC.DLLR.EARN.Domain.Model;
 
 namespace ESRGC.DLLR.EARN.Controllers
 {
+  [Authorize]
   public class ContactController : BaseController
   {
 

@@ -53,3 +53,19 @@
 .clear {
   clear: both;
 }
+.upload-container {
+  width: auto;
+  position: relative;
+  overflow: hidden;
+  direction: ltr;
+}
+.file-input {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  margin: 0px;
+  padding: 0px;
+  cursor: pointer;
+  opacity: 0;
+  height: 34px;
+}

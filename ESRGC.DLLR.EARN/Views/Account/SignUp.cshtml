@@ -32,7 +32,7 @@
                         <div class="form-group">
                             <label for="Email" class="col-sm-3 control-label">Email</label>
                             <div class="col-sm-6">
-                                @Html.TextBoxFor(x => x.Email, new { @class = "form-control", placeholder = "Email" })                                
+                                @Html.TextBoxFor(x => x.Email, new { @class = "form-control", placeholder = "Email", type="email" })                                
                                 <span class="label label-default">Required</span>
                                 <span class="help-block">
                                     @Html.ValidationMessageFor(x => x.Email)
