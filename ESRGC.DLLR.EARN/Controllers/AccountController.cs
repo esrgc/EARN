@@ -120,9 +120,11 @@ namespace ESRGC.DLLR.EARN.Controllers
     public ActionResult SignOut() {
       //record last login
       var account = _workUnit.AccountRepository.Entities.First(x => x.EmailAddress == User.Identity.Name);
-      account.LastLogin = DateTime.Now;
-      _workUnit.AccountRepository.UpdateEntity(account);
-      _workUnit.saveChanges();
+      if(account != null){
+        account.LastLogin = DateTime.Now;
+        _workUnit.AccountRepository.UpdateEntity(account);
+        _workUnit.saveChanges();
+      }
       FormsAuthentication.SignOut();
       return RedirectToAction("Index", "Home");
     }
