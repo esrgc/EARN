@@ -36,6 +36,12 @@
             };
             var addTag = function (value) {
                 value = value.toUpperCase();
+                console.log(value.length)
+                if (value.length > 50) {
+                    $('.status-text').text("Can not add this tag [" + value + "]. The tag's length is too long. Please limit your tag charaters to 50 or less!");
+                    $('input#tagInput').focus();
+                    return;
+                }
                 if (tagExists(value)) {
                     $('.status-text').text('The tag "' + value + '" has already been added. Please enter a different tag!');
                     return;
@@ -47,7 +53,7 @@
                         [
                             '<div class="tag">',
                                 '<span class="label label-default">',
-                                    value + '&nbsp;<a data-value="'+value + '"><i class="icon-remove"></i></a>',
+                                    value + '&nbsp;<a data-value="' + value + '"><i class="icon-remove"></i></a>',
                                 '</span>',
                             '</div>'
                         ].join('')
@@ -175,7 +181,7 @@
                     <hr />
                     <h4>Your tags <small class="">(Please enter at least one tag to procceed)</small></h4>
                     <div class="post">
-                        @Html.Partial("tagListPartial", currentTags.Select(x=>x.Name).ToList())                        
+                        @Html.Partial("tagListPartial", currentTags.Select(x => x.Name).ToList())
                     </div>
                     <br />
                     <div class="pull-right">
