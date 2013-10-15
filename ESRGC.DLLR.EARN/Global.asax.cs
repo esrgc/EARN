@@ -24,7 +24,8 @@ namespace ESRGC.DLLR.EARN
       RouteConfig.RegisterRoutes(RouteTable.Routes);
       BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-      Database.SetInitializer(new DataInitializer());
+      //Database.SetInitializer(new DataInitializer());
+      Database.SetInitializer(new CreateDatabaseIfNotExists<DomainContext>());
       DependencyResolver.SetResolver(new NinjectDependencyResolver());
     }
   }

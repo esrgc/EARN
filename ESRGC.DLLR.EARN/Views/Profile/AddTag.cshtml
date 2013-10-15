@@ -1,0 +1,135 @@
+﻿@using ESRGC.DLLR.EARN.Domain.Model
+@model dynamic
+@{
+    ViewBag.Title = "Search Tag";
+    ViewBag.Header = "Add your search tags";
+}
+
+@section header{
+    <div class="container">
+        <header class="page-header">
+            <h3>@ViewBag.Header <i class="icon-large icon-tags"></i></h3>
+            @*<ul class="breadcrumb">
+                <li><a href="@Url.Action("index", "Home")">Home</a></li>
+                <li class="active">@ViewBag.Header</li>
+            </ul>*@
+        </header>
+    </div>
+}
+
+@section scripts {
+    <script type="text/javascript" src="@Url.Content("~/Client/jsLib/typeahead.js/typeahead.min.js")"></script>
+    <script type="text/javascript">
+        var tagArray = [];
+       
+        $(function () {
+            //preload tags array to match current tags
+            $('input[name="tags"]').each(function (i) {
+                tagArray.push($(this).val());
+            });
+            console.log(tagArray);
+            var tagExists = function (tag) {
+                for (var i = 0; i < tagArray.length; i++) {
+                    if (tagArray[i] == tag.toUpperCase())
+                        return true;
+                }
+                return false;
+            };
+            var addTag = function () {
+                var value = $('input#tagInput').val().toUpperCase();
+                if (tagExists(value)) {
+                    $('.status-text').text('The tag "' + value + '" has already been added. Please enter a different tag!');
+                    return;
+                }
+                if (value != '') {
+                    tagArray.push(value);
+                    $('input#tagInput').val('').focus();
+                    $('#tagList').append('<li><span class="label label-default">' + value + '</span></li>');
+                    $('form').append('<input type="hidden" name="tags" value="' + value + '"/>')
+                    $('.tt-hint').val('');
+                    $('.status-text').text('');
+                }
+                else {
+                    console.log('Tag already exists');
+                }
+            };
+            $('#tagInput').typeahead({
+                name: 'test',
+                //local: ['iphone', 'iphone 5s', 'iphone 5', 'C#', '.NET'],
+                prefetch: 'tags',
+                limit: 20
+            });
+            $('input#tagInput').on('keypress', function (e) {
+                if (e.keyCode == 13) {
+                    addTag();
+                }
+            });
+            $('.typeahead.input-sm').siblings('input.tt-hint').addClass('hint-small');
+            $('.typeahead.input-lg').siblings('input.tt-hint').addClass('hint-large');
+            $('button[type="submit"]').on('click', function () { $('form').submit(); });
+            $('button[type="button"]').on('click', function (e) {
+                addTag();
+            });
+            $('form').on('submit', function () {
+                if (tagArray.length == 0) {
+                    $('.status-text').text('Please add at least one tag before procceding!');
+                    return false;
+                }
+                return true;
+            });
+            //$('input:text').focus(function () { $(this).select(); });
+        });
+    </script>
+}
+@{
+    var preExistingTags = ViewBag.preExistingTags as List<Tag>;
+    var currentTags = ViewBag.currentTags as List<Tag>;
+    
+}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1">
+            <div class="window-panel">
+                <div class="window-panel-title">
+                    <strong>Tell us what you are looking for</strong>
+                </div>
+                <div class="window-panel-content">
+                    <div class="">
+                        <form class="form-inline" role="form" action="@Url.Action("ManageTag")" method="post">
+                            <div class="form-group">
+                                <input type="text"
+                                    class="form-control typeahead"
+                                    placeholder="Searchable Tags e.g. GIS, Engineer"
+                                    name="tag"
+                                    id="tagInput" />
+                            </div>
+                            <button type="button" class="btn btn-primary" id="addTagBtn"><i class="icon-tag"></i> Add</button>
+                            @if (currentTags != null) {
+                                foreach (var i in currentTags) { 
+                                    <input type="hidden" value="@i.Name" name="tags"/>
+                                }
+                            }
+                        </form>
+                        <p>Searchable tags are used to help others search for you, and what you require.</p>
+                    </div>
+                    <hr />
+                    <h5>Your tags <small class="">(Please enter at least one tag to procceed)</small></h5>
+                    <div class="post">
+                        <ul class="list-unstyled list-inline tag-list" id="tagList">
+                            @if (currentTags != null) {
+                                foreach (var i in currentTags) { 
+                                    <li><span class="label label-default">@i.Name</span></li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                    <div><span id="" class="text-warning status-text"></span></div>
+                    <div class="pull-right">
+                        <button class="btn btn-primary" type="submit">Save changes</button>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

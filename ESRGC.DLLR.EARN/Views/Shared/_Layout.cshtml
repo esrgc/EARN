@@ -6,44 +6,53 @@
     <meta name="description" content="" />
     <meta name="keywords" content="" />
     <link href="@Url.Content("~/favicon.ico")" rel="Icon" />
-    <title>DLLR EARN - @ViewBag.Title</title>
+    <title>EARN Maryland - @ViewBag.Title</title>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
     @Styles.Render("~/Styles/css")
-    <!--Custom page CSS goes here-->
-    @RenderSection("pageCSS", required: false)
+    <!--Custom page CSS or extra javascript goes here-->
+    @RenderSection("headContent", required: false)
 </head>
 <body lang="en">
     <div class="wrapper">
         <!--nav bar-->
-        @Html.Partial("Navigation")
+        @Html.Partial("navBar")
         <!--Page content-->
-        <div class="container" id="pageContent">
+        <div id="pageContent">
             <!--Logo-->
             @*<img src="@Url.Content("~/Content/images/MSGIC-logo.jpg")" class="site-logo" />*@
             <!--Header-->
-            <header class="page-header">
-                @RenderSection("header", required: false)
-            </header>
-            <section>
-                @*@Html.Partial("messagePartial") *@
+            @RenderSection("header", required: false)
+            <section class="body-content">
+                @Html.Partial("messagePartial") 
                 @RenderBody()
             </section>
         </div>
         <div class="push">
         </div>
     </div>
-    <div class="footer" id="footer">
-        <div class="container">
-            <div class="row text-center">
-                @*@RenderSection("footer", required: false)*@    
-                Footer content
-            </div>
-        </div>
+    <div class="footer text-center" id="footer">
+            @*@RenderSection("footer", required: false)*@    
+            <a href="http://esrgc.org" target="_blank"><img class="site-logo" src="@Url.Content("~/Client/images/esrgc.png")" alt=""/></a>
+            @*<a  href="http://www.gov.state.md.us/" target="_blank"><img class="site-logo" src="@Url.Content("~/client/images/MDlogo.gif")" alt=""/></a>*@
+            <a  href="http://www.dllr.maryland.gov/earn" target="_blank"><img class="site-logo" src="@Url.Content("~/client/images/EARN_logo_200w.jpg")" alt=""/></a>
+            <a  href="http://www.salsibury.edu/" target="_blank"><img class="site-logo" src="@Url.Content("~/client/images/SalisburyUniversity.jpg")" alt=""/></a>
     </div>
     @Scripts.Render("~/bundles/jsLibs")
     @RenderSection("scripts", required: false)
     <!--Start up code-->
     <script type="text/javascript">
-        $(function () {           
+        $(function () {
+            //hilight current url
+            var url = window.location;
+            $('.navbar a').filter(function () {
+                return this.href == url;
+            }).parent().addClass('active');
+            //tooltip for nav bar
+            $('.navbar a').tooltip({
+                toggle: "tooltip",
+                placement: "bottom",
+                container: 'body'
+            });
             //custom start up code
             if (typeof startup == 'function')
                 startup();

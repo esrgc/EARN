@@ -1,0 +1,27 @@
+﻿@using ESRGC.DLLR.EARN.Domain.Model;
+@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<Profile>
+@{
+    ViewBag.Title = "Index";
+    ViewBag.Header = "Profile search";
+}
+
+@section header {
+    <div class="container">
+        <div class="page-header">
+            <h3>@ViewBag.Header <i class="icon-search"></i></h3>
+        </div>
+    </div>
+}
+
+@section scripts {
+}
+@{
+    var filters = (ViewBag.filters as Dictionary<string, object>) ?? new Dictionary<string, object>();
+    var currentTags = filters.ContainsKey("tags") ? filters["tags"] as List<string> : new List<string>();
+}
+<div class="container" id="basicSearchPage">
+    <div class="row">
+    </div>
+</div>

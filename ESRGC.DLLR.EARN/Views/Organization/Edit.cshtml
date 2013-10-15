@@ -1,0 +1,46 @@
+﻿@model ESRGC.DLLR.EARN.Domain.Model.Organization
+
+@{
+    ViewBag.Title = "Edit Organization";
+    ViewBag.Header = "Organization";
+}
+
+@section header {
+    <div class="container">
+        <header class="page-header">
+            <h3>@ViewBag.Header <i class="icon-large icon-organization"></i></h3>
+            @*<ul class="breadcrumb">
+                <li><a href="@Url.Action("index", "Home")">Home</a></li>
+                <li class="active">@ViewBag.Header</li>
+            </ul>*@
+        </header>
+    </div>
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="window-panel">
+                <div class="window-panel-title">
+                    <strong>Edit</strong>
+                </div>
+                <div class="window-panel-content">
+                    @Html.ValidationSummary(true)
+                    <form class="form-horizontal" action="@Url.Action("Edit")" method="post" role="form">
+                        <input type="hidden" value="@Model.OrganizationID" name="id" />
+                        @Html.Partial("orgFormPartial")
+                        <hr />
+                        <div class="form-group">
+                            <div class="col-sm-6 col-sm-offset-2">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <a class="btn btn-default" href="@Url.Action("Detail", "Profile")">Cancel</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

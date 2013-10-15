@@ -1,0 +1,192 @@
+﻿@using ESRGC.DLLR.EARN.Domain.Model
+@{
+    ViewBag.Title = "Search Tag";
+    ViewBag.Header = "Searchable tags";
+}
+
+@section header{
+    <div class="container">
+        <header class="page-header">
+            <h3>@ViewBag.Header <i class="icon-large icon-tags"></i></h3>
+            @*<ul class="breadcrumb">
+                <li><a href="@Url.Action("index", "Home")">Home</a></li>
+                <li class="active">@ViewBag.Header</li>
+            </ul>*@
+        </header>
+    </div>
+}
+
+@section scripts {
+    <script type="text/javascript" src="@Url.Content("~/Client/jsLib/typeahead.js/typeahead.min.js")"></script>
+    <script type="text/javascript">
+        var tagArray = [];
+
+        var startup = function () {
+            //preload tags array to match current tags
+            $('input[name="tags"]').each(function (i) {
+                tagArray.push($(this).val());
+            });
+            console.log(tagArray);
+            var tagExists = function (tag) {
+                for (var i = 0; i < tagArray.length; i++) {
+                    if (tagArray[i] == tag.toUpperCase())
+                        return true;
+                }
+                return false;
+            };
+            var addTag = function (value) {
+                value = value.toUpperCase();
+                if (tagExists(value)) {
+                    $('.status-text').text('The tag "' + value + '" has already been added. Please enter a different tag!');
+                    return;
+                }
+                if (value != '') {
+                    tagArray.push(value);
+                    $('input#tagInput').val('').focus();
+                    $('.tag-list').append(
+                        [
+                            '<div class="tag">',
+                                '<span class="label label-default">',
+                                    value + '&nbsp;<a data-value="'+value + '"><i class="icon-remove"></i></a>',
+                                '</span>',
+                            '</div>'
+                        ].join('')
+                    );
+                    $('form').append('<input type="hidden" name="tags" value="' + value + '"/>')
+                    $('.tt-hint').val('');
+                    $('.status-text').text('');
+                }
+                else {
+                    console.log('Tag already exists');
+                }
+            };
+            var addTags = function () {
+                var value = $('input#tagInput').val();
+                //separate the tags
+                var tags = value.split(',');
+                for (var i in tags) {
+                    var tag = tags[i].trim();
+                    addTag(tag);
+                }
+            };
+            var removeTag = function (value, tag) {
+                if (typeof value == 'undefined')
+                    return;
+                if (tagArray.length > 1) {
+                    tagArray.pop(value);
+                    $('input[type="hidden"]').filter('[value="' + value + '"]').remove();
+                    //finally remove the whole node
+                    tag.parents().filter('.tag').remove();
+                    console.log('tag ' + value + ' removed');
+                }
+                else {
+                    $('.status-text').text('Could not remove! You must have at least one tag in your profile.');
+                }
+            };
+            $('#tagInput').typeahead({
+                name: 'test',
+                //local: ['iphone', 'iphone 5s', 'iphone 5', 'C#', '.NET'],
+                prefetch: {
+                    url: '../tag/tags',
+                    ttl: 1
+                },
+                //remote: {
+                //    url: 'tags'
+                //    //ttl: 5000
+                //},
+                limit: 20
+            });
+            //capture 'enter' key event to add tags
+            $('input#tagInput').on('keypress', function (e) {
+                if (e.keyCode == 13) {
+                    addTags();
+                }
+            });
+            $('.typeahead.input-sm').siblings('input.tt-hint').addClass('hint-small');
+            $('.typeahead.input-lg').siblings('input.tt-hint').addClass('hint-large');
+            $('button[type="submit"]').on('click', function () { $('form').submit(); });
+            //click event on add button
+            $('#addTagBtn').on('click', function (e) {
+                addTags();
+            });
+            $('form').on('submit', function () {
+                if (tagArray.length == 0) {
+                    $('.status-text').text('Please add at least one tag before procceding!');
+                    return false;
+                }
+                return true;
+            });
+            //$('input:text').focus(function () { $(this).select(); });
+            //remove button events
+            $(document).on('click', '.tag a', function (e) {
+                //get value and remove hidden fields
+                var value = $(this).attr('data-value');
+                removeTag(value, $(this));
+            });
+        };
+    </script>
+}
+@{
+    var currentTags = ViewBag.currentTags as List<Tag> ?? new List<Tag>();    
+}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1">
+            <div class="window-panel">
+                <div class="window-panel-title">
+                    <strong>Tag your organization</strong>
+                </div>
+                <div class="window-panel-content">
+                    <div class="">
+                        <form class="form-inline" role="form" action="@Url.Action("ManageTag")" method="post">
+                            <p>
+                                Tags are essential as they enable other EARN Maryland Connect users to find and connect with you. 
+                                Common tags are one or two words but collectively they serve to describe your organization.
+                            </p>
+                            <div class="form-group typeahead-container">
+                                <input type="text"
+                                    class="form-control typeahead"
+                                    placeholder="e.g. Healthcare, Analyst"
+                                    name="tag"
+                                    id="tagInput" />
+                            </div>
+                            <button type="button" class="btn btn-primary" id="addTagBtn"><i class="icon-plus"></i>&nbsp;Add</button>
+                            <div><span id="" class="text-danger status-text"></span></div>
+                            <p class="text-warning">
+                                Use commas to separate multiple tags.
+                            </p>
+
+                            @if (currentTags != null) {
+                                foreach (var i in currentTags) { 
+                                <input type="hidden" value="@i.Name" name="tags"/>
+                                }
+                            }
+                        </form>
+                        <br />
+                        <div class="alert alert-info">
+                            <p>
+                                <strong>Tip!</strong>
+                                Creating a complete list of tags improves the likelihood our members find your profile
+                                when searching keywords. Using terms popular with the community that advertise contributions,
+                                needs, and/or related skills work well. Remember to update your tags as you grow your profile!                                                      
+                            </p>
+                        </div>
+                    </div>
+                    <hr />
+                    <h4>Your tags <small class="">(Please enter at least one tag to procceed)</small></h4>
+                    <div class="post">
+                        @Html.Partial("tagListPartial", currentTags.Select(x=>x.Name).ToList())                        
+                    </div>
+                    <br />
+                    <div class="pull-right">
+                        <button class="btn btn-primary" type="submit"><i class="icon-save"></i>&nbsp;Save changes</button>
+                        @if (currentTags != null) {
+                            <a class="btn btn-default" href="@Url.Action("Detail", "Profile")">Cancel</a>
+                        }
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

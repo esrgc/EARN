@@ -11,7 +11,6 @@ namespace ESRGC.DLLR.EARN.Domain.Model
   public class Account
   {
     public Account() {
-      AcceptNotification = false;//default value
     }
 
     public int AccountID { get; set; }
@@ -29,11 +28,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     [MaxLength(32)]
     [ScaffoldColumn(false)]
     public string InitialPassword { get; set; }
-
-    [ScaffoldColumn(false)]
-    public int? ContactID { get; set; }
-    public virtual Contact Contact { get; set; }
-
+       
     [MaxLength(20)]
     public string Role { get; set; }
 
@@ -45,30 +40,16 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     [DataType(DataType.Password)]
     public byte[] AnswerToSecretQuestion { get; set; }
 
-    [MaxLength(50)]
-    public string SecretQuestion2 { get; set; }
-
-    [MaxLength(50)]
-    [DataType(DataType.Password)]
-    public byte[] AnswerToSecretQuestion2 { get; set; }
-
-    [MaxLength(50)]
-    public string SecretQuestion3 { get; set; }
-
-    [MaxLength(50)]
-    [DataType(DataType.Password)]
-    public byte[] AnswerToSecretQuestion3 { get; set; }
-
     [Display(Name = "Member since")]
     public DateTime? MemberSince { get; set; }
 
     [Display(Name = "Last login")]
     public DateTime? LastLogin { get; set; }
-
-    public bool? AcceptNotification { get; set; }
-
+       
     [Display(Name = "Last update")]
     public DateTime? LastUpdate { get; set; }
 
+    public int? ProfileID { get; set; }
+    public virtual Profile Profile { get; set; }
   }
 }

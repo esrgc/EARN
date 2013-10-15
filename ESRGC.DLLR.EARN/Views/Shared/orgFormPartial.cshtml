@@ -1,0 +1,115 @@
+﻿@model ESRGC.DLLR.EARN.Domain.Model.Organization
+
+<div class="form-group">
+    <label class="control-label col-sm-2" for="Organization.Name">Name</label>
+    <div class="col-sm-8">
+        @Html.TextBoxFor(x => x.Name,
+                new {
+                    @class = "form-control input-sm",
+                    placeholder = "Organization Name"
+                }
+            )
+        <span class="label label-default">Required</span>
+        <div class="help-block">@Html.ValidationMessageFor(x => x.Name)</div>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-sm-2" for="Organization.Address">Address</label>
+    <div class="col-sm-6">
+        @Html.TextBoxFor(x => x.StreetAddress, new { @class = "form-control input-sm", placeholder = "Street address" })
+        <span class="label label-default">Required</span>
+        <div class="help-block">@Html.ValidationMessageFor(x => x.StreetAddress)</div>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-sm-2" for="Organization.Building">Building/Suite</label>
+    <div class="col-sm-3">
+        @Html.TextBoxFor(x => x.Building, new { @class = "form-control input-sm", placeholder = "Building" })
+        <div class="help-block">@Html.ValidationMessageFor(x => x.Building)</div>
+    </div>
+
+    <label class="control-label col-sm-2" for="Organization.Department">Department</label>
+    <div class="col-sm-3">
+        @Html.TextBoxFor(x => x.Department, new { @class = "form-control input-sm", placeholder = "Department" })
+        <div class="help-block">@Html.ValidationMessageFor(x => x.Department)</div>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-sm-2" for="Organization.City">City/State/Zip</label>
+    <div class="col-sm-4">
+        @Html.TextBoxFor(x => x.City, new { @class = "form-control input-sm", placeholder = "City" })
+        <span class="label label-default">Required</span>
+        <div class="help-block">@Html.ValidationMessageFor(x => x.City)</div>
+    </div>
+    <div class="col-sm-2">
+        @Html.TextBoxFor(x => x.State, new {
+       @class = "form-control input-sm",
+       placeholder = "State",
+       maxlength = "2"
+   })
+        <span class="label label-default">Required</span>
+        <div class="help-block">@Html.ValidationMessageFor(x => x.State)</div>
+    </div>
+    <div class="col-sm-2">
+        @Html.TextBoxFor(x => x.Zip, new {
+       @class = "form-control input-sm",
+       placeholder = "Zip",
+       maxlength = "5"
+   })
+        <span class="label label-default">Required</span>
+        <div class="help-block">@Html.ValidationMessageFor(x => x.Zip)</div>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-sm-2" for="Organization.Website">Website</label>
+    <div class="col-sm-6">
+        @Html.TextBoxFor(x => x.Website, new {
+       @class = "form-control input-sm",
+       placeholder = ModelMetadata.FromLambdaExpression(x => x.Website, ViewData).Description
+   })
+        <div class="help-block">@Html.ValidationMessageFor(x => x.Website)</div>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-sm-2" for="">
+        <i class="icon-twitter-sign icon-large"></i>
+        <i class="icon-facebook-sign icon-large"></i>
+        <i class="icon-linkedin-sign icon-large"></i>
+    </label>
+    <div class="col-sm-3">
+        @Html.TextBoxFor(x => x.TwitterLink, new {
+       @class = "form-control input-sm",
+       placeholder = "Twitter"
+   })
+        <div class="help-block">@Html.ValidationMessageFor(x => x.TwitterLink)</div>
+    </div>
+
+    <div class="col-sm-3">
+        @Html.TextBoxFor(x => x.FacebookLink, new {
+       @class = "form-control input-sm",
+       placeholder = "FaceBook"
+   })
+        <div class="help-block">@Html.ValidationMessageFor(x => x.FacebookLink)</div>
+    </div>
+
+    <div class="col-sm-3">
+        @Html.TextBoxFor(x => x.LinkedInLink, new {
+       @class = "form-control input-sm",
+       placeholder = "LinkedIn"
+   })
+        <div class="help-block">@Html.ValidationMessageFor(x => x.LinkedInLink)</div>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-sm-2" for="Organization.Description">Description</label>
+    <div class="col-sm-9">
+        @Html.TextAreaFor(x => x.Description, new {
+       @class = "form-control input-sm",
+       style = "min-height: 150px;",
+       placeholder = ModelMetadata.FromLambdaExpression(x => x.Description, ViewData).Description
+   })
+        <span class="label label-default">Required</span>
+        <div class="help-block">@Html.ValidationMessageFor(x => x.Description)</div>
+    </div>
+</div>
+
