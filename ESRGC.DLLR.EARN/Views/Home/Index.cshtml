@@ -4,7 +4,21 @@
 }
 
 @section scripts {
-
+    <script type="text/ecmascript">
+        var startup = function () {
+            $(document).on('click', '#agreeTDChbox', function () {
+                $('#proceedBtn').removeAttr('disabled');
+            });
+            $(document).on('click', '#proceedBtn', function () {
+                $('form#quickSignupForm').submit();
+            });
+            $(document).on('keypress', 'form#quickSignupForm', function (e) {
+                if (e.keyCode == 13) {
+                    $('#agreeToSignup').modal('show');
+                }
+            });
+        };
+    </script>
 }
 
 @section header {
@@ -37,10 +51,6 @@
         </div>
     </div>
 }
-
-
-
-
 <div class="container">
     <div class="row">
         <div class="col-sm-4">
@@ -77,7 +87,7 @@
         </div>
         <div class="col-sm-7 col-sm-offset-1">
             <div class="transparent-placeholder-panel">
-                <div class="placeholder-heading">About EARN</div>
+                <div class="placeholder-heading">About EARN Maryland Connect</div>
                 <div>
                     <p>
                         <strong>EARN Maryland Connect</strong> is dedicated to connecting individuals and organizations seeking to partner through the
@@ -95,7 +105,7 @@
                     </ul>
                 </div>
             </div>
-             <div class="transparent-placeholder-panel">
+            <div class="transparent-placeholder-panel">
                 <div class="placeholder-heading">Join Us</div>
                 <div>
                     <p>
@@ -132,6 +142,40 @@
         </div>
     </div>*@
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="agreeToSignup" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Terms and Conditions</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    By clicking “Sign up for EARN Maryland Connect”, you understand that the information you provide will 
+                    be in the public domain and will be accessible to other EARN Maryland Connect users. 
+                    The information you provide will only be used by the Maryland Department of Labor, Licensing, and Regulation
+                    to facilitate the EARN program. The information within the EARN Maryland Connect system will not be distributed
+                    or shared for any purpose other than facilitating the EARN program.
+                </p>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="agreed" id="agreeTDChbox" />
+                        <strong>I agree to the terms and conditions for "EARN Maryland Connect"</strong>
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="proceedBtn" class="btn btn-primary btn-sm" type="button" disabled>Proceed</button>
+            </div>
+    </div>
+    <!-- /.modal-content -->
+</div>
+<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
 <!-- Modal -->
 <div class="modal fade" id="termCondition" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
     <div class="modal-dialog">
@@ -142,12 +186,11 @@
             </div>
             <div class="modal-body">
                 <p>
-                    By clicking “Sign up for EARN,” you understand that the information you provide will 
+                    By clicking “Sign up for EARN Maryland Connect”, you understand that the information you provide will 
                     be in the public domain and will be accessible to other EARN Maryland Connect users. 
                     The information you provide will only be used by the Maryland Department of Labor, Licensing, and Regulation
-                     to facilitate the EARN program. The information within the EARN Maryland Connect system will not be distributed
-                     or shared for any purpose other than facilitating the EARN program.
-
+                    to facilitate the EARN program. The information within the EARN Maryland Connect system will not be distributed
+                    or shared for any purpose other than facilitating the EARN program.
                 </p>
             </div>
             <div class="modal-footer">

@@ -21,7 +21,7 @@
     <script type="text/javascript">
         var tagArray = [];
 
-        $(function () {
+        var startup = function () {
             //preload tags array to match current tags
             $('input[name="tags"]').each(function (i) {
                 tagArray.push($(this).val());
@@ -123,7 +123,7 @@
                 var value = $(this).attr('data-value');
                 removeTag(value, $(this));
             });
-        });
+        };
     </script>
 }
 @{
