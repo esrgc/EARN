@@ -67,9 +67,6 @@ namespace ESRGC.DLLR.EARN.Models
     public class SignInModel
     {
         [Required]
-        [Display(Name = "User name")]
-        public string UserName { get; set; }
-        [Required]
         [EmailValidation(ErrorMessage = "Invalid email address")]
         [Display(Name = "Email")]
         public string Email { get; set; }
@@ -81,14 +78,12 @@ namespace ESRGC.DLLR.EARN.Models
 
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
-
-        public string logOnType { get; set; }
     }
 
     public class SignUpModel
     {
         
-        [Required]
+        [Required(ErrorMessage="Please enter a valid email address")]
         [EmailValidation(ErrorMessage = "Invalid email address")]
         [DataType(DataType.EmailAddress)]
         [Display(Name = "Email address")]
@@ -106,21 +101,21 @@ namespace ESRGC.DLLR.EARN.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        public List<string> SecretQuestions { get; set; }
-        [Required]
-        [Display(Name = "Security question")]
-        public string SecretQuestion { get; set; }
+        //public List<string> SecretQuestions { get; set; }
+        //[Required]
+        //[Display(Name = "Security question")]
+        //public string SecretQuestion { get; set; }
 
-        [Required]
-        [DataType(DataType.Password)]
-        [Display(Name = "Secret answer")]
-        public string SecretAnswer { get; set; }
+        //[Required]
+        //[DataType(DataType.Password)]
+        //[Display(Name = "Secret answer")]
+        //public string SecretAnswer { get; set; }
 
-        [Required]
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirm answer")]
-        [Compare("SecretAnswer", ErrorMessage = "The answer and confirmation answer do not match.")]
-        public string ConfirmAnswer { get; set; }
+        //[Required]
+        //[DataType(DataType.Password)]
+        //[Display(Name = "Confirm answer")]
+        //[Compare("SecretAnswer", ErrorMessage = "The answer and confirmation answer do not match.")]
+        //public string ConfirmAnswer { get; set; }
     }
 
     public class UserEditModel

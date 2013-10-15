@@ -15,20 +15,38 @@ namespace ESRGC.DLLR.EARN
         "~/Client/jsLib/bootstrap-3.0/js/bootstrap*",
         "~/Client/js/modernizr*"
       ));
+
       bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
         "~/Client/jslib/jqueryValidate/jquery.validate.*",
         "~/Client/js/bootstrapValidation.js"
       ));
+
       bundles.Add(new ScriptBundle("~/bundles/jqueryval-unobtrusive").Include(
         "~/Client/jsLib/jqueryValidate/jquery.validate.*",
-        "~/Client/jsLib/jqueryValidate/jquery.validate.unobtrusive*"
+        "~/Client/jsLib/jqueryValidate/jquery.validate.unobtrusive*",
+        "~/Client/js/bootstrapValidation.js"
       ));
-
+      bundles.Add(new ScriptBundle("~/bundles/js/library").Include(
+        "~/Client/js/dx.min.js",
+        "~/Client/jsLib/typeahead.js/typeahead.min.js"
+      ));
+      bundles.Add(new ScriptBundle("~/bundles/js/map").Include(
+        "~/Client/js/map/mapViewer.js",
+        "~/Client/js/map/leafletViewer.js"
+      ));
+      bundles.Add(new ScriptBundle("~/bundles/apps/search").Include(        
+        
+        "~/Client/apps/search/controller/*.js",
+        "~/Client/apps/search/store/*.js",
+        //"~/Client/apps/search/model/*.js",
+        //"~/Client/apps/search/view/*.js",
+        "~/Client/apps/search/app.js"
+      ));
       //css bundles
-      bundles.Add(new StyleBundle("~/Styles/css").Include(
-        "~/Client/css/site.css",
+      bundles.Add(new StyleBundle("~/Styles/css").Include(       
         "~/Client/jsLib/bootstrap-3.0/css/bootstrap*",
-        "~/Client/css/stickyFooter.css"
+        "~/Client/css/less/*.css",
+        "~/Client/css/*.css"
       ));
     }
   }

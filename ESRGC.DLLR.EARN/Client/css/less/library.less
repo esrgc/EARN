@@ -1,0 +1,101 @@
+﻿@import "variables.less";
+
+.rounded-corner (@radius: 5px) {
+    border-radius: @radius;
+}
+
+.box-shadow (@x, @y, @blur: 10px, @spread: 1px) {
+    -webkit-box-shadow: @x @y @blur rgba(0, 0, 0, 0.2) inset;
+    -moz-box-shadow: @x @y @blur rgba(0, 0, 0, 0.2) inset;
+    box-shadow: @x @y @blur rgba(0, 0, 0, 0.2) inset;
+}
+.drop-shadow (@x, @y, @blur: 10px, @spread: 1px) {
+    -webkit-box-shadow: @x @y @blur rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: @x @y @blur rgba(0, 0, 0, 0.2);
+    box-shadow: @x @y @blur rgba(0, 0, 0, 0.2);
+}
+.panel-action (@margin: 5px, @padding: 5px) {
+    margin: @margin 0 0 0;
+    padding: @padding 0;
+}
+.placeholder-heading {
+    padding: 5px;
+    margin-bottom: 8px;
+    /*margin-left: -10px;*/
+    /*margin-right: -10px;*/
+    background: @dark-backgroun-color;
+    font-size: 12px;
+    color: @light-font-color;
+    font-weight: bold;
+    text-align: center;
+    /*border: 1px solid @border-color;*/
+    .rounded-corner;
+}
+.list-container {
+    > ul > li {
+        padding: 10px 0;
+        border-bottom: 1px solid @border-color;
+    }
+}
+
+.footer {
+    border-top: 1px solid @border-color;
+    position: relative;
+    background: #f6f6f6;
+
+    > .container {
+        border-top: 1px solid @border-color;
+        padding: 20px 15px 0 15px;
+    }
+}
+.post {
+    margin: 0;
+    padding: 15px;
+    border: 1px solid @inner-border-color;
+    /*text-shadow: 1px 1px 1px #E1E1E1;*/
+    background: #FFFFFF;
+    position: relative;
+    .rounded-corner;
+
+    > p {
+        margin: 10px 0;
+    }
+
+    h5 {
+        margin-top: 0;
+    }
+}
+.inline-container {
+    > .list-container {
+        margin: 0 5px 0 0;
+    }
+
+    > div {
+        display: inline-block;
+        float: left;
+    }
+}
+
+.clear {
+    clear: both;
+}
+
+.upload-container
+{
+    width: auto;
+    position: relative;
+    overflow: hidden;
+    direction: ltr;
+}
+
+.file-input
+{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    margin: 0px;
+    padding: 0px;
+    cursor: pointer;
+    opacity: 0;
+    height: 34px;
+}

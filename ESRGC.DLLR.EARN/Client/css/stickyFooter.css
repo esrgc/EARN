@@ -6,6 +6,6 @@
 	margin: 0 auto -70px; /* the bottom margin is the negative value of the footer's height */
 }
 .footer, .push {
-	height: 60px; /* .push must be the same height as .footer */
-	margin-top: 10px;
+	height: 70px; /* .push must be the same height as .footer */
+	/*margin-top: 10px;*/
 }

@@ -1,67 +1,204 @@
 ﻿@{
     ViewBag.Title = "Home";
+    ViewBag.showSignin = true;
 }
 
 @section scripts {
-
+    <script type="text/ecmascript">
+        var startup = function () {
+            $(document).on('click', '#agreeTDChbox', function () {
+                $('#proceedBtn').removeAttr('disabled');
+            });
+            $(document).on('click', '#proceedBtn', function () {
+                $('form#quickSignupForm').submit();
+            });
+            $(document).on('keypress', 'form#quickSignupForm', function (e) {
+                if (e.keyCode == 13) {
+                    $('#agreeToSignup').modal('show');
+                }
+            });
+        };
+    </script>
 }
 
 @section header {
     <div class="jumbotron">
         <div class="container">
-            <h1>App title</h1>
-            <p>Description goes here</p>
-            <p><a class="btn btn-lg btn-primary">Learn more</a></p>
+            <div class="row">
+                <div class="col-sm-8 col-xs-12">
+                    <h2>EARN Maryland Connect</h2>
+                    <h4>Industry-led partnerships, creating jobs<br />
+                        <small>Bridging Maryland's skills gap</small>
+                    </h4>
+                    <p>
+                        <a class="btn btn-lg btn-primary" target="_blank" href="http://www.dllr.maryland.gov/earn">
+                            <i class="icon-external-link"></i>&nbsp;Learn more
+                        </a>
+                        @* @if (!Request.IsAuthenticated) {
+                            <a class="btn btn-lg btn-success" href="@Url.Action("SignUp", "Account")">Become a member <i class="icon-edit"></i></a>
+                        }*@
+                    </p>
+                </div>
+                @if (!Request.IsAuthenticated) {
+                    <div class="col-sm-4 col-xs-12">
+                        @Html.Partial("quickSignup")
+                    </div>
+                }
+                else {
+
+                }
+            </div>
         </div>
     </div>
 }
-
-<div class="row">
-    <div class="col-md-6 col-sm-12">
-        <div class="well">
-            <h5>Column heading 1</h5>
-            <p>
-                fefkn felkj flekjlkviwho  vwhohw onkfkjvwoi vowen oivenwo
-                dslkfj ineoi vcnoewi ncowein cwoenc owencioen kcwjoeicj 
-                cwjoeicoweicj oicej wocie coei cwoie oqic wonciowenfafo
-                fowei cvose soijf soiejfa'okfjalsdk fej iaofje 'soifj 
-            </p>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="transparent-placeholder-panel">
+                        <h3 class="text-info">Promote</h3>
+                        <div>
+                            <p>&nbsp;&nbsp;Create a profile...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-sm-offset-2">
+                    <div class="transparent-placeholder-panel">
+                        <h3 class="text-info">Partner</h3>
+                        <div>
+                            <p>&nbsp;&nbsp;Identify relationships...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-sm-offset-4">
+                    <div class="transparent-placeholder-panel">
+                        <h3 class="text-info">Progress</h3>
+                        <div>
+                            <p>&nbsp;&nbsp;Build opportunities...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-7 col-sm-offset-1">
+            <div class="transparent-placeholder-panel">
+                <div class="placeholder-heading">About EARN Maryland Connect</div>
+                <div>
+                    <p>
+                        <strong>EARN Maryland Connect</strong> is dedicated to connecting individuals and organizations seeking to partner through the
+                        <a href="http://www.dllr.maryland.gov/earn/">EARN Maryland Program</a>.
+                    </p>
+                    <label>Organizations committed to bridging Maryland’s skills gap are encouraged to participate:</label>
+                    <ul>
+                        <li>Industry employers and associates </li>
+                        <li>Higher education institutions</li>
+                        <li>Non-profits</li>
+                        <li>Community based organizations</li>
+                        <li>Workforce investment boards </li>
+                        <li>Local government</li>
+                        <li>Labor unions</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="transparent-placeholder-panel">
+                <div class="placeholder-heading">Join Us</div>
+                <div>
+                    <p>
+                        Sign up. Create a profile. Promote your organization’s contributions and/or what it hopes to take away. Members can search and connect with other EARN Maryland Connect users and form partnerships.
+                        Established partnerships can use this site to share materials and documents relevant to the development and submission of an EARN plan grant.
+                        EARN Maryland Connect, your one-stop for everything EARN!
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="col-md-6 col-sm-12">
-        <div class="well">
-            <h5>Column heading 2</h5>
-            <p>
-                fefkn felkj flekjlkviwho  vwhohw onkfkjvwoi vowen oivenwo
-                dslkfj ineoi vcnoewi ncowein cwoenc owencioen kcwjoeicj 
-                cwjoeicoweicj oicej wocie coei cwoie oqic wonciowenfafo
-                fowei cvose soijf soiejfa'okfjalsdk fej iaofje 'soifj 
-            </p>
+    @*<div class="row">
+        <div class="col-sm-6">
+            <div class="transparent-placeholder-panel">
+                <div class="placeholder-heading">Latest News</div>
+                <p>Content to be added</p>
+                <p> 
+                    phoi finad pthis fsin phoi banda blas qwuav apoihd
+                    phoi finad pthis fsin phoi banda blas qwuav apoihd
+                    phoi finad pthis fsin phoi banda blas qwuav apoihd
+                </p>
+            </div>
         </div>
-    </div>
+        <div class="col-sm-6">
+            <div class="transparent-placeholder-panel">
+                <div class="placeholder-heading">Newest Members</div>
+                <p>Content to be added</p>
+                <p> 
+                    phoi finad pthis fsin phoi banda blas qwuav apoihd
+                    phoi finad pthis fsin phoi banda blas qwuav apoihd
+                    phoi finad pthis fsin phoi banda blas qwuav apoihd
+                </p>
+            </div>
+        </div>
+    </div>*@
 </div>
-<div class="row">
-    <div class="col-md-6 col-sm-12">
-        <div class="well">
-            <h5>Column heading 3</h5>
-            <p>
-                fefkn felkj flekjlkviwho  vwhohw onkfkjvwoi vowen oivenwo
-                dslkfj ineoi vcnoewi ncowein cwoenc owencioen kcwjoeicj 
-                cwjoeicoweicj oicej wocie coei cwoie oqic wonciowenfafo
-                fowei cvose soijf soiejfa'okfjalsdk fej iaofje 'soifj 
-            </p>
-        </div>
-    </div>
-    <div class="col-md-6 col-sm-12">
-        <div class="well">
-            <h5>Column heading 4</h5>
-            <p>
-                fefkn felkj flekjlkviwho  vwhohw onkfkjvwoi vowen oivenwo
-                dslkfj ineoi vcnoewi ncowein cwoenc owencioen kcwjoeicj 
-                cwjoeicoweicj oicej wocie coei cwoie oqic wonciowenfafo
-                fowei cvose soijf soiejfa'okfjalsdk fej iaofje 'soifj 
-            </p>
-        </div>
-    </div>
-</div>
 
+<!-- Modal -->
+<div class="modal fade" id="agreeToSignup" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Terms and Conditions</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    By clicking “Sign up for EARN Maryland Connect”, you understand that the information you provide will 
+                    be in the public domain and will be accessible to other EARN Maryland Connect users. 
+                    The information you provide will only be used by the Maryland Department of Labor, Licensing, and Regulation
+                    to facilitate the EARN program. The information within the EARN Maryland Connect system will not be distributed
+                    or shared for any purpose other than facilitating the EARN program.
+                </p>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="agreed" id="agreeTDChbox" />
+                        <strong>I agree to the terms and conditions for "EARN Maryland Connect"</strong>
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="proceedBtn" class="btn btn-primary btn-sm" type="button" disabled>Proceed</button>
+            </div>
+    </div>
+    <!-- /.modal-content -->
+</div>
+<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="termCondition" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Terms and Conditions</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    By clicking “Sign up for EARN Maryland Connect”, you understand that the information you provide will 
+                    be in the public domain and will be accessible to other EARN Maryland Connect users. 
+                    The information you provide will only be used by the Maryland Department of Labor, Licensing, and Regulation
+                    to facilitate the EARN program. The information within the EARN Maryland Connect system will not be distributed
+                    or shared for any purpose other than facilitating the EARN program.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
