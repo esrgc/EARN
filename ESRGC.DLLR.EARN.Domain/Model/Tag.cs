@@ -10,7 +10,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
   {
     public int TagID { get; set; }
     [Required]
-    [MaxLength(20)]
+    [MaxLength(50)]
     public string Name { get; set; }
     public string Description { get; set; }
 
