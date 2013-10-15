@@ -273,6 +273,7 @@
     <Content Include="Views\Organization\Edit.cshtml" />
     <Content Include="Views\Shared\contactFormPartial.cshtml" />
     <None Include="Properties\PublishProfiles\P drive.pubxml" />
+    <None Include="Properties\PublishProfiles\Profile1.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -296,7 +297,6 @@
     <Content Include="Views\Account\SignIn.cshtml" />
     <Content Include="Views\Contact\Create.cshtml" />
     <Content Include="Views\Shared\quickSignin.cshtml" />
-    <None Include="Properties\PublishProfiles\Local.pubxml" />
     <Content Include="Views\Shared\quickSignup.cshtml" />
     <Content Include="Views\Shared\inlineSignin.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
