@@ -1,0 +1,10 @@
+﻿@model IList<ESRGC.DLLR.EARN.Domain.Model.Category>
+
+
+@*render options for dropdown*@
+
+<option value="">--select your category--</option>
+@foreach (var i in Model) {    
+    <option value="@i.CategoryID" data-usergroupId="@i.UserGroupID">@i.Name</option>
+}
+
