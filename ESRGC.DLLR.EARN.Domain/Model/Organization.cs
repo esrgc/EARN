@@ -19,7 +19,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public string Website { get; set; }
 
     [MaxLength(1000)]
-    [Display(Description="Please describe your organization")]
+    [Display(Description="Mission statement")]
     [DataType(DataType.MultilineText)]
     [Required(ErrorMessage="Please describe your organization")]
     public string Description { get; set; }

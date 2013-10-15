@@ -35,7 +35,6 @@ namespace ESRGC.DLLR.EARN.Helpers
       }
 
       return builder.ToString();
-    }
-
+    }   
   }
 }

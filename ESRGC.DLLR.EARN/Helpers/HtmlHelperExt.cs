@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Routing;
 using System.Web.Mvc;
 using ESRGC.DLLR.EARN.Domain.Model;
+using ESRGC.DLLR.EARN.Domain.Helpers;
 
 namespace ESRGC.DLLR.EARN.Helpers
 {
@@ -135,26 +136,7 @@ namespace ESRGC.DLLR.EARN.Helpers
     }
 
     public static string DisplayPhoneText(this HtmlHelper helper, string phoneNumb) {
-      if (!string.IsNullOrEmpty(phoneNumb)) {
-        phoneNumb = phoneNumb
-            .Replace(".", "")
-            .Replace("-", "")
-            .Replace("(", "")
-            .Replace(")", "")
-            .Replace(" ", "")
-            .Trim();
-        double number;
-        if (double.TryParse(phoneNumb, out number)) {
-          if (phoneNumb.Length > 10)
-            return string.Format("{0: # (###) ###-####}", number);
-          else
-            return string.Format("{0: (###) ###-####}", number);
-        }
-        else
-          return phoneNumb;
-      }
-      else
-        return "";
+      return DataUtility.normalizePhoneNumber(phoneNumb);
     }
 
     //public static MvcHtmlString DisplayStreetAddr(

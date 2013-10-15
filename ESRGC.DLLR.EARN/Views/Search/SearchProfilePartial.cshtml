@@ -38,7 +38,17 @@
                                     <li><a target="_blank" href="http://@Model.Organization.TwitterLink" title="Twitter link"><i class="icon-large icon-twitter"></i></a></li>
                                     <li><a target="_blank" href="http://@Model.Organization.LinkedInLink" title="LinkedIn link"><i class="icon-large icon-linkedin"></i></a></li>
                                 </ul>
-                                <p>@Model.Organization.Description</p>
+                                @if (Model.Organization.Description.Length > 200) { 
+                                    <p>
+                                        @Model.Organization.Description.Substring(0, 200)
+                                        ...<a href="@Url.Action("ViewProfile", "Profile", new { Model.ProfileID, returnUrl = Url.GenerateLinkFromFilters("Basic", filters) })">
+                                            read more
+                                        </a>
+                                    </p>
+                                }
+                                else {
+                                    <p>@Model.Organization.Description</p>
+                                }
                             </div>
                         </div>
                         <div class="col-sm-4">
