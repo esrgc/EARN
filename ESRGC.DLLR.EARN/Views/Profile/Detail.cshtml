@@ -34,11 +34,11 @@
                         <div class="profile-picture">
                             @if (Model.PictureID != null) { 
                                 <img class="img-thumbnail" src="@Url.Action("ProfilePicture", new { pictureId = Model.PictureID })"/>
-                                <small><a href="@Url.Action("UploadImage")">Change logo</a></small>
+                                <div><small><a href="@Url.Action("UploadImage")">Change logo</a></small></div>
                             }
                             else {
                                 <img class="img-thumbnail" src="@Url.Content("~/Client/images/empty_profile.gif")"/>
-                                <small><a href="@Url.Action("UploadImage")">Upload Logo</a></small>
+                                <div><small><a href="@Url.Action("UploadImage")">Upload Logo</a></small></div>
                             }
                         </div>
                         <div class="row profile-container">
