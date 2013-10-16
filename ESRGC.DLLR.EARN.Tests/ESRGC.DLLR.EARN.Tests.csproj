@@ -98,6 +98,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTest1.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
@@ -106,9 +107,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ESRGC.DLLR.EARN.Domain\ESRGC.DLLR.EARN.Domain.csproj">
+      <Project>{77981ca6-31d5-43aa-92a1-9404c2fce4ac}</Project>
+      <Name>ESRGC.DLLR.EARN.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ESRGC.DLLR.EARN\ESRGC.DLLR.EARN.csproj">
       <Project>{4BDD46BE-B768-4FC9-AA1E-B96AD31F58F8}</Project>
       <Name>ESRGC.DLLR.EARN</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ESRGC.GIS\ESRGC.GIS.csproj">
+      <Project>{cb6dba67-5862-428d-ade1-b3db55a34a1c}</Project>
+      <Name>ESRGC.GIS</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

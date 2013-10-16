@@ -272,6 +272,7 @@
     <Content Include="Views\Shared\orgFormPartial.cshtml" />
     <Content Include="Views\Organization\Edit.cshtml" />
     <Content Include="Views\Shared\contactFormPartial.cshtml" />
+    <None Include="Properties\PublishProfiles\FTP.pubxml" />
     <None Include="Properties\PublishProfiles\P drive.pubxml" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
   </ItemGroup>
