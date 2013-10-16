@@ -315,6 +315,10 @@
       <Project>{77981CA6-31D5-43AA-92A1-9404C2FCE4AC}</Project>
       <Name>ESRGC.DLLR.EARN.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ESRGC.GIS\ESRGC.GIS.csproj">
+      <Project>{cb6dba67-5862-428d-ade1-b3db55a34a1c}</Project>
+      <Name>ESRGC.GIS</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

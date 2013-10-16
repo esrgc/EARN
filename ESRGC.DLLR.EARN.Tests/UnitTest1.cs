@@ -2,6 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using ESRGC.DLLR.EARN.Controllers;
+using ESRGC.DLLR.EARN.Domain.DAL;
+using ESRGC.DLLR.EARN.Domain.DAL.Concrete;
 using ESRGC.GIS.Geocoding;
 using ESRGC.GIS.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -55,8 +58,13 @@ namespace ESRGC.DLLR.EARN.Tests
         if (candidate.score == 100)
           Console.WriteLine(candidate);
       }
+    }
 
-
+    [TestMethod]
+    public void testProfileGeoTag() { 
+      //arrange
+      var controller = new ProfileController(new WorkUnit(new DomainContext()));
+      controller.addAddressGeoTag(1);
     }
   }
 }

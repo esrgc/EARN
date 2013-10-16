@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Spatial;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ESRGC.DLLR.EARN.Domain.DAL.Abstract;
 using ESRGC.DLLR.EARN.Domain.Model;
 using ESRGC.DLLR.EARN.Models;
+using ESRGC.GIS.Geocoding;
+using ESRGC.GIS.Utilities;
 
 namespace ESRGC.DLLR.EARN.Controllers
 {
@@ -28,6 +31,8 @@ namespace ESRGC.DLLR.EARN.Controllers
         .ProfileTagRepository
         .Entities
         .Where(x => x.ProfileID == profile.ProfileID)
+        .Select(x => x.Tag)
+        .OfType<Tag>()
         .Count();
 
       if (countTag == 0)
@@ -76,6 +81,9 @@ namespace ESRGC.DLLR.EARN.Controllers
           _workUnit.saveChanges();
         }
 
+        //add geotags
+
+
         return RedirectToAction("Detail");
       }
       //error
@@ -113,7 +121,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       }
       return RedirectToAction("Detail");
     }
-    
+
     public ActionResult UploadImage() {
       var profile = CurrentAccount.Profile;
       if (profile == null)
@@ -145,6 +153,51 @@ namespace ESRGC.DLLR.EARN.Controllers
       }
       //error has occurred   
       return View(profile);
+    }
+
+    public void addAddressGeoTag(int profileId) {
+      var profile = _workUnit.ProfileRepository.GetEntityByID(profileId);
+      if (profile == null)
+        return;
+
+      var address = profile.Organization.StreetAddress;
+      var zip = profile.Organization.Zip;
+      var city = profile.Organization.City;
+      //geocode
+      var geocoder = new MDLocatorWithZip();
+      var jsonResult = geocoder.geocode(address, city, zip);
+      var resultObj = Net.deserializeJson(jsonResult);
+      var result = resultObj.candidates as IEnumerable<dynamic>;
+      if (result == null)
+        return;
+
+      var bestScore = geocoder.AcceptableScore;
+      dynamic location = null;
+      //parse result (get the entry with highest score and above acceptable score 65)
+      foreach (var candidate in result) {
+        if (candidate.score > bestScore) {
+          bestScore = candidate.score;
+          location = candidate.location;
+        }
+      }
+      //create geo tag
+      if (location != null) {
+        var wkt = string.Format("POINT ({0} {1})", location.x, location.y);
+        //create geo tag
+        var geoTag = new GeoTag() {
+          Name = address,
+          Geometry = DbGeometry.PointFromText(wkt, geocoder.SpatialReference)
+        };
+
+        //create ProfileTag
+        var profileTag = new ProfileTag() {
+          Tag = geoTag,
+          Profile = profile
+        };
+
+        _workUnit.ProfileTagRepository.InsertEntity(profileTag);
+        _workUnit.saveChanges();
+      }
     }
   }
 }
