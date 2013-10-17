@@ -20,12 +20,12 @@
     <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js" type="text/javascript"></script>
 }
 @section scripts {
-    @Scripts.Render("~/bundles/js/library", "~/bundles/js/map", "~/bundles/apps/search")
+    @Scripts.Render("~/bundles/js/customLibs", "~/bundles/js/map", "~/bundles/apps/search")
 }
 @{
     var filters = (ViewBag.filters as Dictionary<string, object>) ?? new Dictionary<string, object>();
     var currentTags = filters.ContainsKey("tags") ? filters["tags"] as List<string> : new List<string>();
-    var currentAccount = ViewBag.currentAccount as Account;
+    var currentAccount = ViewBag.currentAccount as Account ?? new Account();
 }
 <div class="container" id="basicSearchPage">
     <div class="row">
@@ -101,9 +101,9 @@
                         </div>
                         <div class="col-md-8 col-sm-7">
                             <div class="placeholder-panel">
-                                <div class="map-overlay-for-demo">
+                                @*<div class="map-overlay-for-demo">
                                     <h2>Map will be coming soon..</h2>
-                                </div>
+                                </div>*@
                                 <div class="map" id="map"></div>
                             </div>
                         </div>
@@ -129,7 +129,7 @@
                     }
                     @foreach (var profile in Model) {
                         if (profile.ProfileID == currentAccount.ProfileID) { 
-                            <span class="label label-important">Your organization</span>
+                            <span class="label label-danger your-profile-label">Your organization</span>
                             @Html.Partial("SearchProfilePartial", profile)
                         }
                         else

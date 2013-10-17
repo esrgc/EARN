@@ -55,15 +55,19 @@
                                         @*-
                                         <small>@Model.Category.Name</small>*@
                                         <br />
-                                        <small><a target="_blank" href="http://@Model.Organization.Website" title="Organization website">@Model.Organization.Website</a></small>
-                                        <br />
-                                        @if (Model.Organization.Department != null) {
+                                        @if (Model.Organization.Website != null) { 
                                             <small>
-                                                <abbr title="Department">Dept:</abbr>@Model.Organization.Department</small> <br />
+                                                <a target="_blank" href="http://@Model.Organization.Website" title="Organization website">
+                                                    @Model.Organization.Website
+                                                </a>
+                                            </small>
+                                            <br />
+                                        }
+                                        @if (Model.Organization.Department != null) {
+                                            <small><abbr title="Department">Dept:</abbr>@Model.Organization.Department</small> <br />
                                         }
                                         @if (Model.Organization.Building != null) {
-                                            <small>
-                                                <abbr title="Building">Bld:</abbr>@Model.Organization.Building</small><br />
+                                            <small><abbr title="Building">Bld:</abbr>@Model.Organization.Building</small><br />
                                         }
                                         <small>@Model.Organization.City, @Model.Organization.State @Model.Organization.Zip</small>
                                     </h4>

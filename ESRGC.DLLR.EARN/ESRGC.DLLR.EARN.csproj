@@ -241,6 +241,8 @@
     <Content Include="Client\js\bootstrapValidation.js" />
     <Content Include="Client\js\dx.min.js" />
     <None Include="Client\css\PagedList.notusedcss" />
+    <Content Include="Client\js\map\wicket-leaflet.js" />
+    <Content Include="Client\js\map\wicket.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Client\jsLib\jquery\jquery-2.0.3-vsdoc.js" />

@@ -11,6 +11,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
   public class Account
   {
     public Account() {
+      AccountID = 0;
     }
 
     public int AccountID { get; set; }

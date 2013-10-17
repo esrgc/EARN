@@ -91,7 +91,7 @@
                         Your tags <i class="icon-tags"></i>
                     </div>
                     <div class="window-panel-content">
-                        @Html.Partial("tagListDisplayPartial", Model.ProfileTags.Select(x => x.Tag.Name).ToList())
+                        @Html.Partial("tagListDisplayPartial", Html.getTagListString(Model))
                     </div>
                 </div>
             </div>

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using ESRGC.DLLR.EARN.Controllers;
 using ESRGC.DLLR.EARN.Domain.DAL;
 using ESRGC.DLLR.EARN.Domain.DAL.Concrete;
@@ -63,8 +64,12 @@ namespace ESRGC.DLLR.EARN.Tests
     [TestMethod]
     public void testProfileGeoTag() { 
       //arrange
-      var controller = new ProfileController(new WorkUnit(new DomainContext()));
-      //controller.addAddressGeoTag(1);
+      var workUnit = new WorkUnit(new DomainContext());
+      var controller = new ProfileController(workUnit);
+      var profiles = workUnit.ProfileRepository.Entities.ToList();
+      foreach (var profile in profiles) {
+        controller.addUpdateAddrGeoTag(profile.ProfileID);
+      }
     }
   }
 }

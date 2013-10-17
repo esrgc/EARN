@@ -145,6 +145,24 @@ namespace ESRGC.DLLR.EARN.Helpers
     public static List<Tag> getTagList(this HtmlHelper helper, Profile profile) {
       return DataUtility.getTagList(profile);
     }
+    /// <summary>
+    /// get address geotag from profile
+    /// </summary>
+    /// <param name="helper"></param>
+    /// <param name="profile"></param>
+    /// <returns></returns>
+    public static GeoTag getAddrGeoTag(this HtmlHelper helper, Profile profile) {
+      try {
+        var geoTag = profile
+          .ProfileTags
+          .Select(x => x.Tag)
+          .First(x => (x is GeoTag) && x.Description == "address") as GeoTag;
+        return geoTag;
+      }
+      catch {
+        return null;
+      }
+    }
     //public static MvcHtmlString DisplayStreetAddr(
     //    this HtmlHelper helper,
     //    Contact contact

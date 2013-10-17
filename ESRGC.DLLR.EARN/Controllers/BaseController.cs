@@ -34,7 +34,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     //////////////////////////
     //helpers
     ///////////////////////
-    protected void addUpdateAddrGeoTag(int profileId) {
+    public void addUpdateAddrGeoTag(int profileId) {
       var profile = _workUnit.ProfileRepository.GetEntityByID(profileId);
       if (profile == null)
         return;

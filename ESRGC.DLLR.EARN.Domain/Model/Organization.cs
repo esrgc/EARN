@@ -13,10 +13,14 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     [Display(Name="Name")]
     public string Name { get; set; }
 
+    string _website, _facebook, _linkedIn, _twitter;
     [MaxLength(50)]
     [Display(Description="www.someorganization.org")]
     [DataType(DataType.Url)]
-    public string Website { get; set; }
+    public string Website {
+      get { return _website; }
+      set { _website = value == null? "" : value.Replace("http://", "").Trim(); }
+    }
 
     [MaxLength(1000)]
     [Display(Description="Mission statement")]
@@ -25,14 +29,20 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public string Description { get; set; }
     
     [DataType(DataType.Url)]
-    public string FacebookLink { get; set; }
-
+    public string FacebookLink {
+      get { return _facebook; }
+      set { _facebook = value == null ? "" : value.Replace("http://", "").Trim(); }
+    }
     [DataType(DataType.Url)]
-    public string LinkedInLink { get; set; }
-
+    public string LinkedInLink {
+      get { return _linkedIn; }
+      set { _linkedIn = value == null ? "" : value.Replace("http://", "").Trim(); }
+    }
     [DataType(DataType.Url)]
-    public string TwitterLink { get; set; }
-
+    public string TwitterLink {
+      get { return _twitter; }
+      set { _twitter = value == null ? "" : value.Replace("http://", "").Trim(); }
+    }
     [Required(ErrorMessage = "Please enter your address")]
     [Display(Name = "Street address")]
     public string StreetAddress { get; set; }

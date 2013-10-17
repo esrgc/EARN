@@ -17,13 +17,12 @@ dx.application({
     views: [],
     controllers: ['Search', 'Map'],
     launch: function () {
+        var scope = dx.getController('Map');
+        //add markers after the map is initialized
+        scope.addMarkers();
+
         dx.log('Application initialized.');
-        var app = dx.getApp();
-        //initialize the map
-        app.appData.mapViewer = new dx.app.LeafletViewer();
-        app.getMapViewer = function () {
-            return app.appData.mapViewer;
-        };
+
     }
 
 });

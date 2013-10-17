@@ -30,10 +30,10 @@ dx.app.LeafletViewer = dx.define({
             attribution: osmAttrib
         });
         this.features = new L.FeatureGroup([
-            new L.Marker([39.0, -76.70]).bindPopup('Some organization'),
-            new L.Marker([39.0, -76.20]).bindPopup('Abc company'),
-            new L.Marker([38.9, -76.0]).bindPopup('Eastern shore company'),
-            new L.Marker([38.36, -75.59]).bindPopup('Salisbury University')
+            //new L.Marker([39.0, -76.70]).bindPopup('Some organization'),
+            //new L.Marker([39.0, -76.20]).bindPopup('Abc company'),
+            //new L.Marker([38.9, -76.0]).bindPopup('Eastern shore company'),
+            //new L.Marker([38.36, -75.59]).bindPopup('Salisbury University')
         ]);
         this.map = L.map('map', {
             layers: [osm, this.features],
@@ -55,13 +55,14 @@ dx.app.LeafletViewer = dx.define({
         //L.control.layers(baseMaps, overlayMaps).addTo(this.map);
         L.control.scale().addTo(this.map);
     },
-    addPolygonToFeatureGroup: function (polygon) {
+    addFeatureToFeatureGroup: function (feature) {
         var features = this.features;
         if (typeof features == 'undefined') {
             dx.log('No feature group found');
             return;
         }
-        features.addLayer(polygon);
+        if (feature != null)
+            features.addLayer(feature);
     },
     clearFeatures: function () {
         var features = this.features;
@@ -71,11 +72,11 @@ dx.app.LeafletViewer = dx.define({
         }
         features.clearLayers();
     },
-    createPolygon: function (obj) {
+    createFeature: function (obj) {
         var wkt = new Wkt.Wkt();
-        wkt.read(obj.g);
-        var polygon = wkt.toObject();        
-        return polygon;
+        wkt.read(obj);
+        var f = wkt.toObject();
+        return f;
     },
     getFeaturesBound: function () {
         var features = this.features;
