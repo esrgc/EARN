@@ -64,7 +64,7 @@ namespace ESRGC.DLLR.EARN.Tests
     public void testProfileGeoTag() { 
       //arrange
       var controller = new ProfileController(new WorkUnit(new DomainContext()));
-      controller.addAddressGeoTag(1);
+      //controller.addAddressGeoTag(1);
     }
   }
 }
