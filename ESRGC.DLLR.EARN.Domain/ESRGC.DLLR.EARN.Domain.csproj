@@ -55,6 +55,7 @@
     <Compile Include="DAL\DataInitializer.cs" />
     <Compile Include="DAL\DomainContext.cs" />
     <Compile Include="DAL\PasswordInitializer.cs" />
+    <Compile Include="Helpers\DataUtility.cs" />
     <Compile Include="Migrations\201310102158151_init.cs" />
     <Compile Include="Migrations\201310102158151_init.Designer.cs">
       <DependentUpon>201310102158151_init.cs</DependentUpon>
@@ -62,6 +63,10 @@
     <Compile Include="Migrations\201310151632400_Tag-Max-Size.cs" />
     <Compile Include="Migrations\201310151632400_Tag-Max-Size.Designer.cs">
       <DependentUpon>201310151632400_Tag-Max-Size.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201310171546018_tagNameLength.cs" />
+    <Compile Include="Migrations\201310171546018_tagNameLength.Designer.cs">
+      <DependentUpon>201310171546018_tagNameLength.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
@@ -81,15 +86,16 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Helpers\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201310102158151_init.resx">
       <DependentUpon>201310102158151_init.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201310151632400_Tag-Max-Size.resx">
       <DependentUpon>201310151632400_Tag-Max-Size.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201310171546018_tagNameLength.resx">
+      <DependentUpon>201310171546018_tagNameLength.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

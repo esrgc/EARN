@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
 using ESRGC.DLLR.EARN.Domain.ValidationAttributes;
+using ESRGC.DLLR.EARN.Domain.Helpers;
 
 namespace ESRGC.DLLR.EARN.Domain.Model
 {
@@ -12,6 +13,8 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public Contact() {
       LastUpdate = DateTime.Now;
     }
+    string _phone, _phone2;
+
     [ScaffoldColumn(false)]
     public int ContactID { get; set; }
 
@@ -43,12 +46,20 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     [Display(Name = "P.O. Box/Mail stop")]
     public string MailStop { get; set; }
 
+
     [MaxLength(20)]
     [Required(ErrorMessage = "Phone number is required")]
     [DataType(DataType.PhoneNumber)]
     [RegularExpression(@"^[01]?[- .]?(\([2-9]\d{2}\)|[2-9]\d{2})[- .]?\d{3}[- .]?\d{4}$", ErrorMessage = "Invalid phone number")]
     [Display(Name = "Phone number *")]
-    public string Phone { get; set; }
+    public string Phone {
+      get {
+        return DataUtility.formatPhoneNumber(_phone);
+      }
+      set {
+        _phone = DataUtility.normalizePhoneNumber(value);
+      }
+    }
 
     [Display(Name = "Ext.")]
     [MaxLength(4)]
@@ -62,7 +73,14 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     [DataType(DataType.PhoneNumber)]
     [RegularExpression(@"^[01]?[- .]?(\([2-9]\d{2}\)|[2-9]\d{2})[- .]?\d{3}[- .]?\d{4}$", ErrorMessage = "Invalid phone number")]
     [Display(Name = "Phone number #2")]
-    public string Phone2 { get; set; }
+    public string Phone2 {
+      get {
+        return DataUtility.formatPhoneNumber(_phone2);
+      }
+      set {
+        _phone2 = DataUtility.normalizePhoneNumber(value);
+      }
+    }
 
     [Display(Name = "Ext. #2")]
     [MaxLength(4)]
@@ -84,7 +102,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
 
     public string Floor { get; set; }
 
-    
+
 
   }
 }

@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Spatial;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ESRGC.DLLR.EARN.Domain.DAL.Abstract;
 using ESRGC.DLLR.EARN.Domain.Model;
 using ESRGC.DLLR.EARN.Models;
+using ESRGC.GIS.Geocoding;
+using ESRGC.GIS.Utilities;
 
 namespace ESRGC.DLLR.EARN.Controllers
 {
@@ -18,6 +21,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     public ActionResult Index() {
       return View();
     }
+
     public ActionResult Detail() {
       var profile = CurrentAccount.Profile;
       if (profile == null) {
@@ -28,13 +32,29 @@ namespace ESRGC.DLLR.EARN.Controllers
         .ProfileTagRepository
         .Entities
         .Where(x => x.ProfileID == profile.ProfileID)
+        .Select(x => x.Tag)
+        .OfType<Tag>()
         .Count();
 
       if (countTag == 0)
         return RedirectToAction("ManageTag", "Tag");
 
+      //check if address tag exists
+      int addressTagCount = _workUnit
+        .ProfileTagRepository
+        .Entities
+        .Where(x => x.ProfileID == profile.ProfileID)
+        .Select(x => x.Tag)
+        .OfType<GeoTag>()
+        .Where(x => x.Description.ToLower() == "address")
+        .Count();
+
+      if (addressTagCount == 0)
+        addUpdateAddrGeoTag(profile.ProfileID);
+
       return View(CurrentAccount.Profile);
     }
+
     public ActionResult Create() {
       //if (CurrentAccount.Profile != null) {
       //  updateTempDataMessage("Profile already created!");
@@ -74,7 +94,7 @@ namespace ESRGC.DLLR.EARN.Controllers
           account.Profile = p;
           _workUnit.AccountRepository.UpdateEntity(account);
           _workUnit.saveChanges();
-        }
+        }        
 
         return RedirectToAction("Detail");
       }
@@ -113,7 +133,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       }
       return RedirectToAction("Detail");
     }
-    
+
     public ActionResult UploadImage() {
       var profile = CurrentAccount.Profile;
       if (profile == null)
@@ -145,6 +165,6 @@ namespace ESRGC.DLLR.EARN.Controllers
       }
       //error has occurred   
       return View(profile);
-    }
+    }    
   }
 }

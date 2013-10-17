@@ -1,4 +1,36 @@
-﻿.placeholder-heading {
+﻿.placeholder-panel {
+  position: relative;
+  padding: 10px;
+  background: #f4f4f4;
+  border: 1px solid #f4f4f4;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+.transparent-placeholder-panel {
+  padding: 10px;
+}
+.panel-action-default {
+  margin: 5px 0 0 0;
+  padding: 5px 0;
+}
+.panel-action-right {
+  margin: 5px 0 0 0;
+  padding: 5px 0;
+  text-align: right;
+}
+.panel-action-left {
+  margin: 5px 0 0 0;
+  padding: 5px 0;
+  text-align: left;
+}
+.panel-action-center {
+  margin: 5px 0 0 0;
+  padding: 5px 0;
+  text-align: center;
+}
+.placeholder-heading {
   padding: 5px;
   margin-bottom: 8px;
   /*margin-left: -10px;*/
@@ -106,6 +138,9 @@ header {
     }*/
 
 }
+.your-profile-label {
+  margin-left: 12px;
+}
 .site-logo {
   padding: 10px 5px;
   vertical-align: middle;
@@ -137,37 +172,6 @@ label .error {
 .validation-summary-errors > ul {
   list-style: none;
 }
-.placeholder-panel {
-  padding: 10px;
-  background: #f4f4f4;
-  border: 1px solid #f4f4f4;
-  border-radius: 5px;
-  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-}
-.transparent-placeholder-panel {
-  padding: 10px;
-}
-.panel-action-default {
-  margin: 5px 0 0 0;
-  padding: 5px 0;
-}
-.panel-action-right {
-  margin: 5px 0 0 0;
-  padding: 5px 0;
-  text-align: right;
-}
-.panel-action-left {
-  margin: 5px 0 0 0;
-  padding: 5px 0;
-  text-align: left;
-}
-.panel-action-center {
-  margin: 5px 0 0 0;
-  padding: 5px 0;
-  text-align: center;
-}
 a.link-icon,
 .link-icon-container a {
   text-decoration: none;
@@ -179,4 +183,17 @@ a.link-icon:hover,
 .map {
   width: 100%;
   min-height: 320px;
+}
+.map-overlay-for-demo {
+  border-radius: 5px;
+  opacity: 0.5;
+  background: #808080;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999999;
+  text-align: center;
+  color: #FFFFFF;
 }

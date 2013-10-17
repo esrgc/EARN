@@ -241,6 +241,8 @@
     <Content Include="Client\js\bootstrapValidation.js" />
     <Content Include="Client\js\dx.min.js" />
     <None Include="Client\css\PagedList.notusedcss" />
+    <Content Include="Client\js\map\wicket-leaflet.js" />
+    <Content Include="Client\js\map\wicket.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Client\jsLib\jquery\jquery-2.0.3-vsdoc.js" />
@@ -272,6 +274,7 @@
     <Content Include="Views\Shared\orgFormPartial.cshtml" />
     <Content Include="Views\Organization\Edit.cshtml" />
     <Content Include="Views\Shared\contactFormPartial.cshtml" />
+    <None Include="Properties\PublishProfiles\FTP.pubxml" />
     <None Include="Properties\PublishProfiles\P drive.pubxml" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
   </ItemGroup>
@@ -313,6 +316,10 @@
     <ProjectReference Include="..\ESRGC.DLLR.EARN.Domain\ESRGC.DLLR.EARN.Domain.csproj">
       <Project>{77981CA6-31D5-43AA-92A1-9404C2FCE4AC}</Project>
       <Name>ESRGC.DLLR.EARN.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ESRGC.GIS\ESRGC.GIS.csproj">
+      <Project>{cb6dba67-5862-428d-ade1-b3db55a34a1c}</Project>
+      <Name>ESRGC.GIS</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

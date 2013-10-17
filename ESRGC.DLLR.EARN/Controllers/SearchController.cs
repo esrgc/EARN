@@ -69,7 +69,7 @@ namespace ESRGC.DLLR.EARN.Controllers
 
       //viewbag data
       ViewBag.filters = filters;
-
+      ViewBag.currentAccount = CurrentAccount;
       return View(model);
     }
   }

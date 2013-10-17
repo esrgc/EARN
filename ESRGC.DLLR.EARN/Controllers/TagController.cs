@@ -19,7 +19,12 @@ namespace ESRGC.DLLR.EARN.Controllers
     /// </summary>
     /// <returns></returns>
     public JsonResult Tags() {
-      var tags = _workUnit.TagRepository.Entities.OfType<Tag>().Select(x => x.Name).ToArray();
+      var tags = _workUnit
+        .TagRepository
+        .Entities
+        .Where(x=>!(x is GeoTag))
+        .Select(x => x.Name)
+        .ToArray();
       return Json(tags, JsonRequestBehavior.AllowGet);
     }
     /// <summary>
@@ -29,10 +34,8 @@ namespace ESRGC.DLLR.EARN.Controllers
     public ActionResult ManageTag() {
       if (CurrentAccount.Profile == null)
         return RedirectToAction("Create");
-      if (CurrentAccount.Profile.ProfileTags != null)
-        ViewBag.currentTags = CurrentAccount.Profile.ProfileTags.Select(x => x.Tag).ToList();
-
-      return View();
+      
+      return View(CurrentAccount.Profile);
     }
 
     [HttpPost]
@@ -43,8 +46,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       var profile = CurrentAccount.Profile;
       if (profile == null)
         return new EmptyResult();
-
-
+      
       if (ModelState.IsValid) {
         //preexisting tags
         var preExistingTags = _workUnit.TagRepository.Entities.Select(x => x.Name).ToList();
