@@ -25,6 +25,7 @@
 @{
     var filters = (ViewBag.filters as Dictionary<string, object>) ?? new Dictionary<string, object>();
     var currentTags = filters.ContainsKey("tags") ? filters["tags"] as List<string> : new List<string>();
+    var currentAccount = ViewBag.currentAccount as Account;
 }
 <div class="container" id="basicSearchPage">
     <div class="row">
@@ -127,7 +128,14 @@
                         </div>
                     }
                     @foreach (var profile in Model) {
-                        Html.RenderPartial("SearchProfilePartial", profile);
+                        if (profile.ProfileID == currentAccount.ProfileID) { 
+                            <span class="label label-important">Your organization</span>
+                            @Html.Partial("SearchProfilePartial", profile)
+                        }
+                        else
+                        {
+                            @Html.Partial("SearchProfilePartial", profile)
+                        }
                     }
                     @if (Model.PageCount > 1) {
                         @Html.PagedListPager(

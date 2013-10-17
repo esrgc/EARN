@@ -1,5 +1,6 @@
 ﻿@using ESRGC.DLLR.EARN.Helpers
-@model ESRGC.DLLR.EARN.Domain.Model.Profile
+@using ESRGC.DLLR.EARN.Domain.Model
+@model Profile
 
 @{
     ViewBag.Title = "Profile";
@@ -49,7 +50,7 @@
                                         <small><a class="link-icon" href="@Url.Action("Edit", "Organization", new { id = Model.OrganizationID })">
                                             <i class="icon-pencil"></i></a>
                                         </small>
-                                        <br/>
+                                        <br />
                                         <small>@Model.UserGroup.Name</small>
                                         @*-
                                         <small>@Model.Category.Name</small>*@
@@ -57,10 +58,12 @@
                                         <small><a target="_blank" href="http://@Model.Organization.Website" title="Organization website">@Model.Organization.Website</a></small>
                                         <br />
                                         @if (Model.Organization.Department != null) {
-                                            <small><abbr title="Department">Dept:</abbr>@Model.Organization.Department</small> <br />
+                                            <small>
+                                                <abbr title="Department">Dept:</abbr>@Model.Organization.Department</small> <br />
                                         }
                                         @if (Model.Organization.Building != null) {
-                                            <small><abbr title="Building">Bld:</abbr>@Model.Organization.Building</small><br />
+                                            <small>
+                                                <abbr title="Building">Bld:</abbr>@Model.Organization.Building</small><br />
                                         }
                                         <small>@Model.Organization.City, @Model.Organization.State @Model.Organization.Zip</small>
                                     </h4>
@@ -89,7 +92,7 @@
                         </span>
                     </div>
                     <div class="window-panel-content">
-                        @Html.Partial("tagListDisplayPartial", Model.ProfileTags.Select(x => x.Tag.Name).ToList())
+                        @Html.Partial("tagListDisplayPartial", Html.getTagListString(Model))
                     </div>
                 </div>
             </div>
@@ -110,7 +113,7 @@
                             @Model.Organization.StreetAddress
                             <br />
                             <abbr title="Phone">P:</abbr>
-                            @Html.DisplayPhoneText(Model.Contact.Phone)<br />
+                            @Model.Contact.Phone<br />
                             <a href="mailto:@Model.Contact.Email">@Model.Contact.Email</a>
                         </address>
                     </div>

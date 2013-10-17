@@ -138,7 +138,13 @@ namespace ESRGC.DLLR.EARN.Helpers
     public static string DisplayPhoneText(this HtmlHelper helper, string phoneNumb) {
       return DataUtility.normalizePhoneNumber(phoneNumb);
     }
-
+    //get tags in current profile
+    public static List<string> getTagListString(this HtmlHelper helper, Profile profile) {
+      return DataUtility.getTagListString(profile);
+    }
+    public static List<Tag> getTagList(this HtmlHelper helper, Profile profile) {
+      return DataUtility.getTagList(profile);
+    }
     //public static MvcHtmlString DisplayStreetAddr(
     //    this HtmlHelper helper,
     //    Contact contact

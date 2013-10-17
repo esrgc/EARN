@@ -72,13 +72,17 @@ namespace ESRGC.DLLR.EARN.Controllers
         //create geo tag
         var geoTag = new GeoTag() {
           Name = address,
-          Geometry = DbGeometry.PointFromText(wkt, geocoder.SpatialReference)
+          Geometry = DbGeometry.PointFromText(wkt, geocoder.SpatialReference),
+          Description = "address"
         };
 
         try {
           var currentTag = _workUnit.TagRepository.Entities.OfType<GeoTag>().First(x => x.Name.ToUpper() == address.ToUpper());
           //update the geometry if it already exists
           currentTag.Geometry = geoTag.Geometry;
+          if (currentTag.Description == "")
+            currentTag.Description = "address";
+          //update to database
           _workUnit.TagRepository.UpdateEntity(currentTag);
           //check if it already has referenced this profile
           if (!profile.ProfileTags.Select(x => x.Tag).Contains(currentTag)) {

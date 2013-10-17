@@ -1,4 +1,5 @@
 ﻿@using ESRGC.DLLR.EARN.Domain.Model
+@model Profile
 @{
     ViewBag.Title = "Search Tag";
     ViewBag.Header = "Searchable tags";
@@ -133,7 +134,7 @@
     </script>
 }
 @{
-    var currentTags = ViewBag.currentTags as List<Tag> ?? new List<Tag>();    
+    var currentTags = Html.getTagList(Model);  
 }
 <div class="container">
     <div class="row">

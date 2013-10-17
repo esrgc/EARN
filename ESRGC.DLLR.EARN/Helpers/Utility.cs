@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Text;
+using ESRGC.DLLR.EARN.Domain.Model;
 
 namespace ESRGC.DLLR.EARN.Helpers
 {
@@ -35,6 +36,6 @@ namespace ESRGC.DLLR.EARN.Helpers
       }
 
       return builder.ToString();
-    }   
+    }    
   }
 }

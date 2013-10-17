@@ -21,6 +21,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     public ActionResult Index() {
       return View();
     }
+
     public ActionResult Detail() {
       var profile = CurrentAccount.Profile;
       if (profile == null) {
@@ -37,6 +38,19 @@ namespace ESRGC.DLLR.EARN.Controllers
 
       if (countTag == 0)
         return RedirectToAction("ManageTag", "Tag");
+
+      //check if address tag exists
+      int addressTagCount = _workUnit
+        .ProfileTagRepository
+        .Entities
+        .Where(x => x.ProfileID == profile.ProfileID)
+        .Select(x => x.Tag)
+        .OfType<GeoTag>()
+        .Where(x => x.Description.ToLower() == "address")
+        .Count();
+
+      if (addressTagCount == 0)
+        addUpdateAddrGeoTag(profile.ProfileID);
 
       return View(CurrentAccount.Profile);
     }

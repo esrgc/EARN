@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ESRGC.DLLR.EARN.Domain.Model;
 
 namespace ESRGC.DLLR.EARN.Domain.Helpers
 {
@@ -34,15 +35,44 @@ namespace ESRGC.DLLR.EARN.Domain.Helpers
         double number;
         if (double.TryParse(phoneNumb, out number)) {
           if (phoneNumb.Length > 10)
-            return string.Format("{0: # (###) ###-####}", number);
+            return string.Format("{0:# (###) ###-####}", number);
           else
-            return string.Format("{0: (###) ###-####}", number);
+            return string.Format("{0:(###) ###-####}", number);
         }
         else
           return phoneNumb;
       }
       else
         return "";
+    }
+    public static List<string> getTagListString(Profile profile) {
+      try {
+        var list = profile.ProfileTags
+                            .Select(x => x.Tag)
+                            .Where(x => !(x is GeoTag))
+                            .Select(x => x.Name).ToList();
+        if (list == null)
+          list = new List<string>();
+        return list;
+
+      }
+      catch {
+        return new List<string>();        
+      }
+    }
+    public static List<Tag> getTagList(Profile profile) {
+      try {
+        var list = profile.ProfileTags
+                            .Select(x => x.Tag)
+                            .Where(x => !(x is GeoTag))
+                            .ToList();
+        if (list == null)
+          list = new List<Tag>();
+        return list;
+      }
+      catch (Exception) {
+        return new List<Tag>();
+      }
     }
   }
 }
