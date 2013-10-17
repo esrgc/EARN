@@ -26,13 +26,15 @@ namespace ESRGC.DLLR.EARN
         "~/Client/jsLib/jqueryValidate/jquery.validate.unobtrusive*",
         "~/Client/js/bootstrapValidation.js"
       ));
-      bundles.Add(new ScriptBundle("~/bundles/js/library").Include(
+      bundles.Add(new ScriptBundle("~/bundles/js/customLibs").Include(
         "~/Client/js/dx.min.js",
         "~/Client/jsLib/typeahead.js/typeahead.min.js"
       ));
       bundles.Add(new ScriptBundle("~/bundles/js/map").Include(
         "~/Client/js/map/mapViewer.js",
-        "~/Client/js/map/leafletViewer.js"
+        "~/Client/js/map/leafletViewer.js",
+        "~/Client/js/map/wicket.js",
+        "~/Client/js/map/wicket-leaflet.js"
       ));
       bundles.Add(new ScriptBundle("~/bundles/apps/search").Include(        
         

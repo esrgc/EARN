@@ -48,7 +48,9 @@ header {
     }*/
 }
 
-
+.your-profile-label{
+    margin-left: 12px
+}
 
 .site-logo {
     padding: 10px 5px;
@@ -88,36 +90,6 @@ label {
     }
 }
 
-.placeholder-panel {
-    padding: 10px;
-    background: @base-color;
-    border: 1px solid @base-color;
-    .rounded-corner;
-    .drop-shadow(0, 0, 5px);
-}
-
-.transparent-placeholder-panel {
-    padding: 10px;
-}
-
-.panel-action-default {
-    .panel-action;
-}
-
-.panel-action-right {
-    .panel-action;
-    text-align: right;
-}
-
-.panel-action-left {
-    .panel-action;
-    text-align: left;
-}
-
-.panel-action-center {
-    .panel-action;
-    text-align: center;
-}
 
 a.link-icon, .link-icon-container a {
     text-decoration: none;
@@ -130,4 +102,18 @@ a.link-icon, .link-icon-container a {
 .map {
     width: 100%;
     min-height: 320px;
+}
+
+.map-overlay-for-demo {
+    .rounded-corner;
+    opacity: 0.5;
+    background: #808080;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999999;
+    text-align: center;
+    color: #FFFFFF;
 }

@@ -29,6 +29,11 @@ namespace ESRGC.DLLR.EARN.Controllers
       if (ModelState.IsValid) {
         _workUnit.OrganizationRepository.UpdateEntity(org);
         _workUnit.saveChanges();
+
+        //since address might have been updated so update the geotag
+        if(CurrentAccount.Profile != null && CurrentAccount.ProfileID.HasValue)
+          addUpdateAddrGeoTag(CurrentAccount.ProfileID.Value);
+
         return RedirectToAction("Detail", "Profile");
       }
       //errors

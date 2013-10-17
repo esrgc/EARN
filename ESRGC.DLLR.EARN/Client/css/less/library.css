@@ -1,4 +1,36 @@
-﻿.placeholder-heading {
+﻿.placeholder-panel {
+  position: relative;
+  padding: 10px;
+  background: #f4f4f4;
+  border: 1px solid #f4f4f4;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+.transparent-placeholder-panel {
+  padding: 10px;
+}
+.panel-action-default {
+  margin: 5px 0 0 0;
+  padding: 5px 0;
+}
+.panel-action-right {
+  margin: 5px 0 0 0;
+  padding: 5px 0;
+  text-align: right;
+}
+.panel-action-left {
+  margin: 5px 0 0 0;
+  padding: 5px 0;
+  text-align: left;
+}
+.panel-action-center {
+  margin: 5px 0 0 0;
+  padding: 5px 0;
+  text-align: center;
+}
+.placeholder-heading {
   padding: 5px;
   margin-bottom: 8px;
   /*margin-left: -10px;*/

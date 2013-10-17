@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Routing;
 using System.Web.Mvc;
 using ESRGC.DLLR.EARN.Domain.Model;
+using ESRGC.DLLR.EARN.Domain.Helpers;
 
 namespace ESRGC.DLLR.EARN.Helpers
 {
@@ -135,28 +136,33 @@ namespace ESRGC.DLLR.EARN.Helpers
     }
 
     public static string DisplayPhoneText(this HtmlHelper helper, string phoneNumb) {
-      if (!string.IsNullOrEmpty(phoneNumb)) {
-        phoneNumb = phoneNumb
-            .Replace(".", "")
-            .Replace("-", "")
-            .Replace("(", "")
-            .Replace(")", "")
-            .Replace(" ", "")
-            .Trim();
-        double number;
-        if (double.TryParse(phoneNumb, out number)) {
-          if (phoneNumb.Length > 10)
-            return string.Format("{0: # (###) ###-####}", number);
-          else
-            return string.Format("{0: (###) ###-####}", number);
-        }
-        else
-          return phoneNumb;
-      }
-      else
-        return "";
+      return DataUtility.normalizePhoneNumber(phoneNumb);
     }
-
+    //get tags in current profile
+    public static List<string> getTagListString(this HtmlHelper helper, Profile profile) {
+      return DataUtility.getTagListString(profile);
+    }
+    public static List<Tag> getTagList(this HtmlHelper helper, Profile profile) {
+      return DataUtility.getTagList(profile);
+    }
+    /// <summary>
+    /// get address geotag from profile
+    /// </summary>
+    /// <param name="helper"></param>
+    /// <param name="profile"></param>
+    /// <returns></returns>
+    public static GeoTag getAddrGeoTag(this HtmlHelper helper, Profile profile) {
+      try {
+        var geoTag = profile
+          .ProfileTags
+          .Select(x => x.Tag)
+          .First(x => (x is GeoTag) && x.Description == "address") as GeoTag;
+        return geoTag;
+      }
+      catch {
+        return null;
+      }
+    }
     //public static MvcHtmlString DisplayStreetAddr(
     //    this HtmlHelper helper,
     //    Contact contact

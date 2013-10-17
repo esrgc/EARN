@@ -127,6 +127,9 @@ dx.defineController('Search', {
         //set state to loaded
         scope.loadedState();
         scope.updateTagList();
+
+        if (typeof this.events.searchStoreLoaded == 'function')
+            this.events.searchStoreLoaded.apply(store, arguments);//call in store scope
     },
     //helpers
     tagExists: function (tag) {
