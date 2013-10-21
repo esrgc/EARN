@@ -101,24 +101,7 @@
                         Contact <i class="icon-envelope"></i>
                     </div>
                     <div class="window-panel-content">
-                        <address>
-                            @Model.Contact.NameTitle
-                            <strong>@Model.Contact.FirstName @Model.Contact.Middle @Model.Contact.LastName</strong>
-                            @Model.Contact.NameExtension
-                            <br />
-                            @Model.Organization.StreetAddress
-                            <br />
-                            @if (Model.Organization.Department != null) {
-                                <abbr title="Department">Dept:</abbr>@Model.Organization.Department <br />
-                            }
-                            @if (Model.Organization.Building != null) {
-                                <abbr title="Building">Bld:</abbr>@Model.Organization.Building<br />
-                            }
-                            @Model.Organization.City, @Model.Organization.State @Model.Organization.Zip<br />
-                            <abbr title="Phone">P:</abbr>
-                            @Model.Contact.Phone<br />
-                            <a href="mailto:@Model.Contact.Email">@Model.Contact.Email</a>
-                        </address>
+                        @Html.Partial("profileContactPartial")
                     </div>
                 </div>
             </div>

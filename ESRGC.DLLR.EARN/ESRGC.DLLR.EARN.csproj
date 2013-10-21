@@ -279,7 +279,8 @@
     <None Include="Properties\PublishProfiles\FTP.pubxml" />
     <None Include="Properties\PublishProfiles\P drive.pubxml" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
-    <Content Include="Views\Shared\profileAction.cshtml" />
+    <Content Include="Views\Shared\profileActionPartial.cshtml" />
+    <Content Include="Views\Shared\profileContactPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
