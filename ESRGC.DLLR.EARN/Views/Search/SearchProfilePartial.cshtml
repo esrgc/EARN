@@ -9,11 +9,14 @@
 <section id="result-@Model.ProfileID"  class="profile-search-result"
     data-location="@location" 
     data-organization="@Model.Organization.Name"
-    data-profileUrl = "@Url.Action("ViewProfile", "Profile", new { Model.ProfileID, returnUrl = Url.GenerateLinkFromFilters("Basic", filters)})">
+    data-profileUrl = "@Url.Action("ViewProfile", "Profile", new { Model.ProfileID, returnUrl = Url.GenerateLinkFromFilters("Basic", filters) })">
     <div class="row">
         <div class="col-sm-12 ">
             <div class="placeholder-panel">
                 <div class="post">
+                    <span class="pull-right">
+                        @Html.Partial("profileActionPartial")
+                    </span>
                     <div class="inline-container profile-area">
                         <div class="profile-picture">
                             @if (Model.PictureID != null) { 

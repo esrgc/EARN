@@ -31,13 +31,7 @@
                     <a href="@returnUrl"><i class="icon-long-arrow-left"></i>&nbsp;Back to search</a>
                 </div>
                 <div class="pull-right panel-action-default">
-                    <div class="dropdown">
-                        <a class="btn btn-primary btn-xs" href="#" class="dropdown-toggle" data-toggle="dropdown">More&nbsp;<b class="caret"></b></a>
-                        @*<ul class="dropdown-menu">
-                            <li><a>Add to my contact</a></li>
-                            <li><a>More action</a></li>
-                        </ul>*@
-                    </div>
+                    @Html.Partial("profileActionPartial")
                 </div>
                 <div class="clear"></div>
             </div>
@@ -108,19 +102,19 @@
         </div>
         <div class="col-sm-8 profile-tabs">
             <ul class="nav nav-tabs ">
-                <li class="active"><a href="#summary" data-toggle="tab">Summary</a></li>
-                <li><a href="#needs" data-toggle="tab">Our needs</a></li>
+                <li class="active"><a href="#tab1" data-toggle="tab">Summary</a></li>
+                <li><a href="#tab2" data-toggle="tab">Partnerships</a></li>
             </ul>
             <div class="tab-content">
-                <div class="tab-pane active" id="summary">
+                <div class="tab-pane active" id="tab1">
                     <div class="placeholder">
                         <h4>About</h4>
                         <p>@Model.About</p>
                     </div>
                 </div>
-                <div class="tab-pane" id="needs">
+                <div class="tab-pane" id="tab2">
                     <div class="placeholder">
-                        <h4>Needs is coming soon...</h4>
+                        <h4>Partnership is coming soon...</h4>
                     </div>
                 </div>
             </div>
