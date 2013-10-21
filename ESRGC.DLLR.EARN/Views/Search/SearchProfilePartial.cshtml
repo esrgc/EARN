@@ -14,9 +14,6 @@
         <div class="col-sm-12 ">
             <div class="placeholder-panel">
                 <div class="post">
-                    <span class="pull-right">
-                        @Html.Partial("profileActionPartial")
-                    </span>
                     <div class="inline-container profile-area">
                         <div class="profile-picture">
                             @if (Model.PictureID != null) { 
@@ -69,6 +66,9 @@
                                 }
                             </div>
                         </div>
+                        <span class="pull-right">
+                            @Html.Partial("profileActionPartial")
+                        </span>
                     </div>
                     <div class="clear"></div>
                 </div>

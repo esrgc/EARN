@@ -176,10 +176,10 @@
     <Content Include="Client\css\less\bootstrap-custom.min.css">
       <DependentUpon>bootstrap-custom.less</DependentUpon>
     </Content>
-    <Content Include="Client\css\less\library.css">
+    <Content Include="Client\css\less\lib\library.css">
       <DependentUpon>library.less</DependentUpon>
     </Content>
-    <Content Include="Client\css\less\library.min.css">
+    <Content Include="Client\css\less\lib\library.min.css">
       <DependentUpon>library.less</DependentUpon>
     </Content>
     <Content Include="Client\css\less\profile.css">
@@ -194,24 +194,18 @@
     <Content Include="Client\css\less\quickForm.min.css">
       <DependentUpon>quickForm.less</DependentUpon>
     </Content>
-    <Content Include="Client\css\less\variables.css">
+    <Content Include="Client\css\less\lib\variables.css">
       <DependentUpon>variables.less</DependentUpon>
     </Content>
-    <Content Include="Client\css\less\variables.min.css">
+    <Content Include="Client\css\less\lib\variables.min.css">
       <DependentUpon>variables.less</DependentUpon>
-    </Content>
-    <Content Include="Client\css\less\windowPanel.css">
-      <DependentUpon>windowPanel.less</DependentUpon>
-    </Content>
-    <Content Include="Client\css\less\windowPanel.min.css">
-      <DependentUpon>windowPanel.less</DependentUpon>
     </Content>
     <Content Include="Client\css\less\bootstrap-custom.less" />
     <Content Include="Client\css\less\quickForm.less" />
     <None Include="Client\css\profile.oldcss" />
     <None Include="Client\css\quickForm.oldcss" />
-    <Content Include="Client\css\less\variables.less" />
-    <Content Include="Client\css\less\library.less" />
+    <Content Include="Client\css\less\lib\variables.less" />
+    <Content Include="Client\css\less\lib\library.less" />
     <Content Include="Client\css\less\profile.less" />
     <None Include="Client\css\site.oldcss" />
     <Content Include="Client\css\less\site.css">
@@ -222,7 +216,6 @@
     </Content>
     <Content Include="Client\css\stickyFooter.css" />
     <Content Include="Client\css\typeahead.css" />
-    <None Include="Client\css\less\windowPanel.less" />
     <Content Include="Client\images\ajax-loader-fb.gif" />
     <Content Include="Client\images\EARN_logo_200w.jpg" />
     <Content Include="Client\images\empty_profile.gif" />

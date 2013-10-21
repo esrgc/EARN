@@ -1,43 +1,4 @@
-﻿.list-container > ul > li {
-  padding: 10px 0;
-  border-bottom: 1px solid #dddddd;
-}
-.footer {
-  border-top: 1px solid #dddddd;
-  position: relative;
-  background: #f6f6f6;
-}
-.footer > .container {
-  border-top: 1px solid #dddddd;
-  padding: 20px 15px 0 15px;
-}
-.post {
-  margin: 0;
-  padding: 15px;
-  border: 1px solid #dee4e2;
-  /*text-shadow: 1px 1px 1px #E1E1E1;*/
-
-  background: #FFFFFF;
-  position: relative;
-  border-radius: 5px;
-}
-.post > p {
-  margin: 10px 0;
-}
-.post h5 {
-  margin-top: 0;
-}
-.inline-container > .list-container {
-  margin: 0 5px 0 0;
-}
-.inline-container > div {
-  display: inline-block;
-  float: left;
-}
-.clear {
-  clear: both;
-}
-body.modal-open,
+﻿body.modal-open,
 .modal-open .navbar-fixed-top,
 .modal-open .navbar-fixed-bottom {
   margin-right: 0;

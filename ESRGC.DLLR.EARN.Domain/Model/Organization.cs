@@ -24,9 +24,9 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     }
 
     [MaxLength(1000)]
-    [Display(Description = "Mission statement")]
+    [Display(Description = "Briefly describe organizational goals or statement of purpose")]
     [DataType(DataType.MultilineText)]
-    [Required(ErrorMessage = "Please describe your organization")]
+    [Required(ErrorMessage = "Please provide a brief statement of purpose")]
     public string Description { get; set; }
 
     [DataType(DataType.Url)]
