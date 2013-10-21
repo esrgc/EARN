@@ -9,6 +9,7 @@ using PagedList;
 
 namespace ESRGC.DLLR.EARN.Controllers
 {
+  [Authorize]
   public class SearchController : BaseController
   {
     public SearchController(IWorkUnit workUnit) : base(workUnit) { }

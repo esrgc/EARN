@@ -5,6 +5,7 @@
     var currentTags = filters.ContainsKey("tags") ? filters["tags"] as List<string> : new List<string>();
     var geoTag = Html.getAddrGeoTag(Model);
     var location = geoTag == null ? "" : geoTag.Geometry.WellKnownValue.WellKnownText;
+    var currentAccount = ViewBag.currentAccount as Account ?? new Account();
 }
 <section id="result-@Model.ProfileID"  class="profile-search-result"
     data-location="@location" 
@@ -22,9 +23,11 @@
                             else {
                                 <img class="img-thumbnail" src="@Url.Content("~/Client/images/empty_profile.gif")"/>
                             }
-                            <div class="panel-action-default">
-                                @Html.Partial("profileActionPartial")
-                            </div>
+                            @if (Model.ProfileID != currentAccount.ProfileID) {
+                                <div class="panel-action-default">
+                                    @Html.Partial("profileActionPartial")
+                                </div>
+                            }
                         </div>
                         <div class="row profile-container">
                             <div class="col-sm-8">
