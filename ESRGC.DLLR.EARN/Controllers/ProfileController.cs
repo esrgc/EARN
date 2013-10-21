@@ -165,6 +165,19 @@ namespace ESRGC.DLLR.EARN.Controllers
       }
       //error has occurred   
       return View(profile);
-    }    
+    }
+
+    [HttpGet]
+    public ActionResult AddConnection(int profileID) {
+      if (CurrentAccount.Profile == null) {
+        updateTempDataMessage("You haven't created a profile. Please create one before adding connection");
+        return RedirectToAction("Index", "Home");
+      }
+
+      var profile = CurrentAccount.Profile;
+      var connection = profile.createConnection(profileID);
+
+      return RedirectToAction("Detail");
+    }
   }
 }

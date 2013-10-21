@@ -122,7 +122,7 @@ namespace ESRGC.DLLR.EARN.Models
     {
         public int AccountID { get; set; }
         [Required]
-        [Display(Name = "User name")]
+        [Display(Name = "User tagName")]
         public string UserName { get; set; }
         [Required]
         [DataType(DataType.EmailAddress)]

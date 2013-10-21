@@ -9,25 +9,26 @@ namespace ESRGC.DLLR.EARN.Domain.Model
   public class Organization
   {
     public int OrganizationID { get; set; }
-    [Required(ErrorMessage="Please enter your organization name!")]
-    [Display(Name="Name")]
+    [Required(ErrorMessage = "Please enter your organization name!")]
+    [Display(Name = "Name")]
     public string Name { get; set; }
 
     string _website, _facebook, _linkedIn, _twitter;
     [MaxLength(50)]
-    [Display(Description="www.someorganization.org")]
+    [Display(Description = "www.someorganization.org")]
     [DataType(DataType.Url)]
+    [RegularExpression(@"^[a-zA-Z0-9\-\.]+\.(com|org|net|mil|edu|COM|ORG|NET|MIL|EDU)$", ErrorMessage = "Invalid Url")]
     public string Website {
       get { return _website; }
-      set { _website = value == null? "" : value.Replace("http://", "").Trim(); }
+      set { _website = value == null ? "" : value.Replace("http://", "").Trim(); }
     }
 
     [MaxLength(1000)]
-    [Display(Description="Mission statement")]
+    [Display(Description = "Mission statement")]
     [DataType(DataType.MultilineText)]
-    [Required(ErrorMessage="Please describe your organization")]
+    [Required(ErrorMessage = "Please describe your organization")]
     public string Description { get; set; }
-    
+
     [DataType(DataType.Url)]
     public string FacebookLink {
       get { return _facebook; }

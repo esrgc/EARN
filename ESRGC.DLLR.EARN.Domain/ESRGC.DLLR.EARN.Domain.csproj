@@ -68,12 +68,19 @@
     <Compile Include="Migrations\201310171546018_tagNameLength.Designer.cs">
       <DependentUpon>201310171546018_tagNameLength.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201310211529569_Connection-Partnership.cs" />
+    <Compile Include="Migrations\201310211529569_Connection-Partnership.Designer.cs">
+      <DependentUpon>201310211529569_Connection-Partnership.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
+    <Compile Include="Model\Connection.cs" />
     <Compile Include="Model\GeoTag.cs" />
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\Organization.cs" />
     <Compile Include="Model\Contact.cs" />
+    <Compile Include="Model\Partnership.cs" />
+    <Compile Include="Model\PartnershipDetail.cs" />
     <Compile Include="Model\Picture.cs" />
     <Compile Include="Model\Profile.cs" />
     <Compile Include="Model\ProfileTag.cs" />
@@ -96,6 +103,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201310171546018_tagNameLength.resx">
       <DependentUpon>201310171546018_tagNameLength.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201310211529569_Connection-Partnership.resx">
+      <DependentUpon>201310211529569_Connection-Partnership.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

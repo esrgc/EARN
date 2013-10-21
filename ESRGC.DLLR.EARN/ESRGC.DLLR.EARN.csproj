@@ -139,9 +139,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ConnectionController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrganizationController.cs" />
+    <Compile Include="Controllers\PartnershipController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\TagController.cs" />
@@ -277,6 +279,7 @@
     <None Include="Properties\PublishProfiles\FTP.pubxml" />
     <None Include="Properties\PublishProfiles\P drive.pubxml" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
+    <Content Include="Views\Shared\profileAction.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

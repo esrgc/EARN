@@ -42,7 +42,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       var address = profile.Organization.StreetAddress;
       var zip = profile.Organization.Zip;
       var city = profile.Organization.City;
-
+      var state = profile.Organization.State;
       //if any field is empty do nothing
       if (string.IsNullOrEmpty(address) ||
         string.IsNullOrEmpty(zip) ||
@@ -68,16 +68,17 @@ namespace ESRGC.DLLR.EARN.Controllers
       }
       //create geo tag
       if (location != null) {
-        var wkt = string.Format("POINT ({0} {1})", location.x, location.y);
+        var tagName = string.Format("{0}, {1}, {2} {3}", address, city, state, zip);
+        var wkt = string.Format("POINT({0} {1})", location.x, location.y);
         //create geo tag
         var geoTag = new GeoTag() {
-          Name = address,
+          Name = tagName,
           Geometry = DbGeometry.PointFromText(wkt, geocoder.SpatialReference),
           Description = "address"
         };
 
         try {
-          var currentTag = _workUnit.TagRepository.Entities.OfType<GeoTag>().First(x => x.Name.ToUpper() == address.ToUpper());
+          var currentTag = _workUnit.TagRepository.Entities.OfType<GeoTag>().First(x => x.Name.ToUpper() == tagName.ToUpper());
           //update the geometry if it already exists
           currentTag.Geometry = geoTag.Geometry;
           if (currentTag.Description == "")

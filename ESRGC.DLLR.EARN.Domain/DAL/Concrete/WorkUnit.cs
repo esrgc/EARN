@@ -20,6 +20,9 @@ namespace ESRGC.DLLR.EARN.Domain.DAL.Concrete
     IRepository<UserGroup> _userGroupRepo;
     IRepository<Tag> _tagRepo;
     IRepository<ProfileTag> _profileTagRepo;
+    IRepository<Connection> _connectionRepo;
+    IRepository<Partnership> _partnershipRepo;
+    IRepository<PartnershipDetail> _parnershipDetailRepo;
 
     public WorkUnit(DomainContext context) {
       _context = context;
@@ -87,6 +90,21 @@ namespace ESRGC.DLLR.EARN.Domain.DAL.Concrete
     public IRepository<ProfileTag> ProfileTagRepository {
       get {
         return _profileTagRepo ?? (_profileTagRepo = new Repository<ProfileTag>(_context));
+      }
+    }
+    public IRepository<Connection> ConnectionRepository {
+      get {
+        return _connectionRepo ?? (_connectionRepo = new Repository<Connection>(_context));
+      }
+    }
+    public IRepository<Partnership> PartnershipRepository {
+      get {
+        return _partnershipRepo ?? (_partnershipRepo = new Repository<Partnership>(_context));
+      }
+    }
+    public IRepository<PartnershipDetail> PartnershipDetailRepository {
+      get { 
+        return _parnershipDetailRepo ?? (_parnershipDetailRepo = new Repository<PartnershipDetail>(_context));
       }
     }
     #endregion

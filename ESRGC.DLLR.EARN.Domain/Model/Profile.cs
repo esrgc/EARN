@@ -10,9 +10,8 @@ namespace ESRGC.DLLR.EARN.Domain.Model
   public class Profile
   {
     /// <summary>
-    /// For location based app
+    /// Profile ID
     /// </summary>
-    ///
     public int ProfileID { get; set; }
     //[ScaffoldColumn(false)]
     //public double? lat { get; set; }
@@ -28,7 +27,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public int ContactID { get; set; }
     public virtual Contact Contact { get; set; }
 
-    [Display(Name="Organization")]
+    [Display(Name = "Organization")]
     public int OrganizationID { get; set; }
     public virtual Organization Organization { get; set; }
 
@@ -39,8 +38,30 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public virtual Category Category { get; set; }
 
     public DateTime? LastUpdate { get; set; }
-    [Display(Description="Description about why you're on this site.")]
+    [Display(Description = "Description about why you're on this site.")]
     public string About { get; set; }
     public virtual ICollection<ProfileTag> ProfileTags { get; set; }
+    public virtual ICollection<Connection> Connections { get; set; }
+    public virtual ICollection<PartnershipDetail> PartnershipDetails { get; set; }
+
+    public Connection createConnection(int ProfileID) {
+      var connection = new Connection() { ProfileID = this.ProfileID, ProfileID2 = ProfileID };
+      return connection;
+    }
+
+    public bool LocationVerified() {
+      if (ProfileTags == null)
+        return false;
+      try {
+        ProfileTags
+          .Select(x=>x.Tag)
+          .OfType<GeoTag>()
+          .First(x => x.Description.ToLower() == "address");
+        return true;
+      }
+      catch {
+        return false;
+      }
+    }
   }
 }

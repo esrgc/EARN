@@ -61,15 +61,7 @@
                                                     @Model.Organization.Website
                                                 </a>
                                             </small>
-                                            <br />
                                         }
-                                        @if (Model.Organization.Department != null) {
-                                            <small><abbr title="Department">Dept:</abbr>@Model.Organization.Department</small> <br />
-                                        }
-                                        @if (Model.Organization.Building != null) {
-                                            <small><abbr title="Building">Bld:</abbr>@Model.Organization.Building</small><br />
-                                        }
-                                        <small>@Model.Organization.City, @Model.Organization.State @Model.Organization.Zip</small>
                                     </h4>
                                     <p>@Model.Organization.Description</p>
                                 </div>
@@ -115,7 +107,25 @@
                             @Model.Contact.NameExtension
                             <br />
                             @Model.Organization.StreetAddress
+                            @if (Model.LocationVerified()) {
+                                <span class="label label-success" title="Address located"><i class="icon-ok"></i>&nbsp;Verified</span>
+                            }
+                            else {
+                                <span class="label label-danger" 
+                                    title="Address not located. You can change address by editing your organization address">
+                                    <i class="icon-remove"></i>&nbsp;Not verified
+                                </span>
+                            }
                             <br />
+                            @if (Model.Organization.Department != null) {
+                                <small>
+                                    <abbr title="Department">Dept:</abbr>&nbsp;@Model.Organization.Department</small> <br />
+                            }
+                            @if (Model.Organization.Building != null) {
+                                <small>
+                                    <abbr title="Building">Bld:</abbr>&nbsp;@Model.Organization.Building</small><br />
+                            }
+                            @Model.Organization.City, @Model.Organization.State @Model.Organization.Zip<br />
                             <abbr title="Phone">P:</abbr>
                             @Model.Contact.Phone<br />
                             <a href="mailto:@Model.Contact.Email">@Model.Contact.Email</a>
@@ -127,8 +137,8 @@
         <div class="col-sm-8 profile-tabs">
             <ul class="nav nav-tabs ">
                 <li class="active"><a href="#summary" data-toggle="tab">Summary</a></li>
-                <li><a href="#needs" data-toggle="tab">Our needs</a></li>
-                <li><a href="#contacts" data-toggle="tab">Contacts</a></li>
+                <li><a href="#connections" data-toggle="tab">Connections</a></li>
+                <li><a href="#partnerships" data-toggle="tab">Partnerships</a></li>
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="summary">
@@ -136,9 +146,9 @@
                         <form action="@Url.Action("EditAbout")" method="post">
                             <h4>About</h4>
                             @Html.TextAreaFor(x => x.About, new {
-                           @class = "form-control about",
-                           placeholder = ModelMetadata.FromLambdaExpression(x => x.About, ViewData).Description
-                       })
+                               @class = "form-control about",
+                               placeholder = ModelMetadata.FromLambdaExpression(x => x.About, ViewData).Description
+                           })
                             <div class="text-right">
                                 <button type="submit" class="btn btn-info btn-xs"><i class="icon-save"></i>&nbsp;Save</button>
 
@@ -146,16 +156,16 @@
                         </form>
                     </div>
                 </div>
-                <div class="tab-pane" id="needs">
-                    <div class="placeholder">
-                        <h4>Needs is coming soon...</h4>
-                    </div>
-                </div>
-                <div class="tab-pane" id="contacts">
+                <div class="tab-pane" id="connections">
                     <div class="placeholder">
                         <div>
-                            <h4>Contacts is coming soon...</h4>
+                            <h4>My Connections</h4>
                         </div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="partnerships">
+                    <div class="placeholder">
+                        <h4>Partnership is coming soon...</h4>
                     </div>
                 </div>
             </div>

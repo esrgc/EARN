@@ -23,6 +23,9 @@ namespace ESRGC.DLLR.EARN.Domain.DAL
     public DbSet<Category> Categories { get; set; }
     public DbSet<Tag> Tags { get; set; }
     public DbSet<ProfileTag> ProfileTags { get; set; }
+    public DbSet<Connection> Connections { get; set; }
+    public DbSet<Partnership> Partnership { get; set; }
+    public DbSet<PartnershipDetail> PartnershipDetail { get; set; }
 
     protected override void OnModelCreating(DbModelBuilder modelBuilder) {
       modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
