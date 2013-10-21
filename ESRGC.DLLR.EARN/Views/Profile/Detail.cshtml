@@ -101,35 +101,7 @@
                         </span>
                     </div>
                     <div class="window-panel-content">
-                        <address>
-                            @Model.Contact.NameTitle
-                            <strong>@Model.Contact.FirstName @Model.Contact.Middle @Model.Contact.LastName</strong>
-                            @Model.Contact.NameExtension
-                            <br />
-                            @Model.Organization.StreetAddress
-                            @if (Model.LocationVerified()) {
-                                <span class="label label-success" title="Address located"><i class="icon-ok"></i>&nbsp;Verified</span>
-                            }
-                            else {
-                                <span class="label label-danger" 
-                                    title="Address not located. You can change address by editing your organization address">
-                                    <i class="icon-remove"></i>&nbsp;Not verified
-                                </span>
-                            }
-                            <br />
-                            @if (Model.Organization.Department != null) {
-                                <small>
-                                    <abbr title="Department">Dept:</abbr>&nbsp;@Model.Organization.Department</small> <br />
-                            }
-                            @if (Model.Organization.Building != null) {
-                                <small>
-                                    <abbr title="Building">Bld:</abbr>&nbsp;@Model.Organization.Building</small><br />
-                            }
-                            @Model.Organization.City, @Model.Organization.State @Model.Organization.Zip<br />
-                            <abbr title="Phone">P:</abbr>
-                            @Model.Contact.Phone<br />
-                            <a href="mailto:@Model.Contact.Email">@Model.Contact.Email</a>
-                        </address>
+                        @Html.Partial("profileContactPartial")
                     </div>
                 </div>
             </div>
