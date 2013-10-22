@@ -131,7 +131,9 @@
                 <div class="tab-pane" id="connections">
                     <div class="placeholder">
                         <div>
-                            <h4>My Connections</h4>
+                            @foreach (var p in Model.Connections) { 
+                                @Html.Partial("shortProfilePartial", p)
+                            }
                         </div>
                     </div>
                 </div>

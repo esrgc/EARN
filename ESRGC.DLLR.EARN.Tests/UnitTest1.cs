@@ -6,6 +6,7 @@ using System.Linq;
 using ESRGC.DLLR.EARN.Controllers;
 using ESRGC.DLLR.EARN.Domain.DAL;
 using ESRGC.DLLR.EARN.Domain.DAL.Concrete;
+using ESRGC.DLLR.EARN.Domain.Model;
 using ESRGC.GIS.Geocoding;
 using ESRGC.GIS.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -62,7 +63,7 @@ namespace ESRGC.DLLR.EARN.Tests
     }
 
     [TestMethod]
-    public void testProfileGeoTag() { 
+    public void testProfileGeoTag() {
       //arrange
       var workUnit = new WorkUnit(new DomainContext());
       var controller = new ProfileController(workUnit);
@@ -70,6 +71,18 @@ namespace ESRGC.DLLR.EARN.Tests
       foreach (var profile in profiles) {
         controller.addUpdateAddrGeoTag(profile.ProfileID);
       }
+    }
+    [TestMethod]
+    public void testConnectionEntity() {
+      //arrange 
+      var workUnit = new WorkUnit(new DomainContext());
+      var profile = workUnit.ProfileRepository.GetEntityByID(1);
+
+      var connProf = workUnit.ProfileRepository.GetEntityByID(1);
+      profile.Connections.Add(connProf);
+      workUnit.saveChanges();
+      //assert
+      Assert.AreNotEqual(profile.Connections.Count(), 0);
     }
   }
 }

@@ -50,7 +50,7 @@ namespace ESRGC.DLLR.EARN.Domain.DAL.Concrete
 
     public TEntity GetEntityByID(object ID) {
       var entry = _dbSet.Find(ID);
-      _context.Entry(entry).Reload();
+      //_context.Entry(entry).Reload();
       return entry;
     }
 

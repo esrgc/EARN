@@ -94,13 +94,13 @@
 .matched-tag .label {
   background-color: #5bc0de;
 }
-.profile-search-result {
+.profile-section {
   margin-bottom: 10px !important;
 }
-.profile-search-result:last-child {
+.profile-section:last-child {
   margin-bottom: 0 !important;
 }
-.profile-search-result .profile-picture {
+.profile-section .profile-picture {
   max-width: 10%;
 }
 .tag-list-holder {

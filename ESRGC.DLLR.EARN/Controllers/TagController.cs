@@ -41,7 +41,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     [HttpPost]
     public ActionResult ManageTag(ICollection<string> tags) {
       if (tags == null) {
-        return RedirectToAction("Detail", "profile");
+        return RedirectToAction("Detail", "Profile");
       }
       var profile = CurrentAccount.Profile;
       if (profile == null)
@@ -99,7 +99,7 @@ namespace ESRGC.DLLR.EARN.Controllers
         }
 
         _workUnit.saveChanges();
-        return RedirectToAction("Detail", "profile");
+        return RedirectToAction("Detail", "Profile");
       }
       return View();
     }

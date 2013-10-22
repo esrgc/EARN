@@ -32,8 +32,9 @@ namespace ESRGC.DLLR.EARN.Controllers
     }
 
     //////////////////////////
-    //helpers
+    //helpers 
     ///////////////////////
+    //attempt to geocode the profile address
     public void addUpdateAddrGeoTag(int profileId) {
       var profile = _workUnit.ProfileRepository.GetEntityByID(profileId);
       if (profile == null)
@@ -53,6 +54,8 @@ namespace ESRGC.DLLR.EARN.Controllers
       var geocoder = new MDLocatorWithZip();
       var jsonResult = geocoder.geocode(address, city, zip);
       var resultObj = Net.deserializeJson(jsonResult);
+      if (resultObj == null)
+        return;
       var result = resultObj.candidates as IEnumerable<dynamic>;
       if (result == null)
         return;

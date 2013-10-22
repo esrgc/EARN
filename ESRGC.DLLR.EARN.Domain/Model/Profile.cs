@@ -9,15 +9,16 @@ namespace ESRGC.DLLR.EARN.Domain.Model
 {
   public class Profile
   {
+
+    public Profile() {
+      Connections = new List<Profile>();
+      ProfileTags = new List<ProfileTag>();
+      PartnershipDetails = new List<PartnershipDetail>();
+    }
     /// <summary>
     /// Profile ID
     /// </summary>
     public int ProfileID { get; set; }
-    //[ScaffoldColumn(false)]
-    //public double? lat { get; set; }
-    //[ScaffoldColumn(false)]
-    //public double? lon { get; set; }
-    //public DbGeometry location { get; set; }
 
     [ScaffoldColumn(false)]
     public int? PictureID { get; set; }
@@ -40,13 +41,25 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public DateTime? LastUpdate { get; set; }
     [Display(Description = "Description about why you're on this site.")]
     public string About { get; set; }
+
+    //navigation properties
     public virtual ICollection<ProfileTag> ProfileTags { get; set; }
-    public virtual ICollection<Connection> Connections { get; set; }
+    public virtual ICollection<Profile> Connections { get; set; }
     public virtual ICollection<PartnershipDetail> PartnershipDetails { get; set; }
 
-    public Connection createConnection(int ProfileID) {
-      var connection = new Connection() { ProfileID = this.ProfileID, ProfileID2 = ProfileID };
-      return connection;
+
+    //helpers
+    public void addConnection(Profile connProf) {
+      if (!hasConnection(connProf))
+        this.Connections.Add(connProf);
+    }
+    public void removeConnection(Profile connProf) {
+      if (hasConnection(connProf)) {
+        Connections.Remove(connProf);
+      }
+    }
+    public bool hasConnection(Profile connProf) {
+      return Connections.Contains(connProf);
     }
 
     public bool LocationVerified() {
@@ -54,7 +67,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
         return false;
       try {
         ProfileTags
-          .Select(x=>x.Tag)
+          .Select(x => x.Tag)
           .OfType<GeoTag>()
           .First(x => x.Description.ToLower() == "address");
         return true;

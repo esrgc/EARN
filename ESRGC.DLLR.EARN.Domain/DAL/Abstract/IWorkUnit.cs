@@ -17,7 +17,7 @@ namespace ESRGC.DLLR.EARN.Domain.DAL.Abstract
     IRepository<Category> CategoryRepository { get; }
     IRepository<Tag> TagRepository { get; }
     IRepository<ProfileTag> ProfileTagRepository { get; }
-    IRepository<Connection> ConnectionRepository { get; }
+    //IRepository<Connection> ConnectionRepository { get; }
     IRepository<Partnership> PartnershipRepository { get; }
     IRepository<PartnershipDetail> PartnershipDetailRepository { get; }
 

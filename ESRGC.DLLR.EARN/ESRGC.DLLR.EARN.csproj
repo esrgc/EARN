@@ -257,7 +257,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Search\SearchProfilePartial.cshtml" />
+    <Content Include="Views\Search\searchProfilePartial.cshtml" />
     <Content Include="Views\Shared\tagListPartial.cshtml" />
     <Content Include="Views\Shared\tagListDisplayPartial.cshtml" />
     <Content Include="Views\Search\tagListLinkPartial.cshtml" />
@@ -274,11 +274,13 @@
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <Content Include="Views\Shared\profileActionPartial.cshtml" />
     <Content Include="Views\Shared\profileContactPartial.cshtml" />
+    <Content Include="Views\Shared\shortProfilePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Client\apps\search\model\" />
     <Folder Include="Client\apps\search\view\" />
+    <Folder Include="Views\Connection\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

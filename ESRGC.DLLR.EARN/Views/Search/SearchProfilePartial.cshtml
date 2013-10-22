@@ -7,7 +7,7 @@
     var location = geoTag == null ? "" : geoTag.Geometry.WellKnownValue.WellKnownText;
     var currentAccount = ViewBag.currentAccount as Account ?? new Account();
 }
-<section id="result-@Model.ProfileID"  class="profile-search-result"
+<section id="result-@Model.ProfileID"  class="profile-section"
     data-location="@location" 
     data-organization="@Model.Organization.Name"
     data-profileUrl = "@Url.Action("ViewProfile", "Profile", new { Model.ProfileID, returnUrl = Url.GenerateLinkFromFilters("Basic", filters) })">

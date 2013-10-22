@@ -130,11 +130,11 @@
                     @foreach (var profile in Model) {
                         if (profile.ProfileID == currentAccount.ProfileID) { 
                             <span class="label label-danger your-profile-label">Your organization</span>
-                            @Html.Partial("SearchProfilePartial", profile)
+                            @Html.Partial("searchProfilePartial", profile)
                         }
                         else
                         {
-                            @Html.Partial("SearchProfilePartial", profile)
+                            @Html.Partial("searchProfilePartial", profile)
                         }
                     }
                     @if (Model.PageCount > 1) {

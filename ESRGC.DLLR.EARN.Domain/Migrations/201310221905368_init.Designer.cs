@@ -7,13 +7,13 @@ namespace ESRGC.DLLR.EARN.Domain.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.0.0-rc1-20726")]
-    public sealed partial class TagMaxSize : IMigrationMetadata
+    public sealed partial class init : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(TagMaxSize));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(init));
         
         string IMigrationMetadata.Id
         {
-            get { return "201310151632400_Tag-Max-Size"; }
+            get { return "201310221905368_init"; }
         }
         
         string IMigrationMetadata.Source

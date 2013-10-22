@@ -121,6 +121,33 @@ namespace ESRGC.DLLR.EARN.Domain.Migrations
                 .PrimaryKey(t => t.OrganizationID);
             
             CreateTable(
+                "dbo.PartnershipDetail",
+                c => new
+                    {
+                        PartnershipDetailID = c.Int(nullable: false, identity: true),
+                        PartnershipID = c.Int(nullable: false),
+                        ProfileID = c.Int(nullable: false),
+                        Type = c.String(),
+                    })
+                .PrimaryKey(t => t.PartnershipDetailID)
+                .ForeignKey("dbo.Partnership", t => t.PartnershipID, cascadeDelete: true)
+                .ForeignKey("dbo.Profile", t => t.ProfileID, cascadeDelete: true)
+                .Index(t => t.PartnershipID)
+                .Index(t => t.ProfileID);
+            
+            CreateTable(
+                "dbo.Partnership",
+                c => new
+                    {
+                        PartnershipID = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        Status = c.String(),
+                        Description = c.String(),
+                        GrantStatus = c.String(),
+                    })
+                .PrimaryKey(t => t.PartnershipID);
+            
+            CreateTable(
                 "dbo.Picture",
                 c => new
                     {
@@ -149,12 +176,25 @@ namespace ESRGC.DLLR.EARN.Domain.Migrations
                 c => new
                     {
                         TagID = c.Int(nullable: false, identity: true),
-                        Name = c.String(nullable: false, maxLength: 20),
+                        Name = c.String(nullable: false),
                         Description = c.String(),
                         Geometry = c.Geometry(),
                         Discriminator = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => t.TagID);
+            
+            CreateTable(
+                "dbo.Connection",
+                c => new
+                    {
+                        ProfileID = c.Int(nullable: false),
+                        ConnectionProfileID = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.ProfileID, t.ConnectionProfileID })
+                .ForeignKey("dbo.Profile", t => t.ProfileID)
+                .ForeignKey("dbo.Profile", t => t.ConnectionProfileID)
+                .Index(t => t.ProfileID)
+                .Index(t => t.ConnectionProfileID);
             
         }
         
@@ -165,8 +205,12 @@ namespace ESRGC.DLLR.EARN.Domain.Migrations
             DropForeignKey("dbo.ProfileTag", "TagID", "dbo.Tag");
             DropForeignKey("dbo.ProfileTag", "ProfileID", "dbo.Profile");
             DropForeignKey("dbo.Profile", "PictureID", "dbo.Picture");
+            DropForeignKey("dbo.PartnershipDetail", "ProfileID", "dbo.Profile");
+            DropForeignKey("dbo.PartnershipDetail", "PartnershipID", "dbo.Partnership");
             DropForeignKey("dbo.Profile", "OrganizationID", "dbo.Organization");
             DropForeignKey("dbo.Profile", "ContactID", "dbo.Contact");
+            DropForeignKey("dbo.Connection", "ConnectionProfileID", "dbo.Profile");
+            DropForeignKey("dbo.Connection", "ProfileID", "dbo.Profile");
             DropForeignKey("dbo.Category", "UserGroupID", "dbo.UserGroup");
             DropForeignKey("dbo.Profile", "CategoryID", "dbo.Category");
             DropIndex("dbo.Account", new[] { "ProfileID" });
@@ -174,13 +218,20 @@ namespace ESRGC.DLLR.EARN.Domain.Migrations
             DropIndex("dbo.ProfileTag", new[] { "TagID" });
             DropIndex("dbo.ProfileTag", new[] { "ProfileID" });
             DropIndex("dbo.Profile", new[] { "PictureID" });
+            DropIndex("dbo.PartnershipDetail", new[] { "ProfileID" });
+            DropIndex("dbo.PartnershipDetail", new[] { "PartnershipID" });
             DropIndex("dbo.Profile", new[] { "OrganizationID" });
             DropIndex("dbo.Profile", new[] { "ContactID" });
+            DropIndex("dbo.Connection", new[] { "ConnectionProfileID" });
+            DropIndex("dbo.Connection", new[] { "ProfileID" });
             DropIndex("dbo.Category", new[] { "UserGroupID" });
             DropIndex("dbo.Profile", new[] { "CategoryID" });
+            DropTable("dbo.Connection");
             DropTable("dbo.Tag");
             DropTable("dbo.ProfileTag");
             DropTable("dbo.Picture");
+            DropTable("dbo.Partnership");
+            DropTable("dbo.PartnershipDetail");
             DropTable("dbo.Organization");
             DropTable("dbo.Contact");
             DropTable("dbo.UserGroup");

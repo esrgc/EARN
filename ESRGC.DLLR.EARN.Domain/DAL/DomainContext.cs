@@ -8,7 +8,7 @@ using ESRGC.DLLR.EARN.Domain.Model;
 
 namespace ESRGC.DLLR.EARN.Domain.DAL
 {
-  public class DomainContext: DbContext
+  public class DomainContext : DbContext
   {
     public DomainContext()
       : base("name=DLLR.EARN") {
@@ -23,13 +23,26 @@ namespace ESRGC.DLLR.EARN.Domain.DAL
     public DbSet<Category> Categories { get; set; }
     public DbSet<Tag> Tags { get; set; }
     public DbSet<ProfileTag> ProfileTags { get; set; }
-    public DbSet<Connection> Connections { get; set; }
+    //public DbSet<Connection> Connections { get; set; }
     public DbSet<Partnership> Partnership { get; set; }
     public DbSet<PartnershipDetail> PartnershipDetail { get; set; }
 
     protected override void OnModelCreating(DbModelBuilder modelBuilder) {
       modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-      //modelBuilder.Conventions.Remove<IncludeMetadataConvention>();
+
+      //modelBuilder.Entity<Connection>()
+      //  .HasRequired(c => c.ConnectionProfile)
+      //  .WithMany(p => p.Connections)
+      //  .HasForeignKey(c => c.ConnectionProfileID);
+
+      modelBuilder.Entity<Profile>()
+        .HasMany(x => x.Connections)
+        .WithMany()
+        .Map(map => {
+          map.MapLeftKey("ProfileID");
+          map.MapRightKey("ConnectionProfileID");
+          map.ToTable("Connection");
+        });
     }
   }
 }

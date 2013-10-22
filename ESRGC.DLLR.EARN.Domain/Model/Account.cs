@@ -51,6 +51,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public DateTime? LastUpdate { get; set; }
 
     public int? ProfileID { get; set; }
+    [ForeignKey("ProfileID")]
     public virtual Profile Profile { get; set; }
   }
 }

@@ -47,8 +47,14 @@ namespace ESRGC.GIS.Geocoding
       zip = zip.Trim();
       //construct url
       var url = _geocodeUrl + string.Format("&street={0}&zip={1}", address, zip);
-
-      return Net.sendRequestString(url);
+      try {
+        var restult = Net.sendRequestString(url);
+        return restult;
+      }
+      catch {
+        return "";
+      }
+      
     }
     /// <summary>
     /// geocode address, zipcode, and city
@@ -64,7 +70,12 @@ namespace ESRGC.GIS.Geocoding
       //construct url
       var url = _geocodeUrl + string.Format("&street={0}&zip={1}&city={2}", address, zip, city);
 
-      return Net.sendRequestString(url);
+      try {
+        return Net.sendRequestString(url);
+      }
+      catch {
+        return "";
+      }
     }
     /// <summary>
     /// reverse geocode X,Y location
