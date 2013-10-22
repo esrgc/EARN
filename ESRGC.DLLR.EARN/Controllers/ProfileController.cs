@@ -117,6 +117,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     public ActionResult ViewProfile(int profileID, string returnUrl) {
       var profile = _workUnit.ProfileRepository.GetEntityByID(profileID);
       ViewBag.returnUrl = returnUrl;
+      ViewBag.currentProfile = CurrentAccount.Profile;
       return View(profile);
     }
 

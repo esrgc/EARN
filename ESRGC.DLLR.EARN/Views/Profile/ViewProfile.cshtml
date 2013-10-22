@@ -19,7 +19,8 @@
 }
 
 @{
-    var returnUrl = ViewBag.returnUrl as string ?? Url.Action("Basic", "Search");    
+    var returnUrl = ViewBag.returnUrl as string ?? Url.Action("Basic", "Search");
+    ViewBag.returnUrl = Url.Action("ViewProfile", new { Model.ProfileID });
 }
 
 <div class="container">

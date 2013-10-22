@@ -8,6 +8,9 @@ namespace ESRGC.DLLR.EARN.Domain.Model
 {
   public class Tag
   {
+    public Tag(){
+      ProfileTags = new List<ProfileTag>();
+    }
     public int TagID { get; set; }
     [Required]
     public string Name { get; set; }

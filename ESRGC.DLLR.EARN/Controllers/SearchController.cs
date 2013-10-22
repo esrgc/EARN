@@ -21,6 +21,12 @@ namespace ESRGC.DLLR.EARN.Controllers
       int? userGroupID,
       int? categoryID,
       List<string> tags) {
+
+      if (CurrentAccount.Profile == null) {
+        updateTempDataMessage("Please create a profile before using search.");
+        return RedirectToAction("Detail", "Profile");
+      }
+
       //collection of current filters
       Dictionary<string, object> filters = new Dictionary<string, object>();
 
@@ -70,7 +76,7 @@ namespace ESRGC.DLLR.EARN.Controllers
 
       //viewbag data
       ViewBag.filters = filters;
-      ViewBag.currentAccount = CurrentAccount;
+      ViewBag.currentProfile = CurrentAccount.Profile;
       return View(model);
     }
   }
