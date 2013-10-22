@@ -25,7 +25,7 @@
 @{
     var filters = (ViewBag.filters as Dictionary<string, object>) ?? new Dictionary<string, object>();
     var currentTags = filters.ContainsKey("tags") ? filters["tags"] as List<string> : new List<string>();
-    var currentProfile = ViewBag.currentAccount as Profile ?? new Profile();
+    var currentProfile = ViewBag.currentProfile as Profile ?? new Profile();
 }
 <div class="container" id="basicSearchPage">
     <div class="row">
