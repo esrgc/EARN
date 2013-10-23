@@ -7,7 +7,10 @@
     <script type="text/ecmascript">
         var startup = function () {
             $(document).on('click', '#agreeTDChbox', function () {
-                $('#proceedBtn').removeAttr('disabled');
+                if ($(this).is(':checked')) 
+                    $('#proceedBtn').removeAttr('disabled');
+                else
+                    $('#proceedBtn').attr('disabled', 'disabled');
             });
             $(document).on('click', '#proceedBtn', function () {
                 $('form#quickSignupForm').submit();
