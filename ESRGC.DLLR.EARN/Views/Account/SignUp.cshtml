@@ -10,7 +10,7 @@
     <div class="container">
         <header class="page-header">
             <h3>@ViewBag.Header <i class="icon-large icon-edit"></i></h3>
-           @* <ul class="breadcrumb">
+            @* <ul class="breadcrumb">
                 <li><a href="@Url.Action("index", "Home")">Home</a></li>
                 <li class="active">@ViewBag.Header</li>
             </ul>*@
@@ -21,10 +21,9 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-10 col-sm-offset-1">
-
             <div class="window-panel">
                 <div class="window-panel-title">
-                    <strong><i class="icon-user"></i> New member</strong>
+                    <strong><i class="icon-user"></i>&nbsp;New member</strong>
                 </div>
                 <div class="window-panel-content">
                     @using (Html.BeginForm("SignUp", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
@@ -32,7 +31,7 @@
                         <div class="form-group">
                             <label for="Email" class="col-sm-3 control-label">Email</label>
                             <div class="col-sm-6">
-                                @Html.TextBoxFor(x => x.Email, new { @class = "form-control", placeholder = "Email", type="email" })                                
+                                @Html.TextBoxFor(x => x.Email, new { @class = "form-control", placeholder = "Email", type = "email" })
                                 <span class="label label-default">Required</span>
                                 <span class="help-block">
                                     @Html.ValidationMessageFor(x => x.Email)
@@ -64,6 +63,16 @@
                         </div>
                     }
                 </div>
+            </div>
+            <div class="alert alert-info">
+                <h4>Terms and Conditions</h4>
+                <p>
+                    By clicking “Sign up”, you understand that the information you provide will 
+                    be in the public domain and will be accessible to other EARN Maryland Connect users. 
+                    The information you provide will only be used by the Maryland Department of Labor, Licensing, and Regulation
+                    to facilitate the EARN program. The information within the EARN Maryland Connect system will not be distributed
+                    or shared for any purpose other than facilitating the EARN program.
+                </p>
             </div>
         </div>
     </div>
