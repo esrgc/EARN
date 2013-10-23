@@ -26,12 +26,15 @@ namespace ESRGC.DLLR.EARN.Controllers
         updateTempDataMessage("Please create a profile before using search.");
         return RedirectToAction("Detail", "Profile");
       }
-
+      var currentProfile = CurrentAccount.Profile;
       //collection of current filters
       Dictionary<string, object> filters = new Dictionary<string, object>();
 
       //all profiles
-      var profiles = _workUnit.ProfileRepository.Entities.AsQueryable();
+      var profiles = _workUnit
+        .ProfileRepository
+        .Entities
+        .AsQueryable();
 
       //filter by user group
       if (userGroupID != null) {
@@ -76,7 +79,7 @@ namespace ESRGC.DLLR.EARN.Controllers
 
       //viewbag data
       ViewBag.filters = filters;
-      ViewBag.currentProfile = CurrentAccount.Profile;
+      ViewBag.currentProfile = currentProfile;
       return View(model);
     }
   }

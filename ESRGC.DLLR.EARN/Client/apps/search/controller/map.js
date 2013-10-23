@@ -16,7 +16,8 @@ dx library
 dx.defineController('Map', {
     name: 'Map',
     refs: {
-        searchResults: '#searchResult section'
+        searchResults: '#searchResult .profile-section',
+        ownProfile: '#searchResult #ownProfile'
     },
     control: {
 
@@ -54,13 +55,26 @@ dx.defineController('Map', {
             var geom = $(result).attr('data-location');
             var orgName = $(result).attr('data-organization');
             var url = $(result).attr('data-profileUrl');
+            var id = $(result).attr('id');
             if (geom != "") {
                 var feature = mapViewer.createFeature(geom);
-                feature.bindPopup('<a href="' + url + '">' + orgName + '</a>')
+                if (id != 'ownProfile') {
+                    feature.bindPopup('<a href="' + url + '">' + orgName + '</a>')
+                }
+                else {
+                    //change icon
+                    var icon = L.AwesomeMarkers.icon({
+                        icon: 'user',
+                        color: 'red'
+                    });
+                    feature.setIcon(icon);
+                    feature.bindPopup('<a href="' + url + '">Your organization</a>')
+                    
+                }
                 mapViewer.addFeatureToFeatureGroup(feature);
             }
+
         });
-        //mapViewer.zoomToFeatures();
     },
     scrollToResult: function goToByScroll(id) {
         // Scroll

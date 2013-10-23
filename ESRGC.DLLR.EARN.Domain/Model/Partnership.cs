@@ -7,6 +7,9 @@ namespace ESRGC.DLLR.EARN.Domain.Model
 {
   public class Partnership
   {
+    public Partnership() {
+      PartnershipDetails = new HashSet<PartnershipDetail>();
+    }
     public int PartnershipID { get; set; }
 
     public string Name { get; set; }

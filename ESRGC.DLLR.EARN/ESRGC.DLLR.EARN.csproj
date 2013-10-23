@@ -167,6 +167,16 @@
     <Content Include="Client\apps\search\app.js" />
     <Content Include="Client\apps\search\controller\map.js" />
     <Content Include="Client\apps\search\controller\search.js" />
+    <Content Include="Client\jsLib\leaflet.awesome-markers\images\markers-matte%402x.png" />
+    <Content Include="Client\jsLib\leaflet.awesome-markers\images\markers-matte.png" />
+    <Content Include="Client\jsLib\leaflet.awesome-markers\images\markers-plain.png" />
+    <Content Include="Client\jsLib\leaflet.awesome-markers\images\markers-shadow%402x.png" />
+    <Content Include="Client\jsLib\leaflet.awesome-markers\images\markers-shadow.png" />
+    <Content Include="Client\jsLib\leaflet.awesome-markers\images\markers-soft%402x.png" />
+    <Content Include="Client\jsLib\leaflet.awesome-markers\images\markers-soft.png" />
+    <Content Include="Client\jsLib\leaflet.awesome-markers\leaflet.awesome-markers.css" />
+    <Content Include="Client\jsLib\leaflet.awesome-markers\leaflet.awesome-markers.js" />
+    <Content Include="Client\jsLib\leaflet.awesome-markers\leaflet.awesome-markers.min.js" />
     <Content Include="Client\js\map\leafletViewer.js" />
     <Content Include="Client\js\map\mapViewer.js" />
     <Content Include="Client\apps\search\store\search.js" />
@@ -236,8 +246,8 @@
     <Content Include="Client\js\bootstrapValidation.js" />
     <Content Include="Client\js\dx.min.js" />
     <None Include="Client\css\PagedList.notusedcss" />
-    <Content Include="Client\js\map\wicket-leaflet.js" />
-    <Content Include="Client\js\map\wicket.js" />
+    <Content Include="Client\jsLib\wicket-leaflet\wicket-leaflet.js" />
+    <Content Include="Client\jsLib\wicket-leaflet\wicket.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Client\jsLib\jquery\jquery-2.0.3-vsdoc.js" />
@@ -269,6 +279,9 @@
     <Content Include="Views\Shared\orgFormPartial.cshtml" />
     <Content Include="Views\Organization\Edit.cshtml" />
     <Content Include="Views\Shared\contactFormPartial.cshtml" />
+    <Content Include="Client\jsLib\leaflet.awesome-markers\leaflet.awesome-markers.min.js.map">
+      <DependentUpon>leaflet.awesome-markers.js</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\FTP.pubxml" />
     <None Include="Properties\PublishProfiles\P drive.pubxml" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />

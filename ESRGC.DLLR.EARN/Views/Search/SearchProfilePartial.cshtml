@@ -9,75 +9,85 @@
     var returnUrl = Url.GenerateLinkFromFilters("Basic", filters);
     ViewBag.returnUrl = returnUrl;
 }
-<section id="result-@Model.ProfileID"  class="profile-section"
+@if (currentProfile.ProfileID != Model.ProfileID) {
+    <section id="result-@Model.ProfileID"  class="profile-section"
     data-location="@location" 
     data-organization="@Model.Organization.Name"
     data-profileUrl = "@Url.Action("ViewProfile", "Profile", new { Model.ProfileID, returnUrl = Url.GenerateLinkFromFilters("Basic", filters) })">
-    <div class="row">
-        <div class="col-sm-12 ">
-            <div class="placeholder-panel">
-                <div class="post">
-                    <div class="inline-container profile-area">
-                        <div class="profile-picture">
-                            @if (Model.PictureID != null) { 
-                                <img class="img-thumbnail" src="@Url.Action("ProfilePicture", new { pictureId = Model.PictureID })"/>
-                            }
-                            else {
-                                <img class="img-thumbnail" src="@Url.Content("~/Client/images/empty_profile.gif")"/>
-                            }
-                            @if (Model.ProfileID != currentProfile.ProfileID) {
-                                <div class="panel-action-default">
-                                    @Html.Partial("profileActionPartial")
-                                </div>
-                            }
-                        </div>
-                        <div class="row profile-container">
-                            <div class="col-sm-8">
-                                <div class="">
-                                    <h4>
-                                        <span>
-                                            <a title="View this profile" href="@Url.Action("ViewProfile", "Profile", new { Model.ProfileID, returnUrl })">
-                                                @Model.Organization.Name
-                                            </a>
-                                        </span>
-                                        <br />
-                                        <small>@Model.UserGroup.Name</small>
-                                        @*-
-                                    <small>@Model.Category.Name</small>*@
-                                        <br />
-                                        <small>
-                                            <a target="_blank" href="http://@Model.Organization.Website" title="Organization website">@Model.Organization.Website</a>
-                                        </small>
-                                    </h4>
-                                    <ul class="list-inline list-unstyled">
-                                        <li><a target="_blank" href="http://@Model.Organization.FacebookLink" title="Facebook link"><i class="fa fa-lg fa-facebook"></i></a></li>
-                                        <li><a target="_blank" href="http://@Model.Organization.TwitterLink" title="Twitter link"><i class="fa fa-lg fa-twitter"></i></a></li>
-                                        <li><a target="_blank" href="http://@Model.Organization.LinkedInLink" title="LinkedIn link"><i class="fa fa-lg fa-linkedin"></i></a></li>
-                                    </ul>
-                                    @if (Model.Organization.Description.Length > 200) { 
-                                        <p>
-                                            @Model.Organization.Description.Substring(0, 200)
-                                            ...<a href="@Url.Action("ViewProfile", "Profile", new { Model.ProfileID, returnUrl })">
-                                            read more
-                                            </a>
-                                        </p>
-                                    }
-                                    else {
-                                        <p>@Model.Organization.Description</p>
-                                    }
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="help-block"><i class="fa fa-tags"></i>&nbsp;Tags</div>
-                                @if (Model.ProfileTags != null) {
-                                    @Html.Partial("tagListLinkPartial", Html.getTagListString(Model))
+        <div class="row">
+            <div class="col-sm-12 ">
+                <div class="placeholder-panel">
+                    <div class="post">
+                        <div class="inline-container profile-area">
+                            <div class="profile-picture">
+                                @if (Model.PictureID != null) { 
+                                    <img class="img-thumbnail" src="@Url.Action("ProfilePicture", new { pictureId = Model.PictureID })"/>
+                                }
+                                else {
+                                    <img class="img-thumbnail" src="@Url.Content("~/Client/images/empty_profile.gif")"/>
+                                }
+                                @if (Model.ProfileID != currentProfile.ProfileID) {
+                                    <div class="panel-action-default">
+                                        @Html.Partial("profileActionPartial")
+                                    </div>
                                 }
                             </div>
+                            <div class="row profile-container">
+                                <div class="col-sm-8">
+                                    <div class="">
+                                        <h4>
+                                            <span>
+                                                <a title="View this profile" href="@Url.Action("ViewProfile", "Profile", new { Model.ProfileID, returnUrl })">
+                                                    @Model.Organization.Name
+                                                </a>
+                                            </span>
+                                            <br />
+                                            <small>@Model.UserGroup.Name</small>
+                                            @*-
+                                    <small>@Model.Category.Name</small>*@
+                                            <br />
+                                            <small>
+                                                <a target="_blank" href="http://@Model.Organization.Website" title="Organization website">@Model.Organization.Website</a>
+                                            </small>
+                                        </h4>
+                                        <ul class="list-inline list-unstyled">
+                                            <li><a target="_blank" href="http://@Model.Organization.FacebookLink" title="Facebook link"><i class="fa fa-lg fa-facebook"></i></a></li>
+                                            <li><a target="_blank" href="http://@Model.Organization.TwitterLink" title="Twitter link"><i class="fa fa-lg fa-twitter"></i></a></li>
+                                            <li><a target="_blank" href="http://@Model.Organization.LinkedInLink" title="LinkedIn link"><i class="fa fa-lg fa-linkedin"></i></a></li>
+                                        </ul>
+                                        @if (Model.Organization.Description.Length > 200) { 
+                                            <p>
+                                                @Model.Organization.Description.Substring(0, 200)
+                                                ...<a href="@Url.Action("ViewProfile", "Profile", new { Model.ProfileID, returnUrl })">
+                                            read more
+                                                </a>
+                                            </p>
+                                        }
+                                        else {
+                                            <p>@Model.Organization.Description</p>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="help-block"><i class="fa fa-tags"></i>&nbsp;Tags</div>
+                                    @if (Model.ProfileTags != null) {
+                                        @Html.Partial("tagListLinkPartial", Html.getTagListString(Model))
+                                    }
+                                </div>
+                            </div>
                         </div>
+                        <div class="clear"></div>
                     </div>
-                    <div class="clear"></div>
                 </div>
             </div>
         </div>
+    </section>
+}
+else {
+    <!--Own profile-->
+    <div id="ownProfile" class="profile-section"
+    data-location="@location" 
+    data-organization="@Model.Organization.Name"
+    data-profileUrl = "@Url.Action("ViewProfile", "Profile", new { Model.ProfileID, returnUrl = Url.GenerateLinkFromFilters("Basic", filters) })">
     </div>
-</section>
+}

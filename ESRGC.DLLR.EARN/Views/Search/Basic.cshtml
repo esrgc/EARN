@@ -17,6 +17,7 @@
 @section headContent {
     @*links for leaflet library*@
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
+    @Styles.Render("~/Styles/mapcss")
     <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js" type="text/javascript"></script>
 }
 @section scripts {
@@ -59,7 +60,7 @@
                                     <div class="form-group">
                                         <div class="col-sm-12">
                                             <div class="post tag-list-holder" id="keywords">
-                                                <a id="clearSearchLink" class="link-icon pull-right" title="Clear search" href="@Url.Action("Basic")"><i class="fa fa-remove"></i></a>
+                                                <a id="clearSearchLink" class="link-icon pull-right" title="Clear search" href="@Url.Action("Basic")"><i class="fa fa-times"></i></a>
                                                 <div class="inline-container tag-list">
                                                     @foreach (var i in currentTags) { 
                                                         <div class="tag matched-tag">
@@ -67,7 +68,7 @@
                                                                 @i&nbsp;
                                                 <a data-value="@i" 
                                                     href="@Url.RemoveSearchFilter("Basic", filters, "tags", i)">
-                                                    <i class="fa fa-remove"></i>
+                                                    <i class="fa fa-times"></i>
                                                 </a>
                                                             </span>
                                                         </div>
@@ -128,14 +129,7 @@
                         </div>
                     }
                     @foreach (var profile in Model) {
-                        if (profile.ProfileID == currentProfile.ProfileID) { 
-                            <span class="label label-danger your-profile-label">Your organization</span>
-                            @Html.Partial("searchProfilePartial", profile)
-                        }
-                        else
-                        {
-                            @Html.Partial("searchProfilePartial", profile)
-                        }
+                        @Html.Partial("searchProfilePartial", profile)
                     }
                     @if (Model.PageCount > 1) {
                         @Html.PagedListPager(

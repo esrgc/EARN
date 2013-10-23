@@ -6,15 +6,6 @@
     @Model.Contact.NameExtension
     <br />
     @Model.Organization.StreetAddress
-    @if (Model.LocationVerified()) {
-        <span class="label label-success" title="Address located"><i class="fa fa-ok"></i>&nbsp;Verified</span>
-    }
-    else {
-        <span class="label label-danger"
-            title="Address not located. You can change address by editing your organization address">
-            <i class="fa fa-remove"></i>&nbsp;Not verified
-        </span>
-    }
     <br />
     @if (Model.Organization.Department != null) {
         <small>
@@ -29,3 +20,14 @@
     @Model.Contact.Phone<br />
     <a href="mailto:@Model.Contact.Email">@Model.Contact.Email</a>
 </address>
+<div>
+    @if (Model.LocationVerified()) {
+        <span class="label label-success" title="Address located"><i class="fa fa-check-circle fa-lg"></i>&nbsp;Address verified</span>
+    }
+    else {
+        <span class="label label-danger"
+            title="Address not located. You can change address by editing your organization address">
+            <i class="fa fa-times-circle fa-lg"></i>&nbsp;Address not verified
+        </span>
+    }
+</div>

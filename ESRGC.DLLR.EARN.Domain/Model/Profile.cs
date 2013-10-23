@@ -11,9 +11,9 @@ namespace ESRGC.DLLR.EARN.Domain.Model
   {
 
     public Profile() {
-      Connections = new List<Profile>();
-      ProfileTags = new List<ProfileTag>();
-      PartnershipDetails = new List<PartnershipDetail>();
+      Connections = new HashSet<Profile>();
+      ProfileTags = new HashSet<ProfileTag>();
+      PartnershipDetails = new HashSet<PartnershipDetail>();
     }
     /// <summary>
     /// Profile ID
@@ -66,11 +66,12 @@ namespace ESRGC.DLLR.EARN.Domain.Model
       if (ProfileTags == null)
         return false;
       try {
-        ProfileTags
+        return ProfileTags
           .Select(x => x.Tag)
           .OfType<GeoTag>()
-          .First(x => x.Description.ToLower() == "address");
-        return true;
+          .First(x => x.Description.ToLower() == "address")
+          .Name.Contains(Organization.StreetAddress);
+        
       }
       catch {
         return false;
