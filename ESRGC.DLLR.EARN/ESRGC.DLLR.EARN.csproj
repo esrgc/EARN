@@ -276,6 +276,7 @@
     <Content Include="Views\Shared\profileContactPartial.cshtml" />
     <Content Include="Views\Shared\shortProfilePartial.cshtml" />
     <Content Include="Views\Shared\profileImagePartial.cshtml" />
+    <Content Include="Views\Partnership\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -305,7 +306,6 @@
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Profile\Create.cshtml" />
     <Content Include="Views\Shared\messagePartial.cshtml" />
-    <Content Include="Views\Profile\_organization.cshtml" />
     <Content Include="Views\Profile\_tag.cshtml" />
     <Content Include="Views\Profile\AddTag.cshtml" />
     <Content Include="Views\Tag\ManageTag.cshtml" />

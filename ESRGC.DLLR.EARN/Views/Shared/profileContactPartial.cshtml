@@ -7,12 +7,12 @@
     <br />
     @Model.Organization.StreetAddress
     @if (Model.LocationVerified()) {
-        <span class="label label-success" title="Address located"><i class="icon-ok"></i>&nbsp;Verified</span>
+        <span class="label label-success" title="Address located"><i class="fa fa-ok"></i>&nbsp;Verified</span>
     }
     else {
         <span class="label label-danger"
             title="Address not located. You can change address by editing your organization address">
-            <i class="icon-remove"></i>&nbsp;Not verified
+            <i class="fa fa-remove"></i>&nbsp;Not verified
         </span>
     }
     <br />

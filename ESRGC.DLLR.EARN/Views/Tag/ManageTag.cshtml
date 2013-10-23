@@ -8,7 +8,7 @@
 @section header{
     <div class="container">
         <header class="page-header">
-            <h3>@ViewBag.Header <i class="icon-large icon-tags"></i></h3>
+            <h3>@ViewBag.Header <i class="fa  fa-tags"></i></h3>
             @*<ul class="breadcrumb">
                 <li><a href="@Url.Action("index", "Home")">Home</a></li>
                 <li class="active">@ViewBag.Header</li>
@@ -54,7 +54,7 @@
                         [
                             '<div class="tag">',
                                 '<span class="label label-default">',
-                                    value + '&nbsp;<a data-value="' + value + '"><i class="icon-remove"></i></a>',
+                                    value + '&nbsp;<a data-value="' + value + '"><i class="fa fa-remove"></i></a>',
                                 '</span>',
                             '</div>'
                         ].join('')
@@ -157,7 +157,7 @@
                                     name="tag"
                                     id="tagInput" />
                             </div>
-                            <button type="button" class="btn btn-primary" id="addTagBtn"><i class="icon-plus"></i>&nbsp;Add</button>
+                            <button type="button" class="btn btn-primary" id="addTagBtn"><i class="fa fa-plus"></i>&nbsp;Add</button>
                             <div><span id="" class="text-danger status-text"></span></div>
                             <p class="text-warning">
                                 Use commas to separate multiple tags.
@@ -186,7 +186,7 @@
                     </div>
                     <br />
                     <div class="pull-right">
-                        <button class="btn btn-primary" type="submit"><i class="icon-save"></i>&nbsp;Save changes</button>
+                        <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i>&nbsp;Save changes</button>
                         @if (currentTags != null) {
                             <a class="btn btn-default" href="@Url.Action("Detail", "Profile")">Cancel</a>
                         }

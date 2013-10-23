@@ -10,7 +10,7 @@
 @section header {
     <div class="container">
         <div class="page-header">
-            <h3>@ViewBag.Header <i class="icon-search"></i></h3>
+            <h3>@ViewBag.Header <i class="fa fa-search"></i></h3>
         </div>
     </div>
 }
@@ -48,7 +48,7 @@
                                     <div class="form-group">
                                         <div class="col-sm-12">
                                             <div class="input-group">
-                                                <span class="input-group-addon"><i class="icon-tag"></i></span>
+                                                <span class="input-group-addon"><i class="fa fa-tag"></i></span>
                                                 <input id="tagInput" name="tags"
                                                     class="form-control"
                                                     type="text"
@@ -59,7 +59,7 @@
                                     <div class="form-group">
                                         <div class="col-sm-12">
                                             <div class="post tag-list-holder" id="keywords">
-                                                <a id="clearSearchLink" class="link-icon pull-right" title="Clear search" href="@Url.Action("Basic")"><i class="icon-remove"></i></a>
+                                                <a id="clearSearchLink" class="link-icon pull-right" title="Clear search" href="@Url.Action("Basic")"><i class="fa fa-remove"></i></a>
                                                 <div class="inline-container tag-list">
                                                     @foreach (var i in currentTags) { 
                                                         <div class="tag matched-tag">
@@ -67,7 +67,7 @@
                                                                 @i&nbsp;
                                                 <a data-value="@i" 
                                                     href="@Url.RemoveSearchFilter("Basic", filters, "tags", i)">
-                                                    <i class="icon-remove"></i>
+                                                    <i class="fa fa-remove"></i>
                                                 </a>
                                                             </span>
                                                         </div>

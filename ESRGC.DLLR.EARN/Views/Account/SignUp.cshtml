@@ -20,7 +20,7 @@
 @section header {
     <div class="container">
         <header class="page-header">
-            <h3>@ViewBag.Header <i class="icon-large icon-edit"></i></h3>
+            <h3>@ViewBag.Header <i class="fa fa-edit"></i></h3>
             @* <ul class="breadcrumb">
                 <li><a href="@Url.Action("index", "Home")">Home</a></li>
                 <li class="active">@ViewBag.Header</li>
@@ -34,7 +34,7 @@
         <div class="col-sm-10 col-sm-offset-1">
             <div class="window-panel">
                 <div class="window-panel-title">
-                    <strong><i class="icon-user"></i>&nbsp;New member</strong>
+                    <strong><i class="fa fa-user"></i>&nbsp;New member</strong>
                 </div>
                 <div class="window-panel-content">
                     @using (Html.BeginForm("SignUp", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {

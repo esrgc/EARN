@@ -8,7 +8,7 @@
 @section header{
     <div class="container">
         <header class="page-header">
-            <h3>@ViewBag.Header <i class="icon-large icon-tags"></i></h3>
+            <h3>@ViewBag.Header <i class="fa fa-tags"></i></h3>
             @*<ul class="breadcrumb">
                 <li><a href="@Url.Action("index", "Home")">Home</a></li>
                 <li class="active">@ViewBag.Header</li>
@@ -103,7 +103,7 @@
                                     name="tag"
                                     id="tagInput" />
                             </div>
-                            <button type="button" class="btn btn-primary" id="addTagBtn"><i class="icon-tag"></i> Add</button>
+                            <button type="button" class="btn btn-primary" id="addTagBtn"><i class="fa fa-tag"></i> Add</button>
                             @if (currentTags != null) {
                                 foreach (var i in currentTags) { 
                                     <input type="hidden" value="@i.Name" name="tags"/>
