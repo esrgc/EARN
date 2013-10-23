@@ -71,6 +71,11 @@
         border-top-right-radius: 0;
     }
 }*/
+.profile-tabs .tab-content .placeholder {
+  min-height: 350px;
+  max-height: 800px;
+  overflow-y: auto;
+}
 .profile-tabs > ul > li.active > a,
 .profile-tabs > ul > li.active > a:hover {
   background: #F4F4F4;

@@ -24,18 +24,19 @@ namespace ESRGC.DLLR.EARN.Controllers
         updateTempDataMessage("You haven't created a currentProfile. Please create one before adding connection");
         return RedirectToAction("Index", "Home");
       }
-
+      
       var currentProfile = CurrentAccount.Profile;
       try {
         var connectProfile = _workUnit.ProfileRepository.GetEntityByID(profileID);
         currentProfile.addConnection(connectProfile);
         _workUnit.saveChanges();
-        updateTempDataMessage("A connection has been added to your profile");
+        updateTempDataMessage("The connection \""+ connectProfile.Organization.Name +"\" has been added to your profile");
+        //ViewBag.returnUrl = returnUrl;
       }
       catch {
         updateTempDataMessage("Could not add connection. An error has occured. Please try again later."); 
       }
-
+      
       //return to previous url
       if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
           && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\")) {
@@ -58,7 +59,8 @@ namespace ESRGC.DLLR.EARN.Controllers
         var connectProfile = _workUnit.ProfileRepository.GetEntityByID(profileID);
         currentProfile.removeConnection(connectProfile);
         _workUnit.saveChanges();
-        updateTempDataMessage("A connection has been removed from your profile");
+        updateTempDataMessage("The connection \"" + connectProfile.Organization.Name + "\" has been removed");
+        //ViewBag.returnUrl = returnUrl;
       }
       catch {
         updateTempDataMessage("Could not remove connection. An error has occured. Please try again later.");

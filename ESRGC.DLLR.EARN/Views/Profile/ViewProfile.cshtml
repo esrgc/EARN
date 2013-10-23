@@ -20,7 +20,7 @@
 
 @{
     var returnUrl = ViewBag.returnUrl as string ?? Url.Action("Basic", "Search");
-    ViewBag.returnUrl = Url.Action("ViewProfile", new { Model.ProfileID });
+    ViewBag.returnUrl = Url.Action("ViewProfile", new { Model.ProfileID , returnUrl});
     var currentProfile = ViewBag.currentProfile as Profile ?? new Profile();
 }
 

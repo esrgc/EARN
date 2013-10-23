@@ -18,7 +18,11 @@
         </header>
     </div>
 }
-
+@{
+    var returnUrl = Url.Action("Detail");
+    ViewBag.returnUrl = returnUrl;
+    var connectionCount = Model.Connections.Count();    
+}
 <div class="container">
     <!--Profile header-->
     <div class="text-right"><small>Last update @Html.TimeSpan(@Model.LastUpdate)</small></div>
@@ -109,7 +113,7 @@
         <div class="col-sm-8 profile-tabs">
             <ul class="nav nav-tabs ">
                 <li class="active"><a href="#summary" data-toggle="tab">Summary</a></li>
-                <li><a href="#connections" data-toggle="tab">Connections</a></li>
+                <li><a href="#connections" data-toggle="tab">Connections&nbsp;<span class="badge">@connectionCount</span></a></li>
                 <li><a href="#partnerships" data-toggle="tab">Partnerships</a></li>
             </ul>
             <div class="tab-content">

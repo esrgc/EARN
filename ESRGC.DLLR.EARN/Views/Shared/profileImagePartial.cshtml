@@ -1,5 +1,9 @@
-﻿@model ESRGC.DLLR.EARN.Domain.Model.Profile
-
+﻿@using ESRGC.DLLR.EARN.Domain.Model
+@model Profile
+@{
+    var returnUrl = ViewBag.returnUrl as string ?? "";    
+    var currentProfile = ViewBag.currentProfile as Profile ?? new Profile();
+}
 <div class="profile-picture">
     @if (Model.PictureID != null) { 
         <img class="img-thumbnail" src="@Url.Action("ProfilePicture", new { pictureId = Model.PictureID })"/>

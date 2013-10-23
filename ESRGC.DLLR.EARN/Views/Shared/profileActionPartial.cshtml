@@ -3,20 +3,22 @@
 @{
     var filters = (ViewBag.filters as Dictionary<string, object>) ?? new Dictionary<string, object>();
     var currentTags = filters.ContainsKey("tags") ? filters["tags"] as List<string> : new List<string>();
-    var currentProfile = ViewBag.CurrentProfile as Profile?? new Profile();
+    var currentProfile = ViewBag.CurrentProfile as Profile ?? new Profile();
     var returnUrl = ViewBag.returnUrl as string ?? "";
 }
 
-<div class="dropdown">
-    <a class="btn btn-primary btn-xs" href="#" class="dropdown-toggle" data-toggle="dropdown">Actions&nbsp;<b class="caret"></b></a>
-    <ul class="dropdown-menu">
-        @if (!currentProfile.hasConnection(Model)) { 
-            <li><a href="@Url.Action("AddConnection", "Connection", new { Model.ProfileID , returnUrl})">Add as connection</a></li>
-        }
-        else{
-            <li><a href="@Url.Action("RemoveConnection", "Connection", new { Model.ProfileID , returnUrl })">Remove connection</a></li>
-        }
-        <li><a href="#">Invite to partnership</a></li>
-        <li><a href="#">View available partnerships</a></li>
-    </ul>
-</div>
+@if (currentProfile.ProfileID != Model.ProfileID) { 
+    <div class="dropdown">
+        <a class="btn btn-primary btn-xs" href="#" class="dropdown-toggle" data-toggle="dropdown">Actions&nbsp;<b class="caret"></b></a>
+        <ul class="dropdown-menu">
+            @if (!currentProfile.hasConnection(Model)) { 
+                <li><a href="@Url.Action("AddConnection", "Connection", new { Model.ProfileID, returnUrl })">Add as connection</a></li>
+            }
+            else {
+                <li><a href="@Url.Action("RemoveConnection", "Connection", new { Model.ProfileID, returnUrl })">Remove connection</a></li>
+            }
+            <li><a href="#">Invite to partnership</a></li>
+            <li><a href="#">View available partnerships</a></li>
+        </ul>
+    </div>
+}

@@ -1,13 +1,13 @@
 ﻿@using ESRGC.DLLR.EARN.Domain.Model
 @model Profile
 @{
-    var filters = (ViewBag.filters as Dictionary<string, object>) ?? new Dictionary<string, object>();
-    var currentTags = filters.ContainsKey("tags") ? filters["tags"] as List<string> : new List<string>();
+    //var filters = (ViewBag.filters as Dictionary<string, object>) ?? new Dictionary<string, object>();
+    //var currentTags = filters.ContainsKey("tags") ? filters["tags"] as List<string> : new List<string>();
     var geoTag = Html.getAddrGeoTag(Model);
     var location = geoTag == null ? "" : geoTag.Geometry.WellKnownValue.WellKnownText;
     var currentAccount = ViewBag.currentAccount as Account ?? new Account();
     var currentProfile = currentAccount.Profile ?? new Profile();
-    var returnUrl = Url.GenerateLinkFromFilters("Detail", filters);
+    var returnUrl = ViewBag.returnUrl as string ?? "";
 }
 <section id="profile-@Model.ProfileID"  class="profile-section"
     data-location="@location" 

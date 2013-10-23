@@ -86,10 +86,20 @@
     }
 }*/
 
-.profile-tabs > ul > li.active {
-    > a,
-    > a:hover {
-        background: #F4F4F4;
+.profile-tabs {
+    .tab-content {
+        .placeholder {
+            min-height: 350px;
+            max-height: 800px;
+            overflow-y: auto;
+        }
+    }
+
+    > ul > li.active {
+        > a,
+        > a:hover {
+            background: #F4F4F4;
+        }
     }
 }
 
