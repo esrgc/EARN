@@ -275,6 +275,7 @@
     <Content Include="Views\Shared\profileActionPartial.cshtml" />
     <Content Include="Views\Shared\profileContactPartial.cshtml" />
     <Content Include="Views\Shared\shortProfilePartial.cshtml" />
+    <Content Include="Views\Shared\profileImagePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

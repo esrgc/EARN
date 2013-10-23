@@ -6,29 +6,24 @@
     var geoTag = Html.getAddrGeoTag(Model);
     var location = geoTag == null ? "" : geoTag.Geometry.WellKnownValue.WellKnownText;
     var currentAccount = ViewBag.currentAccount as Account ?? new Account();
+    var currentProfile = currentAccount.Profile ?? new Profile();
+    var returnUrl = Url.GenerateLinkFromFilters("Detail", filters);
 }
-<section id="result-@Model.ProfileID"  class="profile-section"
+<section id="profile-@Model.ProfileID"  class="profile-section"
     data-location="@location" 
     data-organization="@Model.Organization.Name"
-    data-profileUrl = "@Url.Action("ViewProfile", "Profile", new { Model.ProfileID, returnUrl = Url.GenerateLinkFromFilters("Basic", filters) })">
+    data-profileUrl = "@Url.Action("ViewProfile", "Profile", new { Model.ProfileID, returnUrl })">
     <div class="row">
         <div class="col-sm-12 ">
             <div class="post">
                 <div class="inline-container profile-area">
-                    <div class="profile-picture">
-                        @if (Model.PictureID != null) { 
-                            <img class="img-thumbnail" src="@Url.Action("ProfilePicture", new { pictureId = Model.PictureID })"/>
-                        }
-                        else {
-                            <img class="img-thumbnail" src="@Url.Content("~/Client/images/empty_profile.gif")"/>
-                        }
-                    </div>
+                    @Html.Partial("profileImagePartial")
                     <div class="row profile-container">
                         <div class="col-sm-8">
                             <div class="">
                                 <h4>
                                     <span>
-                                        <a title="View this profile" href="@Url.Action("ViewProfile", "Profile", new { Model.ProfileID, returnUrl = Url.GenerateLinkFromFilters("Basic", filters) })">
+                                        <a title="View this profile" href="@Url.Action("ViewProfile", "Profile", new { Model.ProfileID, returnUrl })">
                                             @Model.Organization.Name
                                         </a>
                                     </span>
@@ -41,15 +36,11 @@
                                         <a target="_blank" href="http://@Model.Organization.Website" title="Organization website">@Model.Organization.Website</a>
                                     </small>
                                 </h4>
-                                <ul class="list-inline list-unstyled">
-                                    <li><a target="_blank" href="http://@Model.Organization.FacebookLink" title="Facebook link"><i class="icon-large icon-facebook"></i></a></li>
-                                    <li><a target="_blank" href="http://@Model.Organization.TwitterLink" title="Twitter link"><i class="icon-large icon-twitter"></i></a></li>
-                                    <li><a target="_blank" href="http://@Model.Organization.LinkedInLink" title="LinkedIn link"><i class="icon-large icon-linkedin"></i></a></li>
-                                </ul>
+
                                 @if (Model.Organization.Description.Length > 200) { 
                                     <p>
                                         @Model.Organization.Description.Substring(0, 200)
-                                        ...<a href="@Url.Action("ViewProfile", "Profile", new { Model.ProfileID, returnUrl = Url.GenerateLinkFromFilters("Basic", filters) })">
+                                        ...<a href="@Url.Action("ViewProfile", "Profile", new { Model.ProfileID, returnUrl })">
                                             read more
                                         </a>
                                     </p>
@@ -59,15 +50,16 @@
                                 }
                             </div>
                         </div>
-                        @*<div class="col-sm-4">
-                                <div class="help-block"><i class="icon-tags"></i>&nbsp;Tags</div>
-                                @if (Model.ProfileTags != null) {
-                                    @Html.Partial("tagListLinkPartial", Html.getTagListString(Model))
-                                }
-                            </div>*@
+                        <div class="col-sm-4">
+                            <div class="help-block"><i class="icon-tags"></i>&nbsp;Tags</div>
+                            @if (Model.ProfileTags != null) {
+                                @Html.Partial("tagListDisplayPartial", Html.getTagListString(Model))
+                            }
+                        </div>
                     </div>
                 </div>
                 <div class="clear"></div>
+
             </div>
         </div>
     </div>

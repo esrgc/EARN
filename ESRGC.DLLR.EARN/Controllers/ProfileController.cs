@@ -52,6 +52,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       if (addressTagCount == 0)
         addUpdateAddrGeoTag(profile.ProfileID);
 
+      ViewBag.currentProfile = CurrentAccount.Profile;
       return View(CurrentAccount.Profile);
     }
 

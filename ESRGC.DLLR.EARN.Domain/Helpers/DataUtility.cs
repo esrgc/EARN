@@ -46,19 +46,7 @@ namespace ESRGC.DLLR.EARN.Domain.Helpers
         return "";
     }
     public static List<string> getTagListString(Profile profile) {
-      try {
-        var list = profile.ProfileTags
-                            .Select(x => x.Tag)
-                            .Where(x => !(x is GeoTag))
-                            .Select(x => x.Name).ToList();
-        if (list == null)
-          list = new List<string>();
-        return list;
-
-      }
-      catch {
-        return new List<string>();        
-      }
+      return getTagList(profile).Select(x => x.Name).ToList();
     }
     public static List<Tag> getTagList(Profile profile) {
       try {

@@ -75,6 +75,39 @@ namespace ESRGC.DLLR.EARN.Helpers
         return helper.Action(actionName, routeValues);
     }
 
+    public static string GenerateLinkFromFilters(
+        this UrlHelper helper,
+        string actionName, 
+        string controller,
+        IDictionary<string, object> routeDict) {
+
+      var routeValues = new RouteValueDictionary(routeDict);
+      //check if there's sub list of filter under the same key
+      string extraParams = "";
+      var itemTobeRemoved = new List<string>();
+      foreach (var i in routeValues) {
+        //checks if there are list of the same key
+        if (i.Value is List<string>) {
+          itemTobeRemoved.Add(i.Key);
+          var paramList = i.Value as List<string>;
+          //loop through and genrate url params
+          foreach (var p in paramList) {
+            extraParams += "&" + i.Key + "=" + p;
+          }
+        }
+      }
+      //remove list items from route dictionary
+      itemTobeRemoved.ForEach(x => routeValues.Remove(x));
+
+      //generate url
+      if (routeValues.Count > 0)
+        return helper.Action(actionName, controller, routeValues) + extraParams;
+      else if (extraParams.Length > 0)
+        return helper.Action(actionName, controller, routeValues) + "?" + extraParams.Substring(1, extraParams.Length - 1);
+      else
+        return helper.Action(actionName, controller, routeValues);
+    }
+
     public static string RemoveSearchFilter(
         this UrlHelper helper,
         string actionName,

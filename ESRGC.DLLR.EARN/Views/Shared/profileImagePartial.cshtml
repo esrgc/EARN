@@ -1,0 +1,13 @@
+﻿@model ESRGC.DLLR.EARN.Domain.Model.Profile
+
+<div class="profile-picture">
+    @if (Model.PictureID != null) { 
+        <img class="img-thumbnail" src="@Url.Action("ProfilePicture", new { pictureId = Model.PictureID })"/>
+    }
+    else {
+        <img class="img-thumbnail" src="@Url.Content("~/Client/images/empty_profile.gif")"/>
+    }
+    <div class="panel-action-default">
+        @Html.Partial("profileActionPartial")
+    </div>
+</div>
