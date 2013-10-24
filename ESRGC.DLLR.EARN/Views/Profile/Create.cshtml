@@ -36,8 +36,8 @@
                     <strong>Tell us about your organization</strong>
                 </div>
                 <div class="window-panel-content">
-                    @Html.ValidationSummary(true)
                     <form class="form-horizontal" action="@Url.Action("Create")" method="post" role="form">
+                        @Html.ValidationSummary(true)
                         <fieldset>
                             <legend>Group</legend>
                             <div class="form-group">
@@ -166,7 +166,7 @@
                                })
                                     <div class="help-block">@Html.ValidationMessageFor(x => x.Organization.TwitterLink)</div>
                                 </div>
-                           
+
                                 <div class="col-sm-3">
                                     @Html.TextBoxFor(x => x.Organization.FacebookLink, new {
                                    @class = "form-control input-sm",
@@ -174,7 +174,7 @@
                                })
                                     <div class="help-block">@Html.ValidationMessageFor(x => x.Organization.FacebookLink)</div>
                                 </div>
-                            
+
                                 <div class="col-sm-3">
                                     @Html.TextBoxFor(x => x.Organization.LinkedInLink, new {
                                    @class = "form-control input-sm",

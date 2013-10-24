@@ -1,4 +1,4 @@
-﻿@import "lib/variables.less";
+﻿@import "lib/library.less";
 
 #socialNetworkLinks {
     position: absolute;
@@ -48,16 +48,7 @@
     }
 }
 
-.placeholder {
-    padding: 15px;
-    border-top-color: transparent;
-    border-radius: 0 0 5px 5px;
-    border-left: 1px solid @border-color;
-    border-right: 1px solid @border-color;
-    border-bottom: 1px solid @border-color;
-    background: @base-color;
-    min-height: 300px;
-}
+
 /*.tab-pane > .post {
     border-top: none;
     border-top-left-radius: 0;
@@ -85,10 +76,20 @@
         border-top-right-radius: 0;
     }
 }*/
-
+.placeholder {
+    padding: 15px;  
+    background: @base-color;
+    border-color: @border-color;
+    .rounded-corner;
+}
 .profile-tabs {
     .tab-content {
         .placeholder {
+            border-radius: 0 0 5px 5px;
+            border-top-color: transparent;
+            border-left: 1px solid @border-color;
+            border-right: 1px solid @border-color;
+            border-bottom: 1px solid @border-color;
             min-height: 350px;
             max-height: 800px;
             overflow-y: auto;
@@ -128,7 +129,7 @@
 }
 
 .profile-section {
-    margin-bottom: 10px !important;
+    margin-bottom: 8px !important;
 
     &:last-of-type {
         margin-bottom: 0 !important;

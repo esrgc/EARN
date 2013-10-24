@@ -290,12 +290,16 @@
     <Content Include="Views\Shared\shortProfilePartial.cshtml" />
     <Content Include="Views\Shared\profileImagePartial.cshtml" />
     <Content Include="Views\Partnership\Index.cshtml" />
+    <Content Include="Views\Partnership\Create.cshtml" />
+    <Content Include="Views\Partnership\Detail.cshtml" />
+    <Content Include="Views\Partnership\ListPartnerships.cshtml" />
+    <Content Include="Views\Connection\ListConnections.cshtml" />
+    <Content Include="Views\Partnership\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Client\apps\search\model\" />
     <Folder Include="Client\apps\search\view\" />
-    <Folder Include="Views\Connection\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

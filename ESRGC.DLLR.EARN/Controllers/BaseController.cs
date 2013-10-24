@@ -121,8 +121,8 @@ namespace ESRGC.DLLR.EARN.Controllers
           var account = _workUnit.AccountRepository.Entities.First(x => x.EmailAddress == User.Identity.Name);
           return account;
         }
-        catch  {
-          return null;
+        catch (Exception ex) {
+          throw ex;
         }
       }
     }

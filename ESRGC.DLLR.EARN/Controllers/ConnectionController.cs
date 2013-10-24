@@ -17,7 +17,11 @@ namespace ESRGC.DLLR.EARN.Controllers
     public ActionResult Index() {
       return View();
     }
-
+    public ActionResult ListConnections(int profileID) {
+      var profile = _workUnit.ProfileRepository.GetEntityByID(profileID);
+      var connections = profile.Connections.ToList();
+      return PartialView(connections);
+    }
     [HttpGet]
     public ActionResult AddConnection(int profileID, string returnUrl) {
       if (CurrentAccount.Profile == null) {

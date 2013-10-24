@@ -1,0 +1,52 @@
+﻿@using ESRGC.DLLR.EARN.Domain.Model
+@model List<Partnership>
+
+@{
+    var currentProfile = ViewBag.currentProfile as Profile ?? new Profile();   
+}
+<ul class="list-group">
+    @foreach (var p in Model) {
+        var partners = p.PartnershipDetails.Count();
+        var canEdit = p.PartnershipDetails
+            .Where(x => x.Type.ToLower() == "convener")
+            .Select(x => x.Profile)
+            .Contains(currentProfile);
+        
+        <li class="list-group-item">
+            <a href="@Url.Action("Detail", "Partnership", new { p.PartnershipID })">
+                <strong>@p.Name</strong>
+            </a>
+            @switch (p.Status) {
+                case "Initiating":
+                <span class="text-danger">(@p.Status)</span>
+                    break;
+                case "Partnering/drafting proposal":
+                <span class="text-warning">(@p.Status)</span>
+                    break;
+                case "Partnered/proposed":
+                <span class="text-success">(@p.Status)</span>
+                    break;
+            }
+            @if (canEdit) { 
+                <a href="@Url.Action("Edit", new { p.PartnershipID })"><i class="fa fa-pencil"></i></a>
+            }
+            <span class="badge">Participants @partners</span>
+            <p class="text-muted">@p.Description</p>
+            <span>Grant </span>
+            @switch (p.GrantStatus) {
+                case "Pre-draft":
+                <span class="text-danger"><i class="fa fa-minus-circle"></i>&nbsp;@p.GrantStatus</span>
+                    break;
+                case "Drafting":
+                <span class="text-warning"><i class="fa fa-pencil"></i>&nbsp;@p.GrantStatus</span>
+                    break;
+                case "Submitted":
+                <span class="text-info"><i class="fa fa-check"></i>&nbsp;@p.GrantStatus</span>
+                    break;
+                case "Awarded":
+                <span class="text-success"><i class="fa fa-check-circle"></i>&nbsp;@p.GrantStatus</span>
+                    break;
+            }
+        </li>
+    }
+</ul>

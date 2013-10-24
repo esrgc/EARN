@@ -5,8 +5,8 @@
     //var currentTags = filters.ContainsKey("tags") ? filters["tags"] as List<string> : new List<string>();
     var geoTag = Html.getAddrGeoTag(Model);
     var location = geoTag == null ? "" : geoTag.Geometry.WellKnownValue.WellKnownText;
-    var currentAccount = ViewBag.currentAccount as Account ?? new Account();
-    var currentProfile = currentAccount.Profile ?? new Profile();
+    //var currentAccount = ViewBag.currentAccount as Account ?? new Account();
+    //var currentProfile = currentAccount.Profile ?? new Profile();
     var returnUrl = ViewBag.returnUrl as string ?? "";
 }
 <section id="profile-@Model.ProfileID"  class="profile-section"

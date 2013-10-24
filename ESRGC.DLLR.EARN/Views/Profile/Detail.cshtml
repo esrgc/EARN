@@ -136,6 +136,7 @@
                 <div class="tab-pane" id="connections">
                     <div class="placeholder">
                         <div>
+                            <h4>Your Connections</h4>
                             @foreach (var p in Model.Connections) { 
                                 @Html.Partial("shortProfilePartial", p)
                             }
@@ -144,10 +145,18 @@
                 </div>
                 <div class="tab-pane" id="partnerships">
                     <div class="placeholder">
-                        <span class="pull-right"><a href="@Url.Action("Create", "Partnership")">Create new partnership</a></span>
+                        <span class="pull-right">
+                            <a href="@Url.Action("Create", "Partnership")">
+                                <i class="glyphicon glyphicon-link"></i>
+                                &nbsp;Create new partnership
+                            </a>
+                        </span>
                         <h4>Available Partnerships</h4>
                         @if (Model.PartnershipDetails.Count() == 0) { 
                             <p>There's currently no partnership available.</p>
+                        }
+                        else {
+                            @Html.Action("ListPartnerships", "Partnership", new { Model.ProfileID })
                         }
                     </div>
                 </div>

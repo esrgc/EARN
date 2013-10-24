@@ -1,0 +1,100 @@
+﻿@model ESRGC.DLLR.EARN.Domain.Model.Partnership
+
+@{
+    ViewBag.Title = "Partnership";
+    ViewBag.Header = "Partnership Detail";
+}
+
+@section header{
+    <div class="container">
+        <header class="page-header">
+            <h3>@ViewBag.Header <i class="glyphicon glyphicon-link"></i></h3>
+            @*<ul class="breadcrumb">
+                <li><a href="@Url.Action("index", "Home")">Home</a></li>
+                <li class="active">@ViewBag.Header</li>
+            </ul>*@
+        </header>
+    </div>
+}
+
+@section scripts{}
+
+@{ 
+    var p = Model;
+    var partners = p.PartnershipDetails.Where(x => x.Type.ToLower() != "convener").Select(x => x.Profile);
+    var conveners = p.PartnershipDetails.Where(x => x.Type.ToLower() == "convener").Select(x => x.Profile);
+    var returnUrl = Url.Action("Detail", new { p.PartnershipID });
+    ViewBag.returnUrl = returnUrl;
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1">
+            <div class="window-panel">
+                <div class="window-panel-title">
+                    <strong>@p.Name</strong>
+                    <a href="@Url.Action("Edit", new { p.PartnershipID })"><i class="fa fa-pencil"></i></a>
+                </div>
+                <div class="window-panel-content">
+                    <p class=""><strong>Description</strong> @p.Description</p>
+                    <p>
+                        <strong>Status</strong>
+                        @switch (p.Status) {
+                            case "Initiating":
+                            <span class="text-danger">@p.Status</span>
+                                break;
+                            case "Partnering/drafting proposal":
+                            <span class="text-warning">@p.Status</span>
+                                break;
+                            case "Partnered/proposed":
+                            <span class="text-success">@p.Status</span>
+                                break;
+                        }
+                    </p>
+                    <p>
+                        <strong>Grant</strong>
+                        @switch (p.GrantStatus) {
+                            case "Pre-draft":
+                            <span class="text-danger"><i class="fa fa-minus-circle"></i>&nbsp;@p.GrantStatus</span>
+                                break;
+                            case "Drafting":
+                            <span class="text-warning"><i class="fa fa-pencil"></i>&nbsp;@p.GrantStatus</span>
+                                break;
+                            case "Submitted":
+                            <span class="text-info"><i class="fa fa-check"></i>&nbsp;@p.GrantStatus</span>
+                                break;
+                            case "Awarded":
+                            <span class="text-success"><i class="fa fa-check-circle"></i>&nbsp;@p.GrantStatus</span>
+                                break;
+                        }
+                    </p>
+                    <hr />
+                    <div class="profile-tabs">
+                        <ul class="nav nav-tabs ">
+                            <li class="active"><a href="#conveners" data-toggle="tab">Conveners&nbsp;<span class="badge">@conveners.Count()</span></a></li>
+                            <li><a href="#partners" data-toggle="tab">Partners&nbsp;<span class="badge">@partners.Count()</span></a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="conveners">
+                                <div class="placeholder">
+                                    @foreach (var profile in conveners) { 
+                                        @Html.Action("DisplayShortProfile", "Profile", new { profile.ProfileID })
+                                    }
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="partners">
+                                <div class="placeholder">
+                                    @foreach (var profile in partners) { 
+                                        @Html.Action("DisplayShortProfile", "Profile", new { profile.ProfileID })
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

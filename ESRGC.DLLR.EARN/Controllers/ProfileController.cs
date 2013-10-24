@@ -21,8 +21,19 @@ namespace ESRGC.DLLR.EARN.Controllers
     public ActionResult Index() {
       return View();
     }
-
+    public ActionResult DisplayShortProfile(int profileID) {
+      if (CurrentAccount != null) {
+        ViewBag.currentProfile = CurrentAccount.Profile;
+        var profile = _workUnit.ProfileRepository.GetEntityByID(profileID);
+        return PartialView("shortProfilePartial", profile);
+      }
+      return new EmptyResult();
+    }
     public ActionResult Detail() {
+      if (CurrentAccount == null) {
+        updateTempDataMessage("There was an error accessing your profile. Please try again later");
+        return RedirectToAction("Index","Home");
+      }
       var profile = CurrentAccount.Profile;
       if (profile == null) {
         return RedirectToAction("Create");
