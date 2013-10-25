@@ -18,5 +18,12 @@ namespace ESRGC.DLLR.EARN.Controllers
     public ActionResult ContactUs() {
       return View();
     }
+
+    public ActionResult UnauthorizedAccess() {
+      return View();
+    }
+    public ActionResult ProfileNotCreated() {
+      return View();
+    }
   }
 }

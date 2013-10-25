@@ -147,6 +147,8 @@
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\TagController.cs" />
+    <Compile Include="Filters\VerifyAccountAttribute.cs" />
+    <Compile Include="Filters\VerifyProfileAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -155,6 +157,7 @@
     <Compile Include="Helpers\HtmlHelperExt.cs" />
     <Compile Include="Helpers\SHA1PasswordSecurity.cs" />
     <Compile Include="Helpers\Utility.cs" />
+    <Compile Include="Helpers\ViewDataHelper.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\ProfileModels.cs" />
@@ -295,6 +298,8 @@
     <Content Include="Views\Partnership\ListPartnerships.cshtml" />
     <Content Include="Views\Connection\ListConnections.cshtml" />
     <Content Include="Views\Partnership\Edit.cshtml" />
+    <Content Include="Views\Home\UnauthorizedAccess.cshtml" />
+    <Content Include="Views\Home\ProfileNotCreated.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

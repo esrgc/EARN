@@ -4,10 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ESRGC.DLLR.EARN.Domain.DAL.Abstract;
+using ESRGC.DLLR.EARN.Filters;
 
 namespace ESRGC.DLLR.EARN.Controllers
 {
   [Authorize]
+  [VerifyAccount]
   public class ConnectionController : BaseController
   {
     public ConnectionController(IWorkUnit workUnit)
@@ -23,6 +25,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       return PartialView(connections);
     }
     [HttpGet]
+    [VerifyProfile]
     public ActionResult AddConnection(int profileID, string returnUrl) {
       if (CurrentAccount.Profile == null) {
         updateTempDataMessage("You haven't created a currentProfile. Please create one before adding connection");
@@ -52,6 +55,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     }
 
     [HttpGet]
+    [VerifyProfile]
     public ActionResult RemoveConnection(int profileID, string returnUrl) {
       if (CurrentAccount.Profile == null) {
         updateTempDataMessage("You haven't created a currentProfile. Please create one before adding connection");

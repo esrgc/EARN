@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Profile";
+    ViewBag.Header = "Profile Not Found";
+}
+
+@section header{
+    <div class="container">
+        <header class="page-header">
+            <h3>@ViewBag.Header <i class="fa fa-times-circle text-danger"></i></h3>
+            @*<ul class="breadcrumb">
+                <li><a href="@Url.Action("index", "Home")">Home</a></li>
+                <li class="active">@ViewBag.Header</li>
+            </ul>*@
+        </header>
+    </div>
+}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+            <div class="alert alert-danger">
+                <h4>@ViewBag.Header</h4>
+                <p>You have not created an profile. Please create a profile!</p>
+                <a class="btn btn-default" href="@Url.Action("Create", "Profile")">Home</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+

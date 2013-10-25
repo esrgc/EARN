@@ -27,9 +27,10 @@
                     <strong>Edit</strong>
                 </div>
                 <div class="window-panel-content">
+                    @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true)
                     <form class="form-horizontal" action="@Url.Action("Edit")" method="post" role="form">
-                        <input type="hidden" value="@Model.OrganizationID" name="id" />
+                        @Html.HiddenFor(x=>x.OrganizationID)
                         @Html.Partial("orgFormPartial")
                         <hr />
                         <div class="form-group">

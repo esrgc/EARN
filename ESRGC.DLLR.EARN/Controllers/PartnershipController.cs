@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using ESRGC.DLLR.EARN.Domain.DAL.Abstract;
 using ESRGC.DLLR.EARN.Domain.Model;
+using ESRGC.DLLR.EARN.Filters;
 
 namespace ESRGC.DLLR.EARN.Controllers
 {
@@ -46,6 +47,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       return View();
     }
     [HttpPost]
+    [VerifyProfile]
     public ActionResult Create(Partnership partnership) {
       if (ModelState.IsValid) {
         var partnershipDetail = new PartnershipDetail() {
@@ -65,8 +67,24 @@ namespace ESRGC.DLLR.EARN.Controllers
     /// </summary>
     /// <param name="partnershipID"></param>
     /// <returns></returns>
+    [VerifyProfile]
     public ActionResult Edit(int partnershipID) {
-      return View();
+      var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
+      ViewBag.currentProfile = CurrentAccount.Profile;
+      return View(partnership);
+    }
+    [HttpPost]
+    [ActionName("Edit")]
+    public ActionResult EditPartnership(int partnershipID) {
+      var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID) ?? new Partnership();
+      TryUpdateModel(partnership);
+      if (ModelState.IsValid) {
+        _workUnit.PartnershipRepository.UpdateEntity(partnership);
+        _workUnit.saveChanges();
+        return RedirectToAction("Detail", new { partnershipID });
+      }
+      //error redisplay
+      return View(partnership);
     }
     /// <summary>
     /// Delete a partnership

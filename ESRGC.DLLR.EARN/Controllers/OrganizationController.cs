@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using ESRGC.DLLR.EARN.Domain.DAL.Abstract;
 using ESRGC.DLLR.EARN.Domain.Model;
+using ESRGC.DLLR.EARN.Filters;
 
 namespace ESRGC.DLLR.EARN.Controllers
 {
@@ -15,16 +16,16 @@ namespace ESRGC.DLLR.EARN.Controllers
       : base(workUnit) {
 
     }
-
-    public ActionResult Edit(int id) {
-      var organization = _workUnit.OrganizationRepository.GetEntityByID(id);
+    [VerifyProfile]
+    public ActionResult Edit() {      
+      var organization = CurrentAccount.Profile.Organization;
       return View(organization);
     }
 
     [HttpPost]
     [ActionName("Edit")]
-    public ActionResult EditOrg(int id) {
-      var org = _workUnit.OrganizationRepository.GetEntityByID(id) ?? new Organization();
+    public ActionResult EditOrg(int organizationID) {
+      var org = _workUnit.OrganizationRepository.GetEntityByID(organizationID) ?? new Organization();
       TryUpdateModel(org);
       if (ModelState.IsValid) {
         _workUnit.OrganizationRepository.UpdateEntity(org);

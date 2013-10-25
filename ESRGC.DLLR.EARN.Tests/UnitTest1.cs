@@ -69,7 +69,7 @@ namespace ESRGC.DLLR.EARN.Tests
       var controller = new ProfileController(workUnit);
       var profiles = workUnit.ProfileRepository.Entities.ToList();
       foreach (var profile in profiles) {
-        controller.addUpdateAddrGeoTag(profile.ProfileID);
+        //controller.addUpdateAddrGeoTag(profile.ProfileID);
       }
     }
     [TestMethod]

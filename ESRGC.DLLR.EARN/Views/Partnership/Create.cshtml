@@ -21,17 +21,8 @@
     </div>
 }
 @{
-    var statusList = new List<string>() { 
-        "Initiating",
-        "Partnering/drafting proposal",
-        "Partnered/proposed"
-    };
-    var grantStatusList = new List<string>() { 
-        "Pre-draft",
-        "Drafting",
-        "Submitted",
-        "Awarded"
-    };
+    var grantStatusList = Html.getGrantStatusList();
+    var statusList = Html.getPartnershipStatusList();
 }
 
 <div class="container">

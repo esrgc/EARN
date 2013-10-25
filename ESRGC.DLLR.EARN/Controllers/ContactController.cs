@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using ESRGC.DLLR.EARN.Domain.DAL.Abstract;
 using ESRGC.DLLR.EARN.Domain.Model;
+using ESRGC.DLLR.EARN.Filters;
 
 namespace ESRGC.DLLR.EARN.Controllers
 {
@@ -24,9 +25,9 @@ namespace ESRGC.DLLR.EARN.Controllers
     public ActionResult Create() {
       return View();
     }
-
-    public ActionResult Edit(int id) {
-      var contact = _workUnit.ContactRepository.GetEntityByID(id);
+    [VerifyProfile]
+    public ActionResult Edit() {
+      var contact = CurrentAccount.Profile.Contact;
       return View(contact);
     }
 

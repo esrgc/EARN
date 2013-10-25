@@ -77,7 +77,7 @@ namespace ESRGC.DLLR.EARN.Helpers
 
     public static string GenerateLinkFromFilters(
         this UrlHelper helper,
-        string actionName, 
+        string actionName,
         string controller,
         IDictionary<string, object> routeDict) {
 
@@ -196,6 +196,7 @@ namespace ESRGC.DLLR.EARN.Helpers
         return null;
       }
     }
+    
     //public static MvcHtmlString DisplayStreetAddr(
     //    this HtmlHelper helper,
     //    Contact contact

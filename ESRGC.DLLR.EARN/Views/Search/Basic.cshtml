@@ -56,6 +56,12 @@
                                                     placeholder="e.g. MS Office, computer skills, etc." />
                                             </div>
                                         </div>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <button type="submit" class="btn btn-primary btn-block" data-loading-text="Searching...">Go</button>
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-12">
@@ -78,11 +84,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-12">
-                                            <button type="submit" class="btn btn-primary btn-block" data-loading-text="Searching...">Go</button>
-                                        </div>
-                                    </div>
+
                                     <div id="hiddenInputHolder">
                                         @foreach (var i in currentTags) { 
                                             <input type="hidden" value="@i" name="tags" />

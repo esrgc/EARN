@@ -6,11 +6,12 @@ using System.Web;
 using System.Web.Mvc;
 using ESRGC.DLLR.EARN.Domain.DAL.Abstract;
 using ESRGC.DLLR.EARN.Domain.Model;
+using ESRGC.DLLR.EARN.Filters;
 using ESRGC.GIS.Geocoding;
 using ESRGC.GIS.Utilities;
 
 namespace ESRGC.DLLR.EARN.Controllers
-{
+{  
   public class BaseController : Controller
   {
     protected IWorkUnit _workUnit = null;
@@ -35,7 +36,8 @@ namespace ESRGC.DLLR.EARN.Controllers
     //helpers 
     ///////////////////////
     //attempt to geocode the profile address
-    public void addUpdateAddrGeoTag(int profileId) {
+
+    protected void addUpdateAddrGeoTag(int profileId) {
       var profile = _workUnit.ProfileRepository.GetEntityByID(profileId);
       if (profile == null)
         return;

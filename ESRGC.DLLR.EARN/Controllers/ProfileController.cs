@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using ESRGC.DLLR.EARN.Domain.DAL.Abstract;
 using ESRGC.DLLR.EARN.Domain.Model;
+using ESRGC.DLLR.EARN.Filters;
 using ESRGC.DLLR.EARN.Models;
 using ESRGC.GIS.Geocoding;
 using ESRGC.GIS.Utilities;
@@ -13,6 +14,7 @@ using ESRGC.GIS.Utilities;
 namespace ESRGC.DLLR.EARN.Controllers
 {
   [Authorize]
+  [VerifyAccount]
   public class ProfileController : BaseController
   {
     public ProfileController(IWorkUnit workUnit)
@@ -29,16 +31,10 @@ namespace ESRGC.DLLR.EARN.Controllers
       }
       return new EmptyResult();
     }
+    [VerifyProfile]
     public ActionResult Detail() {
-      if (CurrentAccount == null) {
-        updateTempDataMessage("There was an error accessing your profile. Please try again later");
-        return RedirectToAction("Index","Home");
-      }
       var profile = CurrentAccount.Profile;
-      if (profile == null) {
-        return RedirectToAction("Create");
-      }
-
+      //count tags
       int countTag = _workUnit
         .ProfileTagRepository
         .Entities
@@ -146,7 +142,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       }
       return RedirectToAction("Detail");
     }
-
+    [VerifyProfile]
     public ActionResult UploadImage() {
       var profile = CurrentAccount.Profile;
       if (profile == null)
