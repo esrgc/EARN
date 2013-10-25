@@ -26,7 +26,9 @@ namespace ESRGC.DLLR.EARN.Domain.DAL
     //public DbSet<Connection> Connections { get; set; }
     public DbSet<Partnership> Partnership { get; set; }
     public DbSet<PartnershipDetail> PartnershipDetail { get; set; }
-
+    public DbSet<Request> Requests { get; set; }
+    public DbSet<Notification> Notifications { get; set; }
+    
     protected override void OnModelCreating(DbModelBuilder modelBuilder) {
       modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
@@ -43,6 +45,16 @@ namespace ESRGC.DLLR.EARN.Domain.DAL
           map.MapRightKey("ConnectionProfileID");
           map.ToTable("Connection");
         });
+      modelBuilder.Entity<Account>()
+        .HasMany(x => x.SentRequests)
+        .WithRequired(x => x.Sender)
+        .HasForeignKey(x => x.SenderID)
+        .WillCascadeOnDelete(false);
+      modelBuilder.Entity<Request>()
+        .HasRequired(x => x.Receiver)
+        .WithMany(x => x.ReceivedRequests)
+        .HasForeignKey(x => x.ReceiverID)
+        .WillCascadeOnDelete(false);
     }
   }
 }

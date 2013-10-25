@@ -10,6 +10,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
   {
     public Partnership() {
       PartnershipDetails = new List<PartnershipDetail>();
+      LastUpdate = DateTime.Now;
     }
     public int PartnershipID { get; set; }
     [Required]
@@ -24,6 +25,8 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     [Required]
     [MaxLength(100, ErrorMessage = "100 maximum characters allowed")]
     public string GrantStatus { get; set; }
+
+    public DateTime? LastUpdate { get; set; }
     //nav properties
     public virtual ICollection<PartnershipDetail> PartnershipDetails { get; set; }
   }

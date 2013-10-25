@@ -69,6 +69,10 @@ namespace ESRGC.DLLR.EARN.Controllers
       else
         result = profiles.ToList();
 
+      //always include current profile
+      if (!result.Contains(currentProfile)) {
+        result.Add(currentProfile);
+      }
 
       int pageIndex = page ?? 1;
       int pageSize = size ?? 15;

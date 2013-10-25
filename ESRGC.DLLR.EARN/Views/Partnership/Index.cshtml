@@ -1,16 +1,93 @@
 ﻿@using ESRGC.DLLR.EARN.Domain.Model
+@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.PagedList<Partnership>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Partnerships";
+    ViewBag.Header = "Partnerships Search";
 }
 
-@section header {
+@section header{
+    <div class="container">
+        <header class="page-header">
+            <h3>@ViewBag.Header <i class="glyphicon glyphicon-link"></i></h3>
+            @*<ul class="breadcrumb">
+                <li><a href="@Url.Action("index", "Home")">Home</a></li>
+                <li class="active">@ViewBag.Header</li>
+            </ul>*@
+        </header>
+    </div>
 }
 
 @section scripts {
-}
 
+}
+@{
+    var filters = ViewBag.filters as Dictionary<string, object> ?? new Dictionary<string, object>();   
+ }
 <div class="container">
     <div class="row">
-
+        <div class="col-sm-12">
+            <div class="window-panel">
+                <div class="window-panel-title">
+                    <strong>Available Partnerships</strong>
+                </div>
+                <div class="window-panel-content">
+                    @if (Model.PageCount > 1) {
+                        @Html.PagedListPager(
+                        Model,
+                        page => Url.AddSearchFilter("Basic", filters, "page", page.ToString()),
+                        PagedListRenderOptions.OnlyShowFivePagesAtATime
+                    )}
+                    <div class="placeholder">
+                        <ul class="list-group">
+                            @foreach (var p in Model) {
+                                var partners = p.PartnershipDetails.Count();
+        
+                                <li class="list-group-item">
+                                    <a href="@Url.Action("Detail", "Partnership", new { p.PartnershipID })">
+                                        <strong>@p.Name</strong>
+                                    </a>
+                                    @switch (p.Status) {
+                                        case "Initiating":
+                                        <span class="text-danger">(@p.Status)</span>
+                                            break;
+                                        case "Partnering/drafting proposal":
+                                        <span class="text-warning">(@p.Status)</span>
+                                            break;
+                                        case "Partnered/proposed":
+                                        <span class="text-success">(@p.Status)</span>
+                                            break;
+                                    }
+                                    <span class="badge">Participants @partners</span>
+                                    <p class="text-muted">@p.Description</p>
+                                    <span>Grant </span>
+                                    @switch (p.GrantStatus) {
+                                        case "Pre-draft":
+                                        <span class="text-danger"><i class="fa fa-minus-circle"></i>&nbsp;@p.GrantStatus</span>
+                                            break;
+                                        case "Drafting":
+                                        <span class="text-warning"><i class="fa fa-pencil"></i>&nbsp;@p.GrantStatus</span>
+                                            break;
+                                        case "Submitted":
+                                        <span class="text-info"><i class="fa fa-check"></i>&nbsp;@p.GrantStatus</span>
+                                            break;
+                                        case "Awarded":
+                                        <span class="text-success"><i class="fa fa-check-circle"></i>&nbsp;@p.GrantStatus</span>
+                                            break;
+                                    }
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    @if (Model.PageCount > 1) {
+                        @Html.PagedListPager(
+                        Model,
+                        page => Url.AddSearchFilter("Basic", filters, "page", page.ToString()),
+                        PagedListRenderOptions.OnlyShowFivePagesAtATime
+                    )}
+                </div>
+            </div>
+        </div>
     </div>
 </div>

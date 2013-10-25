@@ -12,6 +12,9 @@ namespace ESRGC.DLLR.EARN.Domain.Model
   {
     public Account() {
       AccountID = 0;
+      Notifications = new List<Notification>();
+      SentRequests = new List<Request>();
+      ReceivedRequests = new List<Request>();
     }
 
     public int AccountID { get; set; }
@@ -53,5 +56,9 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public int? ProfileID { get; set; }
     [ForeignKey("ProfileID")]
     public virtual Profile Profile { get; set; }
+
+    public virtual ICollection<Notification> Notifications { get; set; }
+    public virtual ICollection<Request> SentRequests { get; set; }
+    public virtual ICollection<Request> ReceivedRequests { get; set; }
   }
 }

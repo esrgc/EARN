@@ -64,10 +64,15 @@
     <Compile Include="Migrations\201310241611121_PartnershipFieldsRequired.Designer.cs">
       <DependentUpon>201310241611121_PartnershipFieldsRequired.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201310251937585_request-notification.cs" />
+    <Compile Include="Migrations\201310251937585_request-notification.Designer.cs">
+      <DependentUpon>201310251937585_request-notification.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\GeoTag.cs" />
     <Compile Include="Model\Category.cs" />
+    <Compile Include="Model\Notification.cs" />
     <Compile Include="Model\Organization.cs" />
     <Compile Include="Model\Contact.cs" />
     <Compile Include="Model\Partnership.cs" />
@@ -75,6 +80,7 @@
     <Compile Include="Model\Picture.cs" />
     <Compile Include="Model\Profile.cs" />
     <Compile Include="Model\ProfileTag.cs" />
+    <Compile Include="Model\Request.cs" />
     <Compile Include="Model\Tag.cs" />
     <Compile Include="Model\UserGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -90,6 +96,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201310241611121_PartnershipFieldsRequired.resx">
       <DependentUpon>201310241611121_PartnershipFieldsRequired.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201310251937585_request-notification.resx">
+      <DependentUpon>201310251937585_request-notification.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

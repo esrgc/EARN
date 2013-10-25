@@ -23,6 +23,8 @@ namespace ESRGC.DLLR.EARN.Domain.DAL.Concrete
     //IRepository<Connection> _connectionRepo;
     IRepository<Partnership> _partnershipRepo;
     IRepository<PartnershipDetail> _parnershipDetailRepo;
+    IRepository<Notification> _notificationRepo;
+    IRepository<Request> _requestRepo;
 
     public WorkUnit(DomainContext context) {
       _context = context;
@@ -103,10 +105,19 @@ namespace ESRGC.DLLR.EARN.Domain.DAL.Concrete
       }
     }
     public IRepository<PartnershipDetail> PartnershipDetailRepository {
-      get { 
+      get {
         return _parnershipDetailRepo ?? (_parnershipDetailRepo = new Repository<PartnershipDetail>(_context));
       }
     }
+
+    public IRepository<Request> RequestRepository {
+      get { return _requestRepo ?? (_requestRepo = new Repository<Request>(_context)); }
+    }
+
+    public IRepository<Notification> NotificationRepository {
+      get { return _notificationRepo ?? (_notificationRepo = new Repository<Notification>(_context)); }
+    }
+
     #endregion
   }
 }

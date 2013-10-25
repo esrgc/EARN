@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using ESRGC.DLLR.EARN.Domain.DAL.Abstract;
 using ESRGC.DLLR.EARN.Domain.Model;
 using ESRGC.DLLR.EARN.Filters;
-
+using PagedList;
 namespace ESRGC.DLLR.EARN.Controllers
 {
   [Authorize]
@@ -16,8 +16,15 @@ namespace ESRGC.DLLR.EARN.Controllers
     //
     // GET: /Partnership/
     //for search
-    public ActionResult Index() {
-      return View();
+    public ActionResult Index(int? page, int? size) {
+      var partnerships = _workUnit
+        .PartnershipRepository
+        .Entities
+        .OrderBy(x=>x.Name)
+        .ToList();
+      int pageIndex = page ?? 1, pageSize = size ?? 15;
+      var pagedList = partnerships.ToPagedList(pageIndex, pageSize);
+      return View(pagedList);
     }
     /// <summary>
     /// View partnership detail
@@ -79,6 +86,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID) ?? new Partnership();
       TryUpdateModel(partnership);
       if (ModelState.IsValid) {
+        partnership.LastUpdate = DateTime.Now;
         _workUnit.PartnershipRepository.UpdateEntity(partnership);
         _workUnit.saveChanges();
         return RedirectToAction("Detail", new { partnershipID });
