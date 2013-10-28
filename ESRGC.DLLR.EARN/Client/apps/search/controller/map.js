@@ -2,7 +2,7 @@
 Author: Tu hoang
 ESRGC 2013
 
-EARN Maryland Connect
+EARN MD Connect
 
 Map controller
 map.js

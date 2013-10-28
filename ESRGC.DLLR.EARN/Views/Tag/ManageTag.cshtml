@@ -1,7 +1,7 @@
 ﻿@using ESRGC.DLLR.EARN.Domain.Model
 @model Profile
 @{
-    ViewBag.Title = "Search Tag";
+    ViewBag.Title = "Tags";
     ViewBag.Header = "Searchable tags";
 }
 
@@ -141,14 +141,15 @@
         <div class="col-sm-10 col-sm-offset-1">
             <div class="window-panel">
                 <div class="window-panel-title">
-                    <strong>Tag your organization</strong>
+                    <strong>Searchable Tags</strong>
                 </div>
                 <div class="window-panel-content">
                     <div class="">
                         <form class="form-inline" role="form" action="@Url.Action("ManageTag")" method="post">
                             <p>
-                                Tags are essential as they enable other EARN Maryland Connect users to find and connect with you. 
-                                Common tags are one or two words but collectively they serve to describe your organization.
+                                Tags are essential as they enable other EARN MD CONNECT users to find and connect with you.
+                                Common tags are one or two words, but collectively they serve to describe your organization’s function,
+                                focus, constituency, capacity, expertise, industry sector, workforce interests, etc.
                             </p>
                             <div class="form-group typeahead-container">
                                 <input type="text"
@@ -174,15 +175,14 @@
                             <p>
                                 <strong>Tip!</strong>
                                 Creating a complete list of tags improves the likelihood our members find your profile
-                                when searching keywords. Using terms popular with the community that advertise contributions,
-                                needs, and/or related skills work well. Remember to update your tags as you grow your profile!                                                      
+                                when searching keywords.                                                    
                             </p>
                         </div>
                     </div>
                     <hr />
-                    <h4>Your tags <small class="">(Please enter at least one tag to procceed)</small></h4>
+                    <h4>Current Tag(s)</h4>
                     <div class="post">
-                        @Html.Partial("tagListPartial", currentTags.Select(x => x.Name).ToList())
+                        @Html.Partial("tagListEditPartial", currentTags.Select(x => x.Name).ToList())
                     </div>
                     <br />
                     <div class="pull-right">

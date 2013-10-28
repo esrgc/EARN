@@ -39,10 +39,10 @@
                     <form class="form-horizontal" action="@Url.Action("Create")" method="post" role="form">
                         @Html.ValidationSummary(true)
                         <fieldset>
-                            <legend>Group</legend>
+                            <legend>Organization Type</legend>
                             <div class="form-group">
                                 <div class="col-sm-8 col-sm-offset-2">
-                                    <label class="control-label" for="UserGroupID">User group (select primary role)</label>
+                                    <label class="control-label" for="UserGroupID">Organization Type (select primary role)</label>
                                     <span class="label label-default">Required</span>
                                     @foreach (var i in Model.UserGroups) { 
                                         <div class="radio">
@@ -166,11 +166,11 @@
                                })
                                     <div class="help-block">@Html.ValidationMessageFor(x => x.Organization.TwitterLink)</div>
                                 </div>
-
+                                
                                 <div class="col-sm-3">
                                     @Html.TextBoxFor(x => x.Organization.FacebookLink, new {
                                    @class = "form-control input-sm",
-                                   placeholder = "FaceBook"
+                                   placeholder = "Facebook"
                                })
                                     <div class="help-block">@Html.ValidationMessageFor(x => x.Organization.FacebookLink)</div>
                                 </div>

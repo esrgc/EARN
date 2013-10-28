@@ -42,7 +42,31 @@ namespace ESRGC.DLLR.EARN.Helpers
       return helper.GenerateLinkFromFilters(actionName, routeValues);
 
     }
+    public static string AddSearchFilter(
+        this UrlHelper helper,
+        string actionName,
+        string controller,
+        IDictionary<string, object> routeDict,
+        string newFilterKey,
+        object newFilterVal) {
 
+      var routeValues = new RouteValueDictionary(routeDict);
+      if (routeValues.Keys.Contains(newFilterKey)) {
+        if (routeValues[newFilterKey] is IEnumerable<string>) {
+          var list = (routeValues[newFilterKey] as List<string>).ToList();
+          list.Add(newFilterVal as string);
+          routeValues[newFilterKey] = list;
+        }
+        else
+          routeValues[newFilterKey] = newFilterVal;
+      }
+      else
+        routeValues.Add(newFilterKey, newFilterVal);
+
+      //generate url
+      return helper.GenerateLinkFromFilters(actionName, controller, routeValues);
+
+    }
     public static string GenerateLinkFromFilters(
         this UrlHelper helper,
         string actionName,
@@ -132,7 +156,31 @@ namespace ESRGC.DLLR.EARN.Helpers
       //generate url
       return helper.GenerateLinkFromFilters(actionName, routeValues);
     }
-
+    public static string RemoveSearchFilter(
+        this UrlHelper helper,
+        string actionName,
+        string controller,
+        IDictionary<string, object> routeDict,
+        string removeKey,
+        string value) {
+      //create new route dictionary
+      var routeValues = new RouteValueDictionary(routeDict);
+      //checks if value is a list
+      if (routeValues.ContainsKey(removeKey)) {
+        var valueAtThatKey = routeValues[removeKey];
+        //if value at that key is a collection then only remove that one value
+        if (valueAtThatKey is IEnumerable<string>) {
+          var subList = (valueAtThatKey as List<string>).ToList();//copy to a new list
+          subList.Remove(value);
+          routeValues[removeKey] = subList;//reference the new list
+        }
+        else
+          //remove key
+          routeValues.Remove(removeKey);
+      }
+      //generate url
+      return helper.GenerateLinkFromFilters(actionName, controller, routeValues);
+    }
     public static string TimeSpan(this HtmlHelper helper, DateTime? timeInPast) {
       if (timeInPast == null)
         return "unknown";

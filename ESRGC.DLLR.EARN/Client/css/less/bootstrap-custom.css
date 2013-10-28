@@ -4,7 +4,7 @@
   margin-right: 0;
 }
 .modal-dialog {
-  margin-top: 200px;
+  margin-top: 50px;
 }
 .navbar-form {
   padding: 0;
@@ -14,4 +14,9 @@
 .pull-right .dropdown-menu {
   right: 0;
   left: auto;
+}
+@media screen and (min-width: 768px) {
+  .modal-dialog {
+    width: 750px;
+  }
 }

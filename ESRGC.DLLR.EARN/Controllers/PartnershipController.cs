@@ -16,6 +16,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     //
     // GET: /Partnership/
     //for search
+    [VerifyProfile]
     public ActionResult Index(int? page, int? size) {
       var partnerships = _workUnit
         .PartnershipRepository

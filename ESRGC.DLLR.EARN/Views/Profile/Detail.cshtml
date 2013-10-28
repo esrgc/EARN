@@ -4,7 +4,7 @@
 
 @{
     ViewBag.Title = "Profile";
-    ViewBag.Header = "Organization Profile";
+    ViewBag.Header = "Organizational Profile";
 }
 
 @section header{
@@ -93,14 +93,14 @@
                         </span>
                     </div>
                     <div class="window-panel-content">
-                        @Html.Partial("tagListDisplayPartial", Html.getTagListString(Model))
+                        @Html.Partial("tagListLinkPartial", Html.getTagListString(Model))
                     </div>
                 </div>
             </div>
             <div>
                 <div class="window-panel">
                     <div class="window-panel-title">
-                        Contact <i class="fa fa-envelope"></i>
+                        Point of Contact @*<i class="fa fa-envelope"></i>*@
                         <span class="pull-right">
                             <a class="link-icon" title="Edit" href="@Url.Action("Edit", "Contact")"><i class="fa fa-pencil"></i></a>
                         </span>
@@ -123,9 +123,9 @@
                         <form action="@Url.Action("EditAbout")" method="post">
                             <h4>About</h4>
                             @Html.TextAreaFor(x => x.About, new {
-                           @class = "form-control about",
-                           placeholder = ModelMetadata.FromLambdaExpression(x => x.About, ViewData).Description
-                       })
+                               @class = "form-control about",
+                               placeholder = ModelMetadata.FromLambdaExpression(x => x.About, ViewData).Description
+                           })
                             <div class="text-right">
                                 <button type="submit" class="btn btn-info btn-xs"><i class="fa fa-save"></i>&nbsp;Save</button>
 

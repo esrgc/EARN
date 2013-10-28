@@ -30,7 +30,6 @@
             @if (canEdit) { 
                 <a href="@Url.Action("Edit", new { p.PartnershipID })"><i class="fa fa-pencil"></i></a>
             }
-            <span class="badge">Participants @partners</span>
             <p class="text-muted">@p.Description</p>
             <span>Grant </span>
             @switch (p.GrantStatus) {
@@ -47,6 +46,9 @@
                 <span class="text-success"><i class="fa fa-check-circle"></i>&nbsp;@p.GrantStatus</span>
                     break;
             }
+            <span class="badge">Participant(s @partners</span>
+
         </li>
+        
     }
 </ul>

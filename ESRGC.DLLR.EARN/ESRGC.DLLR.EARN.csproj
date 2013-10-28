@@ -271,9 +271,9 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\Search\searchProfilePartial.cshtml" />
-    <Content Include="Views\Shared\tagListPartial.cshtml" />
+    <Content Include="Views\Shared\tagListEditPartial.cshtml" />
     <Content Include="Views\Shared\tagListDisplayPartial.cshtml" />
-    <Content Include="Views\Search\tagListLinkPartial.cshtml" />
+    <Content Include="Views\Shared\tagListLinkPartial.cshtml" />
     <Content Include="Views\Search\Basic.cshtml" />
     <Content Include="Views\Profile\ViewProfile.cshtml" />
     <Content Include="Views\Profile\Detail.cshtml" />
@@ -300,6 +300,7 @@
     <Content Include="Views\Partnership\Edit.cshtml" />
     <Content Include="Views\Home\UnauthorizedAccess.cshtml" />
     <Content Include="Views\Home\ProfileNotCreated.cshtml" />
+    <Content Include="Views\Shared\termTextPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

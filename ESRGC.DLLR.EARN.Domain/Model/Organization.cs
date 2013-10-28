@@ -23,8 +23,8 @@ namespace ESRGC.DLLR.EARN.Domain.Model
       set { _website = value == null ? "" : value.Replace("http://", "").Trim(); }
     }
 
-    [MaxLength(1000)]
-    [Display(Description = "Briefly describe organizational goals or statement of purpose")]
+    [MaxLength(1000, ErrorMessage="Maximum 1000 characters")]
+    [Display(Description = "Brief organizational description of up to 1000 characters to accompany your profile.")]
     [DataType(DataType.MultilineText)]
     [Required(ErrorMessage = "Please provide a brief statement of purpose")]
     public string Description { get; set; }

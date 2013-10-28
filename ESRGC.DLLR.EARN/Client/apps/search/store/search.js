@@ -2,7 +2,7 @@
 Author: Tu hoang
 ESRGC 2013
 
-EARN Maryland Connect
+EARN MD Connect
 
 Search store
 search.js

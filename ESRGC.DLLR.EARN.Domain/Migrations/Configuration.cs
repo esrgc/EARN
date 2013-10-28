@@ -34,10 +34,10 @@ namespace ESRGC.DLLR.EARN.Domain.Migrations
       if (context.UserGroups.Count() == 0) {
         context.UserGroups.AddOrUpdate(
           new UserGroup { Name = "Industry", Description = "e.g. Industry Associations, Employers, Chambers of Commerce" },
-          new UserGroup { Name = "Education and Training", Description = "e.g. Four-Year and Two-Year College or University, Community College, and Technical Colleges, K-12" },
-          new UserGroup { Name = "Workforce and Economic Development and Local Governments", Description = "e.g. Workforce Investment Board Members" },
-          new UserGroup { Name = "Nonprofits and Community Based Organizations", Description = "e.g. Job Training Advocacy Groups, Veterans Groups, Advocates for people with disabilities" },
-          new UserGroup { Name = "Other Strategic Partners", Description = "e.g. Labor unions, Social Service Providers." }
+          new UserGroup { Name = "Education and Training", Description = "e.g. Two- and Four-Year Institutions of Higher Education, Apprenticeship programs, K-12 programs" },
+          new UserGroup { Name = "Workforce and Economic Development and Local Governmental Entities", Description = "" },
+          new UserGroup { Name = "Nonprofits and Community-based Organizations", Description = "e.g. Job Training Advocacy Organizations, Veterans Groups, Advocates for People with Disabilities" },
+          new UserGroup { Name = "Other Strategic Partners", Description = "e.g. Labor Unions, Philanthropic Organizations" }
         );
         context.SaveChanges();
       }

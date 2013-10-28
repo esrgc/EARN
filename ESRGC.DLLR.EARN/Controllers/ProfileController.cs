@@ -136,6 +136,7 @@ namespace ESRGC.DLLR.EARN.Controllers
         profile.About = about;
         _workUnit.ProfileRepository.UpdateEntity(profile);
         _workUnit.saveChanges();
+        updateTempDataMessage("Your about section has been saved.");
       }
       catch (Exception) {
         updateTempDataMessage("Error saving about text");

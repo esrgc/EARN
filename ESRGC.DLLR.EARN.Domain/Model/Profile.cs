@@ -39,7 +39,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public virtual Category Category { get; set; }
 
     public DateTime? LastUpdate { get; set; }
-    [Display(Description = "Description about why you're on this site.")]
+    [Display(Description = "Describe why your organization is interested in EARN MD (i.e., what you bring to a Partnership and/or what you hope to gain)")]
     public string About { get; set; }
 
     //navigation properties
