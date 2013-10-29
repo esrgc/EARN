@@ -36,6 +36,12 @@ namespace ESRGC.DLLR.EARN.Controllers
       var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
       return View(partnership);
     }
+
+    public ActionResult View(int partnershipID) {
+      var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
+      return View(partnership);  
+    }
+
     /// <summary>
     /// list partnerships for provided profile
     /// </summary>

@@ -22,7 +22,7 @@
 @{ 
     var p = Model;
     var partners = p.PartnershipDetails.Where(x => x.Type.ToLower() != "convener").Select(x => x.Profile);
-    var conveners = p.PartnershipDetails.Where(x => x.Type.ToLower() == "convener").Select(x => x.Profile);
+    var owners = p.PartnershipDetails.Where(x => x.Type.ToLower() == "convener").Select(x => x.Profile);
     var returnUrl = Url.Action("Detail", new { p.PartnershipID });
     ViewBag.returnUrl = returnUrl;
 }
@@ -74,13 +74,13 @@
                     <hr />
                     <div class="profile-tabs">
                         <ul class="nav nav-tabs ">
-                            <li class="active"><a href="#conveners" data-toggle="tab">Conveners&nbsp;<span class="badge">@conveners.Count()</span></a></li>
+                            <li class="active"><a href="#owners" data-toggle="tab">Owner&nbsp;<span class="badge">@owners.Count()</span></a></li>
                             <li><a href="#partners" data-toggle="tab">Partners&nbsp;<span class="badge">@partners.Count()</span></a></li>
                         </ul>
                         <div class="tab-content">
-                            <div class="tab-pane active" id="conveners">
+                            <div class="tab-pane active" id="owners">
                                 <div class="placeholder">
-                                    @foreach (var profile in conveners) { 
+                                    @foreach (var profile in owners) { 
                                         @Html.Action("DisplayShortProfile", "Profile", new { profile.ProfileID })
                                     }
                                 </div>

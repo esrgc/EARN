@@ -170,6 +170,9 @@
     <Content Include="Client\apps\search\app.js" />
     <Content Include="Client\apps\search\controller\map.js" />
     <Content Include="Client\apps\search\controller\search.js" />
+    <Content Include="Client\jsLib\bootstrap-3.0\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Client\jsLib\jquery-1.10.2\jquery-1.10.2.js" />
+    <Content Include="Client\jsLib\jquery-1.10.2\jquery-1.10.2.min.js" />
     <Content Include="Client\jsLib\leaflet.awesome-markers\images\markers-matte%402x.png" />
     <Content Include="Client\jsLib\leaflet.awesome-markers\images\markers-matte.png" />
     <Content Include="Client\jsLib\leaflet.awesome-markers\images\markers-plain.png" />
@@ -180,6 +183,8 @@
     <Content Include="Client\jsLib\leaflet.awesome-markers\leaflet.awesome-markers.css" />
     <Content Include="Client\jsLib\leaflet.awesome-markers\leaflet.awesome-markers.js" />
     <Content Include="Client\jsLib\leaflet.awesome-markers\leaflet.awesome-markers.min.js" />
+    <Content Include="Client\jsLib\response\respond.min.js" />
+    <Content Include="Client\jsLib\response\respond.src.js" />
     <Content Include="Client\js\map\leafletViewer.js" />
     <Content Include="Client\js\map\mapViewer.js" />
     <Content Include="Client\apps\search\store\search.js" />
@@ -241,7 +246,6 @@
     <Content Include="Client\jsLib\bootstrap-3.0\css\bootstrap-theme.min.css" />
     <Content Include="Client\jsLib\bootstrap-3.0\css\bootstrap.css" />
     <Content Include="Client\jsLib\bootstrap-3.0\css\bootstrap.min.css" />
-    <Content Include="Client\jsLib\bootstrap-3.0\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Client\jsLib\bootstrap-3.0\js\bootstrap.js" />
     <Content Include="Client\jsLib\bootstrap-3.0\js\bootstrap.min.js" />
     <Content Include="Client\jsLib\typeahead.js\typeahead.js" />
@@ -253,9 +257,9 @@
     <Content Include="Client\jsLib\wicket-leaflet\wicket.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Client\jsLib\jquery\jquery-2.0.3-vsdoc.js" />
-    <Content Include="Client\jsLib\jquery\jquery-2.0.3.js" />
-    <Content Include="Client\jsLib\jquery\jquery-2.0.3.min.js" />
+    <Content Include="Client\jsLib\jquery-2.0.3\jquery-2.0.3-vsdoc.js" />
+    <Content Include="Client\jsLib\jquery-2.0.3\jquery-2.0.3.js" />
+    <Content Include="Client\jsLib\jquery-2.0.3\jquery-2.0.3.min.js" />
     <Content Include="Client\jsLib\jqueryValidate\jquery.validate-vsdoc.js" />
     <Content Include="Client\jsLib\jqueryValidate\jquery.validate.js" />
     <Content Include="Client\jsLib\jqueryValidate\jquery.validate.min.js" />
@@ -285,6 +289,10 @@
     <Content Include="Client\jsLib\leaflet.awesome-markers\leaflet.awesome-markers.min.js.map">
       <DependentUpon>leaflet.awesome-markers.js</DependentUpon>
     </Content>
+    <Content Include="Client\jsLib\bootstrap-3.0\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Client\jsLib\bootstrap-3.0\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Client\jsLib\bootstrap-3.0\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Client\jsLib\jquery-1.10.2\jquery-1.10.2.min.map" />
     <None Include="Properties\PublishProfiles\FTP.pubxml" />
     <None Include="Properties\PublishProfiles\P drive.pubxml" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
@@ -312,10 +320,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Client\css\less\site.less" />
-    <None Include="Client\jsLib\bootstrap-3.0\fonts\glyphicons-halflings-regular.eot" />
-    <None Include="Client\jsLib\bootstrap-3.0\fonts\glyphicons-halflings-regular.ttf" />
-    <None Include="Client\jsLib\bootstrap-3.0\fonts\glyphicons-halflings-regular.woff" />
-    <None Include="Client\jsLib\jquery\jquery-2.0.3.min.map" />
+    <None Include="Client\jsLib\jquery-2.0.3\jquery-2.0.3.min.map" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />

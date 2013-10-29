@@ -48,7 +48,10 @@
                                         <div class="radio">
                                             <label>
                                                 @Html.RadioButtonFor(x => x.UserGroupID, i.UserGroupID, new { })
-                                                <span>@i.Name </span><small>- @i.Description</small>
+                                                <span>@i.Name </span>
+                                                @if (!string.IsNullOrEmpty(i.Description)) { 
+                                                    <small>-&nbsp;@i.Description</small>
+                                                }
                                             </label>
                                         </div>
                                     }
@@ -166,7 +169,7 @@
                                })
                                     <div class="help-block">@Html.ValidationMessageFor(x => x.Organization.TwitterLink)</div>
                                 </div>
-                                
+
                                 <div class="col-sm-3">
                                     @Html.TextBoxFor(x => x.Organization.FacebookLink, new {
                                    @class = "form-control input-sm",
