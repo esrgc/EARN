@@ -149,6 +149,7 @@
     <Compile Include="Controllers\TagController.cs" />
     <Compile Include="Filters\VerifyAccountAttribute.cs" />
     <Compile Include="Filters\VerifyProfileAttribute.cs" />
+    <Compile Include="Filters\VerifyProfilePartnership.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -173,15 +174,6 @@
     <Content Include="Client\jsLib\bootstrap-3.0\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Client\jsLib\jquery-1.10.2\jquery-1.10.2.js" />
     <Content Include="Client\jsLib\jquery-1.10.2\jquery-1.10.2.min.js" />
-    <Content Include="Client\jsLib\leaflet-0.6.4\images\layers-2x.png" />
-    <Content Include="Client\jsLib\leaflet-0.6.4\images\layers.png" />
-    <Content Include="Client\jsLib\leaflet-0.6.4\images\marker-icon-2x.png" />
-    <Content Include="Client\jsLib\leaflet-0.6.4\images\marker-icon.png" />
-    <Content Include="Client\jsLib\leaflet-0.6.4\images\marker-shadow.png" />
-    <Content Include="Client\jsLib\leaflet-0.6.4\leaflet-src.js" />
-    <Content Include="Client\jsLib\leaflet-0.6.4\leaflet.css" />
-    <Content Include="Client\jsLib\leaflet-0.6.4\leaflet.ie.css" />
-    <Content Include="Client\jsLib\leaflet-0.6.4\leaflet.js" />
     <Content Include="Client\jsLib\leaflet.awesome-markers\images\markers-matte%402x.png" />
     <Content Include="Client\jsLib\leaflet.awesome-markers\images\markers-matte.png" />
     <Content Include="Client\jsLib\leaflet.awesome-markers\images\markers-plain.png" />
@@ -192,6 +184,15 @@
     <Content Include="Client\jsLib\leaflet.awesome-markers\leaflet.awesome-markers.css" />
     <Content Include="Client\jsLib\leaflet.awesome-markers\leaflet.awesome-markers.js" />
     <Content Include="Client\jsLib\leaflet.awesome-markers\leaflet.awesome-markers.min.js" />
+    <Content Include="Client\jsLib\leaflet-0.6.4\images\layers-2x.png" />
+    <Content Include="Client\jsLib\leaflet-0.6.4\images\layers.png" />
+    <Content Include="Client\jsLib\leaflet-0.6.4\images\marker-icon-2x.png" />
+    <Content Include="Client\jsLib\leaflet-0.6.4\images\marker-icon.png" />
+    <Content Include="Client\jsLib\leaflet-0.6.4\images\marker-shadow.png" />
+    <Content Include="Client\jsLib\leaflet-0.6.4\leaflet-src.js" />
+    <Content Include="Client\jsLib\leaflet-0.6.4\leaflet.css" />
+    <Content Include="Client\jsLib\leaflet-0.6.4\leaflet.ie.css" />
+    <Content Include="Client\jsLib\leaflet-0.6.4\leaflet.js" />
     <Content Include="Client\jsLib\response\respond.min.js" />
     <Content Include="Client\jsLib\response\respond.src.js" />
     <Content Include="Client\js\map\leafletViewer.js" />
@@ -318,6 +319,8 @@
     <Content Include="Views\Home\UnauthorizedAccess.cshtml" />
     <Content Include="Views\Home\ProfileNotCreated.cshtml" />
     <Content Include="Views\Shared\termTextPartial.cshtml" />
+    <Content Include="Views\Partnership\View.cshtml" />
+    <Content Include="Views\Partnership\InvalidAccessToPartnership.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

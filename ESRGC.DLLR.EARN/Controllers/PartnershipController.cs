@@ -32,7 +32,10 @@ namespace ESRGC.DLLR.EARN.Controllers
     /// </summary>
     /// <param name="partnershipID"></param>
     /// <returns></returns>
+    [VerifyProfile]
+    [VerifyProfilePartnership]
     public ActionResult Detail(int partnershipID) {
+      var currentProfile = CurrentAccount.Profile;
       var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
       return View(partnership);
     }
@@ -66,7 +69,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       if (ModelState.IsValid) {
         var partnershipDetail = new PartnershipDetail() {
           Profile = CurrentAccount.Profile,
-          Type = "Convener",
+          Type = "Owner",
           Partnership = partnership
         };
         _workUnit.PartnershipDetailRepository.InsertEntity(partnershipDetail);
@@ -82,6 +85,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     /// <param name="partnershipID"></param>
     /// <returns></returns>
     [VerifyProfile]
+    [VerifyProfilePartnership]
     public ActionResult Edit(int partnershipID) {
       var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
       ViewBag.currentProfile = CurrentAccount.Profile;
@@ -106,10 +110,13 @@ namespace ESRGC.DLLR.EARN.Controllers
     /// </summary>
     /// <param name="partnershipID"></param>
     /// <returns></returns>
+    [VerifyProfilePartnership]
     public ActionResult Delete(int partnershipID) {
       return View();
     }
 
-
+    public ActionResult InvalidAccessToPartnership() {
+      return View();
+    }
   }
 }

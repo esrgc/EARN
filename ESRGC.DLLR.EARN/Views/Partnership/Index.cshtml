@@ -45,7 +45,7 @@
                                 var partners = p.PartnershipDetails.Count();
         
                                 <li class="list-group-item">
-                                    <a href="@Url.Action("Detail", "Partnership", new { p.PartnershipID })">
+                                    <a href="@Url.Action("View", "Partnership", new { p.PartnershipID })">
                                         <strong>@p.Name</strong>
                                     </a>
                                     @switch (p.Status) {

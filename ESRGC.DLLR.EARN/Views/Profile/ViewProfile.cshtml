@@ -100,18 +100,29 @@
         <div class="col-sm-8 profile-tabs">
             <ul class="nav nav-tabs ">
                 <li class="active"><a href="#tab1" data-toggle="tab">Summary</a></li>
-                <li><a href="#tab2" data-toggle="tab">Partnerships</a></li>
+                <li><a href="#tab2" data-toggle="tab">Partnerships&nbsp;<span class="badge">@Model.PartnershipDetails.Count()</span></a></li>
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="tab1">
                     <div class="placeholder">
                         <h4>About</h4>
-                        <p>@Model.About</p>
+                        @if (!string.IsNullOrEmpty(Model.About)) { 
+                            <p>@Model.About</p>
+                        }
+                        else{
+                            <p>...</p>
+                        }
                     </div>
                 </div>
                 <div class="tab-pane" id="tab2">
                     <div class="placeholder">
-                        <h4>Partnership is coming soon...</h4>
+                        <h4>Available Partnerships</h4>
+                        @if (Model.PartnershipDetails.Count() == 0) { 
+                            <p>There's currently no partnership available.</p>
+                        }
+                        else {
+                            @Html.Action("ListPartnerships", "Partnership", new { Model.ProfileID })
+                        }
                     </div>
                 </div>
             </div>

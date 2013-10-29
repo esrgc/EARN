@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Partnership";
-    ViewBag.Header = "Partnership Detail";
+    ViewBag.Header = "View Partnership";
 }
 
 @section header{
@@ -31,12 +31,11 @@
     <div class="row">
         <div class="col-sm-10 col-sm-offset-1">
             <div class="panel-action-default">
-                <a href="@Url.Action("Detail", "Profile")"><i class="fa fa-long-arrow-left"></i>&nbsp;Back to profile</a>
+                <a href="@Url.Action("Index")"><i class="fa fa-long-arrow-left"></i>&nbsp;Back to list</a>
             </div>
             <div class="window-panel">
                 <div class="window-panel-title">
                     <strong>@p.Name</strong>
-                    <a href="@Url.Action("Edit", new { p.PartnershipID })"><i class="fa fa-pencil"></i></a>
                 </div>
                 <div class="window-panel-content">
                     <p class=""><strong>Description</strong> @p.Description</p>

@@ -29,5 +29,19 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public DateTime? LastUpdate { get; set; }
     //nav properties
     public virtual ICollection<PartnershipDetail> PartnershipDetails { get; set; }
+
+    //helpers
+    public List<Profile> getOwners() {
+      return PartnershipDetails
+        .Where(x => x.Type.ToLower() == "owner")
+        .Select(x => x.Profile)
+        .ToList();
+    }
+    public List<Profile> getPartners() {
+      return PartnershipDetails
+        .Where(x => x.Type.ToLower() != "owner")
+        .Select(x => x.Profile)
+        .ToList();
+    }
   }
 }

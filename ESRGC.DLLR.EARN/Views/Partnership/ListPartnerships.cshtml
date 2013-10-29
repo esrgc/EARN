@@ -7,10 +7,7 @@
 <ul class="list-group">
     @foreach (var p in Model) {
         var partners = p.PartnershipDetails.Count();
-        var canEdit = p.PartnershipDetails
-            .Where(x => x.Type.ToLower() == "convener")
-            .Select(x => x.Profile)
-            .Contains(currentProfile);
+        var canEdit = currentProfile.canEditPartnership(p);
         
         <li class="list-group-item">
             <a href="@Url.Action("Detail", "Partnership", new { p.PartnershipID })">
