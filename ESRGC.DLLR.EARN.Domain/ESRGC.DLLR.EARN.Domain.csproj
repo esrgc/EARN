@@ -82,6 +82,7 @@
     <Compile Include="Model\Partnership.cs" />
     <Compile Include="Model\PartnershipDetail.cs" />
     <Compile Include="Model\PartnershipInvite.cs" />
+    <Compile Include="Model\PartnershipRequest.cs" />
     <Compile Include="Model\Picture.cs" />
     <Compile Include="Model\Profile.cs" />
     <Compile Include="Model\ProfileTag.cs" />

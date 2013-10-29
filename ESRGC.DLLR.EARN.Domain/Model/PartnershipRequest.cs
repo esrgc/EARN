@@ -5,11 +5,12 @@ using System.Text;
 
 namespace ESRGC.DLLR.EARN.Domain.Model
 {
-  public class PartnershipInvite: Request
+  public class PartnershipRequest: Request
   {
-    public PartnershipInvite() {
-      Type = "Partnership Invite";
+    public PartnershipRequest() {
+      Type = "Partnership Request";
       Status = "new";
+
     }
   }
 }

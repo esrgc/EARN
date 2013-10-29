@@ -10,9 +10,16 @@
         var canEdit = currentProfile.canEditPartnership(p);
         
         <li class="list-group-item">
-            <a href="@Url.Action("Detail", "Partnership", new { p.PartnershipID })">
-                <strong>@p.Name</strong>
-            </a>
+            @if (canEdit) { 
+                <a href="@Url.Action("Detail", "Partnership", new { p.PartnershipID })">
+                    <strong>@p.Name</strong>
+                </a>
+            }
+            else {
+                <a href="@Url.Action("View", "Partnership", new { p.PartnershipID })">
+                    <strong>@p.Name</strong>
+                </a>
+            }
             @switch (p.Status) {
                 case "Initiating":
                 <span class="text-danger">(@p.Status)</span>
