@@ -27,10 +27,7 @@
     var grantStatusList = Html.getGrantStatusList();
     var statusList = Html.getPartnershipStatusList();
 
-    var canDelete = Model.PartnershipDetails
-            .Where(x => x.Type.ToLower() == "convener")
-            .Select(x => x.Profile)
-            .Contains(currentProfile);
+    var canDelete = currentProfile.canEditPartnership(Model);
 }
 
 <div class="container">
