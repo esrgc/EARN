@@ -85,7 +85,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     /// <param name="partnershipID"></param>
     /// <returns></returns>
     [VerifyProfile]
-    [VerifyProfilePartnership]
+    [CanEditPartnership]
     public ActionResult Edit(int partnershipID) {
       var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
       ViewBag.currentProfile = CurrentAccount.Profile;
@@ -110,7 +110,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     /// </summary>
     /// <param name="partnershipID"></param>
     /// <returns></returns>
-    [VerifyProfilePartnership]
+    [CanEditPartnership]
     public ActionResult Delete(int partnershipID) {
       return View();
     }

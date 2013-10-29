@@ -50,10 +50,13 @@ namespace ESRGC.DLLR.EARN.Domain.Model
 
     //helpers
     public bool canEditPartnership(Partnership partnership) {
+      return canEditPartnership(partnership.PartnershipID);
+    }
+    public bool canEditPartnership(int partnershipID) {
       return PartnershipDetails
-        .Where(x=>x.Type.ToLower() == "owner")
+        .Where(x => x.Type.ToLower() == "owner")
         .Select(x => x.PartnershipID)
-        .Contains(partnership.PartnershipID);
+        .Contains(partnershipID);
     }
 
     public void addConnection(Profile connProf) {

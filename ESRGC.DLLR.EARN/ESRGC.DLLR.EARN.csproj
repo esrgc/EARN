@@ -147,9 +147,10 @@
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\TagController.cs" />
+    <Compile Include="Filters\CanEditPartnershipAttribute.cs" />
     <Compile Include="Filters\VerifyAccountAttribute.cs" />
     <Compile Include="Filters\VerifyProfileAttribute.cs" />
-    <Compile Include="Filters\VerifyProfilePartnership.cs" />
+    <Compile Include="Filters\VerifyProfilePartnershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

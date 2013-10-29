@@ -9,6 +9,10 @@ using ESRGC.DLLR.EARN.Domain.DAL.Concrete;
 
 namespace ESRGC.DLLR.EARN.Filters
 {
+  /// <summary>
+  /// This attribute verifies if the current profile is asscociated with the 
+  /// partnership being requested
+  /// </summary>
   public class VerifyProfilePartnershipAttribute : ActionFilterAttribute
   {
     public override void OnActionExecuting(ActionExecutingContext filterContext) {
