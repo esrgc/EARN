@@ -72,6 +72,10 @@
     <Compile Include="Migrations\201310292251275_PartnershipInvite.Designer.cs">
       <DependentUpon>201310292251275_PartnershipInvite.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201310301903011_PartnershipTableCreatedDate.cs" />
+    <Compile Include="Migrations\201310301903011_PartnershipTableCreatedDate.Designer.cs">
+      <DependentUpon>201310301903011_PartnershipTableCreatedDate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\GeoTag.cs" />
@@ -108,6 +112,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201310292251275_PartnershipInvite.resx">
       <DependentUpon>201310292251275_PartnershipInvite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201310301903011_PartnershipTableCreatedDate.resx">
+      <DependentUpon>201310301903011_PartnershipTableCreatedDate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

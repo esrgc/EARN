@@ -11,21 +11,41 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public Partnership() {
       PartnershipDetails = new List<PartnershipDetail>();
       LastUpdate = DateTime.Now;
+      Created = DateTime.Now;
     }
+    string _name, _status, _description, _grantStatus;
     public int PartnershipID { get; set; }
     [Required]
     [MaxLength(100, ErrorMessage="100 maximum characters allowed")]
-    public string Name { get; set; }
+    public string Name {
+      get { return _name; }
+      set { _name = value; LastUpdate = DateTime.Now; }
+    }
+
     [Required]
     [MaxLength(100, ErrorMessage = "100 maximum characters allowed")]
-    public string Status { get; set; }
+    public string Status {
+      get { return _status; }
+      set { _status = value; LastUpdate = DateTime.Now; }
+    }
+
     [Required]
     [MaxLength(500, ErrorMessage = "500 maximum characters allowed")]
-    public string Description { get; set; }
+    public string Description {
+      get { return _description; }
+      set { _description = value; LastUpdate = DateTime.Now; }
+    }
+
     [Required]
     [MaxLength(100, ErrorMessage = "100 maximum characters allowed")]
-    public string GrantStatus { get; set; }
 
+    public string GrantStatus {
+      get { return _grantStatus; }
+      set { _grantStatus = value; LastUpdate = DateTime.Now; }
+    }
+
+
+    public DateTime Created { get; set; }
     public DateTime? LastUpdate { get; set; }
     //nav properties
     public virtual ICollection<PartnershipDetail> PartnershipDetails { get; set; }

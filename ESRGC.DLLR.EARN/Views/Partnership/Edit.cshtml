@@ -25,9 +25,7 @@
 @{
     var currentProfile = ViewBag.currentProfile as Profile ?? new Profile();
     var grantStatusList = Html.getGrantStatusList();
-    var statusList = Html.getPartnershipStatusList();
-
-    var canDelete = currentProfile.canEditPartnership(Model);
+    var statusList = Html.getPartnershipStatusList();    
 }
 
 <div class="container">
@@ -36,11 +34,7 @@
             <div class="window-panel">
                 <div class="window-panel-title">
                     <strong>@Model.Name</strong>
-                    @if (canDelete) { 
-                        <a title="Delete this partnership" href="#" class="pull-right text-danger">
-                            <i class="fa fa-times-circle"></i>&nbsp;Delete this partnership
-                        </a>
-                    }
+                   
                 </div>
                 <div class="window-panel-content">
                     <form class="form-horizontal" method="post" action="@Url.Action("Edit")" role="form">

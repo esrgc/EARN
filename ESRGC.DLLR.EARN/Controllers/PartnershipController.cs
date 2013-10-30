@@ -21,7 +21,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       var partnerships = _workUnit
         .PartnershipRepository
         .Entities
-        .OrderBy(x=>x.Name)
+        .OrderBy(x => x.Name)
         .ToList();
       int pageIndex = page ?? 1, pageSize = size ?? 15;
       var pagedList = partnerships.ToPagedList(pageIndex, pageSize);
@@ -35,14 +35,13 @@ namespace ESRGC.DLLR.EARN.Controllers
     [VerifyProfile]
     [VerifyProfilePartnership]
     public ActionResult Detail(int partnershipID) {
-      var currentProfile = CurrentAccount.Profile;
       var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
       return View(partnership);
     }
-
+    [VerifyProfile]
     public ActionResult View(int partnershipID) {
       var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
-      return View(partnership);  
+      return View(partnership);
     }
 
     /// <summary>
@@ -88,7 +87,6 @@ namespace ESRGC.DLLR.EARN.Controllers
     [CanEditPartnership]
     public ActionResult Edit(int partnershipID) {
       var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
-      ViewBag.currentProfile = CurrentAccount.Profile;
       return View(partnership);
     }
     [HttpPost]
@@ -110,12 +108,33 @@ namespace ESRGC.DLLR.EARN.Controllers
     /// </summary>
     /// <param name="partnershipID"></param>
     /// <returns></returns>
+    [VerifyProfile]
     [CanEditPartnership]
     public ActionResult Delete(int partnershipID) {
+      var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
+      return View(partnership);
+    }
+    [VerifyProfile]
+    [CanEditPartnership]
+    [ActionName("Delete")]
+    [HttpPost]
+    public ActionResult DeletePartnership(int partnershipID) {
+      if (ModelState.IsValid) {
+        var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
+        foreach (var detail in partnership.PartnershipDetails.ToList()) {
+          _workUnit.PartnershipDetailRepository.DeleteEntity(detail);
+        }
+        _workUnit.PartnershipRepository.DeleteEntity(partnership);
+        _workUnit.saveChanges();
+        return RedirectToAction("Detail", "Profile");
+      }
+      updateTempDataMessage("Error deleting partnership");
+      return RedirectToAction("Detail", "Profile");
+    }
+    public ActionResult InvalidAccessToPartnership() {
       return View();
     }
-
-    public ActionResult InvalidAccessToPartnership() {
+    public ActionResult InvalidPartnershipRequest() {
       return View();
     }
   }

@@ -10,6 +10,7 @@
         var canEdit = currentProfile.canEditPartnership(p);
         
         <li class="list-group-item">
+            <small class="pull-right">Last edited: @Html.TimeSpan(p.LastUpdate)</small>
             @if (canEdit) { 
                 <a href="@Url.Action("Detail", "Partnership", new { p.PartnershipID })">
                     <strong>@p.Name</strong>
@@ -51,7 +52,6 @@
                     break;
             }
             <span class="badge">Participant(s @partners</span>
-
         </li>
         
     }

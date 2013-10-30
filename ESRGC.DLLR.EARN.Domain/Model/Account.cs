@@ -32,7 +32,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     [MaxLength(32)]
     [ScaffoldColumn(false)]
     public string InitialPassword { get; set; }
-       
+
     [MaxLength(20)]
     public string Role { get; set; }
 
@@ -49,7 +49,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
 
     [Display(Name = "Last login")]
     public DateTime? LastLogin { get; set; }
-       
+
     [Display(Name = "Last update")]
     public DateTime? LastUpdate { get; set; }
 
@@ -59,6 +59,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
 
     public virtual ICollection<Notification> Notifications { get; set; }
     public virtual ICollection<Request> SentRequests { get; set; }
-    public virtual ICollection<Request> ReceivedRequests { get; set; }
+    public virtual ICollection<Request> ReceivedRequests { get; set; }   
+    
   }
 }

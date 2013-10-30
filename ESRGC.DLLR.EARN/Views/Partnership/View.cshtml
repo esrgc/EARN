@@ -1,4 +1,5 @@
-﻿@model ESRGC.DLLR.EARN.Domain.Model.Partnership
+﻿@using ESRGC.DLLR.EARN.Domain.Model
+@model Partnership
 
 @{
     ViewBag.Title = "Partnership";
@@ -23,6 +24,7 @@
     var p = Model;
     var partners = p.getPartners();
     var owners = p.getOwners();
+    var currentProfile = ViewBag.currentProfile as Profile ?? new Profile();
     var returnUrl = Url.Action("Detail", new { p.PartnershipID });
     ViewBag.returnUrl = returnUrl;
 }
@@ -38,6 +40,7 @@
                     <strong>@p.Name</strong>
                 </div>
                 <div class="window-panel-content">
+                    <small class="pull-right">Last edited: @Html.TimeSpan(p.LastUpdate)</small>
                     <p class=""><strong>Description</strong> @p.Description</p>
                     <p>
                         <strong>Status</strong>
@@ -71,6 +74,14 @@
                         }
                     </p>
                     <hr />
+                    <div class="btn-group pull-right">
+                        @if (currentProfile.isNewToPartnership(Model.PartnershipID)) { 
+                            <a href="@Url.Action("SendPartnershipRequest", "Communication", new { Model.PartnershipID })" class="btn btn-default btn-sm" title="Request to join this partnership">
+                                <i class="fa fa-share"></i>&nbsp;Request
+                            </a>
+                        }
+                        <button type="button" class="btn btn-default btn-sm" title="Bookmark this partnership"><i class="fa fa-bookmark"></i>&nbsp;Bookmark</button>
+                    </div>
                     <div class="profile-tabs">
                         <ul class="nav nav-tabs ">
                             <li class="active"><a href="#owners" data-toggle="tab">Owner&nbsp;<span class="badge">@owners.Count()</span></a></li>

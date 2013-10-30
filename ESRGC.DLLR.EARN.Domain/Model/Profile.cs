@@ -58,7 +58,24 @@ namespace ESRGC.DLLR.EARN.Domain.Model
         .Select(x => x.PartnershipID)
         .Contains(partnershipID);
     }
-
+    public bool isNewToPartnership(Partnership partnership) {
+      return isNewToPartnership(partnership.PartnershipID);
+    }
+    /// <summary>
+    /// Determines whether the current profile is already associated with
+    /// the provided partnership
+    /// </summary>
+    /// <param name="partnershipID"></param>
+    /// <returns></returns>
+    public bool isNewToPartnership(int partnershipID) {
+      var partnerships = PartnershipDetails
+        .Where(x => x.PartnershipID == partnershipID)
+        .Count();
+      if (partnerships > 0)
+        return false;
+      else
+        return true;
+    }
     public void addConnection(Profile connProf) {
       if (!hasConnection(connProf))
         this.Connections.Add(connProf);
@@ -103,7 +120,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
       var list = ProfileTags
         .Select(x => x.Tag)
         .Where(x => !(x is GeoTag))
-        .OrderBy(x=>x.Name)
+        .OrderBy(x => x.Name)
         .ToList();
       return list ?? new List<Tag>();
     }
