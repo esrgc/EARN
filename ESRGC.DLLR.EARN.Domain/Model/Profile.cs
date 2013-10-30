@@ -49,10 +49,10 @@ namespace ESRGC.DLLR.EARN.Domain.Model
 
 
     //helpers
-    public bool canEditPartnership(Partnership partnership) {
-      return canEditPartnership(partnership.PartnershipID);
+    public bool isOwnerOfPartnership(Partnership partnership) {
+      return isOwnerOfPartnership(partnership.PartnershipID);
     }
-    public bool canEditPartnership(int partnershipID) {
+    public bool isOwnerOfPartnership(int partnershipID) {
       return PartnershipDetails
         .Where(x => x.Type.ToLower() == "owner")
         .Select(x => x.PartnershipID)

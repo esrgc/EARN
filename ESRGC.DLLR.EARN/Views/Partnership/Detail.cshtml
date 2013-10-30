@@ -27,7 +27,7 @@
     var returnUrl = Url.Action("Detail", new { p.PartnershipID });
     ViewBag.returnUrl = returnUrl;
     var currentProfile = ViewBag.currentProfile as Profile ?? new Profile();
-    var canDelete = currentProfile.canEditPartnership(Model);
+    var canDelete = currentProfile.isOwnerOfPartnership(Model);
 }
 
 <div class="container">

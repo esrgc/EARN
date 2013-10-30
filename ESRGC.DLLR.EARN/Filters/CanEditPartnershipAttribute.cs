@@ -26,7 +26,7 @@ namespace ESRGC.DLLR.EARN.Filters
         var currentProfile = account.Profile;
         int partnershipID = (filterContext.ActionParameters["partnershipID"] as int?).Value;
         //check if the current profile is in the partnership partners list
-        if (!currentProfile.canEditPartnership(partnershipID)) {
+        if (!currentProfile.isOwnerOfPartnership(partnershipID)) {
           filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary() { 
             {"controller", "Partnership"},
             {"action", "InvalidAccessToPartnership"}

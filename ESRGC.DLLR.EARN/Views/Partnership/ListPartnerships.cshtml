@@ -7,7 +7,7 @@
 <ul class="list-group">
     @foreach (var p in Model) {
         var partners = p.PartnershipDetails.Count();
-        var canEdit = currentProfile.canEditPartnership(p);
+        var canEdit = currentProfile.isOwnerOfPartnership(p);
         
         <li class="list-group-item">
             <small class="pull-right">Last edited: @Html.TimeSpan(p.LastUpdate)</small>

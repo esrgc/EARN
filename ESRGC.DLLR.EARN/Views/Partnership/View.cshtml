@@ -80,7 +80,9 @@
                                 <i class="fa fa-share"></i>&nbsp;Request
                             </a>
                         }
-                        <button type="button" class="btn btn-default btn-sm" title="Bookmark this partnership"><i class="fa fa-bookmark"></i>&nbsp;Bookmark</button>
+                        @if(!currentProfile.isOwnerOfPartnership(Model.PartnershipID)){
+                            <button type="button" class="btn btn-default btn-sm" title="Bookmark this partnership"><i class="fa fa-bookmark"></i>&nbsp;Bookmark</button>
+                        }
                     </div>
                     <div class="profile-tabs">
                         <ul class="nav nav-tabs ">
