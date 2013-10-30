@@ -80,7 +80,10 @@
                 if (typeof value == 'undefined')
                     return;
                 if (tagArray.length > 1) {
-                    tagArray.pop(value);
+                    for (var i in tagArray) {
+                        if (tagArray[i] == value)
+                            delete tagArray[i];
+                    }
                     $('input[type="hidden"]').filter('[value="' + value + '"]').remove();
                     //finally remove the whole node
                     tag.parents().filter('.tag').remove();
