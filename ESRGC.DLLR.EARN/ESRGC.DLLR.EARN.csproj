@@ -277,6 +277,7 @@
     <Content Include="Client\jsLib\jqueryValidate\jquery.validate.unobtrusive.js" />
     <Content Include="Client\jsLib\jqueryValidate\jquery.validate.unobtrusive.min.js" />
     <Content Include="Client\js\modernizr-2.6.2.js" />
+    <Content Include="TestIframe.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

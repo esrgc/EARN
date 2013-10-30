@@ -82,7 +82,7 @@
                         Searchable tags <i class="fa fa-tags"></i>
                     </div>
                     <div class="window-panel-content">
-                        @Html.Partial("tagListLinkPartial", Html.getTagListString(Model))
+                        @Html.Partial("tagListLinkPartial", Model.getTagNames())
                     </div>
                 </div>
             </div>

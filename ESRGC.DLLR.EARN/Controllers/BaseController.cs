@@ -81,7 +81,19 @@ namespace ESRGC.DLLR.EARN.Controllers
           Geometry = DbGeometry.PointFromText(wkt, geocoder.SpatialReference),
           Description = "address"
         };
-
+        //remove all old references
+        try {
+          var oldAddrTagRefs = profile
+                .ProfileTags
+                .Where(x => (x.Tag is GeoTag) && x.Tag.Description == "address")
+                .ToList();
+          oldAddrTagRefs.ForEach(x => _workUnit.ProfileTagRepository.DeleteEntity(x));
+          _workUnit.saveChanges();
+        }
+        catch (ArgumentNullException) {
+          //no item found
+        }
+        //update new tags 
         try {
           var currentTag = _workUnit.TagRepository.Entities.OfType<GeoTag>().First(x => x.Name.ToUpper() == tagName.ToUpper());
           //update the geometry if it already exists
@@ -99,7 +111,7 @@ namespace ESRGC.DLLR.EARN.Controllers
             _workUnit.ProfileTagRepository.InsertEntity(profileTag);
           }
         }
-        catch {
+        catch {          
           //create ProfileTag
           var profileTag = new ProfileTag() {
             Tag = geoTag,

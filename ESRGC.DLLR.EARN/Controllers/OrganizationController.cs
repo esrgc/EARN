@@ -32,8 +32,8 @@ namespace ESRGC.DLLR.EARN.Controllers
         _workUnit.saveChanges();
 
         //since address might have been updated so update the geotag
-        if(CurrentAccount.Profile != null && CurrentAccount.ProfileID.HasValue)
-          addUpdateAddrGeoTag(CurrentAccount.ProfileID.Value);
+        if(CurrentAccount.Profile != null)
+          addUpdateAddrGeoTag(CurrentAccount.Profile.ProfileID);
 
         return RedirectToAction("Detail", "Profile");
       }

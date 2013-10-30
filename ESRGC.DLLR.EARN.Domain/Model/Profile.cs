@@ -81,11 +81,34 @@ namespace ESRGC.DLLR.EARN.Domain.Model
           .OfType<GeoTag>()
           .First(x => x.Description.ToLower() == "address")
           .Name.Contains(Organization.StreetAddress);
-        
+
       }
       catch {
         return false;
       }
+    }
+
+    public GeoTag getGeoTag() {
+      try {
+        return ProfileTags
+              .Select(x => x.Tag)
+              .First(x => (x is GeoTag) && x.Description == "address") as GeoTag;
+      }
+      catch {
+        return null;
+      }
+    }
+
+    public List<Tag> getTags() {
+      var list = ProfileTags
+        .Select(x => x.Tag)
+        .Where(x => !(x is GeoTag))
+        .OrderBy(x=>x.Name)
+        .ToList();
+      return list ?? new List<Tag>();
+    }
+    public List<string> getTagNames() {
+      return getTags().Select(x => x.Name).ToList();
     }
   }
 }

@@ -3,7 +3,7 @@
 @{
     //var filters = (ViewBag.filters as Dictionary<string, object>) ?? new Dictionary<string, object>();
     //var currentTags = filters.ContainsKey("tags") ? filters["tags"] as List<string> : new List<string>();
-    var geoTag = Html.getAddrGeoTag(Model);
+    var geoTag = Model.getGeoTag();
     var location = geoTag == null ? "" : geoTag.Geometry.WellKnownValue.WellKnownText;
     //var currentAccount = ViewBag.currentAccount as Account ?? new Account();
     //var currentProfile = currentAccount.Profile ?? new Profile();
@@ -53,7 +53,7 @@
                         <div class="col-sm-4">
                             <div class="help-block"><i class="fa fa-tags"></i>&nbsp;Tags</div>
                             @if (Model.ProfileTags != null) {
-                                @Html.Partial("tagListLinkPartial", Html.getTagListString(Model))
+                                @Html.Partial("tagListLinkPartial", Model.getTagNames())
                             }
                         </div>
                     </div>
