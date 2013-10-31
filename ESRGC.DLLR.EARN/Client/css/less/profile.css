@@ -1,4 +1,7 @@
-﻿.placeholder-panel {
+﻿.inline-block {
+  display: inline-block;
+}
+.placeholder-panel {
   position: relative;
   padding: 10px;
   background: #f4f4f4;
@@ -29,6 +32,12 @@
   margin: 5px 0 0 0;
   padding: 5px 0;
   text-align: center;
+}
+.placeholder {
+  padding: 15px;
+  background: #f4f4f4;
+  border-color: #dddddd;
+  border-radius: 5px;
 }
 .placeholder-heading {
   padding: 5px;
@@ -226,19 +235,13 @@
         border-top-right-radius: 0;
     }
 }*/
-.placeholder {
-  padding: 15px;
-  background: #f4f4f4;
-  border-color: #dddddd;
-  border-radius: 5px;
-}
 .profile-tabs .tab-content .placeholder {
   border-radius: 0 0 5px 5px;
   border-top-color: transparent;
   border-left: 1px solid #dddddd;
   border-right: 1px solid #dddddd;
   border-bottom: 1px solid #dddddd;
-  min-height: 350px;
+  min-height: 200px;
   max-height: 800px;
   overflow-y: auto;
 }

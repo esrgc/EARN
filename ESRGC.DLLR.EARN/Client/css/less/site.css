@@ -1,4 +1,7 @@
-﻿.placeholder-panel {
+﻿.inline-block {
+  display: inline-block;
+}
+.placeholder-panel {
   position: relative;
   padding: 10px;
   background: #f4f4f4;
@@ -29,6 +32,12 @@
   margin: 5px 0 0 0;
   padding: 5px 0;
   text-align: center;
+}
+.placeholder {
+  padding: 15px;
+  background: #f4f4f4;
+  border-color: #dddddd;
+  border-radius: 5px;
 }
 .placeholder-heading {
   padding: 5px;
@@ -171,6 +180,9 @@ body {
 }
 header {
   margin-top: 60px;
+}
+textarea {
+  min-height: 150px;
 }
 #tagInput {
   border-top-right-radius: 4px;

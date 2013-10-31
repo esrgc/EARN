@@ -10,7 +10,9 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public PartnershipRequest() {
       Type = "Partnership Request";
       Status = "new";
-
     }
+
+    public int PartnershipID { get; set; }
+    public virtual Partnership Partnership { get; set; }
   }
 }

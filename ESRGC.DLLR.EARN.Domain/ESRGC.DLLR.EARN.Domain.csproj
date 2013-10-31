@@ -76,6 +76,18 @@
     <Compile Include="Migrations\201310301903011_PartnershipTableCreatedDate.Designer.cs">
       <DependentUpon>201310301903011_PartnershipTableCreatedDate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201310311606115_request-notification2.cs" />
+    <Compile Include="Migrations\201310311606115_request-notification2.Designer.cs">
+      <DependentUpon>201310311606115_request-notification2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201310311621048_request-notification3.cs" />
+    <Compile Include="Migrations\201310311621048_request-notification3.Designer.cs">
+      <DependentUpon>201310311621048_request-notification3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201310312117444_Notification.LinkToAction.cs" />
+    <Compile Include="Migrations\201310312117444_Notification.LinkToAction.Designer.cs">
+      <DependentUpon>201310312117444_Notification.LinkToAction.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\GeoTag.cs" />
@@ -85,7 +97,6 @@
     <Compile Include="Model\Contact.cs" />
     <Compile Include="Model\Partnership.cs" />
     <Compile Include="Model\PartnershipDetail.cs" />
-    <Compile Include="Model\PartnershipInvite.cs" />
     <Compile Include="Model\PartnershipRequest.cs" />
     <Compile Include="Model\Picture.cs" />
     <Compile Include="Model\Profile.cs" />
@@ -115,6 +126,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201310301903011_PartnershipTableCreatedDate.resx">
       <DependentUpon>201310301903011_PartnershipTableCreatedDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201310311606115_request-notification2.resx">
+      <DependentUpon>201310311606115_request-notification2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201310311621048_request-notification3.resx">
+      <DependentUpon>201310311621048_request-notification3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201310312117444_Notification.LinkToAction.resx">
+      <DependentUpon>201310312117444_Notification.LinkToAction.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

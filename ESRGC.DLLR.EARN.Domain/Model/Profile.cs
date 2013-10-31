@@ -46,7 +46,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public virtual ICollection<ProfileTag> ProfileTags { get; set; }
     public virtual ICollection<Profile> Connections { get; set; }
     public virtual ICollection<PartnershipDetail> PartnershipDetails { get; set; }
-
+    public virtual ICollection<Account> Accounts { get; set; }
 
     //helpers
     public bool isOwnerOfPartnership(Partnership partnership) {
@@ -57,6 +57,34 @@ namespace ESRGC.DLLR.EARN.Domain.Model
         .Where(x => x.Type.ToLower() == "owner")
         .Select(x => x.PartnershipID)
         .Contains(partnershipID);
+    }
+   
+    /// <summary>
+    /// Gets the account associated with this profile
+    /// </summary>
+    /// <returns></returns>
+    public Account getAccount() {
+      try {
+        return Accounts.First();
+      }
+      catch (Exception) {
+        return null;
+      }
+    }
+    /// <summary>
+    /// Returns a list of owned partnerships
+    /// </summary>
+    /// <returns>Null if no owned partnership found</returns>
+    public List<Partnership> getOwnedPartnerships() {
+      try {
+        var partnerships = PartnershipDetails
+            .Where(x => x.Type.ToLower() == "owner")
+            .Select(x => x.Partnership).ToList();
+        return partnerships;
+      }
+      catch (Exception) {
+        return null;
+      }
     }
     public bool isNewToPartnership(Partnership partnership) {
       return isNewToPartnership(partnership.PartnershipID);
@@ -126,6 +154,6 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     }
     public List<string> getTagNames() {
       return getTags().Select(x => x.Name).ToList();
-    }
+    }    
   }
 }

@@ -9,7 +9,6 @@ using ESRGC.DLLR.EARN.Filters;
 namespace ESRGC.DLLR.EARN.Controllers
 {
   [Authorize]
-  [VerifyAccount]
   public class ConnectionController : BaseController
   {
     public ConnectionController(IWorkUnit workUnit)

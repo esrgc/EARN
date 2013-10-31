@@ -7,6 +7,10 @@ namespace ESRGC.DLLR.EARN.Domain.Model
 {
   public class Request
   {
+    public Request() {
+      Created = DateTime.Now;
+    }
+
     public int RequestID { get; set; }
     public string Type { get; set; }
     public string Message { get; set; }
@@ -16,5 +20,10 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public virtual Account Sender { get; set; }
     public int ReceiverID { get; set; }
     public virtual Account Receiver { get; set; }
+
+    public int NotificationID { get; set; }
+    public virtual Notification Notification { get; set; }
+
+    public DateTime Created { get; set; }
   }
 }

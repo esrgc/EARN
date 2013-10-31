@@ -327,6 +327,10 @@
     <Content Include="Views\Partnership\InvalidAccessToPartnership.cshtml" />
     <Content Include="Views\Partnership\Delete.cshtml" />
     <Content Include="Views\Partnership\InvalidPartnershipRequest.cshtml" />
+    <Content Include="Views\Communication\SendPartnershipRequest.cshtml" />
+    <Content Include="Views\Communication\SendPartnershipInvite.cshtml" />
+    <Content Include="Views\Communication\InviteToPartnership.cshtml" />
+    <Content Include="Views\Communication\Requests.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

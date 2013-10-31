@@ -16,7 +16,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     string _name, _status, _description, _grantStatus;
     public int PartnershipID { get; set; }
     [Required]
-    [MaxLength(100, ErrorMessage="100 maximum characters allowed")]
+    [MaxLength(100, ErrorMessage = "100 maximum characters allowed")]
     public string Name {
       get { return _name; }
       set { _name = value; LastUpdate = DateTime.Now; }
@@ -51,11 +51,16 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public virtual ICollection<PartnershipDetail> PartnershipDetails { get; set; }
 
     //helpers
-    public List<Profile> getOwners() {
-      return PartnershipDetails
-        .Where(x => x.Type.ToLower() == "owner")
-        .Select(x => x.Profile)
-        .ToList();
+    public Profile getOwner() {
+      try {
+        return PartnershipDetails
+           .Where(x => x.Type.ToLower() == "owner")
+           .Select(x => x.Profile)
+           .First();
+      }
+      catch (Exception) {
+        return null;
+      }
     }
     public List<Profile> getPartners() {
       return PartnershipDetails

@@ -45,11 +45,18 @@ namespace ESRGC.DLLR.EARN.Domain.DAL
           map.MapRightKey("ConnectionProfileID");
           map.ToTable("Connection");
         });
+      //sender foreign key
       modelBuilder.Entity<Account>()
         .HasMany(x => x.SentRequests)
         .WithRequired(x => x.Sender)
         .HasForeignKey(x => x.SenderID)
         .WillCascadeOnDelete(false);
+      //receiver foreign key
+      //modelBuilder.Entity<Account>()
+      //  .HasMany(x => x.ReceivedRequests)
+      //  .WithRequired(x => x.Receiver)
+      //  .HasForeignKey(x => x.ReceiverID);
+      //or
       modelBuilder.Entity<Request>()
         .HasRequired(x => x.Receiver)
         .WithMany(x => x.ReceivedRequests)

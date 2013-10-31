@@ -1,0 +1,116 @@
+﻿@using ESRGC.DLLR.EARN.Domain.Model
+@model Profile
+@{
+    ViewBag.Title = "Partnerships";
+    ViewBag.Header = "Invite To Partnership";
+    
+}
+
+@section header{
+    <div class="container">
+        <header class="page-header">
+            <h3>@ViewBag.Header <i class="glyphicon glyphicon-link"></i></h3>
+            @*<ul class="breadcrumb">
+                <li><a href="@Url.Action("index", "Home")">Home</a></li>
+                <li class="active">@ViewBag.Header</li>
+            </ul>*@
+        </header>
+    </div>
+}
+@{
+    var ownerProfile = ViewBag.currentProfile as Profile ?? new Profile();
+    var partnerships = ownerProfile.getOwnedPartnerships();
+    var receiverAccount = Model.getAccount();
+    var invites = receiverAccount.ReceivedRequests.Cast<PartnershipRequest>().ToList();
+    var returnUrl = ViewBag.returnUrl as string;
+}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1">
+            <div class="panel-action-default">
+                <a href="@returnUrl"><i class="fa fa-long-arrow-left"></i>&nbsp;Back to previous</a>
+            </div>
+            <div class="window-panel">
+                <div class="window-panel-title">
+                    <strong>Select a partnership</strong>
+                </div>
+                <div class="window-panel-content">
+                    <p>Inviting "@Model.Organization.Name" to which partnership?</p>
+                    <div class="alert alert-info">
+                        <p>
+                            The list below contains the partnerships
+                            that your organization posted. Pick the partnership you want to invite
+                            then click "Invite" button.
+                        </p>
+                    </div>
+                    <ul class="list-group">
+                        @foreach (var p in partnerships) {
+                            var partners = p.getPartners();
+                            if (Model.isNewToPartnership(p.PartnershipID)) {
+                            <li class="list-group-item">
+                                <small class="pull-right">Last edited: @Html.TimeSpan(p.LastUpdate)</small>
+                                <strong>@p.Name</strong>
+                                <br />
+                                <span class="text-muted">@p.Description</span>
+                                <br />
+                                <br />
+                                <p class="inline-block">
+                                    <span>Status&nbsp;
+                                    @switch (p.Status) {
+                                        case "Initiating":
+                                        <span class="text-danger">@p.Status</span>
+                                            break;
+                                        case "Partnering/drafting proposal":
+                                        <span class="text-warning">@p.Status</span>
+                                            break;
+                                        case "Partnered/proposed":
+                                        <span class="text-success">@p.Status</span>
+                                            break;
+                                    }
+                                    </span>
+                                    <br />
+                                    <span>Grant </span>
+                                    @switch (p.GrantStatus) {
+                                        case "Pre-draft":
+                                        <span class="text-danger"><i class="fa fa-minus-circle"></i>&nbsp;@p.GrantStatus</span>
+                                            break;
+                                        case "Drafting":
+                                        <span class="text-warning"><i class="fa fa-pencil"></i>&nbsp;@p.GrantStatus</span>
+                                            break;
+                                        case "Submitted":
+                                        <span class="text-info"><i class="fa fa-check"></i>&nbsp;@p.GrantStatus</span>
+                                            break;
+                                        case "Awarded":
+                                        <span class="text-success"><i class="fa fa-check-circle"></i>&nbsp;@p.GrantStatus</span>
+                                            break;
+                                    }
+                                    <br />
+                                    <span>Participants</span>&nbsp;<span class="badge">@partners.Count()</span>
+
+                                </p>
+                                <div class="pull-right">
+                                    @if (invites.Select(x => x.PartnershipID).Contains(p.PartnershipID)) {
+                                        <button disabled class="btn btn-primary"><i class="glyphicon glyphicon-send"></i>&nbsp;&nbsp;Invited</button>
+                                    }
+                                    else {
+                                        <form action="@Url.Action("InviteToPartnership")" method="post">
+                                            @Html.Hidden("profileID", Model.ProfileID)
+                                            @Html.Hidden("partnershipID", p.PartnershipID)
+                                            @Html.Hidden("returnUrl", returnUrl)
+                                            <button type="submit" class="btn btn-primary">
+                                                <i class="glyphicon glyphicon-send"></i>&nbsp;&nbsp;Invite
+                                            </button>
+                                        </form>
+                                        
+                                    }
+                                </div>
+                                <div class="clear"></div>
+                            </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

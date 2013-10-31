@@ -41,6 +41,12 @@
                         <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="@Url.Action("Detail", "Profile")">Profile</a></li>
+                            <li>
+                                <a href="@Url.Action("Requests", "Communication")">
+                                    Requests
+                                    <span class="badge pull-right">@Html.Action("RequestCount", "Communication")</span>
+                                </a>
+                            </li>
                             <li><a href="@Url.Action("SignOut", "Account")">Sign out</a></li>
                         </ul>
                     </li>

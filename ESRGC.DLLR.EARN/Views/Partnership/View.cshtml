@@ -23,8 +23,15 @@
 @{ 
     var p = Model;
     var partners = p.getPartners();
-    var owners = p.getOwners();
+    var owner = p.getOwner();
     var currentProfile = ViewBag.currentProfile as Profile ?? new Profile();
+    var account = currentProfile.getAccount();
+    var requested = account
+        .SentRequests
+        .Cast<PartnershipRequest>()
+        .Select(x => x.PartnershipID)
+        .Contains(Model.PartnershipID);
+
     var returnUrl = Url.Action("Detail", new { p.PartnershipID });
     ViewBag.returnUrl = returnUrl;
 }
@@ -75,26 +82,31 @@
                     </p>
                     <hr />
                     <div class="btn-group pull-right">
-                        @if (currentProfile.isNewToPartnership(Model.PartnershipID)) { 
-                            <a href="@Url.Action("SendPartnershipRequest", "Communication", new { Model.PartnershipID })" class="btn btn-default btn-sm" title="Request to join this partnership">
-                                <i class="fa fa-share"></i>&nbsp;Request
-                            </a>
+                        @if (currentProfile.isNewToPartnership(Model.PartnershipID)) {
+                            if ((!requested)) {
+                                <a href="@Url.Action("SendPartnershipRequest", "Communication", new { Model.PartnershipID })" class="btn btn-default btn-sm" title="Request to join this partnership">
+                                    <i class="fa fa-share"></i>&nbsp;Request
+                                </a>
+                            }
+                            else {
+                                <button disabled class="btn btn-default btn-sm" title="Request to join this partnership">
+                                    <i class="fa fa-share"></i>&nbsp;Join request sent
+                                </button>
+                            }
                         }
-                        @if(!currentProfile.isOwnerOfPartnership(Model.PartnershipID)){
+                        @if (!currentProfile.isOwnerOfPartnership(Model.PartnershipID)) {
                             <button type="button" class="btn btn-default btn-sm" title="Bookmark this partnership"><i class="fa fa-bookmark"></i>&nbsp;Bookmark</button>
                         }
                     </div>
                     <div class="profile-tabs">
                         <ul class="nav nav-tabs ">
-                            <li class="active"><a href="#owners" data-toggle="tab">Owner&nbsp;<span class="badge">@owners.Count()</span></a></li>
+                            <li class="active"><a href="#owners" data-toggle="tab">Owner</a></li>
                             <li><a href="#partners" data-toggle="tab">Partners&nbsp;<span class="badge">@partners.Count()</span></a></li>
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active" id="owners">
                                 <div class="placeholder">
-                                    @foreach (var profile in owners) { 
-                                        @Html.Action("DisplayShortProfile", "Profile", new { profile.ProfileID })
-                                    }
+                                    @Html.Action("DisplayShortProfile", "Profile", new { owner.ProfileID })
                                 </div>
                             </div>
                             <div class="tab-pane" id="partners">

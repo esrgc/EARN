@@ -23,7 +23,7 @@
 @{ 
     var p = Model;
     var partners = p.getPartners();
-    var owners = p.getOwners();
+    var owner = p.getOwner();
     var returnUrl = Url.Action("Detail", new { p.PartnershipID });
     ViewBag.returnUrl = returnUrl;
     var currentProfile = ViewBag.currentProfile as Profile ?? new Profile();
@@ -83,15 +83,14 @@
                     <hr />
                     <div class="profile-tabs">
                         <ul class="nav nav-tabs ">
-                            <li class="active"><a href="#owners" data-toggle="tab">Owner&nbsp;<span class="badge">@owners.Count()</span></a></li>
+                            <li class="active"><a href="#owners" data-toggle="tab">Owner</a></li>
                             <li><a href="#partners" data-toggle="tab">Partners&nbsp;<span class="badge">@partners.Count()</span></a></li>
+                            @*<li><a href="#connections" data-toggle="tab">Invite From Connections</a></li>*@
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active" id="owners">
                                 <div class="placeholder">
-                                    @foreach (var profile in owners) { 
-                                        @Html.Action("DisplayShortProfile", "Profile", new { profile.ProfileID })
-                                    }
+                                    @Html.Action("DisplayShortProfile", "Profile", new { owner.ProfileID })
                                 </div>
                             </div>
                             <div class="tab-pane" id="partners">
@@ -101,6 +100,11 @@
                                     }
                                 </div>
                             </div>
+                            @*<div class="tab-pane" id="connections">
+                                <div class="placeholder">
+
+                                </div>
+                            </div>*@
                         </div>
                     </div>
                 </div>

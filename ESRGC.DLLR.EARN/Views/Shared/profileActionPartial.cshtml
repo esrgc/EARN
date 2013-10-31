@@ -18,7 +18,7 @@
             else {
                 <li><a href="@Url.Action("RemoveConnection", "Connection", new { Model.ProfileID, returnUrl })">Remove connection</a></li>
             }
-            <li><a href="#">Invite to partnership</a></li>
+            <li><a href="@Url.Action("InviteToPartnership", "Communication", new { Model.ProfileID, returnUrl })">Invite to partnership</a></li>
         </ul>
     </div>
 }

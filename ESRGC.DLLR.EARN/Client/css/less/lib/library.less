@@ -18,7 +18,9 @@
     margin: @margin 0 0 0;
     padding: @padding 0;
 }
-
+.inline-block{
+    display: inline-block;
+}
 .placeholder-panel {
     position: relative;
     padding: 10px;
@@ -48,6 +50,12 @@
 .panel-action-center {
     .panel-action;
     text-align: center;
+}
+.placeholder {
+    padding: 15px;  
+    background: @base-color;
+    border-color: @border-color;
+    .rounded-corner;
 }
 .placeholder-heading {
     padding: 5px;
