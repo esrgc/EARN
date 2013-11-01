@@ -37,9 +37,9 @@
                                     </small>
                                 </h4>
 
-                                @if (Model.Organization.Description.Length > 200) { 
+                                @if (Model.Organization.Description.Length > 100) { 
                                     <p>
-                                        @Model.Organization.Description.Substring(0, 200)
+                                        @Model.Organization.Description.Substring(0, 100)
                                         ...<a href="@Url.Action("ViewProfile", "Profile", new { Model.ProfileID, returnUrl })">
                                             read more
                                         </a>
