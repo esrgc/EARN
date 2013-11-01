@@ -331,6 +331,9 @@
     <Content Include="Views\Communication\SendPartnershipInvite.cshtml" />
     <Content Include="Views\Communication\InviteToPartnership.cshtml" />
     <Content Include="Views\Communication\Requests.cshtml" />
+    <Content Include="Views\Shared\miniProfilePartial.cshtml" />
+    <Content Include="Views\Shared\miniPartnershipPartial.cshtml" />
+    <Content Include="Views\Communication\Notifications.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

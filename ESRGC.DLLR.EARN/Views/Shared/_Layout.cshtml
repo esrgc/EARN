@@ -59,6 +59,14 @@
                 placement: "bottom",
                 container: 'body'
             });
+            $('.navbar a#notifications').popover({
+                placement: "bottom",
+                container: 'body',
+                html: true,
+                content: function () {
+                    return $('.hidden-content').html();
+                }
+            });
             //custom start up code
             if (typeof startup == 'function')
                 startup();

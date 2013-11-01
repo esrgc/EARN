@@ -37,7 +37,7 @@
                                     </small>
                                 </h4>
 
-                                @*@if (Model.Organization.Description.Length > 200) { 
+                                @if (Model.Organization.Description.Length > 200) { 
                                     <p>
                                         @Model.Organization.Description.Substring(0, 200)
                                         ...<a href="@Url.Action("ViewProfile", "Profile", new { Model.ProfileID, returnUrl })">
@@ -47,7 +47,7 @@
                                 }
                                 else {
                                     <p>@Model.Organization.Description</p>
-                                }*@
+                                }
                             </div>
                         </div>
                         <div class="col-sm-4">

@@ -23,7 +23,8 @@
 
 }
 @{
-    var filters = ViewBag.filters as Dictionary<string, object> ?? new Dictionary<string, object>();   
+    var filters = ViewBag.filters as Dictionary<string, object> ?? new Dictionary<string, object>();
+    var returnUrl = Url.Action("Index");
 }
 <div class="container">
     <div class="row">
@@ -50,7 +51,7 @@
                                     var partners = p.PartnershipDetails.Count();
                                     <li class="list-group-item">
                                         <small class="pull-right">Last edited: @Html.TimeSpan(p.LastUpdate)</small>
-                                        <a href="@Url.Action("View", "Partnership", new { p.PartnershipID })">
+                                        <a href="@Url.Action("View", "Partnership", new { p.PartnershipID, returnUrl })">
                                             <strong>@p.Name</strong>
                                         </a>
                                         @switch (p.Status) {

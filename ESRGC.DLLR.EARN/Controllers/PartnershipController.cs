@@ -34,12 +34,14 @@ namespace ESRGC.DLLR.EARN.Controllers
     /// <returns></returns>
     [VerifyProfile]
     [VerifyProfilePartnership]
-    public ActionResult Detail(int partnershipID) {
+    public ActionResult Detail(int partnershipID, string returnUrl) {
+      ViewBag.returnUrl = returnUrl;
       var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
       return View(partnership);
     }
     [VerifyProfile]
-    public ActionResult View(int partnershipID) {
+    public ActionResult View(int partnershipID, string returnUrl) {
+      ViewBag.returnUrl = returnUrl;
       var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
       return View(partnership);
     }
@@ -49,10 +51,11 @@ namespace ESRGC.DLLR.EARN.Controllers
     /// </summary>
     /// <param name="profileID"></param>
     /// <returns></returns>
-    public ActionResult ListPartnerships(int profileID) {
+    public ActionResult ListPartnerships(int profileID,string returnUrl) {
       var profile = _workUnit.ProfileRepository.GetEntityByID(profileID);
       var partnerships = profile.PartnershipDetails.Select(x => x.Partnership).ToList();
       ViewBag.currentProfile = CurrentAccount.Profile;
+      ViewBag.returnUrl = returnUrl;
       return PartialView(partnerships);
     }
     /// <summary>

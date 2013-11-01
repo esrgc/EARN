@@ -24,8 +24,8 @@
     var p = Model;
     var partners = p.getPartners();
     var owner = p.getOwner();
-    var returnUrl = Url.Action("Detail", new { p.PartnershipID });
-    ViewBag.returnUrl = returnUrl;
+    var returnUrl = ViewBag.returnUrl as string ?? Url.Action("Detail", "Profile");
+    ViewBag.returnUrl = Url.Action("Detail", new { p.PartnershipID , returnUrl});
     var currentProfile = ViewBag.currentProfile as Profile ?? new Profile();
     var canDelete = currentProfile.isOwnerOfPartnership(Model);
 }
@@ -34,7 +34,7 @@
     <div class="row">
         <div class="col-sm-10 col-sm-offset-1">
             <div class="panel-action-default">
-                <a href="@Url.Action("Detail", "Profile")"><i class="fa fa-long-arrow-left"></i>&nbsp;Back to profile</a>
+                <a href="@returnUrl"><i class="fa fa-long-arrow-left"></i>&nbsp;Back to previous</a>
             </div>
             <div class="window-panel">
                 <div class="window-panel-title">
@@ -83,26 +83,36 @@
                     <hr />
                     <div class="profile-tabs">
                         <ul class="nav nav-tabs ">
-                            <li class="active"><a href="#owners" data-toggle="tab">Owner</a></li>
-                            <li><a href="#partners" data-toggle="tab">Partners&nbsp;<span class="badge">@partners.Count()</span></a></li>
-                            @*<li><a href="#connections" data-toggle="tab">Invite From Connections</a></li>*@
+                            <li class="active"><a href="#partners" data-toggle="tab">Partners</a></li>
+                            <li><a href="#documents" data-toggle="tab">Documents&nbsp;<span class="badge"></span></a></li>
+                            @*<li><a href="#comments" data-toggle="tab">Comments&nbsp;<span class="badge"></span></a></li>*@
                         </ul>
                         <div class="tab-content">
-                            <div class="tab-pane active" id="owners">
+                            <div class="tab-pane active" id="partners">
                                 <div class="placeholder">
-                                    @Html.Action("DisplayShortProfile", "Profile", new { owner.ProfileID })
+                                    <div class="profile-container-holder">
+                                        <span class="label label-danger">Owner</span>
+                                        @Html.Partial("shortProfilePartial", owner)
+                                        <hr />
+                                    </div>
+                                    <strong>Other Partners</strong>
+                                    @foreach (var profile in partners) { 
+                                        <div class="placeholder-panel">
+                                            @Html.Partial("shortProfilePartial", profile)
+                                        </div>
+                                    }
                                 </div>
                             </div>
-                            <div class="tab-pane" id="partners">
+                            <div class="tab-pane" id="documents">
+                                <div class="placeholder">
+                                    <p>Comming soon...</p>
+                                </div>
+                            </div>
+                            @*<div class="tab-pane" id="comments">
                                 <div class="placeholder">
                                     @foreach (var profile in partners) { 
                                         @Html.Action("DisplayShortProfile", "Profile", new { profile.ProfileID })
                                     }
-                                </div>
-                            </div>
-                            @*<div class="tab-pane" id="connections">
-                                <div class="placeholder">
-
                                 </div>
                             </div>*@
                         </div>

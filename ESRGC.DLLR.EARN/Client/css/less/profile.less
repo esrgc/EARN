@@ -1,4 +1,4 @@
-﻿@import "lib/library.less";
+﻿@import "lib/variables.less";
 
 #socialNetworkLinks {
     position: absolute;
@@ -12,7 +12,11 @@
 .profile-area h5 {
     margin-top: 0;
 }
-
+.mini-profile {
+    h4{
+        min-width: 350px;
+    }
+}
 .profile-area {
     .dropdown {
         margin: 0 auto 0 auto;
@@ -84,7 +88,7 @@
             border-left: 1px solid @border-color;
             border-right: 1px solid @border-color;
             border-bottom: 1px solid @border-color;
-            min-height: 200px;
+            min-height: 250px;
             max-height: 800px;
             overflow-y: auto;
         }
@@ -97,7 +101,12 @@
         }
     }
 }
-
+.profile-container-holder {
+    > span.label {
+        margin-left: 10px;
+        margin-bottom: -1px;
+    }
+}
 .about {
     min-height: 250px;
     min-width: 100%;

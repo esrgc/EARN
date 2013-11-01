@@ -1,0 +1,28 @@
+﻿@using ESRGC.DLLR.EARN.Domain.Model
+@model List<Notification>
+@if (Model != null) { 
+    <div class="notification-container">
+        <ul class="list-group">
+            @foreach (var i in Model) { 
+                <li class="list-group-item">
+                    <small class="pull-right">@Html.TimeSpan(i.Created)</small>
+                    <a href="@Url.Action("ViewNotification", new { i.NotificationID })">
+                        <p>
+                            <strong>@i.Category</strong>
+                            @if (!i.IsRead) { 
+                                <small class="label label-danger">New</small>
+                            }
+                        </p>
+                        @i.Message
+                    </a>
+
+                </li>
+            }
+        </ul>
+    </div>
+}
+else{
+    <div class="notification-container">
+        <p>There's currently no notification.</p>
+    </div>
+}

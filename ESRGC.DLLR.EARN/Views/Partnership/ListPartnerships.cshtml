@@ -2,7 +2,8 @@
 @model List<Partnership>
 
 @{
-    var currentProfile = ViewBag.currentProfile as Profile ?? new Profile();   
+    var currentProfile = ViewBag.currentProfile as Profile ?? new Profile();
+    var returnUrl = ViewBag.returnUrl as string;
 }
 <ul class="list-group">
     @foreach (var p in Model) {
@@ -12,12 +13,12 @@
         <li class="list-group-item">
             <small class="pull-right">Last edited: @Html.TimeSpan(p.LastUpdate)</small>
             @if (canEdit) { 
-                <a href="@Url.Action("Detail", "Partnership", new { p.PartnershipID })">
+                <a href="@Url.Action("Detail", "Partnership", new { p.PartnershipID , returnUrl})">
                     <strong>@p.Name</strong>
                 </a>
             }
             else {
-                <a href="@Url.Action("View", "Partnership", new { p.PartnershipID })">
+                <a href="@Url.Action("View", "Partnership", new { p.PartnershipID , returnUrl})">
                     <strong>@p.Name</strong>
                 </a>
             }
@@ -51,7 +52,7 @@
                 <span class="text-success"><i class="fa fa-check-circle"></i>&nbsp;@p.GrantStatus</span>
                     break;
             }
-            <span class="badge">Participant(s @partners</span>
+            <span class="badge">Participants @partners</span>
         </li>
         
     }

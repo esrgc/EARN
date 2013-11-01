@@ -39,14 +39,15 @@
                     <div class="alert alert-info">
                         <p>
                             The list below contains the partnerships
-                            that your organization posted. Pick the partnership you want to invite
-                            then click "Invite" button.
+                            that your organization posted. To invite the organization 
+                            to join your partnership first
+                            pick the partnership you want to invite
+                            then click the "Invite" button.
                         </p>
                     </div>
                     <ul class="list-group">
                         @foreach (var p in partnerships) {
                             var partners = p.getPartners();
-                            if (Model.isNewToPartnership(p.PartnershipID)) {
                             <li class="list-group-item">
                                 <small class="pull-right">Last edited: @Html.TimeSpan(p.LastUpdate)</small>
                                 <strong>@p.Name</strong>
@@ -89,10 +90,11 @@
 
                                 </p>
                                 <div class="pull-right">
-                                    @if (invites.Select(x => x.PartnershipID).Contains(p.PartnershipID)) {
+                                    @if (Model.isNewToPartnership(p.PartnershipID)) {
+                                        if (invites.Select(x => x.PartnershipID).Contains(p.PartnershipID)) {
                                         <button disabled class="btn btn-primary"><i class="glyphicon glyphicon-send"></i>&nbsp;&nbsp;Invited</button>
-                                    }
-                                    else {
+                                        }
+                                        else {
                                         <form action="@Url.Action("InviteToPartnership")" method="post">
                                             @Html.Hidden("profileID", Model.ProfileID)
                                             @Html.Hidden("partnershipID", p.PartnershipID)
@@ -102,11 +104,15 @@
                                             </button>
                                         </form>
                                         
+                                        }
+                                    }
+                                    else {
+                                        <button disabled class="btn btn-primary"><i class="fa fa-check"></i>&nbsp;&nbsp;Partnered</button>
                                     }
                                 </div>
                                 <div class="clear"></div>
                             </li>
-                            }
+                            
                         }
                     </ul>
                 </div>

@@ -50,8 +50,8 @@ textarea {
     }*/
 }
 
-.your-profile-label{
-    margin-left: 12px
+.your-profile-label {
+    margin-left: 12px;
 }
 
 .site-logo {
@@ -118,4 +118,33 @@ a.link-icon, .link-icon-container a {
     z-index: 9999999;
     text-align: center;
     color: #FFFFFF;
+}
+
+.navbar-nav > li {
+    position: relative;
+
+    .label {
+        position: absolute;
+        right: 10px;
+        top: 6px;
+    }
+}
+
+.popover-content .list-group-item {
+    font-size: 12px;
+    cursor: pointer;
+    a{
+        text-decoration: none;
+    }
+    &:hover {
+        background: @base-color;
+    }
+}
+
+.hidden-content {
+    display: none;
+}
+.notification-container{
+    max-height: 500px;
+    overflow-y:auto;
 }

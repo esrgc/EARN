@@ -156,7 +156,7 @@
                             <p>There's currently no partnership available.</p>
                         }
                         else {
-                            @Html.Action("ListPartnerships", "Partnership", new { Model.ProfileID })
+                            @Html.Action("ListPartnerships", "Partnership", new { Model.ProfileID , returnUrl})
                         }
                     </div>
                 </div>

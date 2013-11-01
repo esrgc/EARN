@@ -11,7 +11,7 @@
     <div class="dropdown">
         <a class="btn btn-primary btn-xs dropdown-toggle" href="#" data-toggle="dropdown">Actions&nbsp;<b class="caret"></b></a>
         <ul class="dropdown-menu">
-            <li><a href="@Url.Action("ViewProfile", "Profile", new { Model.ProfileID })">View profile</a></li>
+            <li><a href="@Url.Action("ViewProfile", "Profile", new { Model.ProfileID , returnUrl})">View profile</a></li>
             @if (!currentProfile.hasConnection(Model)) { 
                 <li><a href="@Url.Action("AddConnection", "Connection", new { Model.ProfileID, returnUrl })">Add as connection</a></li>
             }
