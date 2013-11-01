@@ -69,6 +69,8 @@
     <!-- /.navbar-collapse -->
 </nav>
 @*Notification popover content*@
-<div class="hidden-content">
-    @Html.Action("Notifications", "Communication")
-</div>
+@if (Request.IsAuthenticated) { 
+    <div class="hidden-content">
+        @Html.Action("Notifications", "Communication")
+    </div>
+}

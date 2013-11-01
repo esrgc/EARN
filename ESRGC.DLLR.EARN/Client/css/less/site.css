@@ -282,9 +282,10 @@ a.link-icon:hover,
 .popover-content .list-group-item {
   font-size: 12px;
   cursor: pointer;
-}
-.popover-content .list-group-item a {
-  text-decoration: none;
+  /*a{
+        text-decoration: none;
+    }*/
+
 }
 .popover-content .list-group-item:hover {
   background: #f4f4f4;

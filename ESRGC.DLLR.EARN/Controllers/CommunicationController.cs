@@ -22,7 +22,6 @@ namespace ESRGC.DLLR.EARN.Controllers
     }
     [HttpPost]
     [VerifyProfile]
-    [NewToPartnership]
     public ActionResult InviteToPartnership(int profileID, int partnershipID, string message, string returnUrl) {
       var profile = _workUnit.ProfileRepository.GetEntityByID(profileID);
       ViewBag.returnUrl = returnUrl;
@@ -138,6 +137,7 @@ namespace ESRGC.DLLR.EARN.Controllers
             result = Redirect(url);
           break;
         case "request":
+        case "invite":
           result = RedirectToAction("Requests", "Communication");
           break;
       }
