@@ -1,0 +1,30 @@
+﻿@using ActionMailer.Net.Mvc
+@model ESRGC.DLLR.EARN.Domain.Model.Notification
+
+@{
+    Layout = null;
+}
+<h4>EARN MD CONNECT</h4>
+
+<strong>@Model.Category</strong> on @Model.Created
+
+<p>
+    @Model.Message 
+</p>
+
+
+@if (!string.IsNullOrEmpty(Model.LinkToAction)) {
+<pre>
+    Pleae follow the link below to view this notification on EARN MD CONNECT site (Sign in required).
+    @Url.AbsoluteAction("ViewNotification", "Communication", new { Model.NotificationID })
+</pre>
+}
+else {
+<pre>
+    Pleae follow the link below to sign in EARN MD CONNECT.
+    @Url.AbsoluteAction("SignIn", "Account")
+</pre>
+}
+<br />
+<small>This is an automatic email notification. Please do not reply to this message. Contact EARN MD CONNECT if you have any question.</small>
+

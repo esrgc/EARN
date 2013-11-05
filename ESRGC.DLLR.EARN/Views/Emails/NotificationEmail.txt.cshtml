@@ -5,8 +5,18 @@
     Layout = null;
 }
 
-@Model.Category
+@Model.Category 
 
-This automatic email is to notify that @Model.Message @Html.TimeSpan(Model.Created)
+@{<text>@Model.Message</text> } @Html.TimeSpan(Model.Created)
 
-@Url.AbsoluteAction("Index", "Home")
+
+@if(Model.LinkToAction == ""){
+    <text>Pleae follow the link below to view this notification on EARN MD CONNECT site (Sign in required).</text>    
+    @Url.AbsoluteAction("ViewNotification", "Communication", new { Model.NotificationID }) 
+}
+else{
+    <text>Pleae follow the link below to sign in EARN MD CONNECT.</text>    
+    @Url.AbsoluteAction("SignIn", "Account")
+}
+
+This is an automatic email notification. Please do not reply to this message. Contact EARN MD CONNECT if you have any question.

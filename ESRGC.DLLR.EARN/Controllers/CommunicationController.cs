@@ -190,7 +190,7 @@ namespace ESRGC.DLLR.EARN.Controllers
               Message = string.Format(@"{0} has accepted your request. You are now a partner of ""{1}""",
                 r.Receiver.Profile.Organization.Name,
                 r.Partnership.Name),
-              LinkToAction = Url.Action("View", "Partnership", new { r.PartnershipID })
+              LinkToAction = Url.Action("Detail", "Partnership", new { r.PartnershipID })
             };
           }
           break;
@@ -212,7 +212,7 @@ namespace ESRGC.DLLR.EARN.Controllers
               Message = string.Format(@"{0} has accepted your invitation to join the ""{1}"" partnership",
                 r.Receiver.Profile.Organization.Name,
                 r.Partnership.Name),
-              LinkToAction = Url.Action("View", "Partnership", new { r.PartnershipID })
+              LinkToAction = Url.Action("Detail", "Partnership", new { r.PartnershipID })
             };
           }
           break;

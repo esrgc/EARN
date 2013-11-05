@@ -94,8 +94,13 @@
     <Compile Include="Migrations\201311042046530_notificationEmail.Designer.cs">
       <DependentUpon>201311042046530_notificationEmail.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201311052010170_Comment.cs" />
+    <Compile Include="Migrations\201311052010170_Comment.Designer.cs">
+      <DependentUpon>201311052010170_Comment.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
+    <Compile Include="Model\Comment.cs" />
     <Compile Include="Model\GeoTag.cs" />
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\Notification.cs" />
@@ -144,6 +149,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201311042046530_notificationEmail.resx">
       <DependentUpon>201311042046530_notificationEmail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201311052010170_Comment.resx">
+      <DependentUpon>201311052010170_Comment.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

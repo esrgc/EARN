@@ -10,6 +10,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
   {
     public Partnership() {
       PartnershipDetails = new List<PartnershipDetail>();
+      Comments = new List<Comment>();
       LastUpdate = DateTime.Now;
       Created = DateTime.Now;
     }
@@ -49,7 +50,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public DateTime? LastUpdate { get; set; }
     //nav properties
     public virtual ICollection<PartnershipDetail> PartnershipDetails { get; set; }
-
+    public virtual ICollection<Comment> Comments { get; set; }
     //helpers
     public Profile getOwner() {
       try {

@@ -11,9 +11,10 @@ namespace ESRGC.DLLR.EARN.Domain.Model
   {
 
     public Profile() {
-      Connections = new HashSet<Profile>();
-      ProfileTags = new HashSet<ProfileTag>();
-      PartnershipDetails = new HashSet<PartnershipDetail>();
+      Connections = new List<Profile>();
+      ProfileTags = new List<ProfileTag>();
+      PartnershipDetails = new List<PartnershipDetail>();
+      Comments = new List<Comment>();
     }
     /// <summary>
     /// Profile ID
@@ -47,6 +48,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public virtual ICollection<Profile> Connections { get; set; }
     public virtual ICollection<PartnershipDetail> PartnershipDetails { get; set; }
     public virtual ICollection<Account> Accounts { get; set; }
+    public virtual ICollection<Comment> Comments { get; set; }
 
     //helpers
     public bool isOwnerOfPartnership(Partnership partnership) {

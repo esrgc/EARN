@@ -9,19 +9,14 @@ using ESRGC.DLLR.EARN.Helpers;
 
 namespace ESRGC.DLLR.EARN.Filters
 {
-  public class SendNotificationAttribute: ActionFilterAttribute
+  public class SendNotificationAttribute : ActionFilterAttribute
   {
     public override void OnActionExecuted(ActionExecutedContext filterContext) {
-      var requestEmail = filterContext.HttpContext.User.Identity.Name;
       var workUnit = new WorkUnit(new DomainContext());
       try {
-        var account = workUnit
-          .AccountRepository
-          .Entities
-          .First(x => x.EmailAddress.ToLower() == requestEmail.ToLower());
         var unsentNotifs = workUnit.NotificationRepository
           .Entities
-          .Where(x => (!x.EmailSent))
+          .Where(x => !x.EmailSent)
           .ToList();
         foreach (var unsent in unsentNotifs) {
           EmailHelper.SendNotificationEmail(unsent);
@@ -29,10 +24,10 @@ namespace ESRGC.DLLR.EARN.Filters
           workUnit.NotificationRepository.UpdateEntity(unsent);
         }
         workUnit.saveChanges();
-       
+
       }
       catch (Exception) {
-       
+
       }
     }
   }

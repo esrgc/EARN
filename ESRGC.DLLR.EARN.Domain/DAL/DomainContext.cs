@@ -62,6 +62,11 @@ namespace ESRGC.DLLR.EARN.Domain.DAL
         .WithMany(x => x.ReceivedRequests)
         .HasForeignKey(x => x.ReceiverID)
         .WillCascadeOnDelete(false);
+      //Profile - Comment relationship (one to many)
+      modelBuilder.Entity<Comment>()
+        .HasRequired(x => x.Author)
+        .WithMany(x => x.Comments)
+        .HasForeignKey(x => x.AuthorID);
     }
   }
 }
