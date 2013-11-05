@@ -33,7 +33,10 @@
     <div class="row">
         <div class="col-sm-10 col-sm-offset-1">
             <div class="panel-action-default">
-                <a href="@returnUrl"><i class="fa fa-long-arrow-left"></i>&nbsp;Back to previous</a>
+                @if (!string.IsNullOrEmpty(returnUrl)) {
+                    <a href="@returnUrl"><i class="fa fa-long-arrow-left"></i>&nbsp;Back to previous</a>
+                }
+                <small class="pull-right">Last edited: @Html.TimeSpan(p.LastUpdate)</small>
             </div>
             <div class="window-panel">
                 <div class="window-panel-title">
@@ -46,7 +49,7 @@
                     }
                 </div>
                 <div class="window-panel-content">
-                    <small class="pull-right">Last edited: @Html.TimeSpan(p.LastUpdate)</small>
+
                     <p class=""><strong>Description</strong> @p.Description</p>
                     <p>
                         <strong>Status</strong>
@@ -134,7 +137,7 @@
                 <div class="transparent-placeholder-panel">
                     <form class="form-horizontal" method="post" action="@Url.Action("PostComment", "Communication")">
                         @Html.HiddenFor(x => x.PartnershipID)
-                        <input type="hidden" name="returnUrl" value="@Url.Action("Detail", new { Model.PartnershipID, returnUrl })"/>                       
+                        <input type="hidden" name="returnUrl" value="@Url.Action("Detail", new { Model.PartnershipID, returnUrl })"/>
                         <div class="form-group">
                             <div class="col-md-12">
                                 @Html.TextArea("comment", new {
