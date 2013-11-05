@@ -22,7 +22,7 @@ namespace ESRGC.DLLR.EARN.Controllers
 
     public EmailResult Notification(Notification model) {
       To.Add(model.Account.EmailAddress);
-      Subject = "EARN MD CONNECT - " + model.Category;
+      Subject = "EARN MD CONNECT - " + model.Message;
       return Email("Notification", model);
     }
 

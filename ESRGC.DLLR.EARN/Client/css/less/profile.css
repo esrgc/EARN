@@ -71,8 +71,9 @@
   border-right: 1px solid #dddddd;
   border-bottom: 1px solid #dddddd;
   min-height: 250px;
-  max-height: 800px;
-  overflow-y: auto;
+  /*max-height: 800px;
+            overflow-y: auto;*/
+
 }
 .profile-tabs > ul > li.active > a,
 .profile-tabs > ul > li.active > a:hover {

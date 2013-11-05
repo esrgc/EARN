@@ -25,9 +25,10 @@
     var partners = p.getPartners();
     var owner = p.getOwner();
     var returnUrl = ViewBag.returnUrl as string ?? Url.Action("Detail", "Profile");
-    ViewBag.returnUrl = Url.Action("Detail", new { p.PartnershipID , returnUrl});
+    ViewBag.returnUrl = Url.Action("Detail", new { p.PartnershipID, returnUrl });
     var currentProfile = ViewBag.currentProfile as Profile ?? new Profile();
-    var canDelete = currentProfile.isOwnerOfPartnership(Model);
+    var canEdit = currentProfile.isOwnerOfPartnership(Model);
+   
 }
 
 <div class="container">
@@ -39,8 +40,8 @@
             <div class="window-panel">
                 <div class="window-panel-title">
                     <strong>@p.Name</strong>
-                    <a href="@Url.Action("Edit", new { p.PartnershipID })"><i class="fa fa-pencil"></i></a>
-                    @if (canDelete) { 
+                    @if (canEdit) { 
+                        <a href="@Url.Action("Edit", new { p.PartnershipID })"><i class="fa fa-pencil"></i></a>
                         <a title="Delete this partnership" href="@Url.Action("Delete", new { Model.PartnershipID })" class="pull-right text-danger">
                             <i class="fa fa-times-circle"></i>&nbsp;Delete this partnership
                         </a>
@@ -118,6 +119,14 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="well">
+                <h4><i class="fa fa-comments"></i>&nbsp;Comments</h4>
+                <p>Coming soon...</p>
             </div>
         </div>
     </div>

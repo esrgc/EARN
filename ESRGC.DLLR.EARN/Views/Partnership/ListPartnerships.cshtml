@@ -12,16 +12,11 @@
         
         <li class="list-group-item">
             <small class="pull-right">Last edited: @Html.TimeSpan(p.LastUpdate)</small>
-            @if (canEdit) { 
-                <a href="@Url.Action("Detail", "Partnership", new { p.PartnershipID , returnUrl})">
-                    <strong>@p.Name</strong>
-                </a>
-            }
-            else {
-                <a href="@Url.Action("View", "Partnership", new { p.PartnershipID , returnUrl})">
-                    <strong>@p.Name</strong>
-                </a>
-            }
+
+            <a href="@Url.Action("Detail", "Partnership", new { p.PartnershipID, returnUrl })">
+                <strong>@p.Name</strong>
+            </a>
+
             @switch (p.Status) {
                 case "Initiating":
                 <span class="text-danger">(@p.Status)</span>
