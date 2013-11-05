@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="@Url.Action("index", "Home")">EARN MD Connect</a>
+            <a class="navbar-brand" href="@Url.Action("index", "Home")">EARN MD CONNECT</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -37,7 +37,7 @@
             <ul class="nav navbar-nav navbar-right">
                 @if (Request.IsAuthenticated) { 
                     <li>
-                        <a href="#" data-toggle="popover" id="notifications" role="button">
+                        <a href="#" data-toggle="popover" id="notifications" role="menuitem" data-trigger="click">
                             <i class="fa fa-flag fa-lg"></i>&nbsp;<span class="label label-danger">@Html.Action("NotificationCount", "Communication")</span>
                         </a>
                     </li>

@@ -22,6 +22,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     }
     [HttpPost]
     [VerifyProfile]
+    [SendNotification]
     public ActionResult InviteToPartnership(int profileID, int partnershipID, string message, string returnUrl) {
       var profile = _workUnit.ProfileRepository.GetEntityByID(profileID);
       ViewBag.returnUrl = returnUrl;
@@ -64,6 +65,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     [HttpPost]
     [VerifyProfile]
     [NewToPartnership]
+    [SendNotification]
     public ActionResult SendPartnershipRequest(int partnershipID, string message, string returnUrl) {
       var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
       var ownerProfile = partnership.getOwner();
@@ -162,7 +164,7 @@ namespace ESRGC.DLLR.EARN.Controllers
         .ToList();
       return View(requests);
     }
-
+    [SendNotification]
     public ActionResult AcceptRequest(int requestID) {
       var request = _workUnit.RequestRepository.GetEntityByID(requestID);
       PartnershipRequest r = null;

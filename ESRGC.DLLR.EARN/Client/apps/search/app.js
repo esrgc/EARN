@@ -2,7 +2,7 @@
 Author: Tu hoang
 ESRGC 2013
 
-EARN MD Connect
+EARN MD CONNECT
 
 Search application
 

@@ -7,6 +7,7 @@ using ESRGC.DLLR.EARN.Controllers;
 using ESRGC.DLLR.EARN.Domain.DAL;
 using ESRGC.DLLR.EARN.Domain.DAL.Concrete;
 using ESRGC.DLLR.EARN.Domain.Model;
+using ESRGC.DLLR.EARN.Helpers;
 using ESRGC.GIS.Geocoding;
 using ESRGC.GIS.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -83,6 +84,26 @@ namespace ESRGC.DLLR.EARN.Tests
       workUnit.saveChanges();
       //assert
       Assert.AreNotEqual(profile.Connections.Count(), 0);
+    }
+    [TestMethod]
+    public void testEmail() {
+      EmailHelper.SendNotificationEmail(new Notification() {
+        Account = new Account() { EmailAddress = "tahoang@salisbury.edu"},
+        Created = DateTime.Now,
+        Message = "This is a notification test",
+        Category = "Notification",
+        LinkToAction = "http://test.com"
+      });
+    }
+
+    [TestMethod]
+    public void testAccountVerificaitonCode() {
+      //arrange
+      var account = new Account();
+      //act
+      Console.WriteLine(account.VerificationCode);
+      //assert
+      Assert.AreEqual(30, account.VerificationCode.Length);
     }
   }
 }

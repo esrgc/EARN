@@ -1,0 +1,12 @@
+﻿@using ActionMailer.Net.Mvc
+@model ESRGC.DLLR.EARN.Domain.Model.Notification
+
+@{
+    Layout = null;
+}
+
+@Model.Category
+
+This automatic email is to notify that @Model.Message @Html.TimeSpan(Model.Created)
+
+@Url.AbsoluteAction("Index", "Home")

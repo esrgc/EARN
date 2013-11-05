@@ -15,6 +15,8 @@ namespace ESRGC.DLLR.EARN.Domain.Model
       Notifications = new List<Notification>();
       SentRequests = new List<Request>();
       ReceivedRequests = new List<Request>();
+      EmailVerified = false;
+      VerificationCode = Helpers.Utility.RandomString(30);
     }
 
     public int AccountID { get; set; }
@@ -59,7 +61,10 @@ namespace ESRGC.DLLR.EARN.Domain.Model
 
     public virtual ICollection<Notification> Notifications { get; set; }
     public virtual ICollection<Request> SentRequests { get; set; }
-    public virtual ICollection<Request> ReceivedRequests { get; set; }   
+    public virtual ICollection<Request> ReceivedRequests { get; set; }
+
+    public bool EmailVerified { get; set; }
+    public string VerificationCode { get; set; }
     
   }
 }

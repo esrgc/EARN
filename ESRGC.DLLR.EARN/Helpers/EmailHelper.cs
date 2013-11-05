@@ -4,6 +4,8 @@ using System.Configuration;
 using System.Linq;
 using System.Net.Mail;
 using System.Web;
+using ESRGC.DLLR.EARN.Controllers;
+using ESRGC.DLLR.EARN.Domain.Model;
 
 namespace ESRGC.DLLR.EARN.Helpers
 {
@@ -63,6 +65,13 @@ namespace ESRGC.DLLR.EARN.Helpers
       catch {
         return false;
       }
+    }
+
+    public static void SendNotificationEmail(Notification model) {
+      new EmailController().Notification(model).DeliverAsync();
+    }
+    public static void SendVerificationEmail(Account model) {
+      new EmailController().EmailVerification(model).DeliverAsync();
     }
   }
 }

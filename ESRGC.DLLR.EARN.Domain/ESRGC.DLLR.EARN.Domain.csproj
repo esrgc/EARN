@@ -33,10 +33,11 @@
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.6.0.0-rc1\lib\net40\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.0.1\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.0.0-rc1\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.0.1\lib\net40\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -56,6 +57,7 @@
     <Compile Include="DAL\DomainContext.cs" />
     <Compile Include="DAL\PasswordInitializer.cs" />
     <Compile Include="Helpers\DataUtility.cs" />
+    <Compile Include="Helpers\Utility.cs" />
     <Compile Include="Migrations\201310221905368_init.cs" />
     <Compile Include="Migrations\201310221905368_init.Designer.cs">
       <DependentUpon>201310221905368_init.cs</DependentUpon>
@@ -87,6 +89,10 @@
     <Compile Include="Migrations\201310312117444_Notification.LinkToAction.cs" />
     <Compile Include="Migrations\201310312117444_Notification.LinkToAction.Designer.cs">
       <DependentUpon>201310312117444_Notification.LinkToAction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201311042046530_notificationEmail.cs" />
+    <Compile Include="Migrations\201311042046530_notificationEmail.Designer.cs">
+      <DependentUpon>201311042046530_notificationEmail.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
@@ -135,6 +141,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201310312117444_Notification.LinkToAction.resx">
       <DependentUpon>201310312117444_Notification.LinkToAction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201311042046530_notificationEmail.resx">
+      <DependentUpon>201311042046530_notificationEmail.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

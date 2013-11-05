@@ -11,6 +11,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
       IsRead = false;
       Created = DateTime.Now;
       Requests = new List<Request>();
+      EmailSent = false;
     }
 
     public int NotificationID { get; set; }
@@ -24,5 +25,6 @@ namespace ESRGC.DLLR.EARN.Domain.Model
 
     public DateTime Created { get; set; }
     public string LinkToAction { get; set; }
+    public bool EmailSent { get; set; }
   }
 }
