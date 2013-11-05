@@ -9,23 +9,23 @@
 <strong>@Model.Category</strong> on @Model.Created
 
 <p>
-    @Model.Message 
+    @Model.Message
 </p>
 <i>
     @Model.Message2
 </i>
 
 @if (!string.IsNullOrEmpty(Model.LinkToAction)) {
-<pre>
-Please follow the link below to view this notification on EARN MD CONNECT site (Sign in required).
-@Url.AbsoluteAction("ViewNotification", "Communication", new { Model.NotificationID })
-</pre>
+    <p>
+        Please follow the link below to view this notification on EARN MD CONNECT site (Sign in required).
+        @Url.AbsoluteAction("ViewNotification", "Communication", new { Model.NotificationID })
+    </p>
 }
 else {
-<pre>
-Please follow the link below to sign in EARN MD CONNECT.
-@Url.AbsoluteAction("SignIn", "Account")
-</pre>
+    <p>
+        Please follow the link below to sign in EARN MD CONNECT.
+        @Url.AbsoluteAction("SignIn", "Account")
+    </p>
 }
 <br />
 <small>This is an automatic email notification. Please do not reply to this message. Contact EARN MD CONNECT if you have any question.</small>
