@@ -357,6 +357,7 @@
     <Content Include="Views\Emails\SendMail.cshtml" />
     <Content Include="Views\Emails\_ViewStart.cshtml" />
     <Content Include="Views\Email\Notification.html.cshtml" />
+    <Content Include="Views\Shared\ListComments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

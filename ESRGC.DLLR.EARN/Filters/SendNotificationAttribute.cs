@@ -16,7 +16,7 @@ namespace ESRGC.DLLR.EARN.Filters
       try {
         var unsentNotifs = workUnit.NotificationRepository
           .Entities
-          .Where(x => !x.EmailSent)
+          .Where(x => x.EmailSent == false)
           .ToList();
         foreach (var unsent in unsentNotifs) {
           EmailHelper.SendNotificationEmail(unsent);

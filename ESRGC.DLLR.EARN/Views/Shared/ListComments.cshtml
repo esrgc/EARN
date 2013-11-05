@@ -1,0 +1,33 @@
+﻿@using ESRGC.DLLR.EARN.Domain.Model
+@model List<Comment>
+@{
+    var currentProfile = ViewBag.currentProfile as Profile;
+    var returnUrl = ViewBag.returnUrl as string;
+    var comments = Model.OrderBy(x => x.Created).ToList();
+}
+
+@foreach (var i in comments) {        
+    <form action="@Url.Action("DeleteComment", "Communication")" method="post">
+        <input type="hidden" value="@i.CommentID" name="commentID" />
+        <input type="hidden" value="@returnUrl" name="returnUrl" />
+        <section class="transparent-placeholder-panel" id="comment-@i.AuthorID-@i.Created">
+            <div class="post">
+                <h5>
+                    <i class="fa fa-comment"></i>
+                    @i.Author.Organization.Name <small>says</small>
+                    <small class="pull-right">@Html.TimeSpan(i.Created)</small>
+                </h5>
+                <p class="text-info">
+                    @i.Content
+                </p>
+                @if (i.AuthorID == currentProfile.ProfileID) { 
+                    <div class="btn-group pull-right">
+                        <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>&nbsp;Delete</button>
+                    </div>
+                    <div class="clear"></div>
+                }
+
+            </div>
+        </section>
+    </form>
+}

@@ -1,6 +1,6 @@
 ﻿@using ESRGC.DLLR.EARN.Domain.Model
 @model List<Notification>
-@if (Model != null) { 
+@if (Model.Count > 0) { 
     <div class="notification-container">
         <ul class="list-group">
             @foreach (var i in Model) { 
@@ -22,7 +22,7 @@
     </div>
 }
 else{
-    <div class="notification-container">
+    <div class="notification-container panel-action-center">
         <p>There's currently no notification.</p>
     </div>
 }

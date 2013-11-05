@@ -12,7 +12,7 @@
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 .transparent-placeholder-panel {
-  padding: 10px;
+  padding: 5px;
 }
 .panel-action-default {
   margin: 5px 0 0 0;
@@ -296,4 +296,7 @@ a.link-icon:hover,
 .notification-container {
   max-height: 500px;
   overflow-y: auto;
+}
+.comment-box {
+  min-height: 100px;
 }

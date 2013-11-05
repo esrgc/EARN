@@ -11,18 +11,20 @@
 <p>
     @Model.Message 
 </p>
-
+<i>
+    @Model.Message2
+</i>
 
 @if (!string.IsNullOrEmpty(Model.LinkToAction)) {
 <pre>
-    Pleae follow the link below to view this notification on EARN MD CONNECT site (Sign in required).
-    @Url.AbsoluteAction("ViewNotification", "Communication", new { Model.NotificationID })
+Please follow the link below to view this notification on EARN MD CONNECT site (Sign in required).
+@Url.AbsoluteAction("ViewNotification", "Communication", new { Model.NotificationID })
 </pre>
 }
 else {
 <pre>
-    Pleae follow the link below to sign in EARN MD CONNECT.
-    @Url.AbsoluteAction("SignIn", "Account")
+Please follow the link below to sign in EARN MD CONNECT.
+@Url.AbsoluteAction("SignIn", "Account")
 </pre>
 }
 <br />

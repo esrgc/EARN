@@ -14,7 +14,6 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     }
 
     public int CommentID { get; set;  }
-    [MaxLength(1000)]
     public string Content { get; set; }
     public DateTime Created { get; set; }
     public DateTime Updated { get; set; }

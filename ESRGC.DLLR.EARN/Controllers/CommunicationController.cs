@@ -132,15 +132,16 @@ namespace ESRGC.DLLR.EARN.Controllers
       var notification = _workUnit.NotificationRepository.GetEntityByID(notificationID);
       ActionResult result = null;
       switch (notification.Category.ToLower()) {
-        case "request accepted":
-        case "invite accepted":
-          var url = notification.LinkToAction;
-          if (!string.IsNullOrEmpty(url))
-            result = Redirect(url);
-          break;
         case "request":
         case "invite":
           result = RedirectToAction("Requests", "Communication");
+          break;
+        case "request accepted":
+        case "invite accepted":
+        default:
+          var url = notification.LinkToAction;
+          if (!string.IsNullOrEmpty(url))
+            result = Redirect(url);
           break;
       }
       notification.IsRead = true;
@@ -235,6 +236,79 @@ namespace ESRGC.DLLR.EARN.Controllers
       _workUnit.saveChanges();
       return RedirectToAction("Requests");
     }
+    [VerifyProfile]
+    [VerifyProfilePartnership]
+    public ActionResult ListComments(int partnershipID) {
+      try {
+        var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
+        var comments = partnership.Comments;
+        return PartialView(comments);
+      }
+      catch (Exception) {
+        return new EmptyResult();
+      }
+    }
+    [HttpPost]
+    [VerifyProfile]
+    [VerifyProfilePartnership]
+    [SendNotification]
+    public ActionResult PostComment(int partnershipID, string comment, string returnUrl) {
+      var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
+      var c = new Comment() {
+        Partnership = partnership,
+        Content = comment,
+        Author = CurrentAccount.Profile
+      };
+      _workUnit.CommentRepository.InsertEntity(c);
 
+      //create notifications
+      foreach (var p in partnership.PartnershipDetails.Select(x => x.Profile).ToList()) {
+        if (p.ProfileID != CurrentAccount.ProfileID) {
+          var account = p.getAccount();
+          var notification = new Notification() {
+            Account = account,
+            LinkToAction = Url.Action("Detail", "Partnership", new { partnershipID, returnUrl }),
+            Category = "New Comment",
+            Message = CurrentAccount.Profile.Organization.Name
+            + " has posted a new comment on the partnership \""
+            + partnership.Name + "\"",
+            Message2 = comment
+          };
+          _workUnit.NotificationRepository.InsertEntity(notification);
+        }
+      }
+      _workUnit.saveChanges();
+      //return to previous url
+      if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
+          && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\")) {
+        return Redirect(returnUrl);
+      }
+      else {
+        return RedirectToAction("Detail", "Partnership", new { partnershipID });
+      }
+    }
+    [HttpPost]
+    [VerifyProfile]
+    public ActionResult DeleteComment(int commentID, string returnUrl) {
+      try {
+        var comment = _workUnit.CommentRepository.GetEntityByID(commentID);
+        var partnershipID = comment.PartnershipID;
+        _workUnit.CommentRepository.DeleteEntity(comment);
+        _workUnit.saveChanges();
+        updateTempDataMessage("Your comment has been deleted.");
+        //return to previous url
+        if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
+            && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\")) {
+          return Redirect(returnUrl);
+        }
+        else {
+          return RedirectToAction("Detail", "Partnership", new { partnershipID });
+        }
+      }
+      catch (Exception) {
+        updateTempDataMessage("An error has occured while deleting your comment.");
+        return RedirectToAction("Index", "Partnership");
+      }
+    }
   }
 }

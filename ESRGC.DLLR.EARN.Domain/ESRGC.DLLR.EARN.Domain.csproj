@@ -98,6 +98,14 @@
     <Compile Include="Migrations\201311052010170_Comment.Designer.cs">
       <DependentUpon>201311052010170_Comment.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201311052103026_Comment2.cs" />
+    <Compile Include="Migrations\201311052103026_Comment2.Designer.cs">
+      <DependentUpon>201311052103026_Comment2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201311052157189_Notification.Message2.cs" />
+    <Compile Include="Migrations\201311052157189_Notification.Message2.Designer.cs">
+      <DependentUpon>201311052157189_Notification.Message2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\Comment.cs" />
@@ -152,6 +160,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201311052010170_Comment.resx">
       <DependentUpon>201311052010170_Comment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201311052103026_Comment2.resx">
+      <DependentUpon>201311052103026_Comment2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201311052157189_Notification.Message2.resx">
+      <DependentUpon>201311052157189_Notification.Message2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

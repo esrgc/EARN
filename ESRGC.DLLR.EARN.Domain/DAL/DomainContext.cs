@@ -28,7 +28,7 @@ namespace ESRGC.DLLR.EARN.Domain.DAL
     public DbSet<PartnershipDetail> PartnershipDetail { get; set; }
     public DbSet<Request> Requests { get; set; }
     public DbSet<Notification> Notifications { get; set; }
-    
+    public DbSet<Comment> Comments { get; set; }
     protected override void OnModelCreating(DbModelBuilder modelBuilder) {
       modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 

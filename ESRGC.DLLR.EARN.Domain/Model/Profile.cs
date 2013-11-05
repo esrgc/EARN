@@ -60,7 +60,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
         .Select(x => x.PartnershipID)
         .Contains(partnershipID);
     }
-   
+
     /// <summary>
     /// Gets the account associated with this profile
     /// </summary>
@@ -156,6 +156,6 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     }
     public List<string> getTagNames() {
       return getTags().Select(x => x.Name).ToList();
-    }    
+    }
   }
 }

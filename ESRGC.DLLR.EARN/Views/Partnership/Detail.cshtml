@@ -18,8 +18,6 @@
     </div>
 }
 
-@section scripts{}
-
 @{ 
     var p = Model;
     var partners = p.getPartners();
@@ -97,6 +95,12 @@
                                         <hr />
                                     </div>
                                     <strong>Other Partners</strong>
+                                    @if (partners.Count == 0) { 
+                                        <p>
+                                            There's currently no other partner in this partnership. 
+                                            You can invite new partners through search or your connections in profile page.
+                                        </p>
+                                    }
                                     @foreach (var profile in partners) { 
                                         <div class="placeholder-panel">
                                             @Html.Partial("shortProfilePartial", profile)
@@ -126,10 +130,45 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="well">
                 <h4><i class="fa fa-comments"></i>&nbsp;Comments</h4>
-                <p>Coming soon...</p>
+                @Html.Partial("ListComments", Model.Comments.ToList())
+                <div class="transparent-placeholder-panel">
+                    <form class="form-horizontal" method="post" action="@Url.Action("PostComment", "Communication")">
+                        @Html.HiddenFor(x => x.PartnershipID)
+                        <input type="hidden" name="returnUrl" value="@Url.Action("Detail", new { Model.PartnershipID, returnUrl })"/>                       
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                @Html.TextArea("comment", new {
+                               @class = "form-control input-sm comment-box",
+                               placeholder = "Post your comment here"
+                           })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <button type="submit" disabled class="btn btn-primary btn-sm"><i class="fa fa-comment"></i>&nbsp;Post comment</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 
+@section scripts {
+    <script type="text/javascript">
+        var startup = function () {
+            $(document).on('input propertychange', '#comment', function (e) {
+                var messageLength = $(this).val().length;
+
+                if (messageLength > 0) {
+                    $('button[type="submit"]').removeAttr('disabled');
+                }
+                else {
+                    $('button[type="submit"]').attr('disabled', 'disabled');
+                }
+            });
+        }
+    </script>
+}

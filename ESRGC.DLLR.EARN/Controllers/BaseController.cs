@@ -126,7 +126,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     }
 
     public void updateTempDataMessage(string message) {
-      TempData["message"] = message;
+      TempData["c"] = message;
     }
 
     protected Account CurrentAccount {
