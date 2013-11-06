@@ -22,8 +22,9 @@ namespace ESRGC.DLLR.EARN.Filters
           EmailHelper.SendNotificationEmail(unsent);
           unsent.EmailSent = true;
           workUnit.NotificationRepository.UpdateEntity(unsent);
+          workUnit.saveChanges();
         }
-        workUnit.saveChanges();
+        
 
       }
       catch (Exception) {
