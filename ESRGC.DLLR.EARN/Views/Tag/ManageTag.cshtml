@@ -21,7 +21,12 @@
     <script type="text/javascript" src="@Url.Content("~/Client/jsLib/typeahead.js/typeahead.min.js")"></script>
     <script type="text/javascript">
         var tagArray = [];
-
+        //for ie8
+        if (typeof String.prototype.trim !== 'function') {
+            String.prototype.trim = function () {
+                return this.replace(/^\s+|\s+$/g, '');
+            }
+        }
         var startup = function () {
             //preload tags array to match current tags
             $('input[name="tags"]').each(function (i) {

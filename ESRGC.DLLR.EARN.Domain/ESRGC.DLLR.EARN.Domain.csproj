@@ -110,6 +110,7 @@
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\Announcement.cs" />
     <Compile Include="Model\Comment.cs" />
+    <Compile Include="Model\Document.cs" />
     <Compile Include="Model\GeoTag.cs" />
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\Notification.cs" />

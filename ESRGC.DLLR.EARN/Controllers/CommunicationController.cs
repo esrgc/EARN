@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using ESRGC.DLLR.EARN.Domain.DAL.Abstract;
 using ESRGC.DLLR.EARN.Domain.Model;
 using ESRGC.DLLR.EARN.Filters;
+using PagedList;
 
 namespace ESRGC.DLLR.EARN.Controllers
 {
@@ -239,10 +240,12 @@ namespace ESRGC.DLLR.EARN.Controllers
     }
     [VerifyProfile]
     [VerifyProfilePartnership]
-    public ActionResult ListComments(int partnershipID) {
+    public ActionResult ListComments(int partnershipID, int? page, int? size) {
       try {
         var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
-        var comments = partnership.Comments;
+        int pageIndex = page ?? 1;
+        int pageSize = size ?? 20;
+        var comments = partnership.Comments.ToPagedList(pageIndex, pageSize);
         return PartialView(comments);
       }
       catch (Exception) {
