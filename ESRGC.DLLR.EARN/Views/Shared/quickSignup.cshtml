@@ -19,7 +19,9 @@
             @class = "form-control",
             placeholder = ModelMetadata.FromLambdaExpression<SignUpModel, string>(x => x.ConfirmPassword, ViewData).DisplayName
         })
-    <button class="btn btn-lg btn-primary btn-block" type="button" data-toggle="modal" data-target="#agreeToSignup">Sign up</button>
+    <button class="btn btn-lg btn-primary btn-block" type="button" data-toggle="modal" data-target="#agreeToSignup">
+        <i class="fa fa-lock" title="Secured sign up"></i>&nbsp;Sign up
+    </button>
     <p><small>By clicking "Sign up for EARN MD CONNECT", you agree to our <a href="#termCondition" data-toggle="modal">terms and conditions.</a></small></p>
 
 </form>
