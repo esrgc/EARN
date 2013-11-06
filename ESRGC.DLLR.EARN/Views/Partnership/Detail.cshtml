@@ -1,4 +1,6 @@
 ﻿@using ESRGC.DLLR.EARN.Domain.Model
+@using PagedList
+@using PagedList.Mvc
 @model Partnership
 
 @{
@@ -26,7 +28,7 @@
     ViewBag.returnUrl = Url.Action("Detail", new { p.PartnershipID, returnUrl });
     var currentProfile = ViewBag.currentProfile as Profile ?? new Profile();
     var canEdit = currentProfile.isOwnerOfPartnership(Model);
-   
+    var comments = ViewBag.comments as PagedList<Comment> ?? new PagedList<Comment>(new List<Comment>(), 1, 10);
 }
 
 <div class="container">
@@ -133,7 +135,19 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="well">
                 <h4><i class="fa fa-comments"></i>&nbsp;Comments</h4>
-                @Html.Partial("ListComments", Model.Comments.ToList())
+                @if (comments.PageCount > 1) {
+                    @Html.PagedListPager(
+                    comments,
+                    page => Url.Action("Detail", new { Model.PartnershipID, page, returnUrl }),
+                    PagedListRenderOptions.OnlyShowFivePagesAtATime
+                )}
+                @Html.Partial("ListComments", comments)
+                @if (comments.PageCount > 1) {
+                    @Html.PagedListPager(
+                    comments,
+                    page => Url.Action("Detail", new { Model.PartnershipID, page, returnUrl }),
+                    PagedListRenderOptions.OnlyShowFivePagesAtATime
+                )}
                 <div class="transparent-placeholder-panel">
                     <form class="form-horizontal" method="post" action="@Url.Action("PostComment", "Communication")">
                         @Html.HiddenFor(x => x.PartnershipID)

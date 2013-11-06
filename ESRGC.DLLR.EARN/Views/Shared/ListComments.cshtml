@@ -7,13 +7,7 @@
     var returnUrl = ViewBag.returnUrl as string;
     var comments = Model.OrderBy(x => x.Created).ToList();
 }
-@if (Model.PageCount > 1) {
-    @Html.PagedListPager(
-        Model,
-        page => Url.Action("ListComments", "Communication", new { page }),
-        PagedListRenderOptions.OnlyShowFivePagesAtATime
-    )
-}
+
 @foreach (var i in comments) {        
     <form action="@Url.Action("DeleteComment", "Communication")" method="post">
         <input type="hidden" value="@i.CommentID" name="commentID" />
@@ -38,11 +32,4 @@
             </div>
         </section>
     </form>
-}
-@if (Model.PageCount > 1) {
-    @Html.PagedListPager(
-        Model,
-        page => Url.Action("ListComments", "Communication", new { page }),
-        PagedListRenderOptions.OnlyShowFivePagesAtATime
-    )
 }

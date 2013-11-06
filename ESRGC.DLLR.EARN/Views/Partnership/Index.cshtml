@@ -43,7 +43,7 @@
                         if (Model.PageCount > 1) {
                         @Html.PagedListPager(
                             Model,
-                            page => Url.AddSearchFilter("Basic", filters, "page", page.ToString()),
+                            page => Url.AddSearchFilter("Index", filters, "page", page.ToString()),
                             PagedListRenderOptions.OnlyShowFivePagesAtATime
                         )}
                         <div class="placeholder-pane">
@@ -107,7 +107,7 @@
                                 if (Model.PageCount > 1) {
                         @Html.PagedListPager(
                             Model,
-                            page => Url.AddSearchFilter("Basic", filters, "page", page.ToString()),
+                            page => Url.AddSearchFilter("Index", filters, "page", page.ToString()),
                             PagedListRenderOptions.OnlyShowFivePagesAtATime
                         )}
                     }

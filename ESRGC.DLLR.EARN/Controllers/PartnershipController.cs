@@ -34,9 +34,13 @@ namespace ESRGC.DLLR.EARN.Controllers
     /// <returns></returns>
     [VerifyProfile]
     [VerifyProfilePartnership]
-    public ActionResult Detail(int partnershipID, string returnUrl) {
+    public ActionResult Detail(int partnershipID, string returnUrl, int? page, int? size) {
       ViewBag.returnUrl = returnUrl;
       var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
+      int commentPageIndex = page ?? 1;
+      int commentPageSize = size ?? 20;
+      var comments = partnership.Comments.ToPagedList(commentPageIndex, commentPageSize);
+      ViewBag.comments = comments;
       return View(partnership);
     }
     [VerifyProfile]
