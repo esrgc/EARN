@@ -279,6 +279,10 @@ a.link-icon:hover,
   right: 10px;
   top: 6px;
 }
+.navbar-nav > li .label.for-input {
+  left: 0px;
+  top: -3px;
+}
 .popover-content .list-group-item {
   font-size: 12px;
   cursor: pointer;

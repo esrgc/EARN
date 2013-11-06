@@ -2,6 +2,7 @@
 @model SignUpModel
 
 <form id="quickSignupForm" class="quick-form" action="@Url.Action("SignUp", "Account")" method="post" role="form">
+    <label>Not yet a member? Sign up below</label>
     @Html.TextBoxFor(x => x.Email,
         new {
             type = "email",
