@@ -130,9 +130,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-5">            
-            <div class="">    
-                <h4><i class="fa fa-comments"></i>&nbsp;Comments</h4>            
+        <div class="col-md-5">
+            <div class="">
+                <h4><i class="fa fa-comments"></i>&nbsp;Comments</h4>
                 @if (comments.PageCount > 1) {
                     @Html.PagedListPager(
                     comments,
@@ -160,7 +160,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-12">
-                                <button type="submit" disabled class="btn btn-primary btn-sm"><i class="fa fa-comment"></i>&nbsp;Post comment</button>
+                                <button type="submit" id="postCommentBtn" disabled class="btn btn-primary btn-sm"><i class="fa fa-comment"></i>&nbsp;Post comment</button>
                             </div>
                         </div>
                     </form>
@@ -174,16 +174,29 @@
 
 
 @section scripts {
+    <!--[if lte IE9]>
+       <script type="text/javascript">
+        $(document).on('keyup', '#comment', function (e) {
+            var messageLength = $(this).val().length;
+            if (messageLength > 0) {
+                $('#postCommentBtn').removeAttr('disabled');
+            }
+            else {
+                $('#postCommentBtn').attr('disabled', 'disabled');
+            }
+        });
+    </script>
+    <![endif]-->
+
     <script type="text/javascript">
         var startup = function () {
             $(document).on('input propertychange', '#comment', function (e) {
                 var messageLength = $(this).val().length;
-
                 if (messageLength > 0) {
-                    $('button[type="submit"]').removeAttr('disabled');
+                    $('#postCommentBtn').removeAttr('disabled');
                 }
                 else {
-                    $('button[type="submit"]').attr('disabled', 'disabled');
+                    $('#postCommentBtn').attr('disabled', 'disabled');
                 }
             });
         }
