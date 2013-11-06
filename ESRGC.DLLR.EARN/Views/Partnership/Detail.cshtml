@@ -33,7 +33,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-sm-10 col-sm-offset-1">
+        <div class="col-md-7">
             <div class="panel-action-default">
                 @if (!string.IsNullOrEmpty(returnUrl)) {
                     <a href="@returnUrl"><i class="fa fa-long-arrow-left"></i>&nbsp;Back to previous</a>
@@ -130,11 +130,9 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="well">
-                <h4><i class="fa fa-comments"></i>&nbsp;Comments</h4>
+        <div class="col-md-5">            
+            <div class="">    
+                <h4><i class="fa fa-comments"></i>&nbsp;Comments</h4>            
                 @if (comments.PageCount > 1) {
                     @Html.PagedListPager(
                     comments,
@@ -169,6 +167,8 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row">
     </div>
 </div>
 

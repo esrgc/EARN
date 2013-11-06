@@ -104,12 +104,13 @@
 }
 .profile-section {
   margin-bottom: 8px !important;
+  /*.profile-picture {
+        max-width: 10%;
+    }*/
+
 }
 .profile-section:last-of-type {
   margin-bottom: 0 !important;
-}
-.profile-section .profile-picture {
-  max-width: 10%;
 }
 .tag-list-holder {
   min-height: 100px;
