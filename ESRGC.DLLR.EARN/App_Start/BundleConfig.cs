@@ -12,7 +12,7 @@ namespace ESRGC.DLLR.EARN
       //scripts bundles
       bundles.Add(new ScriptBundle("~/bundles/jsLibs").Include(
         "~/Client/jsLib/jquery-1.10.2/jquery-{version}.js",
-        "~/Client/jsLib/bootstrap-3.0/js/bootstrap*",
+        "~/Client/jsLib/bootstrap-3.0.1/js/bootstrap*",
         "~/Client/js/modernizr*"
       ));
 
@@ -47,7 +47,7 @@ namespace ESRGC.DLLR.EARN
       ));
       //css bundles
       bundles.Add(new StyleBundle("~/Styles/css").Include(
-        "~/Client/jsLib/bootstrap-3.0/css/bootstrap*",
+        "~/Client/jsLib/bootstrap-3.0.1/css/bootstrap*",
         "~/Client/css/less/*.css",
         "~/Client/css/*.css"
       ));
