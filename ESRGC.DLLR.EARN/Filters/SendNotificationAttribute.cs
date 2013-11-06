@@ -19,10 +19,12 @@ namespace ESRGC.DLLR.EARN.Filters
           .Where(x => x.EmailSent == false)
           .ToList();
         foreach (var unsent in unsentNotifs) {
-          EmailHelper.SendNotificationEmail(unsent);
-          unsent.EmailSent = true;
-          workUnit.NotificationRepository.UpdateEntity(unsent);
-          workUnit.saveChanges();
+          if (unsent.Account.EmailVerified) {
+            EmailHelper.SendNotificationEmail(unsent);
+            unsent.EmailSent = true;
+            workUnit.NotificationRepository.UpdateEntity(unsent);
+            workUnit.saveChanges();
+          }
         }
         
 

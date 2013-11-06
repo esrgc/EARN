@@ -191,6 +191,13 @@
     <Content Include="Client\apps\search\app.js" />
     <Content Include="Client\apps\search\controller\map.js" />
     <Content Include="Client\apps\search\controller\search.js" />
+    <Content Include="Client\jsLib\bootstrap-3.0.1\css\bootstrap-theme.css" />
+    <Content Include="Client\jsLib\bootstrap-3.0.1\css\bootstrap-theme.min.css" />
+    <Content Include="Client\jsLib\bootstrap-3.0.1\css\bootstrap.css" />
+    <Content Include="Client\jsLib\bootstrap-3.0.1\css\bootstrap.min.css" />
+    <Content Include="Client\jsLib\bootstrap-3.0.1\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Client\jsLib\bootstrap-3.0.1\js\bootstrap.js" />
+    <Content Include="Client\jsLib\bootstrap-3.0.1\js\bootstrap.min.js" />
     <Content Include="Client\jsLib\bootstrap-3.0\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Client\jsLib\jquery-1.10.2\jquery-1.10.2.js" />
     <Content Include="Client\jsLib\jquery-1.10.2\jquery-1.10.2.min.js" />
@@ -324,6 +331,9 @@
     <Content Include="Client\jsLib\bootstrap-3.0\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Client\jsLib\bootstrap-3.0\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Client\jsLib\jquery-1.10.2\jquery-1.10.2.min.map" />
+    <Content Include="Client\jsLib\bootstrap-3.0.1\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Client\jsLib\bootstrap-3.0.1\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Client\jsLib\bootstrap-3.0.1\fonts\glyphicons-halflings-regular.woff" />
     <None Include="Properties\PublishProfiles\FTP.pubxml" />
     <None Include="Properties\PublishProfiles\P drive.pubxml" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
@@ -358,7 +368,7 @@
     <Content Include="Views\Emails\_ViewStart.cshtml" />
     <Content Include="Views\Email\Notification.html.cshtml" />
     <Content Include="Views\Shared\ListComments.cshtml" />
-    <Content Include="Views\Email\VerificationEmail.html.cshtml" />
+    <Content Include="Views\Email\EmailVerification.html.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

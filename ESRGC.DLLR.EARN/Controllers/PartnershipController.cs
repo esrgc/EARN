@@ -131,7 +131,7 @@ namespace ESRGC.DLLR.EARN.Controllers
         _workUnit.saveChanges();
         return RedirectToAction("Detail", "Profile");
       }
-      updateTempDataMessage("Error deleting partnership");
+      updateTempMessage("Error deleting partnership");
       return RedirectToAction("Detail", "Profile");
     }
     public ActionResult InvalidAccessToPartnership() {

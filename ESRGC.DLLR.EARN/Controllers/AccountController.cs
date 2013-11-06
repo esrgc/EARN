@@ -69,7 +69,8 @@ namespace ESRGC.DLLR.EARN.Controllers
             //notifyNewAccount(newAccount);
             //updateTempDataMessage("Your account has been created. Please create a new contact for your account");
             //redirect to create new user contact
-
+            //verify email
+            EmailHelper.SendVerificationEmail(newAccount);
             return RedirectToAction("Create", "Profile");
           }
           catch (Exception) {
@@ -129,7 +130,26 @@ namespace ESRGC.DLLR.EARN.Controllers
       return RedirectToAction("Index", "Home");
     }
 
+    public ActionResult VerifyEmail(int accountID, string verificationCode) {
+      var account = _workUnit.AccountRepository.GetEntityByID(accountID);
+      if (account == null) {
+        updateTempMessage("Invalid account ID. Error verifying email.");
+        return RedirectToAction("Index", "Home");
+      }
+      if (string.IsNullOrEmpty(verificationCode)) {
+        updateTempMessage("Could not verify email. Verification code is empty.");
+        return RedirectToAction("Index", "Home");
+      }
 
+      if (verificationCode == account.VerificationCode) {
+        account.EmailVerified = true;
+        _workUnit.AccountRepository.UpdateEntity(account);
+        _workUnit.saveChanges();
+        updateTempMessage("Your email address has been verified.");
+      }
+
+      return RedirectToAction("Index", "Home");
+    }
 
   }
 }

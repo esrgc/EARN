@@ -77,7 +77,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     [HttpPost]
     public ActionResult Create(CreateProfile profile) {
       if (CurrentAccount.Profile != null) {
-        updateTempDataMessage("Profile already created!");
+        updateTempMessage("Profile already created!");
         return RedirectToAction("Detail");
       }
       if (ModelState.IsValid) {
@@ -136,10 +136,10 @@ namespace ESRGC.DLLR.EARN.Controllers
         profile.About = about;
         _workUnit.ProfileRepository.UpdateEntity(profile);
         _workUnit.saveChanges();
-        updateTempDataMessage("Your about section has been saved.");
+        updateTempMessage("Your about section has been saved.");
       }
       catch (Exception) {
-        updateTempDataMessage("Error saving about text");
+        updateTempMessage("Error saving about text");
       }
       return RedirectToAction("Detail");
     }

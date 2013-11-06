@@ -47,10 +47,10 @@ namespace ESRGC.DLLR.EARN.Controllers
         };
         _workUnit.RequestRepository.InsertEntity(request);
         _workUnit.saveChanges();
-        updateTempDataMessage("Invitation has been sent");
+        updateTempMessage("Invitation has been sent");
       }
       else {
-        updateTempDataMessage("Error sending the invite.");
+        updateTempMessage("Error sending the invite.");
       }
       return View(profile);
     }
@@ -71,7 +71,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       var ownerProfile = partnership.getOwner();
       var receiverAccount = ownerProfile.getAccount();
       if (receiverAccount == null) {
-        updateTempDataMessage("Can not send request to this partnership! Please choose a different partnership.");
+        updateTempMessage("Can not send request to this partnership! Please choose a different partnership.");
         return RedirectToAction("View", "Partnership", new { partnershipID, returnUrl });
       }
       //only send if partnership is valid
@@ -94,11 +94,11 @@ namespace ESRGC.DLLR.EARN.Controllers
 
         _workUnit.RequestRepository.InsertEntity(request);
         _workUnit.saveChanges();
-        updateTempDataMessage("Your request has been sent to the owner of this partnership");
+        updateTempMessage("Your request has been sent to the owner of this partnership");
         return RedirectToAction("View", "Partnership", new { partnershipID, returnUrl });
       }
       //error
-      updateTempDataMessage("Error sending join request.");
+      updateTempMessage("Error sending join request.");
       return RedirectToAction("View", "Partnership", new { partnershipID, returnUrl }); ;
     }
     public ActionResult Notifications() {
@@ -183,7 +183,7 @@ namespace ESRGC.DLLR.EARN.Controllers
             var message = string.Format(@"You have accepted {0} to join the ""{1}"" partnership.",
               r.Sender.Profile.Organization.Name,
               r.Partnership.Name);
-            updateTempDataMessage(message);
+            updateTempMessage(message);
             //create notification to sender
             notification = new Notification() {
               Account = r.Sender,
@@ -205,7 +205,7 @@ namespace ESRGC.DLLR.EARN.Controllers
             };
             _workUnit.PartnershipDetailRepository.InsertEntity(detail);
             var message = "You are now a partner of the \"" + r.Partnership.Name + "\" partnership.";
-            updateTempDataMessage(message);
+            updateTempMessage(message);
             //create notification
             notification = new Notification() {
               Account = r.Sender,
@@ -225,7 +225,7 @@ namespace ESRGC.DLLR.EARN.Controllers
         _workUnit.saveChanges();
       }
       else {
-        updateTempDataMessage("Error processing request.");
+        updateTempMessage("Error processing request.");
       }
       return RedirectToAction("Requests");
     }
@@ -295,7 +295,7 @@ namespace ESRGC.DLLR.EARN.Controllers
         var partnershipID = comment.PartnershipID;
         _workUnit.CommentRepository.DeleteEntity(comment);
         _workUnit.saveChanges();
-        updateTempDataMessage("Your comment has been deleted.");
+        updateTempMessage("Your comment has been deleted.");
         //return to previous url
         if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
             && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\")) {
@@ -306,7 +306,7 @@ namespace ESRGC.DLLR.EARN.Controllers
         }
       }
       catch (Exception) {
-        updateTempDataMessage("An error has occured while deleting your comment.");
+        updateTempMessage("An error has occured while deleting your comment.");
         return RedirectToAction("Index", "Partnership");
       }
     }

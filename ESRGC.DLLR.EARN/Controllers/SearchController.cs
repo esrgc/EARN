@@ -23,7 +23,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       List<string> tags) {
 
       if (CurrentAccount.Profile == null) {
-        updateTempDataMessage("Please create a profile before using search.");
+        updateTempMessage("Please create a profile before using search.");
         return RedirectToAction("Detail", "Profile");
       }
       var currentProfile = CurrentAccount.Profile;
