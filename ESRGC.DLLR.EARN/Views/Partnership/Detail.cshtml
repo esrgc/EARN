@@ -91,7 +91,7 @@
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active" id="partners">
-                                <div class="placeholder">
+                                <div class="placeholder-pane">
                                     <div class="profile-container-holder">
                                         <span class="label label-danger">Owner</span>
                                         @Html.Partial("shortProfilePartial", owner)
@@ -112,12 +112,12 @@
                                 </div>
                             </div>
                             <div class="tab-pane" id="documents">
-                                <div class="placeholder">
+                                <div class="placeholder-pane">
                                     <p>Comming soon...</p>
                                 </div>
                             </div>
                             @*<div class="tab-pane" id="comments">
-                                <div class="placeholder">
+                                <div class="placeholder-pane">
                                     @foreach (var profile in partners) { 
                                         @Html.Action("DisplayShortProfile", "Profile", new { profile.ProfileID })
                                     }

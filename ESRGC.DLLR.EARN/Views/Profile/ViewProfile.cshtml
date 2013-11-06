@@ -104,7 +104,7 @@
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="tab1">
-                    <div class="placeholder">
+                    <div class="placeholder-pane">
                         <h4>About</h4>
                         @if (!string.IsNullOrEmpty(Model.About)) { 
                             <p>@Model.About</p>
@@ -115,7 +115,7 @@
                     </div>
                 </div>
                 <div class="tab-pane" id="tab2">
-                    <div class="placeholder">
+                    <div class="placeholder-pane">
                         <h4>Available Partnerships</h4>
                         @if (Model.PartnershipDetails.Count() == 0) { 
                             <p>There's currently no partnership available.</p>

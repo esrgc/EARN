@@ -201,6 +201,7 @@
     <Content Include="Client\jsLib\bootstrap-3.0\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Client\jsLib\jquery-1.10.2\jquery-1.10.2.js" />
     <Content Include="Client\jsLib\jquery-1.10.2\jquery-1.10.2.min.js" />
+    <Content Include="Client\jsLib\jquery.placeholder.js" />
     <Content Include="Client\jsLib\leaflet.awesome-markers\images\markers-matte%402x.png" />
     <Content Include="Client\jsLib\leaflet.awesome-markers\images\markers-matte.png" />
     <Content Include="Client\jsLib\leaflet.awesome-markers\images\markers-plain.png" />

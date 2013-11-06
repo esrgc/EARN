@@ -33,13 +33,13 @@
   padding: 5px 0;
   text-align: center;
 }
-.placeholder {
+.placeholder-pane {
   padding: 15px;
   background: #f4f4f4;
   border-color: #dddddd;
   border-radius: 5px;
 }
-.placeholder-heading {
+.placeholder-pane-heading {
   padding: 5px;
   margin-bottom: 8px;
   /*margin-left: -10px;*/

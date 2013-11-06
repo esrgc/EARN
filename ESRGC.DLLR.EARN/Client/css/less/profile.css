@@ -64,7 +64,7 @@
         border-top-right-radius: 0;
     }
 }*/
-.profile-tabs .tab-content .placeholder {
+.profile-tabs .tab-content .placeholder-pane {
   border-radius: 0 0 5px 5px;
   border-top-color: transparent;
   border-left: 1px solid #dddddd;

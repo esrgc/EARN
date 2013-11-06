@@ -46,7 +46,7 @@
                             page => Url.AddSearchFilter("Basic", filters, "page", page.ToString()),
                             PagedListRenderOptions.OnlyShowFivePagesAtATime
                         )}
-                        <div class="placeholder">
+                        <div class="placeholder-pane">
                             <ul class="list-group">
                                 @foreach (var p in Model) {
                                     var partners = p.PartnershipDetails.Count();
