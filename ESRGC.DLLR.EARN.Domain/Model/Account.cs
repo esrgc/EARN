@@ -12,6 +12,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
   {
     public Account() {
       AccountID = 0;
+      Active = true;
       Notifications = new List<Notification>();
       SentRequests = new List<Request>();
       ReceivedRequests = new List<Request>();

@@ -101,6 +101,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       updateTempMessage("Error sending join request.");
       return RedirectToAction("View", "Partnership", new { partnershipID, returnUrl }); ;
     }
+    [VerifyAccount]
     public ActionResult Notifications() {
       var notifcations = CurrentAccount
         .Notifications
@@ -121,7 +122,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       _workUnit.saveChanges();
       return PartialView(notifcations);
     }
-
+    [VerifyAccount]
     public ActionResult NotificationCount() {
       //new notifications count
       var notifcations = CurrentAccount.Notifications.Where(x => !x.IsRead).ToList();
@@ -152,13 +153,13 @@ namespace ESRGC.DLLR.EARN.Controllers
 
       return result;
     }
-
+    [VerifyAccount]
     public ContentResult RequestCount() {
       var requests = CurrentAccount.ReceivedRequests
         .Where(x => x.Status.ToLower() == "new").ToList();
       return Content(requests.Count().ToString());
     }
-
+    [VerifyAccount]
     public ActionResult Requests() {
       var requests = CurrentAccount
         .ReceivedRequests
