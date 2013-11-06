@@ -15,7 +15,9 @@
                         </p>
                         @i.Message
                     </a>
-
+                    @if (!string.IsNullOrEmpty(i.Message2)) { 
+                        <p><i>@i.Message2</i></p>
+                    }
                 </li>
             }
         </ul>
