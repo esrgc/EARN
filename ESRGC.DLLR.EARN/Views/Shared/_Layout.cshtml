@@ -67,9 +67,13 @@
                     return $('.hidden-content').html();
                 }
             });
-            //custom start up code
-            if (typeof startup == 'function')
-                startup();
+
+          //placeholder
+          $('input, textarea').placeholder();
+
+          //custom start up code
+          if (typeof startup == 'function')
+              startup();
         });
     </script>
 </body>

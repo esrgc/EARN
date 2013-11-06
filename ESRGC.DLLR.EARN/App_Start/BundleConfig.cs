@@ -12,6 +12,7 @@ namespace ESRGC.DLLR.EARN
       //scripts bundles
       bundles.Add(new ScriptBundle("~/bundles/jsLibs").Include(
         "~/Client/jsLib/jquery-1.10.2/jquery-{version}.js",
+        "~/Client/jsLib/jquery.placeholder.js",
         "~/Client/jsLib/bootstrap-3.0.1/js/bootstrap*",
         "~/Client/js/modernizr*"
       ));
