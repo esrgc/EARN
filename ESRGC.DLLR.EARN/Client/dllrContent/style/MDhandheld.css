@@ -1,0 +1,66 @@
+/* Additional CSS Document: for HANDHELD devices only  */
+
+/*********** Page Changes  ***********/
+
+
+body {
+	margin:0;
+	padding:0;
+	color:#333;
+	background:#FFF;
+}
+
+/*********** Width Changes  ***********/
+#Column560, #Column560a, #Column560b, #Column560c, #Column560d, #Column560e, #Column560f, #Column560g, #Column560h, #Column560i, #Column560j,  
+#Column470, #Column470a, #Column470b, #Column470c, #Column470d, #Column470e, #Column470f, #Column470g, #Column470h, #Column470i, #Column470j, 
+#Column320, #Column320a, #Column320b, #Column320c, #Column320d, #Column320e, #Column320f, #Column320g, #Column320h, #Column320i, #Column320j, 
+#Column275, #Column275a, #Column275b, #Column275c, #Column275d, #Column275e, #Column275f, #Column275g, #Column275h, #Column275i, #Column275j, 
+#Column230, #Column230a, #Column230b, #Column230c, #Column230d, #Column230e, #Column230f, #Column230g, #Column230h, #Column230i, #Column230j, 
+#Column180, #Column180a, #Column180b, #Column180c, #Column180d, #Column180e, #Column180f, #Column180g, #Column180h, #Column180i, #Column180j,
+#Column800, #Column800a, #Column800b, #Column800c, #Column800d, #Column800e, #Column800f, #Column800g, #Column800h, #Column800i, #Column800j,
+#Column152, #Column152a, #Column152b, #Column152c, #Column152d, #Column152e, #Column152f, #Column152g, #Column152h, #Column152i, #Column152j,
+#Column132, #Column132a, #Column132b, #Column132c, #Column132d, #Column132e, #Column132f, #Column132g, #Column132h, #Column132i, #Column132j  
+#ColumnMain, #ColumnRight {
+	display:block;
+	width: 100%;		
+}
+
+/*********** Style-Stripping ***********/
+#banner {
+	background-image: none;
+	background-color:#fff;
+	color:#000;
+}
+.boxLside, .sidelinks, .boxBlank, .boxColor, .boxWhite, .boxGrey, .boxDark, .boxConnected, .boxEvents, .boxFAQ, .boxFindit, .boxMedia, .boxNews, .boxPopular, .boxDocs, .boxServices {
+ 	display:block;
+ 	background-image:none;
+	background-color:#fff;
+	color:#000;
+}
+.boxLside h1, .sidelinks h1, .boxBlank h1, .boxColor h1, .boxWhite h1, .boxGrey h1, .boxDark h1, .boxConnected h1, .boxEvents h1, .boxFAQ h1, .boxFindit h1, .boxMedia h1, .boxNews h1, .boxPopular h1, .boxDocs h1, .boxServices h1 {
+	background-image:none;
+	background-color:#fff;
+	color:#000;
+}
+.boxLside h2, .sidelinks h2, .boxBlank h2, .boxColor h2, .boxWhite h2, .boxGrey h2, .boxDark h2, .boxConnected h2, .boxEvents h2, .boxFAQ h2, .boxFindit h2, .boxMedia h2, .boxNews h2, .boxPopular h2, .boxDocs h2, .boxServices h2 {
+	background-image:none;
+	background-color:#fff;
+	color:#000;
+}
+.boxLside h3, .sidelinks h3, .boxBlank h3, .boxColor h3, .boxWhite h3, .boxGrey h3, .boxDark h3, .boxConnected h3, .boxEvents h3, .boxFAQ h3, .boxFindit h3, .boxMedia h3, .boxNews h3, .boxPopular h3, .boxDocs h3, .boxServices h3 {
+	background-image:none;
+	background-color:#fff;
+	color:#000;
+}
+
+#content {
+	background-image:none;
+	background-color:#fff;
+}
+#container {
+	margin:0px;
+	padding:0px;
+	display:block;
+	background-image:none;
+	background-color:#fff;
+}

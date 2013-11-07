@@ -124,7 +124,7 @@
             $('#addTagBtn').on('click', function (e) {
                 addTags();
             });
-            $('form').on('submit', function () {
+            $('#tagForm').on('submit', function () {
                 if (tagArray.length == 0) {
                     $('.status-text').text('Please add at least one tag before procceding!');
                     return false;
@@ -153,7 +153,7 @@
                 </div>
                 <div class="window-panel-content">
                     <div class="">
-                        <form class="form-inline" role="form" action="@Url.Action("ManageTag")" method="post">
+                        <form id="tagForm" class="form-inline" role="form" action="@Url.Action("ManageTag")" method="post">
                             <p>
                                 Tags are essential as they enable other EARN MD CONNECT users to find and connect with you.
                                 Common tags are one or two words, but collectively they serve to describe your organization’s function,

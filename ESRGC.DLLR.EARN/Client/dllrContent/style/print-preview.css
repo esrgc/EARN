@@ -1,0 +1,50 @@
+﻿@import "print.css";
+body{font-size:12px;}
+#preview-message {
+	display:block;
+	border:1px solid #666;
+	background: #FFFFCC;
+	padding:2px 5px;
+}
+#Column800, #Column800a, #Column800b, #Column800c, #Column800d, #Column800e, #Column800f, #Column800g, #Column800h, #Column800i, #Column800j,
+#Column560, #Column560a, #Column560b, #Column560c, #Column560d, #Column560e, #Column560f, #Column560g, #Column560h, #Column560i, #Column560j,  
+#Column470, #Column470a, #Column470b, #Column470c, #Column470d, #Column470e, #Column470f, #Column470g, #Column470h, #Column470i, #Column470j, 
+#Column320, #Column320a, #Column320b, #Column320c, #Column320d, #Column320e, #Column320f, #Column320g, #Column320h, #Column320i, #Column320j, 
+#Column275, #Column275a, #Column275b, #Column275c, #Column275d, #Column275e, #Column275f, #Column275g, #Column275h, #Column275i, #Column275j,
+#Column230, #Column230a, #Column230b, #Column230c, #Column230d, #Column230e, #Column230f, #Column230g, #Column230h, #Column230i, #Column230j, 
+#Column180, #Column180a, #Column180b, #Column180c, #Column180d, #Column180e, #Column180f, #Column180g, #Column180h, #Column180i, #Column180j,
+#ColumnMain, #ColumnRight {
+display:block;
+width:760px;		
+}
+.boxBlank, .boxColor, .boxWhite, .boxGrey, .boxDark, .boxConnected, .boxEvents, .boxFAQ, .boxFindit, .boxMedia, .boxNews, .boxPopular, .boxDocs, .boxServices {
+display:block;
+background-image:none;
+background-color:#fff;
+color:#000;
+}
+.boxBlank h1, .boxColor h1, .boxWhite h1, .boxGrey h1, .boxDark h1 {
+background-image:none;
+background-color:#fff;
+color:#000;
+}
+.boxBlank h1, .boxColor h2, .boxWhite h2, .boxGrey h2, .boxDark, h2 {
+background-image:none;
+background-color:#fff;
+color:#000;
+}
+.boxColor h3, .boxDark h3, .boxMedia h3, .boxNews h3, {
+color: #000000;
+}
+
+#content {
+background-image:none;
+background-color:#fff;
+}
+#container {
+margin:0px;
+padding:0px;
+display:block;
+background-image:none;
+background-color:#fff;
+}

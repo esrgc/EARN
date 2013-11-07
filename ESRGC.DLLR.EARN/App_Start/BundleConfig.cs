@@ -46,7 +46,13 @@ namespace ESRGC.DLLR.EARN
         //"~/Client/apps/search/view/*.js",
         "~/Client/apps/search/app.js"
       ));
+      bundles.Add(new ScriptBundle("~/bundles/dllrjs").Include(
+        "~/Client/dllrcontent/javascript/*.js",
+        "~/Client/dllrcontent/scripts/*.js"
+      ));
+      //////////////////////////////////////////////////////////////////////////////
       //css bundles
+      //////////////////////////////////////////////////////////////////////////////
       bundles.Add(new StyleBundle("~/Styles/css").Include(
         "~/Client/jsLib/bootstrap-3.0.1/css/bootstrap*",
         "~/Client/css/less/*.css",
@@ -54,6 +60,9 @@ namespace ESRGC.DLLR.EARN
       ));
       bundles.Add(new StyleBundle("~/Styles/mapcss").Include(
           "~/Client/jsLib/leaflet.awesome-markers/leaflet.awesome-markers.css"
+      ));
+      bundles.Add(new StyleBundle("~/Styles/dllrCSS").Include(
+        "~/Client/dllrContent/css/dllrCSS.css"
       ));
     }
   }

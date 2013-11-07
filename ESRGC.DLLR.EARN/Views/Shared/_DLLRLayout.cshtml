@@ -1,0 +1,164 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="@Url.Content("~/favicon.ico")" rel="Icon" />
+    <title>EARN MD CONNECT - @ViewBag.Title</title>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" rel="stylesheet">
+    @Styles.Render("~/Styles/css", "~/Styles/dllrCSS")
+    <!--Custom page CSS or extra javascript goes here-->
+    @RenderSection("headContent", required: false)
+
+    <!--[if lte IE 8]> 
+        <script src="@Url.Content("~/Client/jsLib/response/respond.min.js")"></script>
+    <![endif]-->
+</head>
+<body lang="en" class="dllr">
+    <div class="wrapper">
+        <div class="">
+            <div class="">
+                <div class="dllr-content">
+                    <div class="banner">
+                        <div id="mdlogo">
+                            <a href="http://www.maryland.gov">
+                                <img src="@Url.Content("~/Client/dllrcontent/images/page/MDlogo.gif")" alt="maryland.gov"/>
+                            </a>
+                        </div>
+                        <div id="global">
+                            <!-- [Begin] Statewide Navigation -->
+                            <div class="statewide-navigation">
+                                <div class="">
+                                    <a href="http://www.maryland.gov" target="_blank">Maryland.gov</a>&nbsp;|&nbsp;
+                                <a href="http://www.doit.state.md.us/phonebook/" target="_blank">Phone Directory</a>&nbsp;|&nbsp;
+                                <a href="http://www.maryland.gov/pages/agency_directory.aspx?view=State%20Agencies" target="_blank">State Agencies</a>&nbsp;|&nbsp;
+                                <a href="http://www.maryland.gov/pages/online_services.aspx" target="_blank">Online Services</a>
+
+                                </div>
+                            </div>
+                            <div class="hide">
+                                <h1>Department of Labor, Licensing and Regulation (for pda/handhelds)</h1>
+                                <a href="#content" title="Skip to content" accesskey="1">skip to content </a>| 
+                                <a href="#footer" title="Access shortcuts" accesskey="0">access shortcuts </a>
+                            </div>
+                            <!-- [End] Statewide Navigation -->
+                        </div>
+                        <div id="global2">
+                            <!-- [Begin] Search Form -->
+                            <div>
+                                <form name="gs" method="get" action="http://search.maryland.gov/search" id="Form2">
+                                    <input type="text" class="searchTextBox" accesskey="4" name="q" id="q" size="30" maxlength="256" value="Search" onfocus="if(this.value=='Search'){this.value='';this.style.color='#000';}else{this.select();}" />
+                                    <!-- site collection name -->
+                                    <input type="hidden" name="site" value="YourSearchValueHere" id="site" />
+                                    <input type="image" class="searchButton" name="btnG" id="search" title="Search" alt="Search" src="@Url.Content("~/Client/dllrContent/images/page/searchButton.gif")" />
+                                    <input type="hidden" name="site" value="Labor_Licensing_and_Regulation">
+                                    <input type="hidden" name="entqr" value="0" id="entqr" />
+                                    <input type="hidden" name="ud" value="1" id="ud" />
+                                    <input type="hidden" name="sort" value="date:D:L:d1" id="sort" />
+                                    <input type="hidden" name="output" value="xml_no_dtd" id="output" />
+                                    <input type="hidden" name="oe" value="UTF-8" id="oe" />
+                                    <input type="hidden" name="ie" value="UTF-8" id="ie" />
+                                    <input type="hidden" name="client" value="search_md_1" id="client" />
+                                    <input type="hidden" name="proxystylesheet" value="search_md_1" id="proxystylesheet" />
+                                </form>
+                            </div>
+                            <!-- [End] Search Form -->
+                        </div>
+                        <div id="tools">
+                            <ul>
+                                <li class="mail"><a href="Javascript:void(mailThisUrl())">E-mail Friend</a> </li>
+                                <li class="print"><a href="#" onclick="print_preview(); return false;">Print Page</a> </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="" id="main">
+            <div class="">
+
+                <!--nav bar-->
+                @Html.Partial("navBar")
+                <!--Page content-->
+                <div id="pageContent">
+                    <!--Logo-->
+                    @*<img src="@Url.Content("~/Content/images/MSGIC-logo.jpg")" class="site-logo" />*@
+                    <!--Header-->
+                    @RenderSection("header", required: false)
+                    <section class="body-content">
+                        @Html.Partial("messagePartial")
+                        @RenderBody()
+                    </section>
+                </div>
+               
+            </div>
+        </div>
+        <div class="push">
+        </div>
+    </div>
+    <div class="footer-container">
+        <div class="footer">
+            <div class="text-center">
+                @*@RenderSection("footer", required: false)*@
+                <a href="http://esrgc.org" target="_blank">
+                    <img class="site-logo" src="@Url.Content("~/Client/images/esrgc.png")" alt=""/></a>
+                @*<a  href="http://www.gov.state.md.us/" target="_blank"><img class="site-logo" src="@Url.Content("~/client/images/MDlogo.gif")" alt=""/></a>*@
+                <a href="http://www.dllr.maryland.gov/earn" target="_blank">
+                    <img class="site-logo" src="@Url.Content("~/client/images/EARN_logo_200w.jpg")" alt=""/></a>
+                <a href="http://www.salsibury.edu/" target="_blank">
+                    <img class="site-logo" src="@Url.Content("~/client/images/SalisburyUniversity.jpg")" alt=""/></a>
+            </div>
+            <div class="dllr-content">
+                <div id="footer">
+                    <!-- ACCESS KEY Include Recommended Here -->
+                    <a href="../contactinfo/">Contact Us</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                    <a href="http://doit.maryland.gov/about/Pages/Accessibility.aspx">MD Accessibility Policy</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                    <a href="../aboutdllr/privacystatement.shtml">Privacy Notice</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                    <a href="../faq/">Frequently Asked Questions</a><br>
+                    <br>
+                    500 North Calvert Street #401 Baltimore, MD 21202 |
+                    General Information - 410-230-6001<a name="footer"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jsLibs", "~/bundles/dllrjs")
+    @RenderSection("scripts", required: false)
+    <!--Start up code-->
+    <script type="text/javascript">
+        $(function () {
+            //hilight current url
+            var url = window.location;
+            $('.navbar a').filter(function () {
+                return this.href == url;
+            }).parent().addClass('active');
+            //tooltip for nav bar
+            $('.navbar a').tooltip({
+                toggle: "tooltip",
+                placement: "bottom",
+                container: 'body'
+            });
+            $('.navbar a#notifications').popover({
+                placement: "bottom",
+                container: 'body',
+                html: true,
+                content: function () {
+                    return $('.hidden-content').html();
+                }
+            });
+
+            //placeholder
+            $('input, textarea').placeholder();
+
+            //custom start up code
+            if (typeof startup == 'function')
+                startup();
+        });
+    </script>
+</body>
+</html>

@@ -74,8 +74,8 @@ namespace ESRGC.DLLR.EARN.Controllers
             EmailHelper.SendVerificationEmail(newAccount);
             return RedirectToAction("Create", "Profile");
           }
-          catch (Exception) {
-            ModelState.AddModelError("", "Error saving data to database. Please try again later");
+          catch (Exception ex) {
+            ModelState.AddModelError("", "Error saving data to database. Please try again later. " + ex.Message);
 
           }
 

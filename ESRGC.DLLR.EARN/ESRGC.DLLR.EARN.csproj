@@ -192,6 +192,27 @@
     <Content Include="Client\apps\search\app.js" />
     <Content Include="Client\apps\search\controller\map.js" />
     <Content Include="Client\apps\search\controller\search.js" />
+    <Content Include="Client\dllrContent\images\icons\mail.gif" />
+    <Content Include="Client\dllrContent\images\icons\print.gif" />
+    <Content Include="Client\dllrContent\images\mdicon.ico" />
+    <Content Include="Client\dllrContent\images\page\bodyBG2.gif" />
+    <Content Include="Client\dllrContent\images\page\dllrbannernew.jpg" />
+    <Content Include="Client\dllrContent\images\page\MDlogo.gif" />
+    <Content Include="Client\dllrContent\images\page\searchButton.gif" />
+    <Content Include="Client\dllrContent\javascript\dllrghome.css" />
+    <Content Include="Client\dllrContent\javascript\mailurl.js" />
+    <Content Include="Client\dllrContent\scripts\Print.js" />
+    <Content Include="Client\dllrContent\style\AgencyAdd.css" />
+    <Content Include="Client\dllrContent\css\dllrCSS.css">
+      <DependentUpon>dllrCSS.less</DependentUpon>
+    </Content>
+    <Content Include="Client\dllrContent\css\dllrCSS.min.css">
+      <DependentUpon>dllrCSS.less</DependentUpon>
+    </Content>
+    <Content Include="Client\dllrContent\style\MDhandheld.css" />
+    <Content Include="Client\dllrContent\style\MDstandard.css" />
+    <Content Include="Client\dllrContent\style\print-preview.css" />
+    <Content Include="Client\dllrContent\style\print.css" />
     <Content Include="Client\jsLib\bootstrap-3.0.1\css\bootstrap-theme.css" />
     <Content Include="Client\jsLib\bootstrap-3.0.1\css\bootstrap-theme.min.css" />
     <Content Include="Client\jsLib\bootstrap-3.0.1\css\bootstrap.css" />
@@ -305,7 +326,7 @@
     <Content Include="Client\js\modernizr-2.6.2.js" />
     <Content Include="Client\jsLib\jqueryValidate\jquery.validate.unobtrusive.js" />
     <Content Include="Client\jsLib\jqueryValidate\jquery.validate.unobtrusive.min.js" />
-    <Content Include="TestIframe.html" />
+    <Content Include="iframe.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -336,6 +357,7 @@
     <Content Include="Client\jsLib\bootstrap-3.0.1\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Client\jsLib\bootstrap-3.0.1\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Client\jsLib\bootstrap-3.0.1\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Client\dllrContent\css\dllrCSS.less" />
     <None Include="Properties\PublishProfiles\FTP.pubxml" />
     <None Include="Properties\PublishProfiles\P drive.pubxml" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
@@ -373,11 +395,13 @@
     <Content Include="Views\Email\EmailVerification.html.cshtml" />
     <Content Include="Views\Account\Settings.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Shared\_DLLRLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Client\apps\search\model\" />
     <Folder Include="Client\apps\search\view\" />
+    <Folder Include="Client\dllrContent\includes\footers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
