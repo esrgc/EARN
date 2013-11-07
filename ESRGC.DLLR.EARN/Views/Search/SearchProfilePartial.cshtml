@@ -50,11 +50,21 @@
                                                 <a target="_blank" href="http://@Model.Organization.Website" title="Organization website">@Model.Organization.Website</a>
                                             </small>
                                         </h4>
-                                        <ul class="list-inline list-unstyled">
-                                            <li><a target="_blank" href="http://@Model.Organization.FacebookLink" title="Facebook link"><i class="fa fa-lg fa-facebook"></i></a></li>
-                                            <li><a target="_blank" href="http://@Model.Organization.TwitterLink" title="Twitter link"><i class="fa fa-lg fa-twitter"></i></a></li>
-                                            <li><a target="_blank" href="http://@Model.Organization.LinkedInLink" title="LinkedIn link"><i class="fa fa-lg fa-linkedin"></i></a></li>
-                                        </ul>
+                                        @if (Model.Organization.LinkedInLink != "" && Model.Organization.FacebookLink != "" && Model.Organization.TwitterLink != "") { 
+                                            <ul class="list-inline list-unstyled">
+                                                <li></li>
+                                                @if (Model.Organization.FacebookLink != "") { 
+                                                    <li><a target="_blank" href="http://@Model.Organization.FacebookLink" title="Facebook link"><i class="fa fa-lg fa-facebook"></i></a></li>
+                                                }
+                                                @if (Model.Organization.TwitterLink != "") { 
+                                                    <li><a target="_blank" href="http://@Model.Organization.TwitterLink" title="Twitter link"><i class="fa fa-lg fa-twitter"></i></a></li>
+                                                }
+                                                @if (Model.Organization.LinkedInLink != "") { 
+                                                    <li><a target="_blank" href="http://@Model.Organization.LinkedInLink" title="LinkedIn link"><i class="fa fa-lg fa-linkedin"></i></a></li>
+                                                }
+                                            </ul>
+                                        }
+
                                         @if (Model.Organization.Description.Length > 200) { 
                                             <p>
                                                 @Model.Organization.Description.Substring(0, 200)
