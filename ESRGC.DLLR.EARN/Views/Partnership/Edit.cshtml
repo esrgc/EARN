@@ -25,7 +25,8 @@
 @{
     var currentProfile = ViewBag.currentProfile as Profile ?? new Profile();
     var grantStatusList = Html.getGrantStatusList();
-    var statusList = Html.getPartnershipStatusList();    
+    var statusList = Html.getPartnershipStatusList();
+    var returnUrl = ViewBag.returnUrl as string;
 }
 
 <div class="container">
@@ -41,6 +42,7 @@
                         @Html.AntiForgeryToken()
                         @Html.ValidationSummary(true)
                         @Html.HiddenFor(x => x.PartnershipID)
+                        @Html.Hidden("returnUrl", returnUrl)
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="Name">Name</label>
                             <div class="col-sm-6">
@@ -96,7 +98,7 @@
                         <div class="form-group">
                             <div class="col-sm-6 col-sm-offset-3">
                                 <input class="btn btn-primary" type="submit" value="Submit" />
-                                <a class="btn btn-default" href="@Url.Action("Detail", new { Model.PartnershipID })">Cancel</a>
+                                <a class="btn btn-default" href="@Url.Action("Detail", new { Model.PartnershipID, returnUrl })">Cancel</a>
                             </div>
                         </div>
                     </form>

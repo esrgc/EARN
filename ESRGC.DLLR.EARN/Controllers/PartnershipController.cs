@@ -92,20 +92,21 @@ namespace ESRGC.DLLR.EARN.Controllers
     /// <returns></returns>
     [VerifyProfile]
     [CanEditPartnership]
-    public ActionResult Edit(int partnershipID) {
+    [HasReturnUrl]
+    public ActionResult Edit(int partnershipID, string returnUrl) {
       var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
       return View(partnership);
     }
     [HttpPost]
     [ActionName("Edit")]
-    public ActionResult EditPartnership(int partnershipID) {
+    public ActionResult EditPartnership(int partnershipID, string returnUrl) {
       var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID) ?? new Partnership();
       TryUpdateModel(partnership);
       if (ModelState.IsValid) {
         partnership.LastUpdate = DateTime.Now;
         _workUnit.PartnershipRepository.UpdateEntity(partnership);
         _workUnit.saveChanges();
-        return RedirectToAction("Detail", new { partnershipID });
+        return RedirectToAction("Detail", new { partnershipID , returnUrl});
       }
       //error redisplay
       return View(partnership);
@@ -117,7 +118,8 @@ namespace ESRGC.DLLR.EARN.Controllers
     /// <returns></returns>
     [VerifyProfile]
     [CanEditPartnership]
-    public ActionResult Delete(int partnershipID) {
+    [HasReturnUrl]
+    public ActionResult Delete(int partnershipID, string returnUrl) {
       var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
       return View(partnership);
     }
@@ -125,7 +127,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     [CanEditPartnership]
     [ActionName("Delete")]
     [HttpPost]
-    public ActionResult DeletePartnership(int partnershipID) {
+    public ActionResult DeletePartnership(int partnershipID, string returnUrl) {
       if (ModelState.IsValid) {
         var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
         foreach (var detail in partnership.PartnershipDetails.ToList()) {
@@ -136,7 +138,15 @@ namespace ESRGC.DLLR.EARN.Controllers
         return RedirectToAction("Detail", "Profile");
       }
       updateTempMessage("Error deleting partnership");
-      return RedirectToAction("Detail", "Profile");
+      //return to previous url
+      if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
+          && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\")) {
+        return Redirect(returnUrl);
+      }
+      else {
+        return RedirectToAction("Index");
+      }
+      
     }
     public ActionResult InvalidAccessToPartnership() {
       return View();

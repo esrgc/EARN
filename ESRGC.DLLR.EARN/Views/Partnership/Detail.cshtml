@@ -24,7 +24,7 @@
     var p = Model;
     var partners = p.getPartners();
     var owner = p.getOwner();
-    var returnUrl = ViewBag.returnUrl as string ?? Url.Action("Detail", "Profile");
+    var returnUrl = ViewBag.returnUrl as string ?? Url.Action("Index");
     ViewBag.returnUrl = Url.Action("Detail", new { p.PartnershipID, returnUrl });
     var currentProfile = ViewBag.currentProfile as Profile ?? new Profile();
     var canEdit = currentProfile.isOwnerOfPartnership(Model);
@@ -44,9 +44,9 @@
                 <div class="window-panel-title">
                     <strong>@p.Name</strong>
                     @if (canEdit) { 
-                        <a href="@Url.Action("Edit", new { p.PartnershipID })"><i class="fa fa-pencil"></i></a>
-                        <a title="Delete this partnership" href="@Url.Action("Delete", new { Model.PartnershipID })" class="pull-right text-danger">
-                            <i class="fa fa-times-circle"></i>&nbsp;Delete this partnership
+                        <a href="@Url.Action("Edit", new { p.PartnershipID , returnUrl})"><i class="fa fa-pencil"></i></a>
+                        <a title="Delete this partnership" href="@Url.Action("Delete", new { Model.PartnershipID, returnUrl })" class="pull-right text-danger">
+                            <i class="fa fa-times-circle"></i>&nbsp;Delete partnership
                         </a>
                     }
                 </div>

@@ -165,6 +165,7 @@
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\TagController.cs" />
     <Compile Include="Filters\CanEditPartnershipAttribute.cs" />
+    <Compile Include="Filters\HasReturnUrlAttribute.cs" />
     <Compile Include="Filters\NewToPartnershipAttribute.cs" />
     <Compile Include="Filters\SendNotificationAttribute.cs" />
     <Compile Include="Filters\VerifyAccountAttribute.cs" />
