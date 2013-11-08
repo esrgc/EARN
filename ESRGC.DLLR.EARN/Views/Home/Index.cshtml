@@ -13,6 +13,8 @@
                     $('#proceedBtn').attr('disabled', 'disabled');
             });
             $(document).on('click', '#proceedBtn', function () {
+                $(this).button('loading');
+                $(this).attr('disabled', 'disabled');
                 $('form#quickSignupForm').submit();
             });
             $(document).on('keypress', 'form#quickSignupForm', function (e) {
@@ -20,6 +22,7 @@
                     $('#agreeToSignup').modal('show');
                 }
             });
+            
         };
     </script>
 }
@@ -168,7 +171,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button id="proceedBtn" class="btn btn-primary btn-sm" type="button" disabled>Proceed</button>
+                <button id="proceedBtn" data-loading-text="Signing up..." class="btn btn-primary btn-sm" type="button" disabled>Proceed</button>
             </div>
         </div>
         <!-- /.modal-content -->

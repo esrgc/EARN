@@ -34,7 +34,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     [AllowAnonymous]
     public ActionResult SignUp(SignUpModel model) {
       if (ModelState.IsValid) {
-        var existingEmails = _workUnit.AccountRepository.Entities.Where(x => x.EmailAddress == model.Email);
+        var existingEmails = _workUnit.AccountRepository.Entities.Where(x => x.EmailAddress.ToLower() == model.Email.ToLower());
         if (existingEmails.Count() > 0) {
           ModelState.AddModelError("", "This email address \"" + model.Email + "\" has already been in use. Please try again with a different email address");
           return View(model);
