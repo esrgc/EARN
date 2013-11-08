@@ -5,10 +5,11 @@
         <ul class="list-group">
             @foreach (var i in Model) { 
                 <li class="list-group-item">
+                    <strong>@i.Category</strong>
                     <small class="pull-right">@Html.TimeSpan(i.Created)</small>
                     <a href="@Url.Action("ViewNotification", new { i.NotificationID })">
                         <p>
-                            <strong>@i.Category</strong>
+                            
                             @if (!i.IsRead) { 
                                 <small class="label label-danger">New</small>
                             }

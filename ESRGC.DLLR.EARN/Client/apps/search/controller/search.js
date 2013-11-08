@@ -19,7 +19,7 @@ dx.defineController('Search', {
         tagInput: '#tagInput',
         goBtn: 'button[type="submit"]',
         searchForm: 'form',
-        tagLinks: '.tag a, a#clearSearchLink',
+        pageLinks: '.tag a, a#clearSearchLink, .pagination a',
         pager: '.pagination',
         currentHiddenInput: 'input[type="hidden"][name="tags"]',
         hiddenInputHolder: '#hiddenInputHolder',
@@ -34,8 +34,8 @@ dx.defineController('Search', {
         searchForm: {
             submit: 'onSearchSubmit'
         },
-        tagLinks: {
-            click: 'onTagLinkClick'
+        pageLinks: {
+            click: 'onPageLinksClick'
         }
     },
     initialize: function () {
@@ -66,9 +66,11 @@ dx.defineController('Search', {
             store.on('load', scope.onSearchStoreLoad);
         }
     },
-    onTagLinkClick: function (event, object) {
+    onPageLinksClick: function (event, object) {
         event.preventDefault();
         var url = $(object).attr('href');
+        if (typeof url == 'undefined')
+            return;
         var store = dx.getStore('Search');
         if (typeof store != 'undefined') {
             dx.log(url);

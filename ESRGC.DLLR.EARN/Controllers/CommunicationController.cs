@@ -244,7 +244,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       try {
         var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
         int pageIndex = page ?? 1;
-        int pageSize = size ?? 20;
+        int pageSize = size ?? 15;
         var comments = partnership.Comments.ToPagedList(pageIndex, pageSize);
         return PartialView(comments);
       }
