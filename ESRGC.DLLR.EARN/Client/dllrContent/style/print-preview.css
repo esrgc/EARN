@@ -1,5 +1,5 @@
 ﻿@import "print.css";
-@media only print and (max-width: 1024px) and (max-height: 768px) {
+@media only print {
     body {
         font-size: 12px;
     }
