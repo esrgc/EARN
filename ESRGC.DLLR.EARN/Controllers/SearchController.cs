@@ -75,7 +75,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       }
 
       int pageIndex = page ?? 1;
-      int pageSize = size ?? 15;
+      int pageSize = size ?? 10;
 
       var model = result
         .OrderBy(x => x.Organization.Name) // ordered by organization name
