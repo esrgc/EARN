@@ -62,7 +62,9 @@ namespace ESRGC.DLLR.EARN
           "~/Client/jsLib/leaflet.awesome-markers/leaflet.awesome-markers.css"
       ));
       bundles.Add(new StyleBundle("~/Styles/dllrCSS").Include(
-        "~/Client/dllrContent/css/dllrCSS.css"
+        "~/Client/dllrContent/css/dllrCSS.css",
+        "~/Client/dllrContent/style/print-preview.css",
+        "~/Client/dllrContent/style/print.css"
       ));
     }
   }

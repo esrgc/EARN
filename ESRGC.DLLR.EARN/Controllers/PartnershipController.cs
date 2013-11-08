@@ -123,10 +123,10 @@ namespace ESRGC.DLLR.EARN.Controllers
       var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
       return View(partnership);
     }
+    [HttpPost]
     [VerifyProfile]
     [CanEditPartnership]
     [ActionName("Delete")]
-    [HttpPost]
     public ActionResult DeletePartnership(int partnershipID, string returnUrl) {
       if (ModelState.IsValid) {
         var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);

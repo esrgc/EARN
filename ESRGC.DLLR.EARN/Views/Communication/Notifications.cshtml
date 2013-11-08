@@ -6,15 +6,15 @@
             @foreach (var i in Model) { 
                 <li class="list-group-item">
                     <strong>@i.Category</strong>
+                    @if (!i.IsRead) { 
+                        <small class="label label-danger">New</small>
+                    }
                     <small class="pull-right">@Html.TimeSpan(i.Created)</small>
                     <a href="@Url.Action("ViewNotification", new { i.NotificationID })">
                         <p>
-                            
-                            @if (!i.IsRead) { 
-                                <small class="label label-danger">New</small>
-                            }
+                            @i.Message
                         </p>
-                        @i.Message
+
                     </a>
                     @if (!string.IsNullOrEmpty(i.Message2)) { 
                         <p><i>@i.Message2</i></p>
@@ -24,7 +24,7 @@
         </ul>
     </div>
 }
-else{
+else {
     <div class="notification-container panel-action-center">
         <p>There's currently no notification.</p>
     </div>

@@ -146,6 +146,13 @@
                     <div class="placeholder-pane">
                         <div>
                             <h4>Your Connections</h4>
+                            @if (Model.Connections.Count() == 0) { 
+                                <p>
+                                    There's currently no connection. Connections are 
+                                    organizational profiles that help you keep track of who you might 
+                                    be interested in inviting to your partnerships. 
+                                </p>
+                            }
                             @foreach (var p in Model.Connections) { 
                                 @Html.Partial("shortProfilePartial", p)
                             }
@@ -162,7 +169,13 @@
                         </span>
                         <h4>Available Partnerships</h4>
                         @if (Model.PartnershipDetails.Count() == 0) { 
-                            <p>There's currently no partnership available.</p>
+                            <p>
+                                There's currently no partnership available. Once you are a 
+                                partner of any partnership, they will be listed here. 
+                                Or you can create a new partnership. To do so, click on "Create new partnership" 
+                                to form a new partnership. Note that you will be the owner of the partnership 
+                                and will be able to control the partnership.
+                            </p>
                         }
                         else {
                             @Html.Action("ListPartnerships", "Partnership", new { Model.ProfileID, returnUrl })

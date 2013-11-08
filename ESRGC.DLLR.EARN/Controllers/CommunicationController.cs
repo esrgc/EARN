@@ -177,6 +177,13 @@ namespace ESRGC.DLLR.EARN.Controllers
         case "partnership request":
           r = (PartnershipRequest)request;
           if (r.Partnership != null) {
+            //check if the requested organization is already a partner
+            if (r.Partnership.getPartners().Contains(r.Sender.Profile)) {
+              updateTempMessage("\""+ r.Sender.Profile.Organization.Name 
+                + "\"is already a partner of this partnership");
+              break;
+            }
+            //form a partner reference
             detail = new PartnershipDetail() {
               Partnership = r.Partnership,
               Profile = r.Sender.Profile,
@@ -200,6 +207,12 @@ namespace ESRGC.DLLR.EARN.Controllers
         case "partnership invite":
           r = (PartnershipRequest)request;
           if (r.Partnership != null) {
+            //check if the invited organization is already a partner
+            if (r.Partnership.getPartners().Contains(r.Receiver.Profile)) {
+              updateTempMessage("You are already a partner of this partnership");
+              break;
+            }
+            //form a partner reference
             detail = new PartnershipDetail() {
               Partnership = r.Partnership,
               Profile = r.Receiver.Profile,
