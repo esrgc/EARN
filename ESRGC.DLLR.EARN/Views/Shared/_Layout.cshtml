@@ -27,14 +27,20 @@
             @*<img src="@Url.Content("~/Content/images/MSGIC-logo.jpg")" class="site-logo" />*@
             <!--Header-->
             @RenderSection("header", required: false)
-            <div id="cookieWarning" class="alert alert-warning hidden-content">
-                <h4>Cookies are not enabled</h4>
-                <p>
-                    This web site uses cookies to track your account information.
-                            If you are experiencing problems with signing in to the site,
-                            please enable cookies in your browser before signing in. This
-                            message will go away if cookies are enabled in your browser.
-                </p>
+            <div class="container hidden-content" id="cookieWarning">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="alert alert-warning">
+                            <h4>Cookies are not enabled</h4>
+                            <p>
+                                This web site uses cookies to track your account information.
+                                If you are experiencing problems with signing in to the site,
+                                please enable cookies in your browser before signing in. This
+                                message will go away if cookies are enabled in your browser.
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
             <section class="body-content">
                 @Html.Partial("messagePartial")
