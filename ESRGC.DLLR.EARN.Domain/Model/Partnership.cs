@@ -72,5 +72,11 @@ namespace ESRGC.DLLR.EARN.Domain.Model
         .Select(x => x.Profile)
         .ToList();
     }
+    public List<Tag> getTags() {
+      return PartnershipTags.Select(x => x.Tag).ToList();
+    }
+    public List<string> getTagNames() {
+      return PartnershipTags.Select(x => x.Tag.Name).ToList();
+    }
   }
 }

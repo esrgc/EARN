@@ -1,6 +1,9 @@
 ﻿@model IEnumerable<string>
 @if (Model != null) { 
     <div class="inline-container tag-list">
+        @if (Model.Count() == 0) { 
+            <p></p>
+        }
         @foreach (var i in Model) { 
             <div class="tag">
                 <span class="label label-default">

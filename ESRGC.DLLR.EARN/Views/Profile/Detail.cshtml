@@ -132,9 +132,9 @@
                         <form action="@Url.Action("EditAbout")" method="post">
                             <h4>About</h4>
                             @Html.TextAreaFor(x => x.About, new {
-                           @class = "form-control about",
-                           placeholder = ModelMetadata.FromLambdaExpression(x => x.About, ViewData).Description
-                       })
+                               @class = "form-control about",
+                               placeholder = ModelMetadata.FromLambdaExpression(x => x.About, ViewData).Description
+                           })
                             <div class="text-right">
                                 <button type="submit" class="btn btn-info btn-xs"><i class="fa fa-save"></i>&nbsp;Save</button>
 

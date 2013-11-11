@@ -4,6 +4,9 @@
     var currentTags = filters.ContainsKey("tags") ? filters["tags"] as List<string> : new List<string>();
 }
 @if (Model != null) {
+    if (Model.Count() == 0) { 
+        <p>There's currently no tag available.</p>
+    }
     if (currentTags == null) {
     <div class="inline-container tag-list">
         @foreach (var i in Model) { 
