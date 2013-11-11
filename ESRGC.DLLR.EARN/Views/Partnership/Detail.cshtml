@@ -133,11 +133,12 @@
             };
             var discardChanges = function () {
                 console.log(tagArray);
-                //$('#tagForm input').filter('input[name="tags"]').remove();
-                //$('.tag-list').html('');
+                $('#tagForm input').filter('input[name="tags"]').remove();
+                $('.tag-list').html('');
                 //remove all elements from tagArray
-                for (var i in tagArray)
-                    removeTag(tagArray[i]);
+                for (var i in tagArray) {
+                    delete tagArray[i];
+                }
                 //restore original tags
                 for (var i in originalTags)
                     addTag(originalTags[i]);
