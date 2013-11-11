@@ -10,6 +10,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
   {
     public Tag(){
       ProfileTags = new List<ProfileTag>();
+      PartnershipTags = new List<PartnershipTag>();
     }
     public int TagID { get; set; }
     [Required]
@@ -17,5 +18,6 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public string Description { get; set; }
 
     public virtual ICollection<ProfileTag> ProfileTags { get; set; }
+    public virtual ICollection<PartnershipTag> PartnershipTags { get; set; }
   }
 }

@@ -143,6 +143,11 @@
                 placement: "bottom",
                 container: 'body'
             });
+            $('.window-panel a').tooltip({
+                toggle: "tooltip",
+                placement: "top",
+                container: 'body'
+            });
             $('.navbar a#notifications').popover({
                 placement: "bottom",
                 container: 'body',
@@ -151,7 +156,9 @@
                     return $('.hidden-content').html();
                 }
             });
-
+            $(document).on('click', '.submit-button', function () {
+                $(this).button('loading');
+            });            
             //placeholder
             $('input, textarea').placeholder();
 

@@ -44,7 +44,7 @@
                 <div class="window-panel-title">
                     <strong>@p.Name</strong>
                     @if (canEdit) { 
-                        <a href="@Url.Action("Edit", new { p.PartnershipID , returnUrl})"><i class="fa fa-pencil"></i></a>
+                        <a title="Edit this partnership" href="@Url.Action("Edit", new { p.PartnershipID , returnUrl})"><i class="fa fa-pencil"></i></a>
                         <a title="Delete this partnership" href="@Url.Action("Delete", new { Model.PartnershipID, returnUrl })" class="pull-right text-danger">
                             <i class="fa fa-times-circle"></i>&nbsp;Delete partnership
                         </a>

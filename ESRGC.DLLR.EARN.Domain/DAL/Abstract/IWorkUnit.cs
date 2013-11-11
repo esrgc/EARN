@@ -23,6 +23,8 @@ namespace ESRGC.DLLR.EARN.Domain.DAL.Abstract
     IRepository<Request> RequestRepository { get; }
     IRepository<Notification> NotificationRepository { get; }
     IRepository<Comment> CommentRepository { get; }
+    IRepository<PartnershipTag> PartnershipTagRepository { get; }
+
     void saveChanges();
     void Dispose();
   }

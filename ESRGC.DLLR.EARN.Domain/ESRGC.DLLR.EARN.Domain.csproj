@@ -106,6 +106,10 @@
     <Compile Include="Migrations\201311052157189_Notification.Message2.Designer.cs">
       <DependentUpon>201311052157189_Notification.Message2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201311111530455_partnershipTag.cs" />
+    <Compile Include="Migrations\201311111530455_partnershipTag.Designer.cs">
+      <DependentUpon>201311111530455_partnershipTag.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\Announcement.cs" />
@@ -119,6 +123,7 @@
     <Compile Include="Model\Partnership.cs" />
     <Compile Include="Model\PartnershipDetail.cs" />
     <Compile Include="Model\PartnershipRequest.cs" />
+    <Compile Include="Model\PartnershipTag.cs" />
     <Compile Include="Model\Picture.cs" />
     <Compile Include="Model\Profile.cs" />
     <Compile Include="Model\ProfileTag.cs" />
@@ -168,6 +173,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201311052157189_Notification.Message2.resx">
       <DependentUpon>201311052157189_Notification.Message2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201311111530455_partnershipTag.resx">
+      <DependentUpon>201311111530455_partnershipTag.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

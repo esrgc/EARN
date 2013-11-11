@@ -11,7 +11,9 @@
         @Html.CheckBoxFor(x => x.RememberMe)
         Remember me
     </label>
-    <button class="btn btn-lg btn-primary btn-block" type="submit"><i class="fa fa-lock" title="Secured sign up"></i>&nbsp;Sign in</button>    
+    <button class="btn btn-lg btn-primary btn-block submit-button" type="submit" data-loading-text="Signing in...">
+        <i class="fa fa-lock" title="Secured sign up"></i>&nbsp;Sign in
+    </button>    
     <span class="help-block">
         Not a member? <a href="@Url.Action("SignUp")"><small>Sign up for EARN MD CONNECT</small></a>
     </span>

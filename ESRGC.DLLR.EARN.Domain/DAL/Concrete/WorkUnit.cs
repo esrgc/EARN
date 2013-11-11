@@ -26,6 +26,7 @@ namespace ESRGC.DLLR.EARN.Domain.DAL.Concrete
     IRepository<Notification> _notificationRepo;
     IRepository<Request> _requestRepo;
     IRepository<Comment> _commentRepo;
+    IRepository<PartnershipTag> _partnershipTagRepo;
 
     public WorkUnit(DomainContext context) {
       _context = context;
@@ -38,6 +39,7 @@ namespace ESRGC.DLLR.EARN.Domain.DAL.Concrete
     }
 
     public void Dispose() {
+      this.Dispose();
       _context.Dispose();
     }
 
@@ -120,6 +122,9 @@ namespace ESRGC.DLLR.EARN.Domain.DAL.Concrete
     }
     public IRepository<Comment> CommentRepository {
       get { return _commentRepo ?? (_commentRepo = new Repository<Comment>(_context)); }
+    }
+    public IRepository<PartnershipTag> PartnershipTagRepository {
+      get { return _partnershipTagRepo ?? (_partnershipTagRepo = new Repository<PartnershipTag>(_context)); }
     }
     #endregion
   }

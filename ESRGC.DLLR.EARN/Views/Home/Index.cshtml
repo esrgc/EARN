@@ -12,8 +12,7 @@
                 else
                     $('#proceedBtn').attr('disabled', 'disabled');
             });
-            $(document).on('click', '#proceedBtn', function () {
-                $(this).button('loading');
+            $(document).on('click', '#proceedBtn', function () {                
                 $(this).attr('disabled', 'disabled');
                 $('form#quickSignupForm').submit();
             });
@@ -171,7 +170,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button id="proceedBtn" data-loading-text="Signing up..." class="btn btn-primary btn-sm" type="button" disabled>Proceed</button>
+                <button id="proceedBtn" data-loading-text="Signing up..." class="btn btn-primary btn-sm submit-button" type="button" disabled>Proceed</button>
             </div>
         </div>
         <!-- /.modal-content -->
