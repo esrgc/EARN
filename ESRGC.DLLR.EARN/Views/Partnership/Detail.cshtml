@@ -54,10 +54,12 @@
             });
 
             //Tag management
-            var tagArray = [];
+            var tagArray = [], originalTags = [];
             //preload tags array to match current tags
             $('input[name="tags"]').each(function (i) {
-                tagArray.push($(this).val());
+                var value = $(this).val();
+                tagArray.push(value);
+                originalTags.push(value);
             });
             console.log(tagArray);
             var tagExists = function (tag) {
@@ -100,17 +102,24 @@
             };
             var addTags = function () {
                 var value = $('input#tagInput').val();
+                //enable discard changes button
+                if (value.length > 0) {
+                    $('#tagDiscardBtn').removeAttr('disabled');
+                }
                 //separate the tags
                 var tags = value.split(',');
                 for (var i in tags) {
                     var tag = tags[i].trim();
                     addTag(tag);
                 }
+
                 console.log(tagArray);
             };
             var removeTag = function (value, tag) {
                 if (typeof value == 'undefined')
                     return;
+                //enable discard changes button
+                $('#tagDiscardBtn').removeAttr('disabled');
                 for (var i in tagArray) {
                     if (tagArray[i] == value) {
                         delete tagArray[i];
@@ -121,6 +130,20 @@
                 tag.parents().filter('.tag').remove();
                 console.log('tag ' + value + ' removed');
                 console.log(tagArray);
+            };
+            var discardChanges = function () {
+                console.log(tagArray);
+                $('#tagForm input').filter('input[name="tags"]').remove();
+                $('.tag-list').html('');
+                //remove all elements from tagArray
+                tagArray.forEach(function (e, i, array) {
+                    delete array[i];
+                });
+                //restore original tags
+                for (var i in originalTags) {                   
+                    addTag(originalTags[i]);
+                }
+                $('#tagDiscardBtn').attr('disabled', 'disabled');
             };
             $('#tagInput').typeahead({
                 name: 'partnershipTag',
@@ -163,6 +186,7 @@
                 var value = $(this).attr('data-value');
                 removeTag(value, $(this));
             });
+            $(document).on('click', '#tagDiscardBtn', function (e) { discardChanges(); });
         }
     </script>
 }
@@ -275,7 +299,7 @@
                                             <br />
                                             <div class="pull-right">
                                                 <button id="tagSubmitBtn" class="btn btn-primary btn-sm" type="submit"><i class="fa fa-save"></i>&nbsp;Save changes</button>
-                                                <button class="btn btn-default btn-sm" disabled>Discard changes</button>
+                                                <button id="tagDiscardBtn" class="btn btn-default btn-sm" disabled>Discard changes</button>
                                             </div>
 
                                             <div class="clear"></div>
