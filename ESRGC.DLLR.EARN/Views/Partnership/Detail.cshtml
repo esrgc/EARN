@@ -133,16 +133,14 @@
             };
             var discardChanges = function () {
                 console.log(tagArray);
-                $('#tagForm input').filter('input[name="tags"]').remove();
-                $('.tag-list').html('');
+                //$('#tagForm input').filter('input[name="tags"]').remove();
+                //$('.tag-list').html('');
                 //remove all elements from tagArray
-                tagArray.forEach(function (e, i, array) {
-                    delete array[i];
-                });
+                for (var i in tagArray)
+                    removeTag(tagArray[i]);
                 //restore original tags
-                for (var i in originalTags) {                   
+                for (var i in originalTags)
                     addTag(originalTags[i]);
-                }
                 $('#tagDiscardBtn').attr('disabled', 'disabled');
             };
             $('#tagInput').typeahead({
