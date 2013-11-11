@@ -55,7 +55,7 @@
                                     <!-- site collection name -->
                                     <input type="hidden" name="site" value="YourSearchValueHere" id="site" />
                                     <input type="image" class="searchButton" name="btnG" id="search" title="Search" alt="Search" src="@Url.Content("~/Client/dllrContent/images/page/searchButton.gif")" />
-                                    <input type="hidden" name="site" value="Labor_Licensing_and_Regulation"/>
+                                    <input type="hidden" name="site" value="Labor_Licensing_and_Regulation" />
                                     <input type="hidden" name="entqr" value="0" id="entqr" />
                                     <input type="hidden" name="ud" value="1" id="ud" />
                                     <input type="hidden" name="sort" value="date:D:L:d1" id="sort" />
@@ -90,6 +90,15 @@
                     @*<img src="@Url.Content("~/Content/images/MSGIC-logo.jpg")" class="site-logo" />*@
                     <!--Header-->
                     @RenderSection("header", required: false)
+                    <div id="cookieWarning" class="alert alert-warning hidden-content">
+                        <h4>Cookies are not enabled</h4>
+                        <p>
+                            This web site uses cookies to track your account information.
+                            If you are experiencing problems with signing in to the site,
+                            please enable cookies in your browser before signing in. This
+                            message will go away if cookies are enabled in your browser.
+                        </p>
+                    </div>
                     <section class="body-content">
                         @Html.Partial("messagePartial")
                         @RenderBody()
@@ -119,7 +128,7 @@
                     <a target="_blank" href="https://www.dllr.state.md.us/contactinfo/">Contact Us</a>&nbsp;|&nbsp;
                     <a target="_blank" href="http://doit.maryland.gov/about/Pages/Accessibility.aspx">MD Accessibility Policy</a>&nbsp;|&nbsp;
                     <a target="_blank" href="https://www.dllr.state.md.us/aboutdllr/privacystatement.shtml">Privacy Notice</a>&nbsp;|&nbsp;
-                    <a target="_blank" href="https://www.dllr.state.md.us/faq/">Frequently Asked Questions</a><br/>
+                    <a target="_blank" href="https://www.dllr.state.md.us/faq/">Frequently Asked Questions</a><br />
                     <br />
                     500 North Calvert Street #401 Baltimore, MD 21202 |
                     General Information - 410-230-6001
@@ -143,9 +152,9 @@
                 placement: "bottom",
                 container: 'body'
             });
-            $('.window-panel a').tooltip({
-                toggle: "tooltip",
-                placement: "top",
+            $('.container a').tooltip({
+                toggle: 'tooltip',
+                placement: 'right',
                 container: 'body'
             });
             $('.navbar a#notifications').popover({
@@ -158,13 +167,17 @@
             });
             $(document).on('click', '.submit-button', function () {
                 $(this).button('loading');
-            });            
+            });
             //placeholder
             $('input, textarea').placeholder();
 
             //custom start up code
             if (typeof startup == 'function')
                 startup();
+            //check cookies
+            if (!navigator.cookieEnabled) {
+                $('#cookieWarning').removeClass('hidden-content');
+            }
         });
     </script>
 </body>

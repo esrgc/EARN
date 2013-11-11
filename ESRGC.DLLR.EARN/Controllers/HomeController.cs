@@ -27,7 +27,9 @@ namespace ESRGC.DLLR.EARN.Controllers
     public ActionResult ProfileNotCreated() {
       return View();
     }
-
+    public ViewResult CookieNotEnabled() {
+      return View();
+    }
     public ActionResult SendEmail() {
       var model = new Notification() {
         Account = new Account() { EmailAddress = "tahoang@salisbury.edu" },

@@ -12,6 +12,7 @@ using ESRGC.GIS.Utilities;
 
 namespace ESRGC.DLLR.EARN.Controllers
 {  
+  [SetGuestCookie]
   public class BaseController : Controller
   {
     protected IWorkUnit _workUnit = null;
@@ -36,7 +37,6 @@ namespace ESRGC.DLLR.EARN.Controllers
     //helpers 
     ///////////////////////
     //attempt to geocode the profile address
-
     protected void addUpdateAddrGeoTag(int profileId) {
       var profile = _workUnit.ProfileRepository.GetEntityByID(profileId);
       if (profile == null)

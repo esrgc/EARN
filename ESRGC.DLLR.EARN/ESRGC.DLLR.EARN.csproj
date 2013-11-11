@@ -165,9 +165,11 @@
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\TagController.cs" />
     <Compile Include="Filters\CanEditPartnershipAttribute.cs" />
+    <Compile Include="Filters\CheckCookieAttribute.cs" />
     <Compile Include="Filters\HasReturnUrlAttribute.cs" />
     <Compile Include="Filters\NewToPartnershipAttribute.cs" />
     <Compile Include="Filters\SendNotificationAttribute.cs" />
+    <Compile Include="Filters\SetGuestCookieAttribute.cs" />
     <Compile Include="Filters\VerifyAccountAttribute.cs" />
     <Compile Include="Filters\VerifyProfileAttribute.cs" />
     <Compile Include="Filters\VerifyProfilePartnershipAttribute.cs" />
@@ -396,6 +398,7 @@
     <Content Include="Views\Account\Settings.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Shared\_DLLRLayout.cshtml" />
+    <Content Include="Views\Home\CookieNotEnabled.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

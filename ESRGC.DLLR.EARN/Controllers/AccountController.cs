@@ -22,6 +22,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       return View();
     }
     [AllowAnonymous]
+    [CheckCookie]
     public ActionResult SignUp() {
       var signUpModel = new SignUpModel() {
         //SecretQuestions = Utility.SecurityQuestions
@@ -32,6 +33,7 @@ namespace ESRGC.DLLR.EARN.Controllers
 
     [HttpPost]
     [AllowAnonymous]
+    [CheckCookie]
     public ActionResult SignUp(SignUpModel model) {
       if (ModelState.IsValid) {
         var existingEmails = _workUnit.AccountRepository.Entities.Where(x => x.EmailAddress.ToLower() == model.Email.ToLower());
@@ -88,6 +90,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       return View(model);
     }
     [AllowAnonymous]
+    [CheckCookie]
     public ActionResult SignIn() {
       //sign out any previous session
 
@@ -97,6 +100,7 @@ namespace ESRGC.DLLR.EARN.Controllers
 
     [HttpPost]
     [AllowAnonymous]
+    [CheckCookie]
     public ActionResult SignIn(SignInModel model, string returnUrl) {
       if (ModelState.IsValid) {
         if (Authentication.authenticate(_workUnit, model)) {

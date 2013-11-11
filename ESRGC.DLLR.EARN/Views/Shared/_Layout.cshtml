@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,8 +27,17 @@
             @*<img src="@Url.Content("~/Content/images/MSGIC-logo.jpg")" class="site-logo" />*@
             <!--Header-->
             @RenderSection("header", required: false)
+            <div id="cookieWarning" class="alert alert-warning hidden-content">
+                <h4>Cookies are not enabled</h4>
+                <p>
+                    This web site uses cookies to track your account information.
+                            If you are experiencing problems with signing in to the site,
+                            please enable cookies in your browser before signing in. This
+                            message will go away if cookies are enabled in your browser.
+                </p>
+            </div>
             <section class="body-content">
-                @Html.Partial("messagePartial") 
+                @Html.Partial("messagePartial")
                 @RenderBody()
             </section>
         </div>
@@ -36,12 +45,15 @@
         </div>
     </div>
     <div class="footer text-center" id="footer">
-            @*@RenderSection("footer", required: false)*@    
-            <a href="http://esrgc.org" target="_blank"><img class="site-logo" src="@Url.Content("~/Client/images/esrgc.png")" alt=""/></a>
-            @*<a  href="http://www.gov.state.md.us/" target="_blank"><img class="site-logo" src="@Url.Content("~/client/images/MDlogo.gif")" alt=""/></a>*@
-            <a  href="http://www.dllr.maryland.gov/earn" target="_blank"><img class="site-logo" src="@Url.Content("~/client/images/EARN_logo_200w.jpg")" alt=""/></a>
-            <a  href="http://www.salisbury.edu/" target="_blank"><img class="site-logo" src="@Url.Content("~/client/images/SalisburyUniversity.jpg")" alt=""/></a>
-    </div>    
+        @*@RenderSection("footer", required: false)*@
+        <a href="http://esrgc.org" target="_blank">
+            <img class="site-logo" src="@Url.Content("~/Client/images/esrgc.png")" alt=""/></a>
+        @*<a  href="http://www.gov.state.md.us/" target="_blank"><img class="site-logo" src="@Url.Content("~/client/images/MDlogo.gif")" alt=""/></a>*@
+        <a href="http://www.dllr.maryland.gov/earn" target="_blank">
+            <img class="site-logo" src="@Url.Content("~/client/images/EARN_logo_200w.jpg")" alt=""/></a>
+        <a href="http://www.salisbury.edu/" target="_blank">
+            <img class="site-logo" src="@Url.Content("~/client/images/SalisburyUniversity.jpg")" alt=""/></a>
+    </div>
 
     @Scripts.Render("~/bundles/jsLibs")
     @RenderSection("scripts", required: false)
@@ -59,9 +71,9 @@
                 placement: "bottom",
                 container: 'body'
             });
-            $('.window-panel a').tooltip({
-                toggle: "tooltip",
-                placement: "top",
+            $('.container a').tooltip({
+                toggle: 'tooltip',
+                placement: 'right',
                 container: 'body'
             });
             $('.navbar a#notifications').popover({
@@ -81,6 +93,10 @@
             //custom start up code
             if (typeof startup == 'function')
                 startup();
+            //check cookies
+            if (!navigator.cookieEnabled) {
+                $('#cookieWarning').removeClass('hidden-content');
+            }
         });
     </script>
 </body>
