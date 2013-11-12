@@ -23,6 +23,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     [HttpPost]
     [VerifyProfile]
     [VerifyProfilePartnership]
+    [SendNotification]
     public ActionResult Upload(int partnershipID, HttpPostedFileBase data, string description, string returnUrl) {
       var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
       if (data == null) {
@@ -42,6 +43,18 @@ namespace ESRGC.DLLR.EARN.Controllers
         data.InputStream.Read(document.Data, 0, data.ContentLength);
         //store it
         _workUnit.DocumentRepository.InsertEntity(document);
+
+        //notify partners
+        partnership.getAllPartners().ForEach(x => {
+          var notification = new Notification {
+            Account = x.getAccount(),
+            Category = "Document Uploaded",
+            LinkToAction = Url.Action("Detail", "Partnership", new { partnershipID }),
+            Message = CurrentAccount.Profile.Organization.Name + " has uploaded a new document (" + document.Name + ")."
+          };
+          _workUnit.NotificationRepository.InsertEntity(notification);
+        });
+
         _workUnit.saveChanges();
         updateTempMessage("Document uploaded successfully.");
       }
@@ -63,6 +76,7 @@ namespace ESRGC.DLLR.EARN.Controllers
 
     [HttpPost]
     [VerifyProfilePartnership]
+    [SendNotification]
     public ActionResult Delete(int partnershipID, int documentID, string returnUrl) {
       var document = _workUnit.DocumentRepository.GetEntityByID(documentID);
       if (document.ProfileID != CurrentAccount.ProfileID) {
@@ -72,10 +86,21 @@ namespace ESRGC.DLLR.EARN.Controllers
       }
       else {
         _workUnit.DocumentRepository.DeleteEntity(document);
+        
+        var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
+        //notify partners
+        partnership.getAllPartners().ForEach(x => {
+          var notification = new Notification {
+            Account = x.getAccount(),
+            Category = "Document Uploaded",
+            LinkToAction = Url.Action("Detail", "Partnership", new { partnershipID }),
+            Message = CurrentAccount.Profile.Organization.Name + " has deleted a document (" + document.Name + ")."
+          };
+          _workUnit.NotificationRepository.InsertEntity(notification);
+        });
         _workUnit.saveChanges();
         updateTempMessage("Document deleted");
       }
-
       if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
              && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\")) {
         return Redirect(returnUrl);

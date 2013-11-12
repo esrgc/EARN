@@ -57,6 +57,14 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public virtual ICollection<Document> Documents { get; set; }
 
     //helpers
+    /// <summary>
+    /// get all partners of this partnership 
+    /// including owner
+    /// </summary>
+    /// <returns></returns>
+    public List<Profile> getAllPartners() {
+      return PartnershipDetails.Select(x => x.Profile).ToList();
+    }
     public Profile getOwner() {
       try {
         return PartnershipDetails
