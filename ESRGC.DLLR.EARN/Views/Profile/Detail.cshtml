@@ -46,13 +46,41 @@
                     <div class="inline-container profile-area">
                         <div class="profile-picture">
                             @if (Model.PictureID != null) { 
-                                <img class="img-thumbnail" src="@Url.Action("ProfilePicture", new { pictureId = Model.PictureID })"/>
-                                <div><small><a href="@Url.Action("UploadImage")">Change logo</a></small></div>
+                                <div class="logo-container" >
+                                    <a href="@Url.Action("UploadImage")">
+                                        <img class="img-thumbnail" src="@Url.Action("ProfilePicture", new { pictureId = Model.PictureID })"/>
+                                        <div class="upload-link">
+                                            <span class="label label-default">Change logo</span>
+                                        </div>
+                                    </a>
+                                </div>
                             }
                             else {
-                                <img class="img-thumbnail" src="@Url.Content("~/Client/images/empty_profile.gif")"/>
-                                <div><small><a href="@Url.Action("UploadImage")">Upload Logo</a></small></div>
+                                <div class="logo-container">
+                                    <a href="@Url.Action("UploadImage")">
+                                        <img class="img-thumbnail" src="@Url.Content("~/Client/images/empty_profile.gif")"/>
+                                        <div class="upload-link">
+                                            <span class="label label-default">Upload logo</span>
+                                        </div>
+                                    </a>
+                                </div>
                             }
+                            @* @if (Model.PictureID != null) { 
+                                <div style="position: relative;">
+                                    <a href="@Url.Action("UploadImage")">
+                                        <img class="img-polaroid" src="@Url.Action("ProfilePicture", new { pictureId = Model.PictureID })"/>
+                                        <span class="label" style="position: absolute; bottom: 5px; left: 5px;">Change logo</span>
+                                    </a>
+                                </div>
+                            }
+                            else {
+                                <div style="position: relative;">
+                                    <a title="Upload/Change profile picture" href="@Url.Action("UploadImage")">
+                                        <img class="img-polaroid" src="@Url.Content("~/Client/images/empty_profile.gif")" alt="profile picture"/>
+                                        <span class="label" style="position: absolute; bottom: 5px; left: 5px;">Upload logo</span>
+                                    </a>
+                                </div>
+                            }*@
                         </div>
                         <div class="row profile-container">
                             <div class="col-md-10">
