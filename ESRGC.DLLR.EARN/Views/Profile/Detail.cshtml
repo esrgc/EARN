@@ -31,20 +31,18 @@
         <div class="col-md-12">
             <div class="placeholder-panel">
                 <div class="post">
-                    @if (Model.Organization.LinkedInLink != "" && Model.Organization.FacebookLink != "" && Model.Organization.TwitterLink != "") { 
-                        <ul class="list-inline list-unstyled link-fa-container" id="socialNetworkLinks">
-                            <li></li>
-                            @if (Model.Organization.FacebookLink != "") { 
-                                <li><a target="_blank" href="http://@Model.Organization.FacebookLink" title="Facebook link"><i class="fa fa-lg fa-facebook"></i></a></li>
-                            }
-                            @if (Model.Organization.TwitterLink != "") { 
-                                <li><a target="_blank" href="http://@Model.Organization.TwitterLink" title="Twitter link"><i class="fa fa-lg fa-twitter"></i></a></li>
-                            }
-                            @if (Model.Organization.LinkedInLink != "") { 
-                                <li><a target="_blank" href="http://@Model.Organization.LinkedInLink" title="LinkedIn link"><i class="fa fa-lg fa-linkedin"></i></a></li>
-                            }
-                        </ul>
-                    }
+                    <ul class="list-inline list-unstyled link-fa-container" id="socialNetworkLinks">
+                        <li></li>
+                        @if (Model.Organization.FacebookLink != "") { 
+                            <li><a target="_blank" href="http://@Model.Organization.FacebookLink" title="Facebook link"><i class="fa fa-lg fa-facebook"></i></a></li>
+                        }
+                        @if (Model.Organization.TwitterLink != "") { 
+                            <li><a target="_blank" href="http://@Model.Organization.TwitterLink" title="Twitter link"><i class="fa fa-lg fa-twitter"></i></a></li>
+                        }
+                        @if (Model.Organization.LinkedInLink != "") { 
+                            <li><a target="_blank" href="http://@Model.Organization.LinkedInLink" title="LinkedIn link"><i class="fa fa-lg fa-linkedin"></i></a></li>
+                        }
+                    </ul>
                     <div class="inline-container profile-area">
                         <div class="profile-picture">
                             @if (Model.PictureID != null) { 
@@ -132,9 +130,9 @@
                         <form action="@Url.Action("EditAbout")" method="post">
                             <h4>About</h4>
                             @Html.TextAreaFor(x => x.About, new {
-                               @class = "form-control about",
-                               placeholder = ModelMetadata.FromLambdaExpression(x => x.About, ViewData).Description
-                           })
+                           @class = "form-control about",
+                           placeholder = ModelMetadata.FromLambdaExpression(x => x.About, ViewData).Description
+                       })
                             <div class="text-right">
                                 <button type="submit" class="btn btn-info btn-xs"><i class="fa fa-save"></i>&nbsp;Save</button>
 
