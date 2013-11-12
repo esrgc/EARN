@@ -99,12 +99,28 @@ namespace ESRGC.DLLR.EARN.Controllers
     }
     [HttpPost]
     [ActionName("Edit")]
+    [CanEditPartnership]
+    [SendNotification]
     public ActionResult EditPartnership(int partnershipID, string returnUrl) {
       var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID) ?? new Partnership();
       TryUpdateModel(partnership);
       if (ModelState.IsValid) {
         partnership.LastUpdate = DateTime.Now;
         _workUnit.PartnershipRepository.UpdateEntity(partnership);
+        //notifications
+        partnership.getAllPartners()
+          .Where(x => x.ProfileID != CurrentAccount.ProfileID)
+          .ToList()
+          .ForEach(x => {
+            var notification = new Notification { 
+              Category = "Partnership Edited",
+              Account = x.getAccount(),
+              LinkToAction = Url.Action("Detail", new { partnershipID }), 
+              Message = partnership.Name + " has been mofified.",
+              Message2 = "Status: " + partnership.Status + ", Grant status: " + partnership.GrantStatus + "."
+            };
+            _workUnit.NotificationRepository.InsertEntity(notification);
+          });
         _workUnit.saveChanges();
         return RedirectToAction("Detail", new { partnershipID , returnUrl});
       }
