@@ -147,7 +147,8 @@ namespace ESRGC.DLLR.EARN.Controllers
         return RedirectToAction("Index");
       }
       
-    }
+    }            
+
     public ActionResult InvalidAccessToPartnership() {
       return View();
     }

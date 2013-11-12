@@ -1,0 +1,33 @@
+﻿@using ESRGC.DLLR.EARN.Domain.Model
+@model Partnership
+@{
+    var currentProfile = ViewBag.currentProfile as Profile;
+    var returnUrl = ViewBag.returnUrl as string;
+}
+<div class="placeholder-panel">
+    @if (Model.Documents.Count() == 0) { 
+        <p>There's currently no document uploaded.</p>
+    }
+    @foreach (var i in Model.Documents) { 
+        <div class="post">
+            <h5>
+                <small class="pull-right">@Html.TimeSpan(i.Created)</small>
+                <a href="@Url.Action("Download", "Document", new { i.DocumentID, Model.PartnershipID })">@i.Name</a><br />
+                <small>Uploaded by</small>&nbsp;<span>@i.Profile.Organization.Name</span>
+            </h5>
+            <p class="text-info">@i.Description</p>
+            @if (currentProfile.ProfileID == i.ProfileID) { 
+                <div class="panel-action-right">
+                    <form action="@Url.Action("Delete", "Document")" method="post">
+                        <input type="hidden" name="partnershipID" value="@Model.PartnershipID"/>
+                        <input type="hidden" name="documentID" value="@i.DocumentID"/>
+                        <input type="hidden" name="returnUrl" value="@returnUrl" />
+                        <button type="submit" class="btn btn-danger btn-xs">
+                            <i class="fa fa-trash-o"></i>&nbsp;Delete
+                        </button>
+                    </form>
+                </div>
+            }
+        </div>
+    }
+</div>

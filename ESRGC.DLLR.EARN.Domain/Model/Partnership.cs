@@ -12,6 +12,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
       PartnershipDetails = new List<PartnershipDetail>();
       PartnershipTags = new List<PartnershipTag>();
       Comments = new List<Comment>();
+      Documents = new List<Document>();
       LastUpdate = DateTime.Now;
       Created = DateTime.Now;
     }
@@ -53,6 +54,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public virtual ICollection<PartnershipDetail> PartnershipDetails { get; set; }
     public virtual ICollection<Comment> Comments { get; set; }
     public virtual ICollection<PartnershipTag> PartnershipTags { get; set; }
+    public virtual ICollection<Document> Documents { get; set; }
 
     //helpers
     public Profile getOwner() {

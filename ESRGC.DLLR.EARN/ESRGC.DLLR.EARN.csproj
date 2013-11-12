@@ -157,6 +157,7 @@
     <Compile Include="Controllers\CommunicationController.cs" />
     <Compile Include="Controllers\ConnectionController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\DocumentController.cs" />
     <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrganizationController.cs" />
@@ -399,6 +400,7 @@
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Shared\_DLLRLayout.cshtml" />
     <Content Include="Views\Home\CookieNotEnabled.cshtml" />
+    <Content Include="Views\Document\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
