@@ -45,7 +45,10 @@ namespace ESRGC.DLLR.EARN.Controllers
         _workUnit.DocumentRepository.InsertEntity(document);
 
         //notify partners
-        partnership.getAllPartners().ForEach(x => {
+        partnership.getAllPartners()
+          .Where(x => x.ProfileID != CurrentAccount.ProfileID)
+          .ToList()
+          .ForEach(x => {
           var notification = new Notification {
             Account = x.getAccount(),
             Category = "Document Uploaded",
@@ -89,10 +92,13 @@ namespace ESRGC.DLLR.EARN.Controllers
         
         var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
         //notify partners
-        partnership.getAllPartners().ForEach(x => {
+        partnership.getAllPartners()
+          .Where(x=>x.ProfileID != CurrentAccount.ProfileID)
+          .ToList()
+          .ForEach(x => {
           var notification = new Notification {
             Account = x.getAccount(),
-            Category = "Document Uploaded",
+            Category = "Document Deleted",
             LinkToAction = Url.Action("Detail", "Partnership", new { partnershipID }),
             Message = CurrentAccount.Profile.Organization.Name + " has deleted a document (" + document.Name + ")."
           };

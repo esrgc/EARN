@@ -85,6 +85,7 @@
                 @Html.Partial("navBar")
                 <!--Page content-->
                 <div id="pageContent">
+                    @Html.Partial("messagePartial")
                     <!--Logo-->
                     @*<img src="@Url.Content("~/Content/images/MSGIC-logo.jpg")" class="site-logo" />*@
                     <!--Header-->
@@ -108,7 +109,6 @@
                         </div>
                     </div>
                     <section class="body-content">
-                        @Html.Partial("messagePartial")
                         @RenderBody()
                     </section>
                 </div>
