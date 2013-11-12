@@ -55,7 +55,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     /// </summary>
     /// <param name="profileID"></param>
     /// <returns></returns>
-    public ActionResult ListPartnerships(int profileID,string returnUrl) {
+    public ActionResult ListPartnerships(int profileID, string returnUrl) {
       var profile = _workUnit.ProfileRepository.GetEntityByID(profileID);
       var partnerships = profile.PartnershipDetails.Select(x => x.Partnership).ToList();
       ViewBag.currentProfile = CurrentAccount.Profile;
@@ -112,17 +112,17 @@ namespace ESRGC.DLLR.EARN.Controllers
           .Where(x => x.ProfileID != CurrentAccount.ProfileID)
           .ToList()
           .ForEach(x => {
-            var notification = new Notification { 
+            var notification = new Notification {
               Category = "Partnership Edited",
               Account = x.getAccount(),
-              LinkToAction = Url.Action("Detail", new { partnershipID }), 
-              Message = partnership.Name + " has been mofified by " + CurrentAccount.Profile.Organization.Name,
+              LinkToAction = Url.Action("Detail", new { partnershipID }),
+              Message = partnership.Name + " has been mofified by " + CurrentAccount.Profile.Organization.Name + ".",
               Message2 = "Status: " + partnership.Status + ", Grant status: " + partnership.GrantStatus + "."
             };
             _workUnit.NotificationRepository.InsertEntity(notification);
           });
         _workUnit.saveChanges();
-        return RedirectToAction("Detail", new { partnershipID , returnUrl});
+        return RedirectToAction("Detail", new { partnershipID, returnUrl });
       }
       //error redisplay
       return View(partnership);
@@ -142,6 +142,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     [HttpPost]
     [VerifyProfile]
     [CanEditPartnership]
+    [SendNotification]
     [ActionName("Delete")]
     public ActionResult DeletePartnership(int partnershipID, string returnUrl) {
       if (ModelState.IsValid) {
@@ -149,8 +150,33 @@ namespace ESRGC.DLLR.EARN.Controllers
         foreach (var detail in partnership.PartnershipDetails.ToList()) {
           _workUnit.PartnershipDetailRepository.DeleteEntity(detail);
         }
+        //comments
+        partnership.Comments
+          .ToList()
+          .ForEach(x => { _workUnit.CommentRepository.DeleteEntity(x); });
+        //tags
+        partnership.PartnershipTags
+          .ToList()
+          .ForEach(x => { _workUnit.PartnershipTagRepository.DeleteEntity(x); });
+        //delete documents
+        partnership.Documents
+          .ToList()
+          .ForEach(x => { _workUnit.DocumentRepository.DeleteEntity(x); });
         _workUnit.PartnershipRepository.DeleteEntity(partnership);
+        //notifications
+        partnership.getAllPartners()
+          .Where(x => x.ProfileID != CurrentAccount.ProfileID)
+          .ToList()
+          .ForEach(x => {
+            var notification = new Notification {
+              Category = "Partnership Deleted",
+              Account = x.getAccount(),
+              Message = partnership.Name + " has been deleted by " + CurrentAccount.Profile.Organization.Name + ".",
+            };
+            _workUnit.NotificationRepository.InsertEntity(notification);
+          });
         _workUnit.saveChanges();
+        updateTempMessage("Partnership deleted.");
         return RedirectToAction("Detail", "Profile");
       }
       updateTempMessage("Error deleting partnership");
@@ -162,8 +188,8 @@ namespace ESRGC.DLLR.EARN.Controllers
       else {
         return RedirectToAction("Index");
       }
-      
-    }            
+
+    }
 
     public ActionResult InvalidAccessToPartnership() {
       return View();

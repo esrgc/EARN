@@ -67,7 +67,7 @@
                     </p>
                     <div class="alert alert-warning">
                         <h4>Comfirm Deletion</h4>
-                        <p>Are you sure you want to delete this partnership?</p>
+                        <p>Are you sure you want to delete this partnership? This action can not be undone.</p>
                         <form action="@Url.Action("Delete")" method="post" role="form">
                             @Html.HiddenFor(x=>x.PartnershipID)
                             @Html.Hidden("returnUrl", returnUrl)
