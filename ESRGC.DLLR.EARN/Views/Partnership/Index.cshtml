@@ -100,6 +100,11 @@
                                             <span class="label label-success"><i class="fa fa-check"></i>&nbsp;Partnered</span>
                                             }
                                         }
+                                        <br />
+                                        <h5>Target Industry Tags&nbsp;<i class="fa fa-tags"></i></h5>
+                                        <div class="placeholder-panel">
+                                                @Html.Partial("tagListDisplayPartial", p.getTagNames())
+                                        </div>
                                     </li>
                                 }
                             </ul>
