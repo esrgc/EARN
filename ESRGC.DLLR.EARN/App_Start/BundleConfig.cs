@@ -35,8 +35,7 @@ namespace ESRGC.DLLR.EARN
         "~/Client/js/map/mapViewer.js",
         "~/Client/js/map/leafletViewer.js",
         "~/Client/jsLib/wicket-leaflet/wicket.js",
-        "~/Client/jsLib/wicket-leaflet/wicket-leaflet.js",
-        "~/Client/jsLib/leaflet.awesome-markers/leaflet.awesome-markers.js"
+        "~/Client/jsLib/wicket-leaflet/wicket-leaflet.js"
       ));
       bundles.Add(new ScriptBundle("~/bundles/apps/search").Include(
 
@@ -53,18 +52,18 @@ namespace ESRGC.DLLR.EARN
       //////////////////////////////////////////////////////////////////////////////
       //css bundles
       //////////////////////////////////////////////////////////////////////////////
-      bundles.Add(new StyleBundle("~/Styles/css").Include(
-        "~/Client/jsLib/bootstrap-3.0.1/css/bootstrap*",
+      bundles.Add(new StyleBundle("~/Styles/css").Include(        
         "~/Client/css/less/*.css",
         "~/Client/css/*.css"
       ));
-      bundles.Add(new StyleBundle("~/Styles/mapcss").Include(
-          "~/Client/jsLib/leaflet.awesome-markers/leaflet.awesome-markers.css"
-      ));
-      bundles.Add(new StyleBundle("~/Styles/dllrCSS").Include(
+      
+      //bundles.Add(new StyleBundle("~/Styles/mapcss").Include(
+      //    "~/Client/jsLib/leaflet.awesome-markers/leaflet.awesome-markers.css"
+      //));
+      bundles.Add(new StyleBundle("~/Styles/dllrContent/css/dllrCSS").Include(
         "~/Client/dllrContent/css/dllrCSS.css",
         "~/Client/dllrContent/style/print-preview.css",
-        "~/Client/dllrContent/style/print.css"
+        "~/Client/dllrContent/style/print.css"        
       ));
     }
   }

@@ -403,7 +403,9 @@
                     page => Url.Action("Detail", new { Model.PartnershipID, page, returnUrl }),
                     PagedListRenderOptions.OnlyShowFivePagesAtATime
                 )}
-                @Html.Partial("ListComments", comments)
+                <div id="comments">
+                    @Html.Partial("ListComments", comments)
+                </div>
                 @if (comments.PageCount > 1) {
                     @Html.PagedListPager(
                     comments,

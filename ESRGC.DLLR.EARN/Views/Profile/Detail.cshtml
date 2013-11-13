@@ -46,23 +46,19 @@
                     <div class="inline-container profile-area">
                         <div class="profile-picture">
                             @if (Model.PictureID != null) { 
-                                <div class="logo-container" >
-                                    <a href="@Url.Action("UploadImage")">
-                                        <img class="img-thumbnail" src="@Url.Action("ProfilePicture", new { pictureId = Model.PictureID })"/>
-                                        <div class="upload-link">
-                                            <span class="label label-info">Change logo</span>
-                                        </div>
-                                    </a>
+                                <div class="logo-container">
+                                     <img class="img-thumbnail" src="@Url.Action("ProfilePicture", new { pictureId = Model.PictureID })"/>
+                                    <div class="panel-action-center">
+                                        <a href="@Url.Action("UploadImage")"><small class="">Change logo</small></a>
+                                    </div>
                                 </div>
                             }
                             else {
                                 <div class="logo-container">
-                                    <a href="@Url.Action("UploadImage")">
-                                        <img class="img-thumbnail" src="@Url.Content("~/Client/images/empty_profile.gif")"/>
-                                        <div class="upload-link">
-                                            <span class="label label-info">Upload logo</span>
-                                        </div>
-                                    </a>
+                                    <img class="img-thumbnail" src="@Url.Content("~/Client/images/empty_profile.gif")"/>
+                                    <div class="panel-action-center">
+                                        <a href="@Url.Action("UploadImage")"><small>Upload logo</small></a>
+                                    </div>
                                 </div>
                             }
                             @* @if (Model.PictureID != null) { 

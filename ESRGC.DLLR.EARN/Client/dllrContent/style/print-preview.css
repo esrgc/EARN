@@ -1,5 +1,4 @@
-﻿@import "print.css";
-@media only print {
+﻿@media only print {
     body {
         font-size: 12px;
     }
