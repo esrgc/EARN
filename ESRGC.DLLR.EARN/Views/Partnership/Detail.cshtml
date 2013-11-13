@@ -224,7 +224,7 @@
                     @if (canEdit) { 
                         <a title="Edit this partnership" href="@Url.Action("Edit", new { p.PartnershipID, returnUrl })"><i class="fa fa-pencil"></i></a>
                         <a title="Delete this partnership" href="@Url.Action("Delete", new { Model.PartnershipID, returnUrl })" class="pull-right text-danger">
-                            <i class="fa fa-times-circle"></i>&nbsp;Delete partnership
+                            <i class="fa fa-times-circle"></i>&nbsp;Delete
                         </a>
                     }
                 </div>
@@ -371,7 +371,7 @@
                             <div id="partners" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <div class="profile-container-holder">
-                                        <span class="label label-danger">Owner</span>
+                                        <span class="label label-danger">Convener</span>
                                         @Html.Partial("shortProfilePartial", owner)
                                         <hr />
                                     </div>
