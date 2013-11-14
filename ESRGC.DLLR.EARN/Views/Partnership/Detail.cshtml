@@ -241,7 +241,7 @@
                                     <a data-toggle="collapse" data-parent="#partnershipDetail" href="#tags">Target Industry Tags&nbsp;<i class="fa fa-tags"></i></a>
                                 </h5>
                             </div>
-                            <div id="tags" class="panel-collapse collapse in">
+                            <div id="tags" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     @if (isOwner) { 
                                         <div class="owner-view">
@@ -256,7 +256,7 @@
                                                 <button type="button" class="btn btn-primary" id="addTagBtn"><i class="fa fa-plus"></i>&nbsp;Add</button>
                                                 <div><span id="" class="text-danger status-text"></span></div>
                                                 <p class="text-warning">
-                                                    Enter tags one at a time
+                                                    Enter your Partnership’s target industry so potential partners can find you.
                                                 </p>
                                                 <input type="hidden" value="@Model.PartnershipID" name="partnershipID"/>
                                                 <input type="hidden" name="returnUrl" value="@Url.Action("Detail", new { Model.PartnershipID, returnUrl })"/>
@@ -321,7 +321,7 @@
                                                     cols="20" id="Description" 
                                                     rows="2"
                                                     name="Description" 
-                                                    placeholder="Brief document description (200 characters max)"
+                                                    placeholder="Brief document description (200 characters max). Users should not share sensitive or proprietary content on this site."
                                                     style="min-height: 50px;"></textarea>
                                             </div>
                                         </div>
@@ -349,8 +349,9 @@
                                     <strong>Other Partners</strong>
                                     @if (partners.Count == 0) { 
                                         <p>
-                                            There's currently no other partner in this partnership. 
-                                            You can invite new partners through search or your connections in profile page.
+                                            There are currently no other partners in this partnership. 
+                                            You can invite new partners through search or your connections 
+                                            in your Organizational Profile page.
                                         </p>
                                     }
                                     @foreach (var profile in partners) { 

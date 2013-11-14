@@ -4,20 +4,30 @@
 @{
     Layout = null;
 }
-<h4>Welcome to EARN MD CONNECT</h4>
 
-<h5>Hello, thank you for signing up for EARN MD CONNECT.</h5>
+<h4>Thank you for signing up for EARN MD CONNECT!</h4>
 
 <p>
     Please verify your email address (@Model.EmailAddress). 
-    You will not be able to receive notifications from the 
-    site until you do so. Please follow the link below to verify your email. If the link
-    does not work you can copy and paste it to your browser. 
+    so that you will be able to receive notifications from the site, 
+    including invitations to join partnerships. 
 </p>
 
 <p>
+    Please follow the link below to verify your email and to get started using EARN MD CONNECT.  
+    (If the link does not work you can copy and paste it to your browser.)
+    <br />
     @Url.AbsoluteAction("VerifyEmail", "Account", new { Model.AccountID, Model.VerificationCode })
 </p>
 <br />
-<small>This is an automatic email notification. Please do not reply to this message. Contact EARN MD CONNECT if you have any question.</small>
+<p>
+    Thanks for your interest in EARN Maryland, and welcome to EARN MD CONNECT!<br />
+    -	Team EARN Maryland
+
+</p>
+<small>
+    This is an automatic email notification. Please do not reply to this message. 
+    <a href="mailto://earn.jobs@maryland.gov?cc=esrgc@salisbury.edu">Contact EARN MD CONNECT</a> 
+    if you have any question.
+</small>
 

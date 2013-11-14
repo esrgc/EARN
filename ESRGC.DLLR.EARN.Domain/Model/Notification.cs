@@ -19,6 +19,8 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public virtual Account Account { get; set; }
     public string Message { get; set; }
     public string Message2 { get; set; }
+    public string Message3 { get; set; }
+    public string FootNote { get; set; }
     public string Category { get; set; }
     public bool IsRead { get; set; }
 

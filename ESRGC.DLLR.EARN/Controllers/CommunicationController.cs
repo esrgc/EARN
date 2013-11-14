@@ -80,8 +80,12 @@ namespace ESRGC.DLLR.EARN.Controllers
         //create notification
         var notification = new Notification() {
           Category = "Request",
-          Message = string.Format("An organization has requested to join your \"{0}\" partnership", partnership.Name),
-          Account = receiverAccount
+          Message = string.Format("{0} has requested to join your \"{0}\" partnership",
+            partnership.Name,
+            CurrentAccount.Profile.Organization.Name),
+          Account = receiverAccount,
+          Message2 = @"You will be able to choose whether to accept this request, 
+and/or view this user’s Organizational Profile for more information."
         };
         //create request
         var request = new PartnershipRequest() {
@@ -196,10 +200,12 @@ namespace ESRGC.DLLR.EARN.Controllers
             //create notification to sender
             notification = new Notification() {
               Account = r.Sender,
-              Category = "Request Accepted",
+              Category = "Partnership Request Accepted",
               Message = string.Format(@"{0} has accepted your request. You are now a partner of ""{1}""",
                 r.Receiver.Profile.Organization.Name,
                 r.Partnership.Name),
+              Message2 = "You can now visit the \""+ r.Partnership.Name 
+                +"\" partnership’s profile, and communicate with your partners!",
               LinkToAction = Url.Action("Detail", "Partnership", new { r.PartnershipID })
             };
           }
@@ -224,7 +230,7 @@ namespace ESRGC.DLLR.EARN.Controllers
             //create notification
             notification = new Notification() {
               Account = r.Sender,
-              Category = "Invite Accepted",
+              Category = "Partnership Invite Accepted",
               Message = string.Format(@"{0} has accepted your invitation to join the ""{1}"" partnership",
                 r.Receiver.Profile.Organization.Name,
                 r.Partnership.Name),
@@ -239,9 +245,7 @@ namespace ESRGC.DLLR.EARN.Controllers
         _workUnit.RequestRepository.DeleteByID(requestID);
         _workUnit.saveChanges();
       }
-      else {
-        updateTempMessage("Error processing request.");
-      }
+      
       return RedirectToAction("Requests");
     }
     [HttpPost]

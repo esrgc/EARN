@@ -55,6 +55,10 @@
                     <p>
                         Status: @Html.Partial("partnershipStatusPartial", p)
                     </p>
+                    <div class="placeholder-panel">
+                        @Html.Partial("tagListDisplayPartial", p.getTagNames())
+                    </div>
+                    <hr />
                     <div class="btn-group pull-right">
                         @if (currentProfile.isNewToPartnership(Model.PartnershipID)) {
                             if ((!requested)) {
@@ -67,6 +71,7 @@
                             <button disabled class="btn btn-default btn-sm" title="Request to join this partnership">
                                 <i class="fa fa-share"></i>&nbsp;Join request sent
                             </button>
+                            <p class="text-center">Waiting for approval</p>
                             }
                         }
                         else {
