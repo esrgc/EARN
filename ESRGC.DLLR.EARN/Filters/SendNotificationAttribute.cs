@@ -25,15 +25,10 @@ namespace ESRGC.DLLR.EARN.Filters
             workUnit.NotificationRepository.UpdateEntity(unsent);
             workUnit.saveChanges();
           }
-          else { 
-            //attempting to send verification email
-            var requestEmail = filterContext.HttpContext.User.Identity.Name;
-            var account = workUnit
-              .AccountRepository
-              .Entities
-              .First(x => x.EmailAddress.ToLower() == requestEmail.ToLower());
-            EmailHelper.SendVerificationEmail(account);
-          }
+          //else { 
+          //  //attempt to send the verification email
+          //  EmailHelper.SendVerificationEmail(unsent.Account);
+          //}
         }
         
 

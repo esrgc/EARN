@@ -101,7 +101,7 @@ and/or view this user’s Organizational Profile for more information.",
 
         _workUnit.RequestRepository.InsertEntity(request);
         _workUnit.saveChanges();
-        updateTempMessage("Your request has been sent to the owner of this partnership");
+        updateTempMessage("Your request has been sent to the admin of this partnership");
         return RedirectToAction("View", "Partnership", new { partnershipID, returnUrl });
       }
       //error

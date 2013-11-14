@@ -29,6 +29,16 @@
     <div class="text-right"><small>Last update @Html.TimeSpan(@Model.LastUpdate)</small></div>
     <div class="row">
         <div class="col-md-12">
+            @if (!Model.getAccount().EmailVerified) { 
+                <div class="alert alert-warning">
+                    <h4>Your account email address has not been verified!</h4>
+                    <p>
+                        Currently, you are not able to receive notifications, including partnership invite/request. 
+                        Please verify your email address to start receiving notifications.
+                        <a href="@Url.Action("Settings", "Account")">Click here to check your email verification status.</a>
+                    </p>
+                </div>
+            }
             <div class="placeholder-panel">
                 <div class="post">
                     <ul class="list-inline list-unstyled link-fa-container" id="socialNetworkLinks">
