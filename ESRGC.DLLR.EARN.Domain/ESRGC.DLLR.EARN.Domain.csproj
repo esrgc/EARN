@@ -122,6 +122,10 @@
     <Compile Include="Migrations\201311121655481_document3.Designer.cs">
       <DependentUpon>201311121655481_document3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201311141738480_delete-grantStatus.cs" />
+    <Compile Include="Migrations\201311141738480_delete-grantStatus.Designer.cs">
+      <DependentUpon>201311141738480_delete-grantStatus.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\Announcement.cs" />
@@ -197,6 +201,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201311121655481_document3.resx">
       <DependentUpon>201311121655481_document3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201311141738480_delete-grantStatus.resx">
+      <DependentUpon>201311141738480_delete-grantStatus.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

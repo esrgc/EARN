@@ -39,13 +39,13 @@ namespace ESRGC.DLLR.EARN.Domain.Model
       set { _description = value; LastUpdate = DateTime.Now; }
     }
 
-    [Required]
-    [MaxLength(100, ErrorMessage = "100 maximum characters allowed")]
+    //[Required]
+    //[MaxLength(100, ErrorMessage = "100 maximum characters allowed")]
 
-    public string GrantStatus {
-      get { return _grantStatus; }
-      set { _grantStatus = value; LastUpdate = DateTime.Now; }
-    }
+    //public string GrantStatus {
+    //  get { return _grantStatus; }
+    //  set { _grantStatus = value; LastUpdate = DateTime.Now; }
+    //}
 
 
     public DateTime Created { get; set; }

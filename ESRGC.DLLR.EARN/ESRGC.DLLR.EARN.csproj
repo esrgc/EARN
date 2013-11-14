@@ -223,6 +223,13 @@
     <Content Include="Client\jsLib\bootstrap-3.0.1\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Client\jsLib\bootstrap-3.0.1\js\bootstrap.js" />
     <Content Include="Client\jsLib\bootstrap-3.0.1\js\bootstrap.min.js" />
+    <Content Include="Client\jsLib\bootstrap-3.0.2\css\bootstrap-theme.css" />
+    <Content Include="Client\jsLib\bootstrap-3.0.2\css\bootstrap-theme.min.css" />
+    <Content Include="Client\jsLib\bootstrap-3.0.2\css\bootstrap.css" />
+    <Content Include="Client\jsLib\bootstrap-3.0.2\css\bootstrap.min.css" />
+    <Content Include="Client\jsLib\bootstrap-3.0.2\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Client\jsLib\bootstrap-3.0.2\js\bootstrap.js" />
+    <Content Include="Client\jsLib\bootstrap-3.0.2\js\bootstrap.min.js" />
     <Content Include="Client\jsLib\bootstrap-3.0\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Client\jsLib\jquery-1.10.2\jquery-1.10.2.js" />
     <Content Include="Client\jsLib\jquery-1.10.2\jquery-1.10.2.min.js" />
@@ -361,6 +368,9 @@
     <Content Include="Client\jsLib\bootstrap-3.0.1\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Client\jsLib\bootstrap-3.0.1\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Client\dllrContent\css\dllrCSS.less" />
+    <Content Include="Client\jsLib\bootstrap-3.0.2\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Client\jsLib\bootstrap-3.0.2\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Client\jsLib\bootstrap-3.0.2\fonts\glyphicons-halflings-regular.woff" />
     <None Include="Properties\PublishProfiles\FTP.pubxml" />
     <None Include="Properties\PublishProfiles\P drive.pubxml" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
@@ -386,7 +396,7 @@
     <Content Include="Views\Communication\InviteToPartnership.cshtml" />
     <Content Include="Views\Communication\Requests.cshtml" />
     <Content Include="Views\Shared\miniProfilePartial.cshtml" />
-    <Content Include="Views\Shared\miniPartnershipPartial.cshtml" />
+    <Content Include="Views\Shared\partnershipStatusPartial.cshtml" />
     <Content Include="Views\Communication\Notifications.cshtml" />
     <Content Include="Views\Emails\VerificationEmail.html.cshtml" />
     <Content Include="Views\Emails\NotificationEmail.txt.cshtml" />
@@ -401,6 +411,8 @@
     <Content Include="Views\Shared\_DLLRLayout.cshtml" />
     <Content Include="Views\Home\CookieNotEnabled.cshtml" />
     <Content Include="Views\Document\List.cshtml" />
+    <Content Include="Views\Shared\aboutTextPartial.cshtml" />
+    <Content Include="Views\Shared\partnershipPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

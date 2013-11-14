@@ -87,7 +87,7 @@
                 if (tagArray.length > 1) {
                     for (var i in tagArray) {
                         if (tagArray[i] == value)
-                            delete tagArray[i];
+                            tagArray.splice(i, 1);
                     }
                     $('input[type="hidden"]').filter('[value="' + value + '"]').remove();
                     //finally remove the whole node
@@ -124,10 +124,11 @@
             $('#addTagBtn').on('click', function (e) {
                 addTags();
             });
-            $('#tagForm').on('submit', function () {
+            $('#tagForm').on('submit', function (e) {
                 if (tagArray.length == 0) {
                     $('.status-text').text('Please add at least one tag before procceding!');
-                    return false;
+                    e.preventDefaults();
+                    return false;                    
                 }
                 return true;
             });
@@ -174,7 +175,7 @@
 
                             @if (currentTags != null) {
                                 foreach (var i in currentTags) { 
-                                <input type="hidden" value="@i.Name" name="tags"/>
+                                    <input type="hidden" value="@i.Name" name="tags"/>
                                 }
                             }
                         </form>

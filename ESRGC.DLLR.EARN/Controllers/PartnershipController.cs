@@ -117,7 +117,7 @@ namespace ESRGC.DLLR.EARN.Controllers
               Account = x.getAccount(),
               LinkToAction = Url.Action("Detail", new { partnershipID }),
               Message = partnership.Name + " has been mofified by " + CurrentAccount.Profile.Organization.Name + ".",
-              Message2 = "Status: " + partnership.Status + ", Grant status: " + partnership.GrantStatus + "."
+              Message2 = "Status: " + partnership.Status + "."
             };
             _workUnit.NotificationRepository.InsertEntity(notification);
           });

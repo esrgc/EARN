@@ -38,34 +38,7 @@
                     <p class=""><strong>Description</strong> @Model.Description</p>
                     <p>
                         <strong>Status</strong>
-                        @switch (Model.Status) {
-                            case "Initiating":
-                            <span class="text-danger">@Model.Status</span>
-                                break;
-                            case "Partnering/drafting proposal":
-                            <span class="text-warning">@Model.Status</span>
-                                break;
-                            case "Partnered/proposed":
-                            <span class="text-success">@Model.Status</span>
-                                break;
-                        }
-                    </p>
-                    <p>
-                        <strong>Grant</strong>
-                        @switch (Model.GrantStatus) {
-                            case "Pre-draft":
-                            <span class="text-danger"><i class="fa fa-minus-circle"></i>&nbsp;@Model.GrantStatus</span>
-                                break;
-                            case "Drafting":
-                            <span class="text-warning"><i class="fa fa-pencil"></i>&nbsp;@Model.GrantStatus</span>
-                                break;
-                            case "Submitted":
-                            <span class="text-info"><i class="fa fa-check"></i>&nbsp;@Model.GrantStatus</span>
-                                break;
-                            case "Awarded":
-                            <span class="text-success"><i class="fa fa-check-circle"></i>&nbsp;@Model.GrantStatus</span>
-                                break;
-                        }
+                        @Html.Partial("partnershipStatusPartial", Model)
                     </p>
                     <div class="alert alert-info">
                         <h4>Confirm Sending Request</h4>
@@ -76,12 +49,12 @@
                         </p>
                         <div class="panel-action-default">
                             <form class="form-horizontal" action="@Url.Action("SendPartnershipRequest")" method="post" role="form">
-                                @Html.HiddenFor(x=>x.PartnershipID)
+                                @Html.HiddenFor(x => x.PartnershipID)
                                 @Html.Hidden("returnUrl", returnUrl)
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="message">Message</label>
                                     <div class="col-md-8">
-                                        @Html.TextArea("message", 
+                                        @Html.TextArea("message",
                                         "Our organization would like to join your partnership.",
                                         new {
                                             @class = "form-control",

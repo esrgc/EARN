@@ -35,16 +35,21 @@
                     <strong>Select a partnership</strong>
                 </div>
                 <div class="window-panel-content">
-                    <p>Inviting "@Model.Organization.Name" to which partnership?</p>
-                    <div class="alert alert-info">
-                        <p>
-                            The list below contains the partnerships
-                            that your organization posted. To invite the organization 
-                            to join your partnership first
-                            pick the partnership you want to invite
-                            then click the "Invite" button.
-                        </p>
-                    </div>
+                    @if (partnerships.Count() == 0) { 
+                        <p>You have not created any partnership. Please create a partnership first!</p>
+                    }
+                    else{
+                        <p>Inviting "@Model.Organization.Name" to which partnership?</p>
+                        <div class="alert alert-info">
+                            <p>
+                                The list below contains the partnerships
+                                that your organization posted. To invite the organization 
+                                to join your partnership first
+                                pick the partnership you want to invite
+                                then click the "Invite" button.
+                            </p>
+                        </div>
+                    }
                     <ul class="list-group">
                         @foreach (var p in partnerships) {
                             var partners = p.getPartners();
@@ -56,35 +61,7 @@
                                 <br />
                                 <br />
                                 <p class="inline-block">
-                                    <span>Status&nbsp;
-                                    @switch (p.Status) {
-                                        case "Initiating":
-                                        <span class="text-danger">@p.Status</span>
-                                            break;
-                                        case "Partnering/drafting proposal":
-                                        <span class="text-warning">@p.Status</span>
-                                            break;
-                                        case "Partnered/proposed":
-                                        <span class="text-success">@p.Status</span>
-                                            break;
-                                    }
-                                    </span>
-                                    <br />
-                                    <span>Grant </span>
-                                    @switch (p.GrantStatus) {
-                                        case "Pre-draft":
-                                        <span class="text-danger"><i class="fa fa-minus-circle"></i>&nbsp;@p.GrantStatus</span>
-                                            break;
-                                        case "Drafting":
-                                        <span class="text-warning"><i class="fa fa-pencil"></i>&nbsp;@p.GrantStatus</span>
-                                            break;
-                                        case "Submitted":
-                                        <span class="text-info"><i class="fa fa-check"></i>&nbsp;@p.GrantStatus</span>
-                                            break;
-                                        case "Awarded":
-                                        <span class="text-success"><i class="fa fa-check-circle"></i>&nbsp;@p.GrantStatus</span>
-                                            break;
-                                    }
+                                    <span>Status&nbsp;@Html.Partial("partnershipStatusPartial", p)</span>
                                     <br />
                                     <span>Participants</span>&nbsp;<span class="badge">@partners.Count()</span>
 

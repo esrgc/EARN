@@ -24,7 +24,6 @@
 
 @{
     var currentProfile = ViewBag.currentProfile as Profile ?? new Profile();
-    var grantStatusList = Html.getGrantStatusList();
     var statusList = Html.getPartnershipStatusList();
     var returnUrl = ViewBag.returnUrl as string;
 }
@@ -66,19 +65,6 @@
                                 })
                                 <span class="label label-default">Required</span>
                                 <div class="help-block">@Html.ValidationMessageFor(x => x.Status)</div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="GrantStatus">Grant status</label>
-                            <div class="col-sm-4">
-                                @Html.DropDownListFor(x => x.GrantStatus,
-                                new SelectList(grantStatusList),
-                                new {
-                                    @class = "form-control input-sm",
-                                    placeholder = "Awarded, Pending...ect."
-                                })
-                                <span class="label label-default">Required</span>
-                                <div class="help-block">@Html.ValidationMessageFor(x => x.GrantStatus)</div>
                             </div>
                         </div>
                         <div class="form-group">

@@ -11,17 +11,13 @@ namespace ESRGC.DLLR.EARN.Helpers
     public static List<string> getPartnershipStatusList(this HtmlHelper helper) {
       return new List<string>() { 
         "Initiating",
-        "Partnering/drafting proposal",
-        "Partnered/proposed"
+        "Planning Grant in Progress",
+        "Planning Grant Awarded",
+        "Implementation Grant in Progress",
+        "Implementation Grant Awarded",
+        "Other"
       };
     }
-    public static List<string> getGrantStatusList(this HtmlHelper helper) {
-      return new List<string>() { 
-        "Pre-draft",
-        "Drafting",
-        "Submitted",
-        "Awarded"
-      };
-    }
+
   }
 }

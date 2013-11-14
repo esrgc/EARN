@@ -316,3 +316,7 @@ a.link-icon:hover,
   right: 5px;
   text-align: center;
 }
+.info-button-container button,
+.info-button-container a {
+  min-width: 280px;
+}

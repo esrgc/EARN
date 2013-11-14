@@ -22,12 +22,12 @@
 </address>
 <div>
     @if (Model.LocationVerified()) {
-        <span class="label label-success" title="Address located and viewable in the map"><i class="fa fa-check-circle fa-lg"></i>&nbsp;Address verified</span>
+        <span class="label label-success" title="Address located and viewable in the map"><i class="fa fa-check-circle fa-lg"></i>&nbsp;Street address located</span>
     }
     else {
         <span class="label label-danger"
             title="Address not located. You can change address by editing your organization address">
-            <i class="fa fa-times-circle fa-lg"></i>&nbsp;Address not verified
+            <i class="fa fa-times-circle fa-lg"></i>&nbsp;Street address not located
         </span>
     }
 </div>

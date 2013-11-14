@@ -154,9 +154,9 @@
                         <form action="@Url.Action("EditAbout")" method="post">
                             <h4>About</h4>
                             @Html.TextAreaFor(x => x.About, new {
-                           @class = "form-control about",
-                           placeholder = ModelMetadata.FromLambdaExpression(x => x.About, ViewData).Description
-                       })
+                               @class = "form-control about",
+                               placeholder = ModelMetadata.FromLambdaExpression(x => x.About, ViewData).Description
+                           })
                             <div class="text-right">
                                 <button type="submit" class="btn btn-info btn-xs"><i class="fa fa-save"></i>&nbsp;Save</button>
 
@@ -169,10 +169,13 @@
                         <div>
                             <h4>Your Connections</h4>
                             @if (Model.Connections.Count() == 0) { 
-                                <p>
-                                    There's currently no connection. Connections are 
-                                    organizational profiles that help you keep track of who you might 
-                                    be interested in inviting to your partnerships. 
+                                <p class="text-muted">
+                                    “Connections” are a personal bookmarking system where EARN MD CONNECT users can
+                                    store other user profiles for personal use. Users’ Connections are not 
+                                    visible to others (including the user selected for a Connection). Instead, 
+                                    Connections allow users to conveniently maintain search results for future use, 
+                                    and are only meant to make each user’s search experience more convenient and efficient. 
+                                    Once you add Connections, they will display here.
                                 </p>
                             }
                             @foreach (var p in Model.Connections) { 
@@ -191,12 +194,28 @@
                         </span>
                         <h4>Available Partnerships</h4>
                         @if (Model.PartnershipDetails.Count() == 0) { 
-                            <p>
-                                There's currently no partnership available. Once you are a 
-                                partner of any partnership, they will be listed here. 
-                                Or you can create a new partnership. To do so, click on "Create new partnership" 
-                                to form a new partnership. Note that you will be the owner of the partnership 
-                                and will be able to control the partnership.
+                            <p class="text-muted">
+                                If you are already a member of an EARN Maryland partnership, it may not be reflected 
+                                here because a Partnership Profile has not yet been created on this site, or because 
+                                the Partnership Profile Administrator has not yet invited or confirmed your membership yet. 
+                                Once you are a member of a partnership or partnerships within EARN MD CONNECT, they will be listed here. 
+                                As such, if you are already part of a Planning Grant Applicant Group, you will not have an Organization 
+                                or a Partnership Profile on EARN MD CONNECT until one is created!
+                            </p>
+                            <p class="text-muted">
+                                If there is not yet a Partnership Profile within EARN MD CONNECT for your partnership, 
+                                one can be created by clicking “Create new partnership” above. 
+                                Please note that the user who creates the Partnership Profile will become the Partnership 
+                                Profile’s Administrator, and will be the only user able 1) to control the Partnership Profile’s membership, 2) 
+                                to invite other organizations to join your Partnership Profile, 3) to decide whether to approve users who 
+                                request to join your Partnership Profile, and 4) to control the Partnership Profile’s Title and Description 
+                                visible to other EARN MD CONNECT users. As such, partnerships should determine the appropriate member to create, 
+                                and be the Administrator of, their group’s Partnership Profile on EARN MD CONNECT.
+                            </p>
+                            <p class="text-muted">
+                                If there is already a Partnership Profile for your partnership, you can request to join that Profile within 
+                                EARN MD CONNECT by clicking “Request to join” on the Partnership’s Profile page. 
+                                If you are unsure, you can always <a href="mailto://earn.jobs@maryland.gov">email us</a>. 
                             </p>
                         }
                         else {

@@ -53,41 +53,14 @@
                 <div class="window-panel-content">
                     <p class=""><strong>Description</strong> @p.Description</p>
                     <p>
-                        <strong>Status</strong>
-                        @switch (p.Status) {
-                            case "Initiating":
-                            <span class="text-danger">@p.Status</span>
-                                break;
-                            case "Partnering/drafting proposal":
-                            <span class="text-warning">@p.Status</span>
-                                break;
-                            case "Partnered/proposed":
-                            <span class="text-success">@p.Status</span>
-                                break;
-                        }
-                    </p>
-                    <p>
-                        <strong>Grant</strong>
-                        @switch (p.GrantStatus) {
-                            case "Pre-draft":
-                            <span class="text-danger"><i class="fa fa-minus-circle"></i>&nbsp;@p.GrantStatus</span>
-                                break;
-                            case "Drafting":
-                            <span class="text-warning"><i class="fa fa-pencil"></i>&nbsp;@p.GrantStatus</span>
-                                break;
-                            case "Submitted":
-                            <span class="text-info"><i class="fa fa-check"></i>&nbsp;@p.GrantStatus</span>
-                                break;
-                            case "Awarded":
-                            <span class="text-success"><i class="fa fa-check-circle"></i>&nbsp;@p.GrantStatus</span>
-                                break;
-                        }
+                        Status: @Html.Partial("partnershipStatusPartial", p)
                     </p>
                     <div class="btn-group pull-right">
                         @if (currentProfile.isNewToPartnership(Model.PartnershipID)) {
                             if ((!requested)) {
-                            <a href="@Url.Action("SendPartnershipRequest", "Communication", new { Model.PartnershipID, returnUrl })" class="btn btn-default btn-sm" title="Request to join this partnership">
-                                <i class="fa fa-share"></i>&nbsp;Join request
+                            <a href="@Url.Action("SendPartnershipRequest", "Communication", new { Model.PartnershipID, returnUrl })" 
+                                class="btn btn-primary btn-sm" title="Request to join this partnership">
+                                <i class="fa fa-share"></i>&nbsp;Request to join
                             </a>
                             }
                             else {
@@ -98,7 +71,7 @@
                         }
                         else {
                             if (currentProfile.isOwnerOfPartnership(Model.PartnershipID)) { 
-                            <span class="label label-danger">Owner</span>
+                            <span class="label label-danger">Admin</span>
                             }
                             else {
                             <span class="label label-success"><i class="fa fa-check"></i>&nbsp;Partnered</span>

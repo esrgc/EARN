@@ -20,7 +20,7 @@
     </div>
 }
 @section scripts {
-    <!--[if lte IE9]>
+    <!--[if lt IE 10]>
        <script type="text/javascript">
         $(document).on('keyup', '#comment', function (e) {
             var messageLength = $(this).val().length;
@@ -31,7 +31,7 @@
                 $('#postCommentBtn').attr('disabled', 'disabled');
             }
         });
-    </script>
+        </script>
     <![endif]-->
     <script type="text/javascript" src="@Url.Content("~/Client/jsLib/typeahead.js/typeahead.min.js")"></script>
     <script type="text/javascript">
@@ -122,7 +122,7 @@
                 $('#tagDiscardBtn').removeAttr('disabled');
                 for (var i in tagArray) {
                     if (tagArray[i] == value) {
-                        delete tagArray[i];
+                        tagArray.splice(i, 1);
                     }
                 }
                 $('input[type="hidden"]').filter('[value="' + value + '"]').remove();
@@ -136,9 +136,7 @@
                 $('#tagForm input').filter('input[name="tags"]').remove();
                 $('.tag-list').html('');
                 //remove all elements from tagArray
-                for (var i in tagArray) {
-                    delete tagArray[i];
-                }
+                tagArray.splice(0, tagArray.length);
                 //restore original tags
                 for (var i in originalTags)
                     addTag(originalTags[i]);
@@ -231,35 +229,8 @@
                 <div class="window-panel-content">
                     <p class=""><strong>Description</strong> @p.Description</p>
                     <p>
-                        <strong>Status</strong>
-                        @switch (p.Status) {
-                            case "Initiating":
-                            <span class="text-danger">@p.Status</span>
-                                break;
-                            case "Partnering/drafting proposal":
-                            <span class="text-warning">@p.Status</span>
-                                break;
-                            case "Partnered/proposed":
-                            <span class="text-success">@p.Status</span>
-                                break;
-                        }
-                    </p>
-                    <p>
-                        <strong>Grant</strong>
-                        @switch (p.GrantStatus) {
-                            case "Pre-draft":
-                            <span class="text-danger"><i class="fa fa-minus-circle"></i>&nbsp;@p.GrantStatus</span>
-                                break;
-                            case "Drafting":
-                            <span class="text-warning"><i class="fa fa-pencil"></i>&nbsp;@p.GrantStatus</span>
-                                break;
-                            case "Submitted":
-                            <span class="text-info"><i class="fa fa-check"></i>&nbsp;@p.GrantStatus</span>
-                                break;
-                            case "Awarded":
-                            <span class="text-success"><i class="fa fa-check-circle"></i>&nbsp;@p.GrantStatus</span>
-                                break;
-                        }
+                        <strong>Status:</strong>
+                        @Html.Partial("partnershipStatusPartial", p)
                     </p>
                     <hr />
                     <!--Tags-->
@@ -371,7 +342,7 @@
                             <div id="partners" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <div class="profile-container-holder">
-                                        <span class="label label-danger">Convener</span>
+                                        <span class="label label-danger">Admin</span>
                                         @Html.Partial("shortProfilePartial", owner)
                                         <hr />
                                     </div>

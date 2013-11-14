@@ -25,6 +25,7 @@
 @{
     var filters = ViewBag.filters as Dictionary<string, object> ?? new Dictionary<string, object>();
     var returnUrl = Url.Action("Index");
+    ViewBag.returnUrl = returnUrl;
     var currentProfile = ViewBag.currentProfile as Profile;
 }
 <div class="container">
@@ -49,62 +50,8 @@
                         <div class="">
                             <ul class="list-group">
                                 @foreach (var p in Model) {
-                                    var partners = p.PartnershipDetails.Count();
                                     <li class="list-group-item">
-                                        <small class="pull-right">Last edited: @Html.TimeSpan(p.LastUpdate)</small>
-                                        @if (currentProfile.isNewToPartnership(p.PartnershipID)) {
-                                            <a href="@Url.Action("View", "Partnership", new { p.PartnershipID, returnUrl })">
-                                                <strong>@p.Name</strong>
-                                            </a>
-                                        }
-                                        else {
-                                            <a href="@Url.Action("Detail", "Partnership", new { p.PartnershipID, returnUrl })">
-                                                <strong>@p.Name</strong>
-                                            </a>
-                                        }
-                                        @switch (p.Status) {
-                                            case "Initiating":
-                                            <span class="text-danger">(@p.Status)</span>
-                                                break;
-                                            case "Partnering/drafting proposal":
-                                            <span class="text-warning">(@p.Status)</span>
-                                                break;
-                                            case "Partnered/proposed":
-                                            <span class="text-success">(@p.Status)</span>
-                                                break;
-                                        }
-
-                                        <p class="text-muted">@p.Description</p>
-                                        <span>Grant&nbsp;</span>
-                                        @switch (p.GrantStatus) {
-                                            case "Pre-draft":
-                                            <span class="text-danger"><i class="fa fa-minus-circle"></i>&nbsp;@p.GrantStatus</span>
-                                                break;
-                                            case "Drafting":
-                                            <span class="text-warning"><i class="fa fa-pencil"></i>&nbsp;@p.GrantStatus</span>
-                                                break;
-                                            case "Submitted":
-                                            <span class="text-info"><i class="fa fa-check"></i>&nbsp;@p.GrantStatus</span>
-                                                break;
-                                            case "Awarded":
-                                            <span class="text-success"><i class="fa fa-check-circle"></i>&nbsp;@p.GrantStatus</span>
-                                                break;
-                                        }
-                                        <span class="badge">Participant(s) @partners</span>
-                                        <br />
-                                        @if (!currentProfile.isNewToPartnership(p.PartnershipID)) {
-                                            if (currentProfile.isOwnerOfPartnership(p.PartnershipID)) { 
-                                            <span class="label label-danger">Convener</span>
-                                            }
-                                            else {
-                                            <span class="label label-success"><i class="fa fa-check"></i>&nbsp;Partnered</span>
-                                            }
-                                        }
-                                        <br />
-                                        <h5>Target Industry Tags&nbsp;<i class="fa fa-tags"></i></h5>
-                                        <div class="placeholder-panel">
-                                                @Html.Partial("tagListDisplayPartial", p.getTagNames())
-                                        </div>
+                                        @Html.Partial("partnershipPartial", p)
                                     </li>
                                 }
                             </ul>

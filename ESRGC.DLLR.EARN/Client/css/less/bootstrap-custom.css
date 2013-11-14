@@ -1,7 +1,9 @@
 ﻿body.modal-open,
 .modal-open .navbar-fixed-top,
 .modal-open .navbar-fixed-bottom {
-  margin-right: 0;
+  margin-right: 17px !important;
+  /*Fixed modal open shifts body content*/
+
 }
 .modal-dialog {
   margin-top: 50px;

@@ -20,7 +20,7 @@
 
 @section scripts{}
 
-<div class="container">
+@*<div class="container">
     <div class="row">
         <div class="col-sm-10 col-sm-offset-1">
             <div class="panel-action-default">
@@ -34,39 +34,12 @@
                     <p class=""><strong>Description</strong> @Model.Description</p>
                     <p>
                         <strong>Status</strong>
-                        @switch (Model.Status) {
-                            case "Initiating":
-                            <span class="text-danger">@Model.Status</span>
-                                break;
-                            case "Partnering/drafting proposal":
-                            <span class="text-warning">@Model.Status</span>
-                                break;
-                            case "Partnered/proposed":
-                            <span class="text-success">@Model.Status</span>
-                                break;
-                        }
-                    </p>
-                    <p>
-                        <strong>Grant</strong>
-                        @switch (Model.GrantStatus) {
-                            case "Pre-draft":
-                            <span class="text-danger"><i class="fa fa-minus-circle"></i>&nbsp;@Model.GrantStatus</span>
-                                break;
-                            case "Drafting":
-                            <span class="text-warning"><i class="fa fa-pencil"></i>&nbsp;@Model.GrantStatus</span>
-                                break;
-                            case "Submitted":
-                            <span class="text-info"><i class="fa fa-check"></i>&nbsp;@Model.GrantStatus</span>
-                                break;
-                            case "Awarded":
-                            <span class="text-success"><i class="fa fa-check-circle"></i>&nbsp;@Model.GrantStatus</span>
-                                break;
-                        }
-                    </p>
+                        @Html.Partial("partnershipStatusPartial", Model)
+                    </p>                    
                     <div class="alert alert-info">
                         <h4>Comfirm Sending Request</h4>
                         <p>
-                            You are requesting to join this partnerhiModel.
+                            You are requesting to join this partnership.
                             Your request will be sent to the owner of the partnership to
                             review. This request is subject to approval. 
                         </p>
@@ -95,6 +68,6 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
 
 
