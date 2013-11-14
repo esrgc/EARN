@@ -101,8 +101,9 @@ Description, Target Industry, region, and membership will be visible to other EA
 full Partnership Profiles, including the communication function, are only accessible to that Partnership 
 Profile’s members, and 4) the communication feature is meant to support communication between partners, 
 but should not be used to share proprietary or sensitive content.",                                                                     
-
+          LinkToAction = Url.Action("Detail", new { partnership.PartnershipID})
         };
+        _workUnit.NotificationRepository.InsertEntity(notification);
         _workUnit.saveChanges();
         return RedirectToAction("Detail", new { partnership.PartnershipID });
       }

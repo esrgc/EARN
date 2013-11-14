@@ -11,13 +11,20 @@
                     }
                     <small class="pull-right">@Html.TimeSpan(i.Created)</small>
                     <a href="@Url.Action("ViewNotification", new { i.NotificationID })">
-                        <p>
-                            @i.Message
-                        </p>
-
+                        @if (i.Message.Length > 100) {
+                            <p>@i.Message.Substring(0, 100)...</p>
+                        }
+                        else { 
+                            <p>@i.Message</p>
+                        }
                     </a>
-                    @if (!string.IsNullOrEmpty(i.Message2)) { 
-                        <p><i>@i.Message2</i></p>
+                    @if (!string.IsNullOrEmpty(i.Message2)) {
+                        if (i.Message2.Length > 100) {
+                            <p><i>@i.Message2.Substring(0, 100)...</i></p>
+                        }
+                        else { 
+                            <p><i>@i.Message2</i></p>
+                        }
                     }
                 </li>
             }
