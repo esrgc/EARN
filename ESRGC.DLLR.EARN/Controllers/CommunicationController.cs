@@ -33,7 +33,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       message = message ?? "You have been invited to join our partnership";
       if (partnership != null) {
         var notification = new Notification() {
-          Category = "Invite",
+          Category = "Invite Recieved",
           Message = string.Format("You have been invited to join the \"{0}\" partnership", partnership.Name),
           Account = receiverAccount
         };
@@ -79,7 +79,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       if (partnership != null) {
         //create notification
         var notification = new Notification() {
-          Category = "Request",
+          Category = "Request Received",
           Message = string.Format("{0} has requested to join your \"{0}\" partnership",
             partnership.Name,
             CurrentAccount.Profile.Organization.Name),
@@ -231,7 +231,7 @@ and/or view this user’s Organizational Profile for more information."
             notification = new Notification() {
               Account = r.Sender,
               Category = "Partnership Invite Accepted",
-              Message = string.Format(@"{0} has accepted your invitation to join the ""{1}"" partnership",
+              Message = string.Format(@"{0} is now a new partner of your ""{1}"" partnership",
                 r.Receiver.Profile.Organization.Name,
                 r.Partnership.Name),
               LinkToAction = Url.Action("Detail", "Partnership", new { r.PartnershipID })

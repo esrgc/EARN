@@ -71,6 +71,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     }
     [HttpPost]
     [VerifyProfile]
+    [SendNotification]
     public ActionResult Create(Partnership partnership) {
       if (ModelState.IsValid) {
         var partnershipDetail = new PartnershipDetail() {
@@ -79,6 +80,29 @@ namespace ESRGC.DLLR.EARN.Controllers
           Partnership = partnership
         };
         _workUnit.PartnershipDetailRepository.InsertEntity(partnershipDetail);
+        //notifications
+        var notification = new Notification { 
+          Account = CurrentAccount,
+          Category = "New Partnership Profile Created",
+          Header = "Thank you for creating a Partnership Profile on EARN MD CONNECT!",
+          Message = @"You are now the Administrator of your Partnership Profile. 
+As the Administrator, you are the only user able 1) to control the Partnership Profile’s membership, 2) 
+to invite other organizations to join your Partnership Profile, and 3) 
+to decide whether to approve users who request to join your Partnership Profile.
+
+If you are the appropriate Administrator for your partnership’s EARN MD CONNECT Partnership Profile, you’re ready to get started!
+",
+          Message2 = @"Next, please visit your EARN MD CONNECT Partnership Profile and invite 
+your partners to join the Partnership Profile on EARN MD CONNECT, communicate with your partners, 
+and search for any other Partnership Profiles that may be of interest to you.",
+          Message3 = @"Please note: 1) to become a member of an EARN MD CONNECT Partnership Profile, 
+a user must first have, or create an Organizational Profile; 2) the Partnership Profile’s Title, 
+Description, Target Industry, region, and membership will be visible to other EARN MD CONNECT users; 3) 
+full Partnership Profiles, including the communication function, are only accessible to that Partnership 
+Profile’s members, and 4) the communication feature is meant to support communication between partners, 
+but should not be used to share proprietary or sensitive content.",                                                                     
+
+        };
         _workUnit.saveChanges();
         return RedirectToAction("Detail", new { partnership.PartnershipID });
       }

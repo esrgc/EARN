@@ -17,6 +17,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public int NotificationID { get; set; }
     public int AccountID { get; set; }
     public virtual Account Account { get; set; }
+    public string Header { get; set; }
     public string Message { get; set; }
     public string Message2 { get; set; }
     public string Message3 { get; set; }

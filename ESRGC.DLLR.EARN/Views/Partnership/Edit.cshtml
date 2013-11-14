@@ -19,13 +19,14 @@
 }
 
 @section scripts {
-    @Scripts.Render("~/bundles/jqueryval-unobtrusive")  
+    @Scripts.Render("~/bundles/jqueryval-unobtrusive")
 }
 
 @{
     var currentProfile = ViewBag.currentProfile as Profile ?? new Profile();
     var statusList = Html.getPartnershipStatusList();
     var returnUrl = ViewBag.returnUrl as string;
+    var canEdit = currentProfile.isOwnerOfPartnership(Model.PartnershipID);
 }
 
 <div class="container">
@@ -34,7 +35,13 @@
             <div class="window-panel">
                 <div class="window-panel-title">
                     <strong>@Model.Name</strong>
-                   
+                    @if (canEdit) { 
+                        <a title="Delete this partnership" 
+                            href="@Url.Action("Delete", new { Model.PartnershipID, returnUrl })" 
+                            class="pull-right text-danger">
+                            <i class="fa fa-times-circle"></i>&nbsp;Delete
+                        </a>
+                    }
                 </div>
                 <div class="window-panel-content">
                     <form class="form-horizontal" method="post" action="@Url.Action("Edit")" role="form">
