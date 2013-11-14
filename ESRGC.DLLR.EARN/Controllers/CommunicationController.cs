@@ -35,7 +35,8 @@ namespace ESRGC.DLLR.EARN.Controllers
         var notification = new Notification() {
           Category = "Invite Recieved",
           Message = string.Format("You have been invited to join the \"{0}\" partnership", partnership.Name),
-          Account = receiverAccount
+          Account = receiverAccount,
+          LinkToAction = Url.Action("Requests", "Communication")
         };
         //create request
         var request = new PartnershipRequest() {
@@ -85,7 +86,8 @@ namespace ESRGC.DLLR.EARN.Controllers
             CurrentAccount.Profile.Organization.Name),
           Account = receiverAccount,
           Message2 = @"You will be able to choose whether to accept this request, 
-and/or view this user’s Organizational Profile for more information."
+and/or view this user’s Organizational Profile for more information.",
+          LinkToAction = Url.Action("Requests", "Communication")
         };
         //create request
         var request = new PartnershipRequest() {
@@ -150,8 +152,11 @@ and/or view this user’s Organizational Profile for more information."
             result = Redirect(url);
           break;
       }
-      notification.IsRead = true;
-      _workUnit.NotificationRepository.UpdateEntity(notification);
+      //mark all as read
+      notification.Account.Notifications.ToList().ForEach(x => {
+        notification.IsRead = true;
+        _workUnit.NotificationRepository.UpdateEntity(x);
+      });
       _workUnit.saveChanges();
       if (result == null)
         return RedirectToAction("index", "home");
