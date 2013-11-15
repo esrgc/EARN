@@ -84,7 +84,7 @@
   margin-bottom: -1px;
 }
 .about {
-  min-height: 250px;
+  min-height: 200px;
   min-width: 100%;
   max-width: 100%;
   margin-bottom: 5px;
@@ -114,4 +114,7 @@
 }
 .tag-list-holder {
   min-height: 100px;
+}
+.profile-info-container div.placeholder-panel {
+  margin-bottom: 10px;
 }

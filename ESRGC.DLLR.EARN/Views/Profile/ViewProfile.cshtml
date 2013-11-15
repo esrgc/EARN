@@ -48,7 +48,7 @@
                             <div class="col-md-12">
                                 <div class="">
                                     <h4>
-                                        <span>@Model.Organization.Name</span>                                        
+                                        <span>@Model.Organization.Name</span>
                                         <br />
                                         <small>@Model.UserGroup.Name</small>
                                         @*-
@@ -65,8 +65,7 @@
 
 
                                     <p>@Model.Organization.Description</p>
-                                    <h5>
-                                        Searchable tags <i class="fa fa-tags"></i>
+                                    <h5>Searchable tags <i class="fa fa-tags"></i>
                                     </h5>
                                     <div class="placeholder-panel">
                                         @Html.Partial("tagListLinkPartial", Model.getTagNames())
@@ -84,56 +83,66 @@
     <hr />
     <!--Profile detail-->
     <div class="row">
-        <div class="col-md-4">           
+        <div class="col-md-4">
             <div class="profile-info-container">
                 <div class="placeholder-panel">
                     <div>
-                        <span>Point of Contact</span> @*<i class="fa fa-envelope"></i>*@                        
+                        <strong>Point of Contact</strong> @*<i class="fa fa-envelope"></i>*@
                     </div>
                     <div class="post">
                         @Html.Partial("profileContactPartial")
                     </div>
-                </div>                
+                </div>
                 <div class="placeholder-panel">
                     <div>
-                        <span>Location</span> @*<i class="fa fa-envelope"></i>*@
+                        <strong>Location</strong> @*<i class="fa fa-envelope"></i>*@
                     </div>
                     <div class="post">
                         <div>@Html.Partial("locationInfoPartial", Model)</div>
                     </div>
                 </div>
-
             </div>
         </div>
-        <div class="col-sm-8 profile-tabs">
-            <ul class="nav nav-tabs ">
-                <li class="active"><a href="#tab1" data-toggle="tab">Summary</a></li>
-                <li><a href="#tab2" data-toggle="tab">Partnerships&nbsp;<span class="badge">@Model.PartnershipDetails.Count()</span></a></li>
-            </ul>
-            <div class="tab-content">
-                <div class="tab-pane active" id="tab1">
-                    <div class="placeholder-pane">
-                        <h4>About</h4>
-                        @if (!string.IsNullOrEmpty(Model.About)) { 
-                            <p>@Model.About</p>
-                        }
-                        else {
-                            <p>...</p>
-                        }
-                    </div>
+        <div class="col-md-8 profile-info-container">
+            <div class="placeholder-panel">
+                <strong>Profile Summary</strong>
+                <div class="post">
+                    @if (!string.IsNullOrEmpty(Model.About)) { 
+                        <p >@Model.About</p>
+                    }
+                    else {
+                        <p>Sorry! We have not filled this out...</p>
+                    }
                 </div>
-                <div class="tab-pane" id="tab2">
-                    <div class="placeholder-pane">
-                        <h4>Available Partnerships</h4>
+            </div>
+            <div class="placeholder-panel">
+                    <strong>Partnerships</strong>
+                    <div class="post">
                         @if (Model.PartnershipDetails.Count() == 0) { 
-                            <p>There's currently no partnership available.</p>
+                            <p>This organization currently has no partnership.</p>
                         }
                         else {
                             @Html.Action("ListPartnerships", "Partnership", new { Model.ProfileID })
                         }
                     </div>
                 </div>
+        </div>
+    </div>
+    <div>
+        <div class="row">
+            <div class="col-md-12">
+                @*<ul class="nav nav-tabs ">
+                <li class="active"><a href="#tab1" data-toggle="tab">Profile Summary</a></li>
+                <li><a href="#tab2" data-toggle="tab">Partnerships&nbsp;<span class="badge">@Model.PartnershipDetails.Count()</span></a></li>
+            </ul>
+            <div class="tab-content">*@
+                @*<div class="tab-pane active" id="tab1">
+                    
+                </div>
+                <div class="tab-pane" id="tab2">*@
+                
+                @*</div>*@
+                @*</div>*@
             </div>
         </div>
     </div>
-</div>

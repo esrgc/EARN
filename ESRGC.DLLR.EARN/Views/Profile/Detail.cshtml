@@ -64,7 +64,6 @@
                         <div class="row profile-container">
                             <div class="col-md-12">
                                 <div class="">
-
                                     <h4>
                                         <span>@Model.Organization.Name</span>
                                         <small>
@@ -109,11 +108,11 @@
     <hr />
     <!--Profile detail-->
     <div class="row">
-        <div class="col-md-4">           
+        <div class="col-md-4">
             <div class="profile-info-container">
                 <div class="placeholder-panel">
                     <div>
-                        <span>Point of Contact</span> @*<i class="fa fa-envelope"></i>*@
+                        <strong>Point of Contact</strong> @*<i class="fa fa-envelope"></i>*@
                         <span class="pull-right">
                             <a class="link-icon" title="Edit contact info" href="@Url.Action("Edit", "Contact")"><i class="fa fa-pencil"></i></a>
                         </span>
@@ -121,10 +120,15 @@
                     <div class="post">
                         @Html.Partial("profileContactPartial")
                     </div>
-                </div>                
+                </div>
                 <div class="placeholder-panel">
                     <div>
-                        <span>Location</span> @*<i class="fa fa-envelope"></i>*@
+                        <strong>Location</strong>
+                        <span class="pull-right">
+                            <a class="link-icon" title="Edit address location"
+                                            href="@Url.Action("Edit", "Organization")">
+                                <i class="fa fa-pencil"></i></a>
+                        </span>
                     </div>
                     <div class="post">
                         <div>@Html.Partial("locationInfoPartial", Model)</div>
@@ -133,33 +137,36 @@
 
             </div>
         </div>
-
-        <div class="col-md-8 profile-tabs">
-            <ul class="nav nav-tabs ">
-                <li class="active"><a href="#summary" data-toggle="tab">Summary</a></li>
-                <li><a href="#connections" data-toggle="tab">Connections&nbsp;<span class="badge">@connectionCount</span></a></li>
-                <li><a href="#partnerships" data-toggle="tab">Partnerships&nbsp;<span class="badge">@partnershipCount</span></a></li>
-            </ul>
-            <div class="tab-content">
-                <div class="tab-pane active" id="summary">
-                    <div class="placeholder-pane">
-                        <form action="@Url.Action("EditAbout")" method="post">
-                            <h4>About</h4>
-                            @Html.TextAreaFor(x => x.About, new {
+        <div class="col-md-8 profile-info-container">
+            <div class="placeholder-panel">
+                <form action="@Url.Action("EditAbout")" method="post">
+                    <strong>Profile Summary</strong>
+                        @Html.TextAreaFor(x => x.About, new {
                            @class = "form-control about",
                            placeholder = ModelMetadata.FromLambdaExpression(x => x.About, ViewData).Description
                        })
-                            <div class="text-right">
-                                <button type="submit" class="btn btn-info btn-xs"><i class="fa fa-save"></i>&nbsp;Save</button>
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-info btn-xs"><i class="fa fa-save"></i>&nbsp;Save</button>
 
-                            </div>
-                        </form>
                     </div>
-                </div>
-                <div class="tab-pane" id="connections">
+                </form>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-12 profile-tabs">
+            <ul class="nav nav-tabs ">
+                @*<li class="active"><a href="#summary" data-toggle="tab">Summary</a></li>*@
+                <li class="active"><a href="#connections" data-toggle="tab">Connections&nbsp;<span class="badge">@connectionCount</span></a></li>
+                <li><a href="#partnerships" data-toggle="tab">Partnerships&nbsp;<span class="badge">@partnershipCount</span></a></li>
+            </ul>
+            <div class="tab-content">
+                @*<div class="tab-pane active" id="summary">                    
+                </div>*@
+                <div class="tab-pane active" id="connections">
                     <div class="placeholder-pane">
                         <div>
-                            <h4>Your Connections</h4>
                             @if (Model.Connections.Count() == 0) { 
                                 <p class="text-muted">
                                     “Connections” are a personal bookmarking system where EARN MD CONNECT users can
@@ -184,7 +191,6 @@
                                 &nbsp;Create new partnership
                             </a>
                         </span>
-                        <h4>Available Partnerships</h4>
                         @if (Model.PartnershipDetails.Count() == 0) { 
                             <p class="text-muted">
                                 If you are already a member of an EARN Maryland partnership, it may not be reflected 
