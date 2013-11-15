@@ -226,6 +226,9 @@ namespace ESRGC.DLLR.EARN.Helpers
     public static List<Tag> getTagList(this HtmlHelper helper, Profile profile) {
       return DataUtility.getTagList(profile);
     }
+    public static string DecryptPassword(this HtmlHelper helper, byte[] password) {
+      return SHA1PasswordSecurity.ByteArrayToString(password);
+    }
     /// <summary>
     /// get address geotag from profile
     /// </summary>

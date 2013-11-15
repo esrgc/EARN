@@ -136,7 +136,7 @@ namespace ESRGC.DLLR.EARN.Controllers
           return account;
         }
         catch (Exception ex) {
-          throw ex;
+          return null;
         }
       }
     }

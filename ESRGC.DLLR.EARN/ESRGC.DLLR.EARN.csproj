@@ -180,7 +180,6 @@
     <Compile Include="Helpers\Authentication.cs" />
     <Compile Include="Helpers\EmailHelper.cs" />
     <Compile Include="Helpers\HtmlHelperExt.cs" />
-    <Compile Include="Helpers\SHA1PasswordSecurity.cs" />
     <Compile Include="Helpers\Utility.cs" />
     <Compile Include="Helpers\ViewDataHelper.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
@@ -415,6 +414,8 @@
     <Content Include="Views\Shared\shortPartnershipPartial.cshtml" />
     <Content Include="Views\Shared\locationInfoPartial.cshtml" />
     <Content Include="Views\Shared\socialNetworkPartial.cshtml" />
+    <Content Include="Views\Email\ForgotPassword.html.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

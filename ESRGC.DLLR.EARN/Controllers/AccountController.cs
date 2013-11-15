@@ -9,6 +9,7 @@ using System.Web.Security;
 using ESRGC.DLLR.EARN.Domain.Model;
 using ESRGC.DLLR.EARN.Domain.DAL.Abstract;
 using ESRGC.DLLR.EARN.Filters;
+using ESRGC.DLLR.EARN.Domain.Helpers;
 
 namespace ESRGC.DLLR.EARN.Controllers
 {
@@ -43,9 +44,7 @@ namespace ESRGC.DLLR.EARN.Controllers
         }
         //we're good to go
         var newAccount = new Account() {
-          EmailAddress = model.Email,
-          //SecretQuestion = model.SecretQuestion,
-          InitialPassword = Utility.RandomString(8)
+          EmailAddress = model.Email
         };
         //check password
         if (model.Password == model.ConfirmPassword) {
@@ -106,6 +105,26 @@ namespace ESRGC.DLLR.EARN.Controllers
         if (Authentication.authenticate(_workUnit, model)) {
           //authenticate user
           FormsAuthentication.SetAuthCookie(model.Email, model.RememberMe);
+
+          try {
+            var currentAccount = _workUnit.AccountRepository
+                    .Entities.First(x => x.EmailAddress == model.Email);
+
+            //check password reset
+            var initPassword = SHA1PasswordSecurity.encrypt(currentAccount.InitialPassword);
+            if (Authentication.comparePassword(initPassword, currentAccount.Password)) {
+              updateTempMessage("Please change your password. If you choose not to do so, you will be prompted to change your password everytime you sign in!");
+              return RedirectToAction("ChangePassword");
+            }
+          }
+          catch {
+            //just in case..ofcourse account would have been 
+            //authenticated at this point
+
+            //if could not find the account
+            //proceeds as usual  
+          }
+
           //return to previous url
           if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
               && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\")) {
@@ -126,7 +145,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     public ActionResult SignOut() {
       //record last login
       var account = _workUnit.AccountRepository.Entities.First(x => x.EmailAddress == User.Identity.Name);
-      if(account != null){
+      if (account != null) {
         account.LastLogin = DateTime.Now;
         _workUnit.AccountRepository.UpdateEntity(account);
         _workUnit.saveChanges();
@@ -226,7 +245,58 @@ namespace ESRGC.DLLR.EARN.Controllers
       // If we got this far, something failed, redisplay form
       return View(model);
     }
+    [AllowAnonymous]
+    public ActionResult ForgotPassword() {
+      return View();
+    }
+    [AllowAnonymous]
+    [HttpPost]
+    public ActionResult ForgotPassword(ResetPasswordModel model) {
+      if (ModelState.IsValid) {
+        var emailAddress = model.Email;
+        Account account = null;
+        try {
+          account = _workUnit.AccountRepository.Entities
+              .Where(x => x.EmailAddress.ToLower() == emailAddress.ToLower())
+              .First();
+        }
+        catch {// no email found in the system
+          ModelState.AddModelError("", "We could not find the email address you entered. Please enter a different email address!");
+        }
+        if (account != null) {
+          //set temp password
+          account.Password = SHA1PasswordSecurity.encrypt(account.InitialPassword);
+          _workUnit.AccountRepository.UpdateEntity(account);
+          _workUnit.saveChanges();
+          //send email
+          EmailHelper.SendPasswordEmail(account);
+          updateTempMessage("An email with password reset information has been sent to your email address. Please check your inbox to change your password.");
+          return RedirectToAction("Index", "Home");
+        }
+      }
+      return View(model);
+    }
 
+    [AllowAnonymous]
+    public ActionResult ResetPassword(int accountID, string verificationCode) {
+      var account = _workUnit.AccountRepository.GetEntityByID(accountID);
+      if (account == null) {
+        updateTempMessage("Invalid account ID. Error resetting your password.");
+        return RedirectToAction("Index", "Home");
+      }
+      if (string.IsNullOrEmpty(verificationCode)) {
+        updateTempMessage("Could reset your password. Verification code is empty.");
+        return RedirectToAction("Index", "Home");
+      }
+      if (verificationCode == account.VerificationCode) {
+        updateTempMessage("Please enter a new password");
+        //sign the user in
+        FormsAuthentication.SetAuthCookie(account.EmailAddress, false);
+        //change the password
+        return RedirectToAction("ChangePassword");
+      }
+      return RedirectToAction("Index", "Home");
+    }
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////// Private functions //////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 

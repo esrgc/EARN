@@ -57,6 +57,7 @@
     <Compile Include="DAL\DomainContext.cs" />
     <Compile Include="DAL\PasswordInitializer.cs" />
     <Compile Include="Helpers\DataUtility.cs" />
+    <Compile Include="Helpers\SHA1PasswordSecurity.cs" />
     <Compile Include="Helpers\Utility.cs" />
     <Compile Include="Migrations\201310221905368_init.cs" />
     <Compile Include="Migrations\201310221905368_init.Designer.cs">

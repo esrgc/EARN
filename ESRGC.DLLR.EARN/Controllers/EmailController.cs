@@ -31,5 +31,10 @@ namespace ESRGC.DLLR.EARN.Controllers
       Subject = "EARN MD CONNECT - Email Address Verification";
       return Email("EmailVerification", model);
     }
+    public EmailResult ForgotPassword(Account model) {
+      To.Add(model.EmailAddress);
+      Subject = "EARN MD CONNECT - Your account password";
+      return Email("ForgotPassword", model);
+    }
   }
 }

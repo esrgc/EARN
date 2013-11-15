@@ -5,6 +5,7 @@ using System.Text;
 using System.ComponentModel.DataAnnotations;
 using ESRGC.DLLR.EARN.Domain.ValidationAttributes;
 using System.ComponentModel.DataAnnotations.Schema;
+using ESRGC.DLLR.EARN.Domain.Helpers;
 
 namespace ESRGC.DLLR.EARN.Domain.Model
 {
@@ -18,6 +19,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
       ReceivedRequests = new List<Request>();
       EmailVerified = false;
       VerificationCode = Helpers.Utility.RandomString(30);
+      InitialPassword = Utility.RandomString(8);
     }
 
     public int AccountID { get; set; }

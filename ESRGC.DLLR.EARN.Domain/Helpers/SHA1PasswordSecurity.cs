@@ -5,7 +5,7 @@ using System.Web;
 using System.Text;
 using System.Security.Cryptography;
 
-namespace ESRGC.DLLR.EARN.Helpers
+namespace ESRGC.DLLR.EARN.Domain.Helpers
 {
   public class SHA1PasswordSecurity
   {
@@ -15,7 +15,7 @@ namespace ESRGC.DLLR.EARN.Helpers
       var hasedBytes = encryptor.ComputeHash(tempSrc);
       return hasedBytes;
     }
-
+   
     public static string ByteArrayToString(byte[] arrInput) {
       int i;
       StringBuilder sOutput = new StringBuilder(arrInput.Length);

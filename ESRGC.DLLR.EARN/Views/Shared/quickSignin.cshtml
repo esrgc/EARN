@@ -5,7 +5,7 @@
     <input type="email" name="Email" id="email" class="form-control" placeholder="Email address" autofocus="" value="@Model.Email"/>
     <input type="password" name="Password" id="password" class="form-control" placeholder="Password" />
     <span class="help-block">
-        <a href="#" class="pull-right"><small>Forgot your password?</small></a>
+        <a href="@Url.Action("ForgotPassword", "Account")" class="pull-right"><small>Forgot your password?</small></a>
     </span>
     <label class="checkbox">
         @Html.CheckBoxFor(x => x.RememberMe)
