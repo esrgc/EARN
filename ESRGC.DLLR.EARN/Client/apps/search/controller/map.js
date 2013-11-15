@@ -40,6 +40,7 @@ dx.defineController('Map', {
             //after the store data is loaded this handler is called
             store.on('searchStoreLoaded', function (store, data) {
                 scope.addMarkers();
+                scope.zoomToOwnProfile();
             });
         }
     },
@@ -69,12 +70,19 @@ dx.defineController('Map', {
                     });
                     feature.setIcon(icon);
                     feature.bindPopup('<a href="' + url + '">Your organization</a>')
-                    
                 }
                 mapViewer.addFeatureToFeatureGroup(feature);
             }
-
         });
+    },
+    zoomToOwnProfile: function () {
+        var scope = dx.getController('Map');
+        var mapViewer = dx.getApp().getMapViewer();
+        var ownProfile = scope.getOwnProfile();
+        var geom = ownProfile.attr('data-location');
+        var feature = mapViewer.createFeature(geom);
+        //dx.log(feature);
+        mapViewer.zoomToPoint(feature.getLatLng());
     },
     scrollToResult: function goToByScroll(id) {
         // Scroll

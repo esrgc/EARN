@@ -34,6 +34,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       var profiles = _workUnit
         .ProfileRepository
         .Entities
+        .Where(x=>x.ProfileID != currentProfile.ProfileID)
         .AsQueryable();
 
       //filter by user group
@@ -43,10 +44,10 @@ namespace ESRGC.DLLR.EARN.Controllers
       }
 
       //filter by category
-      if (categoryID != null) {
-        profiles = profiles.Where(x => x.CategoryID == categoryID).AsQueryable();
-        filters.Add("categoryID", categoryID);
-      }
+      //if (categoryID != null) {
+      //  profiles = profiles.Where(x => x.CategoryID == categoryID).AsQueryable();
+      //  filters.Add("categoryID", categoryID);
+      //}
 
       var result = new List<Profile>();
       var tagNames = new List<string>();
@@ -69,10 +70,10 @@ namespace ESRGC.DLLR.EARN.Controllers
       else
         result = profiles.ToList();
 
-      //always include current profile
-      if (!result.Contains(currentProfile)) {
-        result.Add(currentProfile);
-      }
+      ////always include current profile
+      //if (!result.Select(x=>x.ProfileID).Contains(currentProfile.ProfileID)) {
+      //  result.Add(currentProfile);
+      //}
 
       int pageIndex = page ?? 1;
       int pageSize = size ?? 10;

@@ -37,7 +37,7 @@
         <div class="col-sm-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Basic search 
+                    <strong>Search</strong>
                     @*<small class="pull-right"><a href="#" title="To be available">Advanced search</a></small>*@
                 </div>
                 <div class="panel-body">
@@ -76,10 +76,10 @@
                                                         <div class="tag matched-tag">
                                                             <span class="label label-default">
                                                                 @i&nbsp;
-                                                <a data-value="@i" 
-                                                    href="@Url.RemoveSearchFilter("Basic", filters, "tags", i)">
-                                                    <i class="fa fa-times"></i>
-                                                </a>
+                                                                <a data-value="@i" 
+                                                                    href="@Url.RemoveSearchFilter("Basic", filters, "tags", i)">
+                                                                    <i class="fa fa-times"></i>
+                                                                </a>
                                                             </span>
                                                         </div>
                                                     }
@@ -123,6 +123,7 @@
         <div class="col-sm-12">
             <div class="panel panel-default" id="searchResult">
                 <div class="panel-body">
+                    @Html.Partial("searchProfilePartial", currentProfile)
                     @if (Model.PageCount > 1) {
                         @Html.PagedListPager(
                         Model,

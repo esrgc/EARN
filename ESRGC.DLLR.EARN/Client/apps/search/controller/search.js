@@ -73,7 +73,7 @@ dx.defineController('Search', {
             return;
         var store = dx.getStore('Search');
         if (typeof store != 'undefined') {
-            dx.log(url);
+            //dx.log(url);
             store.loadContentUrl(url);
         }       
     },
@@ -96,12 +96,12 @@ dx.defineController('Search', {
             scope.tagArray.push(input);
 
         var params = scope.getFormData($(object));
-        dx.log(params)
+        //dx.log(params)
         var store = dx.getStore('Search');
         if (typeof store != 'undefined') {
             store.setParams(params);
 
-            dx.log(store.constructParams());
+            //dx.log(store.constructParams());
             store.loadContent();
         }
     },
@@ -146,11 +146,11 @@ dx.defineController('Search', {
         this.getNotificationLabel().text(msg);
     },
     preloadState: function () {
-        dx.log('pre-load');
+        //dx.log('pre-load');
         this.getGoBtn().button('loading');
     },
     loadedState: function () {
-        dx.log('loaded');
+        //dx.log('loaded');
         this.getGoBtn().button('reset');
     },
     updateTagList: function () {
