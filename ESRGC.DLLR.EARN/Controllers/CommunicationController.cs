@@ -81,9 +81,9 @@ namespace ESRGC.DLLR.EARN.Controllers
         //create notification
         var notification = new Notification() {
           Category = "Request Received",
-          Message = string.Format("{0} has requested to join your \"{0}\" partnership",
-            partnership.Name,
-            CurrentAccount.Profile.Organization.Name),
+          Message = string.Format("{0} has requested to join your \"{1}\" partnership",
+            CurrentAccount.Profile.Organization.Name,
+            partnership.Name),
           Account = receiverAccount,
           Message2 = @"You will be able to choose whether to accept this request, 
 and/or view this user’s Organizational Profile for more information.",
