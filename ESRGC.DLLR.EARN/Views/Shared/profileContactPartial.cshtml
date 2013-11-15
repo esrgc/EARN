@@ -1,33 +1,28 @@
 ﻿@using ESRGC.DLLR.EARN.Domain.Model
 @model Profile
 <address>
+    <i class="fa fa-user"></i>
     @Model.Contact.NameTitle
     <strong>@Model.Contact.FirstName @Model.Contact.Middle @Model.Contact.LastName</strong>
     @Model.Contact.NameExtension
     <br />
-    @Model.Organization.StreetAddress
+    @*<i class="fa fa-location-arrow" title="Street address"></i>&nbsp;@Model.Organization.StreetAddress
     <br />
-    @if (Model.Organization.Department != null) {
-        <small>
-            <abbr title="Department">Dept:</abbr>&nbsp;@Model.Organization.Department</small> <br />
-    }
+    &nbsp;&nbsp;&nbsp;&nbsp;@Model.Organization.City, @Model.Organization.State @Model.Organization.Zip
+    <br />
     @if (Model.Organization.Building != null) {
-        <small>
-            <abbr title="Building">Bld:</abbr>&nbsp;@Model.Organization.Building</small><br />
+        <i class="fa fa-building-o" title="Building"></i><span>&nbsp;@Model.Organization.Building</span>
     }
-    @Model.Organization.City, @Model.Organization.State @Model.Organization.Zip<br />
-    <abbr title="Phone">P:</abbr>
-    @Model.Contact.Phone<br />
-    <a href="mailto:@Model.Contact.Email">@Model.Contact.Email</a>
+    @if (Model.Organization.Department != null) {
+        if (Model.Organization.Department.Length > 15) { 
+            <br />
+        }
+        else{
+            <text>&nbsp;&nbsp;</text>
+        }
+        <span><abbr title="Department">Dept:</abbr>&nbsp;@Model.Organization.Department</span> <br />
+    }*@
+    <i class="fa fa-phone" title="Phone"></i>&nbsp;@Model.Contact.Phone<br />
+    <i class="fa fa-envelope-o" title="Email"></i>&nbsp;<a href="mailto:@Model.Contact.Email">@Model.Contact.Email</a>
 </address>
-<div>
-    @if (Model.LocationVerified()) {
-        <span class="label label-success" title="Address located and viewable in the map"><i class="fa fa-check-circle fa-lg"></i>&nbsp;Street address located</span>
-    }
-    else {
-        <span class="label label-danger"
-            title="Address not located. You can change address by editing your organization address">
-            <i class="fa fa-times-circle fa-lg"></i>&nbsp;Street address not located
-        </span>
-    }
-</div>
+

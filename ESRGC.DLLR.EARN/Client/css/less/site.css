@@ -320,3 +320,6 @@ a.link-icon:hover,
 .info-button-container a {
   min-width: 280px;
 }
+.profile-info-container div {
+  margin-bottom: 10px;
+}

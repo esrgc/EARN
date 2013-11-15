@@ -41,23 +41,12 @@
             }
             <div class="placeholder-panel">
                 <div class="post">
-                    <ul class="list-inline list-unstyled link-fa-container" id="socialNetworkLinks">
-                        <li></li>
-                        @if (Model.Organization.FacebookLink != "") { 
-                            <li><a target="_blank" href="http://@Model.Organization.FacebookLink" title="Facebook link"><i class="fa fa-lg fa-facebook"></i></a></li>
-                        }
-                        @if (Model.Organization.TwitterLink != "") { 
-                            <li><a target="_blank" href="http://@Model.Organization.TwitterLink" title="Twitter link"><i class="fa fa-lg fa-twitter"></i></a></li>
-                        }
-                        @if (Model.Organization.LinkedInLink != "") { 
-                            <li><a target="_blank" href="http://@Model.Organization.LinkedInLink" title="LinkedIn link"><i class="fa fa-lg fa-linkedin"></i></a></li>
-                        }
-                    </ul>
+                    @Html.Partial("socialNetworkPartial", Model)
                     <div class="inline-container profile-area">
                         <div class="profile-picture">
                             @if (Model.PictureID != null) { 
                                 <div class="logo-container">
-                                     <img class="img-thumbnail" src="@Url.Action("ProfilePicture", new { pictureId = Model.PictureID })"/>
+                                    <img class="img-thumbnail" src="@Url.Action("ProfilePicture", new { pictureId = Model.PictureID })"/>
                                     <div class="panel-action-center">
                                         <a href="@Url.Action("UploadImage")"><small class="">Change logo</small></a>
                                     </div>
@@ -71,30 +60,17 @@
                                     </div>
                                 </div>
                             }
-                            @* @if (Model.PictureID != null) { 
-                                <div style="position: relative;">
-                                    <a href="@Url.Action("UploadImage")">
-                                        <img class="img-polaroid" src="@Url.Action("ProfilePicture", new { pictureId = Model.PictureID })"/>
-                                        <span class="label" style="position: absolute; bottom: 5px; left: 5px;">Change logo</span>
-                                    </a>
-                                </div>
-                            }
-                            else {
-                                <div style="position: relative;">
-                                    <a title="Upload/Change profile picture" href="@Url.Action("UploadImage")">
-                                        <img class="img-polaroid" src="@Url.Content("~/Client/images/empty_profile.gif")" alt="profile picture"/>
-                                        <span class="label" style="position: absolute; bottom: 5px; left: 5px;">Upload logo</span>
-                                    </a>
-                                </div>
-                            }*@
                         </div>
                         <div class="row profile-container">
-                            <div class="col-md-10">
+                            <div class="col-md-12">
                                 <div class="">
+
                                     <h4>
                                         <span>@Model.Organization.Name</span>
-                                        <small><a class="link-icon" href="@Url.Action("Edit", "Organization")">
-                                            <i class="fa fa-pencil"></i></a>
+                                        <small>
+                                            <a class="link-icon" title="Edit organization info"
+                                            href="@Url.Action("Edit", "Organization")">
+                                                <i class="fa fa-pencil"></i></a>
                                         </small>
                                         <br />
                                         <small>@Model.UserGroup.Name</small>
@@ -109,12 +85,21 @@
                                             </small>
                                         }
                                     </h4>
+
+
                                     <p>@Model.Organization.Description</p>
+                                    <h5>Your tags <i class="fa fa-tags"></i>
+                                        <span class="pull-right">
+                                            <a class="link-icon" title="Edit tags" href="@Url.Action("ManageTag", "Tag")"><i class="fa fa-pencil"></i></a>
+                                        </span>
+                                    </h5>
+                                    <div class="placeholder-panel">
+                                        @Html.Partial("tagListLinkPartial", Model.getTagNames())
+                                    </div>
                                 </div>
 
                             </div>
                         </div>
-
                     </div>
                     <div class="clear"></div>
                 </div>
@@ -124,34 +109,31 @@
     <hr />
     <!--Profile detail-->
     <div class="row">
-        <div class="col-md-4">
-            <div>
-                <div class="window-panel">
-                    <div class="window-panel-title">
-                        Your tags <i class="fa fa-tags"></i>
+        <div class="col-md-4">           
+            <div class="profile-info-container">
+                <div class="placeholder-panel">
+                    <div>
+                        <span>Point of Contact</span> @*<i class="fa fa-envelope"></i>*@
                         <span class="pull-right">
-                            <a class="link-icon" title="Edit" href="@Url.Action("ManageTag", "Tag")"><i class="fa fa-pencil"></i></a>
+                            <a class="link-icon" title="Edit contact info" href="@Url.Action("Edit", "Contact")"><i class="fa fa-pencil"></i></a>
                         </span>
                     </div>
-                    <div class="window-panel-content">
-                        @Html.Partial("tagListLinkPartial", Model.getTagNames())
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="window-panel">
-                    <div class="window-panel-title">
-                        Point of Contact @*<i class="fa fa-envelope"></i>*@
-                        <span class="pull-right">
-                            <a class="link-icon" title="Edit" href="@Url.Action("Edit", "Contact")"><i class="fa fa-pencil"></i></a>
-                        </span>
-                    </div>
-                    <div class="window-panel-content">
+                    <div class="post">
                         @Html.Partial("profileContactPartial")
                     </div>
+                </div>                
+                <div class="placeholder-panel">
+                    <div>
+                        <span>Location</span> @*<i class="fa fa-envelope"></i>*@
+                    </div>
+                    <div class="post">
+                        <div>@Html.Partial("locationInfoPartial", Model)</div>
+                    </div>
                 </div>
+
             </div>
         </div>
+
         <div class="col-md-8 profile-tabs">
             <ul class="nav nav-tabs ">
                 <li class="active"><a href="#summary" data-toggle="tab">Summary</a></li>
@@ -164,9 +146,9 @@
                         <form action="@Url.Action("EditAbout")" method="post">
                             <h4>About</h4>
                             @Html.TextAreaFor(x => x.About, new {
-                               @class = "form-control about",
-                               placeholder = ModelMetadata.FromLambdaExpression(x => x.About, ViewData).Description
-                           })
+                           @class = "form-control about",
+                           placeholder = ModelMetadata.FromLambdaExpression(x => x.About, ViewData).Description
+                       })
                             <div class="text-right">
                                 <button type="submit" class="btn btn-info btn-xs"><i class="fa fa-save"></i>&nbsp;Save</button>
 
@@ -235,5 +217,6 @@
                 </div>
             </div>
         </div>
+
     </div>
 </div>

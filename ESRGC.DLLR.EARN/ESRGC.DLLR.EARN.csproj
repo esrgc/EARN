@@ -413,6 +413,8 @@
     <Content Include="Views\Shared\aboutTextPartial.cshtml" />
     <Content Include="Views\Shared\partnershipPartial.cshtml" />
     <Content Include="Views\Shared\shortPartnershipPartial.cshtml" />
+    <Content Include="Views\Shared\locationInfoPartial.cshtml" />
+    <Content Include="Views\Shared\socialNetworkPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

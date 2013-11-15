@@ -66,6 +66,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     /// create a new partnership
     /// </summary>
     /// <returns></returns>
+    [VerifyProfile]
     public ActionResult Create() {
       return View();
     }

@@ -26,11 +26,13 @@ namespace ESRGC.DLLR.EARN.Filters
           .Entities
           .First(x => x.EmailAddress.ToLower() == requestEmail.ToLower());
 
-        if (account.Profile == null)
+        if (account.Profile == null) {
+          filterContext.Controller.TempData["message"] = "You have not created an organizational profile. Please create one!";
           filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary() { 
             {"controller", "Profile"},
             {"action", "Create"}
           });
+        }
         else
           filterContext.Controller.ViewBag.currentProfile = account.Profile;
       }

@@ -41,38 +41,40 @@
             </div>
             <div class="placeholder-panel">
                 <div class="post">
-                    <ul class="list-inline list-unstyled link-fa-container" id="socialNetworkLinks">
-                        <li></li>
-                        @if (Model.Organization.FacebookLink != "") { 
-                            <li><a target="_blank" href="http://@Model.Organization.FacebookLink" title="Facebook link"><i class="fa fa-lg fa-facebook"></i></a></li>
-                        }
-                        @if (Model.Organization.TwitterLink != "") { 
-                            <li><a target="_blank" href="http://@Model.Organization.TwitterLink" title="Twitter link"><i class="fa fa-lg fa-twitter"></i></a></li>
-                        }
-                        @if (Model.Organization.LinkedInLink != "") { 
-                            <li><a target="_blank" href="http://@Model.Organization.LinkedInLink" title="LinkedIn link"><i class="fa fa-lg fa-linkedin"></i></a></li>
-                        }
-                    </ul>
+                    @Html.Partial("socialNetworkPartial", Model)
                     <div class="inline-container profile-area">
-                        @Html.Partial("profileImagePartial")
+                        @Html.Partial("profileImagePartial", Model)
                         <div class="row profile-container">
-                            <div class="col-sm-10">
+                            <div class="col-md-12">
                                 <div class="">
                                     <h4>
-                                        <span>@Model.Organization.Name</span>
+                                        <span>@Model.Organization.Name</span>                                        
                                         <br />
                                         <small>@Model.UserGroup.Name</small>
                                         @*-
                                         <small>@Model.Category.Name</small>*@
                                         <br />
-                                        <small><a target="_blank" href="http://@Model.Organization.Website" title="Organization website">@Model.Organization.Website</a></small>
+                                        @if (Model.Organization.Website != null) { 
+                                            <small>
+                                                <a target="_blank" href="http://@Model.Organization.Website" title="Organization website">
+                                                    @Model.Organization.Website
+                                                </a>
+                                            </small>
+                                        }
                                     </h4>
+
+
                                     <p>@Model.Organization.Description</p>
+                                    <h5>
+                                        Searchable tags <i class="fa fa-tags"></i>
+                                    </h5>
+                                    <div class="placeholder-panel">
+                                        @Html.Partial("tagListLinkPartial", Model.getTagNames())
+                                    </div>
                                 </div>
 
                             </div>
                         </div>
-
                     </div>
                     <div class="clear"></div>
                 </div>
@@ -82,26 +84,25 @@
     <hr />
     <!--Profile detail-->
     <div class="row">
-        <div class="col-sm-4">
-            <div>
-                <div class="window-panel">
-                    <div class="window-panel-title">
-                        Searchable tags <i class="fa fa-tags"></i>
+        <div class="col-md-4">           
+            <div class="profile-info-container">
+                <div class="placeholder-panel">
+                    <div>
+                        <span>Point of Contact</span> @*<i class="fa fa-envelope"></i>*@                        
                     </div>
-                    <div class="window-panel-content">
-                        @Html.Partial("tagListLinkPartial", Model.getTagNames())
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="window-panel">
-                    <div class="window-panel-title">
-                        Point of Contact
-                    </div>
-                    <div class="window-panel-content">
+                    <div class="post">
                         @Html.Partial("profileContactPartial")
                     </div>
+                </div>                
+                <div class="placeholder-panel">
+                    <div>
+                        <span>Location</span> @*<i class="fa fa-envelope"></i>*@
+                    </div>
+                    <div class="post">
+                        <div>@Html.Partial("locationInfoPartial", Model)</div>
+                    </div>
                 </div>
+
             </div>
         </div>
         <div class="col-sm-8 profile-tabs">
