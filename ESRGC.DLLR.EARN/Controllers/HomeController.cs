@@ -13,7 +13,8 @@ namespace ESRGC.DLLR.EARN.Controllers
     //
     // GET: /Home/
 
-    public ActionResult Index() {
+    public ActionResult Index(string returnUrl) {
+      ViewBag.returnUrl = returnUrl;
       return View();
     }
 

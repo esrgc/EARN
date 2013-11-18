@@ -90,10 +90,11 @@ namespace ESRGC.DLLR.EARN.Controllers
     }
     [AllowAnonymous]
     [CheckCookie]
-    public ActionResult SignIn() {
+    public ActionResult SignIn(string returnUrl) {
       //sign out any previous session
 
       FormsAuthentication.SignOut();
+      ViewBag.returnUrl = returnUrl;
       return View(new SignInModel());
     }
 
