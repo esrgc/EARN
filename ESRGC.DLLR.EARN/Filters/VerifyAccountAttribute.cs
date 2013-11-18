@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using ESRGC.DLLR.EARN.Controllers;
 using ESRGC.DLLR.EARN.Domain.DAL;
 using ESRGC.DLLR.EARN.Domain.DAL.Concrete;
 
@@ -15,7 +16,7 @@ namespace ESRGC.DLLR.EARN.Filters
       try {
         System.Diagnostics.Debug.WriteLine(filterContext.ActionDescriptor.ActionName);
         var requestEmail = filterContext.HttpContext.User.Identity.Name;
-        var workUnit = new WorkUnit(new DomainContext());
+        var workUnit = (filterContext.Controller as BaseController).WorkUnit;
         workUnit.AccountRepository.Entities.First(x => x.EmailAddress.ToLower() == requestEmail.ToLower());
       }
       catch (Exception) {

@@ -19,7 +19,7 @@ namespace ESRGC.DLLR.EARN.Filters
   {
     public override void OnActionExecuting(ActionExecutingContext filterContext) {
       var requestEmail = filterContext.HttpContext.User.Identity.Name;
-      var workUnit = new WorkUnit(new DomainContext());
+      var workUnit = (filterContext.Controller as BaseController).WorkUnit;
       try {
         var account = workUnit
           .AccountRepository

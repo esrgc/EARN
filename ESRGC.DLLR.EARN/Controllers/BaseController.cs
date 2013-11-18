@@ -11,7 +11,7 @@ using ESRGC.GIS.Geocoding;
 using ESRGC.GIS.Utilities;
 
 namespace ESRGC.DLLR.EARN.Controllers
-{  
+{
   [SetGuestCookie]
   public class BaseController : Controller
   {
@@ -19,6 +19,12 @@ namespace ESRGC.DLLR.EARN.Controllers
     public BaseController() { }
     public BaseController(IWorkUnit workUnit) {
       _workUnit = workUnit;
+    }
+
+    public IWorkUnit WorkUnit {
+      get {
+        return _workUnit;
+      }
     }
 
     [Authorize]
@@ -111,7 +117,7 @@ namespace ESRGC.DLLR.EARN.Controllers
             _workUnit.ProfileTagRepository.InsertEntity(profileTag);
           }
         }
-        catch {          
+        catch {
           //create ProfileTag
           var profileTag = new ProfileTag() {
             Tag = geoTag,
