@@ -34,13 +34,26 @@ namespace ESRGC.DLLR.EARN.Controllers
     /// <returns></returns>
     [VerifyProfile]
     [VerifyProfilePartnership]
-    public ActionResult Detail(int partnershipID, string returnUrl, int? page, int? size) {
+    public ActionResult Detail(int partnershipID, string returnUrl, int? size) {
       ViewBag.returnUrl = returnUrl;
       var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
-      int commentPageIndex = page ?? 1;
       int commentPageSize = size ?? 10;
-      var comments = partnership.Comments.ToPagedList(commentPageIndex, commentPageSize);
+      var comments = partnership.Comments
+        .OrderByDescending(x => x.Created)
+        .Take(commentPageSize)
+        .Reverse()
+        .ToList();
+
+      string loadMoreUrl = "";
+      int remainSize = partnership.Comments.Count() - commentPageSize;
+      if (remainSize >= 10)
+        loadMoreUrl = Url.Action("Detail", new { partnershipID, returnUrl, size = commentPageSize + 10 });
+      else
+        loadMoreUrl = Url.Action("Detail", new { partnershipID, returnUrl, size = commentPageSize + remainSize });
+
       ViewBag.comments = comments;
+      ViewBag.commentCount = partnership.Comments.Count();
+      ViewBag.loadMoreUrl = loadMoreUrl;
       return View(partnership);
     }
     [VerifyProfile]
@@ -83,7 +96,7 @@ namespace ESRGC.DLLR.EARN.Controllers
         _workUnit.PartnershipDetailRepository.InsertEntity(partnershipDetail);
         _workUnit.saveChanges();
         //notifications
-        var notification = new Notification { 
+        var notification = new Notification {
           Account = CurrentAccount,
           Category = "New Partnership Profile Created",
           Header = "Thank you for creating a Partnership Profile on EARN MD CONNECT!",
@@ -102,8 +115,8 @@ a user must first have, or create an Organizational Profile; 2) the Partnership 
 Description, Target Industry, region, and membership will be visible to other EARN MD CONNECT users; 3) 
 full Partnership Profiles, including the communication function, are only accessible to that Partnership 
 Profile’s members, and 4) the communication feature is meant to support communication between partners, 
-but should not be used to share proprietary or sensitive content.",                                                                     
-          LinkToAction = Url.Action("Detail", new { partnership.PartnershipID})
+but should not be used to share proprietary or sensitive content.",
+          LinkToAction = Url.Action("Detail", new { partnership.PartnershipID })
         };
         _workUnit.NotificationRepository.InsertEntity(notification);
         _workUnit.saveChanges();

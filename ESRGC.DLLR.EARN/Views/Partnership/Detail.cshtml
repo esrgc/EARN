@@ -190,6 +190,13 @@
                 console.log(file);
                 $('#fileName').text(file);
             });
+            $(document).on('click', '#comments #loadMoreComments', function (e) {
+                e.preventDefault();
+                var url = $(this).attr('href');
+                $.get(url, function (data) {
+                    $('#comments').replaceWith($('#comments', data));
+                });
+            });
         }
     </script>
 }
@@ -201,7 +208,7 @@
     ViewBag.returnUrl = Url.Action("Detail", new { p.PartnershipID, returnUrl });
     var currentProfile = ViewBag.currentProfile as Profile ?? new Profile();
     var canEdit = currentProfile.isOwnerOfPartnership(Model);
-    var comments = ViewBag.comments as PagedList<Comment> ?? new PagedList<Comment>(new List<Comment>(), 1, 10);
+    var comments = ViewBag.comments as List<Comment> ?? new List<Comment>();
     //tags
     var currentTags = Model.getTags();
     var isOwner = currentProfile.isOwnerOfPartnership(Model);
@@ -364,23 +371,22 @@
             </div>
         </div>
         <div class="col-md-5">
-            <div class="">
-                <h4><i class="fa fa-comments"></i>&nbsp;Comments</h4>
-                @if (comments.PageCount > 1) {
+            <div class="">                
+               @* @if (comments.PageCount > 1) {
                     @Html.PagedListPager(
                     comments,
                     page => Url.Action("Detail", new { Model.PartnershipID, page, returnUrl }),
                     PagedListRenderOptions.OnlyShowFivePagesAtATime
-                )}
+                )}*@
                 <div id="comments">
                     @Html.Partial("ListComments", comments)
                 </div>
-                @if (comments.PageCount > 1) {
+                @*@if (comments.PageCount > 1) {
                     @Html.PagedListPager(
                     comments,
                     page => Url.Action("Detail", new { Model.PartnershipID, page, returnUrl }),
                     PagedListRenderOptions.OnlyShowFivePagesAtATime
-                )}
+                )}*@
                 <div class="transparent-placeholder-panel">
                     <form class="form-horizontal" method="post" action="@Url.Action("PostComment", "Communication")">
                         @Html.HiddenFor(x => x.PartnershipID)
