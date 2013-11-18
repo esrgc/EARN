@@ -19,7 +19,10 @@ namespace ESRGC.DLLR.EARN.Filters
         workUnit.AccountRepository.Entities.First(x => x.EmailAddress.ToLower() == requestEmail.ToLower());
       }
       catch (Exception) {
-        filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary() { 
+        if (filterContext.IsChildAction)
+          filterContext.Result = new EmptyResult();
+        else
+          filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary() { 
             {"controller", "Home"},
             {"action", "Index"}
           });

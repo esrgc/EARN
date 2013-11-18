@@ -76,5 +76,8 @@ namespace ESRGC.DLLR.EARN.Helpers
     public static void SendPasswordEmail(Account model) {
       new EmailController().ForgotPassword(model).Deliver();
     }
+    public static void SendReverificationEmail(Account model) {
+      new EmailController().ReVerificationEmail(model).Deliver();
+    }
   }
 }

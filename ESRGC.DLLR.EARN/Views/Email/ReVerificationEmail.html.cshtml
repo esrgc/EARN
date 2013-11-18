@@ -1,0 +1,44 @@
+﻿@using ActionMailer.Net.Mvc
+@model ESRGC.DLLR.EARN.Domain.Model.Account
+
+@{
+    Layout = null;
+}
+
+<h4>Email Address Verification.</h4>
+
+<p>    
+    You have recently changed your sign-in email address.
+    Please verify your new email address (@Model.EmailAddress).
+    You will be able to receive notifications from the site, 
+    including invitations to join partnerships after your email
+    is verified.
+</p>
+
+<p>
+    Please follow the link below to verify your email and to get started using EARN MD CONNECT.  
+    (If the link does not work you can copy and paste it to your browser.)
+    <br />
+    @Url.AbsoluteAction("VerifyEmail", "Account", new { Model.AccountID, Model.VerificationCode })
+</p>
+<br />
+<p>
+    <strong>
+        Please note that your previous email address is no longer 
+        valid to sign in to EARN MD CONNECT. Please use your new 
+        email address next time you sign in.
+    </strong>
+</p>
+<i>
+    If you did not initiate this request. Please <a href="mailto://earn.jobs@maryland.gov?cc=esrgc@salisbury.edu">contact EARN MD CONNECT</a> . 
+</i>
+<p>
+    Thanks for your interest in EARN Maryland, and welcome to EARN MD CONNECT!<br />
+    -	Team EARN Maryland
+</p>
+<small>
+    This is an automatic email notification. Please do not reply to this message. 
+    <a href="mailto://earn.jobs@maryland.gov?cc=esrgc@salisbury.edu">Contact EARN MD CONNECT</a> 
+    if you have any question.
+</small>
+

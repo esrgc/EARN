@@ -79,7 +79,15 @@ namespace ESRGC.DLLR.EARN.Models
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
     }
+    public class ChangeEmailModel {
+      [Required(ErrorMessage = "Please enter a valid email address")]
+      [EmailValidation(ErrorMessage = "Invalid email address")]
+      [DataType(DataType.EmailAddress)]
+      [Display(Name = "Email address")]
+      public string NewEmail { get; set; }
 
+      public string CurrentEmail { get; set; }
+    }
     public class SignUpModel
     {
         

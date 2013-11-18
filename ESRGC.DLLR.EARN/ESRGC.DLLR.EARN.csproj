@@ -416,6 +416,8 @@
     <Content Include="Views\Shared\socialNetworkPartial.cshtml" />
     <Content Include="Views\Email\ForgotPassword.html.cshtml" />
     <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ChangeSignInEmail.cshtml" />
+    <Content Include="Views\Email\ReVerificationEmail.html.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

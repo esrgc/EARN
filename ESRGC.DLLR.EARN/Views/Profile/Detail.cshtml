@@ -141,10 +141,10 @@
             <div class="placeholder-panel">
                 <form action="@Url.Action("EditAbout")" method="post">
                     <strong>Profile Summary</strong>
-                        @Html.TextAreaFor(x => x.About, new {
-                           @class = "form-control about",
-                           placeholder = ModelMetadata.FromLambdaExpression(x => x.About, ViewData).Description
-                       })
+                    @Html.TextAreaFor(x => x.About, new {
+                   @class = "form-control about",
+                   placeholder = ModelMetadata.FromLambdaExpression(x => x.About, ViewData).Description
+               })
                     <div class="text-right">
                         <button type="submit" class="btn btn-info btn-xs"><i class="fa fa-save"></i>&nbsp;Save</button>
 
@@ -185,12 +185,18 @@
                 </div>
                 <div class="tab-pane" id="partnerships">
                     <div class="placeholder-pane">
-                        <span class="pull-right">
-                            <a href="@Url.Action("Create", "Partnership")">
-                                <i class="glyphicon glyphicon-link"></i>
-                                &nbsp;Create new partnership
-                            </a>
-                        </span>
+                        <div>
+                            <p>
+                                &nbsp;
+                                <span class="pull-right">
+                                    <a href="@Url.Action("Create", "Partnership")">
+                                        <i class="glyphicon glyphicon-link"></i>
+                                        &nbsp;Create new partnership
+                                    </a>
+                                </span>
+                            </p>
+                            <div class="clear"></div>
+                        </div>
                         @if (Model.PartnershipDetails.Count() == 0) { 
                             <p class="text-muted">
                                 If you are already a member of an EARN Maryland partnership, it may not be reflected 

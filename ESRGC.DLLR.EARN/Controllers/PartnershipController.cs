@@ -81,6 +81,7 @@ namespace ESRGC.DLLR.EARN.Controllers
           Partnership = partnership
         };
         _workUnit.PartnershipDetailRepository.InsertEntity(partnershipDetail);
+        _workUnit.saveChanges();
         //notifications
         var notification = new Notification { 
           Account = CurrentAccount,

@@ -68,6 +68,9 @@ namespace ESRGC.DLLR.EARN.Domain.Model
 
     public bool EmailVerified { get; set; }
     public string VerificationCode { get; set; }
-    
+
+    public void newVerificationCode() {
+      VerificationCode = Helpers.Utility.RandomString(30);
+    }
   }
 }

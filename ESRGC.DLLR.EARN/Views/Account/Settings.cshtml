@@ -29,7 +29,13 @@
                     <div class="list-container">
                         <ul class="list-unstyled">
                             <li>
-                                <span>Email Address</span>
+                                <span>
+                                    Email Address&nbsp;
+                                    <a href="@Url.Action("ChangeSignInEmail", "Account")" title="Change Email">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                </span>
+                               
                                 @if (Model.EmailVerified) { 
                                     <span class="pull-right label label-success">
                                         <i class="fa fa-check"></i>
@@ -39,8 +45,7 @@
                                 else {
                                     <span class="pull-right label label-danger">
                                         <i class="fa fa-times"></i>
-                                        Not Verified
-                                        
+                                        Not Verified                                        
                                     </span>
                                     <a href="@Url.Action("ResendVerificationEmail", new { returnUrl = Url.Action("Settings") })">(Resend verification email)
                                     </a>

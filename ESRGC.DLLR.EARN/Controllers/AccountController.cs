@@ -164,15 +164,17 @@ namespace ESRGC.DLLR.EARN.Controllers
         updateTempMessage("Could not verify email. Verification code is empty.");
         return RedirectToAction("Index", "Home");
       }
-
-      if (verificationCode == account.VerificationCode) {
-        account.EmailVerified = true;
-        _workUnit.AccountRepository.UpdateEntity(account);
-        _workUnit.saveChanges();
-        updateTempMessage("Your email address has been verified.");
+      if (account.EmailVerified)
+        updateTempMessage("Your email is already verified.");
+      else {
+        if (verificationCode == account.VerificationCode) {
+          account.EmailVerified = true;
+          _workUnit.AccountRepository.UpdateEntity(account);
+          _workUnit.saveChanges();
+          updateTempMessage("Your email address has been verified.");
+        }
       }
-
-      return RedirectToAction("Index", "Home");
+      return RedirectToAction("Settings");
     }
     [VerifyAccount]
     public ActionResult Settings() {
@@ -296,6 +298,54 @@ namespace ESRGC.DLLR.EARN.Controllers
         return RedirectToAction("ChangePassword");
       }
       return RedirectToAction("Index", "Home");
+    }
+    [VerifyAccount]
+    public ActionResult ChangeSignInEmail() {
+      var account = CurrentAccount;
+
+      return View(new ChangeEmailModel { CurrentEmail = CurrentAccount.EmailAddress });
+    }
+    [HttpPost]
+    [VerifyAccount]    
+    public ActionResult ChangeSignInEmail(ChangeEmailModel model) {
+      var account = CurrentAccount;
+      if (ModelState.IsValid) {
+        var newEmail = model.NewEmail;
+        if (newEmail.ToLower() == account.EmailAddress.ToLower()) {
+          ModelState.AddModelError("", "New email address must be different from the current email address. Please try again!");
+          return View(model);
+        }
+
+        //check for existing email
+        try {
+          var existing = _workUnit.AccountRepository
+                .Entities
+                .First(x => x.EmailAddress.ToLower() == newEmail.ToLower());
+          ModelState.AddModelError("", "The email address you entered already exists in our database. Please use another email address");
+          return View(model);
+        }
+        catch  {
+          //no existing email! We're good
+          //does nothing and keep going
+        }
+
+        //everything is good, so go ahead and store it
+        account.EmailAddress = newEmail;
+        account.EmailVerified = false;
+        account.newVerificationCode();
+        //store to database
+        _workUnit.AccountRepository.UpdateEntity(account);
+        _workUnit.saveChanges();
+        //sign out old email and sign in with new email
+        FormsAuthentication.SignOut();
+        FormsAuthentication.SetAuthCookie(newEmail, false);
+        //resend verification email
+        EmailHelper.SendReverificationEmail(account);
+        
+        updateTempMessage("Your sign-in email address has been changed. Please make sure to verify the email address.");
+        return RedirectToAction("Settings");
+      }
+      return View(model);
     }
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////// Private functions //////////////////////////////////////////////////////////////
