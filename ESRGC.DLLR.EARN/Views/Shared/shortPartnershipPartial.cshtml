@@ -1,0 +1,29 @@
+﻿@using ESRGC.DLLR.EARN.Domain.Model
+@model Partnership
+@{
+    var p = Model;
+    var currentProfile = ViewBag.currentProfile as Profile;
+    var partners = Model.getAllPartners().Count();
+    var returnUrl = ViewBag.returnUrl as string;
+}
+
+<a href="@Url.Action("View", "Partnership", new { p.PartnershipID, returnUrl })">
+    <strong>@p.Name</strong>
+</a>
+
+<p>
+    <i class="fa fa-clock-o fa-lg"></i>@Html.Partial("partnershipStatusPartial", p)
+</p>
+<p>
+    <span class="text-muted">
+        @p.Description
+    </span>
+</p>
+<h5>Target Industry Tags&nbsp;<i class="fa fa-tags"></i></h5>
+<div class="placeholder-panel">
+    @Html.Partial("tagListDisplayPartial", p.getTagNames())
+</div>
+<br />
+
+<span class="label label-info">Participants @partners</span>
+<div class="clear"></div>

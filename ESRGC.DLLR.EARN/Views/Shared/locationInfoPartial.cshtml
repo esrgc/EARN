@@ -1,0 +1,33 @@
+﻿@model ESRGC.DLLR.EARN.Domain.Model.Profile
+
+<i class="fa fa-location-arrow" title="Street address"></i>
+&nbsp;@Model.Organization.StreetAddress
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;@Model.Organization.City, @Model.Organization.State @Model.Organization.Zip
+<br />
+@if (Model.Organization.Building != null) {
+    <i class="fa fa-building-o" title="Building"></i><span>&nbsp;@Model.Organization.Building</span>
+}
+@if (Model.Organization.Department != null) {
+    if (Model.Organization.Department.Length > 15) { 
+    <br />
+    }
+    else {
+    <text>&nbsp;&nbsp;</text>
+    }
+    <span>
+        <abbr title="Department">Dept:</abbr>&nbsp;@Model.Organization.Department</span> <br />
+}
+<div>
+    @if (Model.LocationVerified()) {
+        <span class="label label-success" title="Address located and viewable on the map">
+            <i class="fa fa-check-circle fa-lg"></i>&nbsp;Street address located
+        </span>
+    }
+    else {
+        <span class="label label-danger"
+            title="Address not located. You can change address by editing your organization address">
+            <i class="fa fa-times-circle fa-lg"></i>&nbsp;Street address not located
+        </span>
+    }
+</div>

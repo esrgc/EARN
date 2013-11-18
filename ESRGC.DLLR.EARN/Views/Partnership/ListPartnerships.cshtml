@@ -1,0 +1,27 @@
+﻿@using ESRGC.DLLR.EARN.Domain.Model
+@model List<Partnership>
+
+@{
+    var currentProfile = ViewBag.currentProfile as Profile ?? new Profile();
+    var returnUrl = ViewBag.returnUrl as string;
+}
+<ul class="list-group">
+    @foreach (var p in Model) {
+        <li class="list-group-item">
+            @*<small class="pull-right">Last edited: @Html.TimeSpan(p.LastUpdate)</small>
+
+            <a href="@Url.Action("Detail", "Partnership", new { p.PartnershipID, returnUrl })">
+                <strong>@p.Name</strong>
+            </a>
+            - @Html.Partial("partnershipStatusPartial", p)            
+            @if (canEdit) { 
+                <a href="@Url.Action("Edit", new { p.PartnershipID })"><i class="fa fa-pencil"></i></a>
+            }
+            <p class="text-muted">@p.Description</p>
+            <span class="badge">Participants @partners</span>
+            <div class="clear"></div>*@
+            @Html.Partial("partnershipPartial", p)
+        </li>
+        
+    }
+</ul>

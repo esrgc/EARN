@@ -1,0 +1,66 @@
+﻿@using ESRGC.DLLR.EARN.Domain.Model
+@model Profile
+@{
+    //var filters = (ViewBag.filters as Dictionary<string, object>) ?? new Dictionary<string, object>();
+    //var currentTags = filters.ContainsKey("tags") ? filters["tags"] as List<string> : new List<string>();
+    var geoTag = Model.getGeoTag();
+    var location = geoTag == null ? "" : geoTag.Geometry.WellKnownValue.WellKnownText;
+    //var currentAccount = ViewBag.currentAccount as Account ?? new Account();
+    //var currentProfile = currentAccount.Profile ?? new Profile();
+    var returnUrl = ViewBag.returnUrl as string ?? "";
+}
+<section id="profile-@Model.ProfileID"  class="profile-section"
+    data-location="@location" 
+    data-organization="@Model.Organization.Name"
+    data-profileUrl = "@Url.Action("ViewProfile", "Profile", new { Model.ProfileID, returnUrl })">
+    <div class="row">
+        <div class="col-sm-12 ">
+            <div class="post">
+                <div class="inline-container profile-area">
+                    @Html.Partial("profileImagePartial")
+                    <div class="row profile-container">
+                        <div class="col-sm-8">
+                            <div class="">
+                                <h4>
+                                    <span>
+                                        <a title="View this profile" href="@Url.Action("ViewProfile", "Profile", new { Model.ProfileID, returnUrl })">
+                                            @Model.Organization.Name
+                                        </a>
+                                    </span>
+                                    <br />
+                                    <small>@Model.UserGroup.Name</small>
+                                    @*-
+                                    <small>@Model.Category.Name</small>*@
+                                    <br />
+                                    <small>
+                                        <a target="_blank" href="http://@Model.Organization.Website" title="Organization website">@Model.Organization.Website</a>
+                                    </small>
+                                </h4>
+
+                                @if (Model.Organization.Description.Length > 100) { 
+                                    <p>
+                                        @Model.Organization.Description.Substring(0, 100)
+                                        ...<a href="@Url.Action("ViewProfile", "Profile", new { Model.ProfileID, returnUrl })">
+                                            read more
+                                        </a>
+                                    </p>
+                                }
+                                else {
+                                    <p>@Model.Organization.Description</p>
+                                }
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="help-block"><i class="fa fa-tags"></i>&nbsp;Tags</div>
+                            @if (Model.ProfileTags != null) {
+                                @Html.Partial("tagListLinkPartial", Model.getTagNames())
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+
+            </div>
+        </div>
+    </div>
+</section>

@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using ESRGC.DLLR.EARN.Domain.DAL.Abstract;
 using ESRGC.DLLR.EARN.Domain.Model;
+using ESRGC.DLLR.EARN.Filters;
 using ESRGC.DLLR.EARN.Models;
 using ESRGC.GIS.Geocoding;
 using ESRGC.GIS.Utilities;
@@ -13,6 +14,7 @@ using ESRGC.GIS.Utilities;
 namespace ESRGC.DLLR.EARN.Controllers
 {
   [Authorize]
+  [VerifyAccount]
   public class ProfileController : BaseController
   {
     public ProfileController(IWorkUnit workUnit)
@@ -21,13 +23,18 @@ namespace ESRGC.DLLR.EARN.Controllers
     public ActionResult Index() {
       return View();
     }
-
+    public ActionResult DisplayShortProfile(int profileID) {
+      if (CurrentAccount != null) {
+        ViewBag.currentProfile = CurrentAccount.Profile;
+        var profile = _workUnit.ProfileRepository.GetEntityByID(profileID);
+        return PartialView("shortProfilePartial", profile);
+      }
+      return new EmptyResult();
+    }
+    [VerifyProfile]
     public ActionResult Detail() {
       var profile = CurrentAccount.Profile;
-      if (profile == null) {
-        return RedirectToAction("Create");
-      }
-
+      //count tags
       int countTag = _workUnit
         .ProfileTagRepository
         .Entities
@@ -52,6 +59,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       if (addressTagCount == 0)
         addUpdateAddrGeoTag(profile.ProfileID);
 
+      ViewBag.currentProfile = CurrentAccount.Profile;
       return View(CurrentAccount.Profile);
     }
 
@@ -69,7 +77,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     [HttpPost]
     public ActionResult Create(CreateProfile profile) {
       if (CurrentAccount.Profile != null) {
-        updateTempDataMessage("Profile already created!");
+        updateTempMessage("Profile already created!");
         return RedirectToAction("Detail");
       }
       if (ModelState.IsValid) {
@@ -94,7 +102,7 @@ namespace ESRGC.DLLR.EARN.Controllers
           account.Profile = p;
           _workUnit.AccountRepository.UpdateEntity(account);
           _workUnit.saveChanges();
-        }        
+        }
 
         return RedirectToAction("Detail");
       }
@@ -117,6 +125,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     public ActionResult ViewProfile(int profileID, string returnUrl) {
       var profile = _workUnit.ProfileRepository.GetEntityByID(profileID);
       ViewBag.returnUrl = returnUrl;
+      ViewBag.currentProfile = CurrentAccount.Profile;
       return View(profile);
     }
 
@@ -127,13 +136,14 @@ namespace ESRGC.DLLR.EARN.Controllers
         profile.About = about;
         _workUnit.ProfileRepository.UpdateEntity(profile);
         _workUnit.saveChanges();
+        updateTempMessage("Your about section has been saved.");
       }
       catch (Exception) {
-        updateTempDataMessage("Error saving about text");
+        updateTempMessage("Error saving about text");
       }
       return RedirectToAction("Detail");
     }
-
+    [VerifyProfile]
     public ActionResult UploadImage() {
       var profile = CurrentAccount.Profile;
       if (profile == null)
@@ -165,6 +175,6 @@ namespace ESRGC.DLLR.EARN.Controllers
       }
       //error has occurred   
       return View(profile);
-    }    
+    }
   }
 }

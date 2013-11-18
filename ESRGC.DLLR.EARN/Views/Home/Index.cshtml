@@ -4,12 +4,16 @@
 }
 
 @section scripts {
-    <script type="text/ecmascript">
+    <script type="text/javascript">
         var startup = function () {
             $(document).on('click', '#agreeTDChbox', function () {
-                $('#proceedBtn').removeAttr('disabled');
+                if ($(this).is(':checked'))
+                    $('#proceedBtn').removeAttr('disabled');
+                else
+                    $('#proceedBtn').attr('disabled', 'disabled');
             });
-            $(document).on('click', '#proceedBtn', function () {
+            $(document).on('click', '#proceedBtn', function () {                
+                $(this).attr('disabled', 'disabled');
                 $('form#quickSignupForm').submit();
             });
             $(document).on('keypress', 'form#quickSignupForm', function (e) {
@@ -17,30 +21,31 @@
                     $('#agreeToSignup').modal('show');
                 }
             });
+            
         };
     </script>
 }
 
 @section header {
-    <div class="jumbotron">
-        <div class="container">
+    <div class="">
+        <div class="jumbotron">
             <div class="row">
-                <div class="col-sm-8 col-xs-12">
-                    <h2>EARN Maryland Connect</h2>
-                    <h4>Industry-led partnerships, creating jobs<br />
-                        <small>Bridging Maryland's skills gap</small>
+                <div class="col-sm-6 col-sm-offset-1">
+                    <h2>EARN MD CONNECT</h2>
+                    <h4>Industry-led Partnerships<br />
+                        <small>Bridging Maryland’s Skills Gap, Driving Growth</small>
                     </h4>
-                    <p>
-                        <a class="btn btn-lg btn-primary" target="_blank" href="http://www.dllr.maryland.gov/earn">
-                            <i class="icon-external-link"></i>&nbsp;Learn more
-                        </a>
-                        @* @if (!Request.IsAuthenticated) {
-                            <a class="btn btn-lg btn-success" href="@Url.Action("SignUp", "Account")">Become a member <i class="icon-edit"></i></a>
-                        }*@
-                    </p>
+                    <div class="info-button-container">
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#about">
+                            <i class="fa fa-info"></i>&nbsp;&nbsp;About EARN MD CONNECT
+                        </button>
+                        <a class="btn btn-primary" target="_blank" href="http://www.dllr.maryland.gov/earn">
+                            <i class="fa fa-external-link"></i>&nbsp;&nbsp;About the EARN Maryland Program
+                        </a>       
+                    </div>
                 </div>
                 @if (!Request.IsAuthenticated) {
-                    <div class="col-sm-4 col-xs-12">
+                    <div class="col-sm-4">
                         @Html.Partial("quickSignup")
                     </div>
                 }
@@ -53,7 +58,7 @@
 }
 <div class="container">
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-4 col-sm-offset-1">
             <div class="row">
                 <div class="col-sm-12">
                     <div class="transparent-placeholder-panel">
@@ -85,33 +90,38 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-7 col-sm-offset-1">
+        <div class="col-sm-7">
             <div class="transparent-placeholder-panel">
-                <div class="placeholder-heading">About EARN Maryland Connect</div>
+                <div class="placeholder-pane-heading">About EARN MD CONNECT</div>
                 <div>
                     <p>
-                        <strong>EARN Maryland Connect</strong> is dedicated to connecting individuals and organizations seeking to partner through the
-                        <a href="http://www.dllr.maryland.gov/earn/">EARN Maryland Program</a>.
+                        <strong>EARN MD CONNECT</strong> is dedicated to connecting organizations seeking to partner through the
+                        <a target="_blank" href="http://www.dllr.maryland.gov/earn/">EARN Maryland Program</a>.
                     </p>
                     <label>Organizations committed to bridging Maryland’s skills gap are encouraged to participate:</label>
                     <ul>
-                        <li>Industry employers and associates </li>
-                        <li>Higher education institutions</li>
-                        <li>Non-profits</li>
-                        <li>Community based organizations</li>
-                        <li>Workforce investment boards </li>
+                        <li>Employers</li>
+                        <li>Industry Associations</li>
+                        <li>Nonprofits and Community-Based Organizations</li>
+                        <li>Institutions of Higher Education</li>
+                        <li>Local Workforce Boards</li>
                         <li>Local government</li>
-                        <li>Labor unions</li>
+                        <li>Local and regional economic development entities</li>
+                        <li>Labor Unions</li>
+                        <li>Philanthropic organizations</li>
+                        <li>K-12 programs</li>
+                        <li>Other Training Providers</li>
                     </ul>
+                    <a href="#about" data-toggle="modal">Read more...</a>
                 </div>
             </div>
             <div class="transparent-placeholder-panel">
-                <div class="placeholder-heading">Join Us</div>
+                <div class="placeholder-pane-heading">Join Us</div>
                 <div>
                     <p>
-                        Sign up. Create a profile. Promote your organization’s contributions and/or what it hopes to take away. Members can search and connect with other EARN Maryland Connect users and form partnerships.
-                        Established partnerships can use this site to share materials and documents relevant to the development and submission of an EARN plan grant.
-                        EARN Maryland Connect, your one-stop for everything EARN!
+                        Sign up. Create a profile. Members can search and connect with other EARN MD CONNECT users to form Strategic Industry Partnerships. 
+                        Promote your organization’s interest in joining a Partnership. Established Partnerships can use this site to share ideas, 
+                        best practices and challenges. EARN MD CONNECT: your one stop for building Strategic Industry Partnerships.
                     </p>
                 </div>
             </div>
@@ -120,7 +130,7 @@
     @*<div class="row">
         <div class="col-sm-6">
             <div class="transparent-placeholder-panel">
-                <div class="placeholder-heading">Latest News</div>
+                <div class="placeholder-pane-heading">Latest News</div>
                 <p>Content to be added</p>
                 <p> 
                     phoi finad pthis fsin phoi banda blas qwuav apoihd
@@ -131,7 +141,7 @@
         </div>
         <div class="col-sm-6">
             <div class="transparent-placeholder-panel">
-                <div class="placeholder-heading">Newest Members</div>
+                <div class="placeholder-pane-heading">Newest Members</div>
                 <p>Content to be added</p>
                 <p> 
                     phoi finad pthis fsin phoi banda blas qwuav apoihd
@@ -152,27 +162,21 @@
                 <h4 class="modal-title">Terms and Conditions</h4>
             </div>
             <div class="modal-body">
-                <p>
-                    By clicking “Sign up for EARN Maryland Connect”, you understand that the information you provide will 
-                    be in the public domain and will be accessible to other EARN Maryland Connect users. 
-                    The information you provide will only be used by the Maryland Department of Labor, Licensing, and Regulation
-                    to facilitate the EARN program. The information within the EARN Maryland Connect system will not be distributed
-                    or shared for any purpose other than facilitating the EARN program.
-                </p>
+                @Html.Partial("termTextPartial")
                 <div class="checkbox">
                     <label>
                         <input type="checkbox" name="agreed" id="agreeTDChbox" />
-                        <strong>I agree to the terms and conditions for "EARN Maryland Connect"</strong>
+                        <strong>I agree to the terms and conditions for "EARN MD CONNECT"</strong>
                     </label>
                 </div>
             </div>
             <div class="modal-footer">
-                <button id="proceedBtn" class="btn btn-primary btn-sm" type="button" disabled>Proceed</button>
+                <button id="proceedBtn" data-loading-text="Signing up..." class="btn btn-primary btn-sm submit-button" type="button" disabled>Proceed</button>
             </div>
+        </div>
+        <!-- /.modal-content -->
     </div>
-    <!-- /.modal-content -->
-</div>
-<!-- /.modal-dialog -->
+    <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
 
@@ -185,13 +189,7 @@
                 <h4 class="modal-title">Terms and Conditions</h4>
             </div>
             <div class="modal-body">
-                <p>
-                    By clicking “Sign up for EARN Maryland Connect”, you understand that the information you provide will 
-                    be in the public domain and will be accessible to other EARN Maryland Connect users. 
-                    The information you provide will only be used by the Maryland Department of Labor, Licensing, and Regulation
-                    to facilitate the EARN program. The information within the EARN Maryland Connect system will not be distributed
-                    or shared for any purpose other than facilitating the EARN program.
-                </p>
+                @Html.Partial("termTextPartial")
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

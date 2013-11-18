@@ -61,8 +61,13 @@ namespace ESRGC.GIS.Utilities
     }
 
     public static dynamic deserializeJson(string json) {
-      var jsonObj = JObject.Parse(json);
-      return jsonObj;
+      try {
+        var jsonObj = JObject.Parse(json);
+        return jsonObj;
+      }
+      catch {
+        return null;
+      }
     }
   }
 }

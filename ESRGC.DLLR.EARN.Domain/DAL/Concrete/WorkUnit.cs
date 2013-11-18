@@ -20,6 +20,13 @@ namespace ESRGC.DLLR.EARN.Domain.DAL.Concrete
     IRepository<UserGroup> _userGroupRepo;
     IRepository<Tag> _tagRepo;
     IRepository<ProfileTag> _profileTagRepo;
+    IRepository<Partnership> _partnershipRepo;
+    IRepository<PartnershipDetail> _parnershipDetailRepo;
+    IRepository<Notification> _notificationRepo;
+    IRepository<Request> _requestRepo;
+    IRepository<Comment> _commentRepo;
+    IRepository<PartnershipTag> _partnershipTagRepo;
+    IRepository<Document> _documentRepo;
 
     public WorkUnit(DomainContext context) {
       _context = context;
@@ -32,6 +39,7 @@ namespace ESRGC.DLLR.EARN.Domain.DAL.Concrete
     }
 
     public void Dispose() {
+      this.Dispose();
       _context.Dispose();
     }
 
@@ -88,6 +96,33 @@ namespace ESRGC.DLLR.EARN.Domain.DAL.Concrete
       get {
         return _profileTagRepo ?? (_profileTagRepo = new Repository<ProfileTag>(_context));
       }
+    }   
+    public IRepository<Partnership> PartnershipRepository {
+      get {
+        return _partnershipRepo ?? (_partnershipRepo = new Repository<Partnership>(_context));
+      }
+    }
+    public IRepository<PartnershipDetail> PartnershipDetailRepository {
+      get {
+        return _parnershipDetailRepo ?? (_parnershipDetailRepo = new Repository<PartnershipDetail>(_context));
+      }
+    }
+
+    public IRepository<Request> RequestRepository {
+      get { return _requestRepo ?? (_requestRepo = new Repository<Request>(_context)); }
+    }
+
+    public IRepository<Notification> NotificationRepository {
+      get { return _notificationRepo ?? (_notificationRepo = new Repository<Notification>(_context)); }
+    }
+    public IRepository<Comment> CommentRepository {
+      get { return _commentRepo ?? (_commentRepo = new Repository<Comment>(_context)); }
+    }
+    public IRepository<PartnershipTag> PartnershipTagRepository {
+      get { return _partnershipTagRepo ?? (_partnershipTagRepo = new Repository<PartnershipTag>(_context)); }
+    }
+    public IRepository<Document> DocumentRepository {
+      get { return _documentRepo ?? (_documentRepo = new Repository<Document>(_context)); }
     }
     #endregion
   }

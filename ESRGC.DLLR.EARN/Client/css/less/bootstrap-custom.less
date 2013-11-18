@@ -1,11 +1,9 @@
-﻿@import "library.less";
-
-body.modal-open, .modal-open .navbar-fixed-top, .modal-open .navbar-fixed-bottom {
-    margin-right: 0;
+﻿body.modal-open, .modal-open .navbar-fixed-top, .modal-open .navbar-fixed-bottom {
+    margin-right: 17px !important; /*Fixed modal open shifts body content*/
 }
 
 .modal-dialog {
-    margin-top: 200px;
+    margin-top: 50px;
 }
 
 .navbar-form {
@@ -14,7 +12,21 @@ body.modal-open, .modal-open .navbar-fixed-top, .modal-open .navbar-fixed-bottom
     margin-left: 0;
 }
 
-.pull-right .dropdown-menu {
-    right: 0;
-    left: auto;
+.pull-right {
+    .dropdown-menu {
+        right: 0;
+        left: auto;
+    }
+}
+.popover{
+    max-width: 400px;
+    min-width: 300px;
+}
+.panel-group .panel{
+    overflow: visible;
+}
+@media screen and (min-width: 768px) {
+  .modal-dialog {
+    width: 750px;
+  }
 }

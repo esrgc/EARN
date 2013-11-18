@@ -1,0 +1,32 @@
+﻿@using ActionMailer.Net.Mvc
+@model ESRGC.DLLR.EARN.Domain.Model.Account
+
+@{
+    Layout = null;
+}
+
+<h4>Thank you for signing up for EARN MD CONNECT!</h4>
+
+<p>
+    Your email address has not been verified. 
+    Please verify your new email address (@Model.EmailAddress)
+    so that you will be able to receive notifications from the site, 
+    <strong>including invitations to join partnerships</strong>.
+</p>
+
+<p>
+    Please follow the link below to verify your email and to get started using EARN MD CONNECT.  
+    (If the link does not work you can copy and paste it to your browser.)
+    <br />
+    @Url.AbsoluteAction("VerifyEmail", "Account", new { Model.AccountID, Model.VerificationCode })
+</p>
+<br />
+<p>
+    Thanks for your interest in EARN Maryland, and welcome to EARN MD CONNECT!<br />
+    -	Team EARN Maryland
+</p>
+<small>This is an automatic email notification. Please do not reply to this message. 
+    <a href="mailto://earn.jobs@maryland.gov?cc=esrgc@salisbury.edu">Contact EARN MD CONNECT</a>
+    if you have any question.
+</small>
+

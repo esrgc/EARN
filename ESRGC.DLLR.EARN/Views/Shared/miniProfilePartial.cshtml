@@ -1,0 +1,29 @@
+﻿@model ESRGC.DLLR.EARN.Domain.Model.Profile
+@{
+    var returnUrl = ViewBag.returnUrl as string;
+}
+<div class="inline-block mini-profile">
+    <div class="inline-container ">
+        <div class="profile-picture">
+            @if (Model.PictureID != null) { 
+                <img class="img-thumbnail" src="@Url.Action("ProfilePicture", new { pictureId = Model.PictureID })"/>
+            }
+            else {
+                <img class="img-thumbnail" src="@Url.Content("~/Client/images/empty_profile.gif")"/>
+            }
+
+        </div>
+        <h4>
+            <span>
+                <a title="View this profile" href="@Url.Action("ViewProfile", "Profile", new { Model.ProfileID, returnUrl })">
+                    @Model.Organization.Name
+                </a>
+            </span>
+            <br />
+            <small>@Model.UserGroup.Name</small>
+            <br />
+        </h4>
+    </div>
+    <div class="clear"></div>
+</div>
+

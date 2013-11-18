@@ -1,0 +1,24 @@
+﻿@using ESRGC.DLLR.EARN.Domain.Model
+@model Profile
+@{
+    //var filters = (ViewBag.filters as Dictionary<string, object>) ?? new Dictionary<string, object>();
+    //var currentTags = filters.ContainsKey("tags") ? filters["tags"] as List<string> : new List<string>();
+    var currentProfile = ViewBag.CurrentProfile as Profile ?? new Profile();
+    var returnUrl = ViewBag.returnUrl as string ?? "";
+}
+
+@if (currentProfile.ProfileID != Model.ProfileID) { 
+    <div class="dropdown">
+        <a class="btn btn-primary btn-xs dropdown-toggle" href="#" data-toggle="dropdown">Actions&nbsp;<b class="caret"></b></a>
+        <ul class="dropdown-menu">
+            <li><a href="@Url.Action("ViewProfile", "Profile", new { Model.ProfileID , returnUrl})">View profile</a></li>
+            @if (!currentProfile.hasConnection(Model)) { 
+                <li><a href="@Url.Action("AddConnection", "Connection", new { Model.ProfileID, returnUrl })">Add as connection</a></li>
+            }
+            else {
+                <li><a href="@Url.Action("RemoveConnection", "Connection", new { Model.ProfileID, returnUrl })">Remove connection</a></li>
+            }
+            <li><a href="@Url.Action("InviteToPartnership", "Communication", new { Model.ProfileID, returnUrl })">Invite to partnership</a></li>
+        </ul>
+    </div>
+}

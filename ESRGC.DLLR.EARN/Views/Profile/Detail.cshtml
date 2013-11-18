@@ -4,13 +4,13 @@
 
 @{
     ViewBag.Title = "Profile";
-    ViewBag.Header = "Organization Profile";
+    ViewBag.Header = "Organizational Profile";
 }
 
 @section header{
     <div class="container">
         <header class="page-header">
-            <h3>@ViewBag.Header <i class="icon-large icon-briefcase"></i></h3>
+            <h3>@ViewBag.Header <i class="fa fa-briefcase"></i></h3>
             @*<ul class="breadcrumb">
                 <li><a href="@Url.Action("index", "Home")">Home</a></li>
                 <li class="active">@ViewBag.Header</li>
@@ -18,37 +18,58 @@
         </header>
     </div>
 }
-
+@{
+    var returnUrl = Url.Action("Detail");
+    ViewBag.returnUrl = returnUrl;
+    var connectionCount = Model.Connections.Count();
+    var partnershipCount = Model.PartnershipDetails.Count();
+}
 <div class="container">
     <!--Profile header-->
     <div class="text-right"><small>Last update @Html.TimeSpan(@Model.LastUpdate)</small></div>
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-md-12">
+            @if (!Model.getAccount().EmailVerified) { 
+                <div class="alert alert-warning">
+                    <h4>Your account email address has not been verified!</h4>
+                    <p>
+                        Currently, you are not able to receive notifications, including partnership invite/request. 
+                        Please verify your email address to start receiving notifications.
+                        <a href="@Url.Action("Settings", "Account")">Click here to check your email verification status.</a>
+                    </p>
+                </div>
+            }
             <div class="placeholder-panel">
                 <div class="post">
-                    <ul class="list-inline list-unstyled link-icon-container" id="socialNetworkLinks">
-                        <li><a target="_blank" href="http://@Model.Organization.FacebookLink" title="Facebook link"><i class="icon-large icon-facebook"></i></a></li>
-                        <li><a target="_blank" href="http://@Model.Organization.TwitterLink" title="Twitter link"><i class="icon-large icon-twitter"></i></a></li>
-                        <li><a target="_blank" href="http://@Model.Organization.LinkedInLink" title="LinkedIn link"><i class="icon-large icon-linkedin"></i></a></li>
-                    </ul>
+                    @Html.Partial("socialNetworkPartial", Model)
                     <div class="inline-container profile-area">
                         <div class="profile-picture">
                             @if (Model.PictureID != null) { 
-                                <img class="img-thumbnail" src="@Url.Action("ProfilePicture", new { pictureId = Model.PictureID })"/>
-                                <div><small><a href="@Url.Action("UploadImage")">Change logo</a></small></div>
+                                <div class="logo-container">
+                                    <img class="img-thumbnail" src="@Url.Action("ProfilePicture", new { pictureId = Model.PictureID })"/>
+                                    <div class="panel-action-center">
+                                        <a href="@Url.Action("UploadImage")"><small class="">Change logo</small></a>
+                                    </div>
+                                </div>
                             }
                             else {
-                                <img class="img-thumbnail" src="@Url.Content("~/Client/images/empty_profile.gif")"/>
-                                <div><small><a href="@Url.Action("UploadImage")">Upload Logo</a></small></div>
+                                <div class="logo-container">
+                                    <img class="img-thumbnail" src="@Url.Content("~/Client/images/empty_profile.gif")"/>
+                                    <div class="panel-action-center">
+                                        <a href="@Url.Action("UploadImage")"><small>Upload logo</small></a>
+                                    </div>
+                                </div>
                             }
                         </div>
                         <div class="row profile-container">
-                            <div class="col-sm-10">
+                            <div class="col-md-12">
                                 <div class="">
                                     <h4>
                                         <span>@Model.Organization.Name</span>
-                                        <small><a class="link-icon" href="@Url.Action("Edit", "Organization", new { id = Model.OrganizationID })">
-                                            <i class="icon-pencil"></i></a>
+                                        <small>
+                                            <a class="link-icon" title="Edit organization info"
+                                            href="@Url.Action("Edit", "Organization")">
+                                                <i class="fa fa-pencil"></i></a>
                                         </small>
                                         <br />
                                         <small>@Model.UserGroup.Name</small>
@@ -61,22 +82,23 @@
                                                     @Model.Organization.Website
                                                 </a>
                                             </small>
-                                            <br />
                                         }
-                                        @if (Model.Organization.Department != null) {
-                                            <small><abbr title="Department">Dept:</abbr>@Model.Organization.Department</small> <br />
-                                        }
-                                        @if (Model.Organization.Building != null) {
-                                            <small><abbr title="Building">Bld:</abbr>@Model.Organization.Building</small><br />
-                                        }
-                                        <small>@Model.Organization.City, @Model.Organization.State @Model.Organization.Zip</small>
                                     </h4>
+
+
                                     <p>@Model.Organization.Description</p>
+                                    <h5>Your tags <i class="fa fa-tags"></i>
+                                        <span class="pull-right">
+                                            <a class="link-icon" title="Edit tags" href="@Url.Action("ManageTag", "Tag")"><i class="fa fa-pencil"></i></a>
+                                        </span>
+                                    </h5>
+                                    <div class="placeholder-panel">
+                                        @Html.Partial("tagListLinkPartial", Model.getTagNames())
+                                    </div>
                                 </div>
 
                             </div>
                         </div>
-
                     </div>
                     <div class="clear"></div>
                 </div>
@@ -86,79 +108,127 @@
     <hr />
     <!--Profile detail-->
     <div class="row">
-        <div class="col-sm-4">
-            <div>
-                <div class="window-panel">
-                    <div class="window-panel-title">
-                        Your tags <i class="icon-tags"></i>
+        <div class="col-md-4">
+            <div class="profile-info-container">
+                <div class="placeholder-panel">
+                    <div>
+                        <strong>Point of Contact</strong> @*<i class="fa fa-envelope"></i>*@
                         <span class="pull-right">
-                            <a class="link-icon" title="Edit" href="@Url.Action("ManageTag", "Tag")"><i class="icon-pencil"></i></a>
+                            <a class="link-icon" title="Edit contact info" href="@Url.Action("Edit", "Contact")"><i class="fa fa-pencil"></i></a>
                         </span>
                     </div>
-                    <div class="window-panel-content">
-                        @Html.Partial("tagListDisplayPartial", Html.getTagListString(Model))
+                    <div class="post">
+                        @Html.Partial("profileContactPartial")
                     </div>
                 </div>
-            </div>
-            <div>
-                <div class="window-panel">
-                    <div class="window-panel-title">
-                        Contact <i class="icon-envelope"></i>
+                <div class="placeholder-panel">
+                    <div>
+                        <strong>Location</strong>
                         <span class="pull-right">
-                            <a class="link-icon" title="Edit" href="@Url.Action("Edit", "Contact", new { id = Model.ContactID })"><i class="icon-pencil"></i></a>
+                            <a class="link-icon" title="Edit address location"
+                                            href="@Url.Action("Edit", "Organization")">
+                                <i class="fa fa-pencil"></i></a>
                         </span>
                     </div>
-                    <div class="window-panel-content">
-                        <address>
-                            @Model.Contact.NameTitle
-                            <strong>@Model.Contact.FirstName @Model.Contact.Middle @Model.Contact.LastName</strong>
-                            @Model.Contact.NameExtension
-                            <br />
-                            @Model.Organization.StreetAddress
-                            <br />
-                            <abbr title="Phone">P:</abbr>
-                            @Model.Contact.Phone<br />
-                            <a href="mailto:@Model.Contact.Email">@Model.Contact.Email</a>
-                        </address>
+                    <div class="post">
+                        <div>@Html.Partial("locationInfoPartial", Model)</div>
                     </div>
                 </div>
+
             </div>
         </div>
-        <div class="col-sm-8 profile-tabs">
+        <div class="col-md-8 profile-info-container">
+            <div class="placeholder-panel">
+                <form action="@Url.Action("EditAbout")" method="post">
+                    <strong>Profile Summary</strong>
+                    @Html.TextAreaFor(x => x.About, new {
+                   @class = "form-control about",
+                   placeholder = ModelMetadata.FromLambdaExpression(x => x.About, ViewData).Description
+               })
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-info btn-xs"><i class="fa fa-save"></i>&nbsp;Save</button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-12 profile-tabs">
             <ul class="nav nav-tabs ">
-                <li class="active"><a href="#summary" data-toggle="tab">Summary</a></li>
-                <li><a href="#needs" data-toggle="tab">Our needs</a></li>
-                <li><a href="#contacts" data-toggle="tab">Contacts</a></li>
+                @*<li class="active"><a href="#summary" data-toggle="tab">Summary</a></li>*@
+                <li class="active"><a href="#connections" data-toggle="tab">Connections&nbsp;<span class="badge">@connectionCount</span></a></li>
+                <li><a href="#partnerships" data-toggle="tab">Partnerships&nbsp;<span class="badge">@partnershipCount</span></a></li>
             </ul>
             <div class="tab-content">
-                <div class="tab-pane active" id="summary">
-                    <div class="placeholder">
-                        <form action="@Url.Action("EditAbout")" method="post">
-                            <h4>About</h4>
-                            @Html.TextAreaFor(x => x.About, new {
-                           @class = "form-control about",
-                           placeholder = ModelMetadata.FromLambdaExpression(x => x.About, ViewData).Description
-                       })
-                            <div class="text-right">
-                                <button type="submit" class="btn btn-info btn-xs"><i class="icon-save"></i>&nbsp;Save</button>
-
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="tab-pane" id="needs">
-                    <div class="placeholder">
-                        <h4>Needs is coming soon...</h4>
-                    </div>
-                </div>
-                <div class="tab-pane" id="contacts">
-                    <div class="placeholder">
+                @*<div class="tab-pane active" id="summary">                    
+                </div>*@
+                <div class="tab-pane active" id="connections">
+                    <div class="placeholder-pane">
                         <div>
-                            <h4>Contacts is coming soon...</h4>
+                            @if (Model.Connections.Count() == 0) { 
+                                <p class="text-muted">
+                                    “Connections” are a personal bookmarking system where EARN MD CONNECT users can
+                                    store other user profiles for personal use. Users’ Connections are not 
+                                    visible to others (including the user selected for a Connection). Instead, 
+                                    Connections allow users to conveniently maintain search results for future use, 
+                                    and are only meant to make each user’s search experience more convenient and efficient. 
+                                    Once you add Connections, they will display here.
+                                </p>
+                            }
+                            @foreach (var p in Model.Connections) { 
+                                @Html.Partial("shortProfilePartial", p)
+                            }
                         </div>
                     </div>
                 </div>
+                <div class="tab-pane" id="partnerships">
+                    <div class="placeholder-pane">
+                        <div>
+                            <p>
+                                &nbsp;
+                                <span class="pull-right">
+                                    <a href="@Url.Action("Create", "Partnership")">
+                                        <i class="glyphicon glyphicon-link"></i>
+                                        &nbsp;Create new partnership
+                                    </a>
+                                </span>
+                            </p>
+                            <div class="clear"></div>
+                        </div>
+                        @if (Model.PartnershipDetails.Count() == 0) { 
+                            <p class="text-muted">
+                                If you are already a member of an EARN Maryland partnership, it may not be reflected 
+                                here because a Partnership Profile has not yet been created on this site, or because 
+                                the Partnership Profile Administrator has not yet invited or confirmed your membership yet. 
+                                Once you are a member of a partnership or partnerships within EARN MD CONNECT, they will be listed here. 
+                                As such, if you are already part of a Planning Grant Applicant Group, you will not have an Organization 
+                                or a Partnership Profile on EARN MD CONNECT until one is created!
+                            </p>
+                            <p class="text-muted">
+                                If there is not yet a Partnership Profile within EARN MD CONNECT for your partnership, 
+                                one can be created by clicking “Create new partnership” above. 
+                                Please note that <u>the user who creates the Partnership Profile will become the Partnership 
+                                Profile’s Administrator</u>, and will be the only user able 1) to control the Partnership Profile’s membership, 2) 
+                                to invite other organizations to join your Partnership Profile, 3) to decide whether to approve users who 
+                                request to join your Partnership Profile, and 4) to control the Partnership Profile’s Title and Description 
+                                visible to other EARN MD CONNECT users. As such, partnerships should determine the appropriate member to create, 
+                                and be the Administrator of, their group’s Partnership Profile on EARN MD CONNECT.
+                            </p>
+                            <p class="text-muted">
+                                If there is already a Partnership Profile for your partnership, you can request to join that Profile within 
+                                EARN MD CONNECT by clicking “Request to join” on the Partnership’s Profile page. 
+                                If you are unsure, you can always <a href="mailto://earn.jobs@maryland.gov">email us</a>. 
+                            </p>
+                        }
+                        else {
+                            @Html.Action("ListPartnerships", "Partnership", new { Model.ProfileID, returnUrl })
+                        }
+                    </div>
+                </div>
             </div>
         </div>
+
     </div>
 </div>

@@ -6,6 +6,8 @@ using System.Linq;
 using ESRGC.DLLR.EARN.Controllers;
 using ESRGC.DLLR.EARN.Domain.DAL;
 using ESRGC.DLLR.EARN.Domain.DAL.Concrete;
+using ESRGC.DLLR.EARN.Domain.Model;
+using ESRGC.DLLR.EARN.Helpers;
 using ESRGC.GIS.Geocoding;
 using ESRGC.GIS.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -62,14 +64,46 @@ namespace ESRGC.DLLR.EARN.Tests
     }
 
     [TestMethod]
-    public void testProfileGeoTag() { 
+    public void testProfileGeoTag() {
       //arrange
       var workUnit = new WorkUnit(new DomainContext());
       var controller = new ProfileController(workUnit);
       var profiles = workUnit.ProfileRepository.Entities.ToList();
       foreach (var profile in profiles) {
-        controller.addUpdateAddrGeoTag(profile.ProfileID);
+        //controller.addUpdateAddrGeoTag(profile.ProfileID);
       }
+    }
+    [TestMethod]
+    public void testConnectionEntity() {
+      //arrange 
+      var workUnit = new WorkUnit(new DomainContext());
+      var profile = workUnit.ProfileRepository.GetEntityByID(1);
+
+      var connProf = workUnit.ProfileRepository.GetEntityByID(1);
+      profile.Connections.Add(connProf);
+      workUnit.saveChanges();
+      //assert
+      Assert.AreNotEqual(profile.Connections.Count(), 0);
+    }
+    [TestMethod]
+    public void testEmail() {
+      EmailHelper.SendNotificationEmail(new Notification() {
+        Account = new Account() { EmailAddress = "tahoang@salisbury.edu"},
+        Created = DateTime.Now,
+        Message = "This is a notification test",
+        Category = "Notification",
+        LinkToAction = "http://test.com"
+      });
+    }
+
+    [TestMethod]
+    public void testAccountVerificaitonCode() {
+      //arrange
+      var account = new Account();
+      //act
+      Console.WriteLine(account.VerificationCode);
+      //assert
+      Assert.AreEqual(30, account.VerificationCode.Length);
     }
   }
 }

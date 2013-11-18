@@ -6,11 +6,13 @@ using System.Web;
 using System.Web.Mvc;
 using ESRGC.DLLR.EARN.Domain.DAL.Abstract;
 using ESRGC.DLLR.EARN.Domain.Model;
+using ESRGC.DLLR.EARN.Filters;
 using ESRGC.GIS.Geocoding;
 using ESRGC.GIS.Utilities;
 
 namespace ESRGC.DLLR.EARN.Controllers
-{
+{  
+  [SetGuestCookie]
   public class BaseController : Controller
   {
     protected IWorkUnit _workUnit = null;
@@ -32,9 +34,10 @@ namespace ESRGC.DLLR.EARN.Controllers
     }
 
     //////////////////////////
-    //helpers
+    //helpers 
     ///////////////////////
-    public void addUpdateAddrGeoTag(int profileId) {
+    //attempt to geocode the profile address
+    protected void addUpdateAddrGeoTag(int profileId) {
       var profile = _workUnit.ProfileRepository.GetEntityByID(profileId);
       if (profile == null)
         return;
@@ -42,7 +45,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       var address = profile.Organization.StreetAddress;
       var zip = profile.Organization.Zip;
       var city = profile.Organization.City;
-
+      var state = profile.Organization.State;
       //if any field is empty do nothing
       if (string.IsNullOrEmpty(address) ||
         string.IsNullOrEmpty(zip) ||
@@ -53,6 +56,8 @@ namespace ESRGC.DLLR.EARN.Controllers
       var geocoder = new MDLocatorWithZip();
       var jsonResult = geocoder.geocode(address, city, zip);
       var resultObj = Net.deserializeJson(jsonResult);
+      if (resultObj == null)
+        return;
       var result = resultObj.candidates as IEnumerable<dynamic>;
       if (result == null)
         return;
@@ -68,16 +73,29 @@ namespace ESRGC.DLLR.EARN.Controllers
       }
       //create geo tag
       if (location != null) {
-        var wkt = string.Format("POINT ({0} {1})", location.x, location.y);
+        var tagName = string.Format("{0}, {1}, {2} {3}", address, city, state, zip);
+        var wkt = string.Format("POINT({0} {1})", location.x, location.y);
         //create geo tag
         var geoTag = new GeoTag() {
-          Name = address,
+          Name = tagName,
           Geometry = DbGeometry.PointFromText(wkt, geocoder.SpatialReference),
           Description = "address"
         };
-
+        //remove all old references
         try {
-          var currentTag = _workUnit.TagRepository.Entities.OfType<GeoTag>().First(x => x.Name.ToUpper() == address.ToUpper());
+          var oldAddrTagRefs = profile
+                .ProfileTags
+                .Where(x => (x.Tag is GeoTag) && x.Tag.Description == "address")
+                .ToList();
+          oldAddrTagRefs.ForEach(x => _workUnit.ProfileTagRepository.DeleteEntity(x));
+          _workUnit.saveChanges();
+        }
+        catch (ArgumentNullException) {
+          //no item found
+        }
+        //update new tags 
+        try {
+          var currentTag = _workUnit.TagRepository.Entities.OfType<GeoTag>().First(x => x.Name.ToUpper() == tagName.ToUpper());
           //update the geometry if it already exists
           currentTag.Geometry = geoTag.Geometry;
           if (currentTag.Description == "")
@@ -93,7 +111,7 @@ namespace ESRGC.DLLR.EARN.Controllers
             _workUnit.ProfileTagRepository.InsertEntity(profileTag);
           }
         }
-        catch {
+        catch {          
           //create ProfileTag
           var profileTag = new ProfileTag() {
             Tag = geoTag,
@@ -107,7 +125,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       }
     }
 
-    public void updateTempDataMessage(string message) {
+    public void updateTempMessage(string message) {
       TempData["message"] = message;
     }
 
@@ -117,9 +135,20 @@ namespace ESRGC.DLLR.EARN.Controllers
           var account = _workUnit.AccountRepository.Entities.First(x => x.EmailAddress == User.Identity.Name);
           return account;
         }
-        catch  {
+        catch (Exception ex) {
           return null;
         }
+      }
+    }
+
+    protected RedirectResult returnToUrl(string returnUrl, string defaultUrl) {
+      //return to previous url
+      if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
+          && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\")) {
+        return Redirect(returnUrl);
+      }
+      else {
+        return Redirect(defaultUrl);
       }
     }
   }

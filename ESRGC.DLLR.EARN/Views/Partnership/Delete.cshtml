@@ -1,0 +1,57 @@
+﻿@model ESRGC.DLLR.EARN.Domain.Model.Partnership
+
+@{
+    ViewBag.Title = "Partnership";
+    ViewBag.Header = "Delete Partnership";
+}
+
+@section header{
+    <div class="container">
+        <header class="page-header">
+            <h3>@ViewBag.Header <i class="glyphicon glyphicon-link"></i></h3>
+            @*<ul class="breadcrumb">
+                <li><a href="@Url.Action("index", "Home")">Home</a></li>
+                <li class="active">@ViewBag.Header</li>
+            </ul>*@
+        </header>
+    </div>
+}
+
+@section scripts{}
+
+@{ 
+    var p = Model;
+    var partners = p.getPartners();
+    var returnUrl = ViewBag.returnUrl as string;
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1">          
+            <div class="window-panel">
+                <div class="window-panel-title">
+                    <strong>@p.Name</strong>
+                </div>
+                <div class="window-panel-content">
+                    <p class=""><strong>Description</strong> @p.Description</p>
+                    <p>
+                        <strong>Status: </strong>
+                        @Html.Partial("partnershipStatusPartial", p)
+                    </p>
+                    <div class="alert alert-warning">
+                        <h4>Comfirm Deletion</h4>
+                        <p>Are you sure you want to delete this partnership? This action can not be undone.</p>
+                        <form action="@Url.Action("Delete")" method="post" role="form">
+                            @Html.HiddenFor(x=>x.PartnershipID)
+                            @Html.Hidden("returnUrl", returnUrl)
+                            <input class="btn btn-primary" value="Yes" type="submit"/>
+                            <a class="btn btn-default" href="@Url.Action("Detail", "Partnership", new { Model.PartnershipID, returnUrl})">Cancel</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

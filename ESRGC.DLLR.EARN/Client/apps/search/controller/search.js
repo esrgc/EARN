@@ -2,7 +2,7 @@
 Author: Tu hoang
 ESRGC 2013
 
-EARN Maryland Connect
+EARN MD CONNECT
 
 Search controller
 search.js
@@ -19,7 +19,7 @@ dx.defineController('Search', {
         tagInput: '#tagInput',
         goBtn: 'button[type="submit"]',
         searchForm: 'form',
-        tagLinks: '.tag a, a#clearSearchLink',
+        pageLinks: '.tag a, a#clearSearchLink, .pagination a',
         pager: '.pagination',
         currentHiddenInput: 'input[type="hidden"][name="tags"]',
         hiddenInputHolder: '#hiddenInputHolder',
@@ -34,8 +34,8 @@ dx.defineController('Search', {
         searchForm: {
             submit: 'onSearchSubmit'
         },
-        tagLinks: {
-            click: 'onTagLinkClick'
+        pageLinks: {
+            click: 'onPageLinksClick'
         }
     },
     initialize: function () {
@@ -66,12 +66,14 @@ dx.defineController('Search', {
             store.on('load', scope.onSearchStoreLoad);
         }
     },
-    onTagLinkClick: function (event, object) {
+    onPageLinksClick: function (event, object) {
         event.preventDefault();
         var url = $(object).attr('href');
+        if (typeof url == 'undefined')
+            return;
         var store = dx.getStore('Search');
         if (typeof store != 'undefined') {
-            dx.log(url);
+            //dx.log(url);
             store.loadContentUrl(url);
         }       
     },
@@ -94,12 +96,12 @@ dx.defineController('Search', {
             scope.tagArray.push(input);
 
         var params = scope.getFormData($(object));
-        dx.log(params)
+        //dx.log(params)
         var store = dx.getStore('Search');
         if (typeof store != 'undefined') {
             store.setParams(params);
 
-            dx.log(store.constructParams());
+            //dx.log(store.constructParams());
             store.loadContent();
         }
     },
@@ -144,11 +146,11 @@ dx.defineController('Search', {
         this.getNotificationLabel().text(msg);
     },
     preloadState: function () {
-        dx.log('pre-load');
+        //dx.log('pre-load');
         this.getGoBtn().button('loading');
     },
     loadedState: function () {
-        dx.log('loaded');
+        //dx.log('loaded');
         this.getGoBtn().button('reset');
     },
     updateTagList: function () {

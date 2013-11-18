@@ -1,0 +1,28 @@
+﻿@using ESRGC.DLLR.EARN.Domain.Model
+@model Profile
+<address>
+    <i class="fa fa-user"></i>
+    @Model.Contact.NameTitle
+    <strong>@Model.Contact.FirstName @Model.Contact.Middle @Model.Contact.LastName</strong>
+    @Model.Contact.NameExtension
+    <br />
+    @*<i class="fa fa-location-arrow" title="Street address"></i>&nbsp;@Model.Organization.StreetAddress
+    <br />
+    &nbsp;&nbsp;&nbsp;&nbsp;@Model.Organization.City, @Model.Organization.State @Model.Organization.Zip
+    <br />
+    @if (Model.Organization.Building != null) {
+        <i class="fa fa-building-o" title="Building"></i><span>&nbsp;@Model.Organization.Building</span>
+    }
+    @if (Model.Organization.Department != null) {
+        if (Model.Organization.Department.Length > 15) { 
+            <br />
+        }
+        else{
+            <text>&nbsp;&nbsp;</text>
+        }
+        <span><abbr title="Department">Dept:</abbr>&nbsp;@Model.Organization.Department</span> <br />
+    }*@
+    <i class="fa fa-phone" title="Phone"></i>&nbsp;@Model.Contact.Phone<br />
+    <i class="fa fa-envelope-o" title="Email"></i>&nbsp;<a href="mailto:@Model.Contact.Email">@Model.Contact.Email</a>
+</address>
+

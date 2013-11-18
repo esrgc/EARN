@@ -43,19 +43,28 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Antlr3.Runtime">
-      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    <Reference Include="ActionMailer.Net">
+      <HintPath>..\packages\ActionMailer.0.7.4\lib\Net40\ActionMailer.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="ActionMailer.Net.Mvc">
+      <HintPath>..\packages\ActionMailer.0.7.4\lib\Net40\ActionMailer.Net.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.6.0.0-rc1\lib\net40\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.0.1\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.0.0-rc1\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.0.1\lib\net40\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.3.0.1.10\lib\net40\Ninject.dll</HintPath>
@@ -66,21 +75,68 @@
     <Reference Include="PagedList.Mvc">
       <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="Postal">
+      <HintPath>..\packages\postal.0.8.2\lib\net40\Postal.dll</HintPath>
+    </Reference>
+    <Reference Include="RazorEngine, Version=3.3.0.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\RazorEngine.3.3.0\lib\net40\RazorEngine.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.30506.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Optimization">
-      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.0\lib\net40\System.Web.Optimization.dll</HintPath>
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.30506.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.30506.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.30506.0\lib\net40\System.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.2\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.30506.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
@@ -88,47 +144,6 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http.WebRequest">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20710.0\lib\net40\System.Web.Razor.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease">
@@ -139,20 +154,34 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CommunicationController.cs" />
+    <Compile Include="Controllers\ConnectionController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\DocumentController.cs" />
+    <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrganizationController.cs" />
+    <Compile Include="Controllers\PartnershipController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\TagController.cs" />
+    <Compile Include="Filters\CanEditPartnershipAttribute.cs" />
+    <Compile Include="Filters\CheckCookieAttribute.cs" />
+    <Compile Include="Filters\HasReturnUrlAttribute.cs" />
+    <Compile Include="Filters\NewToPartnershipAttribute.cs" />
+    <Compile Include="Filters\SendNotificationAttribute.cs" />
+    <Compile Include="Filters\SetGuestCookieAttribute.cs" />
+    <Compile Include="Filters\VerifyAccountAttribute.cs" />
+    <Compile Include="Filters\VerifyProfileAttribute.cs" />
+    <Compile Include="Filters\VerifyProfilePartnershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Authentication.cs" />
     <Compile Include="Helpers\EmailHelper.cs" />
     <Compile Include="Helpers\HtmlHelperExt.cs" />
-    <Compile Include="Helpers\SHA1PasswordSecurity.cs" />
     <Compile Include="Helpers\Utility.cs" />
+    <Compile Include="Helpers\ViewDataHelper.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\ProfileModels.cs" />
@@ -165,6 +194,66 @@
     <Content Include="Client\apps\search\app.js" />
     <Content Include="Client\apps\search\controller\map.js" />
     <Content Include="Client\apps\search\controller\search.js" />
+    <Content Include="Client\dllrContent\images\icons\mail.gif" />
+    <Content Include="Client\dllrContent\images\icons\print.gif" />
+    <Content Include="Client\dllrContent\images\mdicon.ico" />
+    <Content Include="Client\dllrContent\images\page\bodyBG2.gif" />
+    <Content Include="Client\dllrContent\images\page\dllrbannernew.jpg" />
+    <Content Include="Client\dllrContent\images\page\MDlogo.gif" />
+    <Content Include="Client\dllrContent\images\page\searchButton.gif" />
+    <Content Include="Client\dllrContent\javascript\dllrghome.css" />
+    <Content Include="Client\dllrContent\javascript\mailurl.js" />
+    <Content Include="Client\dllrContent\scripts\Print.js" />
+    <Content Include="Client\dllrContent\style\AgencyAdd.css" />
+    <Content Include="Client\dllrContent\css\dllrCSS.css">
+      <DependentUpon>dllrCSS.less</DependentUpon>
+    </Content>
+    <Content Include="Client\dllrContent\css\dllrCSS.min.css">
+      <DependentUpon>dllrCSS.less</DependentUpon>
+    </Content>
+    <Content Include="Client\dllrContent\style\MDhandheld.css" />
+    <Content Include="Client\dllrContent\style\MDstandard.css" />
+    <Content Include="Client\dllrContent\style\print-preview.css" />
+    <Content Include="Client\dllrContent\style\print.css" />
+    <Content Include="Client\jsLib\bootstrap-3.0.1\css\bootstrap-theme.css" />
+    <Content Include="Client\jsLib\bootstrap-3.0.1\css\bootstrap-theme.min.css" />
+    <Content Include="Client\jsLib\bootstrap-3.0.1\css\bootstrap.css" />
+    <Content Include="Client\jsLib\bootstrap-3.0.1\css\bootstrap.min.css" />
+    <Content Include="Client\jsLib\bootstrap-3.0.1\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Client\jsLib\bootstrap-3.0.1\js\bootstrap.js" />
+    <Content Include="Client\jsLib\bootstrap-3.0.1\js\bootstrap.min.js" />
+    <Content Include="Client\jsLib\bootstrap-3.0.2\css\bootstrap-theme.css" />
+    <Content Include="Client\jsLib\bootstrap-3.0.2\css\bootstrap-theme.min.css" />
+    <Content Include="Client\jsLib\bootstrap-3.0.2\css\bootstrap.css" />
+    <Content Include="Client\jsLib\bootstrap-3.0.2\css\bootstrap.min.css" />
+    <Content Include="Client\jsLib\bootstrap-3.0.2\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Client\jsLib\bootstrap-3.0.2\js\bootstrap.js" />
+    <Content Include="Client\jsLib\bootstrap-3.0.2\js\bootstrap.min.js" />
+    <Content Include="Client\jsLib\bootstrap-3.0\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Client\jsLib\jquery-1.10.2\jquery-1.10.2.js" />
+    <Content Include="Client\jsLib\jquery-1.10.2\jquery-1.10.2.min.js" />
+    <Content Include="Client\jsLib\jquery.placeholder.js" />
+    <Content Include="Client\jsLib\leaflet.awesome-markers\images\markers-matte%402x.png" />
+    <Content Include="Client\jsLib\leaflet.awesome-markers\images\markers-matte.png" />
+    <Content Include="Client\jsLib\leaflet.awesome-markers\images\markers-plain.png" />
+    <Content Include="Client\jsLib\leaflet.awesome-markers\images\markers-shadow%402x.png" />
+    <Content Include="Client\jsLib\leaflet.awesome-markers\images\markers-shadow.png" />
+    <Content Include="Client\jsLib\leaflet.awesome-markers\images\markers-soft%402x.png" />
+    <Content Include="Client\jsLib\leaflet.awesome-markers\images\markers-soft.png" />
+    <Content Include="Client\jsLib\leaflet.awesome-markers\leaflet.awesome-markers.css" />
+    <Content Include="Client\jsLib\leaflet.awesome-markers\leaflet.awesome-markers.js" />
+    <Content Include="Client\jsLib\leaflet.awesome-markers\leaflet.awesome-markers.min.js" />
+    <Content Include="Client\jsLib\leaflet-0.6.4\images\layers-2x.png" />
+    <Content Include="Client\jsLib\leaflet-0.6.4\images\layers.png" />
+    <Content Include="Client\jsLib\leaflet-0.6.4\images\marker-icon-2x.png" />
+    <Content Include="Client\jsLib\leaflet-0.6.4\images\marker-icon.png" />
+    <Content Include="Client\jsLib\leaflet-0.6.4\images\marker-shadow.png" />
+    <Content Include="Client\jsLib\leaflet-0.6.4\leaflet-src.js" />
+    <Content Include="Client\jsLib\leaflet-0.6.4\leaflet.css" />
+    <Content Include="Client\jsLib\leaflet-0.6.4\leaflet.ie.css" />
+    <Content Include="Client\jsLib\leaflet-0.6.4\leaflet.js" />
+    <Content Include="Client\jsLib\response\respond.min.js" />
+    <Content Include="Client\jsLib\response\respond.src.js" />
     <Content Include="Client\js\map\leafletViewer.js" />
     <Content Include="Client\js\map\mapViewer.js" />
     <Content Include="Client\apps\search\store\search.js" />
@@ -174,10 +263,10 @@
     <Content Include="Client\css\less\bootstrap-custom.min.css">
       <DependentUpon>bootstrap-custom.less</DependentUpon>
     </Content>
-    <Content Include="Client\css\less\library.css">
+    <Content Include="Client\css\less\lib\library.css">
       <DependentUpon>library.less</DependentUpon>
     </Content>
-    <Content Include="Client\css\less\library.min.css">
+    <Content Include="Client\css\less\lib\library.min.css">
       <DependentUpon>library.less</DependentUpon>
     </Content>
     <Content Include="Client\css\less\profile.css">
@@ -192,24 +281,18 @@
     <Content Include="Client\css\less\quickForm.min.css">
       <DependentUpon>quickForm.less</DependentUpon>
     </Content>
-    <Content Include="Client\css\less\variables.css">
+    <Content Include="Client\css\less\lib\variables.css">
       <DependentUpon>variables.less</DependentUpon>
     </Content>
-    <Content Include="Client\css\less\variables.min.css">
+    <Content Include="Client\css\less\lib\variables.min.css">
       <DependentUpon>variables.less</DependentUpon>
-    </Content>
-    <Content Include="Client\css\less\windowPanel.css">
-      <DependentUpon>windowPanel.less</DependentUpon>
-    </Content>
-    <Content Include="Client\css\less\windowPanel.min.css">
-      <DependentUpon>windowPanel.less</DependentUpon>
     </Content>
     <Content Include="Client\css\less\bootstrap-custom.less" />
     <Content Include="Client\css\less\quickForm.less" />
     <None Include="Client\css\profile.oldcss" />
     <None Include="Client\css\quickForm.oldcss" />
-    <Content Include="Client\css\less\variables.less" />
-    <Content Include="Client\css\less\library.less" />
+    <Content Include="Client\css\less\lib\variables.less" />
+    <Content Include="Client\css\less\lib\library.less" />
     <Content Include="Client\css\less\profile.less" />
     <None Include="Client\css\site.oldcss" />
     <Content Include="Client\css\less\site.css">
@@ -220,7 +303,6 @@
     </Content>
     <Content Include="Client\css\stickyFooter.css" />
     <Content Include="Client\css\typeahead.css" />
-    <None Include="Client\css\less\windowPanel.less" />
     <Content Include="Client\images\ajax-loader-fb.gif" />
     <Content Include="Client\images\EARN_logo_200w.jpg" />
     <Content Include="Client\images\empty_profile.gif" />
@@ -233,7 +315,6 @@
     <Content Include="Client\jsLib\bootstrap-3.0\css\bootstrap-theme.min.css" />
     <Content Include="Client\jsLib\bootstrap-3.0\css\bootstrap.css" />
     <Content Include="Client\jsLib\bootstrap-3.0\css\bootstrap.min.css" />
-    <Content Include="Client\jsLib\bootstrap-3.0\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Client\jsLib\bootstrap-3.0\js\bootstrap.js" />
     <Content Include="Client\jsLib\bootstrap-3.0\js\bootstrap.min.js" />
     <Content Include="Client\jsLib\typeahead.js\typeahead.js" />
@@ -241,19 +322,20 @@
     <Content Include="Client\js\bootstrapValidation.js" />
     <Content Include="Client\js\dx.min.js" />
     <None Include="Client\css\PagedList.notusedcss" />
-    <Content Include="Client\js\map\wicket-leaflet.js" />
-    <Content Include="Client\js\map\wicket.js" />
+    <Content Include="Client\jsLib\wicket-leaflet\wicket-leaflet.js" />
+    <Content Include="Client\jsLib\wicket-leaflet\wicket.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Client\jsLib\jquery\jquery-2.0.3-vsdoc.js" />
-    <Content Include="Client\jsLib\jquery\jquery-2.0.3.js" />
-    <Content Include="Client\jsLib\jquery\jquery-2.0.3.min.js" />
+    <Content Include="Client\jsLib\jquery-2.0.3\jquery-2.0.3-vsdoc.js" />
+    <Content Include="Client\jsLib\jquery-2.0.3\jquery-2.0.3.js" />
+    <Content Include="Client\jsLib\jquery-2.0.3\jquery-2.0.3.min.js" />
     <Content Include="Client\jsLib\jqueryValidate\jquery.validate-vsdoc.js" />
     <Content Include="Client\jsLib\jqueryValidate\jquery.validate.js" />
     <Content Include="Client\jsLib\jqueryValidate\jquery.validate.min.js" />
+    <Content Include="Client\js\modernizr-2.6.2.js" />
     <Content Include="Client\jsLib\jqueryValidate\jquery.validate.unobtrusive.js" />
     <Content Include="Client\jsLib\jqueryValidate\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Client\js\modernizr-2.6.2.js" />
+    <Content Include="earnconnect.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -262,10 +344,10 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Search\SearchProfilePartial.cshtml" />
-    <Content Include="Views\Shared\tagListPartial.cshtml" />
+    <Content Include="Views\Search\searchProfilePartial.cshtml" />
+    <Content Include="Views\Shared\tagListEditPartial.cshtml" />
     <Content Include="Views\Shared\tagListDisplayPartial.cshtml" />
-    <Content Include="Views\Search\tagListLinkPartial.cshtml" />
+    <Content Include="Views\Shared\tagListLinkPartial.cshtml" />
     <Content Include="Views\Search\Basic.cshtml" />
     <Content Include="Views\Profile\ViewProfile.cshtml" />
     <Content Include="Views\Profile\Detail.cshtml" />
@@ -274,24 +356,81 @@
     <Content Include="Views\Shared\orgFormPartial.cshtml" />
     <Content Include="Views\Organization\Edit.cshtml" />
     <Content Include="Views\Shared\contactFormPartial.cshtml" />
+    <Content Include="Client\jsLib\leaflet.awesome-markers\leaflet.awesome-markers.min.js.map">
+      <DependentUpon>leaflet.awesome-markers.js</DependentUpon>
+    </Content>
+    <Content Include="Client\jsLib\bootstrap-3.0\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Client\jsLib\bootstrap-3.0\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Client\jsLib\bootstrap-3.0\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Client\jsLib\jquery-1.10.2\jquery-1.10.2.min.map" />
+    <Content Include="Client\jsLib\bootstrap-3.0.1\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Client\jsLib\bootstrap-3.0.1\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Client\jsLib\bootstrap-3.0.1\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Client\dllrContent\css\dllrCSS.less" />
+    <Content Include="Client\jsLib\bootstrap-3.0.2\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Client\jsLib\bootstrap-3.0.2\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Client\jsLib\bootstrap-3.0.2\fonts\glyphicons-halflings-regular.woff" />
     <None Include="Properties\PublishProfiles\FTP.pubxml" />
     <None Include="Properties\PublishProfiles\P drive.pubxml" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
+    <Content Include="Views\Shared\profileActionPartial.cshtml" />
+    <Content Include="Views\Shared\profileContactPartial.cshtml" />
+    <Content Include="Views\Shared\shortProfilePartial.cshtml" />
+    <Content Include="Views\Shared\profileImagePartial.cshtml" />
+    <Content Include="Views\Partnership\Index.cshtml" />
+    <Content Include="Views\Partnership\Create.cshtml" />
+    <Content Include="Views\Partnership\Detail.cshtml" />
+    <Content Include="Views\Partnership\ListPartnerships.cshtml" />
+    <Content Include="Views\Connection\ListConnections.cshtml" />
+    <Content Include="Views\Partnership\Edit.cshtml" />
+    <Content Include="Views\Home\UnauthorizedAccess.cshtml" />
+    <Content Include="Views\Home\ProfileNotCreated.cshtml" />
+    <Content Include="Views\Shared\termTextPartial.cshtml" />
+    <Content Include="Views\Partnership\View.cshtml" />
+    <Content Include="Views\Partnership\InvalidAccessToPartnership.cshtml" />
+    <Content Include="Views\Partnership\Delete.cshtml" />
+    <Content Include="Views\Partnership\InvalidPartnershipRequest.cshtml" />
+    <Content Include="Views\Communication\SendPartnershipRequest.cshtml" />
+    <Content Include="Views\Communication\InviteToPartnership.cshtml" />
+    <Content Include="Views\Communication\Requests.cshtml" />
+    <Content Include="Views\Shared\miniProfilePartial.cshtml" />
+    <Content Include="Views\Shared\partnershipStatusPartial.cshtml" />
+    <Content Include="Views\Communication\Notifications.cshtml" />
+    <Content Include="Views\Emails\VerificationEmail.html.cshtml" />
+    <Content Include="Views\Emails\NotificationEmail.txt.cshtml" />
+    <Content Include="Views\Home\SendEmail.cshtml" />
+    <Content Include="Views\Emails\SendMail.cshtml" />
+    <Content Include="Views\Emails\_ViewStart.cshtml" />
+    <Content Include="Views\Email\Notification.html.cshtml" />
+    <Content Include="Views\Shared\listComments.cshtml" />
+    <Content Include="Views\Email\EmailVerification.html.cshtml" />
+    <Content Include="Views\Account\Settings.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Shared\_DLLRLayout.cshtml" />
+    <Content Include="Views\Home\CookieNotEnabled.cshtml" />
+    <Content Include="Views\Document\List.cshtml" />
+    <Content Include="Views\Shared\aboutTextPartial.cshtml" />
+    <Content Include="Views\Shared\partnershipPartial.cshtml" />
+    <Content Include="Views\Shared\shortPartnershipPartial.cshtml" />
+    <Content Include="Views\Shared\locationInfoPartial.cshtml" />
+    <Content Include="Views\Shared\socialNetworkPartial.cshtml" />
+    <Content Include="Views\Email\ForgotPassword.html.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ChangeSignInEmail.cshtml" />
+    <Content Include="Views\Email\ReVerificationEmail.html.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Client\apps\search\model\" />
     <Folder Include="Client\apps\search\view\" />
+    <Folder Include="Client\dllrContent\includes\footers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Client\css\less\site.less" />
-    <None Include="Client\jsLib\bootstrap-3.0\fonts\glyphicons-halflings-regular.eot" />
-    <None Include="Client\jsLib\bootstrap-3.0\fonts\glyphicons-halflings-regular.ttf" />
-    <None Include="Client\jsLib\bootstrap-3.0\fonts\glyphicons-halflings-regular.woff" />
-    <None Include="Client\jsLib\jquery\jquery-2.0.3.min.map" />
+    <None Include="Client\jsLib\jquery-2.0.3\jquery-2.0.3.min.map" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -305,8 +444,6 @@
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Profile\Create.cshtml" />
     <Content Include="Views\Shared\messagePartial.cshtml" />
-    <Content Include="Views\Profile\_organization.cshtml" />
-    <Content Include="Views\Profile\_tag.cshtml" />
     <Content Include="Views\Profile\AddTag.cshtml" />
     <Content Include="Views\Tag\ManageTag.cshtml" />
     <Content Include="Views\Profile\SubcategoryDropdown.cshtml" />
@@ -338,7 +475,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>6438</DevelopmentServerPort>
+          <DevelopmentServerPort>8940</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

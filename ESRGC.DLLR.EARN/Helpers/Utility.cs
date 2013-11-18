@@ -12,14 +12,14 @@ namespace ESRGC.DLLR.EARN.Helpers
     public static List<string> SecurityQuestions {
       get {
         return new List<string> {
-                    "What is your favorite pet's name?",
+                    "What is your favorite pet's tagName?",
                     "What is your favorite beverage?",
-                    "What is your best friend's name?",
+                    "What is your best friend's tagName?",
                     "What is your favorite sport team?",
-                    "What is the name of the first company you worked for?",
+                    "What is the tagName of the first company you worked for?",
                     "Where did you go on your honeymoon?",
                     "What is your favorite movie?",
-                    "What is your father's middle name?",
+                    "What is your father's middle tagName?",
                     "In what city was your mother born?",
                     "In what city were you born?"
                 };

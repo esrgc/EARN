@@ -89,5 +89,15 @@ dx.app.LeafletViewer = dx.define({
     zoomToFeatures: function () {
         var bounds = this.getFeaturesBound();
         this.map.fitBounds(bounds);
+    },
+    zoomToPoint: function (point, zoom) {
+        var z = zoom || 10;//default zoom
+        if (typeof point.x != 'undefined' && typeof point.y != 'undefined') {
+            var latlng = new L.LatLng(point.x, point.y);
+            this.map.setView(latlng, z);
+        }
+        else {
+            this.map.setView(point, z);
+        }
     }
 });

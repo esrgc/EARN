@@ -2,7 +2,7 @@
 Author: Tu hoang
 ESRGC 2013
 
-EARN Maryland Connect
+EARN MD CONNECT
 
 Search application
 
@@ -20,7 +20,7 @@ dx.application({
         var scope = dx.getController('Map');
         //add markers after the map is initialized
         scope.addMarkers();
-
+        //scope.zoomToOwnProfile();
         dx.log('Application initialized.');
 
     }

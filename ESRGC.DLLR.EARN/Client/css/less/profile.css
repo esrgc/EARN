@@ -8,6 +8,13 @@
 .profile-area h5 {
   margin-top: 0;
 }
+.mini-profile h4 {
+  min-width: 350px;
+}
+.profile-area .dropdown {
+  margin: 0 auto 0 auto;
+  width: 63px;
+}
 /*.profile-container {
     max-width: 85%;
 }*/
@@ -31,16 +38,6 @@
     min-width: 100px;
     margin: 0 10px 10px 0;
   }
-}
-.placeholder {
-  padding: 15px;
-  border-top-color: transparent;
-  border-radius: 0 0 5px 5px;
-  border-left: 1px solid #dddddd;
-  border-right: 1px solid #dddddd;
-  border-bottom: 1px solid #dddddd;
-  background: #f4f4f4;
-  min-height: 300px;
 }
 /*.tab-pane > .post {
     border-top: none;
@@ -67,12 +64,27 @@
         border-top-right-radius: 0;
     }
 }*/
+.profile-tabs .tab-content .placeholder-pane {
+  border-radius: 0 0 5px 5px;
+  border-top-color: transparent;
+  border-left: 1px solid #dddddd;
+  border-right: 1px solid #dddddd;
+  border-bottom: 1px solid #dddddd;
+  min-height: 250px;
+  /*max-height: 800px;
+            overflow-y: auto;*/
+
+}
 .profile-tabs > ul > li.active > a,
 .profile-tabs > ul > li.active > a:hover {
   background: #F4F4F4;
 }
+.profile-container-holder > span.label {
+  margin-left: 10px;
+  margin-bottom: -1px;
+}
 .about {
-  min-height: 250px;
+  min-height: 200px;
   min-width: 100%;
   max-width: 100%;
   margin-bottom: 5px;
@@ -90,15 +102,19 @@
 .matched-tag .label {
   background-color: #5bc0de;
 }
-.profile-search-result {
-  margin-bottom: 10px !important;
+.profile-section {
+  margin-bottom: 8px !important;
+  /*.profile-picture {
+        max-width: 10%;
+    }*/
+
 }
-.profile-search-result:last-child {
+.profile-section:last-of-type {
   margin-bottom: 0 !important;
-}
-.profile-search-result .profile-picture {
-  max-width: 10%;
 }
 .tag-list-holder {
   min-height: 100px;
+}
+.profile-info-container div.placeholder-panel {
+  margin-bottom: 10px;
 }

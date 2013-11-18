@@ -1,0 +1,65 @@
+﻿@model ESRGC.DLLR.EARN.Models.ChangeEmailModel
+
+@{
+    ViewBag.Title = "Account";
+    ViewBag.Header = "Change Sign-in Email";
+}
+@section header{
+    <div class="container">
+        <header class="page-header">
+            <h3>@ViewBag.Header <i class="fa fa-envelope"></i></h3>
+            @*<ul class="breadcrumb">
+                <li><a href="@Url.Action("index", "Home")">Home</a></li>
+                <li class="active">@ViewBag.Header</li>
+            </ul>*@
+        </header>
+    </div>
+}
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval-unobtrusive");
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="window-panel">
+                <div class="window-panel-title">
+                    <strong>Sign-in Email</strong>
+                </div>
+                <div class="window-panel-content">
+                    <p>
+                        Please enter your new account email address. You will be required to re-verify your email address.
+                    </p>
+                    <form class="form-horizontal" action="@Url.Action("ChangeSignInEmail")" method="post">                        
+                        <div class="form-group">
+                            <div class="col-md-8 col-md-offset-2">
+                                @Html.ValidationSummary()
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3" for="Email">Current Email address</label>
+                            <div class="col-md-6">
+                                @Html.HiddenFor(x=>x.CurrentEmail)
+                                <p class="form-control-static">@Model.CurrentEmail</p>                               
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3" for="Email">New Email address</label>
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(x => x.NewEmail, new { @class = "form-control input-sm", placeholder = "New email address", type="Email" })
+                                <span class="label label-default">Required</span>
+                                <div class="help-block">@Html.ValidationMessageFor(x => x.NewEmail)</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-8 col-md-offset-3">
+                                <button type="submit" class="btn btn-primary">Change</button>
+                                <a class="btn btn-default" href="@Url.Action("Settings", "Account")">Cancel</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

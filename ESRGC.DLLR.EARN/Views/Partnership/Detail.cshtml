@@ -1,0 +1,416 @@
+﻿@using ESRGC.DLLR.EARN.Domain.Model
+@using PagedList
+@using PagedList.Mvc
+@model Partnership
+
+@{
+    ViewBag.Title = "Partnership";
+    ViewBag.Header = "Partnership Detail";
+}
+
+@section header{
+    <div class="container">
+        <header class="page-header">
+            <h3>@ViewBag.Header <i class="glyphicon glyphicon-link"></i></h3>
+            @*<ul class="breadcrumb">
+                <li><a href="@Url.Action("index", "Home")">Home</a></li>
+                <li class="active">@ViewBag.Header</li>
+            </ul>*@
+        </header>
+    </div>
+}
+@section scripts {
+    <!--[if lt IE 10]>
+       <script type="text/javascript">
+        $(document).on('keyup', '#comment', function (e) {
+            var messageLength = $(this).val().length;
+            if (messageLength > 0) {
+                $('#postCommentBtn').removeAttr('disabled');
+            }
+            else {
+                $('#postCommentBtn').attr('disabled', 'disabled');
+            }
+        });
+        </script>
+    <![endif]-->
+    <script type="text/javascript" src="@Url.Content("~/Client/jsLib/typeahead.js/typeahead.min.js")"></script>
+    <script type="text/javascript">
+        //for ie8
+        if (typeof String.prototype.trim !== 'function') {
+            String.prototype.trim = function () {
+                return this.replace(/^\s+|\s+$/g, '');
+            }
+        }
+        var startup = function () {
+            //post comment button event
+            $(document).on('input propertychange', '#comment', function (e) {
+                var messageLength = $(this).val().length;
+                if (messageLength > 0) {
+                    $('#postCommentBtn').removeAttr('disabled');
+                }
+                else {
+                    $('#postCommentBtn').attr('disabled', 'disabled');
+                }
+            });
+
+            //Tag management
+            var tagArray = [], originalTags = [];
+            //preload tags array to match current tags
+            $('input[name="tags"]').each(function (i) {
+                var value = $(this).val();
+                tagArray.push(value);
+                originalTags.push(value);
+            });
+            console.log(tagArray);
+            var tagExists = function (tag) {
+                for (var i = 0; i < tagArray.length; i++) {
+                    if (tagArray[i] == tag.toUpperCase())
+                        return true;
+                }
+                return false;
+            };
+            var addTag = function (value) {
+                value = value.toUpperCase();
+                if (value.length > 50) {
+                    $('.status-text').text("Can not add this tag [" + value + "]. The tag's length is too long. Please limit your tag charaters to 50 or less!");
+                    $('input#tagInput').focus();
+                    return;
+                }
+                if (tagExists(value)) {
+                    $('.status-text').text('The tag "' + value + '" has already been added. Please enter a different tag!');
+                    return;
+                }
+                if (value != '') {
+                    tagArray.push(value);
+                    $('input#tagInput').val('').focus();
+                    $('.tag-list').append(
+                        [
+                            '<div class="tag">',
+                                '<span class="label label-default">',
+                                    value + '&nbsp;<a data-value="' + value + '"><i class="fa fa-times"></i></a>',
+                                '</span>',
+                            '</div>'
+                        ].join('')
+                    );
+                    $('#tagForm').append('<input type="hidden" name="tags" value="' + value + '"/>')
+                    $('.tt-hint').val('');
+                    $('.status-text').text('');
+                }
+                else {
+                    console.log('Tag already exists');
+                }
+            };
+            var addTags = function () {
+                var value = $('input#tagInput').val();
+                //enable discard changes button
+                if (value.length > 0) {
+                    $('#tagDiscardBtn').removeAttr('disabled');
+                }
+                //separate the tags
+                var tags = value.split(',');
+                for (var i in tags) {
+                    var tag = tags[i].trim();
+                    addTag(tag);
+                }
+
+                console.log(tagArray);
+            };
+            var removeTag = function (value, tag) {
+                if (typeof value == 'undefined')
+                    return;
+                //enable discard changes button
+                $('#tagDiscardBtn').removeAttr('disabled');
+                for (var i in tagArray) {
+                    if (tagArray[i] == value) {
+                        tagArray.splice(i, 1);
+                    }
+                }
+                $('input[type="hidden"]').filter('[value="' + value + '"]').remove();
+                //finally remove the whole node
+                tag.parents().filter('.tag').remove();
+                console.log('tag ' + value + ' removed');
+                console.log(tagArray);
+            };
+            var discardChanges = function () {
+                console.log(tagArray);
+                $('#tagForm input').filter('input[name="tags"]').remove();
+                $('.tag-list').html('');
+                //remove all elements from tagArray
+                tagArray.splice(0, tagArray.length);
+                //restore original tags
+                for (var i in originalTags)
+                    addTag(originalTags[i]);
+                $('#tagDiscardBtn').attr('disabled', 'disabled');
+            };
+            $('#tagInput').typeahead({
+                name: 'partnershipTag',
+                //local: ['iphone', 'iphone 5s', 'iphone 5', 'C#', '.NET'],
+                prefetch: {
+                    url: '../tag/tags',
+                    ttl: 1
+                },
+                //remote: {
+                //    url: 'tags'
+                //    //ttl: 5000
+                //},
+                limit: 20
+            });
+            //capture 'enter' key event to add tags
+            $('input#tagInput').on('keypress', function (e) {
+                if (e.keyCode == 13) {
+                    addTags();
+                }
+            });
+            $('.typeahead.input-sm').siblings('input.tt-hint').addClass('hint-small');
+            $('.typeahead.input-lg').siblings('input.tt-hint').addClass('hint-large');
+            $(document).on('click', '#tagSubmitBtn', function () { console.log('tag form submit clicked'); $('#tagForm').submit(); });
+            //click event on add button
+            $('#addTagBtn').on('click', function (e) {
+                addTags();
+            });
+            $('#tagForm').on('submit', function (e) {
+                if (tagArray.length == 0) {
+                    $('.status-text').text('Please add at least one tag before procceding!');
+                    e.preventDefault();
+                    return false;
+                }
+                return true;
+            });
+            //$('input:text').focus(function () { $(this).select(); });
+            //remove button events
+            $(document).on('click', '.tag a', function (e) {
+                //get value and remove hidden fields
+                var value = $(this).attr('data-value');
+                removeTag(value, $(this));
+            });
+            $(document).on('click', '#tagDiscardBtn', function (e) { discardChanges(); });
+            //file upload
+            $(document).on('change', 'input#dataInput', { scope: this }, function (event) {
+                var file = $(this).val().split('\\').pop();
+                console.log(file);
+                $('#fileName').text(file);
+            });
+            $(document).on('click', '#comments #loadMoreComments', function (e) {
+                e.preventDefault();
+                var url = $(this).attr('href');
+                $.get(url, function (data) {
+                    $('#comments').replaceWith($('#comments', data));
+                });
+            });
+        }
+    </script>
+}
+@{ 
+    var p = Model;
+    var partners = p.getPartners();
+    var owner = p.getOwner();
+    var returnUrl = ViewBag.returnUrl as string ?? Url.Action("Index");
+    ViewBag.returnUrl = Url.Action("Detail", new { p.PartnershipID, returnUrl });
+    var currentProfile = ViewBag.currentProfile as Profile ?? new Profile();
+    var canEdit = currentProfile.isOwnerOfPartnership(Model);
+    var comments = ViewBag.comments as List<Comment> ?? new List<Comment>();
+    //tags
+    var currentTags = Model.getTags();
+    var isOwner = currentProfile.isOwnerOfPartnership(Model);
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-7">
+            <div class="panel-action-default">
+                @if (!string.IsNullOrEmpty(returnUrl)) {
+                    <a href="@returnUrl"><i class="fa fa-long-arrow-left"></i>&nbsp;Back to previous</a>
+                }
+                <small class="pull-right">Last edited: @Html.TimeSpan(p.LastUpdate)</small>
+            </div>
+            <div class="window-panel">
+                <div class="window-panel-title">
+                    <strong>@p.Name</strong>
+                    @if (canEdit) { 
+                        <a title="Edit this partnership" href="@Url.Action("Edit", new { p.PartnershipID, returnUrl })"><i class="fa fa-pencil"></i></a>                        
+                    }
+                </div>
+                <div class="window-panel-content">
+                    <p class=""><strong>Description</strong> @p.Description</p>
+                    <p>
+                        <strong>Status:</strong>
+                        @Html.Partial("partnershipStatusPartial", p)
+                    </p>
+                    <hr />
+                    <!--Tags-->
+                    <div class="panel-group" id="partnershipDetail">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h5 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#partnershipDetail" href="#tags">Target Industry Tags&nbsp;<i class="fa fa-tags"></i></a>
+                                </h5>
+                            </div>
+                            <div id="tags" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    @if (isOwner) { 
+                                        <div class="owner-view">
+                                            <form id="tagForm" class="form-inline" action="@Url.Action("ManagePartnershipTag", "Tag")" method="post">
+                                                <div class="form-group typeahead-container">
+                                                    <input type="text"
+                                                        class="form-control typeahead"
+                                                        placeholder="e.g. Healthcare, Analyst"
+                                                        name="tag"
+                                                        id="tagInput" />
+                                                </div>
+                                                <button type="button" class="btn btn-primary" id="addTagBtn"><i class="fa fa-plus"></i>&nbsp;Add</button>
+                                                <div><span id="" class="text-danger status-text"></span></div>
+                                                <p class="text-warning">
+                                                    Enter your Partnership’s target industry so potential partners can find you.
+                                                </p>
+                                                <input type="hidden" value="@Model.PartnershipID" name="partnershipID"/>
+                                                <input type="hidden" name="returnUrl" value="@Url.Action("Detail", new { Model.PartnershipID, returnUrl })"/>
+
+                                                @foreach (var i in currentTags) { 
+                                                    <input type="hidden" value="@i.Name" name="tags"/>
+                                                }
+                                            </form>
+                                            <hr />
+                                            <h5>Current Tags</h5>
+                                            <div class="post">
+                                                @Html.Partial("tagListEditPartial", currentTags.Select(x => x.Name).ToList())
+                                            </div>
+                                            <br />
+                                            <div class="pull-right">
+                                                <button id="tagSubmitBtn" class="btn btn-primary btn-sm" type="submit"><i class="fa fa-save"></i>&nbsp;Save</button>
+                                                <button id="tagDiscardBtn" class="btn btn-default btn-sm" disabled>Discard</button>
+                                            </div>
+
+                                            <div class="clear"></div>
+                                        </div>
+                                    }
+                                    else {
+                                        @Html.Partial("tagListDisplayPartial", currentTags.Select(x => x.Name).ToList())
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <!--Documents-->
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h5 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#partnershipDetail" href="#documents">Documents&nbsp<i class="fa fa-folder-open"></i></a>
+                                </h5>
+                            </div>
+                            <div id="documents" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <form id="documentForm" class="form-horizontal" method="post" action="@Url.Action("Upload", "Document")" enctype="multipart/form-data">
+                                        @Html.HiddenFor(x => x.PartnershipID)
+                                        <input type="hidden" value="@returnUrl" name="returnUrl"/>
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-2" for="file">File</label>
+                                            <div class="col-sm-6">
+                                                <div>
+                                                    <div id="uploadBrowse" class="btn btn-success upload-container">
+                                                        <div>
+                                                            <i class="fa fa-folder-open"></i>&nbsp;Browse
+                                                        </div>
+                                                        <input type="file" name="data" id="dataInput" class="file-input" />
+                                                    </div>
+                                                    <button class="btn btn-primary" type="submit"><i class="fa fa-upload"></i>&nbsp;Upload</button>
+                                                </div>
+                                                <p class="form-control-static" id="fileName">
+                                                    No file selected
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" for="Description">Description</label>
+                                            <div class="col-sm-10">
+                                                <textarea class="form-control input-sm" 
+                                                    cols="20" id="Description" 
+                                                    rows="2"
+                                                    name="Description" 
+                                                    placeholder="Brief document description (200 characters max). Users should not share sensitive or proprietary content on this site."
+                                                    style="min-height: 50px;"></textarea>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <hr />
+                                    <h5>Available Documents</h5>
+                                    @Html.Partial("../Document/list", Model)
+                                </div>
+                            </div>
+                        </div>
+                        <!--Partners-->
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h5 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#partnershipDetail" href="#partners">Partners&nbsp;<i class="fa fa-group"></i></a>
+                                </h5>
+                            </div>
+                            <div id="partners" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <div class="profile-container-holder">
+                                        <span class="label label-danger">Admin</span>
+                                        @Html.Partial("shortProfilePartial", owner)
+                                        <hr />
+                                    </div>
+                                    <strong>Other Partners</strong>
+                                    @if (partners.Count == 0) { 
+                                        <p>
+                                            There are currently no other partners in this partnership. 
+                                            You can invite new partners through search or your connections 
+                                            in your Organizational Profile page.
+                                        </p>
+                                    }
+                                    @foreach (var profile in partners) { 
+                                        <div class="placeholder-panel">
+                                            @Html.Partial("shortProfilePartial", profile)
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="">                
+               @* @if (comments.PageCount > 1) {
+                    @Html.PagedListPager(
+                    comments,
+                    page => Url.Action("Detail", new { Model.PartnershipID, page, returnUrl }),
+                    PagedListRenderOptions.OnlyShowFivePagesAtATime
+                )}*@
+                <div id="comments">
+                    @Html.Partial("ListComments", comments)
+                </div>
+                @*@if (comments.PageCount > 1) {
+                    @Html.PagedListPager(
+                    comments,
+                    page => Url.Action("Detail", new { Model.PartnershipID, page, returnUrl }),
+                    PagedListRenderOptions.OnlyShowFivePagesAtATime
+                )}*@
+                <div class="transparent-placeholder-panel">
+                    <form class="form-horizontal" method="post" action="@Url.Action("PostComment", "Communication")">
+                        @Html.HiddenFor(x => x.PartnershipID)
+                        <input type="hidden" name="returnUrl" value="@Url.Action("Detail", new { Model.PartnershipID, returnUrl })"/>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                @Html.TextArea("comment", new {
+                               @class = "form-control input-sm comment-box",
+                               placeholder = "Post your comment here"
+                           })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <button type="submit" id="postCommentBtn" disabled class="btn btn-primary btn-sm">
+                                    <i class="fa fa-comment"></i>&nbsp;Post comment
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+    </div>
+</div>

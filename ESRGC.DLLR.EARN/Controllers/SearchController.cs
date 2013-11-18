@@ -9,6 +9,7 @@ using PagedList;
 
 namespace ESRGC.DLLR.EARN.Controllers
 {
+  [Authorize]
   public class SearchController : BaseController
   {
     public SearchController(IWorkUnit workUnit) : base(workUnit) { }
@@ -20,11 +21,21 @@ namespace ESRGC.DLLR.EARN.Controllers
       int? userGroupID,
       int? categoryID,
       List<string> tags) {
+
+      if (CurrentAccount.Profile == null) {
+        updateTempMessage("Please create a profile before using search.");
+        return RedirectToAction("Detail", "Profile");
+      }
+      var currentProfile = CurrentAccount.Profile;
       //collection of current filters
       Dictionary<string, object> filters = new Dictionary<string, object>();
 
       //all profiles
-      var profiles = _workUnit.ProfileRepository.Entities.AsQueryable();
+      var profiles = _workUnit
+        .ProfileRepository
+        .Entities
+        .Where(x=>x.ProfileID != currentProfile.ProfileID)
+        .AsQueryable();
 
       //filter by user group
       if (userGroupID != null) {
@@ -33,10 +44,10 @@ namespace ESRGC.DLLR.EARN.Controllers
       }
 
       //filter by category
-      if (categoryID != null) {
-        profiles = profiles.Where(x => x.CategoryID == categoryID).AsQueryable();
-        filters.Add("categoryID", categoryID);
-      }
+      //if (categoryID != null) {
+      //  profiles = profiles.Where(x => x.CategoryID == categoryID).AsQueryable();
+      //  filters.Add("categoryID", categoryID);
+      //}
 
       var result = new List<Profile>();
       var tagNames = new List<string>();
@@ -59,9 +70,13 @@ namespace ESRGC.DLLR.EARN.Controllers
       else
         result = profiles.ToList();
 
+      ////always include current profile
+      //if (!result.Select(x=>x.ProfileID).Contains(currentProfile.ProfileID)) {
+      //  result.Add(currentProfile);
+      //}
 
       int pageIndex = page ?? 1;
-      int pageSize = size ?? 15;
+      int pageSize = size ?? 10;
 
       var model = result
         .OrderBy(x => x.Organization.Name) // ordered by organization name
@@ -69,7 +84,7 @@ namespace ESRGC.DLLR.EARN.Controllers
 
       //viewbag data
       ViewBag.filters = filters;
-      ViewBag.currentAccount = CurrentAccount;
+      ViewBag.currentProfile = currentProfile;
       return View(model);
     }
   }

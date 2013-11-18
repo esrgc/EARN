@@ -1,4 +1,4 @@
-﻿@import "library.less";
+﻿@import "lib/variables.less";
 
 #socialNetworkLinks {
     position: absolute;
@@ -12,7 +12,17 @@
 .profile-area h5 {
     margin-top: 0;
 }
-
+.mini-profile {
+    h4{
+        min-width: 350px;
+    }
+}
+.profile-area {
+    .dropdown {
+        margin: 0 auto 0 auto;
+        width: 63px;
+    }
+}
 /*.profile-container {
     max-width: 85%;
 }*/
@@ -42,16 +52,7 @@
     }
 }
 
-.placeholder {
-    padding: 15px;
-    border-top-color: transparent;
-    border-radius: 0 0 5px 5px;
-    border-left: 1px solid @border-color;
-    border-right: 1px solid @border-color;
-    border-bottom: 1px solid @border-color;
-    background: @base-color;
-    min-height: 300px;
-}
+
 /*.tab-pane > .post {
     border-top: none;
     border-top-left-radius: 0;
@@ -79,16 +80,35 @@
         border-top-right-radius: 0;
     }
 }*/
+.profile-tabs {
+    .tab-content {
+        .placeholder-pane {
+            border-radius: 0 0 5px 5px;
+            border-top-color: transparent;
+            border-left: 1px solid @border-color;
+            border-right: 1px solid @border-color;
+            border-bottom: 1px solid @border-color;
+            min-height: 250px;
+            /*max-height: 800px;
+            overflow-y: auto;*/
+        }
+    }
 
-.profile-tabs > ul > li.active {
-    > a,
-    > a:hover {
-        background: #F4F4F4;
+    > ul > li.active {
+        > a,
+        > a:hover {
+            background: #F4F4F4;
+        }
     }
 }
-
+.profile-container-holder {
+    > span.label {
+        margin-left: 10px;
+        margin-bottom: -1px;
+    }
+}
 .about {
-    min-height: 250px;
+    min-height: 200px;
     min-width: 100%;
     max-width: 100%;
     margin-bottom: 5px;
@@ -111,20 +131,23 @@
     }
 }
 
-.profile-search-result {
-    margin-bottom: 10px !important;
+.profile-section {
+    margin-bottom: 8px !important;
 
-    &:last-child {
+    &:last-of-type {
         margin-bottom: 0 !important;
     }
 
-    .profile-picture {
+    /*.profile-picture {
         max-width: 10%;
-    }
+    }*/
 }
 
 .tag-list-holder {
     min-height: 100px;
 }
-
-
+.profile-info-container{
+    div.placeholder-panel{
+        margin-bottom: 10px
+    }
+}

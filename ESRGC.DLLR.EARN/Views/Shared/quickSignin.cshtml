@@ -5,15 +5,17 @@
     <input type="email" name="Email" id="email" class="form-control" placeholder="Email address" autofocus="" value="@Model.Email"/>
     <input type="password" name="Password" id="password" class="form-control" placeholder="Password" />
     <span class="help-block">
-        <a href="#" class="pull-right"><small>Forgot your password?</small></a>
+        <a href="@Url.Action("ForgotPassword", "Account")" class="pull-right"><small>Forgot your password?</small></a>
     </span>
     <label class="checkbox">
         @Html.CheckBoxFor(x => x.RememberMe)
         Remember me
     </label>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>    
+    <button class="btn btn-lg btn-primary btn-block submit-button" type="submit" data-loading-text="Signing in...">
+        <i class="fa fa-lock" title="Secured sign up"></i>&nbsp;Sign in
+    </button>    
     <span class="help-block">
-        Not a member? <a href="@Url.Action("SignUp")"><small>Sign up for EARN Maryland Connect</small></a>
+        Not a member? <a href="@Url.Action("SignUp")"><small>Sign up for EARN MD CONNECT</small></a>
     </span>
 
 </form>

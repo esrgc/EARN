@@ -15,6 +15,8 @@
     @* <label class="checkbox">
         @Html.CheckBoxFor(x=>x.RememberMe)        
     </label>*@
-    <button class="btn btn-primary btn-sm" type="submit"><i class="icon-signin"></i> Sign in</button>
-    <a class="btn btn-sm btn-default" href="#" title="Forgot your password?"><i class="icon-key"></i></a>
+    <button class="btn btn-primary btn-sm submit-button" type="submit" data-loading-text="Signing in...">
+        <i class="fa fa-lock" title="Secured sign in"></i>&nbsp;Sign in
+    </button>
+    <a class="btn btn-sm btn-default" href="@Url.Action("ForgotPassword", "Account")" title="Forgot your password?"><i class="fa fa-key"></i></a>
 </form>

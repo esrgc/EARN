@@ -1,0 +1,79 @@
+﻿@using ESRGC.DLLR.EARN.Domain.Model
+@model List<Request>
+
+@{
+    ViewBag.Title = "Requests";
+    ViewBag.Header = "Requests";
+}
+@{
+    ViewBag.returnUrl = Url.Action("Requests");
+}
+@section header{
+    <div class="container">
+        <header class="page-header">
+            <h3>@ViewBag.Header <i class="glyphicon glyphicon-link"></i></h3>
+            @*<ul class="breadcrumb">
+                <li><a href="@Url.Action("index", "Home")">Home</a></li>
+                <li class="active">@ViewBag.Header</li>
+            </ul>*@
+        </header>
+    </div>
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1">
+            <div class="panel-action-default">
+                <a href="@Url.Action("Detail", "Profile")"><i class="fa fa-long-arrow-left"></i>&nbsp;Back to profile</a>
+            </div>
+            <div class="window-panel">
+                <div class="window-panel-title">
+                    <strong>Respond to @Model.Count Requests</strong>
+                </div>
+                <div class="window-panel-content">
+                    @if (Model.Count() == 0) { 
+                        <p>There's currently no request.</p>
+                    }
+                    <ul class="list-group">
+                        @foreach (var i in Model.Cast<PartnershipRequest>()) {
+                            <li class="list-group-item">
+                                <div class="placeholder-pane">
+                                    <div>
+                                        <strong>@i.Type From</strong>
+                                    </div>
+                                    <form action="@Url.Action("DeleteRequest")" method="post" role="form">
+                                        @Html.Hidden("requestID",i.RequestID)
+                                        <div class="pull-right btn-group">
+                                            <a href="@Url.Action("AcceptRequest", new { i.RequestID })" class="btn btn-success btn-sm"><i class="fa fa-check"></i>&nbsp;Accept</a>
+                                            <button type="submit" class="btn btn-default btn-sm"><i class="fa fa-times"></i>&nbsp;Delete</button>
+                                        </div>
+                                    </form>
+                                    @Html.Partial("miniProfilePartial", i.Sender.Profile)
+                                    <p>
+                                        @if (string.IsNullOrEmpty(i.Message)) {
+                                            <strong>Message</strong>
+                                            switch (i.Type.ToLower()) {
+                                                case "partnership request":
+                                            <text>Our organization would like to join your partnership.</text>
+                                                    break;
+                                                case "partnership invite":
+                                            <text>You have been invited to join this partnership.</text>
+                                                    break;
+                                            }
+                                        }
+                                        else { 
+                                            <strong>Message</strong> @i.Message
+                                        }
+                                    </p>
+                                    <div class="post">
+                                        @Html.Partial("shortPartnershipPartial", i.Partnership)
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

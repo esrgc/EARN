@@ -12,7 +12,8 @@
   /*border: 1px solid #808080;*/
 
   border-radius: 4px;
-  color: #5d6467;
+  /*color: #5d6467;*/
+
 }
 .quick-form .quick-form-heading,
 .quick-form .checkbox {
@@ -20,6 +21,7 @@
 }
 .quick-form .checkbox {
   font-weight: normal;
+  margin-bottom: 15px;
 }
 .quick-form .form-control {
   position: relative;

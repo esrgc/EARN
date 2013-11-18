@@ -1,0 +1,23 @@
+﻿@model ESRGC.DLLR.EARN.Domain.Model.Partnership
+@{var p = Model;}
+
+@switch (p.Status) {
+    case "Initiating":
+    <span class="text-danger">@p.Status</span>
+        break;
+    case "Planning Grant in Progress":
+    <span class="text-danger">@p.Status</span>
+        break;
+    case "Planning Grant Awarded":
+    <span class="text-warning">@p.Status</span>
+        break;
+    case "Implementation Grant in Progress":
+    <span class="text-warning">@p.Status</span>
+        break;
+    case "Implementation Grant Awarded":
+    <span class="text-success">@p.Status</span>
+        break;
+    case "Other":
+    <span class="text-muted">@p.Status</span>
+        break;
+}

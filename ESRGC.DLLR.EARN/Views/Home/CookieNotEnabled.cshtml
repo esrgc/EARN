@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Cookie Not Enabled";
+    ViewBag.Header = "Cookies are not enabled";
+}
+
+@section header{
+    <div class="container">
+        <header class="page-header">
+            <h3>@ViewBag.Header <i class="fa fa-times-circle text-danger"></i></h3>
+            @*<ul class="breadcrumb">
+                <li><a href="@Url.Action("index", "Home")">Home</a></li>
+                <li class="active">@ViewBag.Header</li>
+            </ul>*@
+        </header>
+    </div>
+}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+            <div class="alert alert-warning">
+                <h4>Cookies are not enabled</h4>
+                <p>
+                    This web site uses cookies to track your account information.
+                    If you are experiencing problems with signing in to the site,
+                    please enable cookies in your browser before signing in.
+                </p>
+                <br/>
+                <a class="btn btn-default" href="@Url.Action("Index", "Home")">Back to Home</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -5,6 +5,7 @@ using System.Text;
 using System.ComponentModel.DataAnnotations;
 using ESRGC.DLLR.EARN.Domain.ValidationAttributes;
 using System.ComponentModel.DataAnnotations.Schema;
+using ESRGC.DLLR.EARN.Domain.Helpers;
 
 namespace ESRGC.DLLR.EARN.Domain.Model
 {
@@ -12,6 +13,13 @@ namespace ESRGC.DLLR.EARN.Domain.Model
   {
     public Account() {
       AccountID = 0;
+      Active = true;
+      Notifications = new List<Notification>();
+      SentRequests = new List<Request>();
+      ReceivedRequests = new List<Request>();
+      EmailVerified = false;
+      VerificationCode = Helpers.Utility.RandomString(30);
+      InitialPassword = Utility.RandomString(8);
     }
 
     public int AccountID { get; set; }
@@ -29,7 +37,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     [MaxLength(32)]
     [ScaffoldColumn(false)]
     public string InitialPassword { get; set; }
-       
+
     [MaxLength(20)]
     public string Role { get; set; }
 
@@ -46,11 +54,23 @@ namespace ESRGC.DLLR.EARN.Domain.Model
 
     [Display(Name = "Last login")]
     public DateTime? LastLogin { get; set; }
-       
+
     [Display(Name = "Last update")]
     public DateTime? LastUpdate { get; set; }
 
     public int? ProfileID { get; set; }
+    [ForeignKey("ProfileID")]
     public virtual Profile Profile { get; set; }
+
+    public virtual ICollection<Notification> Notifications { get; set; }
+    public virtual ICollection<Request> SentRequests { get; set; }
+    public virtual ICollection<Request> ReceivedRequests { get; set; }
+
+    public bool EmailVerified { get; set; }
+    public string VerificationCode { get; set; }
+
+    public void newVerificationCode() {
+      VerificationCode = Helpers.Utility.RandomString(30);
+    }
   }
 }

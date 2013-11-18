@@ -2,6 +2,7 @@
 @model SignUpModel
 
 <form id="quickSignupForm" class="quick-form" action="@Url.Action("SignUp", "Account")" method="post" role="form">
+    <label>Not yet a member? Sign up below</label>
     @Html.TextBoxFor(x => x.Email,
         new {
             type = "email",
@@ -18,8 +19,10 @@
             @class = "form-control",
             placeholder = ModelMetadata.FromLambdaExpression<SignUpModel, string>(x => x.ConfirmPassword, ViewData).DisplayName
         })
-    <button class="btn btn-lg btn-primary btn-block" type="button" data-toggle="modal" data-target="#agreeToSignup">Sign up</button>
-    <p><small>By clicking "Sign up for EARN Maryland Connect", you agree to our <a href="#termCondition" data-toggle="modal">terms and conditions.</a></small></p>
+    <button class="btn btn-lg btn-primary btn-block submit-button" data-loading-text="Signing up..." type="button" data-toggle="modal" data-target="#agreeToSignup">
+        <i class="fa fa-lock" title="Secured sign up"></i>&nbsp;Sign up
+    </button>
+    <p><small>By clicking "Sign up", you agree to our <a href="#termCondition" data-toggle="modal">terms and conditions.</a></small></p>
 
 </form>
 
