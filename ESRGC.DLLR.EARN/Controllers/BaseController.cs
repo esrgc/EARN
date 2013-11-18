@@ -140,5 +140,16 @@ namespace ESRGC.DLLR.EARN.Controllers
         }
       }
     }
+
+    protected RedirectResult returnToUrl(string returnUrl, string defaultUrl) {
+      //return to previous url
+      if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
+          && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\")) {
+        return Redirect(returnUrl);
+      }
+      else {
+        return Redirect(defaultUrl);
+      }
+    }
   }
 }

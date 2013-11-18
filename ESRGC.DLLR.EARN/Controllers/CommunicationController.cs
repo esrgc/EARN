@@ -135,7 +135,18 @@ and/or view this user’s Organizational Profile for more information.",
       var notifcations = CurrentAccount.Notifications.Where(x => !x.IsRead).ToList();
       return Content(notifcations.Count().ToString());
     }
-
+    [VerifyAccount]
+    public ActionResult MarkAllNotificationsAsRead(string returnUrl) {
+      var notifications = _workUnit.NotificationRepository.Entities
+        .Where(x => x.AccountID == CurrentAccount.AccountID)
+        .ToList();
+      notifications.ForEach(x => {
+        x.IsRead = true;
+        _workUnit.NotificationRepository.UpdateEntity(x);
+      });
+      _workUnit.saveChanges();
+      return returnToUrl(Request.UrlReferrer.LocalPath, Url.Action("Detail", "Profile"));
+    }
     public ActionResult ViewNotification(int notificationID) {
       var notification = _workUnit.NotificationRepository.GetEntityByID(notificationID);
       ActionResult result = null;
@@ -188,7 +199,7 @@ and/or view this user’s Organizational Profile for more information.",
           if (r.Partnership != null) {
             //check if the requested organization is already a partner
             if (r.Partnership.getPartners().Contains(r.Sender.Profile)) {
-              updateTempMessage("\""+ r.Sender.Profile.Organization.Name 
+              updateTempMessage("\"" + r.Sender.Profile.Organization.Name
                 + "\"is already a partner of this partnership");
               break;
             }
@@ -209,8 +220,8 @@ and/or view this user’s Organizational Profile for more information.",
               Message = string.Format(@"{0} has accepted your request. You are now a partner of ""{1}""",
                 r.Receiver.Profile.Organization.Name,
                 r.Partnership.Name),
-              Message2 = "You can now visit the \""+ r.Partnership.Name 
-                +"\" partnership’s profile, and communicate with your partners!",
+              Message2 = "You can now visit the \"" + r.Partnership.Name
+                + "\" partnership’s profile, and communicate with your partners!",
               LinkToAction = Url.Action("Detail", "Partnership", new { r.PartnershipID })
             };
           }
@@ -250,7 +261,7 @@ and/or view this user’s Organizational Profile for more information.",
         _workUnit.RequestRepository.DeleteByID(requestID);
         _workUnit.saveChanges();
       }
-      
+
       return RedirectToAction("Requests");
     }
     [HttpPost]

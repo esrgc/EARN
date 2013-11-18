@@ -38,7 +38,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       ViewBag.returnUrl = returnUrl;
       var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
       int commentPageIndex = page ?? 1;
-      int commentPageSize = size ?? 20;
+      int commentPageSize = size ?? 10;
       var comments = partnership.Comments.ToPagedList(commentPageIndex, commentPageSize);
       ViewBag.comments = comments;
       return View(partnership);
