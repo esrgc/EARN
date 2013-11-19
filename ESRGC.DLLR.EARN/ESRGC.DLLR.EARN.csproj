@@ -419,6 +419,7 @@
     <Content Include="Views\Account\ChangeSignInEmail.cshtml" />
     <Content Include="Views\Email\ReVerificationEmail.html.cshtml" />
     <Content Include="Views\Partnership\MyPartnerships.cshtml" />
+    <Content Include="Views\Partnership\RemovePartner.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -17,6 +17,7 @@
 }
 @{
     var currentProfile = ViewBag.currentProfile as Profile;
+    var returnUrl = Url.Action("MyPartnerships");
 }
 <div class="container">
     <div class="row">
@@ -63,7 +64,7 @@
                             </p>
                         }
                         else {
-                            @Html.Action("ListPartnerships", "Partnership", new { currentProfile.ProfileID })
+                            @Html.Action("ListPartnerships", "Partnership", new { currentProfile.ProfileID, returnUrl })
                         }
                     </div>
                 </div>

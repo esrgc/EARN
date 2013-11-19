@@ -231,6 +231,45 @@ but should not be used to share proprietary or sensitive content.",
 
     }
     [VerifyProfile]
+    [CanEditPartnership]
+    [HasReturnUrl]
+    public ActionResult RemovePartner(int partnershipID, int profileID, string returnUrl) {
+      return View();
+    }
+    [HttpPost]
+    [VerifyProfile]
+    [CanEditPartnership]
+    [ValidateAntiForgeryToken]
+    [SendNotification]
+    [ActionName("RemovePartner")]
+    public ActionResult RemovePartnerPost(int partnershipID, int profileID, string returnUrl) {
+      var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
+      var profile = _workUnit.ProfileRepository.GetEntityByID(profileID);
+      if (partnership.removePartner(profileID)) {
+        partnership.getAllPartners()
+          .Where(x => x.ProfileID != profileID)
+          .ToList()
+          .ForEach(x => {
+            var notification = new Notification {
+              Account = x.getAccount(),
+              Category = "Partnership Update",
+              Message = profile.Organization.Name + " is no longer a partner of the partnership \"" + partnership.Name + "\"",
+              LinkToAction = Url.Action("Detail", new { partnershipID })              
+            };
+            _workUnit.NotificationRepository.InsertEntity(notification);
+          });
+        //notification
+        _workUnit.saveChanges();
+        updateTempMessage(profile.Organization.Name + " has been removed from partnership \"" + partnership.Name + "\"");
+
+      }
+      else
+        updateTempMessage("Error removing partner from partnership.");
+
+      return returnToUrl(returnUrl, Url.Action("Detail", new { partnershipID }));
+    }
+
+    [VerifyProfile]
     public ActionResult MyPartnerships() {
       return View();
     }
