@@ -212,6 +212,10 @@
     //tags
     var currentTags = Model.getTags();
     var isOwner = currentProfile.isOwnerOfPartnership(Model);
+    //for removing parnters
+    if (canEdit){
+        ViewBag.partnership = Model;
+    }
 }
 
 <div class="container">
@@ -227,10 +231,19 @@
                 <div class="window-panel-title">
                     <strong>@p.Name</strong>
                     @if (canEdit) { 
-                        <a title="Edit this partnership" href="@Url.Action("Edit", new { p.PartnershipID, returnUrl })"><i class="fa fa-pencil"></i></a>                        
+                        <a title="Edit this partnership" href="@Url.Action("Edit", new { p.PartnershipID, returnUrl })">
+                            <i class="fa fa-pencil"></i>
+                        </a>                        
                     }
                 </div>
                 <div class="window-panel-content">
+                    @if (!canEdit) { 
+                        <span class="pull-right">
+                            <a class="btn btn-sm btn-default" href="@Url.Action("LeavePartnership", new { Model.PartnershipID, returnUrl})">
+                                <i class="fa fa-sign-out"></i>&nbsp;Leave partnership
+                            </a>
+                        </span>
+                    }
                     <p class=""><strong>Description</strong> @p.Description</p>
                     <p>
                         <strong>Status:</strong>
@@ -321,10 +334,10 @@
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label" for="Description">Description</label>
                                             <div class="col-sm-10">
-                                                <textarea class="form-control input-sm" 
-                                                    cols="20" id="Description" 
+                                                <textarea class="form-control input-sm"
+                                                    cols="20" id="Description"
                                                     rows="2"
-                                                    name="Description" 
+                                                    name="Description"
                                                     placeholder="Brief document description (200 characters max). Users should not share sensitive or proprietary content on this site."
                                                     style="min-height: 50px;"></textarea>
                                             </div>
@@ -371,8 +384,8 @@
             </div>
         </div>
         <div class="col-md-5">
-            <div class="">                
-               @* @if (comments.PageCount > 1) {
+            <div class="">
+                @* @if (comments.PageCount > 1) {
                     @Html.PagedListPager(
                     comments,
                     page => Url.Action("Detail", new { Model.PartnershipID, page, returnUrl }),

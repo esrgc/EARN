@@ -68,16 +68,19 @@ namespace ESRGC.DLLR.EARN.Helpers
     }
 
     public static void SendNotificationEmail(Notification model) {
-      new EmailController().Notification(model).Deliver();
+      new EmailController().Notification(model).DeliverAsync();
     }
     public static void SendVerificationEmail(Account model) {
-      new EmailController().EmailVerification(model).Deliver();
+      new EmailController().EmailVerification(model).DeliverAsync();
     }
     public static void SendPasswordEmail(Account model) {
-      new EmailController().ForgotPassword(model).Deliver();
+      new EmailController().ForgotPassword(model).DeliverAsync();
     }
     public static void SendReverificationEmail(Account model) {
-      new EmailController().ReVerificationEmail(model).Deliver();
+      new EmailController().ReVerificationEmail(model).DeliverAsync();
+    }
+    public static void SendEmailMessage(Message model) {
+      new EmailController().SendEmailMessage(model).DeliverAsync();
     }
   }
 }

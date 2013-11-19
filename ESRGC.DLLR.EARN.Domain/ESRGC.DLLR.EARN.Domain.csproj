@@ -135,6 +135,10 @@
     <Compile Include="Migrations\201311142153478_notification-header.Designer.cs">
       <DependentUpon>201311142153478_notification-header.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201311191805047_message.cs" />
+    <Compile Include="Migrations\201311191805047_message.Designer.cs">
+      <DependentUpon>201311191805047_message.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\Announcement.cs" />
@@ -142,6 +146,7 @@
     <Compile Include="Model\Document.cs" />
     <Compile Include="Model\GeoTag.cs" />
     <Compile Include="Model\Category.cs" />
+    <Compile Include="Model\Message.cs" />
     <Compile Include="Model\Notification.cs" />
     <Compile Include="Model\Organization.cs" />
     <Compile Include="Model\Contact.cs" />
@@ -219,6 +224,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201311142153478_notification-header.resx">
       <DependentUpon>201311142153478_notification-header.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201311191805047_message.resx">
+      <DependentUpon>201311191805047_message.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

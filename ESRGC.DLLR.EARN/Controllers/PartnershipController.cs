@@ -230,7 +230,159 @@ but should not be used to share proprietary or sensitive content.",
       }
 
     }
+    [VerifyProfile]
+    [VerifyProfilePartnership]
+    public ActionResult LeavePartnership(int partnershipID) {
+      var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
 
+      return View(partnership);
+    }
+
+    [HttpPost]
+    [VerifyProfile]
+    [VerifyProfilePartnership]
+    [ValidateAntiForgeryToken]
+    [SendNotification]
+    [ActionName("LeavePartnership")]
+    public ActionResult LeavePartnershipPost(int partnershipID, string returnUrl) {
+      var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
+      var currentProfile = CurrentAccount.Profile;
+      PartnershipDetail partner = null;
+      try {
+        partner = _workUnit.PartnershipDetailRepository.Entities
+           .First(x => x.ProfileID == currentProfile.ProfileID && x.PartnershipID == partnershipID);
+        _workUnit.PartnershipDetailRepository.DeleteByID(partner.PartnershipDetailID);
+      }
+      catch (Exception) {
+        //not found
+      }
+
+      if (partner != null) {
+        //notify other partners
+        partnership.getAllPartners()
+          .Where(x => x.ProfileID != currentProfile.ProfileID)
+          .ToList()
+          .ForEach(x => {
+            //notifications
+            var notification = new Notification {
+              Account = x.getAccount(),
+              Category = "Partnership Update",
+              Message = currentProfile.Organization.Name + " has left the \"" + partnership.Name + "\" partnership.",
+              LinkToAction = Url.Action("Detail", new { partnershipID })
+            };
+            _workUnit.NotificationRepository.InsertEntity(notification);
+          });
+
+        _workUnit.saveChanges();
+        updateTempMessage("You have left the \"" + partnership.Name + "\" partnership");
+        return RedirectToAction("MyPartnerships");
+      }
+      else
+        updateTempMessage("Error leaving partnership.");
+
+      return returnToUrl(returnUrl, Url.Action("Detail", new { partnershipID }));
+    }
+
+    [VerifyProfile]
+    [CanEditPartnership]
+    [HasReturnUrl]
+    public ActionResult RemovePartner(int partnershipID, int profileID, string returnUrl) {
+      var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
+      var profile = _workUnit.ProfileRepository.GetEntityByID(profileID);
+      if (profile == null) {
+        updateTempMessage("Invalid profile ID");
+        return RedirectToAction("Detail", new { partnershipID });
+      }
+      ViewBag.profile = profile;
+      return View(partnership);
+    }
+
+    [HttpPost]
+    [VerifyProfile]
+    [CanEditPartnership]
+    [ValidateAntiForgeryToken]
+    [SendNotification]
+    [ActionName("RemovePartner")]
+    public ActionResult RemovePartnerPost(int partnershipID, int profileID, string returnUrl) {
+      var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
+      var profile = _workUnit.ProfileRepository.GetEntityByID(profileID);
+      var currentProfile = CurrentAccount.Profile;
+      PartnershipDetail partner = null;
+      try {
+        partner = _workUnit.PartnershipDetailRepository.Entities
+           .First(x => x.ProfileID == profileID && x.PartnershipID == partnershipID);
+        _workUnit.PartnershipDetailRepository.DeleteByID(partner.PartnershipDetailID);
+      }
+      catch (Exception) {
+        //not found
+      }
+
+      if (partner != null) {
+        //notify other partners
+        partnership.getAllPartners()
+          .Where(x => x.ProfileID != profileID && x.ProfileID != currentProfile.ProfileID)
+          .ToList()
+          .ForEach(x => {
+            //notifications
+            var notification = new Notification {
+              Account = x.getAccount(),
+              Category = "Partnership Update",
+              Message = profile.Organization.Name + " is no longer a partner of the \"" + partnership.Name + "\" partnership",
+              LinkToAction = Url.Action("Detail", new { partnershipID })
+            };
+            _workUnit.NotificationRepository.InsertEntity(notification);
+          });
+        //notify the removed partner
+        var n = new Notification {
+          Account = profile.getAccount(),
+          Category = "Partnership Update",
+          Message = "You are no longer a partner of the \"" + partnership.Name + "\" partnership",
+          Message2 = "The administrator has removed you from the partnership.",
+          Message3 = "There is no further action neccessary. You can request to join other partnerships."
+        };
+        _workUnit.NotificationRepository.InsertEntity(n);
+        _workUnit.saveChanges();
+        updateTempMessage(profile.Organization.Name + " has been removed from \"" + partnership.Name + "\" partnership");
+      }
+      else
+        updateTempMessage("Error removing partner from partnership.");
+
+      return returnToUrl(returnUrl, Url.Action("Detail", new { partnershipID }));
+    }
+    [VerifyProfile]
+    [NewToPartnership]
+    [HasReturnUrl]
+    public ActionResult ContactAdmin(int partnershipID, string returnUrl) {
+      var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
+      return View(partnership);
+    }
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    [VerifyProfile]
+    [NewToPartnership]
+    [SendMessaage]
+    public ActionResult ContactAdmin(int partnershipID, string message, string returnUrl) {
+      var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
+      var currentProfile = CurrentAccount.Profile;
+      //create a message
+      var m = new Message {
+        Sender = currentProfile,
+        Receiver = partnership.getOwner(),
+        Title = "Partnership Message",
+        Header = currentProfile.Organization.Name + " has sent you a message",
+        Message1 = "This message is regarding the \"" + partnership.Name + "\" partnership.",
+        Message2 = message
+      };
+      _workUnit.MessageRepository.InsertEntity(m);
+      _workUnit.saveChanges();
+      updateTempMessage("Your message has been sent to the Administrator. A copy of this message was also emailed to you via"
+        + " your contact email ("+ currentProfile.Contact.Email +").");
+      return RedirectToAction("View", new { partnershipID, returnUrl });
+    }
+    [VerifyProfile]
+    public ActionResult MyPartnerships() {
+      return View();
+    }
     public ActionResult InvalidAccessToPartnership() {
       return View();
     }

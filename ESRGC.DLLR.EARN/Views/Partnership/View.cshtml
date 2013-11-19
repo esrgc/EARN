@@ -59,6 +59,11 @@
                         @Html.Partial("tagListDisplayPartial", p.getTagNames())
                     </div>
                     <hr />
+                    <div class="pull-left">
+                        <a class="btn btn-default" href="@Url.Action("ContactAdmin", new { p.PartnershipID , returnUrl })">
+                            <i class="fa fa-envelope"></i>&nbsp;Contact Admin
+                        </a>
+                    </div>
                     <div class="btn-group pull-right">
                         @if (currentProfile.isNewToPartnership(Model.PartnershipID)) {
                             if ((!requested)) {

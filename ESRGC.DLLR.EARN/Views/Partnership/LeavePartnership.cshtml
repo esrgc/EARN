@@ -1,0 +1,55 @@
+﻿@using ESRGC.DLLR.EARN.Domain.Model
+@model Partnership
+@{
+    ViewBag.Title = "Partnership";
+    ViewBag.Header = "Leave Partnership";
+}
+
+@section header{
+    <div class="container">
+        <header class="page-header">
+            <h3>@ViewBag.Header <i class="fa fa-sign-out"></i></h3>
+            @*<ul class="breadcrumb">
+                <li><a href="@Url.Action("index", "Home")">Home</a></li>
+                <li class="active">@ViewBag.Header</li>
+            </ul>*@
+        </header>
+    </div>
+}
+@{
+    var currentProfile = ViewBag.profile as Profile;
+    var returnUrl = ViewBag.returnUrl as string;
+}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1">
+            <div class="window-panel">
+                <div class="window-panel-title">
+                    <strong>Leaving "@Model.Name" partnership</strong>
+                </div>
+                <div class="window-panel-content">
+                    <div class="alert alert-warning">
+                        <h4>Comfirm</h4>
+                        <p>
+                            Are you sure you want to leave from the "@Model.Name" partnership?
+                            This action can not be undone.
+                        </p>
+                        <form action="@Url.Action("LeavePartnership", new { returnUrl })" method="post" role="form">
+                            @Html.AntiForgeryToken()
+                            @Html.HiddenFor(x => x.PartnershipID)
+                            <input class="btn btn-primary" value="Yes" type="submit" />
+                            <a class="btn btn-default" href="@Url.Action("Detail", new { Model.PartnershipID, returnUrl })">Cancel</a>
+                        </form>
+                    </div>
+                    <div class="placeholder-panel">
+                        <div class="post">
+                            @Html.Partial("partnershipPartial", Model)          
+                        </div>
+                    </div>          
+                    
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

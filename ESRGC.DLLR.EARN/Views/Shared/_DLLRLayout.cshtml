@@ -18,6 +18,21 @@
     <!--[if lte IE 8]> 
         <script src="@Url.Content("~/Client/jsLib/response/respond.min.js")"></script>
     <![endif]-->
+
+    @if (Server.MachineName == "ESRGC1") {
+        <!--Google analytics-->
+        <script type="text/javascript">
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-20599539-4', 'salisbury.edu');
+            ga('send', 'pageview');
+        </script>
+    }
 </head>
 <body lang="en" class="dllr">
     <div class="wrapper" id="content">
@@ -83,7 +98,9 @@
         <div class="" id="main">
             <div class="">
                 <!--nav bar-->
-                @Html.Partial("navBar")
+                <div id="navigationBar">
+                    @Html.Partial("navBar")
+                </div>
                 <!--Page content-->
                 <div id="pageContent">
                     @Html.Partial("messagePartial")
@@ -108,7 +125,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>                    
+                    </div>
                     <section class="body-content">
                         @RenderBody()
                     </section>
@@ -123,10 +140,10 @@
         <div class="footer">
             <div class="text-center">
                 @*@RenderSection("footer", required: false)*@
-                <a href="http://esrgc.org" target="_blank">
+    <a href="http://esrgc.org" target="_blank">
                     <img class="site-logo" src="@Url.Content("~/Client/images/esrgc.png")" alt=""/></a>
                 @*<a  href="http://www.gov.state.md.us/" target="_blank"><img class="site-logo" src="@Url.Content("~/client/images/MDlogo.gif")" alt=""/></a>*@
-                <a href="http://www.dllr.maryland.gov/earn" target="_blank">
+    <a href="http://www.dllr.maryland.gov/earn" target="_blank">
                     <img class="site-logo" src="@Url.Content("~/client/images/EARN_logo_200w.jpg")" alt=""/></a>
                 <a href="http://www.salisbury.edu/" target="_blank">
                     <img class="site-logo" src="@Url.Content("~/client/images/SalisburyUniversity.jpg")" alt=""/></a>
@@ -166,9 +183,10 @@
                 placement: 'right',
                 container: 'body'
             });
-            $('.navbar a#notifications').popover({
-                placement: "bottom",
+            $('body').popover({
+                placement: 'bottom',
                 container: 'body',
+                selector: '[rel=popover]',
                 html: true,
                 content: function () {
                     return $('.hidden-content').html();
@@ -179,6 +197,20 @@
             });
             //placeholder
             $('input, textarea').placeholder();
+
+            //auto refresh nav bar for notifications
+            //var timer = setInterval(function () {
+            //    var url = $('#navBarRefreshLink').val();
+            //    if (typeof url == 'undefined')
+            //        return;
+            //    $.get(url, function (data) {
+            //        console.log('refreshing navbar');
+            //        //console.log($('#mainNavigation', data));
+            //        $('.navbar a#notifications').popover('hide');
+            //        $('#notificationArea').replaceWith($('#notificationArea', data));
+            //        $('#notificationContent').replaceWith($('#notificationContent',data));
+            //    });
+            //}, 1500);
 
             //custom start up code
             if (typeof startup == 'function')

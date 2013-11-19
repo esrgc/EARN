@@ -10,29 +10,25 @@ using ESRGC.DLLR.EARN.Helpers;
 
 namespace ESRGC.DLLR.EARN.Filters
 {
-  public class SendNotificationAttribute : ActionFilterAttribute
+  public class SendMessaageAttribute : ActionFilterAttribute
   {
-    public override void OnActionExecuted(ActionExecutedContext filterContext) {      
+    public override void OnActionExecuted(ActionExecutedContext filterContext) {
       try {
         var workUnit = (filterContext.Controller as BaseController).WorkUnit;
-        var unsentNotifs = workUnit.NotificationRepository
+        var messages = workUnit.MessageRepository
           .Entities
           .Where(x => x.EmailSent == false)
           .ToList();
-        foreach (var unsent in unsentNotifs) {
-          if (unsent.Account.EmailVerified) {
-            EmailHelper.SendNotificationEmail(unsent);
-            unsent.EmailSent = true;
-            workUnit.NotificationRepository.UpdateEntity(unsent);
-            workUnit.saveChanges();
-          }
+        foreach (var unsent in messages) {
+          EmailHelper.SendEmailMessage(unsent);
+          unsent.EmailSent = true;
+          workUnit.MessageRepository.UpdateEntity(unsent);
+          workUnit.saveChanges();
           //else { 
           //  //attempt to send the verification email
           //  EmailHelper.SendVerificationEmail(unsent.Account);
           //}
         }
-        
-
       }
       catch (Exception) {
 

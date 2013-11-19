@@ -1,0 +1,57 @@
+﻿@using ESRGC.DLLR.EARN.Domain.Model
+@model Partnership
+@{
+    ViewBag.Title = "Partnership";
+    ViewBag.Header = "Remove Partner";
+}
+
+@section header{
+    <div class="container">
+        <header class="page-header">
+            <h3>@ViewBag.Header <i class="fa fa-times"></i></h3>
+            @*<ul class="breadcrumb">
+                <li><a href="@Url.Action("index", "Home")">Home</a></li>
+                <li class="active">@ViewBag.Header</li>
+            </ul>*@
+        </header>
+    </div>
+}
+@{
+    var profileToRemove = ViewBag.profile as Profile;
+    var returnUrl = ViewBag.returnUrl as string;
+    ViewBag.partnership = Model;
+}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1">
+            <div class="window-panel">
+                <div class="window-panel-title">
+                    <strong>Removing @profileToRemove.Organization.Name from "@Model.Name" partnership</strong>
+                </div>
+                <div class="window-panel-content">
+                    <div class="alert alert-warning">
+                        <h4>Comfirm Deletion</h4>
+                        <p>
+                            Are you sure you want to remove "@profileToRemove.Organization.Name" from the partnership?
+                            This action can not be undone.
+                        </p>
+                        <form action="@Url.Action("RemovePartner", new { returnUrl })" method="post" role="form">
+                            @Html.AntiForgeryToken()
+                            @Html.HiddenFor(x => x.PartnershipID)
+                            @Html.Hidden("profileID", profileToRemove.ProfileID)
+                            <input class="btn btn-primary" value="Yes" type="submit" />
+                            <a class="btn btn-default" href="@Url.Action("Detail", new { Model.PartnershipID, returnUrl })">Cancel</a>
+                        </form>
+                    </div>
+                    <div class="profile-info-container">
+                        <div class="placeholder-panel">
+                            <div class="post">
+                                @Html.Partial("miniProfilePartial", profileToRemove)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

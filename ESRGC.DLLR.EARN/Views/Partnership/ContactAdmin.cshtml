@@ -1,0 +1,74 @@
+﻿@using ESRGC.DLLR.EARN.Domain.Model
+@model Partnership
+@{
+    ViewBag.Title = "Partnership";
+    ViewBag.Header = "Contact Admin";
+}
+
+@section header{
+    <div class="container">
+        <header class="page-header">
+            <h3>@ViewBag.Header <i class="glyphicon glyphicon-link"></i></h3>
+            @*<ul class="breadcrumb">
+                <li><a href="@Url.Action("index", "Home")">Home</a></li>
+                <li class="active">@ViewBag.Header</li>
+            </ul>*@
+        </header>
+    </div>
+}
+@{
+    var currentProfile = ViewBag.profile as Profile;
+    var returnUrl = ViewBag.returnUrl as string;
+}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1">
+            <div class="window-panel">
+                <div class="window-panel-title">
+                    <strong>Contact Admin of the "@Model.Name" partnership</strong>
+                </div>
+                <div class="window-panel-content">
+
+                    <div class="placeholder-panel">
+                        <div class="post">
+                            @Html.Partial("partnershipPartial", Model)
+                        </div>
+                    </div>
+                    <hr />
+                    <form class="form-horizontal" action="@Url.Action("ContactAdmin", new { returnUrl })" method="post" role="form">
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(x => x.PartnershipID)
+                        <div class="form-group">
+                            <div class="col-md-8 col-md-offset-2">
+                                <p class="text-info">
+                                    Please type your message below.
+                                    You can ask questions or inquire more information about this partnership.
+                                    A copy of this message is also sent to you in your contact email.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="message">Message</label>
+                            <div class="col-md-8">
+
+                                @Html.TextArea("message",
+                                "",
+                                new {
+                                    @class = "form-control",
+                                    placeholder = "Type your message here"
+                                })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-8 col-md-offset-2">
+                                <input class="btn btn-primary" value="Send" type="submit" />
+                                <a class="btn btn-default" href="@Url.Action("View", "Partnership", new { Model.PartnershipID, returnUrl })">Cancel</a>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

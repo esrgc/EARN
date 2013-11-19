@@ -1,4 +1,5 @@
-﻿<nav class="navbar navbar-default" role="navigation">
+﻿<div class="navbar navbar-default" role="navigation">
+    <input type="hidden" id="navBarRefreshLink" value="@Url.Action("navigationBar", "Communication")" />
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -20,6 +21,7 @@
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
+                            <li><a href="@Url.Action("MyPartnerships", "Partnership")">My partnerships</a></li>
                             <li><a href="@Url.Action("Index", "Partnership")">Available partnerships</a></li>
                             <li><a href="@Url.Action("Create", "Partnership")">Create new partnership</a></li>
                         </ul>
@@ -29,7 +31,7 @@
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a target="_blank" href="http://www.dllr.maryland.gov/earn/earnresources.shtml">Resources</a></li>
+                            <li><a target="_blank" href="http://www.earn.maryland.gov">Resources</a></li>
                             <li><a data-toggle="modal" href="#about">About EARN MD CONNECT</a></li>
                             <li><a href="mailto:earn.jobs@maryland.gov?subject=Contact EARN MD CONNECT">Contact EARN MD</a></li>
                         </ul>
@@ -50,7 +52,7 @@
                 @if (Request.IsAuthenticated) {
                     var noteCount = Html.Action("NotificationCount", "Communication"); 
                     <li>
-                        <a href="#" data-toggle="popover" id="notifications" role="menuitem" data-trigger="click">
+                        <a href="#" data-toggle="popover" id="notifications" role="menuitem" data-trigger="click" rel="popover">
                             <i class="fa fa-flag fa-lg"></i>&nbsp;
                                 @if (noteCount.ToString() != "0") { 
                                     <span class="label label-danger">@noteCount</span>
@@ -85,13 +87,14 @@
         </div>
     </div>
     <!-- /.navbar-collapse -->
-</nav>
-@*Notification popover content*@
-@if (Request.IsAuthenticated) { 
-    <div class="hidden-content">
-        @Html.Action("Notifications", "Communication")
-    </div>
-}
+    @*Notification popover content*@
+    @if (Request.IsAuthenticated) { 
+        <div class="hidden-content">
+            @Html.Action("Notifications", "Communication")
+        </div>
+    }
+</div>
+
 <!-- Modal -->
 <div class="modal fade" id="about" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
     <div class="modal-dialog">
