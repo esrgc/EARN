@@ -169,6 +169,7 @@
     <Compile Include="Filters\CheckCookieAttribute.cs" />
     <Compile Include="Filters\HasReturnUrlAttribute.cs" />
     <Compile Include="Filters\NewToPartnershipAttribute.cs" />
+    <Compile Include="Filters\SendMessageAttribute.cs" />
     <Compile Include="Filters\SendNotificationAttribute.cs" />
     <Compile Include="Filters\SetGuestCookieAttribute.cs" />
     <Compile Include="Filters\VerifyAccountAttribute.cs" />
@@ -421,6 +422,8 @@
     <Content Include="Views\Partnership\MyPartnerships.cshtml" />
     <Content Include="Views\Partnership\RemovePartner.cshtml" />
     <Content Include="Views\Partnership\LeavePartnership.cshtml" />
+    <Content Include="Views\Email\SendEmailMessage.html.cshtml" />
+    <Content Include="Views\Partnership\ContactAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

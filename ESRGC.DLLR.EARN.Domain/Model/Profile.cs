@@ -15,6 +15,8 @@ namespace ESRGC.DLLR.EARN.Domain.Model
       ProfileTags = new List<ProfileTag>();
       PartnershipDetails = new List<PartnershipDetail>();
       Comments = new List<Comment>();
+      SentMessages = new List<Message>();
+      ReceiveMessages = new List<Message>();
     }
     /// <summary>
     /// Profile ID
@@ -49,6 +51,8 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public virtual ICollection<PartnershipDetail> PartnershipDetails { get; set; }
     public virtual ICollection<Account> Accounts { get; set; }
     public virtual ICollection<Comment> Comments { get; set; }
+    public ICollection<Message> SentMessages { get; set; }
+    public ICollection<Message> ReceiveMessages { get; set; }
 
     //helpers
     public bool isOwnerOfPartnership(Partnership partnership) {

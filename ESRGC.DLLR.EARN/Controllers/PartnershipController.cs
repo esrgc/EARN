@@ -272,7 +272,7 @@ but should not be used to share proprietary or sensitive content.",
             };
             _workUnit.NotificationRepository.InsertEntity(notification);
           });
-       
+
         _workUnit.saveChanges();
         updateTempMessage("You have left the \"" + partnership.Name + "\" partnership");
         return RedirectToAction("MyPartnerships");
@@ -337,7 +337,8 @@ but should not be used to share proprietary or sensitive content.",
           Account = profile.getAccount(),
           Category = "Partnership Update",
           Message = "You are no longer a partner of the \"" + partnership.Name + "\" partnership",
-          Message2 = "There is no further action neccessary. You can request to join other partnerships."
+          Message2 = "The administrator has removed you from the partnership.",
+          Message3 = "There is no further action neccessary. You can request to join other partnerships."
         };
         _workUnit.NotificationRepository.InsertEntity(n);
         _workUnit.saveChanges();
@@ -348,7 +349,36 @@ but should not be used to share proprietary or sensitive content.",
 
       return returnToUrl(returnUrl, Url.Action("Detail", new { partnershipID }));
     }
-
+    [VerifyProfile]
+    [NewToPartnership]
+    [HasReturnUrl]
+    public ActionResult ContactAdmin(int partnershipID, string returnUrl) {
+      var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
+      return View(partnership);
+    }
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    [VerifyProfile]
+    [NewToPartnership]
+    [SendMessaage]
+    public ActionResult ContactAdmin(int partnershipID, string message, string returnUrl) {
+      var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
+      var currentProfile = CurrentAccount.Profile;
+      //create a message
+      var m = new Message {
+        Sender = currentProfile,
+        Receiver = partnership.getOwner(),
+        Title = "Partnership Message",
+        Header = currentProfile.Organization.Name + " has sent you a message",
+        Message1 = "This message is regarding the \"" + partnership.Name + "\" partnership.",
+        Message2 = message
+      };
+      _workUnit.MessageRepository.InsertEntity(m);
+      _workUnit.saveChanges();
+      updateTempMessage("Your message has been sent to the Administrator. A copy of this message was also emailed to you via"
+        + " your contact email ("+ currentProfile.Contact.Email +").");
+      return RedirectToAction("View", new { partnershipID, returnUrl });
+    }
     [VerifyProfile]
     public ActionResult MyPartnerships() {
       return View();

@@ -31,6 +31,7 @@ namespace ESRGC.DLLR.EARN.Domain.DAL
     public DbSet<Comment> Comments { get; set; }
     public DbSet<PartnershipTag> PartnershipTags { get; set; }
     public DbSet<Document> Documents { get; set; }
+    public DbSet<Message> Messages { get; set; }
 
     protected override void OnModelCreating(DbModelBuilder modelBuilder) {
       modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
@@ -70,6 +71,17 @@ namespace ESRGC.DLLR.EARN.Domain.DAL
         .HasRequired(x => x.Author)
         .WithMany(x => x.Comments)
         .HasForeignKey(x => x.AuthorID);
+      //messages
+      modelBuilder.Entity<Message>()
+        .HasRequired(x => x.Sender)
+        .WithMany(x => x.SentMessages)
+        .HasForeignKey(x => x.SenderID)
+        .WillCascadeOnDelete(false);
+      modelBuilder.Entity<Message>()
+        .HasRequired(x => x.Receiver)
+        .WithMany(x => x.ReceiveMessages)
+        .HasForeignKey(x => x.ReceiverID)
+        .WillCascadeOnDelete(false);
     }
   }
 }
