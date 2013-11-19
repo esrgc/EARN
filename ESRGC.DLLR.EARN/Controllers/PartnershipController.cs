@@ -231,6 +231,59 @@ but should not be used to share proprietary or sensitive content.",
 
     }
     [VerifyProfile]
+    [VerifyProfilePartnership]
+    public ActionResult LeavePartnership(int partnershipID) {
+      var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
+
+      return View(partnership);
+    }
+
+    [HttpPost]
+    [VerifyProfile]
+    [VerifyProfilePartnership]
+    [ValidateAntiForgeryToken]
+    [SendNotification]
+    [ActionName("LeavePartnership")]
+    public ActionResult LeavePartnershipPost(int partnershipID, string returnUrl) {
+      var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
+      var currentProfile = CurrentAccount.Profile;
+      PartnershipDetail partner = null;
+      try {
+        partner = _workUnit.PartnershipDetailRepository.Entities
+           .First(x => x.ProfileID == currentProfile.ProfileID && x.PartnershipID == partnershipID);
+        _workUnit.PartnershipDetailRepository.DeleteByID(partner.PartnershipDetailID);
+      }
+      catch (Exception) {
+        //not found
+      }
+
+      if (partner != null) {
+        //notify other partners
+        partnership.getAllPartners()
+          .Where(x => x.ProfileID != currentProfile.ProfileID)
+          .ToList()
+          .ForEach(x => {
+            //notifications
+            var notification = new Notification {
+              Account = x.getAccount(),
+              Category = "Partnership Update",
+              Message = currentProfile.Organization.Name + " has left the \"" + partnership.Name + "\" partnership.",
+              LinkToAction = Url.Action("Detail", new { partnershipID })
+            };
+            _workUnit.NotificationRepository.InsertEntity(notification);
+          });
+       
+        _workUnit.saveChanges();
+        updateTempMessage("You have left the \"" + partnership.Name + "\" partnership");
+        return RedirectToAction("MyPartnerships");
+      }
+      else
+        updateTempMessage("Error leaving partnership.");
+
+      return returnToUrl(returnUrl, Url.Action("Detail", new { partnershipID }));
+    }
+
+    [VerifyProfile]
     [CanEditPartnership]
     [HasReturnUrl]
     public ActionResult RemovePartner(int partnershipID, int profileID, string returnUrl) {
@@ -243,6 +296,7 @@ but should not be used to share proprietary or sensitive content.",
       ViewBag.profile = profile;
       return View(partnership);
     }
+
     [HttpPost]
     [VerifyProfile]
     [CanEditPartnership]

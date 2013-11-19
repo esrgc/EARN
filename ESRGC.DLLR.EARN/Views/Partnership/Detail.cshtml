@@ -231,10 +231,19 @@
                 <div class="window-panel-title">
                     <strong>@p.Name</strong>
                     @if (canEdit) { 
-                        <a title="Edit this partnership" href="@Url.Action("Edit", new { p.PartnershipID, returnUrl })"><i class="fa fa-pencil"></i></a>                        
+                        <a title="Edit this partnership" href="@Url.Action("Edit", new { p.PartnershipID, returnUrl })">
+                            <i class="fa fa-pencil"></i>
+                        </a>                        
                     }
                 </div>
                 <div class="window-panel-content">
+                    @if (!canEdit) { 
+                        <span class="pull-right">
+                            <a class="btn btn-sm btn-default" href="@Url.Action("LeavePartnership", new { Model.PartnershipID, returnUrl})">
+                                <i class="fa fa-sign-out"></i>&nbsp;Leave partnership
+                            </a>
+                        </span>
+                    }
                     <p class=""><strong>Description</strong> @p.Description</p>
                     <p>
                         <strong>Status:</strong>
