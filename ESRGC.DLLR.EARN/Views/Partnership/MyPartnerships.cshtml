@@ -1,0 +1,76 @@
+﻿@using ESRGC.DLLR.EARN.Domain.Model
+@{
+    ViewBag.Title = "Partnership";
+    ViewBag.Header = "My Partnerships";
+}
+
+@section header{
+    <div class="container">
+        <header class="page-header">
+            <h3>@ViewBag.Header <i class="glyphicon glyphicon-link"></i></h3>
+            @*<ul class="breadcrumb">
+                <li><a href="@Url.Action("index", "Home")">Home</a></li>
+                <li class="active">@ViewBag.Header</li>
+            </ul>*@
+        </header>
+    </div>
+}
+@{
+    var currentProfile = ViewBag.currentProfile as Profile;
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="window-panel">
+                <div class="window-panel-title"><strong>@currentProfile.partnershipCount() Partnerships available</strong></div>
+
+                <div class="window-panel-content">
+                    <div>
+                        <div>
+                            <p>
+                                &nbsp;
+                                <span class="pull-right">
+                                    <a href="@Url.Action("Create", "Partnership")">
+                                        <i class="glyphicon glyphicon-link"></i>
+                                        &nbsp;Create new partnership
+                                    </a>
+                                </span>
+                            </p>
+                            <div class="clear"></div>
+                        </div>
+                        @if (currentProfile.partnershipCount() == 0) { 
+                            <p class="text-muted">
+                                If you are already a member of an EARN Maryland partnership, it may not be reflected 
+                                here because a Partnership Profile has not yet been created on this site, or because 
+                                the Partnership Profile Administrator has not yet invited or confirmed your membership yet. 
+                                Once you are a member of a partnership or partnerships within EARN MD CONNECT, they will be listed here. 
+                                As such, if you are already part of a Planning Grant Applicant Group, you will not have an Organization 
+                                or a Partnership Profile on EARN MD CONNECT until one is created!
+                            </p>
+                            <p class="text-muted">
+                                If there is not yet a Partnership Profile within EARN MD CONNECT for your partnership, 
+                                one can be created by clicking “Create new partnership” above. 
+                                Please note that <u>the user who creates the Partnership Profile will become the Partnership 
+                                Profile’s Administrator</u>, and will be the only user able 1) to control the Partnership Profile’s membership, 2) 
+                                to invite other organizations to join your Partnership Profile, 3) to decide whether to approve users who 
+                                request to join your Partnership Profile, and 4) to control the Partnership Profile’s Title and Description 
+                                visible to other EARN MD CONNECT users. As such, partnerships should determine the appropriate member to create, 
+                                and be the Administrator of, their group’s Partnership Profile on EARN MD CONNECT.
+                            </p>
+                            <p class="text-muted">
+                                If there is already a Partnership Profile for your partnership, you can request to join that Profile within 
+                                EARN MD CONNECT by clicking “Request to join” on the Partnership’s Profile page. 
+                                If you are unsure, you can always <a href="mailto://earn.jobs@maryland.gov">email us</a>. 
+                            </p>
+                        }
+                        else {
+                            @Html.Action("ListPartnerships", "Partnership", new { currentProfile.ProfileID })
+                        }
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

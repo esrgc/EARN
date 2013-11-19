@@ -157,5 +157,8 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public List<string> getTagNames() {
       return getTags().Select(x => x.Name).ToList();
     }
+    public int partnershipCount() {
+      return PartnershipDetails.Count();
+    }
   }
 }

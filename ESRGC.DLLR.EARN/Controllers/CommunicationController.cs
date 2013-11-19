@@ -15,6 +15,10 @@ namespace ESRGC.DLLR.EARN.Controllers
   public class CommunicationController : BaseController
   {
     public CommunicationController(IWorkUnit workUnit) : base(workUnit) { }
+    //for navigation bar to refresh (update notifications)
+    public PartialViewResult NavigationBar() {
+      return PartialView("navBar");
+    }
     [VerifyProfile]
     public ActionResult InviteToPartnership(int profileID, string returnUrl) {
       var profile = _workUnit.ProfileRepository.GetEntityByID(profileID);

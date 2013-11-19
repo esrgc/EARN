@@ -230,7 +230,10 @@ but should not be used to share proprietary or sensitive content.",
       }
 
     }
-
+    [VerifyProfile]
+    public ActionResult MyPartnerships() {
+      return View();
+    }
     public ActionResult InvalidAccessToPartnership() {
       return View();
     }

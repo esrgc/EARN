@@ -40,7 +40,7 @@ dx.defineController('Map', {
             //after the store data is loaded this handler is called
             store.on('searchStoreLoaded', function (store, data) {
                 scope.addMarkers();
-                scope.zoomToOwnProfile();
+                //scope.zoomToOwnProfile();
             });
         }
     },
