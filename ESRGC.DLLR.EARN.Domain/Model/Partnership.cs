@@ -88,16 +88,16 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public List<string> getTagNames() {
       return PartnershipTags.Select(x => x.Tag.Name).ToList();
     }
-    public bool removePartner(int profileID) {
-      try {
-        var partner = PartnershipDetails.First(x => x.ProfileID == profileID);
-        PartnershipDetails.Remove(partner);
-        return true;
-      }
-      catch {
-        return false;
-      }
+    //public bool removePartner(int profileID) {
+    //  try {
+    //    var partner = PartnershipDetails.First(x => x.ProfileID == profileID);
+    //    PartnershipDetails.Remove(partner);
+    //    return true;
+    //  }
+    //  catch {
+    //    return false;
+    //  }
         
-    }
+    //}
   }
 }

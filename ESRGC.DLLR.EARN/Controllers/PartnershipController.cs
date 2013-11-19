@@ -234,7 +234,14 @@ but should not be used to share proprietary or sensitive content.",
     [CanEditPartnership]
     [HasReturnUrl]
     public ActionResult RemovePartner(int partnershipID, int profileID, string returnUrl) {
-      return View();
+      var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
+      var profile = _workUnit.ProfileRepository.GetEntityByID(profileID);
+      if (profile == null) {
+        updateTempMessage("Invalid profile ID");
+        return RedirectToAction("Detail", new { partnershipID });
+      }
+      ViewBag.profile = profile;
+      return View(partnership);
     }
     [HttpPost]
     [VerifyProfile]
@@ -245,23 +252,42 @@ but should not be used to share proprietary or sensitive content.",
     public ActionResult RemovePartnerPost(int partnershipID, int profileID, string returnUrl) {
       var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
       var profile = _workUnit.ProfileRepository.GetEntityByID(profileID);
-      if (partnership.removePartner(profileID)) {
+      var currentProfile = CurrentAccount.Profile;
+      PartnershipDetail partner = null;
+      try {
+        partner = _workUnit.PartnershipDetailRepository.Entities
+           .First(x => x.ProfileID == profileID && x.PartnershipID == partnershipID);
+        _workUnit.PartnershipDetailRepository.DeleteByID(partner.PartnershipDetailID);
+      }
+      catch (Exception) {
+        //not found
+      }
+
+      if (partner != null) {
+        //notify other partners
         partnership.getAllPartners()
-          .Where(x => x.ProfileID != profileID)
+          .Where(x => x.ProfileID != profileID && x.ProfileID != currentProfile.ProfileID)
           .ToList()
           .ForEach(x => {
+            //notifications
             var notification = new Notification {
               Account = x.getAccount(),
               Category = "Partnership Update",
-              Message = profile.Organization.Name + " is no longer a partner of the partnership \"" + partnership.Name + "\"",
-              LinkToAction = Url.Action("Detail", new { partnershipID })              
+              Message = profile.Organization.Name + " is no longer a partner of the \"" + partnership.Name + "\" partnership",
+              LinkToAction = Url.Action("Detail", new { partnershipID })
             };
             _workUnit.NotificationRepository.InsertEntity(notification);
           });
-        //notification
+        //notify the removed partner
+        var n = new Notification {
+          Account = profile.getAccount(),
+          Category = "Partnership Update",
+          Message = "You are no longer a partner of the \"" + partnership.Name + "\" partnership",
+          Message2 = "There is no further action neccessary. You can request to join other partnerships."
+        };
+        _workUnit.NotificationRepository.InsertEntity(n);
         _workUnit.saveChanges();
-        updateTempMessage(profile.Organization.Name + " has been removed from partnership \"" + partnership.Name + "\"");
-
+        updateTempMessage(profile.Organization.Name + " has been removed from \"" + partnership.Name + "\" partnership");
       }
       else
         updateTempMessage("Error removing partner from partnership.");

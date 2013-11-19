@@ -14,11 +14,21 @@
 <p>@Model.Message2</p>
 <p><b>@Model.Message3</b></p>
 <br />
-<p>
-    Please follow the link below to view this notification on EARN MD CONNECT site (Sign in required).
-    <br />
-    <a href="@Url.AbsoluteAction("ViewNotification", "Communication", new { Model.NotificationID })">Click here</a>
-</p>
+
+@if (!string.IsNullOrEmpty(Model.LinkToAction)) {
+    <p>
+        Please follow the link below to view this notification on EARN MD CONNECT site (Sign in required).
+        <br />
+        <a href="@Url.AbsoluteAction("ViewNotification", "Communication", new { Model.NotificationID })">Click here</a>
+    </p>
+}
+else {
+    <p>
+        Please follow the link below to sign in EARN MD CONNECT site.
+        <br />
+        <a href="@Url.AbsoluteAction("Sigin", "Account")">Click here</a>
+    </p>
+}
 <br />
 <p>
     Thanks for using EARN MD CONNECT!<br />
