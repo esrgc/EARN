@@ -15,12 +15,24 @@ namespace ESRGC.DLLR.EARN.Domain.Model
 
     string _website, _facebook, _linkedIn, _twitter;
     [MaxLength(50)]
-    [Display(Description = "www.someorganization.org")]
+    [Display(Description = "http://www.someorganization.org")]
     [DataType(DataType.Url)]
-    [RegularExpression(@"^[a-zA-Z0-9\-\.]+\.(com|org|net|mil|edu|COM|ORG|NET|MIL|EDU)$", ErrorMessage = "Invalid Url")]
+    [RegularExpression(@"^(http(?:s)?\:\/\/[a-zA-Z0-9\-]+(?:\.[a-zA-Z0-9\-]+)*\.[a-zA-Z]{2,6}(?:\/?|(?:\/[\w\-]+)*)(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$", 
+      ErrorMessage = "Invalid Url")]
     public string Website {
       get { return _website; }
-      set { _website = value == null ? "" : value.Replace("http://", "").Trim(); }
+      set {
+        if (value == "") {
+          _website = "";
+        }
+        else {
+          if (!value.Contains("http://") && !value.Contains("https://")) {
+            _website = "http://" + _website;
+          }
+          else
+            _website = value;
+        }
+      }
     }
 
     [MaxLength(1000, ErrorMessage="Maximum 1000 characters")]

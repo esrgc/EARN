@@ -213,7 +213,7 @@
     var currentTags = Model.getTags();
     var isOwner = currentProfile.isOwnerOfPartnership(Model);
     //for removing parnters
-    if (canEdit){
+    if (canEdit) {
         ViewBag.partnership = Model;
     }
 }
@@ -237,18 +237,19 @@
                     }
                 </div>
                 <div class="window-panel-content">
+                    <p class=""><strong>Description</strong> @p.Description</p>
+                    <span>
+                        <strong>Status:</strong>
+                        @Html.Partial("partnershipStatusPartial", p)
+                    </span>
                     @if (!canEdit) { 
                         <span class="pull-right">
-                            <a class="btn btn-sm btn-default" href="@Url.Action("LeavePartnership", new { Model.PartnershipID, returnUrl})">
+                            <a class="btn btn-sm btn-default" href="@Url.Action("LeavePartnership", new { Model.PartnershipID, returnUrl })">
                                 <i class="fa fa-sign-out"></i>&nbsp;Leave partnership
                             </a>
                         </span>
+                        <div class="clear"></div>
                     }
-                    <p class=""><strong>Description</strong> @p.Description</p>
-                    <p>
-                        <strong>Status:</strong>
-                        @Html.Partial("partnershipStatusPartial", p)
-                    </p>
                     <hr />
                     <!--Tags-->
                     <div class="panel-group" id="partnershipDetail">

@@ -34,7 +34,7 @@ else {
 </p>
 <h5>Target Industry Tags&nbsp;<i class="fa fa-tags"></i></h5>
 <div class="placeholder-panel">
-    @Html.Partial("tagListDisplayPartial", p.getTagNames())
+    @Html.Partial("tagListLinkPartial", p.getTagNames())
 </div>
 <br />
 @if (!currentProfile.isNewToPartnership(p.PartnershipID)) {
