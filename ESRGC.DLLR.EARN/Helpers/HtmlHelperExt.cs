@@ -226,9 +226,17 @@ namespace ESRGC.DLLR.EARN.Helpers
     public static List<Tag> getTagList(this HtmlHelper helper, Profile profile) {
       return DataUtility.getTagList(profile);
     }
-    public static string DecryptPassword(this HtmlHelper helper, byte[] password) {
-      return SHA1PasswordSecurity.ByteArrayToString(password);
+    public static string ToAbsoluteUrl(this string url, string protocol) {
+      if (string.IsNullOrEmpty(url))
+        return url;
+      if (!url.Contains("http"))
+        url = protocol + url;
+      return url;
     }
+    public static string RemoveProtocol(this string url) {
+      return url.Replace("http://", "").Replace("https://", "");
+    }
+
     /// <summary>
     /// get address geotag from profile
     /// </summary>

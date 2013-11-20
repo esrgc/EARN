@@ -41,7 +41,6 @@
             }
             <div class="placeholder-panel">
                 <div class="post">
-                    @Html.Partial("socialNetworkPartial", Model)
                     <div class="inline-container profile-area">
                         <div class="profile-picture">
                             @if (Model.PictureID != null) { 
@@ -78,8 +77,8 @@
                                         <br />
                                         @if (Model.Organization.Website != null) { 
                                             <small>
-                                                <a target="_blank" href="@Model.Organization.Website" title="Organization website">
-                                                    @Model.Organization.Website
+                                                <a target="_blank" href="@Model.Organization.Website.ToAbsoluteUrl("http://")" title="Organization website">
+                                                    @Model.Organization.Website.RemoveProtocol()
                                                 </a>
                                             </small>
                                         }
@@ -101,6 +100,7 @@
                         </div>
                     </div>
                     <div class="clear"></div>
+                    @Html.Partial("socialNetworkPartial", Model)
                 </div>
             </div>
         </div>
@@ -142,9 +142,9 @@
                 <form action="@Url.Action("EditAbout")" method="post">
                     <strong>Profile Summary</strong>
                     @Html.TextAreaFor(x => x.About, new {
-                       @class = "form-control about",
-                       placeholder = ModelMetadata.FromLambdaExpression(x => x.About, ViewData).Description
-                   })
+                   @class = "form-control about",
+                   placeholder = ModelMetadata.FromLambdaExpression(x => x.About, ViewData).Description
+               })
                     <div class="text-right">
                         <button type="submit" class="btn btn-info btn-xs"><i class="fa fa-save"></i>&nbsp;Save</button>
 

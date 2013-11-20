@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
+using DataAnnotationsExtensions;
 
 namespace ESRGC.DLLR.EARN.Domain.Model
 {
@@ -15,46 +16,37 @@ namespace ESRGC.DLLR.EARN.Domain.Model
 
     string _website, _facebook, _linkedIn, _twitter;
     [MaxLength(50)]
-    [Display(Description = "http://www.someorganization.org")]
+    [Display(Description = "www.someorganization.org")]
     [DataType(DataType.Url)]
-    [RegularExpression(@"^(http(?:s)?\:\/\/[a-zA-Z0-9\-]+(?:\.[a-zA-Z0-9\-]+)*\.[a-zA-Z]{2,6}(?:\/?|(?:\/[\w\-]+)*)(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$", 
-      ErrorMessage = "Invalid Url")]
+    [Url(UrlOptions.OptionalProtocol, ErrorMessage = "Invalid Url")]
     public string Website {
       get { return _website; }
-      set {
-        if (value == "") {
-          _website = "";
-        }
-        else {
-          if (!value.Contains("http://") && !value.Contains("https://")) {
-            _website = "http://" + _website;
-          }
-          else
-            _website = value;
-        }
-      }
+      set {_website = value; }
     }
 
-    [MaxLength(1000, ErrorMessage="Maximum 1000 characters")]
+    [MaxLength(1000, ErrorMessage = "Maximum 1000 characters")]
     [Display(Description = "Brief organizational description of up to 1000 characters to accompany your profile.")]
     [DataType(DataType.MultilineText)]
     [Required(ErrorMessage = "Please provide a brief statement of purpose")]
     public string Description { get; set; }
 
     [DataType(DataType.Url)]
+    [Url(UrlOptions.OptionalProtocol, ErrorMessage = "Invalid Url")]
     public string FacebookLink {
       get { return _facebook; }
-      set { _facebook = value == null ? "" : value.Replace("http://", "").Trim(); }
+      set { _facebook = value; }
     }
     [DataType(DataType.Url)]
+    [Url(UrlOptions.OptionalProtocol, ErrorMessage = "Invalid Url")]
     public string LinkedInLink {
       get { return _linkedIn; }
-      set { _linkedIn = value == null ? "" : value.Replace("http://", "").Trim(); }
+      set { _linkedIn = value; }
     }
     [DataType(DataType.Url)]
+    [Url(UrlOptions.OptionalProtocol, ErrorMessage = "Invalid Url")]
     public string TwitterLink {
       get { return _twitter; }
-      set { _twitter = value == null ? "" : value.Replace("http://", "").Trim(); }
+      set { _twitter = value; }
     }
     [Required(ErrorMessage = "Please enter your address")]
     [Display(Name = "Street address")]
@@ -81,5 +73,6 @@ namespace ESRGC.DLLR.EARN.Domain.Model
 
     [Display(Name = "Building")]
     public string Building { get; set; }
+    
   }
 }

@@ -40,8 +40,7 @@
                 <div class="clear"></div>
             </div>
             <div class="placeholder-panel">
-                <div class="post">
-                    @Html.Partial("socialNetworkPartial", Model)
+                <div class="post">                    
                     <div class="inline-container profile-area">
                         @Html.Partial("profileImagePartial", Model)
                         <div class="row profile-container">
@@ -56,8 +55,8 @@
                                         <br />
                                         @if (Model.Organization.Website != null) { 
                                             <small>
-                                                <a target="_blank" href="@Model.Organization.Website" title="Organization website">
-                                                    @Model.Organization.Website
+                                                <a target="_blank" href="@Model.Organization.Website.ToAbsoluteUrl("http://")" title="Organization website">
+                                                    @Model.Organization.Website.RemoveProtocol()
                                                 </a>
                                             </small>
                                         }
@@ -74,8 +73,9 @@
 
                             </div>
                         </div>
-                    </div>
+                    </div>                    
                     <div class="clear"></div>
+                    @Html.Partial("socialNetworkPartial", Model)
                 </div>
             </div>
         </div>
@@ -108,7 +108,7 @@
                 <strong>Profile Summary</strong>
                 <div class="post">
                     @if (!string.IsNullOrEmpty(Model.About)) { 
-                        <p >@Model.About</p>
+                        <p>@Model.About</p>
                     }
                     else {
                         <p>Sorry! We have not filled this out...</p>
@@ -116,16 +116,16 @@
                 </div>
             </div>
             <div class="placeholder-panel">
-                    <strong>Partnerships</strong>
-                    <div class="post">
-                        @if (Model.PartnershipDetails.Count() == 0) { 
-                            <p>This organization currently has no partnership.</p>
-                        }
-                        else {
-                            @Html.Action("ListPartnerships", "Partnership", new { Model.ProfileID })
-                        }
-                    </div>
+                <strong>Partnerships</strong>
+                <div class="post">
+                    @if (Model.PartnershipDetails.Count() == 0) { 
+                        <p>This organization currently has no partnership.</p>
+                    }
+                    else {
+                        @Html.Action("ListPartnerships", "Partnership", new { Model.ProfileID })
+                    }
                 </div>
+            </div>
         </div>
     </div>
     <div>
@@ -140,7 +140,7 @@
                     
                 </div>
                 <div class="tab-pane" id="tab2">*@
-                
+
                 @*</div>*@
                 @*</div>*@
             </div>

@@ -47,19 +47,21 @@
                                     <small>@Model.Category.Name</small>*@
                                             <br />
                                             <small>
-                                                <a target="_blank" href="@Model.Organization.Website" title="Organization website">@Model.Organization.Website</a>
+                                                <a target="_blank" href="@Model.Organization.Website.ToAbsoluteUrl("http://")" title="Organization website">
+                                                    @Model.Organization.Website.RemoveProtocol()
+                                                </a>
                                             </small>
                                         </h4>
                                         <ul class="list-inline list-unstyled">
                                             <li></li>
                                             @if (Model.Organization.FacebookLink != "") { 
-                                                <li><a target="_blank" href="http://@Model.Organization.FacebookLink" title="Facebook link"><i class="fa fa-lg fa-facebook"></i></a></li>
+                                                <li><a target="_blank" href="@Model.Organization.FacebookLink.ToAbsoluteUrl("http://")" title="Facebook link"><i class="fa fa-lg fa-facebook"></i></a></li>
                                             }
                                             @if (Model.Organization.TwitterLink != "") { 
-                                                <li><a target="_blank" href="http://@Model.Organization.TwitterLink" title="Twitter link"><i class="fa fa-lg fa-twitter"></i></a></li>
+                                                <li><a target="_blank" href="@Model.Organization.TwitterLink.ToAbsoluteUrl("http://")" title="Twitter link"><i class="fa fa-lg fa-twitter"></i></a></li>
                                             }
                                             @if (Model.Organization.LinkedInLink != "") { 
-                                                <li><a target="_blank" href="http://@Model.Organization.LinkedInLink" title="LinkedIn link"><i class="fa fa-lg fa-linkedin"></i></a></li>
+                                                <li><a target="_blank" href="@Model.Organization.LinkedInLink.ToAbsoluteUrl("http://")" title="LinkedIn link"><i class="fa fa-lg fa-linkedin"></i></a></li>
                                             }
                                         </ul>
 
