@@ -129,8 +129,10 @@ and/or view this user’s Organizational Profile for more information.",
             return false;
         })
         .ToList();
-      deleteNotes.ForEach(x => _workUnit.NotificationRepository.DeleteEntity(x));
-      _workUnit.saveChanges();
+      if (ModelState.IsValid) {
+        deleteNotes.ForEach(x => _workUnit.NotificationRepository.DeleteEntity(x));
+        _workUnit.saveChanges();
+      }
       return PartialView(notifcations);
     }
     [VerifyAccount]
@@ -151,6 +153,8 @@ and/or view this user’s Organizational Profile for more information.",
       _workUnit.saveChanges();
       return returnToUrl(Request.UrlReferrer.LocalPath, Url.Action("Detail", "Profile"));
     }
+
+    [VerifyAccount]
     public ActionResult ViewNotification(int notificationID) {
       var notification = _workUnit.NotificationRepository.GetEntityByID(notificationID);
       ActionResult result = null;
@@ -168,11 +172,13 @@ and/or view this user’s Organizational Profile for more information.",
           break;
       }
       //mark all as read
-      notification.Account.Notifications.ToList().ForEach(x => {
-        notification.IsRead = true;
-        _workUnit.NotificationRepository.UpdateEntity(x);
-      });
-      _workUnit.saveChanges();
+      if (ModelState.IsValid) {
+        notification.Account.Notifications.ToList().ForEach(x => {
+          notification.IsRead = true;
+          _workUnit.NotificationRepository.UpdateEntity(x);
+        });
+        _workUnit.saveChanges();
+      }
       if (result == null)
         return RedirectToAction("index", "home");
 
