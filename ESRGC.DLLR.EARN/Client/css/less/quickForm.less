@@ -35,27 +35,27 @@
         }
     }
 
+    .form-input {
+        input:first-of-type {
+            /*margin-bottom: -1px;*/
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            border-bottom: none;
+        }
 
+        input:not(:first-of-type):not(:last-of-type) {
+            border-radius: 0;
+            border-top: none;
+            border-bottom: none;
+            margin: 5px 0;
+        }
 
-    input:first-of-type {
-        /*margin-bottom: -1px;*/
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
-        border-bottom: none;
-    }
-
-    input:not(:first-of-type):not(:last-of-type) {
-        border-radius: 0;
-        border-top: none;
-        border-bottom: none;
-        margin: 5px 0;
-    }
-
-    input:last-of-type {
-        margin-bottom: 5px;
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-        border-top: none;
+        input:last-of-type {
+            margin-bottom: 5px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            border-top: none;
+        }
     }
 
     > p {
