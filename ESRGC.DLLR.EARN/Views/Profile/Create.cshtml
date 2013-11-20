@@ -149,9 +149,9 @@
                                 <label class="control-label col-sm-2" for="Organization.Website">Website</label>
                                 <div class="col-sm-6">
                                     @Html.TextBoxFor(x => x.Organization.Website, new {
-                                   @class = "form-control input-sm",
-                                   placeholder = ModelMetadata.FromLambdaExpression(x => x.Organization.Website, ViewData).Description
-                               }
+                                       @class = "form-control input-sm",
+                                       placeholder = ModelMetadata.FromLambdaExpression(x => x.Organization.Website, ViewData).Description
+                                   }
                                     )
                                     <div class="help-block">@Html.ValidationMessageFor(x => x.Organization.Website)</div>
                                 </div>

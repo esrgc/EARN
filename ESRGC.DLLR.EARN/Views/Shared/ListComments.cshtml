@@ -9,7 +9,7 @@
     var commentCount = ViewBag.commentCount as int? ?? 0;
     var remain = commentCount - comments.Count();
     var nextCount = remain >= 10 ? 10 : remain;
-        
+
     var loadMoreUrl = ViewBag.loadMoreUrl as string;
 }
 <h4><i class="fa fa-comments"></i>&nbsp;Comments <small>(@commentCount)</small></h4>
@@ -19,27 +19,30 @@
     </div>
 }
 @foreach (var i in comments) {        
-    <form action="@Url.Action("DeleteComment", "Communication")" method="post">
-        <input type="hidden" value="@i.CommentID" name="commentID" />
-        <input type="hidden" value="@returnUrl" name="returnUrl" />
-        <section class="transparent-placeholder-panel" id="comment-@i.AuthorID-@i.Created">
-            <div class="post">
-                <h5>
-                    <i class="fa fa-comment"></i>
-                   <a href="@Url.Action("ViewProfile", "Profile", new { i.Author.ProfileID, returnUrl = loadMoreUrl })">@i.Author.Organization.Name</a> <small>says</small>
-                    <small class="pull-right">@Html.TimeSpan(i.Created)</small>
-                </h5>
-                <p class="">
-                    @i.Content
-                </p>
-                @if (i.AuthorID == currentProfile.ProfileID) { 
+    
+    <section class="transparent-placeholder-panel" id="comment-@i.AuthorID-@i.Created">
+        <div class="post">
+            <h5>
+                <i class="fa fa-comment"></i>
+                <a href="@Url.Action("ViewProfile", "Profile", new { i.Author.ProfileID, returnUrl = loadMoreUrl })">@i.Author.Organization.Name</a> <small>says</small>
+                <small class="pull-right">@Html.TimeSpan(i.Created)</small>
+            </h5>
+            <p class="">
+                @i.Content
+            </p>
+            @if (i.AuthorID == currentProfile.ProfileID) { 
+                <form action="@Url.Action("DeleteComment", "Communication")" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" value="@i.CommentID" name="commentID" />
+                    <input type="hidden" value="@returnUrl" name="returnUrl" />
                     <div class="btn-group pull-right">
                         <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>&nbsp;Delete</button>
                     </div>
                     <div class="clear"></div>
-                }
+                </form>
+            }
 
-            </div>
-        </section>
-    </form>
+        </div>
+    </section>
+   
 }

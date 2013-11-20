@@ -9,7 +9,7 @@ using ESRGC.DLLR.EARN.Filters;
 
 namespace ESRGC.DLLR.EARN.Controllers
 {
-  [Authorize]
+  [Authorize]  
   public class DocumentController : BaseController
   {
     public DocumentController(IWorkUnit workUnit) : base(workUnit) { }
@@ -21,6 +21,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       return PartialView(partnership);
     }
     [HttpPost]
+    [ValidateAntiForgeryToken]
     [VerifyProfile]
     [VerifyProfilePartnership]
     [SendNotification]
@@ -78,6 +79,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     }
 
     [HttpPost]
+    [ValidateAntiForgeryToken]
     [VerifyProfilePartnership]
     [SendNotification]
     public ActionResult Delete(int partnershipID, int documentID, string returnUrl) {

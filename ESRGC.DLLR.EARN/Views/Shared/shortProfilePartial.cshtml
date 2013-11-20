@@ -33,7 +33,9 @@
                                     <small>@Model.Category.Name</small>*@
                                     <br />
                                     <small>
-                                        <a target="_blank" href="http://@Model.Organization.Website" title="Organization website">@Model.Organization.Website</a>
+                                        <a target="_blank" href="@Model.Organization.Website.ToAbsoluteUrl("http://")" title="Organization website">
+                                            @Model.Organization.Website.RemoveProtocol()
+                                        </a>
                                     </small>
                                 </h4>
 
