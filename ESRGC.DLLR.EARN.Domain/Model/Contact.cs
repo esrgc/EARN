@@ -23,13 +23,16 @@ namespace ESRGC.DLLR.EARN.Domain.Model
 
     [Required(ErrorMessage = "Please enter first name")]
     [Display(Name = "First name *")]
+    [MaxLength(100, ErrorMessage = "Maximum 100 characters")]
     public string FirstName { get; set; }
 
     [Display(Name = "Middle init.")]
+    [MaxLength(100, ErrorMessage = "Maximum 100 characters")]
     public string Middle { get; set; }
 
     [Required(ErrorMessage = "Please enter last name")]
     [Display(Name = "Last name *")]
+    [MaxLength(100, ErrorMessage = "Maximum 100 characters")]
     public string LastName { get; set; }
 
     [Display(Name = "Extension")]

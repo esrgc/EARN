@@ -234,7 +234,10 @@ namespace ESRGC.DLLR.EARN.Helpers
       return url;
     }
     public static string RemoveProtocol(this string url) {
-      return url.Replace("http://", "").Replace("https://", "");
+      if (!string.IsNullOrEmpty(url))
+        return url.Replace("http://", "").Replace("https://", "");
+      else
+        return "";
     }
 
     /// <summary>
@@ -255,7 +258,7 @@ namespace ESRGC.DLLR.EARN.Helpers
     //    return new GeoTag() { };
     //  }
     //}
-    
+
     //public static MvcHtmlString DisplayStreetAddr(
     //    this HtmlHelper helper,
     //    Contact contact

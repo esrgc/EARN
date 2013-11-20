@@ -149,6 +149,10 @@
     <Compile Include="Migrations\201311191805047_message.Designer.cs">
       <DependentUpon>201311191805047_message.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201311201530505_fieldLength.cs" />
+    <Compile Include="Migrations\201311201530505_fieldLength.Designer.cs">
+      <DependentUpon>201311201530505_fieldLength.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\Announcement.cs" />
@@ -237,6 +241,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201311191805047_message.resx">
       <DependentUpon>201311191805047_message.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201311201530505_fieldLength.resx">
+      <DependentUpon>201311201530505_fieldLength.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -12,6 +12,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public int OrganizationID { get; set; }
     [Required(ErrorMessage = "Please enter your organization name!")]
     [Display(Name = "Name")]
+    [MaxLength(100, ErrorMessage="Maximum 100 characters")]
     public string Name { get; set; }
 
     string _website, _facebook, _linkedIn, _twitter;
@@ -50,6 +51,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     }
     [Required(ErrorMessage = "Please enter your address")]
     [Display(Name = "Street address")]
+    [MaxLength(250, ErrorMessage = "Maximum 100 characters")]
     public string StreetAddress { get; set; }
 
     [Display(Name = "Address 2")]
