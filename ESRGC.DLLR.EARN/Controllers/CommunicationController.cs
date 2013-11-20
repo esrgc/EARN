@@ -184,12 +184,14 @@ and/or view this user’s Organizational Profile for more information.",
 
       return result;
     }
+
     [VerifyAccount]
     public ContentResult RequestCount() {
       var requests = CurrentAccount.ReceivedRequests
         .Where(x => x.Status.ToLower() == "new").ToList();
       return Content(requests.Count().ToString());
     }
+
     [VerifyAccount]
     public ActionResult Requests() {
       var requests = CurrentAccount
@@ -197,6 +199,7 @@ and/or view this user’s Organizational Profile for more information.",
         .ToList();
       return View(requests);
     }
+
     [SendNotification]
     public ActionResult AcceptRequest(int requestID) {
       var request = _workUnit.RequestRepository.GetEntityByID(requestID);
@@ -298,6 +301,7 @@ and/or view this user’s Organizational Profile for more information.",
     [HttpPost]
     [VerifyProfile]
     [VerifyProfilePartnership]
+    [ValidateAntiForgeryToken]
     [SendNotification]
     public ActionResult PostComment(int partnershipID, string comment, string returnUrl) {
       var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
@@ -335,7 +339,8 @@ and/or view this user’s Organizational Profile for more information.",
       }
     }
     [HttpPost]
-    [VerifyProfile]
+    [VerifyProfile]   
+    [ValidateAntiForgeryToken]
     public ActionResult DeleteComment(int commentID, string returnUrl) {
       try {
         var comment = _workUnit.CommentRepository.GetEntityByID(commentID);

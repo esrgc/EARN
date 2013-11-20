@@ -32,6 +32,7 @@
             </p>
             @if (i.AuthorID == currentProfile.ProfileID) { 
                 <form action="@Url.Action("DeleteComment", "Communication")" method="post">
+                    @Html.AntiForgeryToken()
                     <input type="hidden" value="@i.CommentID" name="commentID" />
                     <input type="hidden" value="@returnUrl" name="returnUrl" />
                     <div class="btn-group pull-right">

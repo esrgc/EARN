@@ -19,6 +19,7 @@
             @if (currentProfile.ProfileID == i.ProfileID) { 
                 <div class="panel-action-right">
                     <form action="@Url.Action("Delete", "Document")" method="post">
+                        @Html.AntiForgeryToken()
                         <input type="hidden" name="partnershipID" value="@Model.PartnershipID"/>
                         <input type="hidden" name="documentID" value="@i.DocumentID"/>
                         <input type="hidden" name="returnUrl" value="@returnUrl" />
