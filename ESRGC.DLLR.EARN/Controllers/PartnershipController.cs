@@ -382,11 +382,9 @@ but should not be used to share proprietary or sensitive content.",
     public ActionResult MyPartnerships() {
       return View();
     }
-    [AllowNonProfile]
     public ActionResult InvalidAccessToPartnership() {
       return View();
     }
-    [AllowNonProfile]
     public ActionResult InvalidPartnershipRequest() {
       return View();
     }
