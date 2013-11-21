@@ -165,6 +165,7 @@
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\TagController.cs" />
+    <Compile Include="Filters\AllowNonProfileAttribute.cs" />
     <Compile Include="Filters\CanEditPartnershipAttribute.cs" />
     <Compile Include="Filters\CheckCookieAttribute.cs" />
     <Compile Include="Filters\HasReturnUrlAttribute.cs" />
@@ -371,6 +372,9 @@
     <Content Include="Client\jsLib\bootstrap-3.0.2\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Client\jsLib\bootstrap-3.0.2\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Client\jsLib\bootstrap-3.0.2\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Client\jsLib\jqueryValidate\jquery.validate.unobtrusive.min.js.map">
+      <DependentUpon>jquery.validate.unobtrusive.js</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\FTP.pubxml" />
     <None Include="Properties\PublishProfiles\P drive.pubxml" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />

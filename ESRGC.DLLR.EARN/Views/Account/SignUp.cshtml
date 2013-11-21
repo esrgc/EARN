@@ -3,18 +3,19 @@
     ViewBag.Title = "Sign Up";
     ViewBag.Header = "Sign up";
 }
+
 @section scripts {
     @Scripts.Render("~/bundles/jqueryval-unobtrusive")
-    @*<script type="text/ecmascript">
+    <script type="text/javascript">
         var startup = function () {
             $(document).on('click', '#agreeTDChbox', function () {
                 if ($(this).is(':checked'))
-                    $('input[type="submit"]').removeAttr('disabled');
+                    $('#proceedBtn').removeAttr('disabled');
                 else
-                    $('input[type="submit"]').attr('disabled', 'disabled');
+                    $('#proceedBtn').attr('disabled', 'disabled');
             });
         };
-    </script>*@
+    </script>
 }
 
 @section header {
@@ -31,7 +32,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-sm-10 col-sm-offset-1">
+        <div class="col-md-10 col-md-offset-1">
             <div class="window-panel">
                 <div class="window-panel-title">
                     <strong><i class="fa fa-user"></i>&nbsp;New member</strong>
@@ -40,8 +41,16 @@
                     @using (Html.BeginForm("SignUp", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
                         @Html.ValidationSummary(true)
                         <div class="form-group">
-                            <label for="Email" class="col-sm-3 control-label">Email</label>
-                            <div class="col-sm-6">
+                            <div class="col-md-10 col-md-offset-1">
+                                <p class="text-info">
+                                    Please fill in the form below to sign up. Note that 
+                                    you must accept our terms and conditions before proccedding.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Email" class="col-md-3 control-label">Email</label>
+                            <div class="col-md-6">
                                 @Html.TextBoxFor(x => x.Email, new { @class = "form-control", placeholder = "Email", type = "email" })
                                 <span class="label label-default">Required</span>
                                 <span class="help-block">
@@ -50,42 +59,42 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="Password" class="col-sm-3 control-label">Password</label>
-                            <div class="col-sm-6">
+                            <label for="Password" class="col-md-3 control-label">Password</label>
+                            <div class="col-md-6">
                                 @Html.PasswordFor(x => x.Password, new { @class = "form-control", placeholder = "Password" })
                                 <span class="label label-default">Required</span>
                                 <span class="help-block">@Html.ValidationMessageFor(x => x.Password)</span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="ConfirmPassword" class="col-sm-3 control-label">Confirm password</label>
-                            <div class="col-sm-6">
+                            <label for="ConfirmPassword" class="col-md-3 control-label">Confirm password</label>
+                            <div class="col-md-6">
                                 @Html.PasswordFor(x => x.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm your password" })
                                 <span class="label label-default">Required</span>
                                 <span class="help-block">@Html.ValidationMessageFor(x => x.ConfirmPassword)</span>
                             </div>
                         </div>
-                        @*<div class="form-group">
-                            <div class="alert alert-info col-sm-10 col-sm-offset-1">
-                                <h4>Terms and Conditions</h4>
-                                <p>
-                                    By clicking “Sign up”, you understand that the information you provide will 
-                                    be in the public domain and will be accessible to other EARN MD CONNECT users. 
-                                    The information you provide will only be used by the Maryland Department of Labor, Licensing, and Regulation
-                                    to facilitate the EARN program. The information within the EARN MD CONNECT system will not be distributed
-                                    or shared for any purpose other than facilitating the EARN program.
-                                </p>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="agreed" id="agreeTDChbox" />
-                                        <strong>I agree to the terms and conditions for "EARN MD CONNECT"</strong>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>*@
                         <div class="form-group">
-                            <div class="col-sm-6 col-sm-offset-3">
-                                <input class="btn btn-primary submit-button" type="submit" value="Sign up" data-loading-text="Signing up..." />
+                            <div class="col-md-10 col-md-offset-1">                                
+                                <hr />
+                                <div class="term-condition-container">
+                                    <h4 class="text-center">Terms and Conditions</h4>
+                                    @Html.Partial("termTextPartial")
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="agreed" id="agreeTDChbox" />
+                                            <strong>I agree to the terms and conditions for "EARN MD CONNECT"</strong>
+                                        </label>
+                                    </div>
+                                </div>
+                                <hr />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-3">
+                                <button class="btn btn-primary" id="proceedBtn" disabled type="submit">
+                                    Sign up
+                                </button>
                                 <a class="btn btn-default" href="@Url.Action("Index", "Home")">Cancel</a>
                                 <span><a href="@Url.Action("SignIn")">Already a member? Sign In</a></span>
                             </div>

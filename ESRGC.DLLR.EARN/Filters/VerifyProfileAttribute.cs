@@ -18,6 +18,11 @@ namespace ESRGC.DLLR.EARN.Filters
   public class VerifyProfileAttribute : ActionFilterAttribute
   {
     public override void OnActionExecuting(ActionExecutingContext filterContext) {
+      if (filterContext.ActionDescriptor.GetCustomAttributes(typeof(AllowNonProfileAttribute),false).Any()) {
+        // The controller action is decorated with the [AllowNonProfileAttribute]
+        // custom attribute => don't do anything.
+        return;
+      }
       var requestEmail = filterContext.HttpContext.User.Identity.Name;
       var workUnit = (filterContext.Controller as BaseController).WorkUnit;
       try {

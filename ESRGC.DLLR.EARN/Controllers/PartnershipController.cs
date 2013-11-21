@@ -10,13 +10,14 @@ using PagedList;
 namespace ESRGC.DLLR.EARN.Controllers
 {
   [Authorize]
+  [VerifyProfile]
   public class PartnershipController : BaseController
   {
     public PartnershipController(IWorkUnit workUnit) : base(workUnit) { }
     //
     // GET: /Partnership/
     //for search
-    [VerifyProfile]
+
     public ActionResult Index(int? page, int? size) {
       var partnerships = _workUnit
         .PartnershipRepository
@@ -32,7 +33,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     /// </summary>
     /// <param name="partnershipID"></param>
     /// <returns></returns>
-    [VerifyProfile]
+
     [VerifyProfilePartnership]
     public ActionResult Detail(int partnershipID, string returnUrl, int? size) {
       ViewBag.returnUrl = returnUrl;
@@ -56,7 +57,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       ViewBag.loadMoreUrl = loadMoreUrl;
       return View(partnership);
     }
-    [VerifyProfile]
+
     public ActionResult View(int partnershipID, string returnUrl) {
       ViewBag.returnUrl = returnUrl;
       var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
@@ -68,23 +69,23 @@ namespace ESRGC.DLLR.EARN.Controllers
     /// </summary>
     /// <param name="profileID"></param>
     /// <returns></returns>
+
+    [HasReturnUrl]
     public ActionResult ListPartnerships(int profileID, string returnUrl) {
       var profile = _workUnit.ProfileRepository.GetEntityByID(profileID);
       var partnerships = profile.PartnershipDetails.Select(x => x.Partnership).ToList();
-      ViewBag.currentProfile = CurrentAccount.Profile;
-      ViewBag.returnUrl = returnUrl;
       return PartialView(partnerships);
     }
     /// <summary>
     /// create a new partnership
     /// </summary>
     /// <returns></returns>
-    [VerifyProfile]
+
     public ActionResult Create() {
       return View();
     }
     [HttpPost]
-    [VerifyProfile]
+
     [SendNotification]
     public ActionResult Create(Partnership partnership) {
       if (ModelState.IsValid) {
@@ -130,7 +131,7 @@ but should not be used to share proprietary or sensitive content.",
     /// </summary>
     /// <param name="partnershipID"></param>
     /// <returns></returns>
-    [VerifyProfile]
+
     [CanEditPartnership]
     [HasReturnUrl]
     public ActionResult Edit(int partnershipID, string returnUrl) {
@@ -172,7 +173,7 @@ but should not be used to share proprietary or sensitive content.",
     /// </summary>
     /// <param name="partnershipID"></param>
     /// <returns></returns>
-    [VerifyProfile]
+
     [CanEditPartnership]
     [HasReturnUrl]
     public ActionResult Delete(int partnershipID, string returnUrl) {
@@ -180,7 +181,7 @@ but should not be used to share proprietary or sensitive content.",
       return View(partnership);
     }
     [HttpPost]
-    [VerifyProfile]
+
     [CanEditPartnership]
     [SendNotification]
     [ActionName("Delete")]
@@ -230,7 +231,7 @@ but should not be used to share proprietary or sensitive content.",
       }
 
     }
-    [VerifyProfile]
+
     [VerifyProfilePartnership]
     public ActionResult LeavePartnership(int partnershipID) {
       var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
@@ -239,7 +240,7 @@ but should not be used to share proprietary or sensitive content.",
     }
 
     [HttpPost]
-    [VerifyProfile]
+
     [VerifyProfilePartnership]
     [ValidateAntiForgeryToken]
     [SendNotification]
@@ -283,7 +284,7 @@ but should not be used to share proprietary or sensitive content.",
       return returnToUrl(returnUrl, Url.Action("Detail", new { partnershipID }));
     }
 
-    [VerifyProfile]
+
     [CanEditPartnership]
     [HasReturnUrl]
     public ActionResult RemovePartner(int partnershipID, int profileID, string returnUrl) {
@@ -298,7 +299,6 @@ but should not be used to share proprietary or sensitive content.",
     }
 
     [HttpPost]
-    [VerifyProfile]
     [CanEditPartnership]
     [ValidateAntiForgeryToken]
     [SendNotification]
@@ -349,7 +349,7 @@ but should not be used to share proprietary or sensitive content.",
 
       return returnToUrl(returnUrl, Url.Action("Detail", new { partnershipID }));
     }
-    [VerifyProfile]
+
     [NewToPartnership]
     [HasReturnUrl]
     public ActionResult ContactAdmin(int partnershipID, string returnUrl) {
@@ -358,7 +358,6 @@ but should not be used to share proprietary or sensitive content.",
     }
     [HttpPost]
     [ValidateAntiForgeryToken]
-    [VerifyProfile]
     [NewToPartnership]
     [SendMessaage]
     public ActionResult ContactAdmin(int partnershipID, string message, string returnUrl) {
@@ -376,10 +375,10 @@ but should not be used to share proprietary or sensitive content.",
       _workUnit.MessageRepository.InsertEntity(m);
       _workUnit.saveChanges();
       updateTempMessage("Your message has been sent to the Administrator. A copy of this message was also emailed to you via"
-        + " your contact email ("+ currentProfile.Contact.Email +").");
+        + " your contact email (" + currentProfile.Contact.Email + ").");
       return RedirectToAction("View", new { partnershipID, returnUrl });
     }
-    [VerifyProfile]
+
     public ActionResult MyPartnerships() {
       return View();
     }

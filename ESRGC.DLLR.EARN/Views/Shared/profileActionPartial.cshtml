@@ -19,7 +19,9 @@
             else {
                 <li><a href="@Url.Action("RemoveConnection", "Connection", new { Model.ProfileID, returnUrl })">Remove connection</a></li>
             }
-            <li><a href="@Url.Action("InviteToPartnership", "Communication", new { Model.ProfileID, returnUrl })">Invite to partnership</a></li>
+            @if (currentProfile.hasOwnedPartnerships()) { 
+                <li><a href="@Url.Action("InviteToPartnership", "Communication", new { Model.ProfileID, returnUrl })">Invite to partnership</a></li>
+            }
             @if (partnership != null) { 
                 <li><a href="@Url.Action("RemovePartner", "Partnership", new { partnership.PartnershipID, Model.ProfileID, returnUrl })">Remove from partnership</a></li>
             }

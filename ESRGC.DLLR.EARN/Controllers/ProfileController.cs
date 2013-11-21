@@ -15,6 +15,7 @@ namespace ESRGC.DLLR.EARN.Controllers
 {
   [Authorize]
   [VerifyAccount]
+  [VerifyProfile]
   public class ProfileController : BaseController
   {
     public ProfileController(IWorkUnit workUnit)
@@ -31,7 +32,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       }
       return new EmptyResult();
     }
-    [VerifyProfile]
+    
     public ActionResult Detail() {
       var profile = CurrentAccount.Profile;
       //count tags
@@ -62,7 +63,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       ViewBag.currentProfile = CurrentAccount.Profile;
       return View(CurrentAccount.Profile);
     }
-
+    [AllowNonProfile]
     public ActionResult Create() {
       //if (CurrentAccount.Profile != null) {
       //  updateTempDataMessage("Profile already created!");
@@ -75,6 +76,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     }
 
     [HttpPost]
+    [AllowNonProfile]
     public ActionResult Create(CreateProfile profile) {
       if (CurrentAccount.Profile != null) {
         updateTempMessage("Profile already created!");
@@ -112,20 +114,19 @@ namespace ESRGC.DLLR.EARN.Controllers
       return View(profile);
     }
     //temporary removed from the form
-    public PartialViewResult SubcategoryDropdown(int userGroupID) {
-      var subcats = _workUnit
-        .CategoryRepository
-        .Entities
-        .Where(x => x.UserGroupID == userGroupID || x.UserGroupID == null)
-        .ToList();
+    //public PartialViewResult SubcategoryDropdown(int userGroupID) {
+    //  var subcats = _workUnit
+    //    .CategoryRepository
+    //    .Entities
+    //    .Where(x => x.UserGroupID == userGroupID || x.UserGroupID == null)
+    //    .ToList();
 
-      return PartialView(subcats);
-    }
+    //  return PartialView(subcats);
+    //}
     //public profile view
+    [HasReturnUrl]
     public ActionResult ViewProfile(int profileID, string returnUrl) {
-      var profile = _workUnit.ProfileRepository.GetEntityByID(profileID);
-      ViewBag.returnUrl = returnUrl;
-      ViewBag.currentProfile = CurrentAccount.Profile;
+      var profile = _workUnit.ProfileRepository.GetEntityByID(profileID);      
       return View(profile);
     }
 
@@ -143,7 +144,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       }
       return RedirectToAction("Detail");
     }
-    [VerifyProfile]
+    
     public ActionResult UploadImage() {
       var profile = CurrentAccount.Profile;
       if (profile == null)
