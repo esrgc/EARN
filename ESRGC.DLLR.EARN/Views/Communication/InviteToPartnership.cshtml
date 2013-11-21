@@ -36,9 +36,14 @@
                 </div>
                 <div class="window-panel-content">
                     @if (partnerships.Count() == 0) { 
-                        <p>You have not created any partnership. Please create a partnership first!</p>
+                        <p>
+                            Sorry, only Partnership Profile Administrators can invite other users 
+                            to join a partnership. For more information on Partnership Profiles, 
+                            please read the explanation under the “Create new partnership” 
+                            option under the “Partnerships” tab above.
+                        </p>
                     }
-                    else{
+                    else {
                         <p>Inviting "@Model.Organization.Name" to which partnership?</p>
                         <div class="alert alert-info">
                             <p>

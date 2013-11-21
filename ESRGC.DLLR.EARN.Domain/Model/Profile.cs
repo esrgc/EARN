@@ -92,6 +92,12 @@ namespace ESRGC.DLLR.EARN.Domain.Model
         return null;
       }
     }
+    public bool hasOwnedPartnerships() {
+      var ownPartnerships = getOwnedPartnerships();
+      if (ownPartnerships == null)
+        return false;
+      return ownPartnerships.Count() > 0;
+    }
     public bool isNewToPartnership(Partnership partnership) {
       return isNewToPartnership(partnership.PartnershipID);
     }

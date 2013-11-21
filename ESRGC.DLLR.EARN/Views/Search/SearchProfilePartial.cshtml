@@ -8,6 +8,7 @@
     var currentProfile = ViewBag.currentProfile as Profile ?? new Profile();
     var returnUrl = Url.GenerateLinkFromFilters("Basic", filters);
     ViewBag.returnUrl = returnUrl;
+    var isOwnProfile = Model.ProfileID == currentProfile.ProfileID;
 }
 @if (currentProfile.ProfileID != Model.ProfileID) {
     <section id="result-@Model.ProfileID"  class="profile-section"
@@ -36,11 +37,21 @@
                                 <div class="col-sm-8">
                                     <div class="">
                                         <h4>
-                                            <span>
-                                                <a title="View this profile" href="@Url.Action("ViewProfile", "Profile", new { Model.ProfileID, returnUrl })">
-                                                    @Model.Organization.Name
-                                                </a>
-                                            </span>
+                                            @if (isOwnProfile) { 
+                                                <span>
+                                                    <a title="Your organization profile" 
+                                                        href="@Url.Action("Detail", "Profile", new { Model.ProfileID, returnUrl })">
+                                                        @Model.Organization.Name
+                                                    </a>
+                                                </span>
+                                            }
+                                            else { 
+                                                <span>
+                                                    <a title="View this profile" href="@Url.Action("ViewProfile", "Profile", new { Model.ProfileID, returnUrl })">
+                                                        @Model.Organization.Name
+                                                    </a>
+                                                </span>
+                                            }
                                             <br />
                                             <small>@Model.UserGroup.Name</small>
                                             @*-

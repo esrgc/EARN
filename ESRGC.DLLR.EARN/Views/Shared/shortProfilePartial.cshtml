@@ -6,8 +6,9 @@
     var geoTag = Model.getGeoTag();
     var location = geoTag == null ? "" : geoTag.Geometry.WellKnownValue.WellKnownText;
     //var currentAccount = ViewBag.currentAccount as Account ?? new Account();
-    //var currentProfile = currentAccount.Profile ?? new Profile();
+    var currentProfile = ViewBag.currentProfile as Profile ?? new Profile();
     var returnUrl = ViewBag.returnUrl as string ?? "";
+    var isOwnProfile = currentProfile.ProfileID == Model.ProfileID;
 }
 <section id="profile-@Model.ProfileID"  class="profile-section"
     data-location="@location" 
@@ -22,11 +23,20 @@
                         <div class="col-sm-8">
                             <div class="">
                                 <h4>
-                                    <span>
-                                        <a title="View this profile" href="@Url.Action("ViewProfile", "Profile", new { Model.ProfileID, returnUrl })">
-                                            @Model.Organization.Name
-                                        </a>
-                                    </span>
+                                    @if (isOwnProfile) {
+                                        <span>
+                                            <a title="Your organization profile" href="@Url.Action("Detail", "Profile", new { Model.ProfileID, returnUrl })">
+                                                @Model.Organization.Name
+                                            </a>
+                                        </span>
+                                    }
+                                    else { 
+                                        <span>
+                                            <a title="View this profile" href="@Url.Action("ViewProfile", "Profile", new { Model.ProfileID, returnUrl })">
+                                                @Model.Organization.Name
+                                            </a>
+                                        </span>
+                                    }
                                     <br />
                                     <small>@Model.UserGroup.Name</small>
                                     @*-
