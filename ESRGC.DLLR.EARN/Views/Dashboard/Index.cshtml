@@ -1,0 +1,65 @@
+﻿@model ESRGC.DLLR.EARN.Models.DashboardStatistic
+@{
+    ViewBag.Title = "Dashboard";
+    ViewBag.Header = "Dashboard";
+}
+
+@section header{
+    <div class="container">
+        <header class="page-header">
+            <h3>@ViewBag.Header <i class="fa fa-dashboard"></i></h3>
+            @*<ul class="breadcrumb">
+                <li><a href="@Url.Action("index", "Home")">Home</a></li>
+                <li class="active">@ViewBag.Header</li>
+            </ul>*@
+        </header>
+    </div>
+}
+
+<div class="container">
+    <div class="row info-container">
+        <div class="col-md-12">
+            <div class="placeholder-panel">
+                <div class="post">
+                    <div class="list-container">
+                        <ul class="list-unstyled">
+                            <li>Accounts <span class="pull-right">@Model.AccountTotal</span></li>
+                            <li>Profiles <span class="pull-right">@Model.ProfileTotal</span></li>
+                            <li>Contacts <span class="pull-right">@Model.ContactTotal</span></li>
+                            <li>Organizations <span class="pull-right">@Model.OrganizationTotal</span></li>
+                            <li>Partnerships <span class="pull-right">@Model.Partnerships.Count()</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row info-container">
+        <div class="col-md-6">
+            <div class="placeholder-panel">
+                <div class="">
+                    <ul class="list-group">
+                        @foreach (var profile in Model.Profiles) { 
+                            <li class="list-group-item">
+                                @Html.Partial("miniProfilePartial", profile)
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="placeholder-panel">
+                <div class="">
+                    <ul class="list-group">
+                        @foreach (var p in Model.Partnerships) {
+                            <li class="list-group-item">
+                                @Html.Partial("partnershipPartial", p)
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

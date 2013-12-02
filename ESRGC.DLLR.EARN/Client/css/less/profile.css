@@ -115,6 +115,7 @@
 .tag-list-holder {
   min-height: 100px;
 }
-.profile-info-container div.placeholder-panel {
+.profile-info-container div.placeholder-panel,
+.info-container div.placeholder-panel {
   margin-bottom: 10px;
 }

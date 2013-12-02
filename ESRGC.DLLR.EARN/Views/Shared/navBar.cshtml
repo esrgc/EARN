@@ -49,7 +49,7 @@
             }
 
             <ul class="nav navbar-nav navbar-right">
-                @if (Request.IsAuthenticated) {
+                @if (Request.IsAuthenticated) {                    
                     var noteCount = Html.Action("NotificationCount", "Communication"); 
                     <li>
                         <a href="#" data-toggle="popover" id="notifications" role="menuitem" data-trigger="click" rel="popover">
@@ -70,6 +70,7 @@
                                 </a>
                             </li>
                             <li><a href="@Url.Action("Settings", "Account")">Account settings</a></li>
+                            @Html.Action("NavLinks", "Dashboard")
                             <li><a href="@Url.Action("SignOut", "Account")">Sign out</a></li>
                         </ul>
                     </li>

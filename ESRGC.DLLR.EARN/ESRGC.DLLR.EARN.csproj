@@ -157,6 +157,7 @@
     <Compile Include="Controllers\CommunicationController.cs" />
     <Compile Include="Controllers\ConnectionController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\DocumentController.cs" />
     <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -165,11 +166,13 @@
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\TagController.cs" />
+    <Compile Include="Filters\AllowNonAdminAttribute.cs" />
     <Compile Include="Filters\AllowNonProfileAttribute.cs" />
     <Compile Include="Filters\CanEditPartnershipAttribute.cs" />
     <Compile Include="Filters\CheckCookieAttribute.cs" />
     <Compile Include="Filters\HasReturnUrlAttribute.cs" />
     <Compile Include="Filters\NewToPartnershipAttribute.cs" />
+    <Compile Include="Filters\RoleAuthorizeAttribute.cs" />
     <Compile Include="Filters\SendMessageAttribute.cs" />
     <Compile Include="Filters\SendNotificationAttribute.cs" />
     <Compile Include="Filters\SetGuestCookieAttribute.cs" />
@@ -186,6 +189,7 @@
     <Compile Include="Helpers\ViewDataHelper.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\DashboardModels.cs" />
     <Compile Include="Models\ProfileModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -428,6 +432,8 @@
     <Content Include="Views\Partnership\LeavePartnership.cshtml" />
     <Content Include="Views\Email\SendEmailMessage.html.cshtml" />
     <Content Include="Views\Partnership\ContactAdmin.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Dashboard\NavLinks.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
