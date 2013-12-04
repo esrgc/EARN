@@ -140,7 +140,7 @@ namespace ESRGC.DLLR.EARN.Models
         [Display(Name="Accept notification")]
         public bool AcceptNotification { get; set; }
     }
-
+    
     public class SecurityQuestionEditModel
     {
         public int AccountID { get; set; }
@@ -157,5 +157,15 @@ namespace ESRGC.DLLR.EARN.Models
         [Display(Name = "Confirm secret answer")]
         [Compare("SecurityAnswer", ErrorMessage = "The answer and confirmation answer do not match.")]
         public string ConfirmSecurityAnswer { get; set; }
+    }
+    public class AnonymousMessageModel {
+      [Required]
+      [Display(Name = "Your name")]
+      public string Name { get; set; }
+      [Required]
+      [DataType(DataType.EmailAddress)]
+      [Display(Name = "Email address")]
+      [EmailValidation(ErrorMessage = "Invalid email address")]
+      public string EmailAddress { get; set; }
     }
 }

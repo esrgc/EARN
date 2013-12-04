@@ -173,6 +173,7 @@
     <Compile Include="Filters\HasReturnUrlAttribute.cs" />
     <Compile Include="Filters\NewToPartnershipAttribute.cs" />
     <Compile Include="Filters\RoleAuthorizeAttribute.cs" />
+    <Compile Include="Filters\SendCustomerMessageAttribute.cs" />
     <Compile Include="Filters\SendMessageAttribute.cs" />
     <Compile Include="Filters\SendNotificationAttribute.cs" />
     <Compile Include="Filters\SetGuestCookieAttribute.cs" />
@@ -434,6 +435,10 @@
     <Content Include="Views\Partnership\ContactAdmin.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Dashboard\NavLinks.cshtml" />
+    <Content Include="Views\Email\SendCustomerEmail.html.cshtml" />
+    <Content Include="Views\Communication\SendContactEarnEmail.cshtml" />
+    <Content Include="Views\Communication\SendFeedbackEmail.cshtml" />
+    <Content Include="Views\Communication\SendTechnicalReportEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

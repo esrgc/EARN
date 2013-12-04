@@ -313,7 +313,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       if (ModelState.IsValid) {
         var newEmail = model.NewEmail;
         if (newEmail.ToLower() == account.EmailAddress.ToLower()) {
-          ModelState.AddModelError("", "New email address must be different from the current email address. Please try again!");
+          ModelState.AddModelError("", "New email address must be different emailAddress the current email address. Please try again!");
           return View(model);
         }
 

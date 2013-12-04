@@ -1,0 +1,99 @@
+﻿@using ESRGC.DLLR.EARN.Domain.Model
+@model ESRGC.DLLR.EARN.Models.AnonymousMessageModel
+@{
+    ViewBag.Title = "Communication";
+    ViewBag.Header = "Feedback";
+}
+
+@section header{
+    <div class="container">
+        <header class="page-header">
+            <h3>@ViewBag.Header <i class="fa fa-envelope-o"></i></h3>
+            @*<ul class="breadcrumb">
+                <li><a href="@Url.Action("index", "Home")">Home</a></li>
+                <li class="active">@ViewBag.Header</li>
+            </ul>*@
+        </header>
+    </div>
+}
+@{
+    var currentProfile = ViewBag.profile as Profile;
+    var returnUrl = ViewBag.returnUrl as string ?? Url.Action("index", "Home");
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-2">
+            <div class="window-panel">
+                <div class="window-panel-title"><strong>Message</strong></div>
+                <div class="window-panel-content">
+                    <form class="form-horizontal" action="@Url.Action("SendCustomerEmail", "Communication", new { returnUrl })" method="post" role="form">
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            <div class="col-md-8 col-md-offset-2">
+                                <p class="text-info">
+                                    Please type us your message below.
+                                </p>
+                            </div>
+                        </div>
+                        @if (!Request.IsAuthenticated) { 
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="EmailAddress">Your email</label>
+                                <div class="col-md-8">
+                                    @Html.TextBoxFor(x => x.EmailAddress,
+                                    new {
+                                        type = "email",
+                                        @class = "form-control",
+                                        placeholder = "Please enter a valid email address"
+                                    })
+                                    <span class="label label-default">Required</span>
+                                    <div class="help-block">@Html.ValidationMessageFor(x => x.EmailAddress)</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="Name">Your name</label>
+                                <div class="col-md-8">
+                                    @Html.TextBoxFor(x => x.Name,
+                                    new {
+                                        @class = "form-control",
+                                        placeholder = "Your name"
+                                    })
+                                    <span class="label label-default">Required</span>
+                                    <div class="help-block">@Html.ValidationMessageFor(x => x.Name)</div>
+                                </div>
+                            </div>
+                        }
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="subject">Subject</label>
+                            <div class="col-md-8">
+                                @Html.TextBox("subject",
+                                "EARN MD CONNECT - Website Feedback",
+                                new {
+                                    @class = "form-control",
+                                    placeholder = "Type your message here"
+                                })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="message">Message</label>
+                            <div class="col-md-8">
+                                @Html.TextArea("message",
+                                "",
+                                new {
+                                    @class = "form-control",
+                                    placeholder = "Type your message here"
+                                })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-8 col-md-offset-2">
+                                <input class="btn btn-primary" value="Send" type="submit" />
+                                <a class="btn btn-default" href="@returnUrl">Cancel</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

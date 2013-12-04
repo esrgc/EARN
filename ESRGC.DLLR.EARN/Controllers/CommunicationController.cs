@@ -8,6 +8,8 @@ using ESRGC.DLLR.EARN.Domain.DAL.Abstract;
 using ESRGC.DLLR.EARN.Domain.Model;
 using ESRGC.DLLR.EARN.Filters;
 using PagedList;
+using ESRGC.DLLR.EARN.Helpers;
+using ESRGC.DLLR.EARN.Models;
 
 namespace ESRGC.DLLR.EARN.Controllers
 {
@@ -339,7 +341,7 @@ and/or view this user’s Organizational Profile for more information.",
       }
     }
     [HttpPost]
-    [VerifyProfile]   
+    [VerifyProfile]
     [ValidateAntiForgeryToken]
     public ActionResult DeleteComment(int commentID, string returnUrl) {
       try {
@@ -361,6 +363,68 @@ and/or view this user’s Organizational Profile for more information.",
         updateTempMessage("An error has occured while deleting your comment.");
         return RedirectToAction("Index", "Partnership");
       }
+    }
+    [VerifyProfile]
+    [HasReturnUrl]
+    public ActionResult SendContactEarnEmail(string returnUrl) {
+      return View();
+    }
+    [AllowAnonymous]
+    [HasReturnUrl]
+    public ActionResult SendFeedbackEmail(string returnUrl) {
+      var model = new AnonymousMessageModel();
+      return View(model);
+    }
+    [AllowAnonymous]
+    [HasReturnUrl]
+    public ActionResult SendTechnicalReportEmail(string returnUrl) {
+      var model = new AnonymousMessageModel();
+      return View(model);
+    }
+    [HttpPost]
+    [AllowAnonymous]
+    [ValidateAntiForgeryToken]
+    [SendCustomerMessage]
+    public ActionResult SendCustomerEmail(string emailAddress, string name, string subject, string message, string returnUrl) {
+      Profile currentProfile = null;
+      if (!Request.IsAuthenticated) {
+        if (!ModelState.IsValid) {
+          updateTempMessage("Sorry! We could not send your message. Please try again.");
+          return RedirectToAction("Index", "Home");
+        }
+        //send message without storing to database
+        currentProfile = new Profile {
+          Contact = new Contact {
+            Email = emailAddress
+          },
+          Organization = new Organization {
+            Name = name
+          }
+        };
+        var m = new Message {
+          Sender = currentProfile,
+          Receiver = currentProfile,//this means messages go to EARN CONNECT (Customer messages)
+          Title = subject,
+          Header = currentProfile.Organization.Name + " has sent a message",
+          Message2 = message
+        };
+        EmailHelper.SendCustomerEmailMessage(m);
+      }
+      else {
+        currentProfile = CurrentAccount.Profile;
+        //create a message
+        var m = new Message {
+          Sender = currentProfile,
+          Receiver = currentProfile,//this means messages go to EARN CONNECT (Customer messages)
+          Title = subject,
+          Header = currentProfile.Organization.Name + " has sent a message",
+          Message2 = message
+        };
+        _workUnit.MessageRepository.InsertEntity(m);
+        _workUnit.saveChanges();
+      }
+      updateTempMessage("Your message has been sent to us. Please wait while we review your message. We will respond as soon as possible. Thank you!");
+      return returnToUrl(returnUrl, Url.Action("Index", "Home"));
     }
   }
 }

@@ -82,5 +82,8 @@ namespace ESRGC.DLLR.EARN.Helpers
     public static void SendEmailMessage(Message model) {
       new EmailController().SendEmailMessage(model).DeliverAsync();
     }
+    public static void SendCustomerEmailMessage(Message model) {
+      new EmailController().SendCustomerEmail(model).DeliverAsync();
+    }
   }
 }
