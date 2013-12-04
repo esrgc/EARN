@@ -14,5 +14,6 @@ namespace ESRGC.DLLR.EARN.Models
     public int OrganizationTotal { get; set; }
     public List<Profile> Profiles { get; set; }
     public List<Partnership> Partnerships { get; set; }
+    public List<Account> Accounts { get; set; }
   }
 }

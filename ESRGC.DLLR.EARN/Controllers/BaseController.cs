@@ -11,8 +11,7 @@ using ESRGC.GIS.Geocoding;
 using ESRGC.GIS.Utilities;
 
 namespace ESRGC.DLLR.EARN.Controllers
-{
-  [SetGuestCookie]
+{  
   public class BaseController : Controller
   {
     protected IWorkUnit _workUnit = null;

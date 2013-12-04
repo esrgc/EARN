@@ -7,18 +7,18 @@
 @section header{
     <div class="container">
         <header class="page-header">
-            <h3>@ViewBag.Header <i class="fa fa-dashboard"></i></h3>
-            @*<ul class="breadcrumb">
-                <li><a href="@Url.Action("index", "Home")">Home</a></li>
-                <li class="active">@ViewBag.Header</li>
-            </ul>*@
+            <h3>@ViewBag.Header <i class="fa fa-dashboard"></i></h3>           
         </header>
     </div>
+}
+@{
+    ViewBag.returnUrl = Url.Action("Index");   
 }
 
 <div class="container">
     <div class="row info-container">
         <div class="col-md-12">
+            <h4>Statistics</h4>
             <div class="placeholder-panel">
                 <div class="post">
                     <div class="list-container">
@@ -35,7 +35,27 @@
         </div>
     </div>
     <div class="row info-container">
+        <div class="col-md-12">
+            <h4>Accounts</h4>
+            <div class="placeholder-panel">
+                <div class="post">
+                    <ul class="list-unstyled list-inline">
+                        @foreach (var account in Model.Accounts) {
+                            if (account.EmailVerified) { 
+                                <li><span class="label label-success">@account.EmailAddress</span></li>
+                            }
+                            else{
+                                <li><span class="label label-default">@account.EmailAddress</span></li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row info-container">
         <div class="col-md-6">
+            <h4>Profiles</h4>
             <div class="placeholder-panel">
                 <div class="">
                     <ul class="list-group">
@@ -49,6 +69,7 @@
             </div>
         </div>
         <div class="col-md-6">
+            <h4>Partnerships</h4>
             <div class="placeholder-panel">
                 <div class="">
                     <ul class="list-group">

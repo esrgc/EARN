@@ -24,7 +24,7 @@ namespace ESRGC.DLLR.EARN.Filters
           .Entities
           .First(x => x.EmailAddress.ToLower() == requestEmail.ToLower());
         
-        //check if the current profile is in the partnership partners list
+        //check if the current profile is in admin role
         if (!Roles.Contains(account.Role.ToLower())) {
           filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary() { 
             {"controller", "Home"},

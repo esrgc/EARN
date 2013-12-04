@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ESRGC.DLLR.EARN.Domain.Model;
+using ESRGC.DLLR.EARN.Filters;
 using Postal;
 
 namespace ESRGC.DLLR.EARN.Controllers
@@ -12,7 +13,7 @@ namespace ESRGC.DLLR.EARN.Controllers
   {
     //
     // GET: /Home/
-
+    [SetGuestCookie]
     public ActionResult Index(string returnUrl) {
       ViewBag.returnUrl = returnUrl;
       return View();

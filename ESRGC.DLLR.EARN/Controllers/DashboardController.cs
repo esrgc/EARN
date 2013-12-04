@@ -29,7 +29,8 @@ namespace ESRGC.DLLR.EARN.Controllers
         ContactTotal = _workUnit.ContactRepository.Entities.Count(),
         Profiles = _workUnit.ProfileRepository.Entities.OrderBy(x => x.Organization.Name).ToList(),
         Partnerships = _workUnit.PartnershipRepository.Entities.OrderBy(x => x.Name).ToList(),
-        OrganizationTotal = _workUnit.OrganizationRepository.Entities.Count()
+        OrganizationTotal = _workUnit.OrganizationRepository.Entities.Count(),
+        Accounts = _workUnit.AccountRepository.Entities.OrderBy(x=>x.EmailAddress).ToList()
       };
       return View(stats);
     }

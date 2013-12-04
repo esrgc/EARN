@@ -108,24 +108,26 @@
                     @*<img src="@Url.Content("~/Content/images/MSGIC-logo.jpg")" class="site-logo" />*@
                     <!--Header-->
                     @RenderSection("header", required: false)
-                    <div class="container hidden-content" id="cookieWarning">
-                        <div class="row">
-                            <div class="col-md-8 col-md-offset-2">
-                                <div class="alert alert-warning">
-                                    <h4>Cookies are not enabled</h4>
-                                    <p>
-                                        This web site uses cookies to track your account information.
+                    @if (ViewBag.Title != "Cookie Not Enabled") { 
+                        <div class="container hidden-content" id="cookieWarning">
+                            <div class="row">
+                                <div class="col-md-8 col-md-offset-2">
+                                    <div class="alert alert-warning">
+                                        <h4>Cookies are not enabled</h4>
+                                        <p>
+                                            This web site uses cookies to track your account information.
                                         If you are experiencing problems with signing in to the site,
                                         your browser might have blocked this site to set cookies.
                                         Please enable cookies (including third parties). Contact EARN MD CONNECT
                                         if you have any question.
                                         <br />
-                                        This message will go away if cookies are enabled in your browser.
-                                    </p>
+                                            This message will go away if cookies are enabled in your browser.
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    }
                     <section class="body-content">
                         @RenderBody()
                     </section>
@@ -140,10 +142,10 @@
         <div class="footer">
             <div class="text-center">
                 @*@RenderSection("footer", required: false)*@
-    <a href="http://esrgc.org" target="_blank">
+                <a href="http://esrgc.org" target="_blank">
                     <img class="site-logo" src="@Url.Content("~/Client/images/esrgc.png")" alt=""/></a>
                 @*<a  href="http://www.gov.state.md.us/" target="_blank"><img class="site-logo" src="@Url.Content("~/client/images/MDlogo.gif")" alt=""/></a>*@
-    <a href="http://www.dllr.maryland.gov/earn" target="_blank">
+                <a href="http://www.dllr.maryland.gov/earn" target="_blank">
                     <img class="site-logo" src="@Url.Content("~/client/images/EARN_logo_200w.jpg")" alt=""/></a>
                 <a href="http://www.salisbury.edu/" target="_blank">
                     <img class="site-logo" src="@Url.Content("~/client/images/SalisburyUniversity.jpg")" alt=""/></a>

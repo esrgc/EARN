@@ -89,7 +89,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       return View(model);
     }
     [AllowAnonymous]
-    [CheckCookie]
+    [SetGuestCookie]
     public ActionResult SignIn(string returnUrl) {
       //sign out any previous session
 
