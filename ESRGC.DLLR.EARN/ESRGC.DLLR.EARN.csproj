@@ -439,6 +439,7 @@
     <Content Include="Views\Communication\SendContactEarnEmail.cshtml" />
     <Content Include="Views\Communication\SendFeedbackEmail.cshtml" />
     <Content Include="Views\Communication\SendTechnicalReportEmail.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -10,18 +10,18 @@ using ESRGC.DLLR.EARN.Models;
 namespace ESRGC.DLLR.EARN.Controllers
 {
   [Authorize]
-  [RoleAuthorize(Roles = "admin")]
-  [VerifyProfile]
+  [RoleAuthorize(Roles = "admin")]  
   public class DashboardController : BaseController
   {
     public DashboardController(IWorkUnit workUnit) : base(workUnit) { }
-    [AllowNonAdmin]
+    [AllowNonAdmin]//child action
     public ActionResult NavLinks() {
       if (CurrentAccount.Role.ToLower() == "admin")
         return PartialView();
       else
         return new EmptyResult();
     }
+    [VerifyProfile]
     public ActionResult Index() {
       var stats = new DashboardStatistic {
         AccountTotal = _workUnit.AccountRepository.Entities.Count(),
@@ -30,7 +30,7 @@ namespace ESRGC.DLLR.EARN.Controllers
         Profiles = _workUnit.ProfileRepository.Entities.OrderBy(x => x.Organization.Name).ToList(),
         Partnerships = _workUnit.PartnershipRepository.Entities.OrderBy(x => x.Name).ToList(),
         OrganizationTotal = _workUnit.OrganizationRepository.Entities.Count(),
-        Accounts = _workUnit.AccountRepository.Entities.OrderBy(x=>x.EmailAddress).ToList()
+        Accounts = _workUnit.AccountRepository.Entities.OrderByDescending(x=>x.LastLogin).ToList()
       };
       return View(stats);
     }

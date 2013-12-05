@@ -7,7 +7,7 @@
 @section header{
     <div class="container">
         <header class="page-header">
-            <h3>@ViewBag.Header <i class="fa fa-dashboard"></i></h3>           
+            <h3>@ViewBag.Header <i class="fa fa-dashboard"></i></h3>
         </header>
     </div>
 }
@@ -39,14 +39,30 @@
             <h4>Accounts</h4>
             <div class="placeholder-panel">
                 <div class="post">
-                    <ul class="list-unstyled list-inline">
+                    <ul class="list-group">
                         @foreach (var account in Model.Accounts) {
-                            if (account.EmailVerified) { 
-                                <li><span class="label label-success">@account.EmailAddress</span></li>
-                            }
-                            else{
-                                <li><span class="label label-default">@account.EmailAddress</span></li>
-                            }
+                            <li class="list-group-item">
+                                @if (account.EmailVerified) { 
+                                    <span class="label label-success">@account.EmailAddress</span>
+                                    
+                                }
+                                else {
+                                    <span class="label label-default">@account.EmailAddress</span>
+                                }
+                                <p>
+                                    <small>Member since: @Html.TimeSpan(account.MemberSince)</small><br />
+                                    <small>Last update: @Html.TimeSpan(account.LastUpdate)</small><br />
+                                    <small>Last Signed in: @Html.TimeSpan(account.LastLogin)</small><br />
+                                </p>
+                                @if (account.Profile != null) { 
+                                    <p>
+                                        <small>Profile: @account.Profile.Organization.Name</small><br />
+                                        <small>Partnerships: @account.Profile.partnershipCount()</small><br />
+                                        <small>Created a partnership: @account.Profile.hasOwnedPartnerships()</small><br />
+                                    </p>
+                                }
+                            </li>
+
                         }
                     </ul>
                 </div>
