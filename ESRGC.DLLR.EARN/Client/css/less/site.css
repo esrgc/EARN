@@ -173,6 +173,10 @@
   padding: 20px 15px 15px 15px;
   font-size: 13px;
 }
+.no-script {
+  text-align: center;
+  color: #f00;
+}
 html,
 body {
   /*padding-top: 40px;*/
