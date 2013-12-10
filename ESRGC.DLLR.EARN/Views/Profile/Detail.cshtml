@@ -23,6 +23,7 @@
     ViewBag.returnUrl = returnUrl;
     var connectionCount = Model.Connections.Count();
     var partnershipCount = Model.PartnershipDetails.Count();
+    int countTag = Model.getTags().Count();
 }
 <div class="container">
     <!--Profile header-->
@@ -31,11 +32,23 @@
         <div class="col-md-12">
             @if (!Model.getAccount().EmailVerified) { 
                 <div class="alert alert-warning">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                     <h4>Your account email address has not been verified!</h4>
                     <p>
                         Currently, you are not able to receive notifications, including partnership invite/request. 
                         Please verify your email address to start receiving notifications.
-                        <a href="@Url.Action("Settings", "Account")">Click here to check your email verification status.</a>
+                        <a class="alert-link" href="@Url.Action("Settings", "Account")">Click here to check your email verification status.</a>
+                    </p>
+                </div>
+            }
+            @if (countTag == 0) { 
+                <div class="alert alert-warning">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <h4>An important step that needs your attention!</h4>                    
+                    <p>
+                        There are currently no tags on your profile. Other organizations are not able
+                        to find you by tags. 
+                        <a class="alert-link" href="@Url.Action("ManageTag", "Tag")">Please click here to edit your tags</a>
                     </p>
                 </div>
             }

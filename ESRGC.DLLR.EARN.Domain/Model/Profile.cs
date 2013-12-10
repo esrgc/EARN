@@ -16,8 +16,9 @@ namespace ESRGC.DLLR.EARN.Domain.Model
       PartnershipDetails = new List<PartnershipDetail>();
       Comments = new List<Comment>();
       SentMessages = new List<Message>();
-      ReceiveMessages = new List<Message>();
+      ReceivedMessages = new List<Message>();
     }
+
     /// <summary>
     /// Profile ID
     /// </summary>
@@ -52,7 +53,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public virtual ICollection<Account> Accounts { get; set; }
     public virtual ICollection<Comment> Comments { get; set; }
     public ICollection<Message> SentMessages { get; set; }
-    public ICollection<Message> ReceiveMessages { get; set; }
+    public ICollection<Message> ReceivedMessages { get; set; }
 
     //helpers
     public bool isOwnerOfPartnership(Partnership partnership) {
@@ -64,7 +65,30 @@ namespace ESRGC.DLLR.EARN.Domain.Model
         .Select(x => x.PartnershipID)
         .Contains(partnershipID);
     }
-
+    /// <summary>
+    /// delete all profile details including
+    /// connections, tags, comments, partnerships, and  messages
+    /// </summary>
+    public bool deleteDetails() {
+      try {
+        foreach (var c in Connections)
+          Connections.Remove(c);
+        foreach (var pt in ProfileTags)
+          ProfileTags.Remove(pt);
+        foreach (var pd in PartnershipDetails)
+          PartnershipDetails.Remove(pd);
+        foreach (var cm in Comments)
+          Comments.Remove(cm);
+        foreach (var sm in SentMessages)
+          SentMessages.Remove(sm);
+        foreach (var rm in ReceivedMessages)
+          ReceivedMessages.Remove(rm);
+        return true;
+      }
+      catch (Exception) {
+        return false;
+      }
+    }
     /// <summary>
     /// Gets the account associated with this profile
     /// </summary>

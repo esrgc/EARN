@@ -79,7 +79,7 @@ namespace ESRGC.DLLR.EARN.Domain.DAL
         .WillCascadeOnDelete(false);
       modelBuilder.Entity<Message>()
         .HasRequired(x => x.Receiver)
-        .WithMany(x => x.ReceiveMessages)
+        .WithMany(x => x.ReceivedMessages)
         .HasForeignKey(x => x.ReceiverID)
         .WillCascadeOnDelete(false);
     }

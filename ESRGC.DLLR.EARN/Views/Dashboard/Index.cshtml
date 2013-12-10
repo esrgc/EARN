@@ -38,17 +38,20 @@
         <div class="col-md-12">
             <h4>Accounts</h4>
             <div class="placeholder-panel">
-                <div class="post">
+                <div class="post" id="accountDisplay">
                     <ul class="list-group">
                         @foreach (var account in Model.Accounts) {
                             <li class="list-group-item">
-                                @if (account.EmailVerified) { 
-                                    <span class="label label-success">@account.EmailAddress</span>
+                                <h5>
                                     
-                                }
-                                else {
-                                    <span class="label label-default">@account.EmailAddress</span>
-                                }
+                                    @if (account.EmailVerified) { 
+                                        <span class="label label-success" title="Email Verified">@account.EmailAddress</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="label label-default" title="Not Verified">@account.EmailAddress</span>
+                                    }
+                                </h5>
                                 <p>
                                     <small>Member since: @Html.TimeSpan(account.MemberSince)</small><br />
                                     <small>Last update: @Html.TimeSpan(account.LastUpdate)</small><br />
@@ -56,10 +59,14 @@
                                 </p>
                                 @if (account.Profile != null) { 
                                     <p>
-                                        <small>Profile: @account.Profile.Organization.Name</small><br />
                                         <small>Partnerships: @account.Profile.partnershipCount()</small><br />
                                         <small>Created a partnership: @account.Profile.hasOwnedPartnerships()</small><br />
+                                        <small>Tags: @account.Profile.getTags().Count()</small><br />
+                                        <small>Comments: @account.Profile.Comments.Count()</small>
+                                        <small>Received Messages: @account.Profile.ReceivedMessages.Count()</small>
+                                        <small>Sent Messages: @account.Profile.SentMessages.Count()</small>
                                     </p>
+                                    @Html.Partial("miniProfilePartial", account.Profile)
                                 }
                             </li>
 
@@ -70,7 +77,7 @@
         </div>
     </div>
     <div class="row info-container">
-        <div class="col-md-6">
+        @*<div class="col-md-6">
             <h4>Profiles</h4>
             <div class="placeholder-panel">
                 <div class="">
@@ -83,8 +90,8 @@
                     </ul>
                 </div>
             </div>
-        </div>
-        <div class="col-md-6">
+        </div>*@
+        <div class="col-md-12">
             <h4>Partnerships</h4>
             <div class="placeholder-panel">
                 <div class="">
