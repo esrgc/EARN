@@ -314,9 +314,6 @@ a.link-icon:hover,
   max-height: 500px;
   overflow-y: auto;
 }
-.comment-box {
-  min-height: 100px;
-}
 .logo-container {
   position: relative;
 }
@@ -334,4 +331,15 @@ a.link-icon:hover,
 .term-condition-container {
   max-height: 400px;
   overflow: auto;
+}
+.comment-box {
+  min-height: 100px;
+}
+.comment {
+  -ms-word-break: break-all;
+  word-break: break-all;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
 }

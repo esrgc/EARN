@@ -21,7 +21,7 @@
 @foreach (var i in comments) {        
     
     <section class="transparent-placeholder-panel" id="comment-@i.AuthorID-@i.Created">
-        <div class="post">
+        <div class="post comment">
             <h5>
                 <i class="fa fa-comment"></i>
                 <a href="@Url.Action("ViewProfile", "Profile", new { i.Author.ProfileID, returnUrl = loadMoreUrl })">@i.Author.Organization.Name</a> <small>says</small>
