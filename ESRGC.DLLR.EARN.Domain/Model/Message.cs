@@ -13,11 +13,11 @@ namespace ESRGC.DLLR.EARN.Domain.Model
       EmailSent = false;
     }
     public int MessageID { get; set; }
-    public int SenderID { get; set; }
-    public Profile Sender { get; set; }
+    public int? SenderID { get; set; }
+    public virtual Profile Sender { get; set; }
 
-    public int ReceiverID { get; set; }
-    public Profile Receiver { get; set; }
+    public int? ReceiverID { get; set; }
+    public virtual Profile Receiver { get; set; }
     public string Title { get; set; }
     public string Header { get; set; }
     public string Message1 { get; set; }

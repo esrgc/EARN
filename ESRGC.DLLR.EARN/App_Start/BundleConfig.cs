@@ -11,7 +11,8 @@ namespace ESRGC.DLLR.EARN
     public static void RegisterBundles(BundleCollection bundles) {
       //scripts bundles
       bundles.Add(new ScriptBundle("~/bundles/jsLibs").Include(
-        "~/Client/jsLib/jquery-1.10.2/jquery-{version}.js",
+        "~/Client/jsLib/jquery-1.x/jquery-1.9.1.js",
+        "~/Client/jsLib/jquery-1.x/jquery-migrate-1.2.1.js",       
         "~/Client/jsLib/jquery.placeholder.js",
         "~/Client/jsLib/bootstrap-3.0.2/js/bootstrap*",
         "~/Client/js/modernizr*"
@@ -29,7 +30,7 @@ namespace ESRGC.DLLR.EARN
       ));
       bundles.Add(new ScriptBundle("~/bundles/js/customLibs").Include(
         "~/Client/js/dx.min.js",
-        "~/Client/jsLib/typeahead.js/typeahead.min.js"
+        "~/Client/jsLib/typeahead.js/typeahead.js"
       ));
       bundles.Add(new ScriptBundle("~/bundles/js/map").Include(
         "~/Client/js/map/mapViewer.js",

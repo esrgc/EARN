@@ -153,6 +153,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CommunicationController.cs" />
     <Compile Include="Controllers\ConnectionController.cs" />
@@ -237,8 +238,10 @@
     <Content Include="Client\jsLib\bootstrap-3.0.2\js\bootstrap.js" />
     <Content Include="Client\jsLib\bootstrap-3.0.2\js\bootstrap.min.js" />
     <Content Include="Client\jsLib\bootstrap-3.0\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Client\jsLib\jquery-1.10.2\jquery-1.10.2.js" />
-    <Content Include="Client\jsLib\jquery-1.10.2\jquery-1.10.2.min.js" />
+    <Content Include="Client\jsLib\jquery-1.x\jquery-1.10.2.js" />
+    <Content Include="Client\jsLib\jquery-1.x\jquery-1.10.2.min.js" />
+    <Content Include="Client\jsLib\jquery-1.x\jquery-1.9.1.js" />
+    <Content Include="Client\jsLib\jquery-1.x\jquery-migrate-1.2.1.js" />
     <Content Include="Client\jsLib\jquery.placeholder.js" />
     <Content Include="Client\jsLib\leaflet.awesome-markers\images\markers-matte%402x.png" />
     <Content Include="Client\jsLib\leaflet.awesome-markers\images\markers-matte.png" />
@@ -369,7 +372,7 @@
     <Content Include="Client\jsLib\bootstrap-3.0\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Client\jsLib\bootstrap-3.0\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Client\jsLib\bootstrap-3.0\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Client\jsLib\jquery-1.10.2\jquery-1.10.2.min.map" />
+    <Content Include="Client\jsLib\jquery-1.x\jquery-1.10.2.min.map" />
     <Content Include="Client\jsLib\bootstrap-3.0.1\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Client\jsLib\bootstrap-3.0.1\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Client\jsLib\bootstrap-3.0.1\fonts\glyphicons-halflings-regular.woff" />
@@ -434,12 +437,17 @@
     <Content Include="Views\Email\SendEmailMessage.html.cshtml" />
     <Content Include="Views\Partnership\ContactAdmin.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
-    <Content Include="Views\Dashboard\NavLinks.cshtml" />
+    <Content Include="Views\Admin\NavLinks.cshtml" />
     <Content Include="Views\Email\SendCustomerEmail.html.cshtml" />
     <Content Include="Views\Communication\SendContactEarnEmail.cshtml" />
     <Content Include="Views\Communication\SendFeedbackEmail.cshtml" />
     <Content Include="Views\Communication\SendTechnicalReportEmail.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Email\SendAnnouncementEmail.html.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Communication\EmailAnnounce.cshtml" />
+    <Content Include="Views\Communication\EmailSent.cshtml" />
+    <Content Include="Views\Communication\EmailNotSent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

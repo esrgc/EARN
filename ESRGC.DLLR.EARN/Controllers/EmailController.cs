@@ -69,5 +69,27 @@ namespace ESRGC.DLLR.EARN.Controllers
       return Email("SendCustomerEmail", model);
     }
 
+    public EmailResult SendAnnouncementEmail(Message model, List<string> emailList) {
+      emailList.ForEach(x => To.Add(x));
+      string earnEmail = "", esrgcEmail = "";
+      try {
+        earnEmail = ConfigurationManager.AppSettings["earnEmail"].ToString();
+        esrgcEmail = ConfigurationManager.AppSettings["esrgcEmail"].ToString();
+      }
+      catch {
+        earnEmail = "earn.jobs@maryland.gov";
+        esrgcEmail = "esrgc@salisbury.edu";
+      }
+      BCC.Add(earnEmail);
+      BCC.Add(esrgcEmail);
+
+      Subject = "EARN MD CONNECT - " + model.Title;
+      return Email("SendAnnouncementEmail", model);
+    }
+    public EmailResult SendAnnouncementEmail(Message model, string emailAddress) {
+      To.Add(emailAddress);
+      Subject = "EARN MD CONNECT - " + model.Title;
+      return Email("SendAnnouncementEmail", model);
+    }
   }
 }

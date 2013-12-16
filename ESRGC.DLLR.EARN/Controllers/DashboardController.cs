@@ -15,13 +15,7 @@ namespace ESRGC.DLLR.EARN.Controllers
   public class DashboardController : BaseController
   {
     public DashboardController(IWorkUnit workUnit) : base(workUnit) { }
-    [AllowNonAdmin]//child action
-    public ActionResult NavLinks() {
-      if (CurrentAccount.Role.ToLower() == "admin")
-        return PartialView();
-      else
-        return new EmptyResult();
-    }
+    
     [VerifyProfile]
     public ActionResult Index() {
       var stats = new DashboardStatistic {

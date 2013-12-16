@@ -10,6 +10,7 @@ using ESRGC.DLLR.EARN.Filters;
 using PagedList;
 using ESRGC.DLLR.EARN.Helpers;
 using ESRGC.DLLR.EARN.Models;
+using System.Configuration;
 
 namespace ESRGC.DLLR.EARN.Controllers
 {
@@ -425,6 +426,61 @@ and/or view this user’s Organizational Profile for more information.",
       }
       updateTempMessage("Your message has been sent to us. Please wait while we review your message. We will respond as soon as possible. Thank you!");
       return returnToUrl(returnUrl, Url.Action("Index", "Home"));
+    }
+
+    [RoleAuthorize(Roles = "admin")]
+    public ActionResult EmailAnnounce() {
+      return View();
+    }
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    [RoleAuthorize(Roles = "admin")]
+    public ActionResult EmailAnnounce(string message, string message2, string subject, string header) {
+      if (!string.IsNullOrEmpty(message)) {
+        //get email list
+        var emailList = _workUnit.AccountRepository
+          .Entities
+          .Select(x => x.EmailAddress).ToList();
+        var m = new Message {
+          Sender = null,
+          Receiver = null,//this means messages go to EARN CONNECT (Customer messages)
+          Title = subject,
+          Header = header ?? "Dear EARN MD CONNECT User",
+          Message1 = message,
+          Message2 = message2
+        };
+
+        try {
+          _workUnit.MessageRepository.InsertEntity(m);
+          _workUnit.saveChanges();
+        }
+        catch {
+          //do logging for errors or exception filter
+          updateTempMessage("Message couldn't be stored to database.");
+        }
+
+        if (emailList.Count() > 0) {
+          emailList.ForEach(x => {
+            EmailHelper.SendAnnouncementEmail(m, x);
+          });
+          string earnEmail = "", esrgcEmail = "";
+          try {
+            earnEmail = ConfigurationManager.AppSettings["earnEmail"].ToString();
+            esrgcEmail = ConfigurationManager.AppSettings["esrgcEmail"].ToString();
+          }
+          catch {
+            earnEmail = "earn.jobs@maryland.gov";
+            esrgcEmail = "esrgc@salisbury.edu";
+          }
+          EmailHelper.SendAnnouncementEmail(m, earnEmail);
+          EmailHelper.SendAnnouncementEmail(m, esrgcEmail);
+          return View("EmailSent");
+        }
+        else {
+          updateTempMessage("No email address found");
+        }
+      }
+      return View("EmailNotSent");
     }
   }
 }

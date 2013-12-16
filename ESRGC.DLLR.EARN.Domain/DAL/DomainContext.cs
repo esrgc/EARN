@@ -73,12 +73,12 @@ namespace ESRGC.DLLR.EARN.Domain.DAL
         .HasForeignKey(x => x.AuthorID);
       //messages
       modelBuilder.Entity<Message>()
-        .HasRequired(x => x.Sender)
+        .HasOptional(x => x.Sender)
         .WithMany(x => x.SentMessages)
         .HasForeignKey(x => x.SenderID)
         .WillCascadeOnDelete(false);
       modelBuilder.Entity<Message>()
-        .HasRequired(x => x.Receiver)
+        .HasOptional(x => x.Receiver)
         .WithMany(x => x.ReceivedMessages)
         .HasForeignKey(x => x.ReceiverID)
         .WillCascadeOnDelete(false);

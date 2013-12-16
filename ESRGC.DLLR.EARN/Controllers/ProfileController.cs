@@ -172,10 +172,16 @@ namespace ESRGC.DLLR.EARN.Controllers
       //error has occurred   
       return View(profile);
     }
-
+    [VerifyProfile]
+    [HasReturnUrl]
+    public ActionResult Delete(string returnUrl) {
+      return View();
+    }
     [HttpPost]
-    public ActionResult Delete(int profileID) {
-      var profile = _workUnit.ProfileRepository.GetEntityByID(profileID);
+    [VerifyProfile]
+    [ActionName("Delete")]
+    public ActionResult DeleteProfile(string returnUrl) {
+      var profile = CurrentAccount.Profile;
       if (profile == null) {
         updateTempMessage("Invalid profile ID");
         return RedirectToAction("Index", "Home");
@@ -187,7 +193,7 @@ namespace ESRGC.DLLR.EARN.Controllers
         _workUnit.saveChanges();
         updateTempMessage("Your profile has been deleted");
       }
-      return RedirectToAction("Index", "Home");
+      return returnToUrl(returnUrl, Url.Action("Index", "Home"));
     }
   }
 }
