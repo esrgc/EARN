@@ -85,6 +85,11 @@ namespace ESRGC.DLLR.EARN.Controllers
       //viewbag data
       ViewBag.filters = filters;
       ViewBag.currentProfile = currentProfile;
+      ViewBag.orgTypes = _workUnit
+        .UserGroupRepository
+        .Entities
+        .OrderBy(x=>x.Name)
+        .ToList();
       return View(model);
     }
   }

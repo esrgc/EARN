@@ -164,6 +164,7 @@
     <Compile Include="Model\Document.cs" />
     <Compile Include="Model\GeoTag.cs" />
     <Compile Include="Model\Category.cs" />
+    <Compile Include="Model\History.cs" />
     <Compile Include="Model\Message.cs" />
     <Compile Include="Model\Notification.cs" />
     <Compile Include="Model\Organization.cs" />

@@ -18,7 +18,8 @@ dx.defineController('Search', {
     refs: {
         tagInput: '#tagInput',
         goBtn: 'button[type="submit"]',
-        searchForm: 'form',
+        searchForm: 'form#search',
+        orgTypeDropdown: '#orgType',
         pageLinks: '.tag a, a#clearSearchLink, .pagination a',
         pager: '.pagination',
         currentHiddenInput: 'input[type="hidden"][name="tags"]',
@@ -36,6 +37,9 @@ dx.defineController('Search', {
         },
         pageLinks: {
             click: 'onPageLinksClick'
+        },
+        orgTypeDropdown: {
+            change: 'onOrgTypeChange'
         }
     },
     initialize: function () {
@@ -75,7 +79,7 @@ dx.defineController('Search', {
         if (typeof store != 'undefined') {
             //dx.log(url);
             store.loadContentUrl(url);
-        }       
+        }
     },
     //intercept submit event to use ajax to load content
     onSearchSubmit: function (event, object) {
@@ -83,19 +87,26 @@ dx.defineController('Search', {
 
         var scope = this;
         scope.updateStatus('');
-        var input = scope.getTagInput().val().toUpperCase();
-        if (input == '') {
-            scope.updateStatus('Please enter a tag first!');
-            return;
-        }
-        if (scope.tagExists(input)) {
-            scope.updateStatus('This tag has already been used for this search');
-            return;
-        }
-        else
-            scope.tagArray.push(input);
-
+        //get form parameters
         var params = scope.getFormData($(object));
+        var input = scope.getTagInput().val().toUpperCase();
+        if (input != '') {
+            //scope.updateStatus('Please enter a tag first!');
+            //return;
+            if (scope.tagExists(input)) {
+                scope.updateStatus('This tag has already been used for this search');
+                return;
+            }
+            else
+                scope.tagArray.push(input);
+        }
+        else {
+            dx.log(params);
+            if (typeof params != 'undefined')
+                scope.removeEmptyTags(params);
+
+        }
+
         //dx.log(params)
         var store = dx.getStore('Search');
         if (typeof store != 'undefined') {
@@ -104,6 +115,12 @@ dx.defineController('Search', {
             //dx.log(store.constructParams());
             store.loadContent();
         }
+    },
+    onOrgTypeChange: function (event, object) {
+        var scope = this;
+        var searchForm = scope.getSearchForm();
+        if (typeof searchForm != 'undefined')
+            searchForm.submit();
     },
     //////////////////////////////////////////////
     //store event handlers
@@ -116,12 +133,13 @@ dx.defineController('Search', {
         var searchResult = scope.getSearchResult();
         var queryTagHolder = scope.getQueryTagHolder();
         var hiddenInputHolder = scope.getHiddenInputHolder();
+        var orgTypeDropdown = scope.getOrgTypeDropdown();
 
         //replace with new content
         searchResult.replaceWith(scope.getSearchResult(data));
         queryTagHolder.replaceWith(scope.getQueryTagHolder(data));
         hiddenInputHolder.replaceWith(scope.getHiddenInputHolder(data));
-
+        orgTypeDropdown.replaceWith(scope.getOrgTypeDropdown(data));
         //empty input box
         //scope.getTagInput().focus();
         scope.getTagInput().val('')
@@ -141,6 +159,17 @@ dx.defineController('Search', {
                 return true;
         }
         return false;
+    },
+    removeEmptyTags: function (params) {
+        var tags = params.tags;
+        if (tags == '') {
+            delete params.tags;
+            return;
+        }
+        for (var i in tags) {
+            if (tags[i] == '')
+                delete tags[i];
+        }
     },
     updateStatus: function (msg) {
         this.getNotificationLabel().text(msg);
