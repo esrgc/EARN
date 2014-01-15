@@ -13,6 +13,8 @@
 @if (currentProfile.ProfileID != Model.ProfileID) {
     <section id="result-@Model.ProfileID"  class="profile-section"
         data-location="@location" 
+        data-userGroupID = "@Model.UserGroup.UserGroupID"
+        data-userGroupName ="@Model.UserGroup.Name"
         data-organization="@Model.Organization.Name"
         data-profileUrl = "@Url.Action("ViewProfile", "Profile", new { Model.ProfileID, returnUrl = Url.GenerateLinkFromFilters("Basic", filters) })">
         <div class="row">

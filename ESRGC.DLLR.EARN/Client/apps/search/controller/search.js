@@ -151,6 +151,7 @@ dx.defineController('Search', {
         scope.loadedState();
         scope.updateTagList();
 
+        //call this to update map
         if (typeof this.events.searchStoreLoaded == 'function')
             this.events.searchStoreLoaded.apply(store, arguments);//call in store scope
     },

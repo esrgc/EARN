@@ -104,7 +104,8 @@ namespace ESRGC.DLLR.EARN.Domain.Migrations
           new UserGroup { Name = "Education and Training", Description = "e.g. Two- and Four-Year Institutions of Higher Education, Apprenticeship programs, K-12 programs" },
           new UserGroup { Name = "Workforce and Economic Development and Local Governmental Entities", Description = "" },
           new UserGroup { Name = "Nonprofits and Community-based Organizations", Description = "e.g. Job Training Advocacy Organizations, Veterans Groups, Advocates for People with Disabilities" },
-          new UserGroup { Name = "Other Strategic Partners", Description = "e.g. Labor Unions, Philanthropic Organizations" }
+          new UserGroup { Name = "Other Strategic Partners", Description = "e.g. Labor Unions, Philanthropic Organizations" },
+          new UserGroup { Name = "Potential Employee Recruitment", Description = "" }
         );
         context.SaveChanges();
       }

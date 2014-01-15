@@ -44,6 +44,11 @@ dx.defineController('Map', {
             });
         }
     },
+    organizationTypes: {},
+    markerColors: [
+        'darkred', 'orange', 'green', 'darkgreen',
+        'blue', 'purple', 'darkpuple', 'cadetblue'
+    ],
     ////
     ///private helper functions
     ///
@@ -55,18 +60,56 @@ dx.defineController('Map', {
         searchResult.each(function (i, result) {
             var geom = $(result).attr('data-location');
             var orgName = $(result).attr('data-organization');
+            var orgType = $(result).attr('data-userGroupName');
+            var orgTypeID = $(result).attr('data-userGroupID');
             var url = $(result).attr('data-profileUrl');
             var id = $(result).attr('id');
             if (geom != "") {
                 var feature = mapViewer.createFeature(geom);
                 if (id != 'ownProfile') {
-                    feature.bindPopup('<a href="' + url + '">' + orgName + '</a>')
+
+                    if (typeof orgType != 'undefined' && typeof orgTypeID != 'undefined') {
+                        var typeExists = false;
+                        for (var i in scope.organizationTypes) {
+                            var type = scope.organizationTypes[i].name;
+                            if (type == orgType) {
+                                typeExists = true;
+                                break;
+                            }
+                        }
+                        var iconConfig = null;
+                        if (!typeExists) {
+                            var color = scope.markerColors[0];
+                            scope.markerColors.splice(0, 1);
+                            var orgTypeObj = {
+                                name: orgType,
+                                id: orgTypeID,
+                                markerColor: color,
+                                prefix: 'fa',
+                                icon: 'building-o'
+                            };
+                            scope.organizationTypes[orgTypeID] = orgTypeObj;
+                            iconConfig = orgTypeObj;
+                        }
+                        else
+                            iconConfig = scope.organizationTypes[orgTypeID];
+
+                        var icon = L.AwesomeMarkers.icon(iconConfig);
+                        feature.setIcon(icon);
+                        feature.bindPopup([
+                            '<a href="' + url + '">' + orgName + '</a>',
+                            '<br/>',
+                            '<small>',
+                            orgType,
+                            '</small>'
+                        ].join(''));
+                    }
                 }
                 else {
                     //change icon
                     var icon = L.AwesomeMarkers.icon({
                         icon: 'user',
-                        color: 'red'
+                        markerColor: 'red'
                     });
                     feature.setIcon(icon);
                     feature.bindPopup('<a href="' + url + '">Your organization</a>')
@@ -75,6 +118,7 @@ dx.defineController('Map', {
             }
         });
     },
+
     zoomToOwnProfile: function () {
         var scope = dx.getController('Map');
         var mapViewer = dx.getApp().getMapViewer();
