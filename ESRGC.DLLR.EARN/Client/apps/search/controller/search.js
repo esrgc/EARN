@@ -119,6 +119,9 @@ dx.defineController('Search', {
     onOrgTypeChange: function (event, object) {
         var scope = this;
         var searchForm = scope.getSearchForm();
+        var tagInput = scope.getTagInput();
+        if (tagInput.val() != '')
+            tagInput.val('');
         if (typeof searchForm != 'undefined')
             searchForm.submit();
     },

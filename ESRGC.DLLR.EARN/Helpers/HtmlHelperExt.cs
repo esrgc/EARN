@@ -188,7 +188,7 @@ namespace ESRGC.DLLR.EARN.Helpers
       if (timeSpan.Days == 0) {
         if (timeSpan.Hours == 0) {
           if (timeSpan.Minutes == 0)
-            return "Less than a minute ago";
+            return "just now";
           if (timeSpan.Minutes == 1)
             return timeSpan.Minutes + " minute ago";
           else
