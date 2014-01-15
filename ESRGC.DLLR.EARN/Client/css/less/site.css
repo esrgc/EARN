@@ -1,4 +1,4 @@
-﻿.inline-block {
+.inline-block {
   display: inline-block;
 }
 .placeholder-panel {
@@ -342,4 +342,9 @@ a.link-icon:hover,
   -moz-hyphens: auto;
   -ms-hyphens: auto;
   hyphens: auto;
+}
+.profile-list {
+  max-height: 600px;
+  overflow-y: auto;
+  overflow-x: hidden;
 }

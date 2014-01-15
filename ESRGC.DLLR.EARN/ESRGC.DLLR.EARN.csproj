@@ -448,6 +448,7 @@
     <Content Include="Views\Communication\EmailAnnounce.cshtml" />
     <Content Include="Views\Communication\EmailSent.cshtml" />
     <Content Include="Views\Communication\EmailNotSent.cshtml" />
+    <Content Include="Views\Shared\displayProfilePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
