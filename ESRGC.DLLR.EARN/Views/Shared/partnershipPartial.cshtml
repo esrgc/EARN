@@ -3,47 +3,66 @@
 @{
     var p = Model;
     var currentProfile = ViewBag.currentProfile as Profile;
+    var owner = Model.getOwner();
     var partners = Model.getAllPartners().Count();
+    var partnerList = Model.getAllPartners();
     var returnUrl = ViewBag.returnUrl as string;
     var canEdit = currentProfile.isOwnerOfPartnership(p);
 }
 
-@if (currentProfile.isNewToPartnership(p.PartnershipID)) {
-    <a href="@Url.Action("View", "Partnership", new { p.PartnershipID, returnUrl })">
-        <strong>@p.Name</strong>
-    </a>
-}
-else {
-    <a href="@Url.Action("Detail", "Partnership", new { p.PartnershipID, returnUrl })">
-        <strong>@p.Name</strong>
-    </a>
-}
-<span class="pull-right">
-    @if (canEdit) { 
-        <a href="@Url.Action("Edit", new { p.PartnershipID })" title="Edit partnership"><i class="fa fa-pencil"></i></a>
-    }
-    <small class="">Edited: @Html.TimeSpan(p.LastUpdate)</small>
-</span>
-<p>
-    <i class="fa fa-clock-o fa-lg"></i>@Html.Partial("partnershipStatusPartial", p)
-</p>
-<p>
-    <span class="text-muted">
-        @p.Description
-    </span>
-</p>
-<h5>Target Industry Tags&nbsp;<i class="fa fa-tags"></i></h5>
-<div class="placeholder-panel">
-    @Html.Partial("tagListLinkPartial", p.getTagNames())
-</div>
-<br />
-@if (!currentProfile.isNewToPartnership(p.PartnershipID)) {
-    if (currentProfile.isOwnerOfPartnership(p.PartnershipID)) { 
-    <span class="label label-danger">Admin</span>
+<div class="partnership-container">
+    @if (currentProfile.isNewToPartnership(p.PartnershipID)) {
+        <a href="@Url.Action("View", "Partnership", new { p.PartnershipID, returnUrl })">
+            <strong>@p.Name</strong>
+        </a>
     }
     else {
-    <span class="label label-success"><i class="fa fa-check"></i>&nbsp;Partnered</span>
+        <a href="@Url.Action("Detail", "Partnership", new { p.PartnershipID, returnUrl })">
+            <strong>@p.Name</strong>
+        </a>
     }
-}
-<span class="label label-info">Participants @partners</span>
-<div class="clear"></div>
+    <span class="pull-right">
+        @if (canEdit) { 
+            <a href="@Url.Action("Edit", new { p.PartnershipID })" title="Edit partnership"><i class="fa fa-pencil">
+            </i></a>
+        }
+        <small class="">Edited: @Html.TimeSpan(p.LastUpdate)</small>
+    </span>
+    <p>
+        <i class="fa fa-clock-o fa-lg"></i>@Html.Partial("partnershipStatusPartial", p)
+    </p>
+    <p>
+        <span class="text-muted">
+            @p.Description
+        </span>
+    </p>
+    <h5>Target Industry Tags&nbsp;<i class="fa fa-tags"></i></h5>
+    <div class="placeholder-panel">
+        @Html.Partial("tagListLinkPartial", p.getTagNames())
+    </div>
+    <br />
+    @if (!currentProfile.isNewToPartnership(p.PartnershipID)) {
+        if (currentProfile.isOwnerOfPartnership(p.PartnershipID)) { 
+        <span class="label label-danger">Admin</span>
+        }
+        else {
+        <span class="label label-success"><i class="fa fa-check"></i>&nbsp;Partnered</span>
+        }
+    }
+    <div class="inline-block">
+        <a href="#" data-toggle="popover" data-trigger="hover" data-placement="right" data-original-title="Partners"
+            title="" rel="popover">
+            <span class="label label-info">Participants @partners</span>
+        </a>
+        <div class="hidden-content">
+            <ul class="list-group">
+                @foreach (var i in partnerList) { 
+                    <li class="list-group-item">
+                        @Html.Partial("miniProfilePartial", i)
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>

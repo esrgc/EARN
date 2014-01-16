@@ -1,4 +1,4 @@
-﻿#socialNetworkLinks {
+#socialNetworkLinks {
   position: absolute;
   right: 10px;
   top: 10px;
@@ -14,6 +14,9 @@
 .profile-area .dropdown {
   margin: 0 auto 0 auto;
   width: 63px;
+}
+.profile-section a {
+  text-decoration: none;
 }
 /*.profile-container {
     max-width: 85%;

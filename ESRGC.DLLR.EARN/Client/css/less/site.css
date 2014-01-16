@@ -193,6 +193,9 @@ textarea {
 address {
   margin-bottom: 0;
 }
+*[data-toggle='popover'] {
+  cursor: pointer;
+}
 #tagInput {
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
@@ -347,4 +350,7 @@ a.link-icon:hover,
   max-height: 600px;
   overflow-y: auto;
   overflow-x: hidden;
+}
+.partnership-container a {
+  text-decoration: none;
 }
