@@ -55,13 +55,15 @@
             <span class="label label-info">Participants @partners</span>
         </a>
         <div class="hidden-content">
-            <ul class="list-group">
-                @foreach (var i in partnerList) { 
-                    <li class="list-group-item">
-                        @Html.Partial("miniProfilePartial", i)
-                    </li>
-                }
-            </ul>
+            <div class="partner-list-container">
+                <ul class="list-group">
+                    @foreach (var i in partnerList) { 
+                        <li class="list-group-item">
+                            @Html.Partial("miniProfilePartial", i)
+                        </li>
+                    }
+                </ul>
+            </div>
         </div>
     </div>
     <div class="clear"></div>
