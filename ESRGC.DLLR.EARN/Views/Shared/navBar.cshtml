@@ -56,7 +56,7 @@
                     var noteCount = Html.Action("NotificationCount", "Communication"); 
                     <li>
                         <a href="#" data-toggle="popover" id="notifications" role="menuitem" 
-                            data-trigger="click" rel="popover" data-placement="bottom" data-original-title="Notifications">
+                            rel="popover" data-placement="bottom" data-original-title="Notifications">
                             <i class="fa fa-flag fa-lg"></i>&nbsp;
                                 @if (noteCount.ToString() != "0") { 
                                     <span class="label label-danger">@noteCount</span>

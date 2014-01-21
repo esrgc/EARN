@@ -317,7 +317,7 @@ a.link-icon:hover,
   max-height: 400px;
   max-width: 300px;
   padding-right: 2px;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
 }
 .logo-container {
