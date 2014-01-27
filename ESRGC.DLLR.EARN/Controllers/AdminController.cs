@@ -24,6 +24,8 @@ namespace ESRGC.DLLR.EARN.Controllers
 
     [AllowNonAdmin]//child action
     public ActionResult NavLinks() {
+      if (CurrentAccount == null)
+        return new EmptyResult();
       if (CurrentAccount.Role.ToLower() == "admin")
         return PartialView();
       else
