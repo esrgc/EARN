@@ -32,20 +32,9 @@ namespace ESRGC.DLLR.EARN.Controllers
       }
       return new EmptyResult();
     }
-    
+    [VerifyProfile]
     public ActionResult Detail() {
       var profile = CurrentAccount.Profile;
-      //count tags
-      int countTag = _workUnit
-        .ProfileTagRepository
-        .Entities
-        .Where(x => x.ProfileID == profile.ProfileID)
-        .Select(x => x.Tag)
-        .OfType<Tag>()
-        .Count();
-
-      if (countTag == 0)
-        return RedirectToAction("ManageTag", "Tag");
 
       //check if address tag exists
       int addressTagCount = _workUnit
@@ -60,7 +49,13 @@ namespace ESRGC.DLLR.EARN.Controllers
       if (addressTagCount == 0)
         addUpdateAddrGeoTag(profile.ProfileID);
 
-      ViewBag.currentProfile = CurrentAccount.Profile;
+      //count tags
+      //int countTag = profile.getTags().Count();
+      //if (countTag == 0) {
+      //  updateTempMessage("There are currently no tags on your profile. Other organizations will be more likely to find you when tags are available.");
+      //  return RedirectToAction("ManageTag", "Tag");
+      //}
+      
       return View(CurrentAccount.Profile);
     }
     [AllowNonProfile]
@@ -106,7 +101,7 @@ namespace ESRGC.DLLR.EARN.Controllers
           _workUnit.saveChanges();
         }
 
-        return RedirectToAction("Detail");
+        return RedirectToAction("ManageTag", "Tag");
       }
       //error
       profile.Categories = _workUnit.CategoryRepository.Entities.OrderBy(x => x.Name).ToList();
@@ -126,7 +121,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     //public profile view
     [HasReturnUrl]
     public ActionResult ViewProfile(int profileID, string returnUrl) {
-      var profile = _workUnit.ProfileRepository.GetEntityByID(profileID);      
+      var profile = _workUnit.ProfileRepository.GetEntityByID(profileID);
       return View(profile);
     }
 
@@ -144,7 +139,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       }
       return RedirectToAction("Detail");
     }
-    
+
     public ActionResult UploadImage() {
       var profile = CurrentAccount.Profile;
       if (profile == null)
@@ -176,6 +171,29 @@ namespace ESRGC.DLLR.EARN.Controllers
       }
       //error has occurred   
       return View(profile);
+    }
+    [VerifyProfile]
+    [HasReturnUrl]
+    public ActionResult Delete(string returnUrl) {
+      return View();
+    }
+    [HttpPost]
+    [VerifyProfile]
+    [ActionName("Delete")]
+    public ActionResult DeleteProfile(string returnUrl) {
+      var profile = CurrentAccount.Profile;
+      if (profile == null) {
+        updateTempMessage("Invalid profile ID");
+        return RedirectToAction("Index", "Home");
+      }
+      //delete contact
+      if (profile.deleteDetails()) {
+        CurrentAccount.Profile = null;
+        _workUnit.ProfileRepository.DeleteEntity(profile);
+        _workUnit.saveChanges();
+        updateTempMessage("Your profile has been deleted");
+      }
+      return returnToUrl(returnUrl, Url.Action("Index", "Home"));
     }
   }
 }

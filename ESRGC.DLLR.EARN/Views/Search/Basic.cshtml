@@ -16,12 +16,12 @@
 }
 @section headContent {
     @*links for leaflet library*@
-    <link rel="stylesheet" href="@Url.Content("~/Client/jsLib/leaflet-0.6.4/leaflet.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Client/jsLib/leaflet-0.7.2/leaflet.css")" />
     <!--[if lte IE 8]> 
         <link rel="stylesheet" href="@Url.Content("~/Client/jsLib/leaflet-0.6.4/leaflet.ie.css")">
     <![endif]-->
-    <link rel="stylesheet" href="~/Client/jsLib/leaflet.awesome-markers/leaflet.awesome-markers.css"/>
-    <script src="@Url.Content("~/Client/jsLib/leaflet-0.6.4/leaflet.js")" type="text/javascript"></script>
+    <link rel="stylesheet" href="~/Client/jsLib/leaflet.awesome-markers/leaflet.awesome-markers.css" />
+    <script src="@Url.Content("~/Client/jsLib/leaflet-0.7.2/leaflet.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Client/jsLib/leaflet.awesome-markers/leaflet.awesome-markers.js")"></script>
 }
 @section scripts {
@@ -31,6 +31,8 @@
     var filters = (ViewBag.filters as Dictionary<string, object>) ?? new Dictionary<string, object>();
     var currentTags = filters.ContainsKey("tags") ? filters["tags"] as List<string> : new List<string>();
     var currentProfile = ViewBag.currentProfile as Profile ?? new Profile();
+    var organizationTypes = ViewBag.orgTypes as List<UserGroup> ?? new List<UserGroup>();
+    var currentOrgType = filters.Keys.Contains("userGroupID") ? filters["userGroupID"] as int? : null;
 }
 <div class="container" id="basicSearchPage">
     <div class="row">
@@ -49,18 +51,29 @@
                     <div class="row">
                         <div class="col-md-4 col-sm-5">
                             <div class="">
-                                <form class="form-horizontal" action="@Url.Action("Basic")" method="get">
+                                <form class="form-horizontal" action="@Url.Action("Basic")" method="get" id="search">
                                     <div class="form-group">
                                         <div class="col-sm-12">
                                             <div class="input-group">
-                                                <span class="input-group-addon"><i class="fa fa-tag"></i></span>
+                                                <span class="input-group-addon" title="Organization Types"><i class="fa fa-building-o"></i></span>
+                                                @Html.DropDownList(
+                                                    "userGroupID",
+                                                    new SelectList(organizationTypes, "UserGroupID", "Name", currentOrgType),
+                                                    "Any",
+                                                    new { @class = "form-control", id = "orgType" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <div class="input-group">
+                                                <span class="input-group-addon" title="Tags"><i class="fa fa-tag"></i></span>
                                                 <input id="tagInput" name="tags"
                                                     class="form-control"
                                                     type="text"
                                                     placeholder="e.g. MS Office, computer skills, etc." />
                                             </div>
                                         </div>
-
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-12">
@@ -70,7 +83,8 @@
                                     <div class="form-group">
                                         <div class="col-sm-12">
                                             <div class="post tag-list-holder" id="keywords">
-                                                <a id="clearSearchLink" class="link-icon pull-right" title="Clear search" href="@Url.Action("Basic")"><i class="fa fa-times"></i></a>
+                                                <a id="clearSearchLink" class="link-icon pull-right" title="Clear search" href="@Url.Action("Basic")"><i
+                                                    class="fa fa-times"></i></a>
                                                 <div class="inline-container tag-list">
                                                     @foreach (var i in currentTags) { 
                                                         <div class="tag matched-tag">

@@ -11,8 +11,7 @@ using ESRGC.GIS.Geocoding;
 using ESRGC.GIS.Utilities;
 
 namespace ESRGC.DLLR.EARN.Controllers
-{
-  [SetGuestCookie]
+{  
   public class BaseController : Controller
   {
     protected IWorkUnit _workUnit = null;
@@ -141,7 +140,7 @@ namespace ESRGC.DLLR.EARN.Controllers
           var account = _workUnit.AccountRepository.Entities.First(x => x.EmailAddress == User.Identity.Name);
           return account;
         }
-        catch (Exception ex) {
+        catch (Exception) {
           return null;
         }
       }

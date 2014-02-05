@@ -1,0 +1,28 @@
+﻿@using ESRGC.DLLR.EARN.Domain.Model
+@{
+    ViewBag.Title = "Communication";
+    ViewBag.Header = "Email Not Sent";
+}
+
+@section header{
+    <div class="container">
+        <header class="page-header">
+            <h3>@ViewBag.Header <i class="fa fa-envelope-o"></i></h3>
+            @*<ul class="breadcrumb">
+                <li><a href="@Url.Action("index", "Home")">Home</a></li>
+                <li class="active">@ViewBag.Header</li>
+            </ul>*@
+        </header>
+    </div>
+}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+            <div class="alert alert-danger">
+                <h4>@ViewBag.Header</h4>
+                <p>Email was not sent! Please try again.</p>
+                <a class="btn btn-default" href="@Url.Action("Index", "Home")">Home</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -16,7 +16,7 @@ namespace ESRGC.DLLR.EARN.Controllers
         From = ConfigurationManager.AppSettings["senderEmail"].ToString();
       }
       catch (Exception) {
-        From = "no-reply-EARNMDCONNECT@salisbury.edu";
+        From = "no-reply-EARNMDCONNECT@maryland.gov";
       }
     }
 
@@ -49,6 +49,47 @@ namespace ESRGC.DLLR.EARN.Controllers
       else
         Subject = "EARN MD CONNECT - " + model.Title;
       return Email("SendEmailMessage", model);
+    }
+    public EmailResult SendCustomerEmail(Message model) {
+      From = model.Sender.Contact.Email;
+      CC.Add(model.Sender.Contact.Email);
+
+      string earnEmail = "", esrgcEmail = "";
+      try {
+        earnEmail = ConfigurationManager.AppSettings["earnEmail"].ToString();
+        esrgcEmail = ConfigurationManager.AppSettings["esrgcEmail"].ToString();
+      }
+      catch {
+        earnEmail = "earn.jobs@maryland.gov";
+        esrgcEmail = "esrgc@salisbury.edu";
+      }
+      To.Add(earnEmail);
+      To.Add(esrgcEmail);
+      Subject = model.Title;
+      return Email("SendCustomerEmail", model);
+    }
+
+    public EmailResult SendAnnouncementEmail(Message model, List<string> emailList) {
+      emailList.ForEach(x => To.Add(x));
+      string earnEmail = "", esrgcEmail = "";
+      try {
+        earnEmail = ConfigurationManager.AppSettings["earnEmail"].ToString();
+        esrgcEmail = ConfigurationManager.AppSettings["esrgcEmail"].ToString();
+      }
+      catch {
+        earnEmail = "earn.jobs@maryland.gov";
+        esrgcEmail = "esrgc@salisbury.edu";
+      }
+      BCC.Add(earnEmail);
+      BCC.Add(esrgcEmail);
+
+      Subject = "EARN MD CONNECT - " + model.Title;
+      return Email("SendAnnouncementEmail", model);
+    }
+    public EmailResult SendAnnouncementEmail(Message model, string emailAddress) {
+      To.Add(emailAddress);
+      Subject = "EARN MD CONNECT - " + model.Title;
+      return Email("SendAnnouncementEmail", model);
     }
   }
 }

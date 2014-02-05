@@ -13,8 +13,9 @@
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
-            @if (User.Identity.IsAuthenticated) {
-                <ul class="nav navbar-nav">
+
+            <ul class="nav navbar-nav">
+                @if (User.Identity.IsAuthenticated) {
                     <li><a href="@Url.Action("Basic", "Search")"><i class="fa fa-search"></i>&nbsp;Search</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-link"></i>&nbsp;Partnerships
@@ -26,6 +27,7 @@
                             <li><a href="@Url.Action("Create", "Partnership")">Create new partnership</a></li>
                         </ul>
                     </li>
+                
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-plus"></i>&nbsp;More
                             <b class="caret"></b>
@@ -33,31 +35,39 @@
                         <ul class="dropdown-menu">
                             <li><a target="_blank" href="http://www.earn.maryland.gov">Resources</a></li>
                             <li><a data-toggle="modal" href="#about">About EARN MD CONNECT</a></li>
-                            <li><a href="mailto:earn.jobs@maryland.gov?subject=Contact EARN MD CONNECT">Contact EARN MD</a></li>
+                            <li><a href="@Url.Action("sendContactEarnEmail", "Communication")">Contact EARN MD</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-question"></i>&nbsp;Help
+                }
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-question"></i>&nbsp;Help
                             <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="mailto:earn.jobs@maryland.gov?subject=EARN MD CONNECT – Technical Issue&cc=esrgc@salisbury.edu">Report technical issues</a></li>
-                            <li><a href="mailto:earn.jobs@maryland.gov?subject=EARN MD CONNECT - Website Feedback&cc=esrgc@salisbury.edu">Website feedback</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            }
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="@Url.Action("sendTechnicalReportEmail", "Communication")">Report technical issues</a></li>
+                        <li><a href="@Url.Action("sendFeedbackEmail", "Communication")">Website feedback</a></li>
+                    </ul>
+                </li>
+            </ul>
+
 
             <ul class="nav navbar-nav navbar-right">
                 @if (Request.IsAuthenticated) {
                     var noteCount = Html.Action("NotificationCount", "Communication"); 
                     <li>
-                        <a href="#" data-toggle="popover" id="notifications" role="menuitem" data-trigger="click" rel="popover">
+                        <a href="#" data-toggle="popover" id="notifications" role="menuitem" 
+                            rel="popover" data-placement="bottom" data-original-title="Notifications">
                             <i class="fa fa-flag fa-lg"></i>&nbsp;
                                 @if (noteCount.ToString() != "0") { 
                                     <span class="label label-danger">@noteCount</span>
                                 }
                         </a>
+                        @*Notification popover content*@
+                        @if (Request.IsAuthenticated) { 
+                            <div class="hidden-content">
+                                @Html.Action("Notifications", "Communication")
+                            </div>
+                        }
                     </li>
                     <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-cog"></i>&nbsp;@User.Identity.Name
@@ -70,6 +80,7 @@
                                 </a>
                             </li>
                             <li><a href="@Url.Action("Settings", "Account")">Account settings</a></li>
+                            @Html.Action("NavLinks", "Admin")
                             <li><a href="@Url.Action("SignOut", "Account")">Sign out</a></li>
                         </ul>
                     </li>
@@ -87,12 +98,7 @@
         </div>
     </div>
     <!-- /.navbar-collapse -->
-    @*Notification popover content*@
-    @if (Request.IsAuthenticated) { 
-        <div class="hidden-content">
-            @Html.Action("Notifications", "Communication")
-        </div>
-    }
+
 </div>
 
 <!-- Modal -->

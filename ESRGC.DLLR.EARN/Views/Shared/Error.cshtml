@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Error";
+    ViewBag.Header = "An error has occurred";
+}
+
+@section header{
+    <div class="container">
+        <header class="page-header">
+            <h3>@ViewBag.Header <i class="fa fa-times"></i></h3>
+            @*<ul class="breadcrumb">
+                <li><a href="@Url.Action("index", "Home")">Home</a></li>
+                <li class="active">@ViewBag.Header</li>
+            </ul>*@
+        </header>
+    </div>
+}
+
+<div class="container">
+   <div class="row">
+       <div class="col-md-8 col-md-offset-2">
+           <div class="alert alert-default">
+               <h4>Error processing your request</h4>
+               <p>
+                   An error has occurred while processing your request. Our server might have been 
+                   too busy to complete your request. Please try again.
+               </p>
+               <a class="btn btn-default" href="@Url.Action("Index", "Home")">Back to Home</a>
+           </div>
+       </div>
+   </div>
+</div>

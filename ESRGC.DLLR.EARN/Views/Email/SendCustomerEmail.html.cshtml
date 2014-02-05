@@ -1,0 +1,24 @@
+﻿@using ActionMailer.Net.Mvc
+@model ESRGC.DLLR.EARN.Domain.Model.Message
+@{
+    Layout = null;
+}
+<h4>EARN MD CONNECT</h4>
+
+<strong>@Model.Header</strong> on @Model.Created
+
+<p>@Model.Message1</p>
+<p><i>@Model.Message2</i></p>
+<p><b>@Model.Message3</b></p>
+<br />
+<p>@Model.FootNote</p>
+<p>
+    This message was sent on behalf of @Model.Sender.Organization.Name via 
+    EARN MD CONNECT. 
+</p>
+<br />
+<p>
+    Thanks for using EARN MD CONNECT!<br />
+    -	Team EARN Maryland
+</p>
+

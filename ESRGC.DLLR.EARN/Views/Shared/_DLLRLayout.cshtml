@@ -108,29 +108,50 @@
                     @*<img src="@Url.Content("~/Content/images/MSGIC-logo.jpg")" class="site-logo" />*@
                     <!--Header-->
                     @RenderSection("header", required: false)
-                    <div class="container hidden-content" id="cookieWarning">
-                        <div class="row">
-                            <div class="col-md-8 col-md-offset-2">
-                                <div class="alert alert-warning">
-                                    <h4>Cookies are not enabled</h4>
-                                    <p>
-                                        This web site uses cookies to track your account information.
-                                        If you are experiencing problems with signing in to the site,
-                                        your browser might have blocked this site to set cookies.
-                                        Please enable cookies (including third parties). Contact EARN MD CONNECT
-                                        if you have any question.
-                                        <br />
-                                        This message will go away if cookies are enabled in your browser.
-                                    </p>
+                    <!--JavaScript isn't turned off warning-->
+                    <noscript>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8 col-md-offset-2">
+                                    <div class="alert alert-warning">
+                                        <h4>JavaScript is turned off in your web browser</h4>
+                                        <p>
+                                            For full functionality of this site, it is necessary to enable JavaScript.
+                                            Here are the <a class="alert-link" href="http://www.enable-javascript.com/" target="_blank">
+                                            instructions how to enable JavaScript in your web browser</a>.
+                                            Please turn it on to take full advantage of this site, then refresh the page.                                       
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </noscript>
+                    @if (ViewBag.Title != "Cookie Not Enabled") { 
+                        <div class="container hidden-content" id="cookieWarning">
+                            <div class="row">
+                                <div class="col-md-8 col-md-offset-2">
+                                    <div class="alert alert-warning">
+                                        <h4>Cookies are not enabled</h4>
+                                        <p>
+                                            This web site uses cookies to track your account information.
+                                            If you are experiencing problems with signing in to the site,
+                                            your browser might have blocked this site to set cookies.
+                                            Please enable cookies (including third parties). Contact EARN MD CONNECT
+                                            if you have any question. 
+                                            <a class="alert-link" target="_blank" href="http://www.dllr.maryland.gov/aboutdllr/cookies.shtml">Click here</a>
+                                            for instructions on how to enable cookies in your browser
+                                        <br />
+                                            This message will go away if cookies are enabled in your browser.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
                     <section class="body-content">
                         @RenderBody()
                     </section>
                 </div>
-
             </div>
         </div>
         <div class="push">
@@ -140,10 +161,10 @@
         <div class="footer">
             <div class="text-center">
                 @*@RenderSection("footer", required: false)*@
-    <a href="http://esrgc.org" target="_blank">
+                <a href="http://esrgc.org" target="_blank">
                     <img class="site-logo" src="@Url.Content("~/Client/images/esrgc.png")" alt=""/></a>
                 @*<a  href="http://www.gov.state.md.us/" target="_blank"><img class="site-logo" src="@Url.Content("~/client/images/MDlogo.gif")" alt=""/></a>*@
-    <a href="http://www.dllr.maryland.gov/earn" target="_blank">
+                <a href="http://www.dllr.maryland.gov/earn" target="_blank">
                     <img class="site-logo" src="@Url.Content("~/client/images/EARN_logo_200w.jpg")" alt=""/></a>
                 <a href="http://www.salisbury.edu/" target="_blank">
                     <img class="site-logo" src="@Url.Content("~/client/images/SalisburyUniversity.jpg")" alt=""/></a>
@@ -173,25 +194,72 @@
                 return this.href == url;
             }).parent().addClass('active');
             //tooltip for nav bar
-            $('.navbar a').tooltip({
+            $('.navbar a[data-toggle!=popover]').tooltip({
                 toggle: "tooltip",
                 placement: "bottom",
                 container: 'body'
             });
-            $('.container a').tooltip({
+            //tooltips for items in containers
+            $(document).tooltip({
                 toggle: 'tooltip',
                 placement: 'right',
-                container: 'body'
-            });
-            $('body').popover({
-                placement: 'bottom',
                 container: 'body',
-                selector: '[rel=popover]',
+                selector: '.container a[data-toggle!=popover]'
+            });
+            //navbar popover for notifications
+            $(document).popover({
+                container: 'body',
+                selector: '.navbar [data-toggle=popover]',
+                //trigger: 'manual',
                 html: true,
                 content: function () {
-                    return $('.hidden-content').html();
+                    //console.log($(this).siblings('.hidden-content').html());
+                    return $(this).siblings('.hidden-content').html();
                 }
             });
+            //$('.navbar [data-toggle=popover]').on("mouseenter",  function () {
+            //    var _this = this;
+            //    //console.log(this);
+            //    $(this).popover('show');
+            //    $('.popover').find('.popover-content').html($(this).siblings('.hidden-content').html());
+            //    $(".popover").on("mouseleave", function () {
+            //        $(_this).popover('hide');
+            //    });
+            //}).on('mouseleave',  function () {
+            //    var _this = this;
+            //    setTimeout(function () {
+            //        if (!$('.popover:hover').length) {
+            //            $(_this).popover('hide')
+            //        }
+            //    }, 500);
+            //});
+            //partnership list
+            $('.partnership-container a[rel="popover"]').popover({
+                trigger: 'manual',
+                container: 'body',
+                html: true,
+                content: function () {
+                    //console.log($(this).siblings().html());
+                    return $(this).siblings('.hidden-content').html();
+                }
+            //});
+            }).on('mouseenter',  function () {
+                var _this = this;
+                //console.log(this);
+                $(this).popover('show');
+                //$('.popover').find('.popover-content').html($(this).siblings('.hidden-content').html());
+                $('.popover').on('mouseleave', function () {
+                    $(_this).popover('hide');
+                });
+            }).on('mouseleave',  function () {
+                var _this = this;
+                setTimeout(function () {
+                    if (!$('.popover:hover').length) {
+                        $(_this).popover('hide')
+                    }
+                }, 500);
+            });
+            
             $(document).on('click', '.submit-button', function () {
                 $(this).button('loading');
             });

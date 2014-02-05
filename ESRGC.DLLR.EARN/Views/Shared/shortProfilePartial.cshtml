@@ -20,7 +20,7 @@
                 <div class="inline-container profile-area">
                     @Html.Partial("profileImagePartial")
                     <div class="row profile-container">
-                        <div class="col-sm-8">
+                        <div class="col-sm-12">
                             <div class="">
                                 <h4>
                                     @if (isOwnProfile) {
@@ -62,11 +62,13 @@
                                 }
                             </div>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-12">
                             <div class="help-block"><i class="fa fa-tags"></i>&nbsp;Tags</div>
-                            @if (Model.ProfileTags != null) {
-                                @Html.Partial("tagListLinkPartial", Model.getTagNames())
-                            }
+                            <div class="placeholder-panel">
+                                @if (Model.ProfileTags != null) {
+                                    @Html.Partial("tagListLinkPartial", Model.getTagNames())
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>

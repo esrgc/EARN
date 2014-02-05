@@ -17,7 +17,7 @@ namespace ESRGC.DLLR.EARN.Filters
         var workUnit = (filterContext.Controller as BaseController).WorkUnit;
         var messages = workUnit.MessageRepository
           .Entities
-          .Where(x => x.EmailSent == false)
+          .Where(x => x.EmailSent == false && x.SenderID != x.ReceiverID)
           .ToList();
         foreach (var unsent in messages) {
           EmailHelper.SendEmailMessage(unsent);

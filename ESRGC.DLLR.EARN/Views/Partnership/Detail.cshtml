@@ -256,7 +256,8 @@
                         <div class="panel panel-info">
                             <div class="panel-heading">
                                 <h5 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#partnershipDetail" href="#tags">Target Industry Tags&nbsp;<i class="fa fa-tags"></i></a>
+                                    <a data-toggle="collapse" data-parent="#partnershipDetail" href="#tags">Target Industry Tags&nbsp;<i
+                                        class="fa fa-tags"></i></a>
                                 </h5>
                             </div>
                             <div id="tags" class="panel-collapse collapse">
@@ -374,9 +375,7 @@
                                         </p>
                                     }
                                     @foreach (var profile in partners) { 
-                                        <div class="placeholder-panel">
-                                            @Html.Partial("shortProfilePartial", profile)
-                                        </div>
+                                        @Html.Partial("shortProfilePartial", profile)
                                     }
                                 </div>
                             </div>

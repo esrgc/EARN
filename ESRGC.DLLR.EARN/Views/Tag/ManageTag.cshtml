@@ -18,7 +18,7 @@
 }
 
 @section scripts {
-    <script type="text/javascript" src="@Url.Content("~/Client/jsLib/typeahead.js/typeahead.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Client/jsLib/typeahead.js/typeahead.js")"></script>
     <script type="text/javascript">
         var tagArray = [];
         //for ie8
@@ -119,7 +119,7 @@
             });
             $('.typeahead.input-sm').siblings('input.tt-hint').addClass('hint-small');
             $('.typeahead.input-lg').siblings('input.tt-hint').addClass('hint-large');
-            $('button[type="submit"]').on('click', function () { $('form').submit(); });
+            $(document).on('click', 'button[type="submit"]', function () { $('#tagForm').submit(); });
             //click event on add button
             $('#addTagBtn').on('click', function (e) {
                 addTags();

@@ -4,7 +4,7 @@
 }
 <div class="inline-block mini-profile">
     <div class="inline-container ">
-        <div class="profile-picture">
+        @*<div class="profile-picture">
             @if (Model.PictureID != null) { 
                 <img class="img-thumbnail" src="@Url.Action("ProfilePicture", new { pictureId = Model.PictureID })"/>
             }
@@ -12,7 +12,7 @@
                 <img class="img-thumbnail" src="@Url.Content("~/Client/images/empty_profile.gif")"/>
             }
 
-        </div>
+        </div>*@
         <h4>
             <span>
                 <a title="View this profile" href="@Url.Action("ViewProfile", "Profile", new { Model.ProfileID, returnUrl })">

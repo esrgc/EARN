@@ -20,7 +20,13 @@
 }
 
 @section scripts {
-
+    <script type="text/javascript">
+        var startup = function () {
+            //$(document).on('mouseenter', '#partnershipList *[data-toggle=popover]', function () {
+            //    $(this).popover('show');
+            //});
+        };
+    </script>
 }
 @{
     var filters = ViewBag.filters as Dictionary<string, object> ?? new Dictionary<string, object>();
@@ -38,7 +44,7 @@
 
                 <div class="window-panel-content">
                     @if (Model.Count() == 0) {
-                        <p>There are current no partnerships available.</p>
+                        <p>There are currently no partnerships available.</p>
                     }
                     else {
                         if (Model.PageCount > 1) {
@@ -47,7 +53,7 @@
                             page => Url.AddSearchFilter("Index", filters, "page", page.ToString()),
                             PagedListRenderOptions.OnlyShowFivePagesAtATime
                         )}
-                        <div class="">
+                        <div class="" id="partnershipList">
                             <ul class="list-group">
                                 @foreach (var p in Model) {
                                     <li class="list-group-item">

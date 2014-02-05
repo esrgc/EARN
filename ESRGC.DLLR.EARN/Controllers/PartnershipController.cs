@@ -337,15 +337,15 @@ but should not be used to share proprietary or sensitive content.",
           Account = profile.getAccount(),
           Category = "Partnership Update",
           Message = "You are no longer a partner of the \"" + partnership.Name + "\" partnership",
-          Message2 = "The administrator has removed you from the partnership.",
+          Message2 = "The administrator has removed you emailAddress the partnership.",
           Message3 = "There is no further action neccessary. You can request to join other partnerships."
         };
         _workUnit.NotificationRepository.InsertEntity(n);
         _workUnit.saveChanges();
-        updateTempMessage(profile.Organization.Name + " has been removed from \"" + partnership.Name + "\" partnership");
+        updateTempMessage(profile.Organization.Name + " has been removed emailAddress \"" + partnership.Name + "\" partnership");
       }
       else
-        updateTempMessage("Error removing partner from partnership.");
+        updateTempMessage("Error removing partner emailAddress partnership.");
 
       return returnToUrl(returnUrl, Url.Action("Detail", new { partnershipID }));
     }

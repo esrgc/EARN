@@ -89,7 +89,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       return View(model);
     }
     [AllowAnonymous]
-    [CheckCookie]
+    [SetGuestCookie]
     public ActionResult SignIn(string returnUrl) {
       //sign out any previous session
 
@@ -313,7 +313,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       if (ModelState.IsValid) {
         var newEmail = model.NewEmail;
         if (newEmail.ToLower() == account.EmailAddress.ToLower()) {
-          ModelState.AddModelError("", "New email address must be different from the current email address. Please try again!");
+          ModelState.AddModelError("", "New email address must be different emailAddress the current email address. Please try again!");
           return View(model);
         }
 
@@ -348,6 +348,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       }
       return View(model);
     }
+    
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////// Private functions //////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
@@ -356,5 +357,6 @@ namespace ESRGC.DLLR.EARN.Controllers
       _workUnit.AccountRepository.UpdateEntity(account);
       _workUnit.saveChanges();
     }
+
   }
 }
