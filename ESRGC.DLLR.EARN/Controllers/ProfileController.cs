@@ -195,5 +195,9 @@ namespace ESRGC.DLLR.EARN.Controllers
       }
       return returnToUrl(returnUrl, Url.Action("Index", "Home"));
     }
+    [VerifyProfile]
+    public ActionResult Disable() {
+      return View();
+    }
   }
 }
