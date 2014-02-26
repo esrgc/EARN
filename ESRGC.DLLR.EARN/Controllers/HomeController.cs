@@ -32,21 +32,6 @@ namespace ESRGC.DLLR.EARN.Controllers
     public ViewResult CookieNotEnabled() {
       return View();
     }
-    public ActionResult SendEmail() {
-      var model = new Notification() {
-        Account = new Account() { EmailAddress = "tahoang@salisbury.edu" },
-        Message = "You're in the test notification system",
-        Category = "Test"
-      };
-      new EmailController().Notification(model).DeliverAsync();
-
-      //Helpers.EmailHelper.SendNotificationEmail(model);
-      //dynamic email = new Email("SendMail");
-      //email.To = "test@example.com";
-      //email.Message = "Test";
-      //email.Send();
-
-      return View();
-    }
+    
   }
 }

@@ -165,6 +165,7 @@
     <Compile Include="Controllers\OrganizationController.cs" />
     <Compile Include="Controllers\PartnershipController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\PublicController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\TagController.cs" />
     <Compile Include="Filters\AllowNonAdminAttribute.cs" />
@@ -448,6 +449,8 @@
     <Content Include="Views\Communication\EmailSent.cshtml" />
     <Content Include="Views\Communication\EmailNotSent.cshtml" />
     <Content Include="Views\Shared\displayProfilePartial.cshtml" />
+    <Content Include="Views\Public\Profiles.cshtml" />
+    <Content Include="Views\Public\Partnerships.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

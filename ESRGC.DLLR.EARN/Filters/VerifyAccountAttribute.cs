@@ -14,7 +14,7 @@ namespace ESRGC.DLLR.EARN.Filters
   {
     public override void OnActionExecuting(ActionExecutingContext filterContext) {
       try {
-        System.Diagnostics.Debug.WriteLine(filterContext.ActionDescriptor.ActionName);
+        //System.Diagnostics.Debug.WriteLine(filterContext.ActionDescriptor.ActionName);
         var requestEmail = filterContext.HttpContext.User.Identity.Name;
         var workUnit = (filterContext.Controller as BaseController).WorkUnit;
         workUnit.AccountRepository.Entities.First(x => x.EmailAddress.ToLower() == requestEmail.ToLower());
@@ -22,11 +22,13 @@ namespace ESRGC.DLLR.EARN.Filters
       catch (Exception) {
         if (filterContext.IsChildAction)
           filterContext.Result = new EmptyResult();
-        else
+        else {
           filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary() { 
             {"controller", "Home"},
             {"action", "Index"}
           });
+          filterContext.Controller.TempData["message"] = "Join EARN MD CONNECT to view full site content!";
+        }
       }
     }
   }

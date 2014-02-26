@@ -334,6 +334,10 @@ a.link-icon:hover,
 .info-button-container a {
   min-width: 280px;
 }
+.info-button-container span,
+.info-button-container small {
+  font-size: 75%;
+}
 .term-condition-container {
   max-height: 400px;
   overflow: auto;

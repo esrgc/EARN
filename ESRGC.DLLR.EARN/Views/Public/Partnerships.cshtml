@@ -1,0 +1,38 @@
+﻿@using ESRGC.DLLR.EARN.Domain.Model
+@using PagedList.Mvc;
+@model PagedList.IPagedList<Partnership>
+@{
+    ViewBag.Title = "Partnerships";
+    ViewBag.Header = "EARN Partnerships";
+}
+
+
+@section header{
+    <div class="container">
+        <h3>@ViewBag.Header</h3>       
+    </div>
+}
+
+@section scripts {
+
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            @Html.PagedListPager(Model,
+            page => Url.Action("Partnerships", new { page }),
+            PagedListRenderOptions.TwitterBootstrapPager)
+            <ul class="list-group">
+                @foreach (var i in Model) { 
+                    <li class="list-group-item">
+                        @Html.Partial("shortPartnershipPartial", i)
+                    </li>
+                }
+            </ul>
+            @Html.PagedListPager(Model,
+            page => Url.Action("Partnerships", new { page }),
+            PagedListRenderOptions.TwitterBootstrapPager)
+        </div>
+    </div>
+</div>

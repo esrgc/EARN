@@ -55,7 +55,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       //  updateTempMessage("There are currently no tags on your profile. Other organizations will be more likely to find you when tags are available.");
       //  return RedirectToAction("ManageTag", "Tag");
       //}
-      
+
       return View(CurrentAccount.Profile);
     }
     [AllowNonProfile]

@@ -11,7 +11,7 @@ using ESRGC.GIS.Geocoding;
 using ESRGC.GIS.Utilities;
 
 namespace ESRGC.DLLR.EARN.Controllers
-{  
+{
   public class BaseController : Controller
   {
     protected IWorkUnit _workUnit = null;
@@ -26,7 +26,6 @@ namespace ESRGC.DLLR.EARN.Controllers
       }
     }
 
-    [Authorize]
     public ActionResult ProfilePicture(int pictureId) {
       try {
         var pic = _workUnit.PictureRepository.GetEntityByID(pictureId);
