@@ -42,7 +42,7 @@ dx.defineController('Search', {
             change: 'onOrgTypeChange'
         }
     },
-    initialize: function () {
+    initialize: function() {
         var scope = this;
         //call base class' constructor
         dx.app.controller.Search.parent.initialize.apply(this, arguments);
@@ -60,17 +60,17 @@ dx.defineController('Search', {
         //modify pagination to small
         this.getPager().addClass('pagination-sm');
         //add current tags to tag array
-        this.getCurrentHiddenInput().each(function (i) {
+        this.getCurrentHiddenInput().each(function(i) {
             scope.tagArray.push($(this).val());
         });
         //store event handler
         var store = dx.getStore('Search');
         if (typeof store != 'undefined') {
-            store.on('beforeLoad', function () { scope.preloadState(); });
+            store.on('beforeLoad', function() { scope.preloadState(); });
             store.on('load', scope.onSearchStoreLoad);
         }
     },
-    onPageLinksClick: function (event, object) {
+    onPageLinksClick: function(event, object) {
         event.preventDefault();
         var url = $(object).attr('href');
         if (typeof url == 'undefined')
@@ -82,7 +82,7 @@ dx.defineController('Search', {
         }
     },
     //intercept submit event to use ajax to load content
-    onSearchSubmit: function (event, object) {
+    onSearchSubmit: function(event, object) {
         event.preventDefault();
 
         var scope = this;
@@ -116,7 +116,7 @@ dx.defineController('Search', {
             store.loadContent();
         }
     },
-    onOrgTypeChange: function (event, object) {
+    onOrgTypeChange: function(event, object) {
         var scope = this;
         var searchForm = scope.getSearchForm();
         var tagInput = scope.getTagInput();
@@ -128,7 +128,7 @@ dx.defineController('Search', {
     //////////////////////////////////////////////
     //store event handlers
     //////////////////////////////////////////////
-    onSearchStoreLoad: function (store, data) {
+    onSearchStoreLoad: function(store, data) {
         var scope = dx.getController('Search');
         //var pageContainer = scope.getPageContent();//get page container
         //replace content of page container with new content
@@ -150,13 +150,15 @@ dx.defineController('Search', {
         //set state to loaded
         scope.loadedState();
         scope.updateTagList();
+        
 
         //call this to update map
         if (typeof this.events.searchStoreLoaded == 'function')
             this.events.searchStoreLoaded.apply(store, arguments);//call in store scope
+        //modify pagination to small
     },
     //helpers
-    tagExists: function (tag) {
+    tagExists: function(tag) {
         var tagArray = this.tagArray;
         for (var i = 0; i < tagArray.length; i++) {
             if (tagArray[i] == tag.toUpperCase())
@@ -164,7 +166,7 @@ dx.defineController('Search', {
         }
         return false;
     },
-    removeEmptyTags: function (params) {
+    removeEmptyTags: function(params) {
         var tags = params.tags;
         if (tags == '') {
             delete params.tags;
@@ -175,22 +177,23 @@ dx.defineController('Search', {
                 delete tags[i];
         }
     },
-    updateStatus: function (msg) {
+    updateStatus: function(msg) {
         this.getNotificationLabel().text(msg);
     },
-    preloadState: function () {
+    preloadState: function() {
         //dx.log('pre-load');
         this.getGoBtn().button('loading');
     },
-    loadedState: function () {
+    loadedState: function() {
         //dx.log('loaded');
         this.getGoBtn().button('reset');
+        this.getPager().addClass('pagination-sm');
     },
-    updateTagList: function () {
+    updateTagList: function() {
         var currentTags = this.getCurrentHiddenInput();
         this.tagArray = [];
         var tagArray = this.tagArray;
-        currentTags.each(function (i, tag) {
+        currentTags.each(function(i, tag) {
             var tagName = $(tag).val().toUpperCase();
             dx.log(tagName);
             tagArray.push(tagName);

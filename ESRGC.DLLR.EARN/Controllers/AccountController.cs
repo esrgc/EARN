@@ -132,7 +132,7 @@ namespace ESRGC.DLLR.EARN.Controllers
             return Redirect(returnUrl);
           }
           else {
-            return RedirectToAction("Detail", "Profile");
+            return RedirectToAction("Index", "Home");
           }
         }
         else
