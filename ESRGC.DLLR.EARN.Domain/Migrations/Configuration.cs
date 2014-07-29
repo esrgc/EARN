@@ -28,11 +28,17 @@ namespace ESRGC.DLLR.EARN.Domain.Migrations
       //      new person { fullname = "rowan miller" }
       //    );
       //
-
+      foreach (var i in context.Profiles) {
+        if (i.Accounts.Count() == 1) {
+          i.Accounts.First().IsProfileOwner = true;
+        }
+      }
+      context.SaveChanges();
       //context.UserGroups.RemoveRange(context.UserGroups.ToList());
       //context.Communities.RemoveRange(context.Communities.ToList());
       if (context.Tags.Count() == 0) {
         context.Tags.AddOrUpdate(
+          x=>x.Name,
         new Tag { Name = "Career Planning".ToUpper() },
         new Tag { Name = "Community Organization".ToUpper() },
         new Tag { Name = "Economic Development".ToUpper() },
@@ -100,6 +106,7 @@ namespace ESRGC.DLLR.EARN.Domain.Migrations
       };
       if (context.UserGroups.Count() == 0) {
         context.UserGroups.AddOrUpdate(
+          x=>x.Name,
           new UserGroup { Name = "Industry", Description = "e.g. Industry Associations, Employers, Chambers of Commerce" },
           new UserGroup { Name = "Education and Training", Description = "e.g. Two- and Four-Year Institutions of Higher Education, Apprenticeship programs, K-12 programs" },
           new UserGroup { Name = "Workforce and Economic Development and Local Governmental Entities", Description = "" },
@@ -111,6 +118,7 @@ namespace ESRGC.DLLR.EARN.Domain.Migrations
       }
       if (context.Categories.Count() == 0) {
         context.Categories.AddOrUpdate(
+          x=>x.Name,
           new Category { Name = "Accommodation and Food Services", UserGroupID = 1 },
           new Category { Name = "Administrative and Support Services", UserGroupID = 1 },
           new Category { Name = "Agriculture, Forestry, Fishing, and Hunting", UserGroupID = 1 },

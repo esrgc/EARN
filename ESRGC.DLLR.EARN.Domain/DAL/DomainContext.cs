@@ -81,7 +81,7 @@ namespace ESRGC.DLLR.EARN.Domain.DAL
         .HasOptional(x => x.Receiver)
         .WithMany(x => x.ReceivedMessages)
         .HasForeignKey(x => x.ReceiverID)
-        .WillCascadeOnDelete(false);
+        .WillCascadeOnDelete(false);                  
     }
   }
 }

@@ -59,6 +59,25 @@ namespace ESRGC.DLLR.EARN.Controllers
       return View(CurrentAccount.Profile);
     }
     [AllowNonProfile]
+    public ActionResult Find(string name, string f = "html") {
+      var result = _workUnit.ProfileRepository.Entities;
+      if (!String.IsNullOrEmpty(name))
+        result = result.Where(x => x.Organization.Name.ToLower().Contains(name.ToLower()));
+      var json = result.Select(x => new {
+        ID = x.ProfileID,
+        Name = x.Organization.Name,
+        Website = x.Organization.Website,
+        Group = x.UserGroup.Name,
+      }).ToList();
+      if (Request.IsAjaxRequest() || f.ToLower() == "json") {
+        return Json(json, JsonRequestBehavior.AllowGet);
+      }
+      return View(result.ToList());
+    }
+    public ActionResult Join(int profileID) {
+      return View();
+    }
+    [AllowNonProfile]
     public ActionResult Create() {
       //if (CurrentAccount.Profile != null) {
       //  updateTempDataMessage("Profile already created!");
@@ -97,6 +116,7 @@ namespace ESRGC.DLLR.EARN.Controllers
         var account = CurrentAccount;
         if (account != null) {
           account.Profile = p;
+          account.IsProfileOwner = true;
           _workUnit.AccountRepository.UpdateEntity(account);
           _workUnit.saveChanges();
         }

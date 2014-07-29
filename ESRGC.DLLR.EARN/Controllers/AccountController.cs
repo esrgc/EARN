@@ -268,6 +268,7 @@ namespace ESRGC.DLLR.EARN.Controllers
         }
         if (account != null) {
           //set temp password
+          account.InitialPassword = ESRGC.DLLR.EARN.Domain.Helpers.Utility.RandomString(8);
           account.Password = SHA1PasswordSecurity.encrypt(account.InitialPassword);
           _workUnit.AccountRepository.UpdateEntity(account);
           _workUnit.saveChanges();

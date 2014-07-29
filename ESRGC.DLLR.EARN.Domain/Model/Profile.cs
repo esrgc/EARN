@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.Spatial;
 using System.Linq;
 using System.Text;
@@ -45,7 +46,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public DateTime? LastUpdate { get; set; }
     [Display(Description = "Describe why your organization is interested in EARN MD (i.e., what you would bring to a Partnership and/or what you hope to gain).  What you provide here will be visible to other EARN MD CONNECT users when searching for potential partners.")]
     public string About { get; set; }
-
+       
     //navigation properties
     public virtual ICollection<ProfileTag> ProfileTags { get; set; }
     public virtual ICollection<Profile> Connections { get; set; }
@@ -90,12 +91,12 @@ namespace ESRGC.DLLR.EARN.Domain.Model
       }
     }
     /// <summary>
-    /// Gets the account associated with this profile
+    /// Gets the first account associated with this profile
     /// </summary>
     /// <returns></returns>
     public Account getAccount() {
       try {
-        return Accounts.First();
+        return Accounts.First(x=>x.IsProfileOwner);
       }
       catch (Exception) {
         return null;

@@ -25,7 +25,7 @@ namespace ESRGC.DLLR.EARN.Controllers
         return _workUnit;
       }
     }
-
+    [AllowNonProfile]
     public ActionResult ProfilePicture(int pictureId) {
       try {
         var pic = _workUnit.PictureRepository.GetEntityByID(pictureId);

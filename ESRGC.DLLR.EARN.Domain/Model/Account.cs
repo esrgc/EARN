@@ -20,6 +20,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
       EmailVerified = false;
       VerificationCode = Helpers.Utility.RandomString(30);
       InitialPassword = Utility.RandomString(8);
+      IsProfileOwner = false;
     }
 
     public int AccountID { get; set; }
@@ -68,7 +69,10 @@ namespace ESRGC.DLLR.EARN.Domain.Model
 
     public bool EmailVerified { get; set; }
     public string VerificationCode { get; set; }
-
+    /// <summary>
+    /// indicates this account is verified with the associated profile 
+    /// </summary>
+    public bool IsProfileOwner { get; set; }
     public void newVerificationCode() {
       VerificationCode = Helpers.Utility.RandomString(30);
     }

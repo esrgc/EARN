@@ -157,6 +157,10 @@
     <Compile Include="Migrations\201312131706024_message2.Designer.cs">
       <DependentUpon>201312131706024_message2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201407281750225_account.IsProfileOwner.cs" />
+    <Compile Include="Migrations\201407281750225_account.IsProfileOwner.Designer.cs">
+      <DependentUpon>201407281750225_account.IsProfileOwner.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\Announcement.cs" />
@@ -252,6 +256,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201312131706024_message2.resx">
       <DependentUpon>201312131706024_message2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407281750225_account.IsProfileOwner.resx">
+      <DependentUpon>201407281750225_account.IsProfileOwner.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

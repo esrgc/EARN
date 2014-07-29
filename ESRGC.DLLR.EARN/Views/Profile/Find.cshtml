@@ -1,0 +1,46 @@
+﻿@using ESRGC.DLLR.EARN.Domain.Model
+@model IEnumerable<Profile>
+@{
+  ViewBag.Title = "Find";
+  ViewBag.Header = "Organizations";
+}
+
+@section scripts{
+
+}
+
+@section header{
+  <div class="container">
+    <header class="page-header">
+      <h4>@ViewBag.Header <i class="fa fa-building-o"></i></h4>
+    </header>
+  </div>
+}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <form class="form-horizontal" method="post" action="@Url.Action("Find")">
+        <div class="form-group">
+          <div class="col-sm-12">
+            <div class="input-group">
+              <span class="input-group-addon" title="Organization"><i class="fa fa-search"></i></span>
+              <input type="text" id="organization-name" class="form-control" placeholder="Enter organization name" name="name" />
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="well">
+        @foreach (var i in Model) { 
+          <div class="">
+            @Html.Partial("displayProfilePartial", i)
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>
