@@ -271,28 +271,28 @@ and/or view this user’s Organizational Profile for more information.",
             };
           }
           break;
-        case "Profile Member Request":
+        case "profile member request":
           pr = (ProfileMemberRequest)request;
           var senderProfile = pr.Sender.Profile;
           if (senderProfile == null) {
             //new account without profile -> can accept
-            senderProfile = pr.Receiver.Profile;
-            _workUnit.ProfileRepository.UpdateEntity(senderProfile);
+            pr.Sender.ProfileID = pr.Receiver.ProfileID;
+            pr.Sender.IsProfileOwner = false;
+            _workUnit.AccountRepository.UpdateEntity(pr.Sender);
 
           }
           else {
             updateTempMessage("Can not accept this request. The requesting account already belongs to an organizational profile.");
-            _workUnit.RequestRepository.DeleteByID(requestID);
-            return RedirectToAction("Requests");
           }
+          _workUnit.RequestRepository.DeleteByID(requestID);
           break;
       }
       if (notification != null && detail != null) {
         _workUnit.PartnershipDetailRepository.InsertEntity(detail);
         _workUnit.NotificationRepository.InsertEntity(notification);
         _workUnit.RequestRepository.DeleteByID(requestID);
-        _workUnit.saveChanges();
       }
+      _workUnit.saveChanges();
 
       return RedirectToAction("Requests");
     }
@@ -512,7 +512,7 @@ and/or view this user’s Organizational Profile for more information.",
         return RedirectToAction("Index", "Home");
       }
       var owner = profile.getAccount();
-      if (owner == null) { 
+      if (owner == null) {
         updateTempMessage("No owner found for this profile. ID " + profile.ProfileID);
         return RedirectToAction("Index", "Home");
       }
@@ -534,7 +534,7 @@ and/or view this user’s Organizational Profile for more information.",
         Message2 = "Message: " + message,
         Message3 = message2,
         LinkToAction = Url.Action("Requests", "Communication")
-      }; 
+      };
       var request = new ProfileMemberRequest() {
         Message = string.Format(
           @"{0} ({2}) has requested to join your ""{1}"" profile with the following message: {3}",
