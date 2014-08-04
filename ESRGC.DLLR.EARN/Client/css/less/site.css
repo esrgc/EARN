@@ -43,16 +43,13 @@
   padding: 5px;
   margin-bottom: 8px;
   /*margin-left: -10px;*/
-
   /*margin-right: -10px;*/
-
   background: #3d4241;
   font-size: 12px;
   color: #ffffff;
   font-weight: bold;
   text-align: center;
   /*border: 1px solid @border-color;*/
-
   border-radius: 5px;
 }
 .list-container > ul > li {
@@ -73,7 +70,6 @@
   padding: 12px;
   border: 1px solid #dee4e2;
   /*text-shadow: 1px 1px 1px #E1E1E1;*/
-
   background: #FFFFFF;
   position: relative;
   border-radius: 5px;
@@ -131,7 +127,6 @@
 }
 .window-panel .in {
   /*border: 1px solid #eeeeee;*/
-
 }
 .window-panel .label-close {
   color: #000000;
@@ -180,7 +175,6 @@
 html,
 body {
   /*padding-top: 40px;*/
-
   height: 100%;
   margin: 0;
 }
@@ -229,7 +223,6 @@ address {
   /*.pagination {
         margin: 10px 0;
     }*/
-
 }
 .your-profile-label {
   margin-left: 12px;
@@ -308,7 +301,6 @@ a.link-icon:hover,
   /*a{
         text-decoration: none;
     }*/
-
 }
 .popover-content .list-group-item:hover {
   background: #f4f4f4;
@@ -370,4 +362,20 @@ a.link-icon:hover,
   padding-right: 2px;
   overflow-y: auto;
   overflow-x: hidden;
+}
+.overlay-container {
+  position: relative;
+  margin-bottom: 5px;
+}
+.overlay {
+  position: absolute;
+  z-index: 100;
+}
+.overlay.top-right {
+  top: 5px;
+  right: 5px;
+}
+.overlay.top-left {
+  top: 5px;
+  left: 5px;
 }

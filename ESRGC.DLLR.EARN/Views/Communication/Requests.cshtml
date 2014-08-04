@@ -35,7 +35,43 @@
                         <p>There are currently no requests.</p>
                     }
                     <ul class="list-group">
-                        @foreach (var i in Model.Cast<PartnershipRequest>()) {
+                      @{
+                        var partnershipRequests = Model.OfType<PartnershipRequest>().ToList();
+                        var profileRequests = Model.OfType<ProfileMemberRequest>().ToList();
+                        }
+                        @foreach (var i in profileRequests) {
+                            <li class="list-group-item">
+                                <div class="placeholder-pane">
+                                    <div>
+                                        <strong>@i.Type</strong>
+                                    </div>
+                                    <form action="@Url.Action("DeleteRequest")" method="post" role="form">
+                                        @Html.Hidden("requestID",i.RequestID)
+                                        <div class="pull-right btn-group">
+                                            <a href="@Url.Action("AcceptRequest", new { i.RequestID })" class="btn btn-success btn-sm"><i class="fa fa-check"></i>&nbsp;Accept</a>
+                                            <button type="submit" class="btn btn-default btn-sm"><i class="fa fa-times"></i>&nbsp;Delete</button>
+                                        </div>
+                                    </form>
+                                    @Html.Partial("miniProfilePartial", i.Receiver.Profile)
+                                    <p>
+                                        @if (string.IsNullOrEmpty(i.Message)) {
+                                            <strong>Message:</strong>
+                                            <text></text>
+                                        }
+                                        else { 
+                                            <strong>Message:</strong> @i.Message
+                                        }
+                                    </p>
+                                  <p>
+                                     Upon acceptance of this request, the requesting account
+                                     will be able to have full access to your profile and edit profile information.
+                                     If you do not regconize the person or this email address above, please discard this request or 
+                                     contact the person for more information.
+                                  </p>
+                                </div>
+                            </li>
+                        }
+                        @foreach (var i in partnershipRequests) {
                             <li class="list-group-item">
                                 <div class="placeholder-pane">
                                     <div>

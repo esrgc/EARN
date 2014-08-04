@@ -234,3 +234,19 @@ a.link-icon, .link-icon-container a {
     overflow-y: auto;
     overflow-x: hidden;
 }
+.overlay-container{
+    position: relative;
+    margin-bottom: 5px;
+}
+.overlay {
+    position: absolute;
+    z-index: 100;
+    &.top-right{
+        top: 5px;
+        right: 5px;
+    }
+    &.top-left{
+        top: 5px;
+        left: 5px;
+    }
+}

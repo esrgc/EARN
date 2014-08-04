@@ -1,5 +1,8 @@
 ﻿@using ESRGC.DLLR.EARN.Domain.Model
-@model IEnumerable<Profile>
+@using PagedList.Mvc;
+
+@model PagedList.IPagedList<Profile>
+
 @{
   ViewBag.Title = "Find";
   ViewBag.Header = "Organizations";
@@ -18,28 +21,48 @@
 }
 
 <div class="container">
+  <p>
+    Please search for the organization that you belong to, and request to join.
+    Or, cancel and <a href="@Url.Action("Create", "Profile")">create a new profile</a>.
+  </p>
+
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-10">
       <form class="form-horizontal" method="post" action="@Url.Action("Find")">
         <div class="form-group">
-          <div class="col-sm-12">
+          <div class="col-sm-8">
             <div class="input-group">
               <span class="input-group-addon" title="Organization"><i class="fa fa-search"></i></span>
-              <input type="text" id="organization-name" class="form-control" placeholder="Enter organization name" name="name" />
+              <input type="text" id="organization-name" class="form-control" placeholder="Enter organization name"
+                name="name" />
             </div>
+          </div>
+          <div class="col-sm-4">
+            <input type="submit" class="btn btn-default" value="Find" />
           </div>
         </div>
       </form>
+    </div>
+    <div class="col-md-6">
     </div>
   </div>
   <div class="row">
     <div class="col-md-12">
       <div class="well">
+         @Html.PagedListPager(Model,
+            page => Url.Action("Find", new { page }),
+            PagedListRenderOptions.MinimalWithPageCountText)
         @foreach (var i in Model) { 
-          <div class="">
-            @Html.Partial("displayProfilePartial", i)
+          <div class="overlay-container">
+            <span class="overlay top-right">
+              <a class="btn btn-sm btn-default" href="@Url.Action("JoinProfileRequest", "Communication", new { ProfileID = i.ProfileID})" >Join Request</a>
+            </span>
+            @Html.Partial("displayNoLinkProfilePartial", i)
           </div>
         }
+        @Html.PagedListPager(Model,
+            page => Url.Action("Find", new { page }),
+            PagedListRenderOptions.MinimalWithPageCountText)
       </div>
     </div>
   </div>

@@ -28,11 +28,13 @@ namespace ESRGC.DLLR.EARN.Domain.Migrations
       //      new person { fullname = "rowan miller" }
       //    );
       //
-      foreach (var i in context.Profiles) {
-        if (i.Accounts.Count() == 1) {
-          i.Accounts.First().IsProfileOwner = true;
-        }
-      }
+      //this is to seed the existing accounts' data when added isprofileOwner to the table
+      //no need to run this again
+      //foreach (var i in context.Profiles) {
+      //  if (i.Accounts.Count() == 1) {
+      //    i.Accounts.First().IsProfileOwner = true;
+      //  }
+      //}
       context.SaveChanges();
       //context.UserGroups.RemoveRange(context.UserGroups.ToList());
       //context.Communities.RemoveRange(context.Communities.ToList());

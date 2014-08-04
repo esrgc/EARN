@@ -72,18 +72,21 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     /// </summary>
     public bool deleteDetails() {
       try {
-        foreach (var c in Connections)
-          Connections.Remove(c);
-        foreach (var pt in ProfileTags)
-          ProfileTags.Remove(pt);
-        foreach (var pd in PartnershipDetails)
+        foreach (var c in Connections.ToList())
+          Connections.Remove(c);        
+        foreach (var pd in PartnershipDetails.ToList())
           PartnershipDetails.Remove(pd);
-        foreach (var cm in Comments)
+        foreach (var cm in Comments.ToList())
           Comments.Remove(cm);
-        foreach (var sm in SentMessages)
+        foreach (var sm in SentMessages.ToList())
           SentMessages.Remove(sm);
-        foreach (var rm in ReceivedMessages)
+        foreach (var rm in ReceivedMessages.ToList())
           ReceivedMessages.Remove(rm);
+
+        foreach (var account in Accounts.ToList()) {
+          account.ProfileID = null;
+          account.Profile = null;
+        }
         return true;
       }
       catch (Exception) {

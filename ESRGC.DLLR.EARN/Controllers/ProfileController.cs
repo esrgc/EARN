@@ -10,6 +10,7 @@ using ESRGC.DLLR.EARN.Filters;
 using ESRGC.DLLR.EARN.Models;
 using ESRGC.GIS.Geocoding;
 using ESRGC.GIS.Utilities;
+using PagedList;
 
 namespace ESRGC.DLLR.EARN.Controllers
 {
@@ -58,25 +59,46 @@ namespace ESRGC.DLLR.EARN.Controllers
 
       return View(CurrentAccount.Profile);
     }
+
     [AllowNonProfile]
-    public ActionResult Find(string name, string f = "html") {
+    public ActionResult Find(string name, int? page, int? pageSize, string f = "html") {
+      if (CurrentAccount.Profile != null) {
+        updateTempMessage("Your organization profile already exists.");
+        return RedirectToAction("Detail");
+      }
+      int index = page ?? 1;
+      int size = pageSize ?? 10;
       var result = _workUnit.ProfileRepository.Entities;
       if (!String.IsNullOrEmpty(name))
         result = result.Where(x => x.Organization.Name.ToLower().Contains(name.ToLower()));
+      //if ajax request return json
       var json = result.Select(x => new {
         ID = x.ProfileID,
         Name = x.Organization.Name,
         Website = x.Organization.Website,
         Group = x.UserGroup.Name,
-      }).ToList();
+      }).ToList()
+      .ToPagedList(index, size);
+      
       if (Request.IsAjaxRequest() || f.ToLower() == "json") {
         return Json(json, JsonRequestBehavior.AllowGet);
       }
-      return View(result.ToList());
+      
+      var pagedList = result.ToList().ToPagedList(index, size);
+      return View(pagedList);
     }
+    [AllowNonProfile]
     public ActionResult Join(int profileID) {
+      var profile = _workUnit.ProfileRepository.GetEntityByID(profileID);
+      if (profile == null) {
+        updateTempMessage("Invalid profile ID");
+        return RedirectToAction("Index", "Home");
+      }
+
+
       return View();
     }
+
     [AllowNonProfile]
     public ActionResult Create() {
       //if (CurrentAccount.Profile != null) {
@@ -193,27 +215,53 @@ namespace ESRGC.DLLR.EARN.Controllers
       return View(profile);
     }
     [VerifyProfile]
-    [HasReturnUrl]
-    public ActionResult Delete(string returnUrl) {
+    public ActionResult Delete() {
       return View();
     }
     [HttpPost]
     [VerifyProfile]
     [ActionName("Delete")]
-    public ActionResult DeleteProfile(string returnUrl) {
+    public ActionResult DeleteProfile() {
+      if (!CurrentAccount.IsProfileOwner) {
+        updateTempMessage("Sory, you can not delete this profile. Only the profile creator/owner can delete.");
+        return RedirectToAction("Settings", "Account");
+      }
       var profile = CurrentAccount.Profile;
+
       if (profile == null) {
         updateTempMessage("Invalid profile ID");
         return RedirectToAction("Index", "Home");
       }
-      //delete contact
-      if (profile.deleteDetails()) {
-        CurrentAccount.Profile = null;
-        _workUnit.ProfileRepository.DeleteEntity(profile);
-        _workUnit.saveChanges();
-        updateTempMessage("Your profile has been deleted");
+
+      if (profile.hasOwnedPartnerships()) {
+        updateTempMessage("Your organizational profile is currently involved with one or more partnertships as an administrator. Please re-assign admin role before deleting your profile.");
+        return RedirectToAction("Detail");
+      }         
+
+      //delete profile tags
+      var profileTags = _workUnit.ProfileTagRepository
+        .Entities
+        .Where(x => x.ProfileID == profile.ProfileID)
+        .ToList();
+      foreach (var tag in profileTags) {
+        _workUnit.ProfileTagRepository.DeleteEntity(tag);
       }
-      return returnToUrl(returnUrl, Url.Action("Index", "Home"));
+
+      //CurrentAccount.ProfileID = null;
+      //_workUnit.AccountRepository.UpdateEntity(CurrentAccount);
+      profile.deleteDetails();
+      _workUnit.ProfileRepository.DeleteEntity(profile);
+      if (profile.Organization != null) {
+        _workUnit.OrganizationRepository.DeleteEntity(profile.Organization);
+      }
+      //delete contact
+      if (profile.Contact != null) {
+        _workUnit.ContactRepository.DeleteEntity(profile.Contact);
+      }
+     
+      _workUnit.saveChanges();
+      updateTempMessage("Your profile has been deleted.");
+      return RedirectToAction("Index", "Home");
     }
     [VerifyProfile]
     public ActionResult Disable() {

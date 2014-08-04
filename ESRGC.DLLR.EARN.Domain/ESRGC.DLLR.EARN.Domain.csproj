@@ -161,6 +161,10 @@
     <Compile Include="Migrations\201407281750225_account.IsProfileOwner.Designer.cs">
       <DependentUpon>201407281750225_account.IsProfileOwner.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201408041729112_profileRequest.cs" />
+    <Compile Include="Migrations\201408041729112_profileRequest.Designer.cs">
+      <DependentUpon>201408041729112_profileRequest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\Announcement.cs" />
@@ -169,6 +173,7 @@
     <Compile Include="Model\GeoTag.cs" />
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\History.cs" />
+    <Compile Include="Model\JoinProfileRequest.cs" />
     <Compile Include="Model\Message.cs" />
     <Compile Include="Model\Notification.cs" />
     <Compile Include="Model\Organization.cs" />
@@ -259,6 +264,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201407281750225_account.IsProfileOwner.resx">
       <DependentUpon>201407281750225_account.IsProfileOwner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408041729112_profileRequest.resx">
+      <DependentUpon>201408041729112_profileRequest.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -30,7 +30,10 @@ namespace ESRGC.DLLR.EARN.Filters
           .AccountRepository
           .Entities
           .First(x => x.EmailAddress.ToLower() == requestEmail.ToLower());
+        //check if there's pending request to join profile
+        //..to be implemented
 
+        //profile hasn't been created or there's no pending request to join profile
         if (account.Profile == null) {
           filterContext.Controller.TempData["message"] = "You have not created an organizational profile. Please create one!";
           filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary() { 

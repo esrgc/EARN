@@ -266,8 +266,8 @@
     <Content Include="Client\jsLib\leaflet.awesome-markers\leaflet.awesome-markers.min.js" />
     <Content Include="Client\jsLib\response\respond.min.js" />
     <Content Include="Client\jsLib\response\respond.src.js" />
+    <Content Include="Client\jsLib\underscore\underscore-min.js" />
     <Content Include="Client\jsLib\underscore\underscore.js" />
-    <Content Include="Client\jsLib\underscore\underscore.min.js" />
     <Content Include="Client\js\map\leafletViewer.js" />
     <Content Include="Client\js\map\mapViewer.js" />
     <Content Include="Client\apps\search\store\search.js" />
@@ -456,6 +456,9 @@
     <Content Include="Views\Public\Profiles.cshtml" />
     <Content Include="Views\Public\Partnerships.cshtml" />
     <Content Include="Views\Profile\Find.cshtml" />
+    <Content Include="Views\Shared\displayNoLinkProfilePartial.cshtml" />
+    <Content Include="Views\Profile\Delete.cshtml" />
+    <Content Include="Views\Communication\JoinProfileRequest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

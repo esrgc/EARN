@@ -207,6 +207,7 @@ and/or view this user’s Organizational Profile for more information.",
     public ActionResult AcceptRequest(int requestID) {
       var request = _workUnit.RequestRepository.GetEntityByID(requestID);
       PartnershipRequest r = null;
+      ProfileMemberRequest pr = null;
       Notification notification = null;
       PartnershipDetail detail = null;
       switch (request.Type.ToLower()) {
@@ -268,6 +269,21 @@ and/or view this user’s Organizational Profile for more information.",
                 r.Partnership.Name),
               LinkToAction = Url.Action("Detail", "Partnership", new { r.PartnershipID })
             };
+          }
+          break;
+        case "Profile Member Request":
+          pr = (ProfileMemberRequest)request;
+          var senderProfile = pr.Sender.Profile;
+          if (senderProfile == null) {
+            //new account without profile -> can accept
+            senderProfile = pr.Receiver.Profile;
+            _workUnit.ProfileRepository.UpdateEntity(senderProfile);
+
+          }
+          else {
+            updateTempMessage("Can not accept this request. The requesting account already belongs to an organizational profile.");
+            _workUnit.RequestRepository.DeleteByID(requestID);
+            return RedirectToAction("Requests");
           }
           break;
       }
@@ -481,6 +497,61 @@ and/or view this user’s Organizational Profile for more information.",
         }
       }
       return View("EmailNotSent");
+    }
+
+    public ActionResult JoinProfileRequest(int profileID) {
+      var profile = _workUnit.ProfileRepository.GetEntityByID(profileID);
+      return View(profile);
+    }
+    [HttpPost]
+    [SendNotification]
+    public ActionResult SendJoinProfileRequest(int profileID, string name, string message) {
+      var profile = _workUnit.ProfileRepository.GetEntityByID(profileID);
+      if (profile == null) {
+        updateTempMessage("Profile ID is invalid");
+        return RedirectToAction("Index", "Home");
+      }
+      var owner = profile.getAccount();
+      if (owner == null) { 
+        updateTempMessage("No owner found for this profile. ID " + profile.ProfileID);
+        return RedirectToAction("Index", "Home");
+      }
+      var message1 = string.Format(
+          @"{0} has requested to join your ""{1}"" profile. Contact {0} with at {2} if you need additional information.",
+          name,
+          profile.Organization.Name,
+          CurrentAccount.EmailAddress
+      );
+      var message2 = @"Upon acceptance of this request, " + name +
+        " will be able to have full access to your profile and edit profile information." +
+        " If you do not regconize the person or this email address above, please discard this request or " +
+        "contact the person for more information.";
+
+      var notification = new Notification() {
+        Category = "Request Received",
+        Message = message1,
+        Account = owner,
+        Message2 = "Message: " + message,
+        Message3 = message2,
+        LinkToAction = Url.Action("Requests", "Communication")
+      }; 
+      var request = new ProfileMemberRequest() {
+        Message = string.Format(
+          @"{0} ({2}) has requested to join your ""{1}"" profile with the following message: {3}",
+          name,
+          profile.Organization.Name,
+          CurrentAccount.EmailAddress,
+          message
+      ),
+        Sender = CurrentAccount,
+        Receiver = owner,
+        Notification = notification,
+        Profile = profile
+      };
+      _workUnit.RequestRepository.InsertEntity(request);
+      _workUnit.saveChanges();
+      updateTempMessage("Your request has been sent. You will be notified via email once the request is accepted.");
+      return RedirectToAction("Index", "Home");
     }
   }
 }
