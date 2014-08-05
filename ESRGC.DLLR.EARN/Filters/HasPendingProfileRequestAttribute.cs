@@ -15,14 +15,9 @@ namespace ESRGC.DLLR.EARN.Filters
   /// If profile does exist the filter sets ViewBag.currenProfile 
   /// to the profile associated with this account
   /// </summary>
-  public class VerifyProfileAttribute : ActionFilterAttribute
+  public class HasPendingProfileRequestAttribute : ActionFilterAttribute
   {
     public override void OnActionExecuting(ActionExecutingContext filterContext) {
-      if (filterContext.ActionDescriptor.GetCustomAttributes(typeof(AllowNonProfileAttribute),false).Any()) {
-        // The controller action is decorated with the [AllowNonProfileAttribute]
-        // custom attribute => don't do anything.
-        return;
-      }
       var requestEmail = filterContext.HttpContext.User.Identity.Name;
       var workUnit = (filterContext.Controller as BaseController).WorkUnit;
       try {
@@ -39,18 +34,7 @@ namespace ESRGC.DLLR.EARN.Filters
             {"controller", "Home"},
             {"action", "Index"}
           });
-          return;
         }
-        //profile hasn't been created or there's no pending request to join profile
-        if (account.Profile == null) {
-          filterContext.Controller.TempData["message"] = "You have not created an organizational profile. Please create one!";
-          filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary() { 
-            {"controller", "Profile"},
-            {"action", "Create"}
-          });
-        }
-        else
-          filterContext.Controller.ViewBag.currentProfile = account.Profile;
       }
       catch (Exception) {
         filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary() { 

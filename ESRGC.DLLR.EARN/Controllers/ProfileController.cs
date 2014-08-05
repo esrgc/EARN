@@ -61,6 +61,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     }
 
     [AllowNonProfile]
+    [HasPendingProfileRequest]//prevent searching while having pending profile request
     public ActionResult Find(string name, int? page, int? pageSize, string f = "html") {
       if (CurrentAccount.Profile != null) {
         updateTempMessage("Your organization profile already exists.");
@@ -100,6 +101,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     }
 
     [AllowNonProfile]
+    [HasPendingProfileRequest]
     public ActionResult Create() {
       //if (CurrentAccount.Profile != null) {
       //  updateTempDataMessage("Profile already created!");

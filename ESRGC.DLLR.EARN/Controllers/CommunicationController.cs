@@ -279,7 +279,15 @@ and/or view this user’s Organizational Profile for more information.",
             pr.Sender.ProfileID = pr.Receiver.ProfileID;
             pr.Sender.IsProfileOwner = false;
             _workUnit.AccountRepository.UpdateEntity(pr.Sender);
-
+            //create notification
+            notification = new Notification() {
+              Account = pr.Sender,
+              Category = "Profile Request Accepted",
+              Message = string.Format(@"Congratulations! You are now a member of the ""{1}"" organizational profile.",
+                pr.Receiver.Profile.Organization.Name),
+              Message2 = "You can now edit profile information, search for partnerships and other partners.",
+              LinkToAction = Url.Action("Detail", "Profile")
+            };
           }
           else {
             updateTempMessage("Can not accept this request. The requesting account already belongs to an organizational profile.");
@@ -287,9 +295,11 @@ and/or view this user’s Organizational Profile for more information.",
           _workUnit.RequestRepository.DeleteByID(requestID);
           break;
       }
-      if (notification != null && detail != null) {
-        _workUnit.PartnershipDetailRepository.InsertEntity(detail);
+      if (notification != null) {
         _workUnit.NotificationRepository.InsertEntity(notification);
+      }
+      if (detail != null) {
+        _workUnit.PartnershipDetailRepository.InsertEntity(detail);
         _workUnit.RequestRepository.DeleteByID(requestID);
       }
       _workUnit.saveChanges();
@@ -524,7 +534,7 @@ and/or view this user’s Organizational Profile for more information.",
       );
       var message2 = @"Upon acceptance of this request, " + name +
         " will be able to have full access to your profile and edit profile information." +
-        " If you do not regconize the person or this email address above, please discard this request or " +
+        " If you do not regconize the person or the email address above, please discard this request or " +
         "contact the person for more information.";
 
       var notification = new Notification() {
