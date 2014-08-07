@@ -265,9 +265,5 @@ namespace ESRGC.DLLR.EARN.Controllers
       updateTempMessage("Your profile has been deleted.");
       return RedirectToAction("Index", "Home");
     }
-    [VerifyProfile]
-    public ActionResult Disable() {
-      return View();
-    }
   }
 }

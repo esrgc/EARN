@@ -121,7 +121,7 @@ and/or view this user’s Organizational Profile for more information.",
         .Notifications
         .OrderByDescending(x => x.Created)
         .OrderBy(x => x.IsRead)
-        .Take(20).ToList();
+        .Take(40).ToList();
       var deleteNotes = CurrentAccount
         .Notifications
         .Where(x => {
@@ -283,11 +283,12 @@ and/or view this user’s Organizational Profile for more information.",
             notification = new Notification() {
               Account = pr.Sender,
               Category = "Profile Request Accepted",
-              Message = string.Format(@"Congratulations! You are now a member of the ""{1}"" organizational profile.",
+              Message = string.Format(@"Congratulations! You are now a member of the ""{0}"" organizational profile.",
                 pr.Receiver.Profile.Organization.Name),
               Message2 = "You can now edit profile information, search for partnerships and other partners.",
               LinkToAction = Url.Action("Detail", "Profile")
             };
+            updateTempMessage("Profile member request accepted.");
           }
           else {
             updateTempMessage("Can not accept this request. The requesting account already belongs to an organizational profile.");
@@ -344,17 +345,18 @@ and/or view this user’s Organizational Profile for more information.",
       //create notifications
       foreach (var p in partnership.PartnershipDetails.Select(x => x.Profile).ToList()) {
         if (p.ProfileID != CurrentAccount.ProfileID) {
-          var account = p.getAccount();
-          var notification = new Notification() {
-            Account = account,
-            LinkToAction = Url.Action("Detail", "Partnership", new { partnershipID, returnUrl }),
-            Category = "New Comment",
-            Message = CurrentAccount.Profile.Organization.Name
-            + " has posted a new comment on the partnership \""
-            + partnership.Name + "\"",
-            Message2 = comment
-          };
-          _workUnit.NotificationRepository.InsertEntity(notification);
+          foreach (var account in p.Accounts) {
+            var notification = new Notification() {
+              Account = account,
+              LinkToAction = Url.Action("Detail", "Partnership", new { partnershipID, returnUrl }),
+              Category = "New Comment",
+              Message = CurrentAccount.Profile.Organization.Name
+              + " has posted a new comment on the partnership \""
+              + partnership.Name + "\"",
+              Message2 = comment
+            };
+            _workUnit.NotificationRepository.InsertEntity(notification);
+          }
         }
       }
       _workUnit.saveChanges();
@@ -552,7 +554,7 @@ and/or view this user’s Organizational Profile for more information.",
           profile.Organization.Name,
           CurrentAccount.EmailAddress,
           message
-      ),
+        ),
         Sender = CurrentAccount,
         Receiver = owner,
         Notification = notification,

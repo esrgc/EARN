@@ -1,0 +1,11 @@
+.message-panel {
+  min-height: 500px;
+  max-height: 500px;
+  margin-top: 10px;
+}
+.message-panel #message-control-panel,
+.message-panel #message-area {
+  position: relative;
+  max-height: 500px;
+  overflow-y: auto;
+}

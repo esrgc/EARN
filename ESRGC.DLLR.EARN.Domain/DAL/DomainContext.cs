@@ -32,7 +32,7 @@ namespace ESRGC.DLLR.EARN.Domain.DAL
     public DbSet<PartnershipTag> PartnershipTags { get; set; }
     public DbSet<Document> Documents { get; set; }
     public DbSet<Message> Messages { get; set; }
-
+    public DbSet<MessageBoard> MessageBoards { get; set; }
     protected override void OnModelCreating(DbModelBuilder modelBuilder) {
       modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 

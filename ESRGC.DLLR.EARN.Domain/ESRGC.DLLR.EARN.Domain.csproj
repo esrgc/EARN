@@ -165,6 +165,14 @@
     <Compile Include="Migrations\201408041729112_profileRequest.Designer.cs">
       <DependentUpon>201408041729112_profileRequest.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201408071535179_messageBoard.cs" />
+    <Compile Include="Migrations\201408071535179_messageBoard.Designer.cs">
+      <DependentUpon>201408071535179_messageBoard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201408071538239_messageBoard2.cs" />
+    <Compile Include="Migrations\201408071538239_messageBoard2.Designer.cs">
+      <DependentUpon>201408071538239_messageBoard2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\Announcement.cs" />
@@ -175,6 +183,7 @@
     <Compile Include="Model\History.cs" />
     <Compile Include="Model\JoinProfileRequest.cs" />
     <Compile Include="Model\Message.cs" />
+    <Compile Include="Model\MessageBoard.cs" />
     <Compile Include="Model\Notification.cs" />
     <Compile Include="Model\Organization.cs" />
     <Compile Include="Model\Contact.cs" />
@@ -267,6 +276,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201408041729112_profileRequest.resx">
       <DependentUpon>201408041729112_profileRequest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408071535179_messageBoard.resx">
+      <DependentUpon>201408071535179_messageBoard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408071538239_messageBoard2.resx">
+      <DependentUpon>201408071538239_messageBoard2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

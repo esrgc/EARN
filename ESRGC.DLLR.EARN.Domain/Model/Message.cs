@@ -29,5 +29,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public DateTime Created { get; set; }
     public string LinkToAction { get; set; }
     public bool EmailSent { get; set; }
+
+    public virtual ICollection<MessageBoard> MessageBoards { get; set; }
   }
 }

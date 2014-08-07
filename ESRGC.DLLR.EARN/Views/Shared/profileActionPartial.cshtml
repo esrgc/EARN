@@ -25,6 +25,7 @@
             @if (partnership != null) { 
                 <li><a href="@Url.Action("RemovePartner", "Partnership", new { partnership.PartnershipID, Model.ProfileID, returnUrl })">Remove from partnership</a></li>
             }
+          <li><a href="@Url.Action("Send", "Message", new  { ID = Model.ProfileID })">Message</a></li>
         </ul>
     </div>
 }

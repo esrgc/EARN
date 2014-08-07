@@ -55,6 +55,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public virtual ICollection<Comment> Comments { get; set; }
     public virtual ICollection<Message> SentMessages { get; set; }
     public virtual ICollection<Message> ReceivedMessages { get; set; }
+    public virtual ICollection<MessageBoard> MessageBoards { get; set; }
 
     //helpers
     public bool isOwnerOfPartnership(Partnership partnership) {
@@ -78,10 +79,10 @@ namespace ESRGC.DLLR.EARN.Domain.Model
           PartnershipDetails.Remove(pd);
         foreach (var cm in Comments.ToList())
           Comments.Remove(cm);
-        foreach (var sm in SentMessages.ToList())
-          SentMessages.Remove(sm);
-        foreach (var rm in ReceivedMessages.ToList())
-          ReceivedMessages.Remove(rm);
+        //foreach (var sm in SentMessages.ToList())
+        //  SentMessages.Remove(sm);
+        foreach (var mb in MessageBoards.ToList())
+          MessageBoards.Remove(mb);
 
         foreach (var account in Accounts.ToList()) {
           account.ProfileID = null;

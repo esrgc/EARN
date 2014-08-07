@@ -1,0 +1,51 @@
+﻿@{
+  ViewBag.Title = "Messages";
+  ViewBag.Header = "Message Inbox";
+}
+
+@section header{
+  <div class="container">
+    <header class="page-header">
+      <h4>@ViewBag.Header <i class="fa fa-envelope"></i></h4>
+    </header>
+  </div>
+}
+
+@section scripts{
+  @Html.Partial("Templates")
+  <script src="~/Client/jsLib/underscore/underscore.js"></script>
+  <script src="~/Client/jsLib/backbone/backbone.js"></script>
+  <script src="~/Client/js/backbone-addon/application.js"></script>
+  @Scripts.Render("~/bundles/messageCenter")
+}
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="btn-group pull-right">
+        <button type="button" class="btn btn-default btn-xs"><i class="fa fa-plus"></i>&nbsp;New Message</button>
+        @*<button type="button" class="btn btn-default btn-xs"><i class="fa fa-trash-o"></i>&nbsp;Delete</button>*@
+      </div>
+      <div class="clear"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="message-panel">
+        <div class="" id="message-control-panel">
+          <div class="list-group" id="participant-list">          
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-9">
+      <div class="message-panel">
+        <div class="" id="message-area">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

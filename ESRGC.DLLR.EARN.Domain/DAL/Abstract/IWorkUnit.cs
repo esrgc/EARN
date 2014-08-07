@@ -25,6 +25,7 @@ namespace ESRGC.DLLR.EARN.Domain.DAL.Abstract
     IRepository<PartnershipTag> PartnershipTagRepository { get; }
     IRepository<Document> DocumentRepository { get; }
     IRepository<Message> MessageRepository { get; }
+    IRepository<MessageBoard> MessageBoardRepository { get; }
     void saveChanges();
     void Dispose();
   }
