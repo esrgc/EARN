@@ -15,14 +15,6 @@ app.Model.Participant = Backbone.Model.extend({
   name: 'Participant',
   url: function() {
     return 'fetch'
-  },
-  loadMessages: function(callback) {
-    this.fetch({
-      sucess: callback,
-      data: {
-        participantID: this.id
-      }
-    });
   }
  
 

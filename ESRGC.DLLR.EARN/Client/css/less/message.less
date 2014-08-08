@@ -1,11 +1,60 @@
-﻿.message-panel {
-    min-height: 500px;
-    max-height: 500px;
-    margin-top: 10px;
+﻿@import "lib/variables.less";
 
-    #message-control-panel, #message-area {
-        position: relative;
-        max-height: 500px;
-        overflow-y: auto;
+@maxheight: 600px;
+
+.message-panel {
+    height: @maxheight;
+    max-height: @maxheight;
+    margin-top: 10px;
+    
+    float: left;
+
+    .logo-image {
+        max-width: 80px;
+        margin-bottom: 5px;
     }
+
+    .list-group-item {
+        //padding-left: 0;
+        border-left: none;
+        border-right: none;
+        border-radius: 0;
+
+        &:first-child {
+            border-top: none;
+        }
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+}
+
+#message-control-panel {
+    width: 30%;
+    border-right: 1px solid @border-color;
+}
+
+#message-area {
+    display: inline-block;
+    width: 70%;
+    min-height: @maxheight;
+    overflow-y: auto;    
+    padding-left: 5px;
+    .message-board{
+        position: relative;
+        padding-left: 10px;
+        padding-right: 10px;
+        max-height: @maxheight - 100px;
+        overflow: auto;
+        .message{
+
+        }
+    }
+}
+
+#message-control-panel, #message-area {
+    position: relative;
+    max-height: @maxheight;
+    overflow-y: auto;
 }

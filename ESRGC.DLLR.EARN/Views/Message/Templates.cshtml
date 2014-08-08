@@ -1,10 +1,43 @@
 ﻿<script type="text/template" id="participant">
-  <a href="#" class="list-group-item">
-    {{ name }}
+  {[ 
+    var cssClass = '';
+    if(model.id == id)
+      cssClass = 'active';
+  ]}
+
+  <a href="#for/{{model.name}}/{{model.id}}" class="list-group-item {{cssClass}}">
+    <small class="pull-right">{{model.lastMessageDate}}</small>
+    <img class="img-thumbnail logo-image" src="{{model.logoUrl}}" alt="" />
+    <p>
+      <strong>{{ model.name }}</strong>
+      <br />
+      <small><i>{{ model.lastMessage}}</i></small>
+    </p>
   </a>
 </script>
 
-<script type="text/template" id="message">
+<script type="text/template" id="message-board">
+  <div class="message-container">
+    <h4>{{ name }}</h4>
+    <hr />
+    <div class="message-board">
+      {[
+        _.each(messages, function(m){
+      ]}
+        <div class="message">
+          
+          <h5 class="text-info">{{ m.senderName }} <small class="pull-right">{{m.time }}, {{m.date}}</small></h5>
 
+          <p>{{m.message}}</p>
+        </div>
+        <hr />
+      {[  
+        });
+      ]}
+    </div>
+  </div>
+</script>
+
+<script type="text/template" id="message">
 </script>
 

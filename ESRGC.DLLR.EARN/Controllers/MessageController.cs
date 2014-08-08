@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using ESRGC.DLLR.EARN.Domain.DAL.Abstract;
 using ESRGC.DLLR.EARN.Domain.Model;
 using ESRGC.DLLR.EARN.Filters;
+using ESRGC.DLLR.EARN.Helpers;
 
 namespace ESRGC.DLLR.EARN.Controllers
 {
@@ -23,15 +24,20 @@ namespace ESRGC.DLLR.EARN.Controllers
     }
     //fetch messages for selected participant
     public JsonResult Fetch(int participantID) {
+      var participant = _workUnit.ProfileRepository.GetEntityByID(participantID);
       var profile = CurrentAccount.Profile;
       var messages = profile.MessageBoards
         .Where(x => (x.Message.SenderID == participantID)
           || (x.Message.ReceiverID == participantID))
         .OrderBy(x=>x.Message.Created)  
         .Select(x=>new {
-          messageID = x.MessageID,
+          id = x.MessageID,
           senderName = x.Message.Sender.Organization.Name,
           message = x.Message.Message1,
+          participantID = participantID,
+          participantName = participant.Organization.Name,
+          date = x.Message.Created.ToShortDateString(),
+          time = x.Message.Created.ToShortTimeString()
         })
         .ToList();
       return Json(messages, JsonRequestBehavior.AllowGet);
@@ -52,19 +58,20 @@ namespace ESRGC.DLLR.EARN.Controllers
         .Select(x => new {
           id = x.ProfileID,
           name = x.Organization.Name,
-          logoUrl = Url.Action("ProfilePicture", new { pictureId = x.PictureID }),
-          lastMessage = x.MessageBoards.OrderBy(m=>m.Message.Created).Select(msg=>msg.Message).First().Message1
+          logoUrl = Url.Action("ProfileLogo", new { Id = x.ProfileID }),
+          lastMessage = x.MessageBoards.OrderBy(m=>m.Message.Created).Select(msg=>msg.Message).First().Message1.toShorDescription(50),
+          lastMessageDate = x.MessageBoards.OrderBy(m=>m.Message.Created).Select(msg=>msg.Message).First().Created.ToShortDateString()
         })
         .ToList();
 
       return Json(participants, JsonRequestBehavior.AllowGet);
     }
     //[HttpPost]
-    public ActionResult Send(int recipientID, string message) {
+    public ActionResult Send(int participantID, string message) {
       var sender = CurrentAccount.Profile;
-      var recipient = _workUnit.ProfileRepository.GetEntityByID(recipientID);
+      var recipient = _workUnit.ProfileRepository.GetEntityByID(participantID);
       if (recipient == null)
-        return Json(new { status = "failed", message = "Invalid recipient. ID: " + recipientID }, JsonRequestBehavior.AllowGet);
+        return Json(new { status = "failed", message = "Invalid recipient. ID: " + participantID }, JsonRequestBehavior.AllowGet);
       try {
         //create new message object
         var msg = new Message() {

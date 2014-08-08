@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity.Spatial;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -9,6 +10,7 @@ using ESRGC.DLLR.EARN.Domain.Model;
 using ESRGC.DLLR.EARN.Filters;
 using ESRGC.GIS.Geocoding;
 using ESRGC.GIS.Utilities;
+
 
 namespace ESRGC.DLLR.EARN.Controllers
 {
@@ -34,6 +36,30 @@ namespace ESRGC.DLLR.EARN.Controllers
       }
       catch (Exception) {
         return null;
+      }
+    }
+    [AllowNonProfile]
+    public ActionResult ProfileLogo(int id) {
+      var profile = _workUnit.ProfileRepository.GetEntityByID(id);
+      if (profile == null)
+        return new EmptyResult();
+      if (profile.ProfilePicture != null) {
+        try {
+          var pic = profile.ProfilePicture;
+          return File(pic.ImageData, pic.ImageMimeType);
+        }
+        catch (Exception) {
+          return null;
+        }
+      }
+      else{
+        var physicalPath = Server.MapPath("~/Client/images/empty_profile.gif");
+        
+        using (var fileStream = System.IO.File.OpenRead(physicalPath)) { 
+          var data = new byte[fileStream.Length];
+          var buffer = fileStream.Read(data, 0, (int)fileStream.Length);
+          return File(data, "image/gif");
+        }
       }
     }
 

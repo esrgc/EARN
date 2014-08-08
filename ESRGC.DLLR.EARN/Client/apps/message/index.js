@@ -13,10 +13,12 @@ var startup = app.startup = function() {
   app.application({
     name: 'EARNConnectMessage',
     views: [
-      'ParticipantList'
+      'ParticipantList',
+      'MessageArea'
     ],
     collections: [
-     'Participants'
+     'Participants',
+     'Messages'
     ],
     routers: [
       'Main'
