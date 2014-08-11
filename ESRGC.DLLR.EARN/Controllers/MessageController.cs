@@ -60,7 +60,8 @@ namespace ESRGC.DLLR.EARN.Controllers
           name = x.Organization.Name,
           logoUrl = Url.Action("ProfileLogo", new { Id = x.ProfileID }),
           lastMessage = x.MessageBoards.OrderByDescending(m => m.Message.Created).First().Message.Message1.toShorDescription(50),
-          lastMessageDate = x.MessageBoards.OrderByDescending(m => m.Message.Created).First().Message.Created.ToShortDateString()
+          lastMessageDate = x.MessageBoards.OrderByDescending(m => m.Message.Created).First().Message.Created.ToShortDateString(),
+          lastMessageTime = x.MessageBoards.OrderByDescending(m => m.Message.Created).First().Message.Created.ToShortTimeString()
         })
         .ToList();
 

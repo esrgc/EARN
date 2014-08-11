@@ -6,12 +6,12 @@
   ]}
 
   <a href="#for/{{model.name}}/{{model.id}}" class="list-group-item {{cssClass}}">
-    <small class="pull-right">{{model.lastMessageDate}}</small>
+    <small class="pull-right">{{model.lastMessageTime}}, {{model.lastMessageDate}}</small>
     <img class="img-thumbnail logo-image" src="{{model.logoUrl}}" alt="" />
     <p>
       <strong>{{ model.name }}</strong>
       <br />
-      <small><i>{{ model.lastMessage}}</i></small>
+      <small><i>{{ model.lastMessage }}</i></small>
     </p>
   </a>
 </script>
