@@ -18,19 +18,21 @@
 
 <script type="text/template" id="message-board">
   <div class="message-container">
-    <h4>{{ name }}</h4>
+    <h4>
+      {{ name }}
+      <button class="btn btn-default btn-xs" title="Reload messages" id="refreshBtn"><i class="fa fa-refresh"></i></button>
+    </h4>
     <hr />
-    <div class="message-board">
+    <div class="message-board" data-id="{{id}}">
       {[
         _.each(messages, function(m){
       ]}
         <div class="message">
-          
-          <h5 class="text-info">{{ m.senderName }} <small class="pull-right">{{m.time }}, {{m.date}}</small></h5>
-
+          <h5 class="text-info"><strong>{{ m.senderName }}</strong> <small class="pull-right">{{m.time }}, {{m.date}}</small>
+          </h5>
           <p>{{m.message}}</p>
         </div>
-        <hr />
+
       {[  
         });
       ]}
@@ -38,6 +40,14 @@
   </div>
 </script>
 
-<script type="text/template" id="message">
+<script type="text/template" id="message-composer">
+  <div class="message-composer">
+    <form class="form-horizontal">
+      <textarea class="form-control input-sm message-input-box" cols="20" id="new-message" name="new-message" placeholder="Type a message..."
+        rows="2"></textarea>
+      <button type="button" class="btn btn-xs btn-default send-message-btn disabled">Send</button>
+      <input type="reset" class="btn btn-xs btn-default" value="Clear"/>
+    </form>
+  </div>
 </script>
 

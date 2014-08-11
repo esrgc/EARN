@@ -59,20 +59,21 @@ namespace ESRGC.DLLR.EARN.Controllers
           id = x.ProfileID,
           name = x.Organization.Name,
           logoUrl = Url.Action("ProfileLogo", new { Id = x.ProfileID }),
-          lastMessage = x.MessageBoards.OrderBy(m=>m.Message.Created).Select(msg=>msg.Message).First().Message1.toShorDescription(50),
-          lastMessageDate = x.MessageBoards.OrderBy(m=>m.Message.Created).Select(msg=>msg.Message).First().Created.ToShortDateString()
+          lastMessage = x.MessageBoards.OrderByDescending(m => m.Message.Created).First().Message.Message1.toShorDescription(50),
+          lastMessageDate = x.MessageBoards.OrderByDescending(m => m.Message.Created).First().Message.Created.ToShortDateString()
         })
         .ToList();
 
       return Json(participants, JsonRequestBehavior.AllowGet);
     }
-    //[HttpPost]
+    [HttpPost]
+    [SendNotification]
     public ActionResult Send(int participantID, string message) {
       var sender = CurrentAccount.Profile;
       var recipient = _workUnit.ProfileRepository.GetEntityByID(participantID);
       if (recipient == null)
         return Json(new { status = "failed", message = "Invalid recipient. ID: " + participantID }, JsonRequestBehavior.AllowGet);
-      try {
+      try {       
         //create new message object
         var msg = new Message() {
           Sender = sender,
@@ -93,6 +94,23 @@ namespace ESRGC.DLLR.EARN.Controllers
           Profile = recipient
         };
         _workUnit.MessageBoardRepository.InsertEntity(receiverMsgBoard);
+
+        //create notiification for recipient
+        recipient.Accounts.ToList().ForEach(x => {
+          var notification = new Notification() {
+            Category = "Message Received",
+            Message = sender.Organization.Name + " has sent a new message.",
+            Account = x,
+            Message2 = "Message: " + message.Replace("<br />", "\r\n").toShorDescription(150),
+            Message3 = "You can view and reply to this message at EARN MD CONNECT.",
+            LinkToAction = string.Format(Url.Action("Index") + "#for/{0}/{1}",
+              sender.Organization.Name,
+              sender.ProfileID
+            )
+          };
+          _workUnit.NotificationRepository.InsertEntity(notification);
+        });
+
         _workUnit.saveChanges();
       }
       catch (Exception ex) {

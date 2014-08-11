@@ -1,12 +1,13 @@
 ﻿@import "lib/variables.less";
 
 @maxheight: 600px;
+@message-composer-height: 150px;
 
 .message-panel {
     height: @maxheight;
     max-height: @maxheight;
     margin-top: 10px;
-    
+    display: none;
     float: left;
 
     .logo-image {
@@ -28,6 +29,10 @@
             border-bottom: none;
         }
     }
+    &.active{
+        display: block;
+    }
+
 }
 
 #message-control-panel {
@@ -35,8 +40,7 @@
     border-right: 1px solid @border-color;
 }
 
-#message-area {
-    display: inline-block;
+#message-area, #newMessage {
     width: 70%;
     min-height: @maxheight;
     overflow-y: auto;    
@@ -45,10 +49,19 @@
         position: relative;
         padding-left: 10px;
         padding-right: 10px;
-        max-height: @maxheight - 100px;
+        margin-right: 5px;
+        height: @maxheight - (@message-composer-height + 75px);
+        max-height: @maxheight - (@message-composer-height + 75px);
         overflow: auto;
         .message{
-
+            &:not(:first-child){
+                border-top: 1px solid @border-color;
+            }
+            margin-bottom: 15px;
+        }
+        &.disabled{
+            background: @base-color;
+            margin-bottom: 5px;
         }
     }
 }
@@ -58,3 +71,19 @@
     max-height: @maxheight;
     overflow-y: auto;
 }
+
+.message-composer{
+    position: relative;
+    height: @message-composer-height;
+    border: 1px solid @border-color;
+    margin: 0;
+    margin-right: 5px;
+    padding: 10px;
+    background: @base-color;
+    border-radius: 5px;
+    .message-input-box{
+        min-height: 100px;
+        margin-bottom: 3px;
+    }
+}
+

@@ -24,23 +24,40 @@
   <div class="row">
     <div class="col-sm-12">
       <div class="btn-group pull-right">
-        <button type="button" class="btn btn-default btn-xs"><i class="fa fa-plus"></i>&nbsp;New Message</button>
+        <a href="#new" class="btn btn-default btn-xs"><i class="fa fa-plus"></i>&nbsp;New Message</a>
+        @*<button class="btn btn-default btn-xs"><i class="fa fa-refresh"></i>&nbsp;Refresh</button>*@
         @*<button type="button" class="btn btn-default btn-xs"><i class="fa fa-trash-o"></i>&nbsp;Delete</button>*@
       </div>
       <div class="clear"></div>
     </div>
   </div>
   <div class="row">
-      <div class="message-panel" id="message-control-panel">
-        <div class="">
-          <div class="list-group" id="participant-list">          
-            
-          </div>
+    <div class="message-panel active" id="message-control-panel">
+      <div class="">
+        <div class="list-group" id="participant-list">
         </div>
       </div>
-      <div class="message-panel" id="message-area">
-        
+    </div>
+    <div class="message-panel active" id="message-area"></div>
+    <div class="message-panel" id="newMessage">
+      
+      <div class="message-container">
+        <h4>New message</h4>
+        <hr />
+        <div class="message-board disabled">
+          <div></div>
+        </div>
       </div>
+      <div class="message-composer">
+        <form class="form-horizontal">
+          <textarea class="form-control input-sm message-input-box" cols="20" id="new-message" name="new-message"
+            placeholder="Type a message..."
+            rows="2"></textarea>
+          <button type="button" class="btn btn-xs btn-default send-message-btn disabled">Send</button>
+          <input type="reset" class="btn btn-xs btn-default" value="Clear" />
+        </form>
+      </div>
+    </div>
   </div>
 </div>
 

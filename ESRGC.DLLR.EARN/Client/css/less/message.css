@@ -2,6 +2,7 @@
   height: 600px;
   max-height: 600px;
   margin-top: 10px;
+  display: none;
   float: left;
 }
 .message-panel .logo-image {
@@ -19,27 +20,60 @@
 .message-panel .list-group-item:last-child {
   border-bottom: none;
 }
+.message-panel.active {
+  display: block;
+}
 #message-control-panel {
   width: 30%;
   border-right: 1px solid #dddddd;
 }
-#message-area {
-  display: inline-block;
+#message-area,
+#newMessage {
   width: 70%;
   min-height: 600px;
   overflow-y: auto;
   padding-left: 5px;
 }
-#message-area .message-board {
+#message-area .message-board,
+#newMessage .message-board {
   position: relative;
   padding-left: 10px;
   padding-right: 10px;
-  max-height: 500px;
+  margin-right: 5px;
+  height: 375px;
+  max-height: 375px;
   overflow: auto;
+}
+#message-area .message-board .message,
+#newMessage .message-board .message {
+  margin-bottom: 15px;
+}
+#message-area .message-board .message:not(:first-child),
+#newMessage .message-board .message:not(:first-child) {
+  border-top: 1px solid #dddddd;
+}
+#message-area .message-board.disabled,
+#newMessage .message-board.disabled {
+  background: #f4f4f4;
+  margin-bottom: 5px;
 }
 #message-control-panel,
 #message-area {
   position: relative;
   max-height: 600px;
   overflow-y: auto;
+}
+.message-composer {
+  position: relative;
+  height: 150px;
+  border: 1px solid #dddddd;
+  margin: 0;
+  margin-right: 5px;
+  padding: 10px;
+  background: #f4f4f4;
+  border-radius: 5px;
+}
+.message-composer .message-input-box {
+  min-height: 100px;
+  margin-bottom: 3px;
 }

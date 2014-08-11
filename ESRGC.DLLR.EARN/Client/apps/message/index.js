@@ -14,7 +14,8 @@ var startup = app.startup = function() {
     name: 'EARNConnectMessage',
     views: [
       'ParticipantList',
-      'MessageArea'
+      'MessageArea',
+      'NewMessage'
     ],
     collections: [
      'Participants',
@@ -30,7 +31,8 @@ var startup = app.startup = function() {
         evaluate: /\{\[([\s\S]+?)\]\}/g,
         interpolate: /\{\{([\s\S]+?)\}\}/g
       };
-
+      //force ajax calls not to cache requests
+      $.ajaxSetup({ cache: false });
       console.log("Message box initialized.");
     }
   });
