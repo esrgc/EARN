@@ -23,6 +23,12 @@
 .message-panel.active {
   display: block;
 }
+.message-panel .loading-prompt {
+  display: none;
+}
+.message-panel .loading-prompt.active {
+  display: inline-block;
+}
 #message-control-panel {
   width: 30%;
   border-right: 1px solid #dddddd;

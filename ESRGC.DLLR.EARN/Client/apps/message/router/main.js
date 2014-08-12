@@ -14,15 +14,21 @@ dependency: backbone.js
 
 
 app.Router.Main = Backbone.Router.extend({
+  name: 'Main',
   fetchedParticipants: false,
   newMessage: false,
   routes: {
     '': "init",//page index route,
     'for/:name/:id': 'renderMessageArea',
-    'new': 'newMessage'
+    'new': 'newMessage',
+    'new/:name': 'newMessageByName'
   },
   ///////////////////route functions/////////////////////////////
   init: function() {
+    var newMessageView = app.getView('NewMessage');
+    var messageArea = app.getView('MessageArea');
+    newMessageView.hide();
+    messageArea.show();
     this.newMessage = false;//allow selecting the first message thread
     this.refresh();
   },
@@ -42,7 +48,16 @@ app.Router.Main = Backbone.Router.extend({
     var messageArea = app.getView('MessageArea');
     newMessageView.show();
     messageArea.hide();
-
+  },
+  newMessageByName: function(name) {
+    this.newMessage = true;
+    this.refresh();
+    //render new message view
+    var newMessageView = app.getView('NewMessage');
+    var messageArea = app.getView('MessageArea');
+    newMessageView.setName(name);
+    newMessageView.show();
+    messageArea.hide();
   },
   /////////////helpers and private call backs///////////////
   refresh: function(currentName, currentId) {
@@ -64,7 +79,7 @@ app.Router.Main = Backbone.Router.extend({
               //select 1st convo
               var url = $('#participant-list .list-group-item:first-child').attr('href');
               if (typeof url != 'undefined')
-                scope.navigate(url.replace('#', ''), { trigger: true, replace: true }) //reload with the first conversation messages
+                scope.navigate(url.replace('#', ''), { trigger: true, replace: false }) //reload with the first conversation messages
             }
             else
               scope.fetchMessages(currentId, currentName);

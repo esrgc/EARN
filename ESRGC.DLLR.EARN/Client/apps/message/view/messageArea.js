@@ -53,10 +53,12 @@ app.View.MessageArea = app.View.Base.extend({
       participantID: p.id,
       message: message.replace(/\r?\n/g, '<br />')
     });
+    scope.showLoadingPrompt();
     //post message
     message.save({}, {
       success: function(m, res, options) {
         console.log(res);
+        scope.hideLoadingPrompt();
         //reload message area
         scope.fetchMessages(p.id, p.name);        
       }

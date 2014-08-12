@@ -21,11 +21,17 @@ app.View.ParticipantList = app.View.Base.extend({
     console.log('Rendering participants...')
     console.log(data.toJSON());
     scope.$el.html('');
-    _.each(data.models, function(m) {
-      var data = m.toJSON();
-      var template = _.template($('#participant').html(), { model: data, name: currentname, id: currentId });
-      scope.$el.append(template);
-    });
+    if (data.models.length == 0) {
+      scope.$el.html('<p class="text-center">No conversation found.</p>');
+    }
+    else {
+      _.each(data.models, function(m) {
+        var data = m.toJSON();
+        var template = _.template($('#participant').html(), { model: data, name: currentname, id: currentId });
+        scope.$el.append(template);
+      });
+      scope.$el.animate({ scrollTop: 0 }, 0);//auto scrolls to the top
+    }
   },
   refresh: function(name, id) {
     var scope = this;
@@ -38,6 +44,7 @@ app.View.ParticipantList = app.View.Base.extend({
           var template = _.template($('#participant').html(), { model: data, name: name, id: id });
           scope.$el.append(template);
         });
+        scope.$el.animate({ scrollTop: 0 }, 0);//auto scrolls to the top
       }
     });
   }

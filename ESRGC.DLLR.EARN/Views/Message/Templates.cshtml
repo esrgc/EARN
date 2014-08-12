@@ -24,11 +24,18 @@
     </h4>
     <hr />
     <div class="message-board" data-id="{{id}}">
+
       {[
+        if(messages.length == 0){
+      ]}
+        <p class="text-center">Your message inbox is empty</p>
+      {[  }
         _.each(messages, function(m){
       ]}
         <div class="message">
-          <h5 class="text-info"><strong>{{ m.senderName }}</strong> <small class="pull-right">{{m.time }}, {{m.date}}</small>
+          <h5 class="text-info">
+            <a href="{{m.profileUrl}}"><strong>{{ m.senderName }}</strong></a>
+            <small class="pull-right">{{m.time }}, {{m.date}}</small>
           </h5>
           <p>{{m.message}}</p>
         </div>
@@ -45,8 +52,9 @@
     <form class="form-horizontal">
       <textarea class="form-control input-sm message-input-box" cols="20" id="new-message" name="new-message" placeholder="Type a message..."
         rows="2"></textarea>
-      <button type="button" class="btn btn-xs btn-default send-message-btn disabled">Send</button>
       <input type="reset" class="btn btn-xs btn-default" value="Clear"/>
+      <button type="button" class="btn btn-xs btn-default send-message-btn disabled">Send</button>
+      <img src="@Url.Content("~/Client/images/ajax-loader-fb.gif")" alt="" class="loading-prompt"/>
     </form>
   </div>
 </script>

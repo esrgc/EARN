@@ -6,6 +6,7 @@
     var currentProfile = ViewBag.CurrentProfile as Profile ?? new Profile();
     var returnUrl = ViewBag.returnUrl as string ?? "";
     var partnership = ViewBag.partnership as Partnership ?? null;
+    var messageUrl = Url.Action("index", "Message") + "#new/" + Model.Organization.Name;
 }
 
 @if (currentProfile.ProfileID != Model.ProfileID) { 
@@ -25,7 +26,7 @@
             @if (partnership != null) { 
                 <li><a href="@Url.Action("RemovePartner", "Partnership", new { partnership.PartnershipID, Model.ProfileID, returnUrl })">Remove from partnership</a></li>
             }
-          <li><a href="@Url.Action("Send", "Message", new  { ID = Model.ProfileID })">Message</a></li>
+          <li><a href="@messageUrl">Send Message</a></li>
         </ul>
     </div>
 }
