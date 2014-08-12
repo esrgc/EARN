@@ -518,10 +518,15 @@ and/or view this user’s Organizational Profile for more information.",
     [HttpPost]
     [SendNotification]
     public ActionResult SendJoinProfileRequest(int profileID, string name, string message) {
+      
       var profile = _workUnit.ProfileRepository.GetEntityByID(profileID);
       if (profile == null) {
         updateTempMessage("Profile ID is invalid");
         return RedirectToAction("Index", "Home");
+      }
+      if(string.IsNullOrEmpty(name)){
+        updateTempMessage("Please enter your name, so the profile owner can identify you and approve your request!");
+        return View(profile);
       }
       var owner = profile.getAccount();
       if (owner == null) {

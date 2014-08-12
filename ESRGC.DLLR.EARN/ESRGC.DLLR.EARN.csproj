@@ -259,6 +259,7 @@
     <Content Include="Client\jsLib\bootstrap-3.0.2\js\bootstrap.js" />
     <Content Include="Client\jsLib\bootstrap-3.0.2\js\bootstrap.min.js" />
     <Content Include="Client\jsLib\bootstrap-3.0\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Client\jsLib\handlebars\handlebars-v1.3.0.js" />
     <Content Include="Client\jsLib\jquery-1.x\jquery-1.10.2.js" />
     <Content Include="Client\jsLib\jquery-1.x\jquery-1.10.2.min.js" />
     <Content Include="Client\jsLib\jquery-1.x\jquery-1.9.1.js" />
@@ -284,6 +285,12 @@
     <Content Include="Client\jsLib\leaflet.awesome-markers\leaflet.awesome-markers.min.js" />
     <Content Include="Client\jsLib\response\respond.min.js" />
     <Content Include="Client\jsLib\response\respond.src.js" />
+    <Content Include="Client\jsLib\typeahead-0.10.5\bloodhound.js" />
+    <Content Include="Client\jsLib\typeahead-0.10.5\bloodhound.min.js" />
+    <Content Include="Client\jsLib\typeahead-0.10.5\typeahead.bundle.js" />
+    <Content Include="Client\jsLib\typeahead-0.10.5\typeahead.bundle.min.js" />
+    <Content Include="Client\jsLib\typeahead-0.10.5\typeahead.jquery.js" />
+    <Content Include="Client\jsLib\typeahead-0.10.5\typeahead.jquery.min.js" />
     <Content Include="Client\jsLib\underscore\underscore-min.js" />
     <Content Include="Client\jsLib\underscore\underscore.js" />
     <Content Include="Client\js\backbone-addon\application.js" />

@@ -164,5 +164,17 @@ namespace ESRGC.DLLR.EARN.Controllers
     public ActionResult Delete() {
       return View();
     }
+
+    public ActionResult Connections() {
+      var connections = CurrentAccount.Profile.Connections.ToList();
+
+      var json = connections.Select(x => new { 
+        id = x.ProfileID, 
+        name = x.Organization.Name,
+        logoUrl = Url.Action("ProfileLogo", new { Id = x.ProfileID })
+      }).OrderBy(x=>x.name).ToList();
+
+      return Json(json, JsonRequestBehavior.AllowGet);
+    }
   }
 }

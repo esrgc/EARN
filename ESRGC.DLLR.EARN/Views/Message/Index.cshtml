@@ -12,6 +12,8 @@
 }
 
 @section scripts{
+  <script src="~/Client/jsLib/handlebars/handlebars-v1.3.0.js"></script>
+  <script src="~/Client/jsLib/typeahead-0.10.5/typeahead.bundle.js"></script>
   @Html.Partial("Templates")
   <script src="~/Client/jsLib/underscore/underscore.js"></script>
   <script src="~/Client/jsLib/backbone/backbone.js"></script>
@@ -40,12 +42,23 @@
     </div>
     <div class="message-panel active" id="message-area"></div>
     <div class="message-panel" id="newMessage">
-      
+
       <div class="message-container">
         <h4>New message</h4>
         <hr />
-        <div class="message-board disabled">
-          <div></div>
+        <div class="message-board">
+          <div>
+              <div class="form-group typeahead-container">
+                <label class="control-label col-sm-1" for="msg-participant">To</label>
+                <div class="col-sm-8">
+                  <input type="text"
+                    class="form-control typeahead"
+                    placeholder="Name"
+                    name="msg-participant"
+                    id="msg-participant" />
+                </div>
+              </div>              
+          </div>
         </div>
       </div>
       <div class="message-composer">
