@@ -13,7 +13,7 @@ dependency: backbone.js
 
 app.Collection.Messages = Backbone.Collection.extend({
   name: 'Messages',
-  url: '/message/fetch',
+  url: 'message/fetch',
   model: BackboneApp.Model.Message
 
 });

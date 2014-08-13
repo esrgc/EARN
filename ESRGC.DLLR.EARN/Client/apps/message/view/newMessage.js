@@ -20,7 +20,7 @@ app.View.NewMessage = app.View.Base.extend({
       queryTokenizer: Bloodhound.tokenizers.whitespace,
       limit: 3,
       prefetch: {
-        url: '/message/connections',
+        url: 'message/connections',
         ttl: 1
         // the json file contains an array of strings, but the Bloodhound
         // suggestion engine expects JavaScript objects so this converts all of

@@ -13,5 +13,5 @@ dependency: backbone.js
 
 app.Model.Message = Backbone.Model.extend({
   name: 'Message',
-  url: '/message/send'//for posting new message
+  url: 'message/send'//for posting new message
 });

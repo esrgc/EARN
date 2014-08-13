@@ -46,7 +46,7 @@ app.Router.Main = Backbone.Router.extend({
     this.refresh();
     //render new message view
     this.showActiveView('NewMessage');
-    var messageArea = app.getView('NewMessage');
+    var newMessageView = app.getView('NewMessage');
     newMessageView.setName(name);
   },
   newAdminMessage: function() {

@@ -241,13 +241,28 @@ namespace ESRGC.DLLR.EARN.Controllers
       }         
 
       //delete profile tags
-      var profileTags = _workUnit.ProfileTagRepository
+      _workUnit.ProfileTagRepository
         .Entities
         .Where(x => x.ProfileID == profile.ProfileID)
-        .ToList();
-      foreach (var tag in profileTags) {
-        _workUnit.ProfileTagRepository.DeleteEntity(tag);
-      }
+        .ToList()
+        .ForEach(tag => _workUnit.ProfileTagRepository.DeleteEntity(tag));
+      //delete message borads
+      _workUnit.MessageBoardRepository
+        .Entities
+        .Where(x => x.ProfileID == profile.ProfileID)
+        .ToList()
+        .ForEach(x => {
+          _workUnit.MessageBoardRepository.DeleteEntity(x);
+        });
+      //delete message sent and received
+      _workUnit.MessageRepository
+        .Entities
+        .Where(x => x.SenderID == profile.ProfileID || x.ReceiverID == profile.ProfileID)
+        .ToList()
+        .ForEach(x => _workUnit.MessageRepository.DeleteEntity(x));
+      
+      
+
 
       //CurrentAccount.ProfileID = null;
       //_workUnit.AccountRepository.UpdateEntity(CurrentAccount);

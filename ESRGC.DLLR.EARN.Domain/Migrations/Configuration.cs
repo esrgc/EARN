@@ -35,7 +35,25 @@ namespace ESRGC.DLLR.EARN.Domain.Migrations
       //    i.Accounts.First().IsProfileOwner = true;
       //  }
       //}
+      //context.SaveChanges();
+      try {
+        var earnAdmin = context.Accounts.First(x => x.EmailAddress.ToLower() == "earn.jobs@maryland.gov");
+        earnAdmin.Role = "admin";
+        context.Accounts.AddOrUpdate(earnAdmin);
+        context.SaveChanges();
+      }
+      catch { 
+        //skip
+      }
+      //set account owners when there's only 1 account in the profile for migration
+      context.Profiles.Where(x => x.Accounts.Count() == 1).ToList()
+        .ForEach(x =>{
+          var account = x.getAccount();
+          account.IsProfileOwner = true;
+          context.Accounts.AddOrUpdate(account);
+        });
       context.SaveChanges();
+
       //context.UserGroups.RemoveRange(context.UserGroups.ToList());
       //context.Communities.RemoveRange(context.Communities.ToList());
       if (context.Tags.Count() == 0) {
@@ -160,6 +178,7 @@ namespace ESRGC.DLLR.EARN.Domain.Migrations
           new Category { Name = "Other" }
 
         );
+        context.SaveChanges();
       }
     }
   }

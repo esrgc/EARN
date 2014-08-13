@@ -13,5 +13,5 @@ dependency: backbone.js
 
 app.Model.AdminMessage = Backbone.Model.extend({
   name: 'AdminMessage',
-  url: '/Message/adminSend'//for posting new AdminMessage
+  url: 'Message/adminSend'//for posting new AdminMessage
 });

@@ -13,7 +13,7 @@ dependency: backbone.js
 
 app.Collection.Participants = Backbone.Collection.extend({
   name: 'Participants',
-  url: '/message/participants',
+  url: 'message/participants',
   model: BackboneApp.Model.Participant
   
 });
