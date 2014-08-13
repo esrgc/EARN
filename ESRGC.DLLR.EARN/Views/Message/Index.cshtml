@@ -29,7 +29,7 @@
       <div class="btn-group pull-right">
         <a href="#new" class="btn btn-default btn-xs"><i class="fa fa-plus"></i>&nbsp;New Message</a>
         @if (Model.Role.ToLower() == "admin") { 
-          <a href="#new" class="btn btn-default btn-xs" title="Admin only"><i class="fa fa-lock"></i>&nbsp;Admin Message</a>
+          <a href="#newAdmin" class="btn btn-default btn-xs" title="Admin only"><i class="fa fa-lock"></i>&nbsp;Admin Message</a>
         }
         
         @*<button class="btn btn-default btn-xs"><i class="fa fa-refresh"></i>&nbsp;Refresh</button>*@
@@ -45,11 +45,10 @@
         </div>
       </div>
     </div>
-    <div class="message-panel active" id="message-area"></div>
-    <div class="message-panel" id="newMessage">
-
+    <div class="message-panel message-center active" id="message-area"></div>
+    <div class="message-panel message-center" id="newMessage">
       <div class="message-container">
-        <h4>New message</h4>
+        <h4>New Message</h4>
         <hr />
         <div class="message-board">
           <div>
@@ -69,6 +68,25 @@
       <div class="message-composer">
         <form class="form-horizontal">
           <textarea class="form-control input-sm message-input-box" cols="20" id="new-message" name="new-message"
+            placeholder="Type a message..."
+            rows="2"></textarea>
+          <input type="reset" class="btn btn-xs btn-default" value="Clear" />
+          <button type="button" class="btn btn-xs btn-default send-message-btn disabled">Send</button>
+          <img src="~/Client/images/ajax-loader-fb.gif" alt="" class="loading-prompt"/>
+        </form>
+      </div>
+    </div>
+     <div class="message-panel message-center" id="adminMessage">
+      <div class="message-container">
+        <h4>Administration Message <small>(Announcement)</small></h4>
+        <hr />
+        <div class="message-board disabled">
+          
+        </div>
+      </div>
+      <div class="message-composer">
+        <form class="form-horizontal">
+          <textarea class="form-control input-sm message-input-box" cols="20" id="new-admin-message" name="new-admin-message"
             placeholder="Type a message..."
             rows="2"></textarea>
           <input type="reset" class="btn btn-xs btn-default" value="Clear" />

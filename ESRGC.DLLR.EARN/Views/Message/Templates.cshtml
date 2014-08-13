@@ -2,7 +2,7 @@
   {[ 
     var cssClass = '';
     if(model.id == id)
-      cssClass = 'active';
+      cssClass = 'active';    
   ]}
 
   <a href="#for/{{model.name}}/{{model.id}}" class="list-group-item {{cssClass}}">
@@ -31,10 +31,21 @@
         <p class="text-center">Your message inbox is empty</p>
       {[  }
         _.each(messages, function(m){
+          var adminMsgClass = '';
+          var textTitle = '';
+          var subTitleHtml = '';
+          if(m.isAdminMessage){
+            adminMsgClass = 'admin-message';
+            textTitle = 'Announcement';
+            subTitleHtml = [
+              '<small class="label label-primary">Administration message</small>'
+            ].join('');
+          }
       ]}
-        <div class="message">
-          <h5 class="text-info">
+        <div class="message {{adminMsgClass}}">
+          <h5 class="text-info" title="{{textTitle}}">
             <a href="{{m.profileUrl}}"><strong>{{ m.senderName }}</strong></a>
+            {{subTitleHtml}}
             <small class="pull-right">{{m.time }}, {{m.date}}</small>
           </h5>
           <p>{{m.message}}</p>

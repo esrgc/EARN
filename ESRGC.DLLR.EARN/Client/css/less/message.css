@@ -6,7 +6,7 @@
   float: left;
 }
 .message-panel .logo-image {
-  max-width: 80px;
+  max-width: 60px;
   margin-bottom: 5px;
 }
 .message-panel .list-group-item {
@@ -33,15 +33,13 @@
   width: 30%;
   border-right: 1px solid #dddddd;
 }
-#message-area,
-#newMessage {
+.message-center {
   width: 70%;
   min-height: 600px;
   overflow-y: auto;
   padding-left: 5px;
 }
-#message-area .message-board,
-#newMessage .message-board {
+.message-center .message-board {
   position: relative;
   padding-left: 10px;
   padding-right: 10px;
@@ -50,16 +48,19 @@
   max-height: 375px;
   overflow: auto;
 }
-#message-area .message-board .message,
-#newMessage .message-board .message {
+.message-center .message-board .message {
   margin-bottom: 15px;
 }
-#message-area .message-board .message:not(:first-child),
-#newMessage .message-board .message:not(:first-child) {
+.message-center .message-board .message:not(:first-child) {
   border-top: 1px solid #dddddd;
 }
-#message-area .message-board.disabled,
-#newMessage .message-board.disabled {
+.message-center .message-board .message.admin-message {
+  border: 1px solid #dddddd;
+  border-radius: 5px;
+  padding: 5px;
+  background: #e1deca;
+}
+.message-center .message-board.disabled {
   background: #f4f4f4;
   margin-bottom: 5px;
 }

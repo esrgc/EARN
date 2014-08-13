@@ -21,43 +21,39 @@ app.Router.Main = Backbone.Router.extend({
     '': "init",//page index route,
     'for/:name/:id': 'renderMessageArea',
     'new': 'newMessage',
-    'new/:name': 'newMessageByName'
+    'new/:name': 'newMessageByName',
+    'newAdmin': 'newAdminMessage'
   },
   ///////////////////route functions/////////////////////////////
   init: function() {
-    var newMessageView = app.getView('NewMessage');
-    var messageArea = app.getView('MessageArea');
-    newMessageView.hide();
-    messageArea.show();
+    this.showActiveView('MessageArea');
     this.newMessage = false;//allow selecting the first message thread
     this.refresh();
   },
   renderMessageArea: function(name, id) {
     this.newMessage = false;//allow selecting the first message thread
-    var newMessageView = app.getView('NewMessage');
-    var messageArea = app.getView('MessageArea');
-    newMessageView.hide();
-    messageArea.show();
+    this.showActiveView('MessageArea');
     this.refresh(name, id);//maintain current and hi-light active participant
   },
   newMessage: function() {
     this.newMessage = true;
     this.refresh();
     //render new message view
-    var newMessageView = app.getView('NewMessage');
-    var messageArea = app.getView('MessageArea');
-    newMessageView.show();
-    messageArea.hide();
+    this.showActiveView('NewMessage');
   },
   newMessageByName: function(name) {
     this.newMessage = true;
     this.refresh();
     //render new message view
-    var newMessageView = app.getView('NewMessage');
-    var messageArea = app.getView('MessageArea');
+    this.showActiveView('NewMessage');
+    var messageArea = app.getView('NewMessage');
     newMessageView.setName(name);
-    newMessageView.show();
-    messageArea.hide();
+  },
+  newAdminMessage: function() {
+    this.newMessage = true;
+    this.refresh();
+    //render new message view
+    this.showActiveView('adminMessage')
   },
   /////////////helpers and private call backs///////////////
   refresh: function(currentName, currentId) {
@@ -100,6 +96,17 @@ app.Router.Main = Backbone.Router.extend({
     if (typeof view == 'undefined')
       return;
     view.fetchMessages(id, name);
+  },
+  showActiveView: function(viewName) {
+    var views = app.getViews();
+    _.each(views, function(v) {
+      if (v.name != 'ParticipantList') {
+        v.hide();
+      }      
+    });
+    var activeView = app.getView(viewName);
+    if (activeView)
+      activeView.show();
   }
   
 

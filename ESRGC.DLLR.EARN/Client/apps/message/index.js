@@ -15,7 +15,8 @@ var startup = app.startup = function() {
     views: [
       'ParticipantList',
       'MessageArea',
-      'NewMessage'
+      'NewMessage',
+      'AdminMessage'
     ],
     collections: [
      'Participants',

@@ -205,9 +205,11 @@
     <Content Include="Client\apps\message\collection\messages.js" />
     <Content Include="Client\apps\message\index.js" />
     <Content Include="Client\apps\message\collection\participants.js" />
+    <Content Include="Client\apps\message\model\adminMessage.js" />
     <Content Include="Client\apps\message\model\message.js" />
     <Content Include="Client\apps\message\model\participant.js" />
     <Content Include="Client\apps\message\router\main.js" />
+    <Content Include="Client\apps\message\view\messageAdmin.js" />
     <Content Include="Client\apps\message\view\base.js" />
     <Content Include="Client\apps\message\view\newMessage.js" />
     <Content Include="Client\apps\message\view\messageArea.js" />

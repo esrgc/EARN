@@ -11,7 +11,7 @@
     float: left;
 
     .logo-image {
-        max-width: 80px;
+        max-width: 60px;
         margin-bottom: 5px;
     }
 
@@ -46,7 +46,7 @@
     border-right: 1px solid @border-color;
 }
 
-#message-area, #newMessage {
+.message-center {
     width: 70%;
     min-height: @maxheight;
     overflow-y: auto;    
@@ -64,6 +64,13 @@
                 border-top: 1px solid @border-color;
             }
             margin-bottom: 15px;
+            &.admin-message{
+                border: 1px solid @border-color;
+                border-radius: 5px;
+                padding: 5px;
+                //font-weight: bold;
+                background: #e1deca;
+            }
         }
         &.disabled{
             background: @base-color;
