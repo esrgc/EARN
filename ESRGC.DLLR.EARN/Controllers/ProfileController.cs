@@ -231,6 +231,18 @@ namespace ESRGC.DLLR.EARN.Controllers
         return RedirectToAction("Settings", "Account");
       }
       var profile = CurrentAccount.Profile;
+      var accounts = profile.Accounts.ToList();
+      //create notification
+      accounts.ForEach(a => {
+        var notification = new Notification() {
+          Category = "Profile Deleted",
+          Account = a,
+          Message = string.Format("The organizational profile {0} has been deleted by the owner.", profile.Organization.Name),
+          Message2 = "If you wish to create or join another profile please visit EARN MD CONNECT to do so.",
+          LinkToAction = Url.Action("Index", "Profile")
+        };
+        _workUnit.NotificationRepository.InsertEntity(notification);
+      });
 
       if (profile == null) {
         updateTempMessage("Invalid profile ID");
@@ -288,17 +300,7 @@ namespace ESRGC.DLLR.EARN.Controllers
         _workUnit.ContactRepository.DeleteEntity(profile.Contact);
       }
 
-      //create notification
-      profile.Accounts.ToList().ForEach(a => {
-        var notification = new Notification() {
-          Category = "Profile Deleted",
-          Account = a,
-          Message = string.Format("The organizational profile {0} has been deleted by the owner.", profile.Organization.Name),
-          Message2 = "If you wish to create or join another profile please visit EARN MD CONNECT to do so.",
-          LinkToAction = Url.Action("Index", "Profile")
-        };
-        _workUnit.NotificationRepository.InsertEntity(notification);
-      });
+      
       _workUnit.saveChanges();
       updateTempMessage("Your profile has been deleted.");
       return RedirectToAction("Index", "Home");
