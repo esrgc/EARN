@@ -81,11 +81,11 @@ namespace ESRGC.DLLR.EARN.Controllers
         Group = x.UserGroup.Name,
       }).ToList()
       .ToPagedList(index, size);
-      
+
       if (Request.IsAjaxRequest() || f.ToLower() == "json") {
         return Json(json, JsonRequestBehavior.AllowGet);
       }
-      
+
       var pagedList = result.ToList().ToPagedList(index, size);
       return View(pagedList);
     }
@@ -224,6 +224,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     [HttpPost]
     [VerifyProfile]
     [ActionName("Delete")]
+    [SendNotification]
     public ActionResult DeleteProfile() {
       if (!CurrentAccount.IsProfileOwner) {
         updateTempMessage("Sory, you can not delete this profile. Only the profile creator/owner can delete.");
@@ -247,7 +248,14 @@ namespace ESRGC.DLLR.EARN.Controllers
         .Entities
         .Where(x => x.SenderID == profile.ProfileID || x.ReceiverID == profile.ProfileID)
         .ToList()
-        .ForEach(x => _workUnit.MessageRepository.DeleteEntity(x));
+        .ForEach(x => {
+          _workUnit.MessageBoardRepository
+            .Entities
+            .Where(mb => mb.MessageID == x.MessageID)
+            .ToList()
+            .ForEach(m => _workUnit.MessageBoardRepository.DeleteEntity(m));
+          _workUnit.MessageRepository.DeleteEntity(x);
+        });
       _workUnit.saveChanges();
       //delete message borads
       _workUnit.MessageBoardRepository
@@ -264,9 +272,9 @@ namespace ESRGC.DLLR.EARN.Controllers
         .Where(x => x.ProfileID == profile.ProfileID)
         .ToList()
         .ForEach(tag => _workUnit.ProfileTagRepository.DeleteEntity(tag));
-      
-      
-      
+
+
+
 
       //CurrentAccount.ProfileID = null;
       //_workUnit.AccountRepository.UpdateEntity(CurrentAccount);
@@ -279,7 +287,18 @@ namespace ESRGC.DLLR.EARN.Controllers
       if (profile.Contact != null) {
         _workUnit.ContactRepository.DeleteEntity(profile.Contact);
       }
-     
+
+      //create notification
+      profile.Accounts.ToList().ForEach(a => {
+        var notification = new Notification() {
+          Category = "Profile Deleted",
+          Account = a,
+          Message = string.Format("The organizational profile {0} has been deleted by the owner.", profile.Organization.Name),
+          Message2 = "If you wish to create or join another profile please visit EARN MD CONNECT to do so.",
+          LinkToAction = Url.Action("Index", "Profile")
+        };
+        _workUnit.NotificationRepository.InsertEntity(notification);
+      });
       _workUnit.saveChanges();
       updateTempMessage("Your profile has been deleted.");
       return RedirectToAction("Index", "Home");

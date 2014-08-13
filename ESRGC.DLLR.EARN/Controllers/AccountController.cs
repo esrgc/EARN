@@ -73,7 +73,7 @@ namespace ESRGC.DLLR.EARN.Controllers
             //redirect to create new user contact
             //verify email
             EmailHelper.SendVerificationEmail(newAccount);
-            return RedirectToAction("Create", "Profile");
+            return RedirectToAction("Index", "Profile");
           }
           catch (Exception ex) {
             ModelState.AddModelError("", "Error saving data to database. Please try again later. " + ex.Message);
