@@ -22,6 +22,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     public ProfileController(IWorkUnit workUnit)
       : base(workUnit) {
     }
+    [AllowNonProfile]
     public ActionResult Index() {
       return View();
     }
@@ -238,14 +239,16 @@ namespace ESRGC.DLLR.EARN.Controllers
       if (profile.hasOwnedPartnerships()) {
         updateTempMessage("Your organizational profile is currently involved with one or more partnertships as an administrator. Please re-assign admin role before deleting your profile.");
         return RedirectToAction("Detail");
-      }         
+      }
 
-      //delete profile tags
-      _workUnit.ProfileTagRepository
+
+      //delete message sent and received
+      _workUnit.MessageRepository
         .Entities
-        .Where(x => x.ProfileID == profile.ProfileID)
+        .Where(x => x.SenderID == profile.ProfileID || x.ReceiverID == profile.ProfileID)
         .ToList()
-        .ForEach(tag => _workUnit.ProfileTagRepository.DeleteEntity(tag));
+        .ForEach(x => _workUnit.MessageRepository.DeleteEntity(x));
+      _workUnit.saveChanges();
       //delete message borads
       _workUnit.MessageBoardRepository
         .Entities
@@ -254,15 +257,16 @@ namespace ESRGC.DLLR.EARN.Controllers
         .ForEach(x => {
           _workUnit.MessageBoardRepository.DeleteEntity(x);
         });
-      //delete message sent and received
-      _workUnit.MessageRepository
-        .Entities
-        .Where(x => x.SenderID == profile.ProfileID || x.ReceiverID == profile.ProfileID)
-        .ToList()
-        .ForEach(x => _workUnit.MessageRepository.DeleteEntity(x));
-      
-      
 
+      //delete profile tags
+      _workUnit.ProfileTagRepository
+        .Entities
+        .Where(x => x.ProfileID == profile.ProfileID)
+        .ToList()
+        .ForEach(tag => _workUnit.ProfileTagRepository.DeleteEntity(tag));
+      
+      
+      
 
       //CurrentAccount.ProfileID = null;
       //_workUnit.AccountRepository.UpdateEntity(CurrentAccount);

@@ -208,7 +208,7 @@ namespace ESRGC.DLLR.EARN.Controllers
           recipient.Accounts.ToList().ForEach(x => {
             var notification = new Notification() {
               Category = "Announement Message Received",
-              Message = sender.Organization.Name + " has sent a new announement message.",
+              Message = sender.Organization.Name + " has sent a new announcement message.",
               Account = x,
               Message2 = "Message: " + message.Replace("<br />", "\r\n").toShorDescription(150),
               Message3 = "You can view and reply to this message at EARN MD CONNECT.",

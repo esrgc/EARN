@@ -46,7 +46,7 @@ namespace ESRGC.DLLR.EARN.Filters
           filterContext.Controller.TempData["message"] = "You have not created an organizational profile. Please create one!";
           filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary() { 
             {"controller", "Profile"},
-            {"action", "Create"}
+            {"action", "Index"}
           });
         }
         else
