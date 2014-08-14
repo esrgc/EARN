@@ -388,5 +388,67 @@ but should not be used to share proprietary or sensitive content.",
     public ActionResult InvalidPartnershipRequest() {
       return View();
     }
+    [CanEditPartnership]
+    public ActionResult MakeAdmin(int profileId, int partnershipID) {
+      var profile = _workUnit.ProfileRepository.GetEntityByID(profileId);
+      if (profile == null) {
+        updateTempMessage("Invalid organization profile");
+        return RedirectToAction("Detail", new { partnershipID });
+      }
+      var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
+      if (partnership == null) {
+        updateTempMessage("Invalid Partnership profile");
+        return RedirectToAction("Detail", new { partnershipID });
+      }
+      ViewBag.profile = profile;
+      ViewBag.partnership = partnership;
+      return View();
+    }
+
+    [HttpPost]
+    [CanEditPartnership]
+    [SendNotification]
+    [ActionName("MakeAdmin")]
+    public ActionResult MakeAdminPost(int profileId, int partnershipID) {
+      var currentProfile = CurrentAccount.Profile;
+      var partnershipDetail = currentProfile.PartnershipDetails.First(x => x.PartnershipID == partnershipID);
+      //make current profile 
+      partnershipDetail.Type = "partner";
+      _workUnit.PartnershipDetailRepository.UpdateEntity(partnershipDetail);
+      //now look for the new admin 
+      try {
+        var newAdmin = _workUnit.PartnershipDetailRepository
+            .Entities
+            .First(x => x.ProfileID == profileId && x.PartnershipID == partnershipID);
+        newAdmin.Type = "Owner";
+        _workUnit.PartnershipDetailRepository.UpdateEntity(newAdmin);
+
+        //get the new admin's profile
+        var profile = _workUnit.ProfileRepository.GetEntityByID(profileId);
+        profile.Accounts.ToList().ForEach(x => {
+          //create notification
+          var notif = new Notification() {
+            Account = x,
+            Category = "Partnership Admin Assigned",
+            Message = string.Format("{0} has assigned your organization to be the administrator of the {1} partnership.",
+              currentProfile.Organization.Name,
+              partnershipDetail.Partnership.Name
+            ),
+            Message2 = "You can now edit the partnership status and details, delete the partnerhsip profile, approve new partners, and invite organizations to join the partnership.",
+            LinkToAction = Url.Action("Detail", new { partnershipID })
+          };
+          _workUnit.NotificationRepository.InsertEntity(notif);
+        });
+        //done now save to the database
+        _workUnit.saveChanges();
+        return RedirectToAction("Detail", new { partnershipID });
+      }
+      catch {
+
+        updateTempMessage("Error retreiving partnership information for profile id " + profileId + ".");
+        return RedirectToAction("Detail", new { partnershipID });
+      }
+
+    }
   }
 }

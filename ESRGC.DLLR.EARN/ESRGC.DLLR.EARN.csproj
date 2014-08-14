@@ -490,6 +490,7 @@
     <Content Include="Views\Communication\JoinProfileRequest.cshtml" />
     <Content Include="Views\Message\Index.cshtml" />
     <Content Include="Views\Message\Templates.cshtml" />
+    <Content Include="Views\Partnership\MakeAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
