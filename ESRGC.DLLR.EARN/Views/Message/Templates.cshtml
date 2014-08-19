@@ -66,13 +66,16 @@
         <div class="message {{adminMsgClass}}">
           <h5 class="text-info" title="{{textTitle}}">
             {[ if(m.logoUrl != '') { ]}
-              <img class="img-thumbnail logo-image pull-left" src="{{m.logoUrl}}" alt="" />
+              <a class="pull-left" href="{{m.profileUrl}}">
+                <img class="img-thumbnail logo-image" src="{{m.logoUrl}}" alt="" />
+              </a>
             {[ } ]}
             <a href="{{m.profileUrl}}"><strong>{{ m.senderName }}</strong></a>
             {{subTitleHtml}}
             <small class="pull-right">{{m.time }}, {{m.date}}</small>
           </h5>
           <p>{{m.message}}</p>
+          <div class="clear"></div>
         </div>
 
       {[  
