@@ -28,11 +28,11 @@ app.View.MessageArea = app.View.Base.extend({
 
     //}, 15000);
   },
-  render: function(data, name, id) {
+  render: function(data, id) {
     var scope = this;
-    scope.currentParticipant = { id: id, name: name };
-    console.log(this.name + ' init for ' + name);
-    var template = _.template($('#message-board').html(), { id: id, name: name, messages: data });
+    scope.currentParticipant = { id: id };
+    
+    var template = _.template($('#message-board').html(), data );
     scope.$el.html(template);
 
     var composer = _.template($('#message-composer').html());
@@ -50,7 +50,7 @@ app.View.MessageArea = app.View.Base.extend({
     console.log('sending message: ')
     console.log(message);
     var message = new app.Model.Message({
-      participantID: p.id,
+      conversationID: p.id,
       message: message.replace(/\r?\n/g, '<br />')
     });
     scope.showLoadingPrompt();
@@ -59,8 +59,8 @@ app.View.MessageArea = app.View.Base.extend({
       success: function(m, res, options) {
         console.log(res);
         scope.hideLoadingPrompt();
-        //reload message area
-        scope.fetchMessages(p.id, p.name);        
+        var convoList = app.getView('ConversationList');
+        convoList.refresh(p.id);
       }
     });
 
@@ -77,7 +77,7 @@ app.View.MessageArea = app.View.Base.extend({
   onClearBtnClick: function(ev) {
     this.$('.send-message-btn').addClass('disabled');
   },
-  fetchMessages: function(id, name) {
+  fetchMessages: function(id) {
     if (typeof id == 'undefined')
       return;
     var scope = this;
@@ -88,25 +88,21 @@ app.View.MessageArea = app.View.Base.extend({
     }
     collection.fetch({
       success: function(data) {
-        //console.log(data.toJSON());
-        scope.render(data.toJSON(), name, id);
+        var newData = data.toJSON()[0];
+        console.log(newData);
+        scope.render(newData, id);
         console.log('Messages fetched for ' + name);
-        //refresh participant list
-        var participantListView = app.getView('ParticipantList');
-        participantListView.refresh(name, id);
       },
       data: {
-        participantID: id
+        conversationID: id
       }
     });
   },
   onRefreshBtnClick: function(ev) {
     var scope = this;
     var p = scope.currentParticipant;
-    if (typeof p != 'undefined') {
-      console.log('refreshing messages...');
-      scope.fetchMessages(p.id, p.name);
-    }
+    var convoList = app.getView('ConversationList');
+    convoList.refresh(p.id);
   }
 
 

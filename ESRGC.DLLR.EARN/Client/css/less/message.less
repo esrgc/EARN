@@ -13,6 +13,7 @@
     .logo-image {
         max-width: 60px;
         margin-bottom: 5px;
+        margin-right: 5px;
     }
 
     .list-group-item {
@@ -29,16 +30,18 @@
             border-bottom: none;
         }
     }
-    &.active{
+
+    &.active {
         display: block;
     }
-    .loading-prompt{
+
+    .loading-prompt {
         display: none;
-        &.active{
+
+        &.active {
             display: inline-block;
         }
     }
-
 }
 
 #message-control-panel {
@@ -49,9 +52,10 @@
 .message-center {
     width: 70%;
     min-height: @maxheight;
-    overflow-y: auto;    
+    overflow-y: auto;
     padding-left: 5px;
-    .message-board{
+
+    .message-board {
         position: relative;
         padding-left: 10px;
         padding-right: 10px;
@@ -59,12 +63,16 @@
         height: @maxheight - (@message-composer-height + 75px);
         max-height: @maxheight - (@message-composer-height + 75px);
         overflow: auto;
-        .message{
-            &:not(:first-child){
+        padding-top: 20px;
+        border-top: 1px solid @border-color;
+        .message {
+            &:not(:first-child) {
                 border-top: 1px solid @border-color;
             }
+
             margin-bottom: 15px;
-            &.admin-message{
+
+            &.admin-message {
                 border: 1px solid @border-color;
                 border-radius: 5px;
                 padding: 5px;
@@ -72,9 +80,28 @@
                 background: #e1deca;
             }
         }
-        &.disabled{
+
+        &.disabled {
             background: @base-color;
             margin-bottom: 5px;
+        }
+
+        .recipient-container {
+            padding: 10px;
+            margin-top: 20px;
+
+            .recipient {
+                cursor: pointer;
+                display: inline-block;
+                min-width: 200px;
+                float: left;
+                height: 100px;
+                margin: 5px;
+
+                img {
+                    max-height: 80px;
+                }
+            }
         }
     }
 }
@@ -85,7 +112,7 @@
     overflow-y: auto;
 }
 
-.message-composer{
+.message-composer {
     position: relative;
     height: @message-composer-height;
     border: 1px solid @border-color;
@@ -94,10 +121,9 @@
     padding: 10px;
     background: @base-color;
     border-radius: 5px;
-    .message-input-box{
+
+    .message-input-box {
         min-height: 100px;
         margin-bottom: 3px;
     }
 }
-
-

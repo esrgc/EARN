@@ -203,8 +203,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Client\apps\message\collection\messages.js" />
+    <Content Include="Client\apps\message\collection\organizations.js" />
     <Content Include="Client\apps\message\index.js" />
-    <Content Include="Client\apps\message\collection\participants.js" />
+    <Content Include="Client\apps\message\collection\conversations.js" />
     <Content Include="Client\apps\message\model\adminMessage.js" />
     <Content Include="Client\apps\message\model\message.js" />
     <Content Include="Client\apps\message\model\participant.js" />
@@ -213,7 +214,7 @@
     <Content Include="Client\apps\message\view\base.js" />
     <Content Include="Client\apps\message\view\newMessage.js" />
     <Content Include="Client\apps\message\view\messageArea.js" />
-    <Content Include="Client\apps\message\view\participantList.js" />
+    <Content Include="Client\apps\message\view\conversationList.js" />
     <Content Include="Client\apps\search\app.js" />
     <Content Include="Client\apps\search\controller\map.js" />
     <Content Include="Client\apps\search\controller\search.js" />

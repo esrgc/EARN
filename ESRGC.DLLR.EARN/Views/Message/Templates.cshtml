@@ -1,30 +1,51 @@
-﻿<script type="text/template" id="participant">
+﻿<script type="text/template" id="recipient">
+  {[
+    _.each(recipients, function(r){
+      ]}
+        <div class="recipient placeholder-panel">
+          <a class="pull-right" data-name="{{r.name}}"><i class="fa fa-times"></i></a>
+          <img class="img-thumbnail logo-image pull-left" style="margin-right: 10px;" src="{{r.logoUrl}}" alt="">
+          <p><strong>{{r.name}}</strong></p>
+          <div class="clear"></div>
+        </div>
+
+  {[ });]}
+  
+  
+</script>
+
+<script type="text/template" id="conversation">
   {[ 
     var cssClass = '';
     if(model.id == id)
       cssClass = 'active';    
   ]}
 
-  <a href="#for/{{model.name}}/{{model.id}}" class="list-group-item {{cssClass}}">
-    <small class="pull-right">{{model.lastMessageTime}}, {{model.lastMessageDate}}</small>
-    <img class="img-thumbnail logo-image" src="{{model.logoUrl}}" alt="" />
+  <a href="#for/{{model.id}}" class="list-group-item {{cssClass}}" data-name="{{model.name}}">
+    {[ if(model.logoUrl != '') { ]}
+      <img class="img-thumbnail logo-image pull-left" src="{{model.logoUrl}}" alt="" />
+    {[ } ]}
     <p>
       <strong>{{ model.name }}</strong>
       <br />
       <small><i>{{ model.lastMessage }}</i></small>
     </p>
+    <small class="pull-right">{{model.lastMessageDate}}</small>
+
+    <div class="clear"></div>
   </a>
 </script>
 
 <script type="text/template" id="message-board">
   <div class="message-container">
-    <h4>
-      {{ name }}
-      <button class="btn btn-default btn-xs" title="Reload messages" id="refreshBtn"><i class="fa fa-refresh"></i></button>
+    <h4>{{ name }}
+      <button class="btn btn-default btn-xs" title="Reload messages" id="refreshBtn">
+        <i class="fa fa-refresh"></i>
+      </button>
+      <br />
+      <small>Conversation started on {{started}}</small>
     </h4>
-    <hr />
     <div class="message-board" data-id="{{id}}">
-
       {[
         if(messages.length == 0){
       ]}
@@ -38,12 +59,15 @@
             adminMsgClass = 'admin-message';
             textTitle = 'Announcement';
             subTitleHtml = [
-              '<small class="label label-primary">Administration message</small>'
+              '<small class="label label-primary">Announcement</small>'
             ].join('');
           }
       ]}
         <div class="message {{adminMsgClass}}">
           <h5 class="text-info" title="{{textTitle}}">
+            {[ if(m.logoUrl != '') { ]}
+              <img class="img-thumbnail logo-image pull-left" src="{{m.logoUrl}}" alt="" />
+            {[ } ]}
             <a href="{{m.profileUrl}}"><strong>{{ m.senderName }}</strong></a>
             {{subTitleHtml}}
             <small class="pull-right">{{m.time }}, {{m.date}}</small>
@@ -61,9 +85,10 @@
 <script type="text/template" id="message-composer">
   <div class="message-composer">
     <form class="form-horizontal">
-      <textarea class="form-control input-sm message-input-box" cols="20" id="new-message" name="new-message" placeholder="Type a message..."
+      <textarea class="form-control input-sm message-input-box" cols="20" id="new-message" name="new-message"
+        placeholder="Type a message..."
         rows="2"></textarea>
-      <input type="reset" class="btn btn-xs btn-default" value="Clear"/>
+      <input type="reset" class="btn btn-xs btn-default" value="Clear" />
       <button type="button" class="btn btn-xs btn-default send-message-btn disabled">Send</button>
       <img src="@Url.Content("~/Client/images/ajax-loader-fb.gif")" alt="" class="loading-prompt"/>
     </form>

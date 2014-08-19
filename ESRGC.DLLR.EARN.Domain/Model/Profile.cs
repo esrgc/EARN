@@ -199,5 +199,9 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public int partnershipCount() {
       return PartnershipDetails.Count();
     }
+
+    public List<Conversation> getConversations() {
+      return this.MessageBoards.Select(x => x.Conversation).ToList();
+    }
   }
 }

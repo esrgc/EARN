@@ -29,11 +29,12 @@
       <div class="btn-group pull-right">
         <a href="#new" class="btn btn-default btn-xs"><i class="fa fa-plus"></i>&nbsp;New Message</a>
         @if (Model.Role.ToLower() == "admin") { 
-          <a href="#newAdmin" class="btn btn-default btn-xs" title="Admin only"><i class="fa fa-lock"></i>&nbsp;Admin Message</a>
+          <a href="#newAdmin" class="btn btn-default btn-xs" title="Admin only"><i class="fa fa-lock"></i>&nbsp;Admin
+            Message</a>
         }
         
-        @*<button class="btn btn-default btn-xs"><i class="fa fa-refresh"></i>&nbsp;Refresh</button>*@
-        @*<button type="button" class="btn btn-default btn-xs"><i class="fa fa-trash-o"></i>&nbsp;Delete</button>*@
+@*<button class="btn btn-default btn-xs"><i class="fa fa-refresh"></i>&nbsp;Refresh</button>*@
+@*<button type="button" class="btn btn-default btn-xs"><i class="fa fa-trash-o"></i>&nbsp;Delete</button>*@
       </div>
       <div class="clear"></div>
     </div>
@@ -41,7 +42,7 @@
   <div class="row">
     <div class="message-panel active" id="message-control-panel">
       <div class="">
-        <div class="list-group" id="participant-list">
+        <div class="list-group" id="conversation-list">
         </div>
       </div>
     </div>
@@ -51,17 +52,25 @@
         <h4>New Message</h4>
         <hr />
         <div class="message-board">
-          <div>
-            <div class="form-group typeahead-container">
-              <label class="control-label col-sm-1" for="msg-participant">To</label>
-              <div class="col-sm-10">
+          <div class="form-group typeahead-container">
+            <label class="control-label col-sm-1" for="msg-participant">To</label>
+            <div class="col-sm-9">
+              <div class="input-group">
                 <input type="text"
                   class="form-control typeahead"
                   placeholder="Name"
                   name="msg-participant"
                   id="msg-participant" />
+                <span class="input-group-btn">
+                  <button class="btn btn-primary" type="button" id="addProfile">Add</button>
+                </span>
               </div>
+              <div><span id="validation-msg" class="text-danger"></span></div>
             </div>
+          </div>
+          <div class="clear"></div>
+          <div class="recipient-container">            
+            
           </div>
         </div>
       </div>
@@ -72,16 +81,15 @@
             rows="2"></textarea>
           <input type="reset" class="btn btn-xs btn-default" value="Clear" />
           <button type="button" class="btn btn-xs btn-default send-message-btn disabled">Send</button>
-          <img src="~/Client/images/ajax-loader-fb.gif" alt="" class="loading-prompt"/>
+          <img src="~/Client/images/ajax-loader-fb.gif" alt="" class="loading-prompt" />
         </form>
       </div>
     </div>
-     <div class="message-panel message-center" id="adminMessage">
+    <div class="message-panel message-center" id="adminMessage">
       <div class="message-container">
         <h4>Administration Message <small>(Announcement)</small></h4>
         <hr />
         <div class="message-board disabled">
-          
         </div>
       </div>
       <div class="message-composer">
@@ -91,7 +99,7 @@
             rows="2"></textarea>
           <input type="reset" class="btn btn-xs btn-default" value="Clear" />
           <button type="button" class="btn btn-xs btn-default send-message-btn disabled">Send</button>
-          <img src="~/Client/images/ajax-loader-fb.gif" alt="" class="loading-prompt"/>
+          <img src="~/Client/images/ajax-loader-fb.gif" alt="" class="loading-prompt" />
         </form>
       </div>
     </div>

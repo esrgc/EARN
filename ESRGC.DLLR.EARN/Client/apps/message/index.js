@@ -13,20 +13,20 @@ var startup = app.startup = function() {
   app.application({
     name: 'EARNConnectMessage',
     views: [
-      'ParticipantList',
+      'ConversationList',
       'MessageArea',
       'NewMessage',
       'AdminMessage'
     ],
     collections: [
-     'Participants',
-     'Messages'
+      'Organizations',
+      'Conversations',
+      'Messages'
     ],
     routers: [
       'Main'
     ],
     launch: function() {
-
       //for underscore template custom dilimiters
       _.templateSettings = {
         evaluate: /\{\[([\s\S]+?)\]\}/g,

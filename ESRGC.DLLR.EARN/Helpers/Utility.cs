@@ -46,6 +46,39 @@ namespace ESRGC.DLLR.EARN.Helpers
       else
         return text.Substring(0, length) + "...";
     }
+    public static string TimeSpan(this DateTime timeInPast) {
+      if (timeInPast == null)
+        return "unknown";
+      var timeSpan = DateTime.Now - timeInPast;
+      if (timeSpan.Days == 0) {
+        if (timeSpan.Hours == 0) {
+          if (timeSpan.Minutes == 0)
+            return "just now";
+          if (timeSpan.Minutes == 1)
+            return timeSpan.Minutes + " minute ago";
+          else
+            return timeSpan.Minutes + " minutes ago";
+        }
+        if (timeSpan.Hours == 1)
+          return timeSpan.Hours + " hour ago";
+        else
+          return timeSpan.Hours + " hours ago";
+      }
+      if (timeSpan.Days == 1)
+        return timeSpan.Days + " day ago";
+      else {
+        if (timeSpan.Days < 30)
+          return timeSpan.Days + " days ago";
+        if (timeSpan.Days >= 30 && timeSpan.Days < 60)
+          return (int)timeSpan.Days / 30 + " month ago";
+        else if (timeSpan.Days > 60 && timeSpan.Days < 365)
+          return (int)timeSpan.Days / 30 + " months ago";
+        else if (timeSpan.Days >= 365 && timeSpan.Days < 730)
+          return "over a year ago";
+        else
+          return (int)timeSpan.Days / 365 + " years ago";
+      }
+    }
   }
 
   /// <summary>

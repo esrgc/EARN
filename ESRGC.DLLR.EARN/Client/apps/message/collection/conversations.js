@@ -5,15 +5,15 @@ ESRGC 2014
 collection
 chart.js
 
-load all participants
+load all Conversations
 
 dependency: backbone.js
 
 */
 
-app.Collection.Participants = Backbone.Collection.extend({
-  name: 'Participants',
-  url: 'message/participants',
+app.Collection.Conversations = Backbone.Collection.extend({
+  name: 'Conversations',
+  url: 'message/Conversations',
   model: BackboneApp.Model.Participant
   
 });

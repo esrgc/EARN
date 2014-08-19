@@ -173,10 +173,19 @@
     <Compile Include="Migrations\201408071538239_messageBoard2.Designer.cs">
       <DependentUpon>201408071538239_messageBoard2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201408181900455_conversation.cs" />
+    <Compile Include="Migrations\201408181900455_conversation.Designer.cs">
+      <DependentUpon>201408181900455_conversation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201408191620040_messageboard1.cs" />
+    <Compile Include="Migrations\201408191620040_messageboard1.Designer.cs">
+      <DependentUpon>201408191620040_messageboard1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\Announcement.cs" />
     <Compile Include="Model\Comment.cs" />
+    <Compile Include="Model\Conversation.cs" />
     <Compile Include="Model\Document.cs" />
     <Compile Include="Model\GeoTag.cs" />
     <Compile Include="Model\Category.cs" />
@@ -282,6 +291,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201408071538239_messageBoard2.resx">
       <DependentUpon>201408071538239_messageBoard2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408181900455_conversation.resx">
+      <DependentUpon>201408181900455_conversation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408191620040_messageboard1.resx">
+      <DependentUpon>201408191620040_messageboard1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

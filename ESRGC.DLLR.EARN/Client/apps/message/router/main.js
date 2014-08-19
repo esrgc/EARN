@@ -15,11 +15,11 @@ dependency: backbone.js
 
 app.Router.Main = Backbone.Router.extend({
   name: 'Main',
-  fetchedParticipants: false,
+  fetchConversations: false,
   newMessage: false,
   routes: {
     '': "init",//page index route,
-    'for/:name/:id': 'renderMessageArea',
+    'for/:id': 'renderMessageArea',
     'new': 'newMessage',
     'new/:name': 'newMessageByName',
     'newAdmin': 'newAdminMessage'
@@ -27,80 +27,41 @@ app.Router.Main = Backbone.Router.extend({
   ///////////////////route functions/////////////////////////////
   init: function() {
     this.showActiveView('MessageArea');
-    this.newMessage = false;//allow selecting the first message thread
-    this.refresh();
+    var convoList = app.getView('ConversationList');
+    convoList.refresh();
   },
-  renderMessageArea: function(name, id) {
-    this.newMessage = false;//allow selecting the first message thread
+  renderMessageArea: function(id) {
     this.showActiveView('MessageArea');
-    this.refresh(name, id);//maintain current and hi-light active participant
+    var convoList = app.getView('ConversationList');
+    convoList.refresh(id);
   },
   newMessage: function() {
     this.newMessage = true;
-    this.refresh();
     //render new message view
     this.showActiveView('NewMessage');
+    var convoList = app.getView('ConversationList');
+    convoList.refresh();
+
   },
   newMessageByName: function(name) {
     this.newMessage = true;
-    this.refresh();
     //render new message view
     this.showActiveView('NewMessage');
     var newMessageView = app.getView('NewMessage');
     newMessageView.setName(name);
+    var convoList = app.getView('ConversationList');
+    convoList.refresh();
   },
   newAdminMessage: function() {
     this.newMessage = true;
-    this.refresh();
     //render new message view
     this.showActiveView('adminMessage')
   },
-  /////////////helpers and private call backs///////////////
-  refresh: function(currentName, currentId) {
-    var scope = this;
-    //only fetch once at start up
-    if (!scope.fetchedParticipants) {
-      var collection = app.getCollection('Participants');
-      var participantList = app.getView('ParticipantList');
-
-      collection.fetch({
-        success: function(data) {
-          participantList.render(data, currentName, currentId);
-          scope.fetchedParticipants = true;
-          //fetch messags
-          if (scope.newMessage)
-            return;
-          else {
-            if (typeof currentId == 'undefined') {
-              //select 1st convo
-              var url = $('#participant-list .list-group-item:first-child').attr('href');
-              if (typeof url != 'undefined')
-                scope.navigate(url.replace('#', ''), { trigger: true, replace: false }) //reload with the first conversation messages
-            }
-            else
-              scope.fetchMessages(currentId, currentName);
-          }
-        }
-      });
-    }
-    else {
-      //just hi-light the selected participant
-      $('#participant-list .list-group-item').removeClass('active');
-      $('#participant-list .list-group-item[href="#for/' + currentName + '/' + currentId + '"]').addClass('active');
-      //fetch messages
-      scope.fetchMessages(currentId, currentName);
-    }
-  },
-  fetchMessages: function(id, name) {
-    var view = app.getView('MessageArea');
-    if (typeof view == 'undefined')
-      return;
-    view.fetchMessages(id, name);
-  },
+  /////////////helpers and private call backs/////////////// 
   showActiveView: function(viewName) {
     var views = app.getViews();
     _.each(views, function(v) {
-      if (v.name != 'ParticipantList') {
+      if (v.name != 'conversationList') {
         v.hide();
       }      
     });

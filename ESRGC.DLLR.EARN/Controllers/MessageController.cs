@@ -24,142 +24,132 @@ namespace ESRGC.DLLR.EARN.Controllers
     }
 
     //fetch messages for selected participant
-    public JsonResult Fetch(int participantID) {
-      var participant = _workUnit.ProfileRepository.GetEntityByID(participantID);
-      var profile = CurrentAccount.Profile;
-      var messages = profile.MessageBoards
-        .Where(x => ((x.Message.SenderID == participantID) 
-          || (x.Message.ReceiverID == participantID) 
-          || (x.Message.ReceiverID == null && (x.Message.SenderID == participantID || x.Message.SenderID == profile.ProfileID))))
-        .OrderBy(x => x.Message.Created)
+    public JsonResult Fetch(int conversationID) {
+      var convo = _workUnit.ConversationRepository
+        .GetEntityByID(conversationID);
+
+      var messages = convo.Messages
+        .OrderBy(x => x.Created)
         .Select(x => new {
-          id = x.MessageID,
-          type = x.Type,
-          senderName = x.Message.Sender.Organization.Name,
-          message = x.Message.Message1,
-          participantID = participantID,
-          participantName = participant.Organization.Name,
-          date = x.Message.Created.ToShortDateString(),
-          time = x.Message.Created.ToShortTimeString(),
-          profileUrl = Url.Action("ViewProfile", "Profile", new { profileID = x.Message.Sender.ProfileID, returnUrl = Url.Action("index") }),
-          isAdminMessage = x.Message.ReceiverID == null
-        })
-      .ToList();
-      return Json(messages, JsonRequestBehavior.AllowGet);
-
-    }
-
-    public JsonResult Participants() {
-      var profile = CurrentAccount.Profile;
-      //get participants that this profile sent messages to
-      var p1 = _workUnit.MessageBoardRepository
-        .Entities
-        .Where(x => x.Message.SenderID == profile.ProfileID)
-        .Where(x => x.Type != "adminMessage")
-        .Select(x => x.Message.Receiver).ToList();
-      //get participants that this profile received messages from
-      var p2 = _workUnit.MessageBoardRepository
-        .Entities
-        .Where(x => x.Message.ReceiverID == profile.ProfileID)
-        .Select(x => x.Message.Sender).ToList();
-     
-      //var annountments = profile.MessageBoards
-      //  .Where(x => x.Type == "adminMessage")
-        
-      
-      var participantList = p1.Union(p2);
-
-      var participants = participantList.Select(x => {
-        var lastMsg = x.MessageBoards
-          .Where(m=>m.Message.SenderID == profile.ProfileID || m.Message.ReceiverID == profile.ProfileID)
-          .OrderByDescending(m => m.Message.Created)
-          .First().Message;
-
-        var returnData = new {
-          id = x.ProfileID,
-          name = x.Organization.Name,
-          logoUrl = Url.Action("ProfileLogo", new { Id = x.ProfileID }),
-          lastMessage = lastMsg.Message1.toShorDescription(50),
-          lastMessageDate = lastMsg.Created.ToShortDateString(),
-          lastMessageTime = lastMsg.Created.ToShortTimeString(),
-          dateTime = lastMsg.Created //for sorting
-        };
-        return returnData;
-      })
-        .OrderByDescending(x => x.dateTime)
+            id = x.MessageID,
+            senderName = x.Sender.Organization.Name,
+            message = x.Message1,
+            date = x.Created.ToShortDateString(),
+            time = x.Created.ToShortTimeString(),
+            logoUrl = Url.Action("ProfileLogo", new {id = x.Sender.ProfileID }),
+            profileUrl = Url.Action("ViewProfile", "Profile", new { profileID = x.Sender.ProfileID, returnUrl = Url.Action("index") })
+          })
         .ToList();
-      return Json(participants, JsonRequestBehavior.AllowGet);
 
+      var convoDetails = getConvoDetail(convo);
+      var json = new { 
+        id = convo.ConversationID,
+        started = convo.Started.ToString(),
+        name = convoDetails.name,
+        messages = messages
+      };
+
+      return Json(json, JsonRequestBehavior.AllowGet);
+    }
+    //return conversations and their info
+    public JsonResult Conversations() {
+      var profile = CurrentAccount.Profile;
+      var currentName = profile.Organization.Name;//curent logged in name
+
+      var convo = profile.getConversations()
+        .OrderByDescending(x=>x.LastMessageDate)
+        .Select(x =>
+        this.getConvoDetail(x)
+      );
+
+      return Json(convo, JsonRequestBehavior.AllowGet);
     }
 
-    //[HttpPost]
-    //[SendNotification]
-    //public ActionResult Send(string name, string message) {
-    //  //get participant id
-    //  var id = _workUnit.ProfileRepository.Entities
-    //    .First(x => x.Organization.Name == name).ProfileID;
-    //  return Send(id, message);
-    //}
     [HttpPost]
     [SendNotification]
-    public ActionResult Send(int? participantID, string name, string message) {
-      var sender = CurrentAccount.Profile;
-      int id;
-      //find id when name is used
-      if (participantID == null) {
-        //get participant id
-        id = _workUnit.ProfileRepository.Entities
-          .First(x => x.Organization.Name.ToLower() == name.ToLower())
-          .ProfileID;
-      }
-      else
-        id = participantID.Value;
-
-      var recipient = _workUnit.ProfileRepository.GetEntityByID(id);
-
-      if (recipient == null)
-        return Json(new { status = "failed", message = "Invalid recipient. ID or name: " + participantID }, JsonRequestBehavior.AllowGet);
-      //save name for return 
-      if (string.IsNullOrEmpty(name))
-        name = recipient.Organization.Name;
-
-      //send the message
+    public ActionResult NewMessage(int[] profileIDs, string message) {
       try {
-        //create new message object
-        var msg = new Message() {
+
+        //create a new conversation or get existing convo
+        var idList = profileIDs.ToList();
+        idList.Add(CurrentAccount.ProfileID.Value);
+        Conversation convo = null;
+        try {
+          var convos = _workUnit.ConversationRepository
+                .Entities
+                .ToList();
+
+          convo = convos.Where(x => {
+            var list = x.MessageBoards
+              .Select(mb => mb.ProfileID)
+              .ToList();
+            //true if all ids in current convo are in the new idlist
+            return list.TrueForAll(i => idList.Contains(i));
+          }).First();
+        }
+        catch {
+          //not found create new convo
+          convo = new Conversation() {
+            LastMessageDate = DateTime.Now
+          };
+          _workUnit.ConversationRepository.InsertEntity(convo);
+          //create message boards and generate convo's name
+          idList.ForEach(x => {
+            var profile = _workUnit.ProfileRepository.GetEntityByID(x);
+            var mb = new MessageBoard() {
+              Conversation = convo,
+              Profile = profile
+            };
+            _workUnit.MessageBoardRepository.InsertEntity(mb);
+          });
+        }
+
+
+
+        _workUnit.saveChanges();
+
+        return Send(convo.ConversationID, message);
+      }
+      catch (Exception ex) {
+        return Json(new { status = "failed", message = ex.Message }, JsonRequestBehavior.AllowGet);
+      }
+
+    }
+    [HttpPost]
+    [SendNotification]
+    public ActionResult Send(int conversationID, string message) {
+      try {
+        var sender = CurrentAccount.Profile;
+        var conversation = _workUnit.ConversationRepository.GetEntityByID(conversationID);
+        //create the message
+        var m = new Message() {
           Sender = sender,
-          Receiver = recipient,
+          Conversation = conversation,
           Message1 = message
         };
-        _workUnit.MessageRepository.InsertEntity(msg);
-        //create message boards
-        var senderMsgBoard = new MessageBoard() {
-          Message = msg,
-          Type = "message",
-          Profile = sender
-        };
-        _workUnit.MessageBoardRepository.InsertEntity(senderMsgBoard);
-        var receiverMsgBoard = new MessageBoard() {
-          Message = msg,
-          Type = "message",
-          Profile = recipient
-        };
-        _workUnit.MessageBoardRepository.InsertEntity(receiverMsgBoard);
+        _workUnit.MessageRepository.InsertEntity(m);
+        //update late message
+        conversation.LastMessage = message;
+        conversation.LastMessageDate = DateTime.Now;
+        _workUnit.ConversationRepository.UpdateEntity(conversation);
 
         //create notiification for recipient
-        recipient.Accounts.ToList().ForEach(x => {
-          var notification = new Notification() {
-            Category = "Message Received",
-            Message = sender.Organization.Name + " has sent a new message.",
-            Account = x,
-            Message2 = "Message: " + message.Replace("<br />", "\r\n").toShorDescription(150),
-            Message3 = "You can view and reply to this message at EARN MD CONNECT.",
-            LinkToAction = string.Format(Url.Action("Index") + "#for/{0}/{1}",
-              sender.Organization.Name,
-              sender.ProfileID
-            )
-          };
-          _workUnit.NotificationRepository.InsertEntity(notification);
+        conversation.MessageBoards.Select(x => x.Profile).ToList().ForEach(p => {
+          if (p.ProfileID == sender.ProfileID)
+            return;//send to anyone but the sender
+          p.Accounts.ToList().ForEach(x => {
+            var notification = new Notification() {
+              Category = "Message Received",
+              Message = "\"" + sender.Organization.Name + "\" has sent a new message.",
+              Account = x,
+              Message2 = "Message: " + message.Replace("<br />", "\r\n").toShorDescription(150),
+              Message3 = "You can view and reply to this message at EARN MD CONNECT.",
+              LinkToAction = string.Format(Url.Action("Index") + "#for/{0}",
+                conversationID
+              )
+            };
+            _workUnit.NotificationRepository.InsertEntity(notification);
+          });
         });
 
         _workUnit.saveChanges();
@@ -167,7 +157,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       catch (Exception ex) {
         return Json(new { status = "failed", message = ex.Message }, JsonRequestBehavior.AllowGet);
       }
-      return Json(new { status = "success", id = id, name = name }, JsonRequestBehavior.AllowGet);
+      return Json(new { status = "success" , id = conversationID }, JsonRequestBehavior.AllowGet);
     }
     /// <summary>
     /// admin send a message to all profiles
@@ -177,62 +167,63 @@ namespace ESRGC.DLLR.EARN.Controllers
     [RoleAuthorize(Roles = "admin")]
     [SendNotification]
     public ActionResult AdminSend(string message) {
-      var sender = CurrentAccount.Profile;
-      var recipients = _workUnit.ProfileRepository.Entities
-        .Where(x => x.ProfileID != sender.ProfileID)
-        .ToList();
-      if (recipients == null)
-        return Json(new { status = "failed", message = "Couldn't get recipient profiles" }, JsonRequestBehavior.AllowGet);
-      try {
-        //create new message object
-        var msg = new Message() {
-          Message1 = message,
-          Sender = sender
-        };
-        _workUnit.MessageRepository.InsertEntity(msg);
-        //create message boards
-        var senderMsgBoard = new MessageBoard() {
-          Message = msg,
-          Type = "adminMessage",
-          Profile = sender
-        };
-        _workUnit.MessageBoardRepository.InsertEntity(senderMsgBoard);
-        recipients.ForEach(recipient => {
-          var receiverMsgBoard = new MessageBoard() {
-            Message = msg,
-            Type = "adminMessage",
-            Profile = recipient
-          };
-          _workUnit.MessageBoardRepository.InsertEntity(receiverMsgBoard);
-          //create notifications
-          recipient.Accounts.ToList().ForEach(x => {
-            var notification = new Notification() {
-              Category = "Announement Message Received",
-              Message = sender.Organization.Name + " has sent a new announcement message.",
-              Account = x,
-              Message2 = "Message: " + message.Replace("<br />", "\r\n").toShorDescription(150),
-              Message3 = "You can view and reply to this message at EARN MD CONNECT.",
-              LinkToAction = string.Format(Url.Action("Index") + "#for/{0}/{1}",
-                sender.Organization.Name,
-                sender.ProfileID
-              )
-            };
-            _workUnit.NotificationRepository.InsertEntity(notification);
-          });
-        });
-        _workUnit.saveChanges();
-      }
-      catch (Exception ex) {
-        return Json(new { status = "failed", message = ex.Message }, JsonRequestBehavior.AllowGet);
-      }
-      return Json(new { status = "success" }, JsonRequestBehavior.AllowGet);
+      //var sender = CurrentAccount.Profile;
+      //var recipients = _workUnit.ProfileRepository.Entities
+      //  .Where(x => x.ProfileID != sender.ProfileID)
+      //  .ToList();
+      //if (recipients == null)
+      //  return Json(new { status = "failed", message = "Couldn't get recipient profiles" }, JsonRequestBehavior.AllowGet);
+      //try {
+      //  //create new message object
+      //  var msg = new Message() {
+      //    Message1 = message,
+      //    Sender = sender
+      //  };
+      //  _workUnit.MessageRepository.InsertEntity(msg);
+      //  //create message boards
+      //  var senderMsgBoard = new MessageBoard() {
+      //    Message = msg,
+      //    Type = "adminMessage",
+      //    Profile = sender
+      //  };
+      //  _workUnit.MessageBoardRepository.InsertEntity(senderMsgBoard);
+      //  recipients.ForEach(recipient => {
+      //    var receiverMsgBoard = new MessageBoard() {
+      //      Message = msg,
+      //      Type = "adminMessage",
+      //      Profile = recipient
+      //    };
+      //    _workUnit.MessageBoardRepository.InsertEntity(receiverMsgBoard);
+      //    //create notifications
+      //    recipient.Accounts.ToList().ForEach(x => {
+      //      var notification = new Notification() {
+      //        Category = "Announement Message Received",
+      //        Message = sender.Organization.Name + " has sent a new announcement message.",
+      //        Account = x,
+      //        Message2 = "Message: " + message.Replace("<br />", "\r\n").toShorDescription(150),
+      //        Message3 = "You can view and reply to this message at EARN MD CONNECT.",
+      //        LinkToAction = string.Format(Url.Action("Index") + "#for/{0}/{1}",
+      //          sender.Organization.Name,
+      //          sender.ProfileID
+      //        )
+      //      };
+      //      _workUnit.NotificationRepository.InsertEntity(notification);
+      //    });
+      //  });
+      //  _workUnit.saveChanges();
+      //}
+      //catch (Exception ex) {
+      //  return Json(new { status = "failed", message = ex.Message }, JsonRequestBehavior.AllowGet);
+      //}
+      //return Json(new { status = "success" }, JsonRequestBehavior.AllowGet);
+      return null;
     }
     [HttpPost]
     public ActionResult Delete() {
       return View();
     }
 
-    public ActionResult Connections() {
+    public ActionResult Organizations() {
       var connections = _workUnit
         .ProfileRepository
         .Entities
@@ -248,6 +239,56 @@ namespace ESRGC.DLLR.EARN.Controllers
       return Json(json, JsonRequestBehavior.AllowGet);
     }
 
+    //Helpers
+    private dynamic getConvoDetail(Conversation x) {
+      var profile = CurrentAccount.Profile;
+      var currentName = profile.Organization.Name;//curent logged in name
+      var name = "";
+      string logoUrl = "";
 
+
+      var names = x.MessageBoards
+        .Where(mb => mb.Profile.Organization.Name != currentName)
+        .Select(mb => mb.Profile.Organization.Name)
+        .ToArray();
+
+      switch (names.Length) {
+        case 0:
+          name = "";
+          break;
+        case 1:
+          name = names[0];
+          try {
+            var org = _workUnit.ProfileRepository.Entities.First(p => p.Organization.Name == name);
+            logoUrl = Url.Action("ProfileLogo", new { id = org.ProfileID });
+          }
+          catch {
+            //not found               
+          }
+          break;
+        case 2:
+          name = string.Join(" and ", names);
+          break;
+        case 3:
+          var str = names[names.Length - 1];
+          str = " and " + str;
+          names[names.Length - 1] = str;
+          name = string.Join(", ", names);
+          break;
+        default:
+          name = string.Join(", ", names.Take(3));
+          name += ", and " + (names.Length - 3) + " others";
+          break;
+      }
+
+      return new {
+        id = x.ConversationID,
+        lastMessage = x.LastMessage.toShorDescription(100),
+        started = x.Started.ToString(),
+        name = name,
+        logoUrl = logoUrl,
+        lastMessageDate = x.LastMessageDate.ToShortDateString()
+      };
+    }
   }
 }

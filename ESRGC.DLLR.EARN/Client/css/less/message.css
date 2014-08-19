@@ -8,6 +8,7 @@
 .message-panel .logo-image {
   max-width: 60px;
   margin-bottom: 5px;
+  margin-right: 5px;
 }
 .message-panel .list-group-item {
   border-left: none;
@@ -47,6 +48,8 @@
   height: 375px;
   max-height: 375px;
   overflow: auto;
+  padding-top: 20px;
+  border-top: 1px solid #dddddd;
 }
 .message-center .message-board .message {
   margin-bottom: 15px;
@@ -63,6 +66,21 @@
 .message-center .message-board.disabled {
   background: #f4f4f4;
   margin-bottom: 5px;
+}
+.message-center .message-board .recipient-container {
+  padding: 10px;
+  margin-top: 20px;
+}
+.message-center .message-board .recipient-container .recipient {
+  cursor: pointer;
+  display: inline-block;
+  min-width: 200px;
+  float: left;
+  height: 100px;
+  margin: 5px;
+}
+.message-center .message-board .recipient-container .recipient img {
+  max-height: 80px;
 }
 #message-control-panel,
 #message-area {

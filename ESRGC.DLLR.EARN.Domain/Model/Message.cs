@@ -18,6 +18,10 @@ namespace ESRGC.DLLR.EARN.Domain.Model
 
     public int? ReceiverID { get; set; }
     public virtual Profile Receiver { get; set; }
+
+    public int? ConversationID { get; set; }
+    public virtual Conversation Conversation {get; set;}
+
     public string Title { get; set; }
     public string Header { get; set; }
     public string Message1 { get; set; }
@@ -31,5 +35,6 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public bool EmailSent { get; set; }
 
     public virtual ICollection<MessageBoard> MessageBoards { get; set; }
+
   }
 }

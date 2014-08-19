@@ -256,18 +256,18 @@ namespace ESRGC.DLLR.EARN.Controllers
 
 
       //delete message sent and received
-      _workUnit.MessageRepository
-        .Entities
-        .Where(x => x.SenderID == profile.ProfileID || x.ReceiverID == profile.ProfileID)
-        .ToList()
-        .ForEach(x => {
-          _workUnit.MessageBoardRepository
-            .Entities
-            .Where(mb => mb.MessageID == x.MessageID)
-            .ToList()
-            .ForEach(m => _workUnit.MessageBoardRepository.DeleteEntity(m));
-          _workUnit.MessageRepository.DeleteEntity(x);
-        });
+      //_workUnit.MessageRepository
+      //  .Entities
+      //  .Where(x => x.SenderID == profile.ProfileID || x.ReceiverID == profile.ProfileID)
+      //  .ToList()
+      //  .ForEach(x => {
+      //    _workUnit.MessageBoardRepository
+      //      .Entities
+      //      .Where(mb => mb.MessageID == x.MessageID)
+      //      .ToList()
+      //      .ForEach(m => _workUnit.MessageBoardRepository.DeleteEntity(m));
+      //    _workUnit.MessageRepository.DeleteEntity(x);
+      //  });
       _workUnit.saveChanges();
       //delete message borads
       _workUnit.MessageBoardRepository

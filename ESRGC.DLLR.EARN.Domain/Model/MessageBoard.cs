@@ -16,10 +16,12 @@ namespace ESRGC.DLLR.EARN.Domain.Model
 
     public int MessageBoardID { get; set; }
 
-    public int? MessageID { get; set; }
-    public virtual Message Message { get; set; }
+    public int? ConversationID { get; set; }
+    public virtual Conversation Conversation { get; set; }
+
     public int ProfileID { get; set; }
     public virtual Profile Profile { get; set; }
+
     //indicates user message or admin announcement
     public string Type { get; set; }
   }
