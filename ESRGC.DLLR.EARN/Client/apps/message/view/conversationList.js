@@ -19,7 +19,7 @@ app.View.ConversationList = app.View.Base.extend({
     var scope = this;
     scope.currentConversation = { id: currentId };
     console.log('Rendering Conversations...')
-    console.log(data);
+    //console.log(data);
     scope.$el.html('');
     if (data.length == 0) {
       scope.$el.html('<p class="text-center">No conversation found.</p>');

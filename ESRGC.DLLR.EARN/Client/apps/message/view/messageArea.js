@@ -20,7 +20,7 @@ app.View.MessageArea = app.View.Base.extend({
     var scope = this;
     //refresh every 15 seconds
     //setInterval(function() {
-    //  var p = scope.currentParticipant;
+    //  var p = scope.currentConversation;
     //  if (typeof p != 'undefined') {
     //    console.log('refreshing messages...');
     //    scope.fetchMessages(p.id, p.name);
@@ -30,9 +30,10 @@ app.View.MessageArea = app.View.Base.extend({
   },
   render: function(data, id) {
     var scope = this;
-    scope.currentParticipant = { id: id };
+    scope.currentConversation = { id: id };
+    var data = scope.processMessages(data);//group messages form the same sender
     
-    var template = _.template($('#message-board').html(), data );
+    var template = _.template($('#message-board').html(), data);
     scope.$el.html(template);
 
     var composer = _.template($('#message-composer').html());
@@ -44,8 +45,8 @@ app.View.MessageArea = app.View.Base.extend({
 
   },
   sendMessage: function(ev) {
-    var scope = this;    
-    var p = scope.currentParticipant;
+    var scope = this;
+    var p = scope.currentConversation;
     var message = scope.$('textarea#new-message').val();
     console.log('sending message: ')
     console.log(message);
@@ -100,9 +101,32 @@ app.View.MessageArea = app.View.Base.extend({
   },
   onRefreshBtnClick: function(ev) {
     var scope = this;
-    var p = scope.currentParticipant;
+    var p = scope.currentConversation;
     var convoList = app.getView('ConversationList');
     convoList.refresh(p.id);
+  },
+  ////////////private functions
+  processMessages: function(data) {
+    var messages = data.messages;
+    var currentSenderName = '';
+    var currentMsg;
+    var removeIndex = [];
+
+    for(var i in messages){
+      var msg = messages[i];
+      if (currentSenderName != msg.senderName) {
+        currentSenderName = msg.senderName;
+        currentMsg = msg.message;        
+      }
+      else {
+        delete messages[i - 1];
+        var newMessage = currentMsg + '<br/>' + msg.message;
+        msg.message = newMessage;
+        currentMsg = newMessage;
+      }
+    }
+    
+    return data;
   }
 
 

@@ -63,6 +63,9 @@
   padding: 5px;
   background: #e1deca;
 }
+.message-center .message-board .message p {
+  margin-left: 65px;
+}
 .message-center .message-board.disabled {
   background: #f4f4f4;
   margin-bottom: 5px;

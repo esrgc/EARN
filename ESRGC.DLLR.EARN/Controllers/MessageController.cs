@@ -40,12 +40,14 @@ namespace ESRGC.DLLR.EARN.Controllers
             profileUrl = Url.Action("ViewProfile", "Profile", new { profileID = x.Sender.ProfileID, returnUrl = Url.Action("index") })
           })
         .ToList();
+      var participants = convo.MessageBoards.Select(x => new { id = x.ProfileID, name = x.Profile.Organization.Name }).ToList();
 
       var convoDetails = getConvoDetail(convo);
       var json = new { 
         id = convo.ConversationID,
         started = convo.Started.ToString(),
         name = convoDetails.name,
+        participants = participants,
         messages = messages
       };
 
@@ -221,6 +223,12 @@ namespace ESRGC.DLLR.EARN.Controllers
     [HttpPost]
     public ActionResult Delete() {
       return View();
+    }
+
+    public ActionResult Participants(int conversationID) {
+      var convo = _workUnit.ConversationRepository.GetEntityByID(conversationID);
+      var json = convo.MessageBoards.Select(x => new { id = x.ProfileID, name = x.Profile.Organization.Name }).ToList();
+      return Json(json, JsonRequestBehavior.AllowGet);
     }
 
     public ActionResult Organizations() {
