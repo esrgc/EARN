@@ -31,7 +31,6 @@ app.View.MessageArea = app.View.Base.extend({
   render: function(data, id) {
     var scope = this;
     scope.currentConversation = { id: id };
-    var data = scope.processMessages(data);//group messages form the same sender
     
     var template = _.template($('#message-board').html(), data);
     scope.$el.html(template);
@@ -88,8 +87,8 @@ app.View.MessageArea = app.View.Base.extend({
       return;
     }
     collection.fetch({
-      success: function(data) {
-        var newData = data.toJSON()[0];
+      success: function(collection, res) {
+        var newData = collection.parseData();
         //console.log(newData);
         scope.render(newData, id);
         console.log('Messages fetched for convo id ' + id);
@@ -104,30 +103,8 @@ app.View.MessageArea = app.View.Base.extend({
     var p = scope.currentConversation;
     var convoList = app.getView('ConversationList');
     convoList.refresh(p.id);
-  },
-  ////////////private functions
-  processMessages: function(data) {
-    var messages = data.messages;
-    var currentSenderName = '';
-    var currentMsg;
-    var removeIndex = [];
-
-    for(var i in messages){
-      var msg = messages[i];
-      if (currentSenderName != msg.senderName) {
-        currentSenderName = msg.senderName;
-        currentMsg = msg.message;        
-      }
-      else {
-        delete messages[i - 1];
-        var newMessage = currentMsg + '<br/>' + msg.message;
-        msg.message = newMessage;
-        currentMsg = newMessage;
-      }
-    }
-    
-    return data;
   }
+  
 
 
 });
