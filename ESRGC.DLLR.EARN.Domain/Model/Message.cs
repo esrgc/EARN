@@ -36,5 +36,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
 
     public virtual ICollection<MessageBoard> MessageBoards { get; set; }
 
+    public string Type { get; set; }
+
   }
 }

@@ -18,7 +18,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     public MessageController(IWorkUnit workUnit) : base(workUnit) { }
     //
     // GET: /Message/
-
+    [DeleteEmptyConversation]
     public ActionResult Index() {
       return View(CurrentAccount);
     }
@@ -37,7 +37,8 @@ namespace ESRGC.DLLR.EARN.Controllers
             date = x.Created.ToShortDateString(),
             time = x.Created.ToShortTimeString(),
             logoUrl = Url.Action("ProfileLogo", new {id = x.Sender.ProfileID }),
-            profileUrl = Url.Action("ViewProfile", "Profile", new { profileID = x.Sender.ProfileID, returnUrl = Url.Action("index") })
+            profileUrl = Url.Action("ViewProfile", "Profile", new { profileID = x.Sender.ProfileID, returnUrl = Url.Action("index") }),
+            isAdminMessage = x.Type == "adminMessage"
           })
         .ToList();
       var participants = convo.MessageBoards.Select(x => new { id = x.ProfileID, name = x.Profile.Organization.Name }).ToList();
@@ -69,7 +70,7 @@ namespace ESRGC.DLLR.EARN.Controllers
 
     [HttpPost]
     [SendNotification]
-    public ActionResult NewMessage(int[] profileIDs, string message) {
+    public ActionResult NewMessage(int[] profileIDs, string message, string type) {
       try {
 
         //create a new conversation or get existing convo
@@ -86,7 +87,7 @@ namespace ESRGC.DLLR.EARN.Controllers
               .Select(mb => mb.ProfileID)
               .ToList();
             //true if all ids in current convo are in the new idlist
-            return list.TrueForAll(i => idList.Contains(i));
+            return (list.TrueForAll(i => idList.Contains(i)) && list.Count() == idList.Count());
           }).First();
         }
         catch {
@@ -110,7 +111,7 @@ namespace ESRGC.DLLR.EARN.Controllers
 
         _workUnit.saveChanges();
 
-        return Send(convo.ConversationID, message);
+        return Send(convo.ConversationID, message, type);
       }
       catch (Exception ex) {
         return Json(new { status = "failed", message = ex.Message }, JsonRequestBehavior.AllowGet);
@@ -119,7 +120,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     }
     [HttpPost]
     [SendNotification]
-    public ActionResult Send(int conversationID, string message) {
+    public ActionResult Send(int conversationID, string message, string type) {
       try {
         var sender = CurrentAccount.Profile;
         var conversation = _workUnit.ConversationRepository.GetEntityByID(conversationID);
@@ -127,7 +128,8 @@ namespace ESRGC.DLLR.EARN.Controllers
         var m = new Message() {
           Sender = sender,
           Conversation = conversation,
-          Message1 = message
+          Message1 = message,
+          Type = type
         };
         _workUnit.MessageRepository.InsertEntity(m);
         //update late message
@@ -169,62 +171,35 @@ namespace ESRGC.DLLR.EARN.Controllers
     [RoleAuthorize(Roles = "admin")]
     [SendNotification]
     public ActionResult AdminSend(string message) {
-      //var sender = CurrentAccount.Profile;
-      //var recipients = _workUnit.ProfileRepository.Entities
-      //  .Where(x => x.ProfileID != sender.ProfileID)
-      //  .ToList();
-      //if (recipients == null)
-      //  return Json(new { status = "failed", message = "Couldn't get recipient profiles" }, JsonRequestBehavior.AllowGet);
-      //try {
-      //  //create new message object
-      //  var msg = new Message() {
-      //    Message1 = message,
-      //    Sender = sender
-      //  };
-      //  _workUnit.MessageRepository.InsertEntity(msg);
-      //  //create message boards
-      //  var senderMsgBoard = new MessageBoard() {
-      //    Message = msg,
-      //    Type = "adminMessage",
-      //    Profile = sender
-      //  };
-      //  _workUnit.MessageBoardRepository.InsertEntity(senderMsgBoard);
-      //  recipients.ForEach(recipient => {
-      //    var receiverMsgBoard = new MessageBoard() {
-      //      Message = msg,
-      //      Type = "adminMessage",
-      //      Profile = recipient
-      //    };
-      //    _workUnit.MessageBoardRepository.InsertEntity(receiverMsgBoard);
-      //    //create notifications
-      //    recipient.Accounts.ToList().ForEach(x => {
-      //      var notification = new Notification() {
-      //        Category = "Announement Message Received",
-      //        Message = sender.Organization.Name + " has sent a new announcement message.",
-      //        Account = x,
-      //        Message2 = "Message: " + message.Replace("<br />", "\r\n").toShorDescription(150),
-      //        Message3 = "You can view and reply to this message at EARN MD CONNECT.",
-      //        LinkToAction = string.Format(Url.Action("Index") + "#for/{0}/{1}",
-      //          sender.Organization.Name,
-      //          sender.ProfileID
-      //        )
-      //      };
-      //      _workUnit.NotificationRepository.InsertEntity(notification);
-      //    });
-      //  });
-      //  _workUnit.saveChanges();
-      //}
-      //catch (Exception ex) {
-      //  return Json(new { status = "failed", message = ex.Message }, JsonRequestBehavior.AllowGet);
-      //}
-      //return Json(new { status = "success" }, JsonRequestBehavior.AllowGet);
-      return null;
+     var idList = _workUnit.ProfileRepository
+       .Entities
+       .Where(x=>x.ProfileID != CurrentAccount.ProfileID)
+       .Select(x=>x.ProfileID)
+       .ToArray();
+       
+      return NewMessage(idList, message, "adminMessage");
     }
     [HttpPost]
     public ActionResult Delete() {
       return View();
     }
+    [HttpDelete]
+    public ActionResult RemoveFromConvo(int id) {
+      try {
+        var convo = _workUnit.ConversationRepository.GetEntityByID(id);
+        var profile = CurrentAccount.Profile;
+        convo.MessageBoards
+          .Where(x => x.ProfileID == profile.ProfileID)
+          .ToList()
+          .ForEach(mb => _workUnit.MessageBoardRepository.DeleteEntity(mb));
+        _workUnit.saveChanges();
 
+      }
+      catch (Exception ex) {
+        return Json(new { status = "failed", message = ex.Message });
+      }
+      return Json(new { status = "success" });
+    }
     public ActionResult Participants(int conversationID) {
       var convo = _workUnit.ConversationRepository.GetEntityByID(conversationID);
       var json = convo.MessageBoards.Select(x => new { id = x.ProfileID, name = x.Profile.Organization.Name }).ToList();
@@ -291,7 +266,7 @@ namespace ESRGC.DLLR.EARN.Controllers
 
       return new {
         id = x.ConversationID,
-        lastMessage = x.LastMessage.toShorDescription(100),
+        lastMessage = x.LastMessage.toShorDescription(15),
         started = x.Started.ToString(),
         name = name,
         logoUrl = logoUrl,

@@ -90,9 +90,9 @@ app.View.MessageArea = app.View.Base.extend({
     collection.fetch({
       success: function(data) {
         var newData = data.toJSON()[0];
-        console.log(newData);
+        //console.log(newData);
         scope.render(newData, id);
-        console.log('Messages fetched for ' + name);
+        console.log('Messages fetched for convo id ' + id);
       },
       data: {
         conversationID: id

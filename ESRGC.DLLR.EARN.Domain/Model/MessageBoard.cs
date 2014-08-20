@@ -22,7 +22,5 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public int ProfileID { get; set; }
     public virtual Profile Profile { get; set; }
 
-    //indicates user message or admin announcement
-    public string Type { get; set; }
   }
 }

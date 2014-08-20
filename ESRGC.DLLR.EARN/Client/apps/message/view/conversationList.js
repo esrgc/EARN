@@ -11,7 +11,7 @@ app.View.ConversationList = app.View.Base.extend({
   name: 'ConversationList',
   el: '#conversation-list',
   events: {
-
+    'click small.btn-delete-convo': 'onDeleteConvoClick'
   },
   initialize: function() {
   },
@@ -47,6 +47,22 @@ app.View.ConversationList = app.View.Base.extend({
         scope.render(data.models, id);
         scope.$el.animate({ scrollTop: 0 }, 0);//auto scrolls to the top
         
+      }
+    });
+  },
+  onDeleteConvoClick: function(ev) {
+    var scope = this;
+    var target = ev.currentTarget;
+    var convoId = $(target).attr('data-id');
+    var collection = app.getCollection('Conversations');
+    var convo = collection.get(convoId);
+    console.log(convo);
+    convo.remove({
+      success: function(m, res) {
+        if (res.status == 'success') {
+          console.log('conversation removed!');
+          scope.refresh();
+        }
       }
     });
   }

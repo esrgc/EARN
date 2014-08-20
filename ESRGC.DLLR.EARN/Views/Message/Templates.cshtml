@@ -22,16 +22,20 @@
   ]}
 
   <a href="#for/{{model.id}}" class="list-group-item {{cssClass}}" data-name="{{model.name}}">
-    {[ if(model.logoUrl != '') { ]}
+    <div>
+      <small class="pull-right btn-delete-convo" data-id="{{model.id}}" title="Delete conversation">
+        <i class="fa fa-times"></i>
+      </small>
+      {[ if(model.logoUrl != '') { ]}
       <img class="img-thumbnail logo-image pull-left" src="{{model.logoUrl}}" alt="" />
-    {[ } ]}
-    <p>
-      <strong>{{ model.name }}</strong>
-      <br />
-      <small><i>{{ model.lastMessage }}</i></small>
-    </p>
-    <small class="pull-right">{{model.lastMessageDate}}</small>
-
+      {[ } ]}
+      <p>
+        <strong>{{ model.name }}</strong>
+        <br />
+        <small><i>{{ model.lastMessage }}</i></small>
+      </p>
+      <small class="pull-right">{{model.lastMessageDate}}</small>
+    </div>
     <div class="clear"></div>
   </a>
 </script>
@@ -65,8 +69,7 @@
           }
       ]}
         <div class="message {{adminMsgClass}}">
-          <h5 class="text-info" title="{{textTitle}}">
-            {[ if(m.logoUrl != '') { ]}
+          <h5 class="text-info" title="{{textTitle}}">{[ if(m.logoUrl != '') { ]}
               <a class="pull-left" href="{{m.profileUrl}}">
                 <img class="img-thumbnail logo-image" src="{{m.logoUrl}}" alt="" />
               </a>

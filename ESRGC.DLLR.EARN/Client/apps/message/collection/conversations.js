@@ -14,6 +14,6 @@ dependency: backbone.js
 app.Collection.Conversations = Backbone.Collection.extend({
   name: 'Conversations',
   url: 'message/Conversations',
-  model: BackboneApp.Model.Participant
+  model: BackboneApp.Model.Conversation
   
 });

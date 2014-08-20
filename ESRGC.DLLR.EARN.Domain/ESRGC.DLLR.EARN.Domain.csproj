@@ -181,6 +181,10 @@
     <Compile Include="Migrations\201408191620040_messageboard1.Designer.cs">
       <DependentUpon>201408191620040_messageboard1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201408201953467_messageboard.type.cs" />
+    <Compile Include="Migrations\201408201953467_messageboard.type.Designer.cs">
+      <DependentUpon>201408201953467_messageboard.type.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\Announcement.cs" />
@@ -297,6 +301,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201408191620040_messageboard1.resx">
       <DependentUpon>201408191620040_messageboard1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408201953467_messageboard.type.resx">
+      <DependentUpon>201408201953467_messageboard.type.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

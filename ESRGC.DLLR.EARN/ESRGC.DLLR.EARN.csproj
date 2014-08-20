@@ -173,6 +173,7 @@
     <Compile Include="Filters\AllowNonProfileAttribute.cs" />
     <Compile Include="Filters\CanEditPartnershipAttribute.cs" />
     <Compile Include="Filters\CheckCookieAttribute.cs" />
+    <Compile Include="Filters\DeleteEmptyConversation.cs" />
     <Compile Include="Filters\HasPendingProfileRequestAttribute.cs" />
     <Compile Include="Filters\HasReturnUrlAttribute.cs" />
     <Compile Include="Filters\NewToPartnershipAttribute.cs" />
@@ -208,7 +209,7 @@
     <Content Include="Client\apps\message\collection\conversations.js" />
     <Content Include="Client\apps\message\model\adminMessage.js" />
     <Content Include="Client\apps\message\model\message.js" />
-    <Content Include="Client\apps\message\model\participant.js" />
+    <Content Include="Client\apps\message\model\conversation.js" />
     <Content Include="Client\apps\message\router\main.js" />
     <Content Include="Client\apps\message\view\messageAdmin.js" />
     <Content Include="Client\apps\message\view\base.js" />
