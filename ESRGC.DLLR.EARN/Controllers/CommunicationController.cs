@@ -200,7 +200,7 @@ and/or view this user’s Organizational Profile for more information.",
       if (CurrentAccount.Profile != null)
         requests += CurrentAccount.Profile.ReceivedRequests
         .Where(x => x.Status.ToLower() == "new").Count();
-      
+
       profileRequests += CurrentAccount.ReceivedProfileRequests.Count();
 
       return Content((profileRequests + requests).ToString());
@@ -325,6 +325,7 @@ and/or view this user’s Organizational Profile for more information.",
           Message2 = "You can now edit profile information, search for partnerships and other partners.",
           LinkToAction = Url.Action("Detail", "Profile")
         };
+        _workUnit.NotificationRepository.InsertEntity(notification);
         updateTempMessage("Profile member request accepted.");
       }
       else {
@@ -348,11 +349,25 @@ and/or view this user’s Organizational Profile for more information.",
       return RedirectToAction("Requests");
     }
     [HttpPost]
+    [SendNotification]
     public ActionResult DeleteProfileRequest(int requestID) {
       try {
         var request = _workUnit.ProfileRequestRepository.GetEntityByID(requestID);
+        if (request.Status.ToLower() == "new") {
+          var notification = new Notification() {
+            Account = request.Sender,
+            Category = "Profile Request Denied",
+            Message = string.Format(@"Unfortunately! Your request to join the ""{0}"" organizational profile has been denied.",
+              request.Receiver.Profile.Organization.Name),
+            Message2 = "Please contact the profile owner or re-send your request with more specific information for the owner to identify you.",
+            LinkToAction = Url.Action("Index", "Home")
+          };
+          _workUnit.NotificationRepository.InsertEntity(notification);
+        }
+        //finally delete it
         _workUnit.ProfileRequestRepository.DeleteByID(requestID);
         _workUnit.saveChanges();
+        updateTempMessage("Request denied and deleted!");
       }
       catch (Exception) {
         updateTempMessage("Error deleting request");

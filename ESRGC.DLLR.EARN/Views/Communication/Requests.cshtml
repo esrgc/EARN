@@ -7,6 +7,9 @@
 }
 @{
     ViewBag.returnUrl = Url.Action("Requests");
+    var partnershipRequests = Model.OfType<PartnershipRequest>().ToList();
+    var profileRequests = ViewBag.profileRequests as List<ProfileRequest>;
+    var requestCount = partnershipRequests.Count() + profileRequests.Count();
 }
 @section header{
     <div class="container">
@@ -28,17 +31,13 @@
             </div>
             <div class="window-panel">
                 <div class="window-panel-title">
-                    <strong>Respond to @Model.Count Requests</strong>
+                    <strong>Respond to @requestCount Requests</strong>
                 </div>
                 <div class="window-panel-content">
                     @if (Model.Count() == 0) { 
                         <p>There are currently no requests.</p>
                     }
-                    <ul class="list-group">
-                      @{
-                        var partnershipRequests = Model.OfType<PartnershipRequest>().ToList();
-                        var profileRequests = ViewBag.profileRequests as List<ProfileRequest>;
-                        }
+                    <ul class="list-group">                     
                         @foreach (var i in profileRequests) {
                             <li class="list-group-item">
                                 <div class="placeholder-pane">

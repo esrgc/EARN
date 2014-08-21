@@ -9,6 +9,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
   {
     public ProfileRequest() {
       Created = DateTime.Now;
+      Status = "New";
     }
 
     public int ProfileRequestID { get; set; }
