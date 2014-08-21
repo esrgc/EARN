@@ -27,8 +27,8 @@ namespace ESRGC.DLLR.EARN.Filters
           .First(x => x.EmailAddress.ToLower() == requestEmail.ToLower());
         //check if there's pending request to join profile
         //..to be implemented
-        var pendingRequests = account.SentRequests.Where(x => x.Type.ToLower() == "profile member request").ToList();
-        if (pendingRequests.Count() == 1) {
+        var pendingRequests = account.SentProfileRequests.ToList();
+        if (pendingRequests.Count() > 0) {
           var message = "You currently have a pending profile request. Please wait until your request is accepted!";
           if(!account.EmailVerified){
             message += " You will be notified via email. Please verify your email address. You will not be able to receive email notifications until you do so.";

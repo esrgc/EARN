@@ -59,13 +59,13 @@ namespace ESRGC.DLLR.EARN.Controllers
       var profile = CurrentAccount.Profile;
       var currentName = profile.Organization.Name;//curent logged in name
 
-      var convo = profile.getConversations()
-        .OrderByDescending(x=>x.LastMessageDate)
-        .Select(x =>
-        this.getConvoDetail(x)
-      );
+        var convo = profile.getConversations()
+           .OrderByDescending(x => x.LastMessageDate)
+           .Select(x =>
+           this.getConvoDetail(x)
+         );
 
-      return Json(convo, JsonRequestBehavior.AllowGet);
+        return Json(convo, JsonRequestBehavior.AllowGet);
     }
 
     [HttpPost]

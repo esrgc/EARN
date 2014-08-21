@@ -27,6 +27,9 @@ app.View.NewMessage = app.View.Base.extend({
         var engine = new Bloodhound({
           name: 'organizations',
           local: data.toJSON(),
+          remote: {
+            url: 'message/Organizations'
+          },
           datumTokenizer: function(d) {
             return Bloodhound.tokenizers.whitespace(d.name);
           },
@@ -74,13 +77,22 @@ app.View.NewMessage = app.View.Base.extend({
             ].join('\n'))
           }
         });
+
+        //if there was names for recipient add them
+        if (typeof scope.names != 'undefined') {
+          _.each(scope.names, function(name) {
+            console.log(name);
+            scope.addRecipient(name.trim());
+          });
+        }
       }
     });
 
 
   },
   setName: function(name) {
-    this.$('#msg-participant').val(name);
+    this.names = name.split(',');
+    //this.$('#msg-participant').val(name);
   },
   onMessageTextChanged: function(ev) {
     var scope = this;

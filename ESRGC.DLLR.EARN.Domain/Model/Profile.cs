@@ -56,7 +56,8 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public virtual ICollection<Message> SentMessages { get; set; }
     public virtual ICollection<Message> ReceivedMessages { get; set; }
     public virtual ICollection<MessageBoard> MessageBoards { get; set; }
-
+    public virtual ICollection<Request> SentRequests { get; set; }
+    public virtual ICollection<Request> ReceivedRequests { get; set; }
     //helpers
     public bool isOwnerOfPartnership(Partnership partnership) {
       return isOwnerOfPartnership(partnership.PartnershipID);
@@ -95,7 +96,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
       }
     }
     /// <summary>
-    /// Gets the first account associated with this profile
+    /// Gets the first account associated with this profile (profile owner)
     /// </summary>
     /// <returns></returns>
     public Account getAccount() {
@@ -201,7 +202,15 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     }
 
     public List<Conversation> getConversations() {
-      return this.MessageBoards.Select(x => x.Conversation).ToList();
+      try {
+        return this.MessageBoards.Select(x => x.Conversation).ToList();
+      }
+      catch {
+        return new List<Conversation>();//return a new empty list
+      }
+    }
+    public bool hasConversations() {
+      return (MessageBoards.Count() > 0);
     }
   }
 }

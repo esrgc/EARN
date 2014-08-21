@@ -203,7 +203,7 @@
 @{ 
   var p = Model;
   var partners = p.getPartners();
-  var owner = p.getOwner();
+  var owners = p.getOwners();
   var returnUrl = ViewBag.returnUrl as string ?? Url.Action("Index");
   ViewBag.returnUrl = Url.Action("Detail", new { p.PartnershipID, returnUrl });
   var currentProfile = ViewBag.currentProfile as Profile ?? new Profile();
@@ -362,8 +362,10 @@
               <div id="partners" class="panel-collapse collapse">
                 <div class="panel-body">
                   <div class="profile-container-holder">
-                    <span class="label label-danger">Admin</span>
-                    @Html.Partial("shortProfilePartial", owner)
+                    @foreach (var owner in owners) { 
+                      <span class="label label-danger">Admin</span>
+                      @Html.Partial("shortProfilePartial", owner)
+                    }
                     <hr />
                   </div>
                   <strong>Other Partners</strong>

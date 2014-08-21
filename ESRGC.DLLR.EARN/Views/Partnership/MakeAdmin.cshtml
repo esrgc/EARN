@@ -1,8 +1,8 @@
 ﻿@using ESRGC.DLLR.EARN.Domain.Model
 
 @{
-  ViewBag.Title = "Change Partnership Admin";
-  ViewBag.Header = "Change Partnership Admin";
+  ViewBag.Title = "Partnership Admin";
+  ViewBag.Header = "Partnership Admin";
 }
 @{
   var profile = ViewBag.profile as Profile;
@@ -25,7 +25,7 @@
     <div class="col-md-8 col-md-offset-2">
       <div class="window-panel">
         <div class="window-panel-title">
-          Transfering Partnership administration
+         Assign partnership administration
         </div>
         <div class="window-panel-content">
           <div class="alert alert-warning">
@@ -33,7 +33,7 @@
             <p>
               You are about to assign the organization below to be 
               the administrator of the <strong>@partnership.Name</strong> partnership. 
-              Once this is done, you are no longer the administrator of this partnership.
+              Once this is done, this organization can update/delete the partnership profile, and invite others to join.
               Click confirm to proceed, otherwise click cancel to return to the partnership detail.
             </p>
           </div>

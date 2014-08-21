@@ -11,7 +11,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
   public class MessageBoard
   {
     public MessageBoard() {
-
+      JoinedDate = DateTime.Now;
     }
 
     public int MessageBoardID { get; set; }
@@ -22,5 +22,6 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public int ProfileID { get; set; }
     public virtual Profile Profile { get; set; }
 
+    public DateTime JoinedDate { get; set; }
   }
 }

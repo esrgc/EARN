@@ -185,6 +185,18 @@
     <Compile Include="Migrations\201408201953467_messageboard.type.Designer.cs">
       <DependentUpon>201408201953467_messageboard.type.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201408211439265_messageboard.join-date.cs" />
+    <Compile Include="Migrations\201408211439265_messageboard.join-date.Designer.cs">
+      <DependentUpon>201408211439265_messageboard.join-date.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201408211900429_request-now-ref-profile.cs" />
+    <Compile Include="Migrations\201408211900429_request-now-ref-profile.Designer.cs">
+      <DependentUpon>201408211900429_request-now-ref-profile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201408212016323_profileRequest1.cs" />
+    <Compile Include="Migrations\201408212016323_profileRequest1.Designer.cs">
+      <DependentUpon>201408212016323_profileRequest1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\Announcement.cs" />
@@ -194,7 +206,6 @@
     <Compile Include="Model\GeoTag.cs" />
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\History.cs" />
-    <Compile Include="Model\JoinProfileRequest.cs" />
     <Compile Include="Model\Message.cs" />
     <Compile Include="Model\MessageBoard.cs" />
     <Compile Include="Model\Notification.cs" />
@@ -206,6 +217,7 @@
     <Compile Include="Model\PartnershipTag.cs" />
     <Compile Include="Model\Picture.cs" />
     <Compile Include="Model\Profile.cs" />
+    <Compile Include="Model\ProfileRequest.cs" />
     <Compile Include="Model\ProfileTag.cs" />
     <Compile Include="Model\Request.cs" />
     <Compile Include="Model\Tag.cs" />
@@ -304,6 +316,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201408201953467_messageboard.type.resx">
       <DependentUpon>201408201953467_messageboard.type.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408211439265_messageboard.join-date.resx">
+      <DependentUpon>201408211439265_messageboard.join-date.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408211900429_request-now-ref-profile.resx">
+      <DependentUpon>201408211900429_request-now-ref-profile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408212016323_profileRequest1.resx">
+      <DependentUpon>201408212016323_profileRequest1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

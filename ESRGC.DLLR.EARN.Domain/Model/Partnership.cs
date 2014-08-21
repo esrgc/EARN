@@ -65,16 +65,21 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public List<Profile> getAllPartners() {
       return PartnershipDetails.Select(x => x.Profile).ToList();
     }
-    public Profile getOwner() {
+    public List<Profile> getOwners() {
       try {
         return PartnershipDetails
            .Where(x => x.Type.ToLower() == "owner")
            .Select(x => x.Profile)
-           .First();
+           .ToList();
       }
       catch (Exception) {
         return null;
       }
+    }
+    public string getOwnerNames() {
+      var owners = this.getOwners().ToList();
+      var names = owners.Select(x => x.Organization.Name).ToArray();
+      return string.Join(",", names);
     }
     public List<Profile> getPartners() {
       return PartnershipDetails

@@ -181,5 +181,10 @@ namespace ESRGC.DLLR.EARN.Controllers
         return Redirect(defaultUrl);
       }
     }
+
+    protected bool notifyProfile(Notification notification) {
+      //notification.
+      return true;
+    }
   }
 }

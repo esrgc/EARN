@@ -43,8 +43,8 @@ app.View.ConversationList = app.View.Base.extend({
     var scope = this;
     var collection = app.getCollection('Conversations');
     collection.fetch({
-      success: function(data) {
-        scope.render(data.models, id);
+      success: function(collection, res) {
+        scope.render(collection.models, id);
         scope.$el.animate({ scrollTop: 0 }, 0);//auto scrolls to the top
         
       }

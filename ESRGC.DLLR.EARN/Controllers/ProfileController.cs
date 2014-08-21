@@ -242,6 +242,9 @@ namespace ESRGC.DLLR.EARN.Controllers
           LinkToAction = Url.Action("Index", "Profile")
         };
         _workUnit.NotificationRepository.InsertEntity(notification);
+        a.ProfileID = null;
+        a.Profile = null;
+        _workUnit.AccountRepository.UpdateEntity(a);
       });
 
       if (profile == null) {

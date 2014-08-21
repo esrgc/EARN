@@ -37,7 +37,7 @@
                     <ul class="list-group">
                       @{
                         var partnershipRequests = Model.OfType<PartnershipRequest>().ToList();
-                        var profileRequests = Model.OfType<ProfileMemberRequest>().ToList();
+                        var profileRequests = ViewBag.profileRequests as List<ProfileRequest>;
                         }
                         @foreach (var i in profileRequests) {
                             <li class="list-group-item">
@@ -45,10 +45,10 @@
                                     <div>
                                         <strong>@i.Type</strong>
                                     </div>
-                                    <form action="@Url.Action("DeleteRequest")" method="post" role="form">
-                                        @Html.Hidden("requestID",i.RequestID)
+                                    <form action="@Url.Action("DeleteProfileRequest")" method="post" role="form">
+                                        @Html.Hidden("requestID",i.ProfileRequestID)
                                         <div class="pull-right btn-group">
-                                            <a href="@Url.Action("AcceptRequest", new { i.RequestID })" class="btn btn-success btn-sm"><i class="fa fa-check"></i>&nbsp;Accept</a>
+                                            <a href="@Url.Action("ProcessProfileRequest", new { i.ProfileRequestID })" class="btn btn-success btn-sm"><i class="fa fa-check"></i>&nbsp;Accept</a>
                                             <button type="submit" class="btn btn-default btn-sm"><i class="fa fa-times"></i>&nbsp;Delete</button>
                                         </div>
                                     </form>
@@ -84,7 +84,7 @@
                                             <button type="submit" class="btn btn-default btn-sm"><i class="fa fa-times"></i>&nbsp;Delete</button>
                                         </div>
                                     </form>
-                                    @Html.Partial("miniProfilePartial", i.Sender.Profile)
+                                    @Html.Partial("miniProfilePartial", i.Sender)
                                     <p>
                                         @if (string.IsNullOrEmpty(i.Message)) {
                                             <strong>Message</strong>

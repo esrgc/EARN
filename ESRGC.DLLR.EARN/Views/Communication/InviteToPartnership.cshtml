@@ -21,7 +21,7 @@
     var ownerProfile = ViewBag.currentProfile as Profile ?? new Profile();
     var partnerships = ownerProfile.getOwnedPartnerships();
     var receiverAccount = Model.getAccount();
-    var invites = receiverAccount.ReceivedRequests.Cast<PartnershipRequest>().ToList();
+    var invites = Model.ReceivedRequests.Cast<PartnershipRequest>().ToList();
     var returnUrl = ViewBag.returnUrl as string;
 }
 <div class="container">

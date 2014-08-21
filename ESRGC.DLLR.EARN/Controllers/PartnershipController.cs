@@ -264,14 +264,16 @@ but should not be used to share proprietary or sensitive content.",
           .Where(x => x.ProfileID != currentProfile.ProfileID)
           .ToList()
           .ForEach(x => {
-            //notifications
-            var notification = new Notification {
-              Account = x.getAccount(),
-              Category = "Partnership Update",
-              Message = currentProfile.Organization.Name + " has left the \"" + partnership.Name + "\" partnership.",
-              LinkToAction = Url.Action("Detail", new { partnershipID })
-            };
-            _workUnit.NotificationRepository.InsertEntity(notification);
+            x.Accounts.ToList().ForEach(a => {
+              //notifications
+              var notification = new Notification {
+                Account = a,
+                Category = "Partnership Update",
+                Message = currentProfile.Organization.Name + " has left the \"" + partnership.Name + "\" partnership.",
+                LinkToAction = Url.Action("Detail", new { partnershipID })
+              };
+              _workUnit.NotificationRepository.InsertEntity(notification);
+            });
           });
 
         _workUnit.saveChanges();
@@ -350,34 +352,34 @@ but should not be used to share proprietary or sensitive content.",
       return returnToUrl(returnUrl, Url.Action("Detail", new { partnershipID }));
     }
 
-    [NewToPartnership]
-    [HasReturnUrl]
-    public ActionResult ContactAdmin(int partnershipID, string returnUrl) {
-      var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
-      return View(partnership);
-    }
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    [NewToPartnership]
-    [SendMessaage]
-    public ActionResult ContactAdmin(int partnershipID, string message, string returnUrl) {
-      var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
-      var currentProfile = CurrentAccount.Profile;
-      //create a message
-      var m = new Message {
-        Sender = currentProfile,
-        Receiver = partnership.getOwner(),
-        Title = "Partnership Message",
-        Header = currentProfile.Organization.Name + " has sent you a message",
-        Message1 = "This message is regarding the \"" + partnership.Name + "\" partnership.",
-        Message2 = message
-      };
-      _workUnit.MessageRepository.InsertEntity(m);
-      _workUnit.saveChanges();
-      updateTempMessage("Your message has been sent to the Administrator. A copy of this message was also emailed to you via"
-        + " your contact email (" + currentProfile.Contact.Email + ").");
-      return RedirectToAction("View", new { partnershipID, returnUrl });
-    }
+    //[NewToPartnership]
+    //[HasReturnUrl]
+    //public ActionResult ContactAdmin(int partnershipID, string returnUrl) {
+    //  var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
+    //  return View(partnership);
+    //}
+    //[HttpPost]
+    //[ValidateAntiForgeryToken]
+    //[NewToPartnership]
+    //[SendMessaage]
+    //public ActionResult ContactAdmin(int partnershipID, string message, string returnUrl) {
+    //  var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
+    //  var currentProfile = CurrentAccount.Profile;
+    //  //create a message
+    //  var m = new Message {
+    //    Sender = currentProfile,
+    //    Receiver = partnership.getOwners(),
+    //    Title = "Partnership Message",
+    //    Header = currentProfile.Organization.Name + " has sent you a message",
+    //    Message1 = "This message is regarding the \"" + partnership.Name + "\" partnership.",
+    //    Message2 = message
+    //  };
+    //  _workUnit.MessageRepository.InsertEntity(m);
+    //  _workUnit.saveChanges();
+    //  updateTempMessage("Your message has been sent to the Administrator. A copy of this message was also emailed to you via"
+    //    + " your contact email (" + currentProfile.Contact.Email + ").");
+    //  return RedirectToAction("View", new { partnershipID, returnUrl });
+    //}
 
     public ActionResult MyPartnerships() {
       return View();
@@ -413,8 +415,8 @@ but should not be used to share proprietary or sensitive content.",
       var currentProfile = CurrentAccount.Profile;
       var partnershipDetail = currentProfile.PartnershipDetails.First(x => x.PartnershipID == partnershipID);
       //make current profile 
-      partnershipDetail.Type = "partner";
-      _workUnit.PartnershipDetailRepository.UpdateEntity(partnershipDetail);
+      //partnershipDetail.Type = "partner";
+      //_workUnit.PartnershipDetailRepository.UpdateEntity(partnershipDetail);
       //now look for the new admin 
       try {
         var newAdmin = _workUnit.PartnershipDetailRepository
