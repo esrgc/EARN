@@ -197,6 +197,10 @@
     <Compile Include="Migrations\201408212016323_profileRequest1.Designer.cs">
       <DependentUpon>201408212016323_profileRequest1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201408221430596_partnership-logo.cs" />
+    <Compile Include="Migrations\201408221430596_partnership-logo.Designer.cs">
+      <DependentUpon>201408221430596_partnership-logo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\Announcement.cs" />
@@ -325,6 +329,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201408212016323_profileRequest1.resx">
       <DependentUpon>201408212016323_profileRequest1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408221430596_partnership-logo.resx">
+      <DependentUpon>201408221430596_partnership-logo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

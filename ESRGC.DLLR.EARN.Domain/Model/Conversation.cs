@@ -9,6 +9,8 @@ namespace ESRGC.DLLR.EARN.Domain.Model
   {
     public Conversation() {
       Started = DateTime.Now;
+      Messages = new List<Message>();
+      MessageBoards = new List<MessageBoard>();
     }
     public int ConversationID { get; set; }
 

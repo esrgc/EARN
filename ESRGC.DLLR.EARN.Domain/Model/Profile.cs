@@ -15,9 +15,12 @@ namespace ESRGC.DLLR.EARN.Domain.Model
       Connections = new List<Profile>();
       ProfileTags = new List<ProfileTag>();
       PartnershipDetails = new List<PartnershipDetail>();
+      Accounts = new List<Account>();
       Comments = new List<Comment>();
       SentMessages = new List<Message>();
       ReceivedMessages = new List<Message>();
+      SentRequests = new List<Request>();
+      ReceivedRequests = new List<Request>();
     }
 
     /// <summary>

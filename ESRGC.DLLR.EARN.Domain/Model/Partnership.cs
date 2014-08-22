@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 
@@ -39,13 +40,9 @@ namespace ESRGC.DLLR.EARN.Domain.Model
       set { _description = value; LastUpdate = DateTime.Now; }
     }
 
-    //[Required]
-    //[MaxLength(100, ErrorMessage = "100 maximum characters allowed")]
-
-    //public string GrantStatus {
-    //  get { return _grantStatus; }
-    //  set { _grantStatus = value; LastUpdate = DateTime.Now; }
-    //}
+    public int? PictureID { get; set; }
+    [ForeignKey("PictureID")]
+    public virtual Picture Logo { get; set; }
 
 
     public DateTime Created { get; set; }

@@ -356,6 +356,9 @@ a.link-icon:hover,
 .partnership-container a {
   text-decoration: none;
 }
+.partnership-container .partnership-detail {
+  margin-left: 16%;
+}
 .partner-list-container {
   max-height: 400px;
   padding-left: 2px;

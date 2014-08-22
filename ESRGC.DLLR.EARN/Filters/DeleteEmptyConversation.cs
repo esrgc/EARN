@@ -7,6 +7,9 @@ using ESRGC.DLLR.EARN.Controllers;
 
 namespace ESRGC.DLLR.EARN.Filters
 {
+  /// <summary>
+  /// Delete empty conversation when message box page is loaded
+  /// </summary>
   public class DeleteEmptyConversation : ActionFilterAttribute
   {
     public override void OnActionExecuted(ActionExecutedContext filterContext) {

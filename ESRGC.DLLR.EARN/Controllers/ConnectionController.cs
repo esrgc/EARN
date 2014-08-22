@@ -36,7 +36,7 @@ namespace ESRGC.DLLR.EARN.Controllers
         var connectProfile = _workUnit.ProfileRepository.GetEntityByID(profileID);
         currentProfile.addConnection(connectProfile);
         _workUnit.saveChanges();
-        updateTempMessage("The connection \""+ connectProfile.Organization.Name +"\" has been added to your profile");
+        updateTempMessage("The connection \""+ connectProfile.Organization.Name +"\" has been added to your partnership");
         //ViewBag.returnUrl = returnUrl;
       }
       catch {

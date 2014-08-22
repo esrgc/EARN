@@ -246,6 +246,10 @@
     <Content Include="Client\dllrContent\style\MDstandard.css" />
     <Content Include="Client\dllrContent\style\print-preview.css" />
     <Content Include="Client\dllrContent\style\print.css" />
+    <Content Include="Client\images\default-logo.png" />
+    <Content Include="Client\images\empty-partnership-logo.png" />
+    <Content Include="Client\images\empty-partnership-logo2.png" />
+    <Content Include="Client\images\empty-partnership-logo3.png" />
     <Content Include="Client\jsLib\backbone\backbone.js" />
     <Content Include="Client\jsLib\backbone\backbone.min.js" />
     <Content Include="Client\jsLib\bootstrap-3.0.1\css\bootstrap-theme.css" />
@@ -493,6 +497,7 @@
     <Content Include="Views\Message\Index.cshtml" />
     <Content Include="Views\Message\Templates.cshtml" />
     <Content Include="Views\Partnership\MakeAdmin.cshtml" />
+    <Content Include="Views\Partnership\UploadImage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

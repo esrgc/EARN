@@ -254,7 +254,7 @@ and/or view this user’s Organizational Profile for more information.",
                   r.Receiver.Organization.Name,
                   r.Partnership.Name),
                 Message2 = "You can now visit the \"" + r.Partnership.Name
-                  + "\" partnership’s profile, and communicate with your partners!",
+                  + "\" partnership’s partnership, and communicate with your partners!",
                 LinkToAction = Url.Action("Detail", "Partnership", new { r.PartnershipID })
               };
               _workUnit.NotificationRepository.InsertEntity(notification);
@@ -320,16 +320,16 @@ and/or view this user’s Organizational Profile for more information.",
         var notification = new Notification() {
           Account = pr.Sender,
           Category = "Profile Request Accepted",
-          Message = string.Format(@"Congratulations! You are now a member of the ""{0}"" organizational profile.",
+          Message = string.Format(@"Congratulations! You are now a member of the ""{0}"" organizational partnership.",
             pr.Receiver.Profile.Organization.Name),
-          Message2 = "You can now edit profile information, search for partnerships and other partners.",
+          Message2 = "You can now edit partnership information, search for partnerships and other partners.",
           LinkToAction = Url.Action("Detail", "Profile")
         };
         _workUnit.NotificationRepository.InsertEntity(notification);
         updateTempMessage("Profile member request accepted.");
       }
       else {
-        updateTempMessage("Can not accept this request. The requesting account already belongs to an organizational profile.");
+        updateTempMessage("Can not accept this request. The requesting account already belongs to an organizational partnership.");
       }
       _workUnit.ProfileRequestRepository.DeleteByID(profileRequestID);
       _workUnit.saveChanges();
@@ -357,9 +357,9 @@ and/or view this user’s Organizational Profile for more information.",
           var notification = new Notification() {
             Account = request.Sender,
             Category = "Profile Request Denied",
-            Message = string.Format(@"Unfortunately! Your request to join the ""{0}"" organizational profile has been denied.",
+            Message = string.Format(@"Unfortunately! Your request to join the ""{0}"" organizational partnership has been denied.",
               request.Receiver.Profile.Organization.Name),
-            Message2 = "Please contact the profile owner or re-send your request with more specific information for the owner to identify you.",
+            Message2 = "Please contact the partnership owner or re-send your request with more specific information for the owner to identify you.",
             LinkToAction = Url.Action("Index", "Home")
           };
           _workUnit.NotificationRepository.InsertEntity(notification);
@@ -585,22 +585,22 @@ and/or view this user’s Organizational Profile for more information.",
         return RedirectToAction("Index", "Home");
       }
       if (string.IsNullOrEmpty(name)) {
-        updateTempMessage("Please enter your name, so the profile owner can identify you and approve your request!");
+        updateTempMessage("Please enter your name, so the partnership owner can identify you and approve your request!");
         return View(profile);
       }
       var owner = profile;
       if (owner == null) {
-        updateTempMessage("No owner found for this profile. ID " + profile.ProfileID);
+        updateTempMessage("No owner found for this partnership. ID " + profile.ProfileID);
         return RedirectToAction("Index", "Home");
       }
       var message1 = string.Format(
-          @"{0} has requested to join your ""{1}"" profile. Contact {0} with at {2} if you need additional information.",
+          @"{0} has requested to join your ""{1}"" partnership. Contact {0} with at {2} if you need additional information.",
           name,
           profile.Organization.Name,
           CurrentAccount.EmailAddress
       );
       var message2 = @"Upon acceptance of this request, " + name +
-        " will be able to have full access to your profile and edit profile information." +
+        " will be able to have full access to your partnership and edit partnership information." +
         " If you do not regconize the person or the email address above, please discard this request or " +
         "contact the person for more information.";
 
@@ -615,7 +615,7 @@ and/or view this user’s Organizational Profile for more information.",
       _workUnit.NotificationRepository.InsertEntity(notification);
       var request = new ProfileRequest() {
         Message = string.Format(
-          @"{0} ({2}) has requested to join your ""{1}"" profile with the following message: {3}",
+          @"{0} ({2}) has requested to join your ""{1}"" partnership with the following message: {3}",
           name,
           profile.Organization.Name,
           CurrentAccount.EmailAddress,

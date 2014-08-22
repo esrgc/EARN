@@ -65,7 +65,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     [HasPendingProfileRequest]//prevent searching while having pending profile request
     public ActionResult Find(string name, int? page, int? pageSize, string f = "html") {
       if (CurrentAccount.Profile != null) {
-        updateTempMessage("Your organization profile already exists.");
+        updateTempMessage("Your organization partnership already exists.");
         return RedirectToAction("Detail");
       }
       int index = page ?? 1;
@@ -93,7 +93,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     public ActionResult Join(int profileID) {
       var profile = _workUnit.ProfileRepository.GetEntityByID(profileID);
       if (profile == null) {
-        updateTempMessage("Invalid profile ID");
+        updateTempMessage("Invalid partnership ID");
         return RedirectToAction("Index", "Home");
       }
 
@@ -208,7 +208,6 @@ namespace ESRGC.DLLR.EARN.Controllers
         _workUnit.PictureRepository.InsertEntity(picture);
         if (profile.PictureID != null)//delete current picture
           _workUnit.PictureRepository.DeleteByID(profile.PictureID);
-        _workUnit.saveChanges();
         profile.PictureID = picture.PictureID;
         _workUnit.saveChanges();
         //changes done return to detail page
@@ -227,7 +226,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     [SendNotification]
     public ActionResult DeleteProfile() {
       if (!CurrentAccount.IsProfileOwner) {
-        updateTempMessage("Sory, you can not delete this profile. Only the profile creator/owner can delete.");
+        updateTempMessage("Sory, you can not delete this partnership. Only the partnership creator/owner can delete.");
         return RedirectToAction("Settings", "Account");
       }
       var profile = CurrentAccount.Profile;
@@ -237,8 +236,8 @@ namespace ESRGC.DLLR.EARN.Controllers
         var notification = new Notification() {
           Category = "Profile Deleted",
           Account = a,
-          Message = string.Format("The organizational profile {0} has been deleted by the owner.", profile.Organization.Name),
-          Message2 = "If you wish to create or join another profile please visit EARN MD CONNECT to do so.",
+          Message = string.Format("The organizational partnership {0} has been deleted by the owner.", profile.Organization.Name),
+          Message2 = "If you wish to create or join another partnership please visit EARN MD CONNECT to do so.",
           LinkToAction = Url.Action("Index", "Profile")
         };
         _workUnit.NotificationRepository.InsertEntity(notification);
@@ -248,12 +247,12 @@ namespace ESRGC.DLLR.EARN.Controllers
       });
 
       if (profile == null) {
-        updateTempMessage("Invalid profile ID");
+        updateTempMessage("Invalid partnership ID");
         return RedirectToAction("Index", "Home");
       }
 
       if (profile.hasOwnedPartnerships()) {
-        updateTempMessage("Your organizational profile is currently involved with one or more partnertships as an administrator. Please re-assign admin role before deleting your profile.");
+        updateTempMessage("Your organizational partnership is currently involved with one or more partnertships as an administrator. Please re-assign admin role before deleting your partnership.");
         return RedirectToAction("Detail");
       }
 
@@ -300,7 +299,7 @@ namespace ESRGC.DLLR.EARN.Controllers
 
       
       _workUnit.saveChanges();
-      updateTempMessage("Your profile has been deleted.");
+      updateTempMessage("Your partnership has been deleted.");
       return RedirectToAction("Index", "Home");
     }
   }

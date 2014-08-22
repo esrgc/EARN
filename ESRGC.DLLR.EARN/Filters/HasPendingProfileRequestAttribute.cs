@@ -29,7 +29,7 @@ namespace ESRGC.DLLR.EARN.Filters
         //..to be implemented
         var pendingRequests = account.SentProfileRequests.ToList();
         if (pendingRequests.Count() > 0) {
-          var message = "You currently have a pending profile request. Please wait until your request is accepted!";
+          var message = "You currently have a pending partnership request. Please wait until your request is accepted!";
           if(!account.EmailVerified){
             message += " You will be notified via email. Please verify your email address. You will not be able to receive email notifications until you do so.";
           }

@@ -27,7 +27,7 @@
                                     <img class="img-thumbnail" src="@Url.Action("ProfilePicture", new { pictureId = Model.PictureID })"/>
                                 }
                                 else {
-                                    <img class="img-thumbnail" src="@Url.Content("~/Client/images/empty_profile.gif")"/>
+                                    <img class="img-thumbnail" src="@Url.Content("~/Client/images/default-logo.png")"/>
                                 }
                                 @if (Model.ProfileID != currentProfile.ProfileID) {
                                     <div class="panel-action-default">

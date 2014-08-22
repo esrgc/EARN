@@ -293,7 +293,7 @@ but should not be used to share proprietary or sensitive content.",
       var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
       var profile = _workUnit.ProfileRepository.GetEntityByID(profileID);
       if (profile == null) {
-        updateTempMessage("Invalid profile ID");
+        updateTempMessage("Invalid partnership ID");
         return RedirectToAction("Detail", new { partnershipID });
       }
       ViewBag.profile = profile;
@@ -394,12 +394,12 @@ but should not be used to share proprietary or sensitive content.",
     public ActionResult MakeAdmin(int profileId, int partnershipID) {
       var profile = _workUnit.ProfileRepository.GetEntityByID(profileId);
       if (profile == null) {
-        updateTempMessage("Invalid organization profile");
+        updateTempMessage("Invalid organization partnership");
         return RedirectToAction("Detail", new { partnershipID });
       }
       var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
       if (partnership == null) {
-        updateTempMessage("Invalid Partnership profile");
+        updateTempMessage("Invalid Partnership partnership");
         return RedirectToAction("Detail", new { partnershipID });
       }
       ViewBag.profile = profile;
@@ -436,7 +436,7 @@ but should not be used to share proprietary or sensitive content.",
               currentProfile.Organization.Name,
               partnershipDetail.Partnership.Name
             ),
-            Message2 = "You can now edit the partnership status and details, delete the partnerhsip profile, approve new partners, and invite organizations to join the partnership.",
+            Message2 = "You can now edit the partnership status and details, delete the partnerhsip partnership, approve new partners, and invite organizations to join the partnership.",
             LinkToAction = Url.Action("Detail", new { partnershipID })
           };
           _workUnit.NotificationRepository.InsertEntity(notif);
@@ -447,10 +447,45 @@ but should not be used to share proprietary or sensitive content.",
       }
       catch {
 
-        updateTempMessage("Error retreiving partnership information for profile id " + profileId + ".");
+        updateTempMessage("Error retreiving partnership information for partnership id " + profileId + ".");
         return RedirectToAction("Detail", new { partnershipID });
       }
 
+    }
+
+    [CanEditPartnership]
+    public ActionResult UploadImage(int partnershipID) {
+      var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
+      if (partnership == null)
+        return RedirectToAction("Detail");
+      return View(partnership);
+    }
+    [HttpPost]
+    [CanEditPartnership]
+    public ActionResult UploadImage(int partnershipID, HttpPostedFileBase dataInput) {
+      var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
+      if (dataInput == null)
+        ModelState.AddModelError("", "No data input. Please select a file to upload");
+      else {
+        var picture = new Picture() {
+          ImageMimeType = dataInput.ContentType,
+          ImageData = new byte[dataInput.ContentLength]
+        };
+        //read the input stream and store to picture object 
+        dataInput.InputStream.Read(picture.ImageData, 0, dataInput.ContentLength);
+
+        //store picture to database
+        _workUnit.PictureRepository.InsertEntity(picture);
+        if (partnership.PictureID != null)//delete current picture
+          _workUnit.PictureRepository.DeleteByID(partnership.PictureID);
+        partnership.PictureID = picture.PictureID;
+        _workUnit.PartnershipRepository.UpdateEntity(partnership);
+        _workUnit.saveChanges();
+        //changes done return to detail page
+        return RedirectToAction("Detail", new { partnershipID });
+      }
+      //error has occurred   
+      return View(partnership);
     }
   }
 }

@@ -52,13 +52,23 @@
           <strong>@p.Name</strong>
         </div>
         <div class="window-panel-content">
-          <p class=""><strong>Description</strong> @p.Description</p>
-          <p>
-            Status: @Html.Partial("partnershipStatusPartial", p)
-          </p>
-          <div class="placeholder-panel">
-            @Html.Partial("tagListDisplayPartial", p.getTagNames())
+          <div class="partnership-container">
+            <div class="profile-picture pull-left">
+              <div class="logo-container">
+                <img class="img-thumbnail" src="@Url.Action("PartnershipLogo", new { id = Model.PartnershipID })"/>
+              </div>
+            </div>
+            <div class="partnership-detail">
+              <p class=""><strong>Description</strong> @p.Description</p>
+              <p>
+                Status: @Html.Partial("partnershipStatusPartial", p)
+              </p>
+              <div class="placeholder-panel">
+                @Html.Partial("tagListDisplayPartial", p.getTagNames())
+              </div>
+            </div>
           </div>
+          <div class="clear"></div>
           <hr />
           <div class="row">
             <div class="col-sm-3">
