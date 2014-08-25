@@ -237,29 +237,32 @@
           }
         </div>
         <div class="window-panel-content">
-          <div class="profile-picture pull-left">
-            <div class="logo-container">
-              <img class="img-thumbnail" src="@Url.Action("PartnershipLogo", new { id = Model.PartnershipID })"/>
-              @if (canEdit) { 
-                <div class="panel-action-center">
-                  <a href="@Url.Action("UploadImage", new { Model.PartnershipID })"><small class="">Change logo</small></a>
-                </div>
+          <div class="partnership-container">
+            <div class="profile-picture pull-left">
+              <div class="logo-container">
+                <img class="img-thumbnail" src="@Url.Action("PartnershipLogo", new { id = Model.PartnershipID })"/>
+                @if (canEdit) { 
+                  <div class="panel-action-center">
+                    <a href="@Url.Action("UploadImage", new { Model.PartnershipID })"><small class="">Change logo</small></a>
+                  </div>
+                }
+              </div>
+            </div>
+            <div class="partnership-detail">
+              <p class=""><strong>Description</strong> @p.Description</p>
+              <span>
+                <strong>Status:</strong>
+                @Html.Partial("partnershipStatusPartial", p)
+              </span>
+              @if (!canEdit) { 
+                <span class="pull-right">
+                  <a class="btn btn-sm btn-default" href="@Url.Action("LeavePartnership", new { Model.PartnershipID, returnUrl })">
+                    <i class="fa fa-sign-out"></i>&nbsp;Leave partnership
+                  </a>
+                </span>
               }
             </div>
           </div>
-          <p class=""><strong>Description</strong> @p.Description</p>
-          <span>
-            <strong>Status:</strong>
-            @Html.Partial("partnershipStatusPartial", p)
-          </span>
-          @if (!canEdit) { 
-            <span class="pull-right">
-              <a class="btn btn-sm btn-default" href="@Url.Action("LeavePartnership", new { Model.PartnershipID, returnUrl })">
-                <i class="fa fa-sign-out"></i>&nbsp;Leave partnership
-              </a>
-            </span>
-            <div class="clear"></div>
-          }
           <div class="clear"></div>
           <hr />
           <!--Tags-->
@@ -375,7 +378,15 @@
                   <div class="profile-container-holder">
                     @foreach (var owner in owners) { 
                       <span class="label label-danger">Admin</span>
-                      @Html.Partial("shortProfilePartial", owner)
+                      <div class="overlay-container">
+                        @if (isOwner && currentProfile.ProfileID == owner.ProfileID) { 
+                          <span class="overlay top-right">
+                            <a class="btn btn-sm btn-default" href="@Url.Action("removeAdmin", new { owner.ProfileID, Model.PartnershipID })">
+                              Remove Admin</a>
+                          </span>
+                        }
+                        @Html.Partial("shortProfilePartial", owner)
+                      </div>
                     }
                     <hr />
                   </div>

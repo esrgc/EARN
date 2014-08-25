@@ -454,6 +454,55 @@ but should not be used to share proprietary or sensitive content.",
     }
 
     [CanEditPartnership]
+    public ActionResult RemoveAdmin(int profileId, int partnershipID) {
+      var profile = _workUnit.ProfileRepository.GetEntityByID(profileId);
+      if (profile == null) {
+        updateTempMessage("Invalid organization partnership");
+        return RedirectToAction("Detail", new { partnershipID });
+      }
+      var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
+      if (partnership == null) {
+        updateTempMessage("Invalid Partnership partnership");
+        return RedirectToAction("Detail", new { partnershipID });
+      }
+
+      if (partnership.getOwners().Count == 1) {
+        updateTempMessage("You are the only admin in this partnership. Please assign another organization to be an admin before removing your admin privilege");
+        return RedirectToAction("Detail", new { partnershipID });
+      }
+
+      ViewBag.profile = profile;
+      ViewBag.partnership = partnership;
+      return View();
+    }
+
+    [HttpPost]
+    [CanEditPartnership]
+    [ActionName("RemoveAdmin")]
+    public ActionResult RemoveAdminPost(int profileId, int partnershipID) {
+      var currentProfile = CurrentAccount.Profile;
+      var partnershipDetail = currentProfile.PartnershipDetails.First(x => x.PartnershipID == partnershipID);
+     
+      try {
+       
+        //make current profile 
+        partnershipDetail.Type = "partner";
+        _workUnit.PartnershipDetailRepository.UpdateEntity(partnershipDetail);
+       
+        //done now save to the database
+        _workUnit.saveChanges();
+
+        return RedirectToAction("Detail", new { partnershipID });
+      }
+      catch {
+
+        updateTempMessage("Error retreiving partnership information for partnership id " + profileId + ".");
+        return RedirectToAction("Detail", new { partnershipID });
+      }
+
+    }
+
+    [CanEditPartnership]
     public ActionResult UploadImage(int partnershipID) {
       var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
       if (partnership == null)

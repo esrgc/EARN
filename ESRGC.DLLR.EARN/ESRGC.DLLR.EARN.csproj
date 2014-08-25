@@ -498,6 +498,7 @@
     <Content Include="Views\Message\Templates.cshtml" />
     <Content Include="Views\Partnership\MakeAdmin.cshtml" />
     <Content Include="Views\Partnership\UploadImage.cshtml" />
+    <Content Include="Views\Partnership\RemoveAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
