@@ -14,23 +14,18 @@
 .transparent-placeholder-panel {
   padding: 5px;
 }
-.panel-action-default {
+.panel-action {
   margin: 5px 0 0 0;
   padding: 5px 0;
+  position: relative;
 }
-.panel-action-right {
-  margin: 5px 0 0 0;
-  padding: 5px 0;
+.panel-action.right {
   text-align: right;
 }
-.panel-action-left {
-  margin: 5px 0 0 0;
-  padding: 5px 0;
+.panel-action.left {
   text-align: left;
 }
-.panel-action-center {
-  margin: 5px 0 0 0;
-  padding: 5px 0;
+.panel-action.center {
   text-align: center;
 }
 .placeholder-pane {

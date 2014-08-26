@@ -499,6 +499,8 @@
     <Content Include="Views\Partnership\MakeAdmin.cshtml" />
     <Content Include="Views\Partnership\UploadImage.cshtml" />
     <Content Include="Views\Partnership\RemoveAdmin.cshtml" />
+    <Content Include="Views\Shared\partnershipActionPartial.cshtml" />
+    <Content Include="Views\Shared\partnershipWithActionPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

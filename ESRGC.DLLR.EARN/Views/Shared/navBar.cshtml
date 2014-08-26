@@ -15,15 +15,15 @@
     <div class="collapse navbar-collapse navbar-ex1-collapse">
       <ul class="nav navbar-nav">
         @if (User.Identity.IsAuthenticated) {
-          <li><a href="@Url.Action("Basic", "Search")"><i class="fa fa-search"></i>&nbsp;Search</a></li>
+          <li><a href="@Url.Action("Basic", "Search")"><i class="fa fa-search"></i>&nbsp;Search for Organization</a></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-link"></i>&nbsp;Partnerships
               <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
-              <li><a href="@Url.Action("MyPartnerships", "Partnership")">My partnerships</a></li>
-              <li><a href="@Url.Action("Index", "Partnership")">Available partnerships</a></li>
-              <li><a href="@Url.Action("Create", "Partnership")">Create new partnership</a></li>
+              <li><a href="@Url.Action("MyPartnerships", "Partnership")">My Partnerships</a></li>
+              <li><a href="@Url.Action("Index", "Partnership")">Find Existing Partnerships</a></li>
+              <li><a href="@Url.Action("Create", "Partnership")">Create new Partnership Profile</a></li>
             </ul>
           </li>
           <li class="dropdown">
@@ -31,7 +31,7 @@
                             <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
-              <li><a target="_blank" href="http://www.earn.maryland.gov">Resources</a></li>
+              <li><a target="_blank" href="http://www.earn.maryland.gov">EARN Maryland Website</a></li>
               <li><a data-toggle="modal" href="#about">About EARN MD CONNECT</a></li>
               <li><a href="@Url.Action("sendContactEarnEmail", "Communication")">Contact EARN MD</a></li>
             </ul>
