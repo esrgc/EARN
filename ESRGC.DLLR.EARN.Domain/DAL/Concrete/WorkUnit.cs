@@ -28,6 +28,9 @@ namespace ESRGC.DLLR.EARN.Domain.DAL.Concrete
     IRepository<PartnershipTag> _partnershipTagRepo;
     IRepository<Document> _documentRepo;
     IRepository<Message> _messageRepo;
+    IRepository<MessageBoard> _messageBoardRepo;
+    IRepository<Conversation> _conversationRepo;
+    IRepository<ProfileRequest> _profileReqRepo;
 
     public WorkUnit(DomainContext context) {
       _context = context;
@@ -128,6 +131,16 @@ namespace ESRGC.DLLR.EARN.Domain.DAL.Concrete
     public IRepository<Message> MessageRepository {
       get { return _messageRepo ?? (_messageRepo = new Repository<Message>(_context)); }
     }
+    public IRepository<MessageBoard> MessageBoardRepository {
+      get { return _messageBoardRepo ?? (_messageBoardRepo = new Repository<MessageBoard>(_context)); }
+    }
+    public IRepository<Conversation> ConversationRepository {
+      get { return _conversationRepo ?? (_conversationRepo = new Repository<Conversation>(_context)); }
+    }
+    public IRepository<ProfileRequest> ProfileRequestRepository {
+      get { return _profileReqRepo?? (_profileReqRepo = new Repository<ProfileRequest>(_context)); }
+    }
+
     #endregion
   }
 }

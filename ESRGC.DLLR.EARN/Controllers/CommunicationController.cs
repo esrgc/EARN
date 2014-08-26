@@ -34,25 +34,27 @@ namespace ESRGC.DLLR.EARN.Controllers
     public ActionResult InviteToPartnership(int profileID, int partnershipID, string message, string returnUrl) {
       var profile = _workUnit.ProfileRepository.GetEntityByID(profileID);
       ViewBag.returnUrl = returnUrl;
-      var senderAccount = CurrentAccount;
-      var receiverAccount = profile.getAccount();
+      var sender = CurrentAccount.Profile;
+      var receiver = profile;//send to all accounts
       var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
       message = message ?? "You have been invited to join our partnership";
       if (partnership != null) {
-        var notification = new Notification() {
-          Category = "Invite Recieved",
-          Message = string.Format("You have been invited to join the \"{0}\" partnership", partnership.Name),
-          Account = receiverAccount,
-          LinkToAction = Url.Action("Requests", "Communication")
-        };
+        receiver.Accounts.ToList().ForEach(x => {
+          var notification = new Notification() {
+            Category = "Invite Recieved",
+            Message = string.Format("You have been invited to join the \"{0}\" partnership", partnership.Name),
+            Account = x,
+            LinkToAction = Url.Action("Requests", "Communication")
+          };
+          _workUnit.NotificationRepository.InsertEntity(notification);
+        });
         //create request
         var request = new PartnershipRequest() {
           Type = "Partnership Invite",
           PartnershipID = partnershipID,
           Message = message,
-          Sender = senderAccount,
-          Receiver = receiverAccount,
-          Notification = notification
+          Sender = sender,
+          Receiver = receiver
         };
         _workUnit.RequestRepository.InsertEntity(request);
         _workUnit.saveChanges();
@@ -77,36 +79,40 @@ namespace ESRGC.DLLR.EARN.Controllers
     [SendNotification]
     public ActionResult SendPartnershipRequest(int partnershipID, string message, string returnUrl) {
       var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
-      var ownerProfile = partnership.getOwner();
-      var receiverAccount = ownerProfile.getAccount();
-      if (receiverAccount == null) {
+      var ownerProfiles = partnership.getOwners();
+
+      if (ownerProfiles == null) {
         updateTempMessage("Can not send request to this partnership! Please choose a different partnership.");
         return RedirectToAction("View", "Partnership", new { partnershipID, returnUrl });
       }
       //only send if partnership is valid
       if (partnership != null) {
-        //create notification
-        var notification = new Notification() {
-          Category = "Request Received",
-          Message = string.Format("{0} has requested to join your \"{1}\" partnership",
-            CurrentAccount.Profile.Organization.Name,
-            partnership.Name),
-          Account = receiverAccount,
-          Message2 = @"You will be able to choose whether to accept this request, 
+        ownerProfiles.ToList().ForEach(x => {
+          x.Accounts.ToList().ForEach(a => {
+            //create notification
+            var notification = new Notification() {
+              Category = "Request Received",
+              Message = string.Format("{0} has requested to join your \"{1}\" partnership",
+                CurrentAccount.Profile.Organization.Name,
+                partnership.Name),
+              Account = a,
+              Message2 = @"You will be able to choose whether to accept this request, 
 and/or view this user’s Organizational Profile for more information.",
-          LinkToAction = Url.Action("Requests", "Communication")
-        };
-        //create request
-        var request = new PartnershipRequest() {
-          Type = "Partnership Request",
-          PartnershipID = partnershipID,
-          Message = message,
-          Sender = CurrentAccount,
-          Receiver = receiverAccount,
-          Notification = notification
-        };
+              LinkToAction = Url.Action("Requests", "Communication")
+            };
+            _workUnit.NotificationRepository.InsertEntity(notification);
+          });
+          //create request
+          var request = new PartnershipRequest() {
+            Type = "Partnership Request",
+            PartnershipID = partnershipID,
+            Message = message,
+            Sender = CurrentAccount.Profile,
+            Receiver = x
+          };
 
-        _workUnit.RequestRepository.InsertEntity(request);
+          _workUnit.RequestRepository.InsertEntity(request);
+        });
         _workUnit.saveChanges();
         updateTempMessage("Your request has been sent to the admin of this partnership");
         return RedirectToAction("View", "Partnership", new { partnershipID, returnUrl });
@@ -121,12 +127,12 @@ and/or view this user’s Organizational Profile for more information.",
         .Notifications
         .OrderByDescending(x => x.Created)
         .OrderBy(x => x.IsRead)
-        .Take(20).ToList();
+        .Take(40).ToList();
       var deleteNotes = CurrentAccount
         .Notifications
         .Where(x => {
           var timespan = DateTime.Now - x.Created;
-          if (timespan.Days > 60)
+          if (timespan.Days > 30)
             return true;
           else
             return false;
@@ -190,16 +196,25 @@ and/or view this user’s Organizational Profile for more information.",
 
     [VerifyAccount]
     public ContentResult RequestCount() {
-      var requests = CurrentAccount.ReceivedRequests
-        .Where(x => x.Status.ToLower() == "new").ToList();
-      return Content(requests.Count().ToString());
+      int profileRequests = 0, requests = 0;
+      if (CurrentAccount.Profile != null)
+        requests += CurrentAccount.Profile.ReceivedRequests
+        .Where(x => x.Status.ToLower() == "new").Count();
+
+      profileRequests += CurrentAccount.ReceivedProfileRequests.Count();
+
+      return Content((profileRequests + requests).ToString());
     }
 
     [VerifyAccount]
+    [VerifyProfile]
     public ActionResult Requests() {
-      var requests = CurrentAccount
-        .ReceivedRequests
+      var requests = CurrentAccount.Profile
+          .ReceivedRequests
+          .ToList();
+      var profileRequests = CurrentAccount.ReceivedProfileRequests
         .ToList();
+      ViewBag.profileRequests = profileRequests;
       return View(requests);
     }
 
@@ -214,77 +229,149 @@ and/or view this user’s Organizational Profile for more information.",
           r = (PartnershipRequest)request;
           if (r.Partnership != null) {
             //check if the requested organization is already a partner
-            if (r.Partnership.getPartners().Contains(r.Sender.Profile)) {
-              updateTempMessage("\"" + r.Sender.Profile.Organization.Name
+            if (r.Partnership.getPartners().Contains(r.Sender)) {
+              updateTempMessage("\"" + r.Sender.Organization.Name
                 + "\"is already a partner of this partnership");
+              _workUnit.RequestRepository.DeleteByID(requestID);
               break;
             }
             //form a partner reference
             detail = new PartnershipDetail() {
               Partnership = r.Partnership,
-              Profile = r.Sender.Profile,
+              Profile = r.Sender,
               Type = "partner"
             };
             var message = string.Format(@"You have accepted {0} to join the ""{1}"" partnership.",
-              r.Sender.Profile.Organization.Name,
+              r.Sender.Organization.Name,
               r.Partnership.Name);
             updateTempMessage(message);
-            //create notification to sender
-            notification = new Notification() {
-              Account = r.Sender,
-              Category = "Partnership Request Accepted",
-              Message = string.Format(@"{0} has accepted your request. You are now a partner of ""{1}""",
-                r.Receiver.Profile.Organization.Name,
-                r.Partnership.Name),
-              Message2 = "You can now visit the \"" + r.Partnership.Name
-                + "\" partnership’s profile, and communicate with your partners!",
-              LinkToAction = Url.Action("Detail", "Partnership", new { r.PartnershipID })
-            };
+            r.Sender.Accounts.ToList().ForEach(x => {
+              //create notification to sender
+              notification = new Notification() {
+                Account = x,
+                Category = "Partnership Request Accepted",
+                Message = string.Format(@"{0} has accepted your request. You are now a partner of ""{1}""",
+                  r.Receiver.Organization.Name,
+                  r.Partnership.Name),
+                Message2 = "You can now visit the \"" + r.Partnership.Name
+                  + "\" partnership’s partnership, and communicate with your partners!",
+                LinkToAction = Url.Action("Detail", "Partnership", new { r.PartnershipID })
+              };
+              _workUnit.NotificationRepository.InsertEntity(notification);
+            });
+
           }
           break;
         case "partnership invite":
           r = (PartnershipRequest)request;
           if (r.Partnership != null) {
             //check if the invited organization is already a partner
-            if (r.Partnership.getPartners().Contains(r.Receiver.Profile)) {
+            if (r.Partnership.getPartners().Contains(r.Receiver)) {
               updateTempMessage("You are already a partner of this partnership");
               break;
             }
             //form a partner reference
             detail = new PartnershipDetail() {
               Partnership = r.Partnership,
-              Profile = r.Receiver.Profile,
+              Profile = r.Receiver,
               Type = "partner"
             };
             _workUnit.PartnershipDetailRepository.InsertEntity(detail);
             var message = "You are now a partner of the \"" + r.Partnership.Name + "\" partnership.";
             updateTempMessage(message);
-            //create notification
-            notification = new Notification() {
-              Account = r.Sender,
-              Category = "Partnership Invite Accepted",
-              Message = string.Format(@"{0} is now a new partner of your ""{1}"" partnership",
-                r.Receiver.Profile.Organization.Name,
-                r.Partnership.Name),
-              LinkToAction = Url.Action("Detail", "Partnership", new { r.PartnershipID })
-            };
+            r.Sender.Accounts.ToList().ForEach(x => {
+              //create notification
+              notification = new Notification() {
+                Account = x,
+                Category = "Partnership Invite Accepted",
+                Message = string.Format(@"{0} is now a new partner of your ""{1}"" partnership",
+                  r.Receiver.Organization.Name,
+                  r.Partnership.Name),
+                LinkToAction = Url.Action("Detail", "Partnership", new { r.PartnershipID })
+              };
+              _workUnit.NotificationRepository.InsertEntity(notification);
+            });
           }
           break;
       }
-      if (notification != null && detail != null) {
+
+      if (detail != null) {
         _workUnit.PartnershipDetailRepository.InsertEntity(detail);
-        _workUnit.NotificationRepository.InsertEntity(notification);
         _workUnit.RequestRepository.DeleteByID(requestID);
-        _workUnit.saveChanges();
       }
+      _workUnit.saveChanges();
 
       return RedirectToAction("Requests");
     }
+
+    public ActionResult ProcessProfileRequest(int profileRequestID) {
+      var pr = _workUnit.ProfileRequestRepository.GetEntityByID(profileRequestID);
+      if (pr == null) {
+        updateTempMessage("Invalid Request");
+        return RedirectToAction("Requests");
+      }
+      var senderProfile = pr.Sender.Profile;
+      if (senderProfile == null) {
+        //new account without profile -> can accept
+        pr.Sender.ProfileID = pr.Receiver.ProfileID;
+        pr.Sender.IsProfileOwner = false;
+        _workUnit.AccountRepository.UpdateEntity(pr.Sender);
+        //create notification
+        var notification = new Notification() {
+          Account = pr.Sender,
+          Category = "Profile Request Accepted",
+          Message = string.Format(@"Congratulations! You are now a member of the ""{0}"" organizational partnership.",
+            pr.Receiver.Profile.Organization.Name),
+          Message2 = "You can now edit partnership information, search for partnerships and other partners.",
+          LinkToAction = Url.Action("Detail", "Profile")
+        };
+        _workUnit.NotificationRepository.InsertEntity(notification);
+        updateTempMessage("Profile member request accepted.");
+      }
+      else {
+        updateTempMessage("Can not accept this request. The requesting account already belongs to an organizational partnership.");
+      }
+      _workUnit.ProfileRequestRepository.DeleteByID(profileRequestID);
+      _workUnit.saveChanges();
+      return RedirectToAction("Requests");
+    }
+
     [HttpPost]
     public ActionResult DeleteRequest(int requestID) {
-      var request = _workUnit.RequestRepository.GetEntityByID(requestID);
-      _workUnit.RequestRepository.DeleteByID(requestID);
-      _workUnit.saveChanges();
+      try {
+        var request = _workUnit.RequestRepository.GetEntityByID(requestID);
+        _workUnit.RequestRepository.DeleteByID(requestID);
+        _workUnit.saveChanges();
+      }
+      catch (Exception) {
+        updateTempMessage("Error deleting request");
+      }
+      return RedirectToAction("Requests");
+    }
+    [HttpPost]
+    [SendNotification]
+    public ActionResult DeleteProfileRequest(int requestID) {
+      try {
+        var request = _workUnit.ProfileRequestRepository.GetEntityByID(requestID);
+        if (request.Status.ToLower() == "new") {
+          var notification = new Notification() {
+            Account = request.Sender,
+            Category = "Profile Request Denied",
+            Message = string.Format(@"Unfortunately! Your request to join the ""{0}"" organizational partnership has been denied.",
+              request.Receiver.Profile.Organization.Name),
+            Message2 = "Please contact the partnership owner or re-send your request with more specific information for the owner to identify you.",
+            LinkToAction = Url.Action("Index", "Home")
+          };
+          _workUnit.NotificationRepository.InsertEntity(notification);
+        }
+        //finally delete it
+        _workUnit.ProfileRequestRepository.DeleteByID(requestID);
+        _workUnit.saveChanges();
+        updateTempMessage("Request denied and deleted!");
+      }
+      catch (Exception) {
+        updateTempMessage("Error deleting request");
+      }
       return RedirectToAction("Requests");
     }
     [VerifyProfile]
@@ -318,17 +405,18 @@ and/or view this user’s Organizational Profile for more information.",
       //create notifications
       foreach (var p in partnership.PartnershipDetails.Select(x => x.Profile).ToList()) {
         if (p.ProfileID != CurrentAccount.ProfileID) {
-          var account = p.getAccount();
-          var notification = new Notification() {
-            Account = account,
-            LinkToAction = Url.Action("Detail", "Partnership", new { partnershipID, returnUrl }),
-            Category = "New Comment",
-            Message = CurrentAccount.Profile.Organization.Name
-            + " has posted a new comment on the partnership \""
-            + partnership.Name + "\"",
-            Message2 = comment
-          };
-          _workUnit.NotificationRepository.InsertEntity(notification);
+          foreach (var account in p.Accounts) {
+            var notification = new Notification() {
+              Account = account,
+              LinkToAction = Url.Action("Detail", "Partnership", new { partnershipID, returnUrl }),
+              Category = "New Comment",
+              Message = CurrentAccount.Profile.Organization.Name
+              + " has posted a new comment on the partnership \""
+              + partnership.Name + "\"",
+              Message2 = comment
+            };
+            _workUnit.NotificationRepository.InsertEntity(notification);
+          }
         }
       }
       _workUnit.saveChanges();
@@ -481,6 +569,66 @@ and/or view this user’s Organizational Profile for more information.",
         }
       }
       return View("EmailNotSent");
+    }
+
+    public ActionResult JoinProfileRequest(int profileID) {
+      var profile = _workUnit.ProfileRepository.GetEntityByID(profileID);
+      return View(profile);
+    }
+    [HttpPost]
+    [SendNotification]
+    public ActionResult SendJoinProfileRequest(int profileID, string name, string message) {
+
+      var profile = _workUnit.ProfileRepository.GetEntityByID(profileID);
+      if (profile == null) {
+        updateTempMessage("Profile ID is invalid");
+        return RedirectToAction("Index", "Home");
+      }
+      if (string.IsNullOrEmpty(name)) {
+        updateTempMessage("Please enter your name, so the partnership owner can identify you and approve your request!");
+        return View(profile);
+      }
+      var owner = profile;
+      if (owner == null) {
+        updateTempMessage("No owner found for this partnership. ID " + profile.ProfileID);
+        return RedirectToAction("Index", "Home");
+      }
+      var message1 = string.Format(
+          @"{0} has requested to join your ""{1}"" partnership. Contact {0} with at {2} if you need additional information.",
+          name,
+          profile.Organization.Name,
+          CurrentAccount.EmailAddress
+      );
+      var message2 = @"Upon acceptance of this request, " + name +
+        " will be able to have full access to your partnership and edit partnership information." +
+        " If you do not regconize the person or the email address above, please discard this request or " +
+        "contact the person for more information.";
+
+      var notification = new Notification() {
+        Category = "Request Received",
+        Message = message1,
+        Account = owner.getAccount(),
+        Message2 = "Message: " + message,
+        Message3 = message2,
+        LinkToAction = Url.Action("Requests", "Communication")
+      };
+      _workUnit.NotificationRepository.InsertEntity(notification);
+      var request = new ProfileRequest() {
+        Message = string.Format(
+          @"{0} ({2}) has requested to join your ""{1}"" partnership with the following message: {3}",
+          name,
+          profile.Organization.Name,
+          CurrentAccount.EmailAddress,
+          message
+        ),
+        Sender = CurrentAccount,
+        Receiver = owner.getAccount(),
+        Profile = profile
+      };
+      _workUnit.ProfileRequestRepository.InsertEntity(request);
+      _workUnit.saveChanges();
+      updateTempMessage("Your request has been sent. You will be notified via email once the request is accepted.");
+      return RedirectToAction("Index", "Home");
     }
   }
 }

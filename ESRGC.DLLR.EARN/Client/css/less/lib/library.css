@@ -1,4 +1,4 @@
-﻿.inline-block {
+.inline-block {
   display: inline-block;
 }
 .placeholder-panel {
@@ -14,23 +14,18 @@
 .transparent-placeholder-panel {
   padding: 5px;
 }
-.panel-action-default {
+.panel-action {
   margin: 5px 0 0 0;
   padding: 5px 0;
+  position: relative;
 }
-.panel-action-right {
-  margin: 5px 0 0 0;
-  padding: 5px 0;
+.panel-action.right {
   text-align: right;
 }
-.panel-action-left {
-  margin: 5px 0 0 0;
-  padding: 5px 0;
+.panel-action.left {
   text-align: left;
 }
-.panel-action-center {
-  margin: 5px 0 0 0;
-  padding: 5px 0;
+.panel-action.center {
   text-align: center;
 }
 .placeholder-pane {
@@ -43,16 +38,13 @@
   padding: 5px;
   margin-bottom: 8px;
   /*margin-left: -10px;*/
-
   /*margin-right: -10px;*/
-
   background: #3d4241;
   font-size: 12px;
   color: #ffffff;
   font-weight: bold;
   text-align: center;
   /*border: 1px solid @border-color;*/
-
   border-radius: 5px;
 }
 .list-container > ul > li {
@@ -73,7 +65,6 @@
   padding: 12px;
   border: 1px solid #dee4e2;
   /*text-shadow: 1px 1px 1px #E1E1E1;*/
-
   background: #FFFFFF;
   position: relative;
   border-radius: 5px;
@@ -131,7 +122,6 @@
 }
 .window-panel .in {
   /*border: 1px solid #eeeeee;*/
-
 }
 .window-panel .label-close {
   color: #000000;

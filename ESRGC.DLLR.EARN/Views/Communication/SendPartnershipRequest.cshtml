@@ -27,7 +27,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-10 col-sm-offset-1">
-            <div class="panel-action-default">
+            <div class="panel-action default">
                 <a href="@Url.Action("View", "Partnership", new { Model.PartnershipID, returnUrl })"><i class="fa fa-long-arrow-left"></i>&nbsp;Back to partnership</a>
             </div>
             <div class="window-panel">
@@ -47,7 +47,7 @@
                             Administrator of the Partnership Profile to review. This request is subject to approval. 
                             You may replace the message text below with a more detailed message if you so choose. 
                         </p>
-                        <div class="panel-action-default">
+                        <div class="panel-action default">
                             <form class="form-horizontal" action="@Url.Action("SendPartnershipRequest")" method="post" role="form">
                                 @Html.HiddenFor(x => x.PartnershipID)
                                 @Html.Hidden("returnUrl", returnUrl)

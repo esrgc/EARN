@@ -1,0 +1,109 @@
+﻿@model ESRGC.DLLR.EARN.Domain.Model.Account
+@{
+  ViewBag.Title = "Messages";
+  ViewBag.Header = "Message Inbox";
+}
+
+@section header{
+  <div class="container">
+    <header class="page-header">
+      <h4>@ViewBag.Header <i class="fa fa-envelope"></i></h4>
+    </header>
+  </div>
+}
+
+@section scripts{
+  <script src="~/Client/jsLib/handlebars/handlebars-v1.3.0.js"></script>
+  <script src="~/Client/jsLib/typeahead-0.10.5/typeahead.bundle.js"></script>
+  @Html.Partial("Templates")
+  <script src="~/Client/jsLib/underscore/underscore.js"></script>
+  <script src="~/Client/jsLib/backbone/backbone.js"></script>
+  <script src="~/Client/js/backbone-addon/application.js"></script>
+  @Scripts.Render("~/bundles/messageCenter")
+}
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="btn-group pull-right">
+        <a href="#new" class="btn btn-default btn-xs"><i class="fa fa-plus"></i>&nbsp;New Message</a>
+        @if (Model.Role.ToLower() == "admin") { 
+          <a href="#newAdmin" class="btn btn-default btn-xs" title="Admin only"><i class="fa fa-lock"></i>&nbsp;Admin
+            Message</a>
+        }
+        
+@*<button class="btn btn-default btn-xs"><i class="fa fa-refresh"></i>&nbsp;Refresh</button>*@
+@*<button type="button" class="btn btn-default btn-xs"><i class="fa fa-trash-o"></i>&nbsp;Delete</button>*@
+      </div>
+      <div class="clear"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="message-panel active" id="message-control-panel">
+      <div class="">
+        <div class="list-group" id="conversation-list">
+        </div>
+      </div>
+    </div>
+    <div class="message-panel message-center active" id="message-area"></div>
+    <div class="message-panel message-center" id="newMessage">
+      <div class="message-container">
+        <h4>New Message</h4>
+        
+        <div class="message-board">
+          <div class="form-group typeahead-container">
+            <label class="control-label col-sm-1" for="msg-participant">To</label>
+            <div class="col-sm-9">
+              <div class="input-group">
+                <input type="text"
+                  class="form-control typeahead"
+                  placeholder="Name"
+                  name="msg-participant"
+                  id="msg-participant" />
+                <span class="input-group-btn">
+                  <button class="btn btn-primary" type="button" id="addProfile">Add</button>
+                </span>
+              </div>
+              <div><span id="validation-msg" class="text-danger"></span></div>
+            </div>
+          </div>
+          <div class="clear"></div>
+          <div class="recipient-container">            
+            
+          </div>
+        </div>
+      </div>
+      <div class="message-composer">
+        <form class="form-horizontal">
+          <textarea class="form-control input-sm message-input-box" cols="20" id="new-message" name="new-message"
+            placeholder="Type a message..."
+            rows="2"></textarea>
+          <input type="reset" class="btn btn-xs btn-default" value="Clear" />
+          <button type="button" class="btn btn-xs btn-default send-message-btn disabled">Send</button>
+          <img src="~/Client/images/ajax-loader-fb.gif" alt="" class="loading-prompt" />
+        </form>
+      </div>
+    </div>
+    <div class="message-panel message-center" id="adminMessage">
+      <div class="message-container">
+        <h4>Administration Message <small>(Announcement)</small></h4>
+        <hr />
+        <div class="message-board disabled">
+          <p>Note! This will send a message to all EARN CONNECT Organizations</p>
+        </div>
+      </div>
+      <div class="message-composer">
+        <form class="form-horizontal">
+          <textarea class="form-control input-sm message-input-box" cols="20" id="new-admin-message" name="new-admin-message"
+            placeholder="Type a message..."
+            rows="2"></textarea>
+          <input type="reset" class="btn btn-xs btn-default" value="Clear" />
+          <button type="button" class="btn btn-xs btn-default send-message-btn disabled">Send</button>
+          <img src="~/Client/images/ajax-loader-fb.gif" alt="" class="loading-prompt" />
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+

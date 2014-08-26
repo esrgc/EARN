@@ -11,7 +11,8 @@
 .mini-profile h4 {
   min-width: 350px;
 }
-.profile-area .dropdown {
+.profile-area .dropdown,
+.partnership-action .dropdown {
   margin: 0 auto 0 auto;
   width: 63px;
 }
@@ -76,7 +77,6 @@
   min-height: 250px;
   /*max-height: 800px;
             overflow-y: auto;*/
-
 }
 .profile-tabs > ul > li.active > a,
 .profile-tabs > ul > li.active > a:hover {
@@ -110,7 +110,6 @@
   /*.profile-picture {
         max-width: 10%;
     }*/
-
 }
 .profile-section:last-of-type {
   margin-bottom: 0 !important;
@@ -121,4 +120,11 @@
 .profile-info-container div.placeholder-panel,
 .info-container div.placeholder-panel {
   margin-bottom: 10px;
+}
+.partnership-action-list .list-group-item {
+  color: white;
+  background: #235d9c;
+}
+.partnership-action-list .list-group-item:hover {
+  background: #1d4f85;
 }

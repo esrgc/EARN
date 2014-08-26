@@ -39,11 +39,11 @@
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.6.0.1\lib\net40\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.6.0.1\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -157,15 +157,61 @@
     <Compile Include="Migrations\201312131706024_message2.Designer.cs">
       <DependentUpon>201312131706024_message2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201407281750225_account.IsProfileOwner.cs" />
+    <Compile Include="Migrations\201407281750225_account.IsProfileOwner.Designer.cs">
+      <DependentUpon>201407281750225_account.IsProfileOwner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201408041729112_profileRequest.cs" />
+    <Compile Include="Migrations\201408041729112_profileRequest.Designer.cs">
+      <DependentUpon>201408041729112_profileRequest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201408071535179_messageBoard.cs" />
+    <Compile Include="Migrations\201408071535179_messageBoard.Designer.cs">
+      <DependentUpon>201408071535179_messageBoard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201408071538239_messageBoard2.cs" />
+    <Compile Include="Migrations\201408071538239_messageBoard2.Designer.cs">
+      <DependentUpon>201408071538239_messageBoard2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201408181900455_conversation.cs" />
+    <Compile Include="Migrations\201408181900455_conversation.Designer.cs">
+      <DependentUpon>201408181900455_conversation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201408191620040_messageboard1.cs" />
+    <Compile Include="Migrations\201408191620040_messageboard1.Designer.cs">
+      <DependentUpon>201408191620040_messageboard1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201408201953467_messageboard.type.cs" />
+    <Compile Include="Migrations\201408201953467_messageboard.type.Designer.cs">
+      <DependentUpon>201408201953467_messageboard.type.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201408211439265_messageboard.join-date.cs" />
+    <Compile Include="Migrations\201408211439265_messageboard.join-date.Designer.cs">
+      <DependentUpon>201408211439265_messageboard.join-date.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201408211900429_request-now-ref-profile.cs" />
+    <Compile Include="Migrations\201408211900429_request-now-ref-profile.Designer.cs">
+      <DependentUpon>201408211900429_request-now-ref-profile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201408212016323_profileRequest1.cs" />
+    <Compile Include="Migrations\201408212016323_profileRequest1.Designer.cs">
+      <DependentUpon>201408212016323_profileRequest1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201408221430596_partnership-logo.cs" />
+    <Compile Include="Migrations\201408221430596_partnership-logo.Designer.cs">
+      <DependentUpon>201408221430596_partnership-logo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\Announcement.cs" />
     <Compile Include="Model\Comment.cs" />
+    <Compile Include="Model\Conversation.cs" />
     <Compile Include="Model\Document.cs" />
     <Compile Include="Model\GeoTag.cs" />
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\History.cs" />
     <Compile Include="Model\Message.cs" />
+    <Compile Include="Model\MessageBoard.cs" />
     <Compile Include="Model\Notification.cs" />
     <Compile Include="Model\Organization.cs" />
     <Compile Include="Model\Contact.cs" />
@@ -175,6 +221,7 @@
     <Compile Include="Model\PartnershipTag.cs" />
     <Compile Include="Model\Picture.cs" />
     <Compile Include="Model\Profile.cs" />
+    <Compile Include="Model\ProfileRequest.cs" />
     <Compile Include="Model\ProfileTag.cs" />
     <Compile Include="Model\Request.cs" />
     <Compile Include="Model\Tag.cs" />
@@ -252,6 +299,39 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201312131706024_message2.resx">
       <DependentUpon>201312131706024_message2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407281750225_account.IsProfileOwner.resx">
+      <DependentUpon>201407281750225_account.IsProfileOwner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408041729112_profileRequest.resx">
+      <DependentUpon>201408041729112_profileRequest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408071535179_messageBoard.resx">
+      <DependentUpon>201408071535179_messageBoard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408071538239_messageBoard2.resx">
+      <DependentUpon>201408071538239_messageBoard2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408181900455_conversation.resx">
+      <DependentUpon>201408181900455_conversation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408191620040_messageboard1.resx">
+      <DependentUpon>201408191620040_messageboard1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408201953467_messageboard.type.resx">
+      <DependentUpon>201408201953467_messageboard.type.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408211439265_messageboard.join-date.resx">
+      <DependentUpon>201408211439265_messageboard.join-date.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408211900429_request-now-ref-profile.resx">
+      <DependentUpon>201408211900429_request-now-ref-profile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408212016323_profileRequest1.resx">
+      <DependentUpon>201408212016323_profileRequest1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408221430596_partnership-logo.resx">
+      <DependentUpon>201408221430596_partnership-logo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

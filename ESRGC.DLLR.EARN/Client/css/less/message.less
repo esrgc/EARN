@@ -1,0 +1,134 @@
+﻿@import "lib/variables.less";
+
+@maxheight: 600px;
+@message-composer-height: 150px;
+
+.message-panel {
+    height: @maxheight;
+    max-height: @maxheight;
+    margin-top: 10px;
+    display: none;
+    float: left;
+
+    .logo-image {
+        max-width: 60px;
+        margin-bottom: 5px;
+        margin-right: 5px;
+    }
+
+    .list-group-item {
+        //padding-left: 0;
+        border-left: none;
+        border-right: none;
+        border-radius: 0;
+
+        &:first-child {
+            border-top: none;
+        }
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+
+    &.active {
+        display: block;
+    }
+
+    .loading-prompt {
+        display: none;
+
+        &.active {
+            display: inline-block;
+        }
+    }
+}
+
+#message-control-panel {
+    width: 30%;
+    border-right: 1px solid @border-color;
+}
+
+.message-center {
+    width: 70%;
+    min-height: @maxheight;
+    overflow-y: auto;
+    padding-left: 5px;
+
+    .message-board {
+        position: relative;
+        padding-left: 10px;
+        padding-right: 10px;
+        margin-right: 5px;
+        height: @maxheight - (@message-composer-height + 75px);
+        max-height: @maxheight - (@message-composer-height + 75px);
+        overflow: auto;
+        padding-top: 20px;
+        border-top: 1px solid @border-color;
+
+        .message {
+            &:not(:first-child) {
+                border-top: 1px solid @border-color;
+            }
+
+            margin-bottom: 15px;
+
+            &.admin-message {
+                border: 1px solid @border-color;
+                border-radius: 5px;
+                padding: 5px;
+                //font-weight: bold;
+                background: #e1deca;
+            }
+
+            p {
+                margin-left: 65px;
+            }
+        }
+
+        &.disabled {
+            background: @base-color;
+            margin-bottom: 5px;
+        }
+
+        .recipient-container {
+            padding: 10px;
+            margin-top: 20px;
+
+            .recipient {
+                cursor: pointer;
+                display: inline-block;
+                min-width: 200px;
+                float: left;
+                height: 100px;
+                margin: 5px;
+
+                img {
+                    max-height: 80px;
+                }
+            }
+        }
+    }
+}
+
+#message-control-panel, #message-area {
+    position: relative;
+    max-height: @maxheight;
+    overflow-y: auto;
+}
+
+.message-composer {
+    position: relative;
+    height: @message-composer-height;
+    border: 1px solid @border-color;
+    margin: 0;
+    margin-right: 5px;
+    padding: 10px;
+    background: @base-color;
+    border-radius: 5px;
+
+    .message-input-box {
+        min-height: 100px;
+        margin-bottom: 3px;
+    }
+}

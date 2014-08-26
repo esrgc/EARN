@@ -1,0 +1,53 @@
+﻿@using ESRGC.DLLR.EARN.Domain.Model
+
+@{
+  ViewBag.Title = "Partnership Admin";
+  ViewBag.Header = "Partnership Admin";
+}
+@{
+  var profile = ViewBag.profile as Profile;
+  var partnership = ViewBag.partnership as Partnership;  
+}
+@section header{
+  <div class="container">
+    <header class="page-header">
+      <h3>@ViewBag.Header <i class="glyphicon glyphicon-link"></i></h3>
+      @*<ul class="breadcrumb">
+                <li><a href="@Url.Action("index", "Home")">Home</a></li>
+                <li class="active">@ViewBag.Header</li>
+            </ul>*@
+    </header>
+  </div>
+}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="window-panel">
+        <div class="window-panel-title">
+         Remove partnership administration
+        </div>
+        <div class="window-panel-content">
+          <div class="alert alert-warning">
+            <strong>Important!</strong> 
+            <p>
+              You are about to remove your administration privilege from the <strong>@partnership.Name</strong> partnership. 
+              Once this is done, this organization can no longer update/delete the partnership profile, and invite others to join.
+              Click confirm to proceed, otherwise click cancel to return to the partnership detail.
+            </p>
+          </div>
+          @Html.Partial("displayNoLinkProfilePartial", profile)
+          <hr />
+          <div class="text-center">
+            <form action="@Url.Action("RemoveAdmin")" method="post">
+              <input type="hidden" value="@profile.ProfileID" name="profileID" />
+              <input type="hidden" value="@partnership.PartnershipID" name="partnershipID" />
+              <button type="submit" class="btn btn-primary">Confirm</button>
+              <a class="btn btn-default" href="@Url.Action("Detail", new { partnership.PartnershipID })">Cancel</a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -5,23 +5,23 @@
 
 @section scripts {
     <script type="text/javascript">
-        var startup = function () {
-            $(document).on('click', '#agreeTDChbox', function () {
+        var startup = function() {
+            $(document).on('click', '#agreeTDChbox', function() {
                 if ($(this).is(':checked'))
                     $('#proceedBtn').removeAttr('disabled');
                 else
                     $('#proceedBtn').attr('disabled', 'disabled');
             });
-            $(document).on('click', '#proceedBtn', function () {                
+            $(document).on('click', '#proceedBtn', function() {
                 $(this).attr('disabled', 'disabled');
                 $('form#quickSignupForm').submit();
             });
-            $(document).on('keypress', 'form#quickSignupForm', function (e) {
+            $(document).on('keypress', 'form#quickSignupForm', function(e) {
                 if (e.keyCode == 13) {
                     $('#agreeToSignup').modal('show');
                 }
             });
-            
+
         };
     </script>
 }
@@ -41,8 +41,17 @@
                         </button>
                         <a class="btn btn-primary" target="_blank" href="http://www.dllr.maryland.gov/earn">
                             <i class="fa fa-external-link"></i>&nbsp;&nbsp;About the EARN Maryland Program
-                        </a>       
+                        </a>
                     </div>
+                    @if (!Request.IsAuthenticated) {
+                        <div class="info-button-container">
+                            <a href="@Url.Action("Profiles", "Public")"><small>Browse Organizations</small></a> | 
+                            <a href="@Url.Action("Partnerships", "Public")"><small>View Partnerships</small></a>
+                            <br />
+                            <span>Join EARN MD CONNECT to view full site content.
+                            </span>
+                        </div>
+                    }
                 </div>
                 @if (!Request.IsAuthenticated) {
                     <div class="col-sm-4">
@@ -50,7 +59,18 @@
                     </div>
                 }
                 else {
-
+                    <div class="col-sm-4">
+                        <div id="quicktask">
+                            @*Do a carosel here or something!*@
+                            <h5 class="text-justified">Welcome! You're now signed in as @User.Identity.Name</h5>
+                            <a class="btn btn-default btn-sm btn-block" href="@Url.Action("Basic", "Search")">Search for partners</a>
+                            <a class="btn btn-default btn-sm btn-block" href="@Url.Action("Index", "Partnership")">View available partnerships</a>
+                            <a class="btn btn-default btn-sm btn-block" href="@Url.Action("Detail", "Profile")">View/Edit my organizational
+                                profile</a>
+                            <a class="btn btn-default btn-sm btn-block" href="@Url.Action("MyPartnerships", "Partnership")">View my
+                                partnerships</a>
+                        </div>
+                    </div>
                 }
             </div>
         </div>
@@ -95,7 +115,8 @@
                 <div class="placeholder-pane-heading">About EARN MD CONNECT</div>
                 <div>
                     <p>
-                        <strong>EARN MD CONNECT</strong> is dedicated to connecting organizations seeking to partner through the
+                        <strong>EARN MD CONNECT</strong> is dedicated to connecting organizations seeking to partner through
+                        the
                         <a target="_blank" href="http://www.dllr.maryland.gov/earn/">EARN Maryland Program</a>.
                     </p>
                     <label>Organizations committed to bridging Maryland’s skills gap are encouraged to participate:</label>
@@ -119,8 +140,10 @@
                 <div class="placeholder-pane-heading">Join Us</div>
                 <div>
                     <p>
-                        Sign up. Create a profile. Members can search and connect with other EARN MD CONNECT users to form Strategic Industry Partnerships. 
-                        Promote your organization’s interest in joining a Partnership. Established Partnerships can use this site to share ideas, 
+                        Sign up. Create a profile. Members can search and connect with other EARN MD CONNECT users to form Strategic
+                        Industry Partnerships. 
+                        Promote your organization’s interest in joining a Partnership. Established Partnerships can use this
+                        site to share ideas, 
                         best practices and challenges. EARN MD CONNECT: your one stop for building Strategic Industry Partnerships.
                     </p>
                 </div>
@@ -154,7 +177,8 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="agreeToSignup" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+<div class="modal fade" id="agreeToSignup" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby=""
+    aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -171,7 +195,9 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button id="proceedBtn" data-loading-text="Signing up..." class="btn btn-primary btn-sm submit-button" type="button" disabled>Proceed</button>
+                <button id="proceedBtn" data-loading-text="Signing up..." class="btn btn-primary btn-sm submit-button"
+                    type="button" disabled>
+                    Proceed</button>
             </div>
         </div>
         <!-- /.modal-content -->
@@ -181,7 +207,8 @@
 <!-- /.modal -->
 
 <!-- Modal -->
-<div class="modal fade" id="termCondition" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+<div class="modal fade" id="termCondition" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby=""
+    aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">

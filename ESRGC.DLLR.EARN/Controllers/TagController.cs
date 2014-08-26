@@ -35,7 +35,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     /// <returns></returns>
     public ActionResult ManageTag() {
       if (CurrentAccount.Profile == null)
-        return RedirectToAction("Create");
+        return RedirectToAction("Create", "Profile");
 
       return View(CurrentAccount.Profile);
     }

@@ -7,6 +7,9 @@
 }
 @{
     ViewBag.returnUrl = Url.Action("Requests");
+    var partnershipRequests = Model.OfType<PartnershipRequest>().ToList();
+    var profileRequests = ViewBag.profileRequests as List<ProfileRequest>;
+    var requestCount = partnershipRequests.Count() + profileRequests.Count();
 }
 @section header{
     <div class="container">
@@ -23,19 +26,51 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-10 col-sm-offset-1">
-            <div class="panel-action-default">
+            <div class="panel-action default">
                 <a href="@Url.Action("Detail", "Profile")"><i class="fa fa-long-arrow-left"></i>&nbsp;Back to profile</a>
             </div>
             <div class="window-panel">
                 <div class="window-panel-title">
-                    <strong>Respond to @Model.Count Requests</strong>
+                    <strong>Respond to @requestCount Requests</strong>
                 </div>
                 <div class="window-panel-content">
                     @if (Model.Count() == 0) { 
                         <p>There are currently no requests.</p>
                     }
-                    <ul class="list-group">
-                        @foreach (var i in Model.Cast<PartnershipRequest>()) {
+                    <ul class="list-group">                     
+                        @foreach (var i in profileRequests) {
+                            <li class="list-group-item">
+                                <div class="placeholder-pane">
+                                    <div>
+                                        <strong>@i.Type</strong>
+                                    </div>
+                                    <form action="@Url.Action("DeleteProfileRequest")" method="post" role="form">
+                                        @Html.Hidden("requestID",i.ProfileRequestID)
+                                        <div class="pull-right btn-group">
+                                            <a href="@Url.Action("ProcessProfileRequest", new { i.ProfileRequestID })" class="btn btn-success btn-sm"><i class="fa fa-check"></i>&nbsp;Accept</a>
+                                            <button type="submit" class="btn btn-default btn-sm"><i class="fa fa-times"></i>&nbsp;Delete</button>
+                                        </div>
+                                    </form>
+                                    @Html.Partial("miniProfilePartial", i.Receiver.Profile)
+                                    <p>
+                                        @if (string.IsNullOrEmpty(i.Message)) {
+                                            <strong>Message:</strong>
+                                            <text></text>
+                                        }
+                                        else { 
+                                            <strong>Message:</strong> @i.Message
+                                        }
+                                    </p>
+                                  <p>
+                                     Upon acceptance of this request, the requesting account
+                                     will be able to have full access to your profile and edit profile information.
+                                     If you do not regconize the person or the email address above, please discard this request or 
+                                     contact the person for more information.
+                                  </p>
+                                </div>
+                            </li>
+                        }
+                        @foreach (var i in partnershipRequests) {
                             <li class="list-group-item">
                                 <div class="placeholder-pane">
                                     <div>
@@ -48,7 +83,7 @@
                                             <button type="submit" class="btn btn-default btn-sm"><i class="fa fa-times"></i>&nbsp;Delete</button>
                                         </div>
                                     </form>
-                                    @Html.Partial("miniProfilePartial", i.Sender.Profile)
+                                    @Html.Partial("miniProfilePartial", i.Sender)
                                     <p>
                                         @if (string.IsNullOrEmpty(i.Message)) {
                                             <strong>Message</strong>

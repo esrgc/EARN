@@ -1,9 +1,11 @@
 ﻿@if (TempData["message"] != null) {
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12 panel-action-center">
-                <span class="label label-info">@TempData["message"]</span>
-            </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-8 col-md-offset-2">
+        <div class="alert alert-warning text-center">
+          <span>@TempData["message"]</span>
         </div>
+      </div>
     </div>
+  </div>
 }

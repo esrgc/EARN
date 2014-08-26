@@ -1,123 +1,126 @@
 ﻿<div class="navbar navbar-default" role="navigation">
-    <input type="hidden" id="navBarRefreshLink" value="@Url.Action("navigationBar", "Communication")" />
-    <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="@Url.Action("index", "Home")">EARN MD CONNECT</a>
-        </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-
-            <ul class="nav navbar-nav">
-                @if (User.Identity.IsAuthenticated) {
-                    <li><a href="@Url.Action("Basic", "Search")"><i class="fa fa-search"></i>&nbsp;Search</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-link"></i>&nbsp;Partnerships
-                            <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="@Url.Action("MyPartnerships", "Partnership")">My partnerships</a></li>
-                            <li><a href="@Url.Action("Index", "Partnership")">Available partnerships</a></li>
-                            <li><a href="@Url.Action("Create", "Partnership")">Create new partnership</a></li>
-                        </ul>
-                    </li>
-                
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-plus"></i>&nbsp;More
-                            <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a target="_blank" href="http://www.earn.maryland.gov">Resources</a></li>
-                            <li><a data-toggle="modal" href="#about">About EARN MD CONNECT</a></li>
-                            <li><a href="@Url.Action("sendContactEarnEmail", "Communication")">Contact EARN MD</a></li>
-                        </ul>
-                    </li>
-                }
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-question"></i>&nbsp;Help
-                            <b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="@Url.Action("sendTechnicalReportEmail", "Communication")">Report technical issues</a></li>
-                        <li><a href="@Url.Action("sendFeedbackEmail", "Communication")">Website feedback</a></li>
-                    </ul>
-                </li>
-            </ul>
-
-
-            <ul class="nav navbar-nav navbar-right">
-                @if (Request.IsAuthenticated) {
-                    var noteCount = Html.Action("NotificationCount", "Communication"); 
-                    <li>
-                        <a href="#" data-toggle="popover" id="notifications" role="menuitem" 
-                            rel="popover" data-placement="bottom" data-original-title="Notifications">
-                            <i class="fa fa-flag fa-lg"></i>&nbsp;
-                                @if (noteCount.ToString() != "0") { 
-                                    <span class="label label-danger">@noteCount</span>
-                                }
-                        </a>
-                        @*Notification popover content*@
-                        @if (Request.IsAuthenticated) { 
-                            <div class="hidden-content">
-                                @Html.Action("Notifications", "Communication")
-                            </div>
-                        }
-                    </li>
-                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-cog"></i>&nbsp;@User.Identity.Name
-                        <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="@Url.Action("Detail", "Profile")">Profile</a></li>
-                            <li>
-                                <a href="@Url.Action("Requests", "Communication")">Requests
-                                    <span class="badge pull-right">@Html.Action("RequestCount", "Communication")</span>
-                                </a>
-                            </li>
-                            <li><a href="@Url.Action("Settings", "Account")">Account settings</a></li>
-                            @Html.Action("NavLinks", "Admin")
-                            <li><a href="@Url.Action("SignOut", "Account")">Sign out</a></li>
-                        </ul>
-                    </li>
-                }
-                else {
-                    if (ViewBag.showSignin == true) {
-                    <li>
-                        <div class="navbar-form">
-                            @Html.Partial("inlineSignin")
-                        </div>
-                    </li>
-                    }
-                }
-            </ul>
-        </div>
+  <input type="hidden" id="navBarRefreshLink" value="@Url.Action("navigationBar", "Communication")" />
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="@Url.Action("index", "Home")">EARN MD CONNECT</a>
     </div>
-    <!-- /.navbar-collapse -->
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+      <ul class="nav navbar-nav">
+        @if (User.Identity.IsAuthenticated) {
+          <li><a href="@Url.Action("Basic", "Search")"><i class="fa fa-search"></i>&nbsp;Search for Organization</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-link"></i>&nbsp;Partnerships
+              <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="@Url.Action("MyPartnerships", "Partnership")">My Partnerships</a></li>
+              <li><a href="@Url.Action("Index", "Partnership")">Find Existing Partnerships</a></li>
+              <li><a href="@Url.Action("Create", "Partnership")">Create new Partnership Profile</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-plus"></i>&nbsp;More
+                            <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a target="_blank" href="http://www.earn.maryland.gov">EARN Maryland Website</a></li>
+              <li><a data-toggle="modal" href="#about">About EARN MD CONNECT</a></li>
+              <li><a href="@Url.Action("sendContactEarnEmail", "Communication")">Contact EARN MD</a></li>
+            </ul>
+          </li>
+        }
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-question"></i>&nbsp;Help
+                            <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="@Url.Action("sendTechnicalReportEmail", "Communication")">Report technical issues</a></li>
+            <li><a href="@Url.Action("sendFeedbackEmail", "Communication")">Website feedback</a></li>
+          </ul>
+        </li>
+      </ul>
+
+
+      <ul class="nav navbar-nav navbar-right">
+        @if (Request.IsAuthenticated) {
+
+          var noteCount = Html.Action("NotificationCount", "Communication"); 
+          <li>
+            <a href="#" data-toggle="popover" id="notifications" role="menuitem"
+              rel="popover" data-placement="bottom" data-original-title="Notifications">
+              <i class="fa fa-flag-o fa-lg"></i>&nbsp;
+                                @if (noteCount.ToString() != "0") { 
+                                  <span class="label label-danger">@noteCount</span>
+                                }
+            </a>
+            @*Notification popover content*@
+            @if (Request.IsAuthenticated) { 
+              <div class="hidden-content">
+                @Html.Action("Notifications", "Communication")
+              </div>
+            }
+          </li>
+          <li>
+            <a href="@Url.Action("Index", "Message")" title="Messages"><i class="fa fa-envelope-o"></i></a>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+               @User.Identity.Name
+              <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="@Url.Action("Detail", "Profile")">Profile</a></li>
+              <li>
+                <a href="@Url.Action("Requests", "Communication")">Requests
+                                    <span class="badge pull-right">@Html.Action("RequestCount", "Communication")</span>
+                </a>
+              </li>
+              <li><a href="@Url.Action("Settings", "Account")">Account settings</a></li>
+              @Html.Action("NavLinks", "Admin")
+              <li><a href="@Url.Action("SignOut", "Account")">Sign out</a></li>
+            </ul>
+          </li>
+        }
+        else {
+          if (ViewBag.showSignin == true) {
+          <li>
+            <div class="navbar-form">
+              @Html.Partial("inlineSignin")
+            </div>
+          </li>
+          }
+        }
+      </ul>
+    </div>
+  </div>
+  <!-- /.navbar-collapse -->
 
 </div>
 
 <!-- Modal -->
 <div class="modal fade" id="about" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">About EARN MD CONNECT</h4>
-            </div>
-            <div class="modal-body">
-                @Html.Partial("aboutTextPartial")
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">About EARN MD CONNECT</h4>
+      </div>
+      <div class="modal-body">
+        @Html.Partial("aboutTextPartial")
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
     </div>
-    <!-- /.modal-dialog -->
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->

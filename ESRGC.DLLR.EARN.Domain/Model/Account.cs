@@ -15,11 +15,12 @@ namespace ESRGC.DLLR.EARN.Domain.Model
       AccountID = 0;
       Active = true;
       Notifications = new List<Notification>();
-      SentRequests = new List<Request>();
-      ReceivedRequests = new List<Request>();
+      SentProfileRequests = new List<ProfileRequest>();
+      ReceivedProfileRequests = new List<ProfileRequest>();
       EmailVerified = false;
       VerificationCode = Helpers.Utility.RandomString(30);
       InitialPassword = Utility.RandomString(8);
+      IsProfileOwner = false;
     }
 
     public int AccountID { get; set; }
@@ -63,12 +64,15 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public virtual Profile Profile { get; set; }
 
     public virtual ICollection<Notification> Notifications { get; set; }
-    public virtual ICollection<Request> SentRequests { get; set; }
-    public virtual ICollection<Request> ReceivedRequests { get; set; }
+    public virtual ICollection<ProfileRequest> SentProfileRequests { get; set; }
+    public virtual ICollection<ProfileRequest> ReceivedProfileRequests { get; set; }
 
     public bool EmailVerified { get; set; }
     public string VerificationCode { get; set; }
-
+    /// <summary>
+    /// indicates this account is verified with the associated profile 
+    /// </summary>
+    public bool IsProfileOwner { get; set; }
     public void newVerificationCode() {
       VerificationCode = Helpers.Utility.RandomString(30);
     }

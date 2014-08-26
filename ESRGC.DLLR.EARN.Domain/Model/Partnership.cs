@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 
@@ -39,13 +40,9 @@ namespace ESRGC.DLLR.EARN.Domain.Model
       set { _description = value; LastUpdate = DateTime.Now; }
     }
 
-    //[Required]
-    //[MaxLength(100, ErrorMessage = "100 maximum characters allowed")]
-
-    //public string GrantStatus {
-    //  get { return _grantStatus; }
-    //  set { _grantStatus = value; LastUpdate = DateTime.Now; }
-    //}
+    public int? PictureID { get; set; }
+    [ForeignKey("PictureID")]
+    public virtual Picture Logo { get; set; }
 
 
     public DateTime Created { get; set; }
@@ -65,16 +62,21 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public List<Profile> getAllPartners() {
       return PartnershipDetails.Select(x => x.Profile).ToList();
     }
-    public Profile getOwner() {
+    public List<Profile> getOwners() {
       try {
         return PartnershipDetails
            .Where(x => x.Type.ToLower() == "owner")
            .Select(x => x.Profile)
-           .First();
+           .ToList();
       }
       catch (Exception) {
         return null;
       }
+    }
+    public string getOwnerNames() {
+      var owners = this.getOwners().ToList();
+      var names = owners.Select(x => x.Organization.Name).ToArray();
+      return string.Join(",", names);
     }
     public List<Profile> getPartners() {
       return PartnershipDetails

@@ -2,22 +2,45 @@
 @model ESRGC.DLLR.EARN.Domain.Model.Profile
 
 @{
-    ViewBag.Title = "Profile";
-    ViewBag.Header = "Profile";
+  ViewBag.Title = "Organizational Profile";
+  ViewBag.Header = "Organizational Profile";
 }
 
 @section header{
-    <div class="container">
-        <header class="page-header">
-            <h3>@ViewBag.Header <i class="fa  fa-briefcase"></i></h3>
-            @*<ul class="breadcrumb">
+  <div class="container">
+    <header class="page-header">
+      <h3>@ViewBag.Header <i class="fa  fa-briefcase"></i></h3>
+      @*<ul class="breadcrumb">
                 <li><a href="@Url.Action("index", "Home")">Home</a></li>
                 <li class="active">@ViewBag.Header</li>
             </ul>*@
-        </header>
-    </div>
+    </header>
+  </div>
 }
 
 <div class="container">
-   
+  <div class="row">
+
+    <div class="col-md-8 col-md-offset-2">
+      <div class="well">
+        <h3>Welcome to EARN MD CONNECT!</h3>
+        <p class="">
+          Thank you for signing up with EARN MD CONNECT! Please create a new or join an existing organizational profile.
+          After creating/joining a profile, you will be able to:
+        </p>
+        <ul class="">
+          <li>Search for partners and partnerships.</li>
+          <li>Create/Join partnerships.</li>
+          <li>Communicate with other organizations via messaging.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <a class="btn btn-default btn-lg" href="@Url.Action("Create")">Create New Profile</a>
+      <a class="btn btn-default btn-lg" href="@Url.Action("find")">Join Existing Profile</a>.
+    </div>
+  </div>
 </div>

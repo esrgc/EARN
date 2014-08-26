@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity.Spatial;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -10,8 +11,9 @@ using ESRGC.DLLR.EARN.Filters;
 using ESRGC.GIS.Geocoding;
 using ESRGC.GIS.Utilities;
 
+
 namespace ESRGC.DLLR.EARN.Controllers
-{  
+{
   public class BaseController : Controller
   {
     protected IWorkUnit _workUnit = null;
@@ -25,8 +27,7 @@ namespace ESRGC.DLLR.EARN.Controllers
         return _workUnit;
       }
     }
-
-    [Authorize]
+    [AllowNonProfile]
     public ActionResult ProfilePicture(int pictureId) {
       try {
         var pic = _workUnit.PictureRepository.GetEntityByID(pictureId);
@@ -34,10 +35,63 @@ namespace ESRGC.DLLR.EARN.Controllers
         return File(pic.ImageData, pic.ImageMimeType);
       }
       catch (Exception) {
-        return null;
+        var physicalPath = Server.MapPath("~/Client/images/default-logo.png");
+
+        using (var fileStream = System.IO.File.OpenRead(physicalPath)) {
+          var data = new byte[fileStream.Length];
+          var buffer = fileStream.Read(data, 0, (int)fileStream.Length);
+          return File(data, "image/png");
+        }
       }
     }
+    [AllowNonProfile]
+    public ActionResult ProfileLogo(int id) {
+      var profile = _workUnit.ProfileRepository.GetEntityByID(id);
+      if (profile == null)
+        return new EmptyResult();
+      if (profile.ProfilePicture != null) {
+        try {
+          var pic = profile.ProfilePicture;
+          return File(pic.ImageData, pic.ImageMimeType);
+        }
+        catch (Exception) {
+          return null;
+        }
+      }
+      else{
+        var physicalPath = Server.MapPath("~/Client/images/default-logo.png");
+        
+        using (var fileStream = System.IO.File.OpenRead(physicalPath)) { 
+          var data = new byte[fileStream.Length];
+          var buffer = fileStream.Read(data, 0, (int)fileStream.Length);
+          return File(data, "image/png");
+        }
+      }
+    }
+    [AllowNonProfile]
+    public ActionResult PartnershipLogo(int id) {
+      var partnership = _workUnit.PartnershipRepository.GetEntityByID(id);
+      if (partnership == null)
+        return new EmptyResult();
+      if (partnership.Logo != null) {
+        try {
+          var pic = partnership.Logo;
+          return File(pic.ImageData, pic.ImageMimeType);
+        }
+        catch (Exception) {
+          return null;
+        }
+      }
+      else {
+        var physicalPath = Server.MapPath("~/Client/images/empty-partnership-logo.png");
 
+        using (var fileStream = System.IO.File.OpenRead(physicalPath)) {
+          var data = new byte[fileStream.Length];
+          var buffer = fileStream.Read(data, 0, (int)fileStream.Length);
+          return File(data, "image/png");
+        }
+      }
+    }
     //////////////////////////
     //helpers 
     ///////////////////////
@@ -155,6 +209,11 @@ namespace ESRGC.DLLR.EARN.Controllers
       else {
         return Redirect(defaultUrl);
       }
+    }
+
+    protected bool notifyProfile(Notification notification) {
+      //notification.
+      return true;
     }
   }
 }

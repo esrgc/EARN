@@ -1,0 +1,83 @@
+﻿@using ESRGC.DLLR.EARN.Domain.Model
+@model Profile
+@{
+    //var filters = (ViewBag.filters as Dictionary<string, object>) ?? new Dictionary<string, object>();
+    //var currentTags = filters.ContainsKey("tags") ? filters["tags"] as List<string> : new List<string>();
+    var geoTag = Model.getGeoTag();
+    var location = geoTag == null ? "" : geoTag.Geometry.WellKnownValue.WellKnownText;
+    //var currentAccount = ViewBag.currentAccount as Account ?? new Account();
+    var currentProfile = ViewBag.currentProfile as Profile ?? new Profile();
+    var returnUrl = ViewBag.returnUrl as string ?? "";
+    var isOwnProfile = currentProfile.ProfileID == Model.ProfileID;
+}
+<section id="profile-@Model.ProfileID"  class="profile-section"
+    data-location="@location" 
+    data-organization="@Model.Organization.Name"
+    data-profileUrl = "@Url.Action("ViewProfile", "Profile", new { Model.ProfileID, returnUrl })">
+    <div class="row">
+        <div class="col-sm-12 ">
+            <div class="post">
+                <div class="inline-container profile-area">
+                    <div class="profile-picture">
+                        @if (Model.PictureID != null) { 
+                            <img class="img-thumbnail" src="@Url.Action("ProfilePicture", new { pictureId = Model.PictureID })"
+                                alt="Logo not loaded"/>
+                        }
+                        else {
+                            <img class="img-thumbnail" src="@Url.Content("~/Client/images/default-logo.png")"/>
+                        }
+
+                    </div>
+                    <div class="row profile-container">
+                        <div class="col-sm-12">
+                            <div class="">
+                                <h4>
+                                    @if (isOwnProfile) {
+                                        <span>
+                                                @Model.Organization.Name
+                                        </span>
+                                    }
+                                    else { 
+                                        <span>
+                                                @Model.Organization.Name
+                                        </span>
+                                    }
+                                    <br />
+                                    <small>@Model.UserGroup.Name</small>
+                                    @*-
+                                    <small>@Model.Category.Name</small>*@
+                                    <br />
+                                    <small>
+                                        <a target="_blank" href="@Model.Organization.Website.ToAbsoluteUrl("http://")" title="Organization website">
+                                            @Model.Organization.Website.RemoveProtocol()
+                                        </a>
+                                    </small>
+                                </h4>
+
+                                @if (Model.Organization.Description.Length > 160) { 
+                                    <p>
+                                        @Model.Organization.Description.Substring(0, 160)
+                                        ...
+                                    </p>
+                                }
+                                else {
+                                    <p>@Model.Organization.Description</p>
+                                }
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="help-block"><i class="fa fa-tags"></i>&nbsp;Tags</div>
+                            <div class="placeholder-panel">
+                                @if (Model.ProfileTags != null) {
+                                    @Html.Partial("tagListDisplayPartial", Model.getTagNames())
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+
+            </div>
+        </div>
+    </div>
+</section>

@@ -31,7 +31,7 @@ namespace ESRGC.DLLR.EARN.Filters
         }
       }
       catch (Exception) {
-        filterContext.Controller.TempData["Message"] = "Error verifying partnership with current profile.";
+        filterContext.Controller.TempData["Message"] = "Error verifying partnership with current partnership.";
         filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary() { 
           {"controller", "Home"},
           {"action", "Index"}

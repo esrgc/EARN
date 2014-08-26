@@ -17,8 +17,13 @@ textarea {
 address {
     margin-bottom: 0;
 }
-*[data-toggle='popover']{
+
+*[data-toggle='popover'] {
     cursor: pointer;
+}
+
+#quicktask {
+    padding-top: 10px;
 }
 #tagInput {
     border-top-right-radius: 4px;
@@ -186,6 +191,10 @@ a.link-icon, .link-icon-container a {
     button, a {
         min-width: 280px;
     }
+
+    span, small {
+        font-size: 85%;
+    }
 }
 
 .term-condition-container {
@@ -205,20 +214,42 @@ a.link-icon, .link-icon-container a {
     -ms-hyphens: auto;
     hyphens: auto;
 }
-.profile-list{
+
+.profile-list {
     max-height: 600px;
     overflow-y: auto;
     overflow-x: hidden;
 }
-.partnership-container{
+
+.partnership-container {
     a {
         text-decoration: none;
     }
+    .partnership-detail{
+        margin-left: 16%;
+    }
 }
-.partner-list-container{
+
+.partner-list-container {
     max-height: 400px;
     padding-left: 2px;
-    padding-right:2px;
+    padding-right: 2px;
     overflow-y: auto;
     overflow-x: hidden;
+}
+.overlay-container{
+    position: relative;
+    margin-bottom: 5px;
+}
+.overlay {
+    position: absolute;
+    z-index: 100;
+    &.top-right{
+        top: 5px;
+        right: 5px;
+    }
+    &.top-left{
+        top: 5px;
+        left: 5px;
+    }
 }

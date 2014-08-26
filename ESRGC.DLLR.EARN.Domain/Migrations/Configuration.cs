@@ -28,11 +28,37 @@ namespace ESRGC.DLLR.EARN.Domain.Migrations
       //      new person { fullname = "rowan miller" }
       //    );
       //
+      //this is to seed the existing accounts' data when added isprofileOwner to the table
+      //no need to run this again
+      //foreach (var i in context.Profiles) {
+      //  if (i.Accounts.Count() == 1) {
+      //    i.Accounts.First().IsProfileOwner = true;
+      //  }
+      //}
+      //context.SaveChanges();
+      try {
+        var earnAdmin = context.Accounts.First(x => x.EmailAddress.ToLower() == "earn.jobs@maryland.gov");
+        earnAdmin.Role = "admin";
+        context.Accounts.AddOrUpdate(earnAdmin);
+        context.SaveChanges();
+      }
+      catch { 
+        //skip
+      }
+      //set account owners when there's only 1 account in the profile for migration
+      context.Profiles.Where(x => x.Accounts.Count() == 1).ToList()
+        .ForEach(x =>{
+          var account = x.getAccount();
+          account.IsProfileOwner = true;
+          context.Accounts.AddOrUpdate(account);
+        });
+      context.SaveChanges();
 
       //context.UserGroups.RemoveRange(context.UserGroups.ToList());
       //context.Communities.RemoveRange(context.Communities.ToList());
       if (context.Tags.Count() == 0) {
         context.Tags.AddOrUpdate(
+          x=>x.Name,
         new Tag { Name = "Career Planning".ToUpper() },
         new Tag { Name = "Community Organization".ToUpper() },
         new Tag { Name = "Economic Development".ToUpper() },
@@ -100,6 +126,7 @@ namespace ESRGC.DLLR.EARN.Domain.Migrations
       };
       if (context.UserGroups.Count() == 0) {
         context.UserGroups.AddOrUpdate(
+          x=>x.Name,
           new UserGroup { Name = "Industry", Description = "e.g. Industry Associations, Employers, Chambers of Commerce" },
           new UserGroup { Name = "Education and Training", Description = "e.g. Two- and Four-Year Institutions of Higher Education, Apprenticeship programs, K-12 programs" },
           new UserGroup { Name = "Workforce and Economic Development and Local Governmental Entities", Description = "" },
@@ -111,6 +138,7 @@ namespace ESRGC.DLLR.EARN.Domain.Migrations
       }
       if (context.Categories.Count() == 0) {
         context.Categories.AddOrUpdate(
+          x=>x.Name,
           new Category { Name = "Accommodation and Food Services", UserGroupID = 1 },
           new Category { Name = "Administrative and Support Services", UserGroupID = 1 },
           new Category { Name = "Agriculture, Forestry, Fishing, and Hunting", UserGroupID = 1 },
@@ -150,6 +178,7 @@ namespace ESRGC.DLLR.EARN.Domain.Migrations
           new Category { Name = "Other" }
 
         );
+        context.SaveChanges();
       }
     }
   }

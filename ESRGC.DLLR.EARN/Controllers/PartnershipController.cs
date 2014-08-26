@@ -264,14 +264,16 @@ but should not be used to share proprietary or sensitive content.",
           .Where(x => x.ProfileID != currentProfile.ProfileID)
           .ToList()
           .ForEach(x => {
-            //notifications
-            var notification = new Notification {
-              Account = x.getAccount(),
-              Category = "Partnership Update",
-              Message = currentProfile.Organization.Name + " has left the \"" + partnership.Name + "\" partnership.",
-              LinkToAction = Url.Action("Detail", new { partnershipID })
-            };
-            _workUnit.NotificationRepository.InsertEntity(notification);
+            x.Accounts.ToList().ForEach(a => {
+              //notifications
+              var notification = new Notification {
+                Account = a,
+                Category = "Partnership Update",
+                Message = currentProfile.Organization.Name + " has left the \"" + partnership.Name + "\" partnership.",
+                LinkToAction = Url.Action("Detail", new { partnershipID })
+              };
+              _workUnit.NotificationRepository.InsertEntity(notification);
+            });
           });
 
         _workUnit.saveChanges();
@@ -291,7 +293,7 @@ but should not be used to share proprietary or sensitive content.",
       var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
       var profile = _workUnit.ProfileRepository.GetEntityByID(profileID);
       if (profile == null) {
-        updateTempMessage("Invalid profile ID");
+        updateTempMessage("Invalid partnership ID");
         return RedirectToAction("Detail", new { partnershipID });
       }
       ViewBag.profile = profile;
@@ -350,34 +352,34 @@ but should not be used to share proprietary or sensitive content.",
       return returnToUrl(returnUrl, Url.Action("Detail", new { partnershipID }));
     }
 
-    [NewToPartnership]
-    [HasReturnUrl]
-    public ActionResult ContactAdmin(int partnershipID, string returnUrl) {
-      var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
-      return View(partnership);
-    }
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    [NewToPartnership]
-    [SendMessaage]
-    public ActionResult ContactAdmin(int partnershipID, string message, string returnUrl) {
-      var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
-      var currentProfile = CurrentAccount.Profile;
-      //create a message
-      var m = new Message {
-        Sender = currentProfile,
-        Receiver = partnership.getOwner(),
-        Title = "Partnership Message",
-        Header = currentProfile.Organization.Name + " has sent you a message",
-        Message1 = "This message is regarding the \"" + partnership.Name + "\" partnership.",
-        Message2 = message
-      };
-      _workUnit.MessageRepository.InsertEntity(m);
-      _workUnit.saveChanges();
-      updateTempMessage("Your message has been sent to the Administrator. A copy of this message was also emailed to you via"
-        + " your contact email (" + currentProfile.Contact.Email + ").");
-      return RedirectToAction("View", new { partnershipID, returnUrl });
-    }
+    //[NewToPartnership]
+    //[HasReturnUrl]
+    //public ActionResult ContactAdmin(int partnershipID, string returnUrl) {
+    //  var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
+    //  return View(partnership);
+    //}
+    //[HttpPost]
+    //[ValidateAntiForgeryToken]
+    //[NewToPartnership]
+    //[SendMessaage]
+    //public ActionResult ContactAdmin(int partnershipID, string message, string returnUrl) {
+    //  var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
+    //  var currentProfile = CurrentAccount.Profile;
+    //  //create a message
+    //  var m = new Message {
+    //    Sender = currentProfile,
+    //    Receiver = partnership.getOwners(),
+    //    Title = "Partnership Message",
+    //    Header = currentProfile.Organization.Name + " has sent you a message",
+    //    Message1 = "This message is regarding the \"" + partnership.Name + "\" partnership.",
+    //    Message2 = message
+    //  };
+    //  _workUnit.MessageRepository.InsertEntity(m);
+    //  _workUnit.saveChanges();
+    //  updateTempMessage("Your message has been sent to the Administrator. A copy of this message was also emailed to you via"
+    //    + " your contact email (" + currentProfile.Contact.Email + ").");
+    //  return RedirectToAction("View", new { partnershipID, returnUrl });
+    //}
 
     public ActionResult MyPartnerships() {
       return View();
@@ -387,6 +389,152 @@ but should not be used to share proprietary or sensitive content.",
     }
     public ActionResult InvalidPartnershipRequest() {
       return View();
+    }
+    [CanEditPartnership]
+    public ActionResult MakeAdmin(int profileId, int partnershipID) {
+      var profile = _workUnit.ProfileRepository.GetEntityByID(profileId);
+      if (profile == null) {
+        updateTempMessage("Invalid organization partnership");
+        return RedirectToAction("Detail", new { partnershipID });
+      }
+      var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
+      if (partnership == null) {
+        updateTempMessage("Invalid Partnership partnership");
+        return RedirectToAction("Detail", new { partnershipID });
+      }
+      ViewBag.profile = profile;
+      ViewBag.partnership = partnership;
+      return View();
+    }
+
+    [HttpPost]
+    [CanEditPartnership]
+    [SendNotification]
+    [ActionName("MakeAdmin")]
+    public ActionResult MakeAdminPost(int profileId, int partnershipID) {
+      var currentProfile = CurrentAccount.Profile;
+      var partnershipDetail = currentProfile.PartnershipDetails.First(x => x.PartnershipID == partnershipID);
+      //make current profile 
+      //partnershipDetail.Type = "partner";
+      //_workUnit.PartnershipDetailRepository.UpdateEntity(partnershipDetail);
+      //now look for the new admin 
+      try {
+        var newAdmin = _workUnit.PartnershipDetailRepository
+            .Entities
+            .First(x => x.ProfileID == profileId && x.PartnershipID == partnershipID);
+        newAdmin.Type = "Owner";
+        _workUnit.PartnershipDetailRepository.UpdateEntity(newAdmin);
+
+        //get the new admin's profile
+        var profile = _workUnit.ProfileRepository.GetEntityByID(profileId);
+        profile.Accounts.ToList().ForEach(x => {
+          //create notification
+          var notif = new Notification() {
+            Account = x,
+            Category = "Partnership Admin Assigned",
+            Message = string.Format("{0} has assigned your organization to be the administrator of the {1} partnership.",
+              currentProfile.Organization.Name,
+              partnershipDetail.Partnership.Name
+            ),
+            Message2 = "You can now edit the partnership status and details, delete the partnerhsip partnership, approve new partners, and invite organizations to join the partnership.",
+            LinkToAction = Url.Action("Detail", new { partnershipID })
+          };
+          _workUnit.NotificationRepository.InsertEntity(notif);
+        });
+        //done now save to the database
+        _workUnit.saveChanges();
+        return RedirectToAction("Detail", new { partnershipID });
+      }
+      catch {
+
+        updateTempMessage("Error retreiving partnership information for partnership id " + profileId + ".");
+        return RedirectToAction("Detail", new { partnershipID });
+      }
+
+    }
+
+    [CanEditPartnership]
+    public ActionResult RemoveAdmin(int profileId, int partnershipID) {
+      var profile = _workUnit.ProfileRepository.GetEntityByID(profileId);
+      if (profile == null) {
+        updateTempMessage("Invalid organization partnership");
+        return RedirectToAction("Detail", new { partnershipID });
+      }
+      var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
+      if (partnership == null) {
+        updateTempMessage("Invalid Partnership partnership");
+        return RedirectToAction("Detail", new { partnershipID });
+      }
+
+      if (partnership.getOwners().Count == 1) {
+        updateTempMessage("You are the only admin in this partnership. Please assign another organization to be an admin before removing your admin privilege");
+        return RedirectToAction("Detail", new { partnershipID });
+      }
+
+      ViewBag.profile = profile;
+      ViewBag.partnership = partnership;
+      return View();
+    }
+
+    [HttpPost]
+    [CanEditPartnership]
+    [ActionName("RemoveAdmin")]
+    public ActionResult RemoveAdminPost(int profileId, int partnershipID) {
+      var currentProfile = CurrentAccount.Profile;
+      var partnershipDetail = currentProfile.PartnershipDetails.First(x => x.PartnershipID == partnershipID);
+     
+      try {
+       
+        //make current profile 
+        partnershipDetail.Type = "partner";
+        _workUnit.PartnershipDetailRepository.UpdateEntity(partnershipDetail);
+       
+        //done now save to the database
+        _workUnit.saveChanges();
+
+        return RedirectToAction("Detail", new { partnershipID });
+      }
+      catch {
+
+        updateTempMessage("Error retreiving partnership information for partnership id " + profileId + ".");
+        return RedirectToAction("Detail", new { partnershipID });
+      }
+
+    }
+
+    [CanEditPartnership]
+    public ActionResult UploadImage(int partnershipID) {
+      var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
+      if (partnership == null)
+        return RedirectToAction("Detail");
+      return View(partnership);
+    }
+    [HttpPost]
+    [CanEditPartnership]
+    public ActionResult UploadImage(int partnershipID, HttpPostedFileBase dataInput) {
+      var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
+      if (dataInput == null)
+        ModelState.AddModelError("", "No data input. Please select a file to upload");
+      else {
+        var picture = new Picture() {
+          ImageMimeType = dataInput.ContentType,
+          ImageData = new byte[dataInput.ContentLength]
+        };
+        //read the input stream and store to picture object 
+        dataInput.InputStream.Read(picture.ImageData, 0, dataInput.ContentLength);
+
+        //store picture to database
+        _workUnit.PictureRepository.InsertEntity(picture);
+        if (partnership.PictureID != null)//delete current picture
+          _workUnit.PictureRepository.DeleteByID(partnership.PictureID);
+        partnership.PictureID = picture.PictureID;
+        _workUnit.PartnershipRepository.UpdateEntity(partnership);
+        _workUnit.saveChanges();
+        //changes done return to detail page
+        return RedirectToAction("Detail", new { partnershipID });
+      }
+      //error has occurred   
+      return View(partnership);
     }
   }
 }

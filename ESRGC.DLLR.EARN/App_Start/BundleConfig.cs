@@ -50,6 +50,15 @@ namespace ESRGC.DLLR.EARN
         "~/Client/dllrcontent/javascript/*.js",
         "~/Client/dllrcontent/scripts/*.js"
       ));
+
+      //message center
+      bundles.Add(new ScriptBundle("~/bundles/messageCenter").Include(
+        "~/Client/apps/message/model/*.js",
+        "~/Client/apps/message/collection/*.js",
+        "~/Client/apps/message/router/*.js",
+        "~/Client/apps/message/view/*.js",
+        "~/Client/apps/message/*.js"
+      ));
       //////////////////////////////////////////////////////////////////////////////
       //css bundles
       //////////////////////////////////////////////////////////////////////////////

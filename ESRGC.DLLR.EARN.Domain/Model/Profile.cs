@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.Spatial;
 using System.Linq;
 using System.Text;
@@ -14,9 +15,12 @@ namespace ESRGC.DLLR.EARN.Domain.Model
       Connections = new List<Profile>();
       ProfileTags = new List<ProfileTag>();
       PartnershipDetails = new List<PartnershipDetail>();
+      Accounts = new List<Account>();
       Comments = new List<Comment>();
       SentMessages = new List<Message>();
       ReceivedMessages = new List<Message>();
+      SentRequests = new List<Request>();
+      ReceivedRequests = new List<Request>();
     }
 
     /// <summary>
@@ -45,7 +49,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public DateTime? LastUpdate { get; set; }
     [Display(Description = "Describe why your organization is interested in EARN MD (i.e., what you would bring to a Partnership and/or what you hope to gain).  What you provide here will be visible to other EARN MD CONNECT users when searching for potential partners.")]
     public string About { get; set; }
-
+       
     //navigation properties
     public virtual ICollection<ProfileTag> ProfileTags { get; set; }
     public virtual ICollection<Profile> Connections { get; set; }
@@ -54,7 +58,9 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public virtual ICollection<Comment> Comments { get; set; }
     public virtual ICollection<Message> SentMessages { get; set; }
     public virtual ICollection<Message> ReceivedMessages { get; set; }
-
+    public virtual ICollection<MessageBoard> MessageBoards { get; set; }
+    public virtual ICollection<Request> SentRequests { get; set; }
+    public virtual ICollection<Request> ReceivedRequests { get; set; }
     //helpers
     public bool isOwnerOfPartnership(Partnership partnership) {
       return isOwnerOfPartnership(partnership.PartnershipID);
@@ -71,18 +77,21 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     /// </summary>
     public bool deleteDetails() {
       try {
-        foreach (var c in Connections)
-          Connections.Remove(c);
-        foreach (var pt in ProfileTags)
-          ProfileTags.Remove(pt);
-        foreach (var pd in PartnershipDetails)
+        foreach (var c in Connections.ToList())
+          Connections.Remove(c);        
+        foreach (var pd in PartnershipDetails.ToList())
           PartnershipDetails.Remove(pd);
-        foreach (var cm in Comments)
+        foreach (var cm in Comments.ToList())
           Comments.Remove(cm);
-        foreach (var sm in SentMessages)
-          SentMessages.Remove(sm);
-        foreach (var rm in ReceivedMessages)
-          ReceivedMessages.Remove(rm);
+        //foreach (var sm in SentMessages.ToList())
+        //  SentMessages.Remove(sm);
+        foreach (var mb in MessageBoards.ToList())
+          MessageBoards.Remove(mb);
+
+        foreach (var account in Accounts.ToList()) {
+          account.ProfileID = null;
+          account.Profile = null;
+        }
         return true;
       }
       catch (Exception) {
@@ -90,12 +99,12 @@ namespace ESRGC.DLLR.EARN.Domain.Model
       }
     }
     /// <summary>
-    /// Gets the account associated with this profile
+    /// Gets the first account associated with this profile (profile owner)
     /// </summary>
     /// <returns></returns>
     public Account getAccount() {
       try {
-        return Accounts.First();
+        return Accounts.First(x=>x.IsProfileOwner);
       }
       catch (Exception) {
         return null;
@@ -193,6 +202,18 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     }
     public int partnershipCount() {
       return PartnershipDetails.Count();
+    }
+
+    public List<Conversation> getConversations() {
+      try {
+        return this.MessageBoards.Select(x => x.Conversation).ToList();
+      }
+      catch {
+        return new List<Conversation>();//return a new empty list
+      }
+    }
+    public bool hasConversations() {
+      return (MessageBoards.Count() > 0);
     }
   }
 }

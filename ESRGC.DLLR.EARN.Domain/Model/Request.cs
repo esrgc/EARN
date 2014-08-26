@@ -17,13 +17,11 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public string Status { get; set; }
 
     public int SenderID { get; set; }
-    public virtual Account Sender { get; set; }
+    public virtual Profile Sender { get; set; }
     public int ReceiverID { get; set; }
-    public virtual Account Receiver { get; set; }
+    public virtual Profile Receiver { get; set; }
 
-    public int NotificationID { get; set; }
-    public virtual Notification Notification { get; set; }
-
+    
     public DateTime Created { get; set; }
   }
 }

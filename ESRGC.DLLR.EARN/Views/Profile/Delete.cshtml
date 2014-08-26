@@ -1,0 +1,34 @@
+﻿@{
+  ViewBag.Title = "Delete";
+}
+
+@section header{
+}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="window-panel">
+        <div class="window-panel-title">
+          <strong>Delete Profile</strong>
+        </div>
+        <div class="window-panel-content">
+          <form class="form-horizontal" method="post" action="@Url.Action("Delete")">
+            <div class="alert alert-warning">
+              <strong>Are you sure you want to delete your organization profile?</strong>
+              Your account will still remain active. And, you can either join an existing
+              organizational profile or create a new one after your profile is deleted.
+            </div>
+            <div class="form-group">
+              <div class="col-md-8 col-md-offset-4">
+                <button class="btn btn-danger" type="submit">Confirm</button>
+                <a class="btn btn-default" href="@Url.Action("Settings", "Account")">Cancel</a>
+              </div>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

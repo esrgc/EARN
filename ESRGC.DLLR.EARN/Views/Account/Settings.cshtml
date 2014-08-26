@@ -3,89 +3,93 @@
 @model Account
 
 @{
-    ViewBag.Title = "Account";
-    ViewBag.Header = "Account Settings";
+  ViewBag.Title = "Account";
+  ViewBag.Header = "Account Settings";
 }
 @section header{
-    <div class="container">
-        <header class="page-header">
-            <h3>@ViewBag.Header <i class="fa fa-cogs"></i></h3>
-            @*<ul class="breadcrumb">
+  <div class="container">
+    <header class="page-header">
+      <h3>@ViewBag.Header <i class="fa fa-cogs"></i></h3>
+      @*<ul class="breadcrumb">
                 <li><a href="@Url.Action("index", "Home")">Home</a></li>
                 <li class="active">@ViewBag.Header</li>
             </ul>*@
-        </header>
-    </div>
+    </header>
+  </div>
 }
 
 <div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="window-panel">
-                <div class="window-panel-title">
-                    <strong>@Model.EmailAddress</strong>
-                </div>
-                <div class="window-panel-content">
-                    <div class="list-container">
-                        <ul class="list-unstyled">
-                            <li>
-                                <span>
-                                    Email Address&nbsp;
-                                    <a href="@Url.Action("ChangeSignInEmail", "Account")" title="Change Email">
-                                        <i class="fa fa-pencil"></i>
-                                    </a>
-                                </span>
-                               
-                                @if (Model.EmailVerified) { 
-                                    <span class="pull-right label label-success">
-                                        <i class="fa fa-check"></i>
-                                        Verified
-                                    </span>
-                                }
-                                else {
-                                    <span class="pull-right label label-danger">
-                                        <i class="fa fa-times"></i>
-                                        Not Verified                                        
-                                    </span>
-                                    <a href="@Url.Action("ResendVerificationEmail", new { returnUrl = Url.Action("Settings") })">(Resend verification email)
-                                    </a>
-                                }
-                            </li>
-                            <li>
-                                <span>Password&nbsp;
-                                    <a href="@Url.Action("ChangePassword", "Account")" title="Change password">
-                                        <i class="fa fa-pencil"></i>
-                                    </a>
-                                </span>
-                                <span class="pull-right">********</span>
-                            </li>
-                            <li>
-                                <span>Member since</span>
-                                <span class="pull-right">@Model.MemberSince.Value.ToShortDateString()</span>
-                            </li>
-                            <li>
-                                <span>Last login</span>
-                                <span class="pull-right">@Model.LastLogin.Value.ToShortDateString()</span>
-                            </li>
-                            <li>
-                                <span>Profile</span>
-                                @if (Model.Profile == null) { 
-                                    <span class="pull-right">Not created.
-                                        <a href="@Url.Action("Create", "Profile")">Click here to create profile</a>
-                                    </span>
-                                }
-                                else {
-                                    <span class="pull-right">
-                                        <a href="@Url.Action("Detail", "Profile", new { Model.ProfileID })">
-                                            @Model.Profile.Organization.Name
-                                        </a>
-                                    </span>
-                                }
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="window-panel">
+        <div class="window-panel-title">
+          <strong>@Model.EmailAddress</strong>
         </div>
+        <div class="window-panel-content">
+          <div class="list-container">
+            <ul class="list-unstyled">
+              <li>
+                <span>Email Address&nbsp;
+                                    <a href="@Url.Action("ChangeSignInEmail", "Account")" title="Change Email">
+                                      <i class="fa fa-pencil"></i>
+                                    </a>
+                </span>
+
+                @if (Model.EmailVerified) { 
+                  <span class="pull-right label label-success">
+                    <i class="fa fa-check"></i>
+                    Verified
+                  </span>
+                }
+                else {
+                  <span class="pull-right label label-danger">
+                    <i class="fa fa-times"></i>
+                    Not Verified                                        
+                  </span>
+                  <a href="@Url.Action("ResendVerificationEmail", new { returnUrl = Url.Action("Settings") })">(Resend verification
+                    email)
+                  </a>
+                }
+              </li>
+              <li>
+                <span>Password&nbsp;
+                                    <a href="@Url.Action("ChangePassword", "Account")" title="Change password">
+                                      <i class="fa fa-pencil"></i>
+                                    </a>
+                </span>
+                <span class="pull-right">********</span>
+              </li>
+              <li>
+                <span>Member since</span>
+                <span class="pull-right">@Model.MemberSince.Value.ToShortDateString()</span>
+              </li>
+              <li>
+                <span>Last login</span>
+                <span class="pull-right">@Model.LastLogin.Value.ToShortDateString()</span>
+              </li>
+              <li>
+                <span>Profile</span>
+
+                @if (Model.Profile == null) { 
+                  <span class="pull-right">Not created.
+                                        <a href="@Url.Action("Create", "Profile")">Click here to create profile</a>
+                  </span>
+                }
+                else {
+                  if (Model.IsProfileOwner) { 
+                    <a href="@Url.Action("Delete", "Profile")">(Delete profile)</a>
+                  }
+                  <span class="pull-right">
+                    <a href="@Url.Action("Detail", "Profile", new { Model.ProfileID })">
+                      @Model.Profile.Organization.Name
+                    </a>
+                  </span>
+                }
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>

@@ -9,7 +9,7 @@ using ESRGC.DLLR.EARN.Filters;
 
 namespace ESRGC.DLLR.EARN.Controllers
 {
-  [Authorize]  
+  [Authorize]
   public class DocumentController : BaseController
   {
     public DocumentController(IWorkUnit workUnit) : base(workUnit) { }
@@ -50,14 +50,19 @@ namespace ESRGC.DLLR.EARN.Controllers
           .Where(x => x.ProfileID != CurrentAccount.ProfileID)
           .ToList()
           .ForEach(x => {
-          var notification = new Notification {
-            Account = x.getAccount(),
-            Category = "Document Uploaded",
-            LinkToAction = Url.Action("Detail", "Partnership", new { partnershipID }),
-            Message = CurrentAccount.Profile.Organization.Name + " has uploaded a new document (" + document.Name + ")."
-          };
-          _workUnit.NotificationRepository.InsertEntity(notification);
-        });
+            x.Accounts
+              .ToList()
+              .ForEach(account => {
+                var notification = new Notification {
+                  Account = account,
+                  Category = "Document Uploaded",
+                  LinkToAction = Url.Action("Detail", "Partnership", new { partnershipID }),
+                  Message = CurrentAccount.Profile.Organization.Name + " has uploaded a new document (" + document.Name + ")."
+                };
+                _workUnit.NotificationRepository.InsertEntity(notification);
+              }
+           );
+          });
 
         _workUnit.saveChanges();
         updateTempMessage("Document uploaded successfully.");
@@ -91,21 +96,25 @@ namespace ESRGC.DLLR.EARN.Controllers
       }
       else {
         _workUnit.DocumentRepository.DeleteEntity(document);
-        
+
         var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
         //notify partners
         partnership.getAllPartners()
-          .Where(x=>x.ProfileID != CurrentAccount.ProfileID)
+          .Where(x => x.ProfileID != CurrentAccount.ProfileID)
           .ToList()
           .ForEach(x => {
-          var notification = new Notification {
-            Account = x.getAccount(),
-            Category = "Document Deleted",
-            LinkToAction = Url.Action("Detail", "Partnership", new { partnershipID }),
-            Message = CurrentAccount.Profile.Organization.Name + " has deleted a document (" + document.Name + ")."
-          };
-          _workUnit.NotificationRepository.InsertEntity(notification);
-        });
+            x.Accounts
+              .ToList()
+              .ForEach(account => {
+                var notification = new Notification {
+                  Account = account,
+                  Category = "Document Deleted",
+                  LinkToAction = Url.Action("Detail", "Partnership", new { partnershipID }),
+                  Message = CurrentAccount.Profile.Organization.Name + " has deleted a document (" + document.Name + ")."
+                };
+                _workUnit.NotificationRepository.InsertEntity(notification);
+              });
+          });
         _workUnit.saveChanges();
         updateTempMessage("Document deleted");
       }

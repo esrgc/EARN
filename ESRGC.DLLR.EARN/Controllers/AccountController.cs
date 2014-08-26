@@ -73,7 +73,7 @@ namespace ESRGC.DLLR.EARN.Controllers
             //redirect to create new user contact
             //verify email
             EmailHelper.SendVerificationEmail(newAccount);
-            return RedirectToAction("Create", "Profile");
+            return RedirectToAction("Index", "Profile");
           }
           catch (Exception ex) {
             ModelState.AddModelError("", "Error saving data to database. Please try again later. " + ex.Message);
@@ -132,7 +132,7 @@ namespace ESRGC.DLLR.EARN.Controllers
             return Redirect(returnUrl);
           }
           else {
-            return RedirectToAction("Detail", "Profile");
+            return RedirectToAction("Index", "Home");
           }
         }
         else
@@ -268,6 +268,7 @@ namespace ESRGC.DLLR.EARN.Controllers
         }
         if (account != null) {
           //set temp password
+          account.InitialPassword = ESRGC.DLLR.EARN.Domain.Helpers.Utility.RandomString(8);
           account.Password = SHA1PasswordSecurity.encrypt(account.InitialPassword);
           _workUnit.AccountRepository.UpdateEntity(account);
           _workUnit.saveChanges();

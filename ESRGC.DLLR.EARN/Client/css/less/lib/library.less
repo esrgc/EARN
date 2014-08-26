@@ -33,24 +33,21 @@
 .transparent-placeholder-panel {
     padding: 5px;
 }
-.panel-action-default {
+.panel-action {
     .panel-action;
+    position: relative;
+    &.right{
+        text-align: right;
+    }
+    &.left{
+        text-align: left;
+    }
+    &.center{
+         text-align: center;
+    }
 }
 
-.panel-action-right {
-    .panel-action;
-    text-align: right;
-}
 
-.panel-action-left {
-    .panel-action;
-    text-align: left;
-}
-
-.panel-action-center {
-    .panel-action;
-    text-align: center;
-}
 .placeholder-pane {
     padding: 15px;  
     background: @base-color;

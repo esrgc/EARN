@@ -1,0 +1,51 @@
+﻿@using ESRGC.DLLR.EARN.Domain.Model
+@model Partnership
+
+@{ 
+  var p = Model;
+  var partners = p.getPartners();
+  var owners = p.getOwners();
+  var currentProfile = ViewBag.currentProfile as Profile ?? new Profile();
+  var account = currentProfile.getAccount();
+  var requested = account
+      .Profile
+      .SentRequests
+      .Cast<PartnershipRequest>()
+      .Select(x => x.PartnershipID)
+      .Contains(Model.PartnershipID);
+
+  var returnUrl = ViewBag.returnUrl as string ?? "";
+  ViewBag.returnUrl = Url.Action("View", new { p.PartnershipID, returnUrl });
+  var messageUrl = Url.Action("index", "Message") + "#new/" + Model.getOwnerNames(); 
+}
+
+<div class="dropdown">
+  <a class="btn btn-primary btn-xs dropdown-toggle" href="#" data-toggle="dropdown">Actions&nbsp;<b class="caret"></b></a>
+
+  <ul class="dropdown-menu">
+    <li>
+      <a title="Contact this partnership's admin" href="@messageUrl" class="">
+        <i class="fa fa-envelope"></i>&nbsp;Contact Partnership
+      </a>
+    </li>
+    <li>
+      @if (currentProfile.isNewToPartnership(Model.PartnershipID)) {
+        if ((!requested)) {
+        <a href="@Url.Action("SendPartnershipRequest", "Communication", new { Model.PartnershipID, returnUrl })" 
+           title="Request to join this partnership">
+          <i class="fa fa-share"></i>&nbsp;Join Partnership
+        </a>
+        }
+        else {
+        <a class="" title="Join request pending">
+          <i class="fa fa-share"></i>&nbsp;Join request sent
+                      <small class="text-center">Waiting for approval</small>
+        </a>
+        }
+      }
+    </li>
+  </ul>
+
+
+
+</div>

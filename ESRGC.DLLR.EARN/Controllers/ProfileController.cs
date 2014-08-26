@@ -10,6 +10,7 @@ using ESRGC.DLLR.EARN.Filters;
 using ESRGC.DLLR.EARN.Models;
 using ESRGC.GIS.Geocoding;
 using ESRGC.GIS.Utilities;
+using PagedList;
 
 namespace ESRGC.DLLR.EARN.Controllers
 {
@@ -21,6 +22,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     public ProfileController(IWorkUnit workUnit)
       : base(workUnit) {
     }
+    [AllowNonProfile]
     public ActionResult Index() {
       return View();
     }
@@ -55,10 +57,52 @@ namespace ESRGC.DLLR.EARN.Controllers
       //  updateTempMessage("There are currently no tags on your profile. Other organizations will be more likely to find you when tags are available.");
       //  return RedirectToAction("ManageTag", "Tag");
       //}
-      
+
       return View(CurrentAccount.Profile);
     }
+
     [AllowNonProfile]
+    [HasPendingProfileRequest]//prevent searching while having pending profile request
+    public ActionResult Find(string name, int? page, int? pageSize, string f = "html") {
+      if (CurrentAccount.Profile != null) {
+        updateTempMessage("Your organization partnership already exists.");
+        return RedirectToAction("Detail");
+      }
+      int index = page ?? 1;
+      int size = pageSize ?? 10;
+      var result = _workUnit.ProfileRepository.Entities;
+      if (!String.IsNullOrEmpty(name))
+        result = result.Where(x => x.Organization.Name.ToLower().Contains(name.ToLower()));
+      //if ajax request return json
+      var json = result.Select(x => new {
+        ID = x.ProfileID,
+        Name = x.Organization.Name,
+        Website = x.Organization.Website,
+        Group = x.UserGroup.Name,
+      }).ToList()
+      .ToPagedList(index, size);
+
+      if (Request.IsAjaxRequest() || f.ToLower() == "json") {
+        return Json(json, JsonRequestBehavior.AllowGet);
+      }
+
+      var pagedList = result.ToList().ToPagedList(index, size);
+      return View(pagedList);
+    }
+    [AllowNonProfile]
+    public ActionResult Join(int profileID) {
+      var profile = _workUnit.ProfileRepository.GetEntityByID(profileID);
+      if (profile == null) {
+        updateTempMessage("Invalid partnership ID");
+        return RedirectToAction("Index", "Home");
+      }
+
+
+      return View();
+    }
+
+    [AllowNonProfile]
+    [HasPendingProfileRequest]
     public ActionResult Create() {
       //if (CurrentAccount.Profile != null) {
       //  updateTempDataMessage("Profile already created!");
@@ -97,6 +141,7 @@ namespace ESRGC.DLLR.EARN.Controllers
         var account = CurrentAccount;
         if (account != null) {
           account.Profile = p;
+          account.IsProfileOwner = true;
           _workUnit.AccountRepository.UpdateEntity(account);
           _workUnit.saveChanges();
         }
@@ -163,7 +208,6 @@ namespace ESRGC.DLLR.EARN.Controllers
         _workUnit.PictureRepository.InsertEntity(picture);
         if (profile.PictureID != null)//delete current picture
           _workUnit.PictureRepository.DeleteByID(profile.PictureID);
-        _workUnit.saveChanges();
         profile.PictureID = picture.PictureID;
         _workUnit.saveChanges();
         //changes done return to detail page
@@ -173,27 +217,90 @@ namespace ESRGC.DLLR.EARN.Controllers
       return View(profile);
     }
     [VerifyProfile]
-    [HasReturnUrl]
-    public ActionResult Delete(string returnUrl) {
+    public ActionResult Delete() {
       return View();
     }
     [HttpPost]
     [VerifyProfile]
     [ActionName("Delete")]
-    public ActionResult DeleteProfile(string returnUrl) {
+    [SendNotification]
+    public ActionResult DeleteProfile() {
+      if (!CurrentAccount.IsProfileOwner) {
+        updateTempMessage("Sory, you can not delete this partnership. Only the partnership creator/owner can delete.");
+        return RedirectToAction("Settings", "Account");
+      }
       var profile = CurrentAccount.Profile;
+      var accounts = profile.Accounts.ToList();
+      //create notification
+      accounts.ForEach(a => {
+        var notification = new Notification() {
+          Category = "Profile Deleted",
+          Account = a,
+          Message = string.Format("The organizational partnership {0} has been deleted by the owner.", profile.Organization.Name),
+          Message2 = "If you wish to create or join another partnership please visit EARN MD CONNECT to do so.",
+          LinkToAction = Url.Action("Index", "Profile")
+        };
+        _workUnit.NotificationRepository.InsertEntity(notification);
+        a.ProfileID = null;
+        a.Profile = null;
+        _workUnit.AccountRepository.UpdateEntity(a);
+      });
+
       if (profile == null) {
-        updateTempMessage("Invalid profile ID");
+        updateTempMessage("Invalid partnership ID");
         return RedirectToAction("Index", "Home");
       }
-      //delete contact
-      if (profile.deleteDetails()) {
-        CurrentAccount.Profile = null;
-        _workUnit.ProfileRepository.DeleteEntity(profile);
-        _workUnit.saveChanges();
-        updateTempMessage("Your profile has been deleted");
+
+      if (profile.hasOwnedPartnerships()) {
+        updateTempMessage("Your organizational partnership is currently involved with one or more partnertships as an administrator. Please re-assign admin role before deleting your partnership.");
+        return RedirectToAction("Detail");
       }
-      return returnToUrl(returnUrl, Url.Action("Index", "Home"));
+
+
+      //delete message sent and received
+      _workUnit.MessageRepository
+        .Entities
+        .Where(x => x.SenderID == profile.ProfileID)
+        .ToList()
+        .ForEach(x => {
+          _workUnit.MessageRepository.DeleteEntity(x);          
+        });
+      _workUnit.saveChanges();
+      //delete message borads
+      _workUnit.MessageBoardRepository
+        .Entities
+        .Where(x => x.ProfileID == profile.ProfileID)
+        .ToList()
+        .ForEach(x => {
+          _workUnit.MessageBoardRepository.DeleteEntity(x);
+        });
+
+      //delete profile tags
+      _workUnit.ProfileTagRepository
+        .Entities
+        .Where(x => x.ProfileID == profile.ProfileID)
+        .ToList()
+        .ForEach(tag => _workUnit.ProfileTagRepository.DeleteEntity(tag));
+
+
+
+
+      //CurrentAccount.ProfileID = null;
+      //_workUnit.AccountRepository.UpdateEntity(CurrentAccount);
+      profile.deleteDetails();
+      _workUnit.ProfileRepository.DeleteEntity(profile);
+      if (profile.Organization != null) {
+        _workUnit.OrganizationRepository.DeleteEntity(profile.Organization);
+      }
+      //delete contact
+      if (profile.Contact != null) {
+        _workUnit.ContactRepository.DeleteEntity(profile.Contact);
+      }
+
+      
+      _workUnit.saveChanges();
+      updateTempMessage("Your partnership has been deleted.");
+      return RedirectToAction("Index", "Home");
     }
   }
 }

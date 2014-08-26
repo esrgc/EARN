@@ -1,0 +1,48 @@
+﻿@using ESRGC.DLLR.EARN.Domain.Model
+@using PagedList.Mvc;
+@model PagedList.IPagedList<Profile>
+@{
+    ViewBag.Title = "Organizational Profiles";
+    ViewBag.Header = "Organizational Profiles";
+}
+
+
+@section header{
+    <div class="container">
+        <header class="page-header">
+            <h3>@ViewBag.Header</h3>
+        </header>
+    </div>
+}
+
+@section scripts {
+
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="alert alert-info alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <p><strong>Note!</strong> To view full profile, please sign in or sign up with EARN MD CONNECT!</p>
+                <div>
+                    <a class="btn btn-xs btn-default" href="@Url.Action("Signin", "Account")">Sign in</a>
+                    <a class="btn btn-xs btn-default" href="@Url.Action("Signup", "Account")">Sign up</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            @Html.PagedListPager(Model,
+            page => Url.Action("Profiles", new { page }),
+            PagedListRenderOptions.TwitterBootstrapPager)
+            @foreach (var i in Model) { 
+                @Html.Partial("displayProfilePartial", i)
+            }
+            @Html.PagedListPager(Model,
+            page => Url.Action("Profiles", new { page }),
+            PagedListRenderOptions.TwitterBootstrapPager)
+        </div>
+    </div>
+</div>

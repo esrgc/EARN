@@ -55,11 +55,11 @@
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.6.0.1\lib\net40\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.6.0.1\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -162,15 +162,19 @@
     <Compile Include="Controllers\DocumentController.cs" />
     <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\OrganizationController.cs" />
     <Compile Include="Controllers\PartnershipController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\PublicController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\TagController.cs" />
     <Compile Include="Filters\AllowNonAdminAttribute.cs" />
     <Compile Include="Filters\AllowNonProfileAttribute.cs" />
     <Compile Include="Filters\CanEditPartnershipAttribute.cs" />
     <Compile Include="Filters\CheckCookieAttribute.cs" />
+    <Compile Include="Filters\DeleteEmptyConversation.cs" />
+    <Compile Include="Filters\HasPendingProfileRequestAttribute.cs" />
     <Compile Include="Filters\HasReturnUrlAttribute.cs" />
     <Compile Include="Filters\NewToPartnershipAttribute.cs" />
     <Compile Include="Filters\RoleAuthorizeAttribute.cs" />
@@ -199,9 +203,28 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Client\apps\message\collection\messages.js" />
+    <Content Include="Client\apps\message\collection\organizations.js" />
+    <Content Include="Client\apps\message\index.js" />
+    <Content Include="Client\apps\message\collection\conversations.js" />
+    <Content Include="Client\apps\message\model\adminMessage.js" />
+    <Content Include="Client\apps\message\model\message.js" />
+    <Content Include="Client\apps\message\model\conversation.js" />
+    <Content Include="Client\apps\message\router\main.js" />
+    <Content Include="Client\apps\message\view\messageAdmin.js" />
+    <Content Include="Client\apps\message\view\base.js" />
+    <Content Include="Client\apps\message\view\newMessage.js" />
+    <Content Include="Client\apps\message\view\messageArea.js" />
+    <Content Include="Client\apps\message\view\conversationList.js" />
     <Content Include="Client\apps\search\app.js" />
     <Content Include="Client\apps\search\controller\map.js" />
     <Content Include="Client\apps\search\controller\search.js" />
+    <Content Include="Client\css\less\message.css">
+      <DependentUpon>message.less</DependentUpon>
+    </Content>
+    <Content Include="Client\css\less\message.min.css">
+      <DependentUpon>message.less</DependentUpon>
+    </Content>
     <Content Include="Client\dllrContent\images\icons\mail.gif" />
     <Content Include="Client\dllrContent\images\icons\print.gif" />
     <Content Include="Client\dllrContent\images\mdicon.ico" />
@@ -223,6 +246,12 @@
     <Content Include="Client\dllrContent\style\MDstandard.css" />
     <Content Include="Client\dllrContent\style\print-preview.css" />
     <Content Include="Client\dllrContent\style\print.css" />
+    <Content Include="Client\images\default-logo.png" />
+    <Content Include="Client\images\empty-partnership-logo.png" />
+    <Content Include="Client\images\empty-partnership-logo2.png" />
+    <Content Include="Client\images\empty-partnership-logo3.png" />
+    <Content Include="Client\jsLib\backbone\backbone.js" />
+    <Content Include="Client\jsLib\backbone\backbone.min.js" />
     <Content Include="Client\jsLib\bootstrap-3.0.1\css\bootstrap-theme.css" />
     <Content Include="Client\jsLib\bootstrap-3.0.1\css\bootstrap-theme.min.css" />
     <Content Include="Client\jsLib\bootstrap-3.0.1\css\bootstrap.css" />
@@ -238,6 +267,7 @@
     <Content Include="Client\jsLib\bootstrap-3.0.2\js\bootstrap.js" />
     <Content Include="Client\jsLib\bootstrap-3.0.2\js\bootstrap.min.js" />
     <Content Include="Client\jsLib\bootstrap-3.0\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Client\jsLib\handlebars\handlebars-v1.3.0.js" />
     <Content Include="Client\jsLib\jquery-1.x\jquery-1.10.2.js" />
     <Content Include="Client\jsLib\jquery-1.x\jquery-1.10.2.min.js" />
     <Content Include="Client\jsLib\jquery-1.x\jquery-1.9.1.js" />
@@ -263,6 +293,15 @@
     <Content Include="Client\jsLib\leaflet.awesome-markers\leaflet.awesome-markers.min.js" />
     <Content Include="Client\jsLib\response\respond.min.js" />
     <Content Include="Client\jsLib\response\respond.src.js" />
+    <Content Include="Client\jsLib\typeahead-0.10.5\bloodhound.js" />
+    <Content Include="Client\jsLib\typeahead-0.10.5\bloodhound.min.js" />
+    <Content Include="Client\jsLib\typeahead-0.10.5\typeahead.bundle.js" />
+    <Content Include="Client\jsLib\typeahead-0.10.5\typeahead.bundle.min.js" />
+    <Content Include="Client\jsLib\typeahead-0.10.5\typeahead.jquery.js" />
+    <Content Include="Client\jsLib\typeahead-0.10.5\typeahead.jquery.min.js" />
+    <Content Include="Client\jsLib\underscore\underscore-min.js" />
+    <Content Include="Client\jsLib\underscore\underscore.js" />
+    <Content Include="Client\js\backbone-addon\application.js" />
     <Content Include="Client\js\map\leafletViewer.js" />
     <Content Include="Client\js\map\mapViewer.js" />
     <Content Include="Client\apps\search\store\search.js" />
@@ -298,6 +337,7 @@
     </Content>
     <Content Include="Client\css\less\bootstrap-custom.less" />
     <Content Include="Client\css\less\quickForm.less" />
+    <Content Include="Client\css\less\message.less" />
     <None Include="Client\css\profile.oldcss" />
     <None Include="Client\css\quickForm.oldcss" />
     <Content Include="Client\css\less\lib\variables.less" />
@@ -448,6 +488,19 @@
     <Content Include="Views\Communication\EmailSent.cshtml" />
     <Content Include="Views\Communication\EmailNotSent.cshtml" />
     <Content Include="Views\Shared\displayProfilePartial.cshtml" />
+    <Content Include="Views\Public\Profiles.cshtml" />
+    <Content Include="Views\Public\Partnerships.cshtml" />
+    <Content Include="Views\Profile\Find.cshtml" />
+    <Content Include="Views\Shared\displayNoLinkProfilePartial.cshtml" />
+    <Content Include="Views\Profile\Delete.cshtml" />
+    <Content Include="Views\Communication\JoinProfileRequest.cshtml" />
+    <Content Include="Views\Message\Index.cshtml" />
+    <Content Include="Views\Message\Templates.cshtml" />
+    <Content Include="Views\Partnership\MakeAdmin.cshtml" />
+    <Content Include="Views\Partnership\UploadImage.cshtml" />
+    <Content Include="Views\Partnership\RemoveAdmin.cshtml" />
+    <Content Include="Views\Shared\partnershipActionPartial.cshtml" />
+    <Content Include="Views\Shared\partnershipWithActionPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

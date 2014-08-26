@@ -1,6 +1,7 @@
 ﻿@using ESRGC.DLLR.EARN.Domain.Model
 @model Profile
-<address>
+@if (Model.Contact != null) { 
+  <address>
     <i class="fa fa-user"></i>
     @Model.Contact.NameTitle
     <strong>@Model.Contact.FirstName @Model.Contact.Middle @Model.Contact.LastName</strong>
@@ -24,5 +25,6 @@
     }*@
     <i class="fa fa-phone" title="Phone"></i>&nbsp;@Model.Contact.Phone<br />
     <i class="fa fa-envelope-o" title="Email"></i>&nbsp;<a href="mailto:@Model.Contact.Email">@Model.Contact.Email</a>
-</address>
+  </address>
 
+}
