@@ -352,7 +352,11 @@ a.link-icon:hover,
   text-decoration: none;
 }
 .partnership-container .partnership-detail {
-  margin-left: 16%;
+  margin-left: 12%;
+}
+.partnership-container .partnership-picture {
+  max-width: 10%;
+  margin: 0 10px 10px 0;
 }
 .partner-list-container {
   max-height: 400px;

@@ -11,14 +11,13 @@
 }
 
 <div class="partnership-container">
-  <div class="profile-picture pull-left">
+  <div class="partnership-picture pull-left">
     <div class="logo-container">
       <img class="img-thumbnail" src="@Url.Action("PartnershipLogo", new { id = Model.PartnershipID })"/>
     </div>
     <div class="panel-action default partnership-action">
       @Html.Partial("partnershipActionPartial")
     </div>
-
   </div>
   <div class="partnership-detail">
     @if (currentProfile.isNewToPartnership(p.PartnershipID)) {

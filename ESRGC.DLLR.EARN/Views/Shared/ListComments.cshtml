@@ -14,7 +14,7 @@
 }
 <h4><i class="fa fa-comments"></i>&nbsp;Comments <small>(@commentCount)</small></h4>
 @if (commentCount > Model.Count()) { 
-    <div class="panel-action-center">
+    <div class="panel-action center">
         <a id="loadMoreComments" href="@loadMoreUrl">View @nextCount more comments</a>
     </div>
 }

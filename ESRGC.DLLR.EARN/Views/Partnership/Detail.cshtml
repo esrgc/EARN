@@ -242,7 +242,7 @@
               <div class="logo-container">
                 <img class="img-thumbnail" src="@Url.Action("PartnershipLogo", new { id = Model.PartnershipID })"/>
                 @if (canEdit) { 
-                  <div class="panel-action-center">
+                  <div class="panel-action center">
                     <a href="@Url.Action("UploadImage", new { Model.PartnershipID })"><small class="">Change logo</small></a>
                   </div>
                 }

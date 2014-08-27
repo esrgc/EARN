@@ -57,6 +57,9 @@ namespace ESRGC.DLLR.EARN.Controllers
     //return conversations and their info
     public JsonResult Conversations() {
       var profile = CurrentAccount.Profile;
+      if (profile == null)
+        return Json(new { status = "failed" });
+
       var currentName = profile.Organization.Name;//curent logged in name
 
         var convo = profile.getConversations()
@@ -228,9 +231,10 @@ namespace ESRGC.DLLR.EARN.Controllers
       var currentName = profile.Organization.Name;//curent logged in name
       var name = "";
       string logoUrl = "";
-
-
-      var names = x.MessageBoards
+      
+      var names = _workUnit.MessageBoardRepository
+        .Entities
+        .Where(mb => mb.ConversationID == x.ConversationID)
         .Where(mb => mb.Profile.Organization.Name != currentName)
         .Select(mb => mb.Profile.Organization.Name)
         .ToArray();
