@@ -1,110 +1,114 @@
 ﻿@model ESRGC.DLLR.EARN.Domain.Model.Partnership
 
 @{
-    ViewBag.Title = "Partnership";
-    ViewBag.Header = "Create Partnership";
+  ViewBag.Title = "Partnership";
+  ViewBag.Header = "Create Partnership";
 }
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval-unobtrusive")
+  @Scripts.Render("~/bundles/jqueryval-unobtrusive")
 }
 
 @section header {
-    <div class="container">
-        <header class="page-header">
-            <h3>@ViewBag.Header <i class="glyphicon glyphicon-link"></i></h3>
-            @*<ul class="breadcrumb">
+  <div class="container">
+    <header class="page-header">
+      <h3>@ViewBag.Header <i class="glyphicon glyphicon-link"></i></h3>
+      @*<ul class="breadcrumb">
                 <li><a href="@Url.Action("index", "Home")">Home</a></li>
                 <li class="active">@ViewBag.Header</li>
             </ul>*@
-        </header>
-    </div>
+    </header>
+  </div>
 }
 @{
-    var statusList = Html.getPartnershipStatusList();
+  var statusList = Html.getPartnershipStatusList();
 }
 
 <div class="container">
-    <div class="row">
-        <div class="col-sm-10 col-sm-offset-1">
-            <div class="window-panel">
-                <div class="window-panel-title"><strong>Partnership Information</strong></div>
-                <div class="window-panel-content">
+  <div class="row">
+    <div class="col-sm-10 col-sm-offset-1">
+      <div class="window-panel">
+        <div class="window-panel-title"><strong>Partnership Information</strong></div>
+        <div class="window-panel-content">
 
-                    <form class="form-horizontal" action="@Url.Action("Create")" method="post" role="form">
-                        @Html.AntiForgeryToken()
-                        @Html.ValidationSummary(true)
-                        <div class="form-group">
-                            <div class="col-sm-8 col-sm-offset-2">
-                                <p class="text-info">
-                                    Please fill out the fields below to create a new partnership. 
-                                    You (and your organization) will be the Administrator of this Partnership Profile. 
-                                    After the Partnership Profile is created, you will be the only user able to invite 
-                                    other organizations to your Partnership Profile, and you will decide whether to 
-                                    approve users who request to join.
-                                </p>
-                                <p class="text-info">
-                                    When searching Partnership Profiles, other users will be able to 1) view the only 
-                                    the information you enter on this page, 2) contact you via email, and/or 3) 
-                                    request your approval to join your partnership
-                                </p>
-                                <p class="text-info">
-                                    Once created, your Partnership’s members will be able to communicate with one another 
-                                    within your EARN MD CONNECT Partnership Profile. <u>Please note: 1) full Partnership Profiles, 
-                                    including the communication function, are only accessible to that Partnership’s members, and 2) 
-                                    the communication feature is meant to support communication between partners, but should not 
-                                    be used to share proprietary or sensitive content. </u>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="Name">Name</label>
-                            <div class="col-sm-6">
-                                @Html.TextBoxFor(x => x.Name,
+          <form class="form-horizontal" action="@Url.Action("Create")" method="post" role="form">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            <div class="form-group">
+              <div class="col-sm-8 col-sm-offset-2">
+                <p class="text-info">
+                  Please fill out the fields below to create a new Partnership Profile. 
+                  You (and your organization) will be the Administrator of this Partnership Profile.
+                  After the Partnership Profile is created, Your organization will be able to invite
+                  other organizations to your Partnership Profile, and you will decide whether to approve
+                  users who request to join. You may designate additional Administrators of your Partnership Profile.
+                  To do so, go under “Partners” tab in your Partnership Profile detail page. 
+                  Select an organization profile and click “Make Admin” button to assign admin privilege.
+                  You may also remove your organization as an Admin if there exists one or more other Administrators
+                </p>
+                <p class="text-info">
+                  When searching Partnership Profiles, other users will be able to 
+                  1) view the only the information you enter on this page, 2) contact you via email,
+                  and/or 3) request your approval to join your partnership
+                </p>
+                <p class="text-info">
+                  Once created, your Partnership’s members will be able to communicate with one 
+                  another within your EARN MD CONNECT Partnership Profile. <u>Please note: 1) full Partnership
+                  Profiles, including the communication function, are only accessible to that Partnership’s members, and
+                  2) the communication feature is meant to support communication between partners, but should not be used
+                  to share proprietary or sensitive content.</u>
+
+                </p>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="Name">Name</label>
+              <div class="col-sm-6">
+                @Html.TextBoxFor(x => x.Name,
                                 new {
-                                    @class = "form-control input-sm",
-                                    placeholder = "Partnership name"
+                                  @class = "form-control input-sm",
+                                  placeholder = "Partnership name"
                                 })
-                                <span class="label label-default">Required</span>
-                                <div class="help-block">@Html.ValidationMessageFor(x => x.Name)</div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="Status">Status</label>
-                            <div class="col-sm-4">
-                                @Html.DropDownListFor(x => x.Status,
+                <span class="label label-default">Required</span>
+                <div class="help-block">@Html.ValidationMessageFor(x => x.Name)</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="Status">Status</label>
+              <div class="col-sm-4">
+                @Html.DropDownListFor(x => x.Status,
                                 new SelectList(statusList),
                                 new {
-                                    @class = "form-control input-sm",
-                                    placeholder = "Status"
+                                  @class = "form-control input-sm",
+                                  placeholder = "Status"
                                 })
-                                <span class="label label-default">Required</span>
-                                <div class="help-block">@Html.ValidationMessageFor(x => x.Status)</div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="Description">Description</label>
-                            <div class="col-sm-8">
-                                @Html.TextAreaFor(x => x.Description,
-                                new {
-                                    @class = "form-control input-sm",
-                                    placeholder = "Briefly describe this partnership",
-                                    style = "min-height: 150px"
-                                })
-                                <span class="label label-default">Required</span>
-                                <div class="help-block">@Html.ValidationMessageFor(x => x.Description)</div>
-                            </div>
-                        </div>
-                        <hr />
-                        <div class="form-group">
-                            <div class="col-sm-6 col-sm-offset-3">
-                                <input class="btn btn-primary" type="submit" value="Submit" />
-                                <a class="btn btn-default" href="@Url.Action("MyPartnerships", "Partnership")">Cancel</a>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                <span class="label label-default">Required</span>
+                <div class="help-block">@Html.ValidationMessageFor(x => x.Status)</div>
+              </div>
             </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="Description">Description</label>
+              <div class="col-sm-8">
+                @Html.TextAreaFor(x => x.Description,
+                                new {
+                                  @class = "form-control input-sm",
+                                  placeholder = "Briefly describe this partnership",
+                                  style = "min-height: 150px"
+                                })
+                <span class="label label-default">Required</span>
+                <div class="help-block">@Html.ValidationMessageFor(x => x.Description)</div>
+              </div>
+            </div>
+            <hr />
+            <div class="form-group">
+              <div class="col-sm-6 col-sm-offset-3">
+                <input class="btn btn-primary" type="submit" value="Submit" />
+                <a class="btn btn-default" href="@Url.Action("MyPartnerships", "Partnership")">Cancel</a>
+              </div>
+            </div>
+          </form>
         </div>
+      </div>
     </div>
+  </div>
 </div>

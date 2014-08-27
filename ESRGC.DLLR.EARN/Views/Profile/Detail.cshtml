@@ -59,7 +59,7 @@
                             @if (Model.PictureID != null) { 
                                 <div class="logo-container">
                                     <img class="img-thumbnail" src="@Url.Action("ProfilePicture", new { pictureId = Model.PictureID })"/>
-                                    <div class="panel-action-center">
+                                    <div class="panel-action center">
                                         <a href="@Url.Action("UploadImage")"><small class="">Change logo</small></a>
                                     </div>
                                 </div>

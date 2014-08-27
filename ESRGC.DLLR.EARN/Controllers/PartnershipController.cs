@@ -18,12 +18,17 @@ namespace ESRGC.DLLR.EARN.Controllers
     // GET: /Partnership/
     //for search
 
-    public ActionResult Index(int? page, int? size) {
+    public ActionResult Index(string name, int? page, int? size) {
       var partnerships = _workUnit
         .PartnershipRepository
         .Entities
         .OrderBy(x => x.Name)
         .ToList();
+
+      if (!string.IsNullOrEmpty(name)) {
+        partnerships = partnerships.Where(x => x.Name.ToLower().Contains(name.ToLower())).ToList();
+      }
+      ViewBag.name = name;
       int pageIndex = page ?? 1, pageSize = size ?? 15;
       var pagedList = partnerships.ToPagedList(pageIndex, pageSize);
       return View(pagedList);

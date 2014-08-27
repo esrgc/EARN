@@ -65,13 +65,13 @@ namespace ESRGC.DLLR.EARN.Controllers
     [HasPendingProfileRequest]//prevent searching while having pending profile request
     public ActionResult Find(string name, int? page, int? pageSize, string f = "html") {
       if (CurrentAccount.Profile != null) {
-        updateTempMessage("Your organization partnership already exists.");
+        updateTempMessage("You already belong to an organization.");
         return RedirectToAction("Detail");
       }
       int index = page ?? 1;
       int size = pageSize ?? 10;
       var result = _workUnit.ProfileRepository.Entities;
-      if (!String.IsNullOrEmpty(name))
+      if (!string.IsNullOrEmpty(name))
         result = result.Where(x => x.Organization.Name.ToLower().Contains(name.ToLower()));
       //if ajax request return json
       var json = result.Select(x => new {
