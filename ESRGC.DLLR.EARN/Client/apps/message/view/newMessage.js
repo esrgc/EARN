@@ -76,12 +76,20 @@ app.View.NewMessage = app.View.Base.extend({
               '</div>'
             ].join('\n'))
           }
+        })
+        .on('typeahead:selected', function(ev, obj, dataset) {
+          var name = obj.name;
+          if (typeof name != 'undefined')
+            scope.addRecipient(name);
+          //reset text for the name box
+          scope.$('#msg-participant').val('');
         });
 
         //if there was names for recipient add them
         if (typeof scope.names != 'undefined') {
           _.each(scope.names, function(name) {
             console.log(name);
+            //add recipient
             scope.addRecipient(name.trim());
           });
         }
@@ -197,7 +205,7 @@ app.View.NewMessage = app.View.Base.extend({
     _.each(organizations, function(o) {
       if (o.name == name) {
         scope.recipients.push(o);
-        console.log(o);
+        //console.log(o);
         //draw the list in html
         var template = _.template($('#recipient').html(), { recipients: scope.recipients });
         scope.$('.recipient-container').html(template);
