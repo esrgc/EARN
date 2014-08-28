@@ -218,7 +218,7 @@ app.View.NewMessage = app.View.Base.extend({
     else
       scope.updateValidationMessage('');
 
-    console.log(scope.recipients);
+    //console.log(scope.recipients);
 
   },
   removeRecipient: function(name) {

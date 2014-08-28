@@ -20,19 +20,19 @@ app.Collection.Messages = Backbone.Collection.extend({
     var model = scope.at(0);//always the first
     var messages = model.get('messages');
     var currentSenderName = '';
-    var currentMsg;
+    var currentMsg = '';
     var removeIndex = [];
 
     for (var i in messages) {
       var msg = messages[i];
-      if (currentSenderName != msg.senderName && !msg.isAdminMessage) {
+      if (currentSenderName != msg.senderName) {
         currentSenderName = msg.senderName;
         currentMsg = msg.message;
       }
       else {
         if (i != 0) {
           delete messages[i - 1];
-          var newMessage = currentMsg + '<br/>' + msg.message;
+          var newMessage = [currentMsg, msg.message].join('<br/>');
           msg.message = newMessage;
           currentMsg = newMessage;
         }
