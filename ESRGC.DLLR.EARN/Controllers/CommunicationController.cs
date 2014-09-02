@@ -306,6 +306,7 @@ and/or view this user’s Organizational Profile for more information.",
 
     public ActionResult ProcessProfileRequest(int profileRequestID) {
       var pr = _workUnit.ProfileRequestRepository.GetEntityByID(profileRequestID);
+      
       if (pr == null) {
         updateTempMessage("Invalid Request");
         return RedirectToAction("Requests");

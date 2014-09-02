@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity.Spatial;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -166,8 +167,17 @@ namespace ESRGC.DLLR.EARN.Controllers
     //public profile view
     [HasReturnUrl]
     public ActionResult ViewProfile(int profileID, string returnUrl) {
-      var profile = _workUnit.ProfileRepository.GetEntityByID(profileID);
-      return View(profile);
+      try {
+        var profile = _workUnit.ProfileRepository.Entities
+            .Include(x => x.Contact)
+            .Include(x=>x.ProfileTags)
+            .First(x => x.ProfileID == profileID);
+        return View(profile);
+      }
+      catch  {
+        updateTempMessage("Invalid profile access");
+        return returnToUrl(returnUrl, Url.Action("Index", "Home"));
+      }
     }
 
     [HttpPost]

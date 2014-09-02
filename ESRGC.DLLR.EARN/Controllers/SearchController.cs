@@ -77,7 +77,7 @@ namespace ESRGC.DLLR.EARN.Controllers
 
       int pageIndex = page ?? 1;
       int pageSize = size ?? 10;
-
+      filters.Add("page", pageIndex);
       var model = result
         .OrderBy(x => x.Organization.Name) // ordered by organization name
         .ToPagedList(pageIndex, pageSize);

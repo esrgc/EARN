@@ -13,6 +13,8 @@ namespace ESRGC.DLLR.EARN.Domain.DAL
     public DomainContext()
       : base("name=DLLR.EARN") {
 
+        Configuration.LazyLoadingEnabled = true;
+        Configuration.ProxyCreationEnabled = true;
     }
     public DbSet<Account> Accounts { get; set; }
     public DbSet<Contact> Contacts { get; set; }

@@ -191,7 +191,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     protected Account CurrentAccount {
       get {
         try {
-          var account = _workUnit.AccountRepository.Entities.First(x => x.EmailAddress == User.Identity.Name);
+          var account = _workUnit.AccountRepository.Entities.First(x => x.EmailAddress.ToLower() == User.Identity.Name.ToLower());
           return account;
         }
         catch (Exception) {

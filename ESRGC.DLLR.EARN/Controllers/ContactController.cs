@@ -27,7 +27,8 @@ namespace ESRGC.DLLR.EARN.Controllers
     }
     [VerifyProfile]
     public ActionResult Edit() {
-      var contact = CurrentAccount.Profile.Contact;
+      var profile = CurrentAccount.Profile;
+      var contact = _workUnit.ContactRepository.GetEntityByID(profile.ContactID);
       return View(contact);
     }
 

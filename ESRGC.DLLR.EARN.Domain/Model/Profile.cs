@@ -190,12 +190,17 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     }
 
     public List<Tag> getTags() {
-      var list = ProfileTags
-        .Select(x => x.Tag)
-        .Where(x => !(x is GeoTag))
-        .OrderBy(x => x.Name)
-        .ToList();
-      return list ?? new List<Tag>();
+      try {
+        var list = ProfileTags
+            .Select(x => x.Tag)
+            .Where(x => !(x is GeoTag))
+            .OrderBy(x => x.Name)
+            .ToList();
+        return list ?? new List<Tag>();
+      }
+      catch (Exception) {
+       return new List<Tag>(); 
+      }
     }
     public List<string> getTagNames() {
       return getTags().Select(x => x.Name).ToList();
