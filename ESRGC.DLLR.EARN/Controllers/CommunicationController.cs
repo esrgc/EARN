@@ -586,22 +586,22 @@ and/or view this user’s Organizational Profile for more information.",
         return RedirectToAction("Index", "Home");
       }
       if (string.IsNullOrEmpty(name)) {
-        updateTempMessage("Please enter your name, so the partnership owner can identify you and approve your request!");
+        updateTempMessage("Please enter your name, so the Organizational Profile owner can identify you and approve your request!");
         return View(profile);
       }
       var owner = profile;
       if (owner == null) {
-        updateTempMessage("No owner found for this partnership. ID " + profile.ProfileID);
+        updateTempMessage("No owner found for this Organizational Profile. ID " + profile.ProfileID);
         return RedirectToAction("Index", "Home");
       }
       var message1 = string.Format(
-          @"{0} has requested to join your ""{1}"" partnership. Contact {0} with at {2} if you need additional information.",
+          @"{0} has requested to join your ""{1}"" Organizational Profile. Contact {0} with at {2} if you need additional information.",
           name,
           profile.Organization.Name,
           CurrentAccount.EmailAddress
       );
       var message2 = @"Upon acceptance of this request, " + name +
-        " will be able to have full access to your partnership and edit partnership information." +
+        " will be able to have full access to your Organizational Profile and edit profile information." +
         " If you do not regconize the person or the email address above, please discard this request or " +
         "contact the person for more information.";
 
@@ -616,7 +616,7 @@ and/or view this user’s Organizational Profile for more information.",
       _workUnit.NotificationRepository.InsertEntity(notification);
       var request = new ProfileRequest() {
         Message = string.Format(
-          @"{0} ({2}) has requested to join your ""{1}"" partnership with the following message: {3}",
+          @"{0} ({2}) has requested to join your ""{1}"" Organizational Profile with the following message: {3}",
           name,
           profile.Organization.Name,
           CurrentAccount.EmailAddress,
