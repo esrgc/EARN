@@ -21,23 +21,34 @@ app.Collection.Messages = Backbone.Collection.extend({
     var messages = model.get('messages');
     var currentSenderName = '';
     var currentMsg = '';
+    var currentDate = '';
     var removeIndex = [];
 
+    //loop through messages and group messages from the same
+    //sender
     for (var i in messages) {
       var msg = messages[i];
       if (currentSenderName != msg.senderName) {
         currentSenderName = msg.senderName;
         currentMsg = msg.message;
+        currentDate = msg.date;
       }
       else {
         if (i != 0) {
-          delete messages[i - 1];
-          var newMessage = [currentMsg, msg.message].join('<br/>');
-          msg.message = newMessage;
-          currentMsg = newMessage;
+          if (msg.date == currentDate) {
+            //group messages
+            delete messages[i - 1];
+            var newMessage = [currentMsg, msg.message].join('<br/>');
+            msg.message = newMessage;
+            currentMsg = newMessage;
+          }
+          else
+            currentDate = msg.date;
         }
       }
     }
+
+
 
     return model.toJSON();
   }
