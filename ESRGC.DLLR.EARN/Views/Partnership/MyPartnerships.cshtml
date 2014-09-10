@@ -1,76 +1,82 @@
 ﻿@using ESRGC.DLLR.EARN.Domain.Model
 @{
-    ViewBag.Title = "Partnership";
-    ViewBag.Header = "My Partnerships";
+  ViewBag.Title = "Partnership";
+  ViewBag.Header = "My Partnerships";
 }
 
 @section header{
-    <div class="container">
-        <header class="page-header">
-            <h3>@ViewBag.Header <i class="glyphicon glyphicon-link"></i></h3>
-            @*<ul class="breadcrumb">
+  <div class="container">
+    <header class="page-header">
+      <h3>@ViewBag.Header <i class="glyphicon glyphicon-link"></i></h3>
+      @*<ul class="breadcrumb">
                 <li><a href="@Url.Action("index", "Home")">Home</a></li>
                 <li class="active">@ViewBag.Header</li>
             </ul>*@
-        </header>
-    </div>
+    </header>
+  </div>
 }
 @{
-    var currentProfile = ViewBag.currentProfile as Profile;
-    var returnUrl = Url.Action("MyPartnerships");
+  var currentProfile = ViewBag.currentProfile as Profile;
+  var returnUrl = Url.Action("MyPartnerships");
 }
 <div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="window-panel">
-                <div class="window-panel-title"><strong>@currentProfile.partnershipCount() Partnerships available</strong></div>
-                <div class="window-panel-content">
-                    <div>
-                        <div>
-                            <p>
-                                &nbsp;
-                                <span class="pull-right">
-                                    <a href="@Url.Action("Create", "Partnership")">
-                                        <i class="glyphicon glyphicon-link"></i>
-                                        &nbsp;Create new partnership
-                                    </a>
-                                </span>
-                            </p>
-                            <div class="clear"></div>
-                        </div>
-                        @if (currentProfile.partnershipCount() == 0) { 
-                            <p class="text-muted">
-                                If you are already a member of an EARN Maryland partnership, it may not be reflected 
-                                here because a Partnership Profile has not yet been created on this site, or because 
-                                the Partnership Profile Administrator has not yet invited or confirmed your membership yet. 
-                                Once you are a member of a partnership or partnerships within EARN MD CONNECT, they will be listed here. 
-                                As such, if you are already part of a Planning Grant Applicant Group, you will not have an Organization 
-                                or a Partnership Profile on EARN MD CONNECT until one is created!
-                            </p>
-                            <p class="text-muted">
-                                If there is not yet a Partnership Profile within EARN MD CONNECT for your partnership, 
-                                one can be created by clicking “Create new partnership” above. 
-                                Please note that <u>the user who creates the Partnership Profile will become the Partnership 
-                                Profile’s Administrator</u>, and will be the only user able 1) to control the Partnership Profile’s membership, 2) 
-                                to invite other organizations to join your Partnership Profile, 3) to decide whether to approve users who 
-                                request to join your Partnership Profile, and 4) to control the Partnership Profile’s Title and Description 
-                                visible to other EARN MD CONNECT users. As such, partnerships should determine the appropriate member to create, 
-                                and be the Administrator of, their group’s Partnership Profile on EARN MD CONNECT.
-                            </p>
-                            <p class="text-muted">
-                                If there is already a Partnership Profile for your partnership, you can request to join that Profile within 
-                                EARN MD CONNECT by clicking “Request to join” on the Partnership’s Profile page. 
-                                If you are unsure, you can always <a href="mailto://earn.jobs@maryland.gov">email us</a>. 
-                            </p>
-                        }
-                        else {
-                            @Html.Action("ListPartnerships", "Partnership", new { currentProfile.ProfileID, returnUrl })
-                        }
-                    </div>
-                </div>
-
-            </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="window-panel">
+        <div class="window-panel-title"><strong>@currentProfile.partnershipCount() Partnerships available</strong>
         </div>
+        <div class="window-panel-content">
+          <div>
+            <div>
+              <p>
+                &nbsp;
+                <span class="pull-right">
+                  <a href="@Url.Action("Create", "Partnership")">
+                    <i class="glyphicon glyphicon-link"></i>
+                    &nbsp;Create new partnership
+                  </a>
+                </span>
+              </p>
+              <div class="clear"></div>
+            </div>
+            @if (currentProfile.partnershipCount() == 0) { 
+              <p class="text-muted">
+                Please fill out the fields below to <strong>create a new Partnership Profile</strong>. 
+                  You (and your organization) will be the Administrator of this Partnership Profile. 
+                  After the Partnership Profile is created, your organization will be able to 
+                  <strong>invite other organizations</strong>
+                to your Partnership Profile, and you will decide whether to <strong>approve users who request to join</strong>.
+              </p>
+              <p class="text-muted">
+                You may also <strong>designate additional Administrators</strong> of your Partnership Profile. 
+                To do so, click on the “Partners” tab on the bottom left of your Partnership Profile detail page.
+                Select the desired Partner Organization, and click the “Make Admin” button to assign Administrator Privileges.
+                <strong>You may also remove your organization as an Administrator</strong> if there exists one or more
+                other Administrators. To do so, simply click the “Remove Admin” button next to your own Organization’s profile within the
+                “Partners” tab of your Partnership Profile page.
+              </p>
+              <p class="text-muted">
+                <strong>When searching Partnership Profiles</strong>, other users will be able to 
+                  1) view the only the information you enter on this page, 2) contact you via email,
+                  and/or 3) request your approval to join your partnership
+              </p>
+              <p class="text-muted">
+                Once created, your Partnership’s members will be able to <strong>communicate</strong> with one 
+                another within your EARN MD CONNECT Partnership Profile. <u>Please note: 1) full Partnership
+                Profiles, including the communication function, are only accessible to that Partnership’s members, and
+                2) the communication feature is meant to support communication between partners, but should not be used
+                to share proprietary or sensitive content.</u>
+
+              </p>
+            }
+            else {
+              @Html.Action("ListPartnerships", "Partnership", new { currentProfile.ProfileID, returnUrl })
+            }
+          </div>
+        </div>
+
+      </div>
     </div>
+  </div>
 
 </div>

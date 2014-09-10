@@ -128,6 +128,7 @@ and/or view this user’s Organizational Profile for more information.",
         .OrderByDescending(x => x.Created)
         .OrderBy(x => x.IsRead)
         .Take(40).ToList();
+
       var deleteNotes = CurrentAccount
         .Notifications
         .Where(x => {
@@ -139,7 +140,10 @@ and/or view this user’s Organizational Profile for more information.",
         })
         .ToList();
       if (ModelState.IsValid) {
-        deleteNotes.ForEach(x => _workUnit.NotificationRepository.DeleteEntity(x));
+        deleteNotes.ForEach(x => {
+          if (x.Requests.Count() == 0)
+            _workUnit.NotificationRepository.DeleteEntity(x);
+        });
         _workUnit.saveChanges();
       }
       return PartialView(notifcations);
@@ -306,7 +310,7 @@ and/or view this user’s Organizational Profile for more information.",
 
     public ActionResult ProcessProfileRequest(int profileRequestID) {
       var pr = _workUnit.ProfileRequestRepository.GetEntityByID(profileRequestID);
-      
+
       if (pr == null) {
         updateTempMessage("Invalid Request");
         return RedirectToAction("Requests");

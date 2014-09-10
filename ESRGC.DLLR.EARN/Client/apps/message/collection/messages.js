@@ -43,7 +43,7 @@ app.Collection.Messages = Backbone.Collection.extend({
             currentMsg = newMessage;
           }
           else
-            currentDate = msg.date;
+            currentDate = msg.date;//store current message date for the next message processing
         }
       }
     }
