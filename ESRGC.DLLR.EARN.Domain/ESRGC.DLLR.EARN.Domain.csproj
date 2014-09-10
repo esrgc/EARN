@@ -205,6 +205,10 @@
     <Compile Include="Migrations\201409031436273_ef6.Designer.cs">
       <DependentUpon>201409031436273_ef6.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201409101847353_profile.earn-support-field.cs" />
+    <Compile Include="Migrations\201409101847353_profile.earn-support-field.Designer.cs">
+      <DependentUpon>201409101847353_profile.earn-support-field.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\Announcement.cs" />
@@ -339,6 +343,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201409031436273_ef6.resx">
       <DependentUpon>201409031436273_ef6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409101847353_profile.earn-support-field.resx">
+      <DependentUpon>201409101847353_profile.earn-support-field.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -188,6 +188,14 @@ namespace ESRGC.DLLR.EARN.Controllers
       TempData["message"] = message;
     }
 
+    public MvcHtmlString messageSupportLink() {
+      var supportProfiles = _workUnit.ProfileRepository.Entities
+        .Where(x => x.EARNSupport == true)
+        .Select(x => x.Organization.Name)
+        .ToList();
+      return new MvcHtmlString(Url.Action("Index", "Message") + "#new/"+ string.Join(",", supportProfiles));
+    }
+
     protected Account CurrentAccount {
       get {
         try {
@@ -199,6 +207,7 @@ namespace ESRGC.DLLR.EARN.Controllers
         }
       }
     }
+       
 
     protected RedirectResult returnToUrl(string returnUrl, string defaultUrl) {
       //return to previous url

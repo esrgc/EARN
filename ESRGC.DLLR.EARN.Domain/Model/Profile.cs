@@ -21,6 +21,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
       ReceivedMessages = new List<Message>();
       SentRequests = new List<Request>();
       ReceivedRequests = new List<Request>();
+      EARNSupport = false;
     }
 
     /// <summary>
@@ -49,6 +50,8 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public DateTime? LastUpdate { get; set; }
     [Display(Description = "Describe why your organization is interested in EARN MD (i.e., what you would bring to a Partnership and/or what you hope to gain).  What you provide here will be visible to other EARN MD CONNECT users when searching for potential partners.")]
     public string About { get; set; }
+
+    public bool EARNSupport { get; set; }
        
     //navigation properties
     public virtual ICollection<ProfileTag> ProfileTags { get; set; }

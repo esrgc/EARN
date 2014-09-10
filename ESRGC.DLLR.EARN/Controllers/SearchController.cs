@@ -34,7 +34,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       var profiles = _workUnit
         .ProfileRepository
         .Entities
-        .Where(x=>x.ProfileID != currentProfile.ProfileID)
+        .Where(x => x.ProfileID != currentProfile.ProfileID)
         .AsQueryable();
 
       //filter by user group
@@ -81,14 +81,17 @@ namespace ESRGC.DLLR.EARN.Controllers
       var model = result
         .OrderBy(x => x.Organization.Name) // ordered by organization name
         .ToPagedList(pageIndex, pageSize);
-
       //viewbag data
+      ViewBag.messageLink = Url.Action("Index", "Message") 
+        + "#new/" 
+        + string.Join(",", result.Select(x => x.Organization.Name).ToList());
       ViewBag.filters = filters;
       ViewBag.currentProfile = currentProfile;
+      ViewBag.currentAccount = CurrentAccount;
       ViewBag.orgTypes = _workUnit
         .UserGroupRepository
         .Entities
-        .OrderBy(x=>x.Name)
+        .OrderBy(x => x.Name)
         .ToList();
       return View(model);
     }
