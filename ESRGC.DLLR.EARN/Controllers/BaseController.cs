@@ -58,10 +58,10 @@ namespace ESRGC.DLLR.EARN.Controllers
           return null;
         }
       }
-      else{
+      else {
         var physicalPath = Server.MapPath("~/Client/images/default-logo.png");
-        
-        using (var fileStream = System.IO.File.OpenRead(physicalPath)) { 
+
+        using (var fileStream = System.IO.File.OpenRead(physicalPath)) {
           var data = new byte[fileStream.Length];
           var buffer = fileStream.Read(data, 0, (int)fileStream.Length);
           return File(data, "image/png");
@@ -193,7 +193,7 @@ namespace ESRGC.DLLR.EARN.Controllers
         .Where(x => x.EARNSupport == true)
         .Select(x => x.Organization.Name)
         .ToList();
-      return new MvcHtmlString(Url.Action("Index", "Message") + "#new/"+ string.Join(",", supportProfiles));
+      return new MvcHtmlString(Url.Action("Index", "Message") + "#new/" + string.Join(",", supportProfiles));
     }
 
     protected Account CurrentAccount {
@@ -207,7 +207,7 @@ namespace ESRGC.DLLR.EARN.Controllers
         }
       }
     }
-       
+
 
     protected RedirectResult returnToUrl(string returnUrl, string defaultUrl) {
       //return to previous url
@@ -220,8 +220,13 @@ namespace ESRGC.DLLR.EARN.Controllers
       }
     }
 
-    protected bool notifyProfile(Notification notification) {
+    protected bool notifyProfile(Notification notification, Profile profile) {
       //notification.
+      profile.Accounts.ToList()
+        .ForEach(x => {
+          notification.Account = x;
+
+        });
       return true;
     }
   }

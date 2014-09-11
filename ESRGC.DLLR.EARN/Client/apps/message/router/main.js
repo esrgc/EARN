@@ -22,6 +22,7 @@ app.Router.Main = Backbone.Router.extend({
     'for/:id': 'renderMessageArea',
     'new': 'newMessage',
     'new/:name': 'newMessageByName',
+    'newById/:id': 'newMessageById',
     'newAdmin': 'newAdminMessage'
   },
   ///////////////////route functions/////////////////////////////
@@ -49,6 +50,15 @@ app.Router.Main = Backbone.Router.extend({
     this.showActiveView('NewMessage');
     var newMessageView = app.getView('NewMessage');
     newMessageView.setName(name);
+    var convoList = app.getView('ConversationList');
+    convoList.refresh();
+  },
+  newMessageById: function(id){
+    this.newMessage = true;
+    //render new message view
+    this.showActiveView('NewMessage');
+    var newMessageView = app.getView('NewMessage');
+    newMessageView.setIds(id);
     var convoList = app.getView('ConversationList');
     convoList.refresh();
   },

@@ -16,5 +16,7 @@ namespace ESRGC.DLLR.EARN.Models
     public List<Profile> Profiles { get; set; }
     public List<Partnership> Partnerships { get; set; }
     public List<Account> Accounts { get; set; }
+    public List<Conversation> Conversations { get; set; }
+    public List<Document> Documents { get; set; }
   }
 }

@@ -84,7 +84,15 @@ app.View.NewMessage = app.View.Base.extend({
           //reset text for the name box
           scope.$('#msg-participant').val('');
         });
-
+        //add recipients by id
+        if (typeof scope.ids != 'undefined') {
+          _.each(scope.ids, function(id) {
+            console.log(id);
+            //add recipient
+            scope.addRecipientById(id);
+          });
+          return;//skip adding names if this step is done
+        }
         //if there was names for recipient add them
         if (typeof scope.names != 'undefined') {
           _.each(scope.names, function(name) {
@@ -101,6 +109,9 @@ app.View.NewMessage = app.View.Base.extend({
   setName: function(name) {
     this.names = name.split(',');
     //this.$('#msg-participant').val(name);
+  },
+  setIds: function(ids) {
+    this.ids = ids.split(',');
   },
   onMessageTextChanged: function(ev) {
     var scope = this;
@@ -214,7 +225,45 @@ app.View.NewMessage = app.View.Base.extend({
     });
     //prompt that the recipient is invalid
     if (!valid)
-      scope.updateValidationMessage('Invalid recipient name');
+      scope.updateValidationMessage('Invalid recipient name: ' + name);
+    else
+      scope.updateValidationMessage('');
+
+    //console.log(scope.recipients);
+
+  },
+  addRecipientById: function(id) {
+    var scope = this;
+    scope.updateValidationMessage('');
+    if (typeof scope.recipients == 'undefined')
+      scope.recipients = [];
+    var organizations = scope.organizations;
+    if (typeof organizations == 'undefined') {
+      console.log('No recipient loaded from server');
+      return;
+    }
+    var valid = false, exist = false;
+    _.each(scope.recipients, function(r) {
+      if (id == r.id) {
+        exist = true;
+        return;
+      }
+    });
+    if (exist)
+      return;//already exists so does nothing
+    _.each(organizations, function(o) {
+      if (o.id == id) {
+        scope.recipients.push(o);
+        //console.log(o);
+        //draw the list in html
+        var template = _.template($('#recipient').html(), { recipients: scope.recipients });
+        scope.$('.recipient-container').html(template);
+        valid = true; //indidates the recipient is found
+      }
+    });
+    //prompt that the recipient is invalid
+    if (!valid)
+      scope.updateValidationMessage('Invalid recipient id: ' + id);
     else
       scope.updateValidationMessage('');
 

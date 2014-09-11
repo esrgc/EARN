@@ -1,84 +1,87 @@
 ﻿@model ESRGC.DLLR.EARN.Models.DashboardStatistic
 @{
-    ViewBag.Title = "Dashboard";
-    ViewBag.Header = "Dashboard";
+  ViewBag.Title = "Dashboard";
+  ViewBag.Header = "Dashboard";
 }
 
 @section header{
-    <div class="container">
-        <header class="page-header">
-            <h3>@ViewBag.Header <i class="fa fa-dashboard"></i></h3>
-        </header>
-    </div>
+  <div class="container">
+    <header class="page-header">
+      <h3>@ViewBag.Header <i class="fa fa-dashboard"></i></h3>
+    </header>
+  </div>
 }
 @{
-    ViewBag.returnUrl = Url.Action("Index");   
+  ViewBag.returnUrl = Url.Action("Index");   
 }
 
 <div class="container">
-    <div class="row info-container">
-        <div class="col-md-12">
-            <h4>Statistics</h4>
-            <div class="placeholder-panel">
-                <div class="post">
-                    <div class="list-container">
-                        <ul class="list-unstyled">
-                            <li>Accounts <span class="pull-right">@Model.AccountTotal</span></li>
-                            <li>Profiles <span class="pull-right">@Model.ProfileTotal</span></li>
-                            <li>Contacts <span class="pull-right">@Model.ContactTotal</span></li>
-                            <li>Organizations <span class="pull-right">@Model.OrganizationTotal</span></li>
-                            <li>Partnerships <span class="pull-right">@Model.Partnerships.Count()</span></li>
-                            <li>Tags <span class="pull-right">@Model.TagTotal</span></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+  <div class="row info-container">
+    <div class="col-md-12">
+      <h4>Statistics</h4>
+      <div class="placeholder-panel">
+        <div class="post">
+          <div class="list-container">
+            <ul class="list-unstyled">
+              <li>Accounts <span class="pull-right">@Model.AccountTotal</span></li>
+              <li>Profiles <span class="pull-right">@Model.ProfileTotal</span></li>
+              <li>Contacts <span class="pull-right">@Model.ContactTotal</span></li>
+              <li>Organizations <span class="pull-right">@Model.OrganizationTotal</span></li>
+              <li>Partnerships <span class="pull-right">@Model.Partnerships.Count()</span></li>
+              <li>Tags <span class="pull-right">@Model.TagTotal</span></li>
+              <li>Conversations<span class="pull-right">@Model.Conversations.Count()</span></li>
+              <li>Documents<span class="pull-right">@Model.Documents.Count()</span></li>
+            </ul>
+          </div>
         </div>
+      </div>
     </div>
-    <div class="row info-container">
-        <div class="col-md-12">
-            <h4>Accounts</h4>
-            <div class="placeholder-panel">
-                <div class="post" id="accountDisplay">
-                    <ul class="list-group">
-                        @foreach (var account in Model.Accounts) {
-                            <li class="list-group-item">
-                                <h5>
-                                    
-                                    @if (account.EmailVerified) { 
-                                        <span class="label label-success" title="Email Verified">@account.EmailAddress</span>
-                                    }
-                                    else
-                                    {
-                                        <span class="label label-default" title="Not Verified">@account.EmailAddress</span>
-                                    }
-                                </h5>
-                                <p>
-                                    <small>Member since: @Html.TimeSpan(account.MemberSince)</small><br />
-                                    <small>Last update: @Html.TimeSpan(account.LastUpdate)</small><br />
-                                    <small>Last Signed in: @Html.TimeSpan(account.LastLogin)</small><br />
-                                </p>
-                                @if (account.Profile != null) { 
-                                    <p>
-                                        <small>Partnerships: @account.Profile.partnershipCount()</small><br />
-                                        <small>Created a partnership: @account.Profile.hasOwnedPartnerships()</small><br />
-                                        <small>Tags: @account.Profile.getTags().Count()</small><br />
-                                        <small>Comments: @account.Profile.Comments.Count()</small>
-                                        <small>Received Messages: @account.Profile.ReceivedMessages.Count()</small>
-                                        <small>Sent Messages: @account.Profile.SentMessages.Count()</small>
-                                    </p>
-                                    @Html.Partial("miniProfilePartial", account.Profile)
-                                }
-                            </li>
+  </div>
+  <div class="row info-container">
+    <div class="col-md-12">
+      <h4>Accounts</h4>
+      <div class="placeholder-panel">
+        <div class="post" id="accountDisplay">
+          <ul class="list-group">
+            @foreach (var account in Model.Accounts) {
+              <li class="list-group-item">
+                <h5>
 
-                        }
-                    </ul>
-                </div>
-            </div>
+                  @if (account.EmailVerified) { 
+                    <span class="label label-success" title="Email Verified">@account.EmailAddress</span>
+                    <small>&nbsp;Verified <i class="fa fa-check"></i></small>
+                  }
+                  else {                    
+                    <span class="label label-default" title="Not Verified">@account.EmailAddress</span>
+                    <small>&nbsp;Not Verified <i class="fa fa-times"></i></small>
+                  }
+                </h5>
+                <p>
+                  <small>Member since: @Html.TimeSpan(account.MemberSince)</small><br />
+                  <small>Last update: @Html.TimeSpan(account.LastUpdate)</small><br />
+                  <small>Last Signed in: @Html.TimeSpan(account.LastLogin)</small><br />
+                </p>
+                @if (account.Profile != null) { 
+                  <p>
+                    <small>Partnerships: @account.Profile.partnershipCount()</small><br />
+                    <small>Created a partnership: @account.Profile.hasOwnedPartnerships()</small><br />
+                    <small>Tags: @account.Profile.getTags().Count()</small><br />
+                    <small>Comments: @account.Profile.Comments.Count()</small>
+                    <small>Conversations: @account.Profile.MessageBoards.Count()</small>
+                    <small>Sent Messages: @account.Profile.SentMessages.Count()</small>
+                  </p>
+                  @Html.Partial("miniProfilePartial", account.Profile)
+                }
+              </li>
+
+            }
+          </ul>
         </div>
+      </div>
     </div>
-    <div class="row info-container">
-        @*<div class="col-md-6">
+  </div>
+  <div class="row info-container">
+    @*<div class="col-md-6">
             <h4>Profiles</h4>
             <div class="placeholder-panel">
                 <div class="">
@@ -92,19 +95,19 @@
                 </div>
             </div>
         </div>*@
-        <div class="col-md-12">
-            <h4>Partnerships</h4>
-            <div class="placeholder-panel">
-                <div class="">
-                    <ul class="list-group">
-                        @foreach (var p in Model.Partnerships) {
-                            <li class="list-group-item">
-                                @Html.Partial("partnershipPartial", p)
-                            </li>
-                        }
-                    </ul>
-                </div>
-            </div>
+    <div class="col-md-12">
+      <h4>Partnerships</h4>
+      <div class="placeholder-panel">
+        <div class="">
+          <ul class="list-group">
+            @foreach (var p in Model.Partnerships) {
+              <li class="list-group-item">
+                @Html.Partial("partnershipPartial", p)
+              </li>
+            }
+          </ul>
         </div>
+      </div>
     </div>
+  </div>
 </div>

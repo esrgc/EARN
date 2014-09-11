@@ -26,7 +26,9 @@ namespace ESRGC.DLLR.EARN.Controllers
         Profiles = _workUnit.ProfileRepository.Entities.OrderBy(x => x.Organization.Name).ToList(),
         Partnerships = _workUnit.PartnershipRepository.Entities.OrderBy(x => x.Name).ToList(),
         OrganizationTotal = _workUnit.OrganizationRepository.Entities.Count(),
-        Accounts = _workUnit.AccountRepository.Entities.OrderByDescending(x=>x.LastLogin).ToList()
+        Accounts = _workUnit.AccountRepository.Entities.OrderByDescending(x=>x.LastLogin).ToList(),
+        Conversations = _workUnit.ConversationRepository.Entities.OrderByDescending(x=>x.Started).ToList(),
+        Documents = _workUnit.DocumentRepository.Entities.OrderByDescending(x=> x.Created).ToList()
       };
       return View(stats);
     }

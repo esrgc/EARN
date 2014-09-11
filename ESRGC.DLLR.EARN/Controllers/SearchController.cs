@@ -81,10 +81,11 @@ namespace ESRGC.DLLR.EARN.Controllers
       var model = result
         .OrderBy(x => x.Organization.Name) // ordered by organization name
         .ToPagedList(pageIndex, pageSize);
+      
       //viewbag data
       ViewBag.messageLink = Url.Action("Index", "Message") 
-        + "#new/" 
-        + string.Join(",", result.Select(x => x.Organization.Name).ToList());
+        + "#newById/" 
+        + string.Join(",", result.Select(x => x.ProfileID).ToList());
       ViewBag.filters = filters;
       ViewBag.currentProfile = currentProfile;
       ViewBag.currentAccount = CurrentAccount;
