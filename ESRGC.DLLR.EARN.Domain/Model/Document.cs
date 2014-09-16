@@ -22,7 +22,7 @@ namespace ESRGC.DLLR.EARN.Domain.Model
 
     public int ProfileID { get; set; }
     public virtual Profile Profile { get; set; }
-    [MaxLength(200)]
+    [MaxLength(1000)]
     public string Description { get; set; }
   }
 }

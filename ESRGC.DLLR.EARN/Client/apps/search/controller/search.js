@@ -30,7 +30,8 @@ dx.defineController('Search', {
     pageContent: '#basicSearchPage',
     queryTagHolder: '.tag-list-holder',
     typeahead: '.tt-hint',
-    taskDropdown: '#taskDropdown'
+    taskDropdown: '#taskDropdown',
+    nameFilter: '#nameFilter'
   },
   control: {
     searchForm: {
@@ -139,6 +140,7 @@ dx.defineController('Search', {
     var hiddenInputHolder = scope.getHiddenInputHolder();
     var orgTypeDropdown = scope.getOrgTypeDropdown();
     var taskDropdown = scope.getTaskDropdown();
+    var nameFilter = scope.getNameFilter();
 
     //replace with new content
     searchResult.replaceWith(scope.getSearchResult(data));
@@ -146,6 +148,7 @@ dx.defineController('Search', {
     hiddenInputHolder.replaceWith(scope.getHiddenInputHolder(data));
     orgTypeDropdown.replaceWith(scope.getOrgTypeDropdown(data));
     taskDropdown.replaceWith(scope.getTaskDropdown(data));
+    nameFilter.replaceWith(scope.getNameFilter(data));
     //empty input box
     //scope.getTagInput().focus();
     scope.getTagInput().val('')

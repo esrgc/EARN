@@ -129,23 +129,23 @@ and/or view this user’s Organizational Profile for more information.",
         .OrderBy(x => x.IsRead)
         .Take(40).ToList();
 
-      var deleteNotes = CurrentAccount
-        .Notifications
-        .Where(x => {
-          var timespan = DateTime.Now - x.Created;
-          if (timespan.Days > 30)
-            return true;
-          else
-            return false;
-        })
-        .ToList();
-      if (ModelState.IsValid) {
-        deleteNotes.ForEach(x => {
-          if (x.Requests.Count() == 0)
-            _workUnit.NotificationRepository.DeleteEntity(x);
-        });
-        _workUnit.saveChanges();
-      }
+      //var deleteNotes = CurrentAccount
+      //  .Notifications
+      //  .Where(x => {
+      //    var timespan = DateTime.Now - x.Created;
+      //    if (timespan.Days > 30)
+      //      return true;
+      //    else
+      //      return false;
+      //  })
+      //  .ToList();
+      //if (ModelState.IsValid) {
+      //  deleteNotes.ForEach(x => {
+      //    if (x.Requests.Count() == 0)
+      //      _workUnit.NotificationRepository.DeleteEntity(x);
+      //  });
+      //  _workUnit.saveChanges();
+      //}
       return PartialView(notifcations);
     }
     [VerifyAccount]

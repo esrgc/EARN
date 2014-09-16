@@ -209,6 +209,10 @@
     <Compile Include="Migrations\201409101847353_profile.earn-support-field.Designer.cs">
       <DependentUpon>201409101847353_profile.earn-support-field.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201409112139425_document-description-length-1000-max.cs" />
+    <Compile Include="Migrations\201409112139425_document-description-length-1000-max.Designer.cs">
+      <DependentUpon>201409112139425_document-description-length-1000-max.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\Announcement.cs" />
@@ -346,6 +350,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201409101847353_profile.earn-support-field.resx">
       <DependentUpon>201409101847353_profile.earn-support-field.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409112139425_document-description-length-1000-max.resx">
+      <DependentUpon>201409112139425_document-description-length-1000-max.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

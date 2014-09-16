@@ -20,6 +20,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       int? size,
       int? userGroupID,
       int? categoryID,
+      string name,
       List<string> tags) {
 
       if (CurrentAccount.Profile == null) {
@@ -36,11 +37,17 @@ namespace ESRGC.DLLR.EARN.Controllers
         .Entities
         .Where(x => x.ProfileID != currentProfile.ProfileID)
         .AsQueryable();
-
+      
       //filter by user group
       if (userGroupID != null) {
         profiles = profiles.Where(x => x.UserGroupID == userGroupID).AsQueryable();
         filters.Add("userGroupID", userGroupID);
+      }
+
+      //filter by name
+      if (!string.IsNullOrEmpty(name)) {
+        profiles = profiles.Where(x => x.Organization.Name.ToLower().Contains(name.ToLower())).AsQueryable();
+        filters.Add("name", name);
       }
 
       //filter by category

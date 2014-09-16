@@ -18,19 +18,50 @@ namespace ESRGC.DLLR.EARN.Controllers
     // GET: /Partnership/
     //for search
 
-    public ActionResult Index(string name, int? page, int? size) {
+    public ActionResult Index(string name, int? page, int? size, List<string> tags) {
       var partnerships = _workUnit
         .PartnershipRepository
         .Entities
         .OrderBy(x => x.Name)
         .ToList();
 
+      //collection of current filters
+      Dictionary<string, object> filters = new Dictionary<string, object>();
+      //search by name
       if (!string.IsNullOrEmpty(name)) {
         partnerships = partnerships.Where(x => x.Name.ToLower().Contains(name.ToLower())).ToList();
       }
+
+      var result = new List<Partnership>();
+      
+      var tagNames = new List<string>();
+      if (tags != null && !(tags.Count() == 1 && string.IsNullOrEmpty(tags[0]))) {
+        //matching by tags
+        tags.ForEach(x => {
+          if (string.IsNullOrEmpty(x)) return;
+          var tagName = x.ToUpper();
+          
+          tagNames.Add(tagName);
+          //find the partnerships that match the tag
+          var resultSet = partnerships.Where(
+            p => p.PartnershipTags
+              .Select(t => t.Tag.Name)
+              .Contains(tagName)
+            ).ToList();
+          //accummulate search results for each tag
+          result = resultSet.Union(result).ToList();
+        });
+        filters.Add("tags", tagNames);
+      }
+      else
+        result = partnerships.ToList();
+
+      
+
+      ViewBag.filters = filters;
       ViewBag.name = name;
       int pageIndex = page ?? 1, pageSize = size ?? 10;
-      var pagedList = partnerships.ToPagedList(pageIndex, pageSize);
+      var pagedList = result.ToPagedList(pageIndex, pageSize);
       return View(pagedList);
     }
     /// <summary>
@@ -112,6 +143,10 @@ to invite other organizations to join your Partnership Profile, and 3)
 to decide whether to approve users who request to join your Partnership Profile.
 
 If you are the appropriate Administrator for your partnership’s EARN MD CONNECT Partnership Profile, you’re ready to get started!
+You may also designate additional Administrators of your Partnership Profile. To do so, click on the “Partners” tab on the bottom 
+left of your Partnership Profile detail page. Select the desired Partner Organization, and click the “Make Admin” button to assign 
+Administrator Privileges. You may also remove your organization as an Administrator if there exists one or more other Administrators. 
+To do so, simply click the “Remove Admin” button next to your own Organization’s profile within the “Partners” tab of your Partnership Profile page.
 ",
           Message2 = @"Next, please visit your EARN MD CONNECT Partnership Profile and invite 
 your partners to join the Partnership Profile on EARN MD CONNECT, communicate with your partners, 
