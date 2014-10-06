@@ -40,6 +40,7 @@
   var returnUrl = Url.Action("Index");
   ViewBag.returnUrl = returnUrl;
   var currentProfile = ViewBag.currentProfile as Profile;
+  var statusList = Html.getPartnershipStatusList();
 }
 <div class="container">
   <div class="row">
@@ -68,6 +69,20 @@
             </div>
           </div>
         </div>
+        <div class="form-group">
+          <div class="col-sm-12">
+            <div class="input-group">
+              <span class="input-group-addon" title="Tags"><i class="fa fa-clock-o"></i></span>
+              @Html.DropDownList("status",
+                                new SelectList(statusList),
+                                new {
+                                  @class = "form-control",
+                                  placeholder = "Status"
+                                })
+            </div>
+          </div>
+        </div>
+        
         <div class="form-group">
           <div class="col-sm-12">
             <div class="post tag-list-holder" id="keywords">
