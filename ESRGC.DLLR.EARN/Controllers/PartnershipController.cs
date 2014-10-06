@@ -18,7 +18,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     // GET: /Partnership/
     //for search
 
-    public ActionResult Index(string name, int? page, int? size, List<string> tags) {
+    public ActionResult Index(string name, string status, int? page, int? size, List<string> tags) {
       var partnerships = _workUnit
         .PartnershipRepository
         .Entities
@@ -32,6 +32,11 @@ namespace ESRGC.DLLR.EARN.Controllers
         partnerships = partnerships.Where(x => x.Name.ToLower().Contains(name.ToLower())).ToList();
       }
 
+      //filters by status
+      if (!string.IsNullOrEmpty(status)) {
+        partnerships = partnerships.Where(x => x.Status.ToLower() == status.ToLower()).ToList();
+        filters.Add("status", status);
+      }
       var result = new List<Partnership>();
       
       var tagNames = new List<string>();

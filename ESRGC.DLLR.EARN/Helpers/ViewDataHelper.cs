@@ -11,9 +11,9 @@ namespace ESRGC.DLLR.EARN.Helpers
     public static List<string> getPartnershipStatusList(this HtmlHelper helper) {
       return new List<string>() { 
         "Initiating",
-        "Planning Grant in Progress",
+        //"Planning Grant in Progress",
         "Planning Grant Awarded",
-        "Implementation Grant in Progress",
+        "Implementation Grant Proposed",
         "Implementation Grant Awarded",
         "Other"
       };

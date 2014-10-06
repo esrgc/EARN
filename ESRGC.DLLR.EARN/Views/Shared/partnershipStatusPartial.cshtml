@@ -3,15 +3,16 @@
 
 @switch (p.Status) {
     case "Initiating":
-    <span class="text-danger">@p.Status</span>
+    <span class="text-danger">@p.Status</span>@*
         break;
     case "Planning Grant in Progress":
     <span class="text-danger">@p.Status</span>
         break;
+    *@
     case "Planning Grant Awarded":
     <span class="text-warning">@p.Status</span>
         break;
-    case "Implementation Grant in Progress":
+    case "Implementation Grant Proposed":
     <span class="text-warning">@p.Status</span>
         break;
     case "Implementation Grant Awarded":
