@@ -136,6 +136,22 @@
       <div class="window-panel">
         <div class="window-panel-title">
           <strong>Available Partnerships</strong>
+          <div class="pull-right" id="taskDropdown">
+              <div class="dropdown">
+                <button class="btn btn-default btn-xs dropdown-toggle" title="Admin only" type="button" id="dropdownMenu1"
+                  data-toggle="dropdown">
+                  Tasks
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                  <li role="presentation" title="Send a message to all partnership profile admins in these search results.">
+                    <a role="menuitem" tabindex="-1" href="@ViewBag.messageLink">
+                      <i class="fa fa-envelope"></i>&nbsp;Message to Search Results
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
         </div>
 
         <div class="window-panel-content">

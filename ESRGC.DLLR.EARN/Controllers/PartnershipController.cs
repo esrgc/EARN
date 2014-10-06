@@ -61,7 +61,21 @@ namespace ESRGC.DLLR.EARN.Controllers
       else
         result = partnerships.ToList();
 
-      
+      List<Profile> profiles = new List<Profile>(); 
+      //get OPs
+      result.ForEach(x => {
+        profiles = profiles
+          .Union(
+          x.PartnershipDetails
+          .Where(p=>p.Type.ToLower() == "owner")
+          .Select(p => p.Profile)
+          ).ToList();
+      });
+
+      //viewbag data
+      ViewBag.messageLink = Url.Action("Index", "Message")
+        + "#newById/"
+        + string.Join(",", profiles.Select(x=>x.ProfileID).ToList());
 
       ViewBag.filters = filters;
       ViewBag.name = name;
