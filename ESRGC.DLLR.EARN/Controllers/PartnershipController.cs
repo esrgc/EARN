@@ -33,7 +33,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       }
 
       //filters by status
-      if (!string.IsNullOrEmpty(status)) {
+      if (!string.IsNullOrEmpty(status) && status.ToLower() != "any") {
         partnerships = partnerships.Where(x => x.Status.ToLower() == status.ToLower()).ToList();
         filters.Add("status", status);
       }

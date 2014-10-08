@@ -23,14 +23,15 @@
         <div class="post">
           <div class="list-container">
             <ul class="list-unstyled">
-              <li>Accounts <span class="pull-right">@Model.AccountTotal</span></li>
-              <li>Profiles <span class="pull-right">@Model.ProfileTotal</span></li>
-              <li>Contacts <span class="pull-right">@Model.ContactTotal</span></li>
-              <li>Organizations <span class="pull-right">@Model.OrganizationTotal</span></li>
-              <li>Partnerships <span class="pull-right">@Model.Partnerships.Count()</span></li>
-              <li>Tags <span class="pull-right">@Model.TagTotal</span></li>
+              <li>User Accounts Signed Up <span class="pull-right">@Model.AccountTotal</span></li>
+              <li>Organizational Profiles <span class="pull-right">@Model.ProfileTotal</span></li>
+              <li>Contacts (Shown in OP)<span class="pull-right">@Model.ContactTotal</span></li>
+              <li>Organizations (Organization names linked to OP)<span class="pull-right">@Model.OrganizationTotal</span></li>
+              <li>Partnerships Profiles<span class="pull-right">@Model.Partnerships.Count()</span></li>
+              <li>Tags<span class="pull-right">@Model.TagTotal</span></li>
               <li>Conversations<span class="pull-right">@Model.Conversations.Count()</span></li>
-              <li>Documents<span class="pull-right">@Model.Documents.Count()</span></li>
+              <li>Messages Sent via Message System<span class="pull-right">@Model.MessageTotal</span></li>
+              <li>Documents Posted<span class="pull-right">@Model.Documents.Count()</span></li>
             </ul>
           </div>
         </div>

@@ -28,7 +28,8 @@ namespace ESRGC.DLLR.EARN.Controllers
         OrganizationTotal = _workUnit.OrganizationRepository.Entities.Count(),
         Accounts = _workUnit.AccountRepository.Entities.OrderByDescending(x=>x.LastLogin).ToList(),
         Conversations = _workUnit.ConversationRepository.Entities.OrderByDescending(x=>x.Started).ToList(),
-        Documents = _workUnit.DocumentRepository.Entities.OrderByDescending(x=> x.Created).ToList()
+        Documents = _workUnit.DocumentRepository.Entities.OrderByDescending(x=> x.Created).ToList(),
+        MessageTotal = _workUnit.MessageRepository.Entities.Where(x=>x.ConversationID != null).Count()
       };
       return View(stats);
     }
