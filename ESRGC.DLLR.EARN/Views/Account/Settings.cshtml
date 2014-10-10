@@ -77,12 +77,25 @@
                 }
                 else {
                   if (Model.IsProfileOwner) { 
-                    <a href="@Url.Action("Delete", "Profile")">(Delete profile)</a>
+                  <a href="@Url.Action("Delete", "Profile")">(Delete profile)</a>
                   }
                   <span class="pull-right">
                     <a href="@Url.Action("Detail", "Profile", new { Model.ProfileID })">
                       @Model.Profile.Organization.Name
                     </a>
+                  </span>
+                }
+              </li>
+              <li>
+                <span>Contact Card</span>
+                @if (Model.Contact == null) {
+                  <span class="pull-right">
+                    <a href="@Url.Action("Create", "Contact")">Create</a>
+                  </span>
+                }
+                else { 
+                  <span class="pull-right">
+                    <a href="@Url.Action("Index", "Contact")">@Model.Contact.FirstName @Model.Contact.LastName</a>                    
                   </span>
                 }
               </li>

@@ -22,6 +22,7 @@
   var returnUrl = ViewBag.returnUrl as string ?? Url.Action("Basic", "Search");
   ViewBag.returnUrl = Url.Action("ViewProfile", new { Model.ProfileID, returnUrl });
   var currentProfile = ViewBag.currentProfile as Profile ?? new Profile();
+  var currentAccount = ViewBag.currentAccount as Account ?? new Account();
 }
 
 <div class="container">
@@ -90,7 +91,7 @@
             <strong>Point of Contact</strong> @*<i class="fa fa-envelope"></i>*@
           </div>
           <div class="post">
-            @Html.Partial("profileContactPartial")
+            @Html.Partial("profileContactPartial", Model.Contact)
           </div>
         </div>
         <div class="placeholder-panel">
@@ -101,6 +102,31 @@
             <div>@Html.Partial("locationInfoPartial", Model)</div>
           </div>
         </div>
+        @if (currentAccount.Role.ToLower() == "admin") {
+          <div class="placeholder-panel">
+            <div title="Admin only">
+              <strong>Members&nbsp;<i class="fa fa-lock"></i></strong> @*<i class="fa fa-envelope"></i>*@
+            </div>
+            <div class="">
+              <ul class="list-group">
+                @foreach (var a in Model.Accounts) {
+                  <li class="list-group-item">
+                    @if (a.ContactID == Model.ContactID) { 
+                      <span class="pull-right label label-danger">Profile Owner</span>
+                    }
+                    @if (a.Contact != null) {
+                      @Html.Partial("profileContactPartial", a.Contact as Contact)
+                    }
+                    else {
+                      @a.EmailAddress <span class="text-muted">(No contact created)</span>
+                    }
+                  </li>
+                }
+              </ul>
+            </div>
+
+          </div>
+        }
       </div>
     </div>
     <div class="col-md-8 profile-info-container">

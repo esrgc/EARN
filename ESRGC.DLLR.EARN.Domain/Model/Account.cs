@@ -63,6 +63,9 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     [ForeignKey("ProfileID")]
     public virtual Profile Profile { get; set; }
 
+    public int? ContactID { get; set; }
+    public virtual Contact Contact { get; set; }
+
     public virtual ICollection<Notification> Notifications { get; set; }
     public virtual ICollection<ProfileRequest> SentProfileRequests { get; set; }
     public virtual ICollection<ProfileRequest> ReceivedProfileRequests { get; set; }

@@ -19,16 +19,38 @@ namespace ESRGC.DLLR.EARN.Controllers
     }
 
     public ActionResult Index() {
-      return View();
+      return View(CurrentAccount.Contact);
     }
 
-    public ActionResult Create() {
-      return View();
+    public ActionResult Create(string returnUrl) {
+      if (CurrentAccount.Contact != null) {
+        updateTempMessage("You already have a contact information.");
+        return RedirectToAction("Index");
+      }
+      ViewBag.returnUrl = returnUrl;
+      return View(new Contact() { Email = CurrentAccount.EmailAddress });
     }
-    [VerifyProfile]
+    [HttpPost]
+    [ActionName("Create")]
+    public ActionResult CreateContact(string returnUrl) {
+      var contact = new Contact();
+      TryUpdateModel(contact);
+      if (ModelState.IsValid) {
+        var currentAccount = CurrentAccount;
+        currentAccount.Contact = contact;
+        _workUnit.AccountRepository.UpdateEntity(currentAccount);
+        _workUnit.ContactRepository.InsertEntity(contact);
+        _workUnit.saveChanges();
+        return RedirectToAction("Detail", "Profile");
+      }
+      if (!string.IsNullOrEmpty(returnUrl)) {
+        return returnToUrl(returnUrl, Url.Action("index"));
+      }
+      return View(contact);
+    }
+    
     public ActionResult Edit() {
-      var profile = CurrentAccount.Profile;
-      var contact = _workUnit.ContactRepository.GetEntityByID(profile.ContactID);
+      var contact = CurrentAccount.Contact;
       return View(contact);
     }
 
@@ -40,7 +62,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       if (ModelState.IsValid) {
         _workUnit.ContactRepository.UpdateEntity(contact);
         _workUnit.saveChanges();
-        return RedirectToAction("Detail", "Profile");
+        return RedirectToAction("index");
       }
       return View(contact);
     }

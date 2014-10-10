@@ -43,7 +43,7 @@ namespace ESRGC.DLLR.EARN.Filters
         }
         //profile hasn't been created or there's no pending request to join profile
         if (account.Profile == null) {
-          filterContext.Controller.TempData["message"] = "You have not created an organizational partnership. Please create one!";
+          filterContext.Controller.TempData["message"] = "You have not created an organizational profile. Please create one!";
           filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary() { 
             {"controller", "Profile"},
             {"action", "Index"}

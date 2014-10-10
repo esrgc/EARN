@@ -1,7 +1,7 @@
 ﻿@using ESRGC.DLLR.EARN.Models
 @model CreateProfile
 @{
-  ViewBag.Title = "User Profile";
+  ViewBag.Title = "Organizational Profile";
   ViewBag.Header = "Create profile";
 }
 @section scripts {
@@ -38,7 +38,7 @@
       </p>*@
       <div class="window-panel">
         <div class="window-panel-title">
-          <strong>Tell us about your organization.</strong>          
+          <strong>Tell us about your organization.</strong>
         </div>
         <div class="window-panel-content">
           <form class="form-horizontal" action="@Url.Action("Create")" method="post" role="form">
@@ -110,10 +110,10 @@
                 </div>
                 <div class="col-sm-2">
                   @Html.TextBoxFor(x => x.Organization.State, new {
-                     @class = "form-control input-sm",
-                     placeholder = "State",
-                     maxlength = "2"
-                   })
+                   @class = "form-control input-sm",
+                   placeholder = "State",
+                   maxlength = "2"
+                 })
                   <span class="label label-default">Required</span>
                   <div class="help-block">@Html.ValidationMessageFor(x => x.Organization.State)</div>
                 </div>
@@ -156,8 +156,7 @@
                   @Html.TextBoxFor(x => x.Organization.Website, new {
                    @class = "form-control input-sm",
                    placeholder = ModelMetadata.FromLambdaExpression(x => x.Organization.Website, ViewData).Description
-                 }
-                                    )
+                 })
                   <div class="help-block">@Html.ValidationMessageFor(x => x.Organization.Website)</div>
                 </div>
               </div>
@@ -169,25 +168,25 @@
                 </label>
                 <div class="col-sm-3">
                   @Html.TextBoxFor(x => x.Organization.TwitterLink, new {
-                   @class = "form-control input-sm",
-                   placeholder = "Twitter"
-                 })
+               @class = "form-control input-sm",
+               placeholder = "Twitter"
+             })
                   <div class="help-block">@Html.ValidationMessageFor(x => x.Organization.TwitterLink)</div>
                 </div>
 
                 <div class="col-sm-3">
                   @Html.TextBoxFor(x => x.Organization.FacebookLink, new {
-                   @class = "form-control input-sm",
-                   placeholder = "Facebook"
-                 })
+               @class = "form-control input-sm",
+               placeholder = "Facebook"
+             })
                   <div class="help-block">@Html.ValidationMessageFor(x => x.Organization.FacebookLink)</div>
                 </div>
 
                 <div class="col-sm-3">
                   @Html.TextBoxFor(x => x.Organization.LinkedInLink, new {
-                   @class = "form-control input-sm",
-                   placeholder = "LinkedIn"
-                 })
+               @class = "form-control input-sm",
+               placeholder = "LinkedIn"
+             })
                   <div class="help-block">@Html.ValidationMessageFor(x => x.Organization.LinkedInLink)</div>
                 </div>
               </div>
@@ -195,10 +194,10 @@
                 <label class="control-label col-sm-2" for="Organization.Description">Description</label>
                 <div class="col-sm-9">
                   @Html.TextAreaFor(x => x.Organization.Description, new {
-                   @class = "form-control input-sm",
-                   style = "min-height: 150px;",
-                   placeholder = ModelMetadata.FromLambdaExpression(x => x.Organization.Description, ViewData).Description
-                 })
+               @class = "form-control input-sm",
+               style = "min-height: 150px;",
+               placeholder = ModelMetadata.FromLambdaExpression(x => x.Organization.Description, ViewData).Description
+             })
                   <span class="label label-default">Required</span>
                   <div class="help-block">@Html.ValidationMessageFor(x => x.Organization.Description)</div>
                 </div>
@@ -214,12 +213,10 @@
                   <span class="label label-default">Required</span>
                   <div class="help-block">@Html.ValidationMessageFor(x => x.Contact.FirstName)</div>
                 </div>
-                @*<label class="control-label col-sm-2" for="Contact.Middle">Middle</label>*@
                 <div class="col-sm-2">
                   @Html.TextBoxFor(x => x.Contact.Middle, new { @class = "form-control input-sm", placeholder = "Middle" })
                   <div class="help-block">@Html.ValidationMessageFor(x => x.Contact.Middle)</div>
                 </div>
-                @*<label class="control-label col-sm-2" for="Contact.LastName">Last name</label>*@
                 <div class="col-sm-4">
                   @Html.TextBoxFor(x => x.Contact.LastName, new { @class = "form-control input-sm", placeholder = "Last name" })
                   <span class="label label-default">Required</span>

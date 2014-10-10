@@ -15,6 +15,9 @@
 @section scripts{
   @Scripts.Render("~/bundles/jqueryval-unobtrusive")  
 }
+@{
+  var contact = ViewBag.contact as Contact;  
+}
 <div class="container">
   <div class="row">
     <div class="col-md-12">
@@ -35,7 +38,9 @@
               <div class="form-group">
                 <label class="control-label col-sm-2" for="name">Full Name</label>
                 <div class="col-md-4">
-                  <input type="text" class="form-control input-sm"  data-val="true" data-val-required="Please enter your name" name="name" placeholder="Please enter your full name" />
+                  <input type="text" class="form-control input-sm"  
+                    value="@contact.FirstName @contact.LastName"
+                    data-val="true" data-val-required="Please enter your name" name="name" placeholder="Please enter your full name" />
                   <span class="label label-default">Required</span>
                   <div class="help-block"><span class="field-validation-valid" data-valmsg-for="name" data-valmsg-replace="true"></span></div>
                 </div>

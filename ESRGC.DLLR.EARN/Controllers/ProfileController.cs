@@ -65,6 +65,9 @@ namespace ESRGC.DLLR.EARN.Controllers
     [AllowNonProfile]
     [HasPendingProfileRequest]//prevent searching while having pending profile request
     public ActionResult Find(string name, int? page, int? pageSize, string f = "html") {
+      if (CurrentAccount.Contact == null) {
+        return RedirectToAction("Create", "Contact", new { returnUrl = Url.Action("Find", "Profile")});
+      }
       if (CurrentAccount.Profile != null) {
         updateTempMessage("You already belong to an organization.");
         return RedirectToAction("Detail");
@@ -90,11 +93,12 @@ namespace ESRGC.DLLR.EARN.Controllers
       var pagedList = result.ToList().ToPagedList(index, size);
       return View(pagedList);
     }
+
     [AllowNonProfile]
     public ActionResult Join(int profileID) {
       var profile = _workUnit.ProfileRepository.GetEntityByID(profileID);
       if (profile == null) {
-        updateTempMessage("Invalid partnership ID");
+        updateTempMessage("Invalid Profile ID");
         return RedirectToAction("Index", "Home");
       }
 
@@ -112,7 +116,8 @@ namespace ESRGC.DLLR.EARN.Controllers
 
       var categories = _workUnit.CategoryRepository.Entities.OrderBy(x => x.Name).ToList();
       var userGroups = _workUnit.UserGroupRepository.Entities.OrderBy(x => x.UserGroupID).ToList();
-      return View(new CreateProfile() { Categories = categories, UserGroups = userGroups });
+      var contact = CurrentAccount.Contact ?? new Contact();
+      return View(new CreateProfile() { Categories = categories, UserGroups = userGroups , Contact = contact});
     }
 
     [HttpPost]
@@ -142,6 +147,7 @@ namespace ESRGC.DLLR.EARN.Controllers
         var account = CurrentAccount;
         if (account != null) {
           account.Profile = p;
+          account.Contact = profile.Contact;
           account.IsProfileOwner = true;
           _workUnit.AccountRepository.UpdateEntity(account);
           _workUnit.saveChanges();
@@ -172,6 +178,7 @@ namespace ESRGC.DLLR.EARN.Controllers
             .Include(x => x.Contact)
             .Include(x=>x.ProfileTags)
             .First(x => x.ProfileID == profileID);
+        ViewBag.currentAccount = CurrentAccount;
         return View(profile);
       }
       catch  {
@@ -236,7 +243,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     [SendNotification]
     public ActionResult DeleteProfile() {
       if (!CurrentAccount.IsProfileOwner) {
-        updateTempMessage("Sory, you can not delete this partnership. Only the partnership creator/owner can delete.");
+        updateTempMessage("Sorry, you can not delete this organizational profile. Only the profile creator/owner can delete.");
         return RedirectToAction("Settings", "Account");
       }
       var profile = CurrentAccount.Profile;
@@ -246,8 +253,8 @@ namespace ESRGC.DLLR.EARN.Controllers
         var notification = new Notification() {
           Category = "Profile Deleted",
           Account = a,
-          Message = string.Format("The organizational partnership {0} has been deleted by the owner.", profile.Organization.Name),
-          Message2 = "If you wish to create or join another partnership please visit EARN MD CONNECT to do so.",
+          Message = string.Format("The organizational profile {0} has been deleted by the owner.", profile.Organization.Name),
+          Message2 = "If you wish to create or join another profile please visit EARN MD CONNECT to do so.",
           LinkToAction = Url.Action("Index", "Profile")
         };
         _workUnit.NotificationRepository.InsertEntity(notification);
@@ -262,7 +269,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       }
 
       if (profile.hasOwnedPartnerships()) {
-        updateTempMessage("Your organizational partnership is currently involved with one or more partnertships as an administrator. Please re-assign admin role before deleting your partnership.");
+        updateTempMessage("Your organizational profile is currently involved with one or more partnertships as an administrator. Please re-assign admin role before deleting your profile.");
         return RedirectToAction("Detail");
       }
 
@@ -303,9 +310,9 @@ namespace ESRGC.DLLR.EARN.Controllers
         _workUnit.OrganizationRepository.DeleteEntity(profile.Organization);
       }
       //delete contact
-      if (profile.Contact != null) {
-        _workUnit.ContactRepository.DeleteEntity(profile.Contact);
-      }
+      //if (profile.Contact != null) {
+      //  _workUnit.ContactRepository.DeleteEntity(profile.Contact);
+      //}
 
       
       _workUnit.saveChanges();
