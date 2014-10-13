@@ -79,5 +79,9 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public void newVerificationCode() {
       VerificationCode = Helpers.Utility.RandomString(30);
     }
+
+    public bool isAdmin() {
+      return Role.ToLower() == "admin";
+    }
   }
 }

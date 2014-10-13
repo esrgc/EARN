@@ -502,6 +502,7 @@
     <Content Include="Views\Shared\partnershipActionPartial.cshtml" />
     <Content Include="Views\Shared\partnershipWithActionPartial.cshtml" />
     <Content Include="Views\Contact\Index.cshtml" />
+    <Content Include="Views\Document\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

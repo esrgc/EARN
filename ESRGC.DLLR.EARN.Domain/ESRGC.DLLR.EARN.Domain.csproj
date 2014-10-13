@@ -217,6 +217,10 @@
     <Compile Include="Migrations\201410101453150_account-contact.Designer.cs">
       <DependentUpon>201410101453150_account-contact.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201410131741570_doc-partnership.cs" />
+    <Compile Include="Migrations\201410131741570_doc-partnership.Designer.cs">
+      <DependentUpon>201410131741570_doc-partnership.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\Announcement.cs" />
@@ -360,6 +364,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201410101453150_account-contact.resx">
       <DependentUpon>201410101453150_account-contact.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410131741570_doc-partnership.resx">
+      <DependentUpon>201410131741570_doc-partnership.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
