@@ -42,20 +42,22 @@
 
 <script type="text/template" id="message-board">
   <div class="message-container">
-    <h4>{{ name }}
+    <h5><strong>{{ name }}</strong>
       <button class="btn btn-default btn-xs" title="Reload messages" id="refreshBtn">
         <i class="fa fa-refresh"></i>
       </button>
-      <br />
-      <small>Conversation started on {{started}}</small>
-    </h4>
+    </h5>
     <div class="message-board" data-id="{{id}}">
-      {[
+      <div class="text-center" id="convo-started-time"><small class="text-muted">Conversation started on {{started}}</small>
+      </div>
+      <div>
+        {[
         if(messages.length == 0){
       ]}
-        <p class="text-center">Your message inbox is empty</p>
-      {[  }
-         
+        <hr />
+        <p class="text-center">There are no messages in this conversation</p>
+
+        {[  }
         _.each(messages, function(m){                    
           var adminMsgClass = '';
           var textTitle = '';
@@ -82,9 +84,10 @@
           <div class="clear"></div>
         </div>
 
-      {[  
+        {[  
         });
       ]}
+      </div>
     </div>
   </div>
 </script>
