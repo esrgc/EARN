@@ -14,7 +14,7 @@ namespace ESRGC.DLLR.EARN.Controllers
   {
     public DocumentController(IWorkUnit workUnit) : base(workUnit) { }
 
-    
+    [VerifyProfile]
     public ActionResult Index() {
       var docs = _workUnit.DocumentRepository.Entities
         .Where(x=>x.PartnershipID == null)
