@@ -1,0 +1,81 @@
+﻿@using ESRGC.DLLR.EARN.Domain.Model
+@model Folder
+@{
+  ViewBag.Title = "Documents";
+  ViewBag.Header = "Create Folder";
+}
+
+@section scripts {
+  @Scripts.Render("~/bundles/jqueryval-unobtrusive")
+}
+
+@section header{
+  <div class="container">
+    <header class="page-header">
+      <h4>@ViewBag.Header <i class="fa fa-briefcase"></i></h4>
+    </header>
+  </div>
+}
+@{
+  var currentFolder = ViewBag.currentFolder as Folder;  
+}
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h6 class="panel-title">Create New folder</h6>
+        </div>
+        <div class="panel-body">
+          <ol class="breadcrumb">
+            <li><a href="@Url.Action("Index", "Document")">EARN CONNECT</a></li>
+
+            @if (currentFolder != null) {
+              foreach (var folder in currentFolder.getFolderHierarchy()) {              
+              <li><a href="@Url.Action("Index", "Document", new { folder.FolderID })">@folder.Name</a></li>              
+              }
+              <li><a href="@Url.Action("Index", "Document", new { currentFolder.FolderID })">@currentFolder.Name</a></li>
+            }
+            <li class="active">New Folder</li>
+          </ol>
+          <form method="post" action="@Url.Action("Create")" class="form-horizontal">
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(x=>x.ParentFolderID)
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="name">Name</label>              
+              <div class="col-sm-6">
+                @Html.TextBoxFor(x => x.Name, new {
+                   @class = "form-control input-sm",
+                   type = "text",
+                   maxlength = "30",
+                   placeholder = "Folder Name"
+                 })
+                <span class="label label-default">Required</span>
+                <div class="help-block">@Html.ValidationMessageFor(x => x.Name)</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label" for="Description">Description</label>
+              <div class="col-sm-8">
+                <textarea class="form-control input-sm"
+                  cols="20" id="Description"
+                  maxlength="1000"
+                  rows="5"
+                  name="Description"
+                  placeholder="Brief folder description (1000 characters max). Users should not share sensitive or proprietary content on this site."
+                  style="min-height: 50px;"></textarea>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default btn-primary">Submit</button>
+                <a class="btn btn-default" href="@Url.Action("Index", "Document", new { })">Cancel</a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

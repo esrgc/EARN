@@ -13,8 +13,8 @@ namespace ESRGC.DLLR.EARN.Domain.DAL
     public DomainContext()
       : base("name=DLLR.EARN") {
 
-        Configuration.LazyLoadingEnabled = true;
-        Configuration.ProxyCreationEnabled = true;
+      Configuration.LazyLoadingEnabled = true;
+      Configuration.ProxyCreationEnabled = true;
     }
     public DbSet<Account> Accounts { get; set; }
     public DbSet<Contact> Contacts { get; set; }
@@ -37,6 +37,7 @@ namespace ESRGC.DLLR.EARN.Domain.DAL
     public DbSet<Message> Messages { get; set; }
     public DbSet<MessageBoard> MessageBoards { get; set; }
     public DbSet<Conversation> Conversations { get; set; }
+    public DbSet<Folder> Folders { get; set; }
 
     protected override void OnModelCreating(DbModelBuilder modelBuilder) {
       modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
@@ -56,9 +57,9 @@ namespace ESRGC.DLLR.EARN.Domain.DAL
         });
       //sender foreign key
       modelBuilder.Entity<Request>()
-        .HasRequired(x=>x.Sender)
-        .WithMany(x=>x.SentRequests)
-        .HasForeignKey(x=>x.SenderID)
+        .HasRequired(x => x.Sender)
+        .WithMany(x => x.SentRequests)
+        .HasForeignKey(x => x.SenderID)
         .WillCascadeOnDelete(false);
       modelBuilder.Entity<Request>()
         .HasRequired(x => x.Receiver)
@@ -78,7 +79,7 @@ namespace ESRGC.DLLR.EARN.Domain.DAL
         .WithRequired(x => x.Sender)
         .HasForeignKey(x => x.SenderID)
         .WillCascadeOnDelete(false);
-      
+
       //Profile - Comment relationship (one to many)
       modelBuilder.Entity<Comment>()
         .HasRequired(x => x.Author)
@@ -94,7 +95,16 @@ namespace ESRGC.DLLR.EARN.Domain.DAL
         .HasOptional(x => x.Receiver)
         .WithMany(x => x.ReceivedMessages)
         .HasForeignKey(x => x.ReceiverID)
-        .WillCascadeOnDelete(false);                  
+        .WillCascadeOnDelete(false);
+
+      //folders
+      modelBuilder.Entity<Folder>()
+        .HasOptional(x => x.ParentFolder)
+        .WithMany(x => x.ChildFolders)
+        .HasForeignKey(x => x.ParentFolderID)
+        .WillCascadeOnDelete(false);
+
+
     }
   }
 }

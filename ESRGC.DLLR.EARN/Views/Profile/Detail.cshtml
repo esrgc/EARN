@@ -37,9 +37,9 @@
           <h4>Your account email address has not been verified!</h4>
           <p>
             Currently, you are not able to receive notifications, including partnership invite/request. 
-                        Please verify your email address to start receiving notifications.
-                        <a class="alert-link" href="@Url.Action("Settings", "Account")">Click here to check your email verification
-                          status.</a>
+            Please verify your email address to start receiving notifications.
+            <a class="alert-link" href="@Url.Action("Settings", "Account")">Click here to check your email verification
+              status.</a>
           </p>
         </div>
       }
@@ -205,7 +205,7 @@
                   @if (a.ContactID == Model.ContactID) { 
                     <span class="pull-right label label-danger">Profile Owner</span>
                   }
-                  @if (a.ContactID == currentAccount.ContactID) { 
+                  @if (a.AccountID == currentAccount.AccountID) { 
                     <span class="pull-right label label-info">You</span>
                   }
                   @if (a.Contact != null) {

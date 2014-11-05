@@ -28,6 +28,7 @@ namespace ESRGC.DLLR.EARN.Domain.DAL.Abstract
     IRepository<Message> MessageRepository { get; }
     IRepository<MessageBoard> MessageBoardRepository { get; }
     IRepository<Conversation> ConversationRepository { get; }
+    IRepository<Folder> FolderRepository { get; }
     void saveChanges();
     void Dispose();
   }

@@ -8,6 +8,10 @@
   ViewBag.Header = "EARN Documents";
   var currentAccount = ViewBag.currentAccount as Account;
   var returnUrl = ViewBag.returnUrl as string;
+  var folders = ViewBag.folders as List<Folder> ?? new List<Folder>();
+  var currentFolder = ViewBag.currentFolder as Folder;
+
+  
 }
 
 
@@ -45,7 +49,9 @@
             @if (currentAccount.isAdmin()) {
               <form id="documentForm" class="form-horizontal" method="post" action="@Url.Action("UploadDoc", "Document")" enctype="multipart/form-data">
                 @Html.AntiForgeryToken()
-                @*<input type="hidden" value="@returnUrl" name="returnUrl"/>*@
+                @if (currentFolder != null) { 
+                  <input type="hidden" value="@currentFolder.FolderID" name="folderID"/>
+                }
                 <div class="form-group">
                   <label class="control-label col-sm-2" for="file">File</label>
                   <div class="col-sm-6">
@@ -78,33 +84,126 @@
               </form>
               <hr />
             }
-            <h5>Available Documents</h5>
+
+            <!--Folder navigation-->
+            <ol class="breadcrumb">
+              <li><a href="@Url.Action("Index")">EARN CONNECT</a></li>
+
+              @if (currentFolder != null) {
+                foreach (var folder in currentFolder.getFolderHierarchy()) {              
+                <li><a href="@Url.Action("Index", "Document", new { folder.FolderID })">@folder.Name</a></li>              
+                }
+                <li class="active">@currentFolder.Name</li>
+              }
+              @if (currentAccount.isAdmin()) { 
+                <li>
+                  <span class="">
+                    @if (currentFolder != null) { //root
+                      <a class="btn btn-xs btn-default" href="@Url.Action("Create", "Folder", new { currentFolder.FolderID })">
+                        <i class="fa fa-plus"></i>&nbsp;Create Folder
+                      </a>
+                    }
+                    else {
+                      <a class="btn btn-xs btn-default" href="@Url.Action("Create", "Folder")">
+                        <i class="fa fa-plus"></i>&nbsp;Create Folder
+                      </a>
+                    }
+                  </span>
+                </li>
+              }
+            </ol>
+
+
+
             <div class="placeholder-panel">
               @if (Model.Count() == 0) { 
                 <p>There are currently no documents uploaded.</p>
               }
-              @foreach (var i in Model) { 
-                <div class="post">
-                  <h5>
-                    <small class="pull-right">@Html.TimeSpan(i.Created)</small>
-                    <a href="@Url.Action("DownloadDoc", "Document", new { i.DocumentID })">@i.Name</a><br />
-                    <small>Uploaded by</small>&nbsp;<span>@i.Profile.Organization.Name</span>
-                  </h5>
-                  <p class="text-info">@i.Description</p>
-                  @if (currentAccount.isAdmin()) { 
-                    <div class="panel-action-right">
-                      <form action="@Url.Action("Delete", "Document")" method="post">
-                        @Html.AntiForgeryToken()
-                        <input type="hidden" name="documentID" value="@i.DocumentID"/>
-                        <input type="hidden" name="returnUrl" value="@returnUrl" />
-                        <button type="submit" class="btn btn-danger btn-xs">
-                          <i class="fa fa-trash-o"></i>&nbsp;Delete
-                        </button>
-                      </form>
+
+              <ul class="list-group">
+                @foreach (var f in folders) { 
+                  <li class="list-group-item">
+                    <div class="col-sm-4">
+                      <i class="fa fa-folder"></i>&nbsp;
+                      <a href="@Url.Action("Index", "Document", new { f.FolderID })">
+                        @f.Name
+                      </a>
+                      @if (f.hasDocuments()) { 
+                        <p>
+                          @switch (f.Documents.Count()) {
+                            case 0: 
+                            <small>No document available</small>
+                              break;
+                            case 1:
+                            <small>1 document available</small>
+                              break;
+                            default:
+                            <small>@f.Documents.Count documents available</small>
+                              break;
+                          }
+                        </p>
+                      }
                     </div>
-                  }
-                </div>
-              }
+                    <div class="col-sm-5">
+                      <small class="text-muted">@f.Description</small>
+                    </div>
+                    <div class="col-sm-3">
+                      <small class="pull-left">@Html.TimeSpan(f.Created)</small>
+                      @if (currentAccount.isAdmin()) { 
+                        <form action="@Url.Action("Delete", "Folder")" method="post" class="pull-right">
+                          @Html.AntiForgeryToken()
+                          <input type="hidden" name="folderID" value="@f.FolderID"/>
+                          <input type="hidden" name="returnUrl" value="@returnUrl" />
+                          <button type="submit" class="btn btn-danger btn-xs">
+                            <i class="fa fa-trash-o"></i>
+                          </button>
+                        </form>
+                      }
+                    </div>
+                    <div class="clear"></div>
+                  </li>
+                }
+
+                @foreach (var i in Model) { 
+                  <li class="list-group-item">
+                    <div class="col-sm-4">
+                      <i class="fa fa-file-text-o"></i>&nbsp;
+                      <a href="@Url.Action("DownloadDoc", "Document", new { i.DocumentID })">
+                        @i.Name
+                      </a>
+                      <p>
+                        <small>Uploaded by </small>
+                        <a href="@Url.Action("ViewProfile", "Profile", new { @i.ProfileID, returnUrl = Url.Action("Index") })" title="Uploaded by @i.Profile.Organization.Name">
+                          <small>@i.Profile.Organization.Name</small>
+                        </a>
+                      </p>
+
+                    </div>
+                    <div class="col-sm-5">
+                      <small class="text-muted">@i.Description</small>
+                    </div>
+                    <div class="col-sm-3">
+                      <small class="pull-left">@Html.TimeSpan(i.Created)</small>
+                      @if (currentAccount.isAdmin()) { 
+                        <form action="@Url.Action("DeleteDoc", "Document")" method="post" class="pull-right">
+                          @Html.AntiForgeryToken()
+                          <input type="hidden" name="documentID" value="@i.DocumentID"/>
+                          @if (currentFolder != null) {
+                            @Html.Hidden("FolderID", currentFolder.FolderID)
+                          }
+                          <input type="hidden" name="returnUrl" value="@returnUrl" />
+                          <button type="submit" class="btn btn-danger btn-xs" title="Delete">
+                            <i class="fa fa-trash-o"></i>
+                          </button>
+                        </form>
+                      }
+                    </div>
+                    <div class="clear"></div>
+                  </li>
+                }
+              </ul>
+
+
             </div>
           </div>
         </div>

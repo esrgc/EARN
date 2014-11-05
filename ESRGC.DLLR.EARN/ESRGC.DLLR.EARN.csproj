@@ -152,6 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -161,6 +162,7 @@
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\DocumentController.cs" />
     <Compile Include="Controllers\EmailController.cs" />
+    <Compile Include="Controllers\FolderController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\OrganizationController.cs" />
@@ -338,6 +340,7 @@
     <Content Include="Client\css\less\bootstrap-custom.less" />
     <Content Include="Client\css\less\quickForm.less" />
     <Content Include="Client\css\less\message.less" />
+    <Content Include="Areas\Admin\Views\Web.config" />
     <None Include="Client\css\profile.oldcss" />
     <None Include="Client\css\quickForm.oldcss" />
     <Content Include="Client\css\less\lib\variables.less" />
@@ -503,9 +506,13 @@
     <Content Include="Views\Shared\partnershipWithActionPartial.cshtml" />
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Views\Document\Index.cshtml" />
+    <Content Include="Views\Folder\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Controllers\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Client\apps\search\model\" />
     <Folder Include="Client\apps\search\view\" />
     <Folder Include="Client\dllrContent\includes\footers\" />

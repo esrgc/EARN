@@ -24,5 +24,8 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public virtual Profile Profile { get; set; }
     [MaxLength(1000)]
     public string Description { get; set; }
+
+    public int? FolderID { get; set; }
+    public virtual Folder Folder { get; set; }
   }
 }

@@ -221,12 +221,21 @@
     <Compile Include="Migrations\201410131741570_doc-partnership.Designer.cs">
       <DependentUpon>201410131741570_doc-partnership.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201410301600011_folder.cs" />
+    <Compile Include="Migrations\201410301600011_folder.Designer.cs">
+      <DependentUpon>201410301600011_folder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201411052013485_folder-required-fields.cs" />
+    <Compile Include="Migrations\201411052013485_folder-required-fields.Designer.cs">
+      <DependentUpon>201411052013485_folder-required-fields.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\Announcement.cs" />
     <Compile Include="Model\Comment.cs" />
     <Compile Include="Model\Conversation.cs" />
     <Compile Include="Model\Document.cs" />
+    <Compile Include="Model\Folder.cs" />
     <Compile Include="Model\GeoTag.cs" />
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\History.cs" />
@@ -367,6 +376,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201410131741570_doc-partnership.resx">
       <DependentUpon>201410131741570_doc-partnership.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410301600011_folder.resx">
+      <DependentUpon>201410301600011_folder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201411052013485_folder-required-fields.resx">
+      <DependentUpon>201411052013485_folder-required-fields.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
