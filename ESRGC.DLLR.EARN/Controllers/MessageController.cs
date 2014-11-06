@@ -149,7 +149,7 @@ namespace ESRGC.DLLR.EARN.Controllers
               Category = "Message Received",
               Message = "\"" + sender.Organization.Name + "\" has sent a new message.",
               Account = x,
-              Message2 = "Message: " + message.Replace("<br />", "\r\n").toShorDescription(150),
+              Message2 = "Message: " + message.Replace("<br />", "\r\n"),
               Message3 = "You can view and reply to this message at EARN MD CONNECT.",
               LinkToAction = string.Format(Url.Action("Index") + "#for/{0}",
                 conversationID
@@ -270,7 +270,7 @@ namespace ESRGC.DLLR.EARN.Controllers
 
       return new {
         id = x.ConversationID,
-        lastMessage = x.LastMessage.toShorDescription(15),
+        lastMessage = x.LastMessage.Replace("<br />", " ").toShorDescription(15),
         started = x.Started.ToString(),
         name = name,
         logoUrl = logoUrl,

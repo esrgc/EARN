@@ -1,6 +1,6 @@
 .message-panel {
-  height: 600px;
-  max-height: 600px;
+  height: 620px;
+  max-height: 620px;
   margin-top: 10px;
   display: none;
   float: left;
@@ -36,7 +36,7 @@
 }
 .message-center {
   width: 70%;
-  min-height: 600px;
+  min-height: 620px;
   overflow-y: auto;
   padding-left: 5px;
 }
@@ -45,8 +45,8 @@
   padding-left: 10px;
   padding-right: 10px;
   margin-right: 5px;
-  height: 375px;
-  max-height: 375px;
+  height: 395px;
+  max-height: 395px;
   overflow: auto;
   padding-top: 20px;
   border-top: 1px solid #dddddd;
@@ -89,7 +89,7 @@
 #message-control-panel,
 #message-area {
   position: relative;
-  max-height: 600px;
+  max-height: 620px;
   overflow-y: auto;
 }
 .message-composer {
@@ -105,4 +105,13 @@
 .message-composer .message-input-box {
   min-height: 100px;
   margin-bottom: 3px;
+}
+.message-container #convo-started-time {
+  margin-bottom: 10px;
+}
+.message-container #convo-started-time h4,
+.message-container #convo-started-time h5 {
+  min-height: 42px;
+  max-height: 42px;
+  overflow: auto;
 }

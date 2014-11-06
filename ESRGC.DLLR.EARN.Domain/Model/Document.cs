@@ -17,12 +17,15 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public byte[] Data { get; set; }
     public DateTime Created { get; set; }
 
-    public int PartnershipID { get; set; }
+    public int? PartnershipID { get; set; }
     public virtual Partnership Partnership { get; set; }
 
     public int ProfileID { get; set; }
     public virtual Profile Profile { get; set; }
     [MaxLength(1000)]
     public string Description { get; set; }
+
+    public int? FolderID { get; set; }
+    public virtual Folder Folder { get; set; }
   }
 }

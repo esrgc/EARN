@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Edit Contact";
-    ViewBag.Header = "Point of Contact";
+    ViewBag.Header = "Contact";
 }
 @section scripts {
     @Scripts.Render("~/bundles/jqueryval-unobtrusive")    
@@ -36,7 +36,7 @@
                         <div class="form-group">
                             <div class="col-sm-6 col-sm-offset-2">
                                 <button type="submit" class="btn btn-primary">Submit</button>
-                                <a class="btn btn-default" href="@Url.Action("Detail", "Profile")">Cancel</a>
+                                <a class="btn btn-default" href="@Url.Action("index")">Cancel</a>
                             </div>
                         </div>
                     </form>

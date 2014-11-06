@@ -1,11 +1,11 @@
 ﻿@using ESRGC.DLLR.EARN.Domain.Model
-@model Profile
-@if (Model.Contact != null) { 
+@model Contact
+@if (Model != null) { 
   <address>
     <i class="fa fa-user"></i>
-    @Model.Contact.NameTitle
-    <strong>@Model.Contact.FirstName @Model.Contact.Middle @Model.Contact.LastName</strong>
-    @Model.Contact.NameExtension
+    @Model.NameTitle
+    <strong>@Model.FirstName @Model.Middle @Model.LastName</strong>
+    @Model.NameExtension
     <br />
     @*<i class="fa fa-location-arrow" title="Street address"></i>&nbsp;@Model.Organization.StreetAddress
     <br />
@@ -23,8 +23,16 @@
         }
         <span><abbr title="Department">Dept:</abbr>&nbsp;@Model.Organization.Department</span> <br />
     }*@
-    <i class="fa fa-phone" title="Phone"></i>&nbsp;@Model.Contact.Phone<br />
-    <i class="fa fa-envelope-o" title="Email"></i>&nbsp;<a href="mailto:@Model.Contact.Email">@Model.Contact.Email</a>
+    <i class="fa fa-phone" title="Phone"></i>&nbsp;@Model.Phone<br />
+    <i class="fa fa-envelope-o" title="Email"></i>&nbsp;<a href="mailto:@Model.Email">@Model.Email</a>
   </address>
 
+}
+else{
+  <div class="alert alert-warning">
+    <strong>Contact Not Found!</strong><br />
+    <p>
+      Your contact hasn't been created. Please <a href="@Url.Action("Create", "Contact")">click here</a> to create.
+    </p>
+  </div>
 }

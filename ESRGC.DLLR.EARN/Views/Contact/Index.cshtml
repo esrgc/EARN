@@ -1,0 +1,44 @@
+﻿@model ESRGC.DLLR.EARN.Domain.Model.Contact
+
+@{
+  ViewBag.Title = "Contact Information";
+  ViewBag.Header = "Your Contact Card";
+}
+@section scripts {
+  @Scripts.Render("~/bundles/jqueryval-unobtrusive")
+}
+
+@section header {
+  <div class="container">
+    <header class="page-header">
+      <h3>@ViewBag.Header <i class="fa fa-envelope"></i></h3>
+      @*<ul class="breadcrumb">
+                <li><a href="@Url.Action("index", "Home")">Home</a></li>
+                <li class="active">@ViewBag.Header</li>
+            </ul>*@
+    </header>
+  </div>
+}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="window-panel">
+        <div class="window-panel-title">
+          <strong>Contact</strong>
+          @if (Model != null) { 
+            <span class="pull-right">
+              <a class="link-icon" title="Edit contact info" href="@Url.Action("Edit", "Contact")"><i class="fa fa-pencil">
+              </i></a>
+            </span>
+          }
+        </div>
+        <div class="window-panel-content">
+          <p>@Html.Partial("profileContactPartial")</p>
+
+          <a class="btn btn-default" href="@Url.Action("Detail", "Profile")">Back to Profile</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -37,9 +37,9 @@
           <h4>Your account email address has not been verified!</h4>
           <p>
             Currently, you are not able to receive notifications, including partnership invite/request. 
-                        Please verify your email address to start receiving notifications.
-                        <a class="alert-link" href="@Url.Action("Settings", "Account")">Click here to check your email verification
-                          status.</a>
+            Please verify your email address to start receiving notifications.
+            <a class="alert-link" href="@Url.Action("Settings", "Account")">Click here to check your email verification
+              status.</a>
           </p>
         </div>
       }
@@ -49,8 +49,19 @@
           <h4>An important step that needs your attention!</h4>
           <p>
             There are currently no tags on your profile. Other organizations are not able
-                        to find you by tags. 
-                        <a class="alert-link" href="@Url.Action("ManageTag", "Tag")">Please click here to edit your tags</a>
+            to find you by tags. 
+            <a class="alert-link" href="@Url.Action("ManageTag", "Tag")">Please click here to edit your tags</a>
+          </p>
+        </div>
+      }
+      @if (currentAccount.Contact == null) { 
+        <div class="alert alert-warning">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <h4>An important step that needs your attention!</h4>
+          <p>
+            There is currently no contact information in your account. Please create your contact information, so
+            others can find and contact you within your organization.
+            <a class="alert-link" href="@Url.Action("Create", "Contact")">Please click here enter contact information</a>
           </p>
         </div>
       }
@@ -129,13 +140,15 @@
         <div class="placeholder-panel">
           <div>
             <strong>Point of Contact</strong> @*<i class="fa fa-envelope"></i>*@
-            <span class="pull-right">
-              <a class="link-icon" title="Edit contact info" href="@Url.Action("Edit", "Contact")"><i class="fa fa-pencil">
-              </i></a>
-            </span>
+            @if (Model.ContactID == currentAccount.ContactID) {
+              <span class="pull-right">
+                <a class="link-icon" title="Edit contact info" href="@Url.Action("Edit", "Contact")"><i class="fa fa-pencil">
+                </i></a>
+              </span>            
+            }
           </div>
           <div class="post">
-            @Html.Partial("profileContactPartial")
+            @Html.Partial("profileContactPartial", Model.Contact)
           </div>
         </div>
         <div class="placeholder-panel">
@@ -159,9 +172,9 @@
         <form action="@Url.Action("EditAbout")" method="post">
           <strong>Profile Summary</strong>
           @Html.TextAreaFor(x => x.About, new {
-       @class = "form-control about",
-       placeholder = ModelMetadata.FromLambdaExpression(x => x.About, ViewData).Description
-     })
+             @class = "form-control about",
+             placeholder = ModelMetadata.FromLambdaExpression(x => x.About, ViewData).Description
+           })
           <div class="text-right">
             <button type="submit" class="btn btn-info btn-xs"><i class="fa fa-save"></i>&nbsp;Save</button>
 
@@ -174,25 +187,54 @@
   <div class="row">
     <div class="col-md-12 profile-tabs">
       <ul class="nav nav-tabs ">
-        @*<li class="active"><a href="#summary" data-toggle="tab">Summary</a></li>*@
-        <li class="active"><a href="#connections" data-toggle="tab">Connections&nbsp;<span class="badge">@connectionCount</span></a>
+        <li class="active"><a href="#accounts" data-toggle="tab">Members&nbsp;<span class="badge">@Model.Accounts.Count()</span></a>
         </li>
-        <li><a href="#partnerships" data-toggle="tab">Partnerships&nbsp;<span class="badge">@partnershipCount</span></a>
+        <li>
+          <a href="#connections" data-toggle="tab">Connections&nbsp;<span class="badge">@connectionCount</span></a>
+        </li>
+        <li>
+          <a href="#partnerships" data-toggle="tab">Partnerships&nbsp;<span class="badge">@partnershipCount</span></a>
         </li>
       </ul>
       <div class="tab-content">
-        @*<div class="tab-pane active" id="summary">                    
-                </div>*@
-        <div class="tab-pane active" id="connections">
+        <div class="tab-pane active" id="accounts">
+          <div class="placeholder-pane">
+            <ul class="list-group">
+              @foreach (var a in Model.Accounts) {
+                <li class="list-group-item">
+                  @if (a.ContactID == Model.ContactID) { 
+                    <span class="pull-right label label-danger">Profile Owner</span>
+                  }
+                  @if (a.AccountID == currentAccount.AccountID) { 
+                    <span class="pull-right label label-info">You</span>
+                  }
+                  @if (a.Contact != null) {
+                    @Html.Partial("profileContactPartial", a.Contact as Contact)
+                  }
+                  else {
+                    @a.EmailAddress <span class="text-muted">(No contact created)</span>
+                  }
+                  @if (a.ContactID == currentAccount.ContactID && a.Contact != null) {                    
+                    <span class="pull-right">
+                      <a class="btn btn-xs btn-default" href="@Url.Action("Edit", "Contact")"><i class="fa fa-pencil"></i>&nbsp;Edit</a>
+                    </span>
+                    <div class="clear"></div>
+                  }
+                </li>
+              }
+            </ul>
+          </div>
+        </div>
+        <div class="tab-pane" id="connections">
           <div class="placeholder-pane">
             <div>
               @if (Model.Connections.Count() == 0) { 
                 <p class="text-muted">
                   “Connections” are a personal bookmarking system where EARN MD CONNECT users can
-                                    store other user profiles for personal use. Users’ Connections are not 
-                                    visible to others (including the user selected for a Connection). Instead, 
-                                    Connections allow users to conveniently maintain search results for future use, 
-                                    and are only meant to make each user’s search experience more convenient and efficient.
+                  store other user profiles for personal use. Users’ Connections are not 
+                  visible to others (including the user selected for a Connection). Instead, 
+                  Connections allow users to conveniently maintain search results for future use, 
+                  and are only meant to make each user’s search experience more convenient and efficient.
                   Once you add Connections, they will display here.
                 </p>
               }
@@ -207,12 +249,12 @@
             <div>
               <p>
                 &nbsp;
-                                <span class="pull-right">
-                                  <a href="@Url.Action("Create", "Partnership")">
-                                    <i class="glyphicon glyphicon-link"></i>
-                                    &nbsp;Create new partnership
-                                  </a>
-                                </span>
+                <span class="pull-right">
+                  <a href="@Url.Action("Create", "Partnership")">
+                    <i class="glyphicon glyphicon-link"></i>
+                    &nbsp;Create new partnership
+                  </a>
+                </span>
               </p>
               <div class="clear"></div>
             </div>
@@ -231,9 +273,11 @@
                 one can be created by clicking “Create new partnership” above. 
                 Please note that <u>the user who creates the Partnership Profile will become the Partnership 
                 Profile’s Administrator</u>, and will be the only user able 1) to control the Partnership
-                Profile’s membership, 2) to invite other organizations to join your Partnership Profile, 3) to decide whether
+                Profile’s membership, 2) to invite other organizations to join your Partnership Profile, 3) to decide
+                whether
                 to approve users who request to join your Partnership Profile, and 4) to control the Partnership Profile’s
-                Title and Description visible to other EARN MD CONNECT users. As such, partnerships should determine the appropriate
+                Title and Description visible to other EARN MD CONNECT users. As such, partnerships should determine
+                the appropriate
                 member to create, and be the Administrator of, their group’s Partnership Profile on EARN MD CONNECT.
               </p>
               <p class="text-muted">
@@ -241,7 +285,8 @@
                  To do so, click on the “Partners” tab on the bottom left of your Partnership Profile detail page.
                 Select the desired Partner Organization, and click the “Make Admin” button to assign Administrator Privileges.
                 <strong>You may also remove your organization as an Administrator</strong> if there exists one or more
-                other Administrators. To do so, simply click the “Remove Admin” button next to your own Organization’s profile within the
+                other Administrators. To do so, simply click the “Remove Admin” button next to your own Organization’s
+                profile within the
                 “Partners” tab of your Partnership Profile page.
               </p>
               <p class="text-muted">

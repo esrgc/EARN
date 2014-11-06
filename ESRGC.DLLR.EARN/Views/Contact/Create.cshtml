@@ -1,5 +1,49 @@
-﻿@{
+﻿@model ESRGC.DLLR.EARN.Domain.Model.Contact
+
+@{
     ViewBag.Title = "Create Contact";
+    ViewBag.Header = "Your Contact";
 }
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval-unobtrusive")    
+}
+
+@section header {
+    <div class="container">
+        <header class="page-header">
+            <h3>@ViewBag.Header <i class="fa fa-envelope"></i></h3>
+            @*<ul class="breadcrumb">
+                <li><a href="@Url.Action("index", "Home")">Home</a></li>
+                <li class="active">@ViewBag.Header</li>
+            </ul>*@
+        </header>
+    </div>
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="window-panel">
+                <div class="window-panel-title">
+                    <strong>Please tell us about yourself</strong>
+                </div>
+                <div class="window-panel-content">
+                    @Html.ValidationSummary(true)
+                    <form class="form-horizontal" action="@Url.Action("Create")" method="post" role="form">                        
+                        @Html.Partial("contactFormPartial")
+                        <input type="hidden" value="@ViewBag.returnUrl" name="returnUrl"/>
+                        <hr />
+                        <div class="form-group">
+                            <div class="col-sm-6 col-sm-offset-2">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <a class="btn btn-default" href="@Url.Action("Index")">Cancel</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 

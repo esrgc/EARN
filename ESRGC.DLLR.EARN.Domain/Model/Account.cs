@@ -63,6 +63,9 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     [ForeignKey("ProfileID")]
     public virtual Profile Profile { get; set; }
 
+    public int? ContactID { get; set; }
+    public virtual Contact Contact { get; set; }
+
     public virtual ICollection<Notification> Notifications { get; set; }
     public virtual ICollection<ProfileRequest> SentProfileRequests { get; set; }
     public virtual ICollection<ProfileRequest> ReceivedProfileRequests { get; set; }
@@ -75,6 +78,10 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public bool IsProfileOwner { get; set; }
     public void newVerificationCode() {
       VerificationCode = Helpers.Utility.RandomString(30);
+    }
+
+    public bool isAdmin() {
+      return Role.ToLower() == "admin";
     }
   }
 }

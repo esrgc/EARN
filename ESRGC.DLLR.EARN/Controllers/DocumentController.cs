@@ -15,6 +15,43 @@ namespace ESRGC.DLLR.EARN.Controllers
     public DocumentController(IWorkUnit workUnit) : base(workUnit) { }
 
     [VerifyProfile]
+    public ActionResult Index(int? folderID) {
+
+      var docs = _workUnit.DocumentRepository.Entities
+        .Where(x => x.PartnershipID == null)
+        .Where(x => x.FolderID == folderID)
+        .OrderByDescending(x => x.Created).ToList();
+
+      //if current folder exists
+      if (folderID.HasValue) {
+        //current folder
+        var currentFolder = _workUnit
+          .FolderRepository
+          .GetEntityByID(folderID);
+        ViewBag.currentFolder = currentFolder;
+        //subfolders
+        if (currentFolder.hasChildFolders()) {
+          ViewBag.folders = currentFolder
+          .ChildFolders
+          .OrderBy(x=>x.Name)
+          .ToList();
+        }
+      }
+      else { //at root only get sub-folders
+        ViewBag.folders = _workUnit
+          .FolderRepository
+          .Entities
+          .Where(x => x.ParentFolderID == null)
+          .OrderBy(x=>x.Name)
+          .ToList();
+      }
+
+
+      ViewBag.currentAccount = CurrentAccount;
+      return View(docs);
+    }
+
+    [VerifyProfile]
     [VerifyProfilePartnership]
     public ActionResult List(int partnershipID) {
       var partnership = _workUnit.PartnershipRepository.GetEntityByID(partnershipID);
@@ -73,6 +110,39 @@ namespace ESRGC.DLLR.EARN.Controllers
       return RedirectToAction("Detail", "Partnership", new { partnershipID, returnUrl });
     }
 
+    [HttpPost]
+    [RoleAuthorize(Roles = "admin")]
+    [ValidateAntiForgeryToken]
+    [VerifyProfile]
+    public ActionResult UploadDoc(HttpPostedFileBase data, int? folderID, string description, string returnUrl) {
+      if (data == null) {
+        updateTempMessage("No data was uploaded");
+        return RedirectToAction("Index", new { folderID });
+      }
+      if (ModelState.IsValid) {
+        var document = new Document {
+          Name = data.FileName,
+          Profile = CurrentAccount.Profile,
+          Data = new byte[data.ContentLength],
+          MimeType = data.ContentType,
+          Description = description,
+          FolderID = folderID
+        };
+        //read data
+        data.InputStream.Read(document.Data, 0, data.ContentLength);
+        //store it
+        _workUnit.DocumentRepository.InsertEntity(document);
+
+
+        _workUnit.saveChanges();
+        updateTempMessage("Document uploaded successfully.");
+      }
+      else
+        updateTempMessage("There was an error uploading document.");
+
+      return RedirectToAction("Index", new { folderID });
+    }
+
     [VerifyProfile]
     [VerifyProfilePartnership]
     public FileContentResult Download(int documentID, int partnershipID) {
@@ -81,6 +151,33 @@ namespace ESRGC.DLLR.EARN.Controllers
         return null;
       }
       return File(doc.Data, doc.MimeType, doc.Name);
+    }
+    [VerifyProfile]
+    public FileContentResult DownloadDoc(int documentID) {
+      var doc = _workUnit.DocumentRepository.GetEntityByID(documentID);
+      if (doc == null) {
+        return null;
+      }
+      return File(doc.Data, doc.MimeType, doc.Name);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    [RoleAuthorize(Roles = "admin")]
+    public ActionResult DeleteDoc(int documentID, int? folderID, string returnUrl) {
+      var document = _workUnit.DocumentRepository.GetEntityByID(documentID);
+      _workUnit.DocumentRepository.DeleteEntity(document);
+      _workUnit.saveChanges();
+
+      updateTempMessage("Document deleted");
+
+      if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
+             && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\")) {
+        return Redirect(returnUrl);
+      }
+      else {
+        return RedirectToAction("index", new { folderID });
+      }
     }
 
     [HttpPost]

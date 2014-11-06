@@ -34,8 +34,6 @@ namespace ESRGC.DLLR.EARN.Domain.Model
     public string LinkToAction { get; set; }
     public bool EmailSent { get; set; }
 
-    public virtual ICollection<MessageBoard> MessageBoards { get; set; }
-
     public string Type { get; set; }
 
   }

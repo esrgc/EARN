@@ -325,7 +325,7 @@ and/or view this user’s Organizational Profile for more information.",
         var notification = new Notification() {
           Account = pr.Sender,
           Category = "Profile Request Accepted",
-          Message = string.Format(@"Congratulations! You are now a member of the ""{0}"" organizational partnership.",
+          Message = string.Format(@"Congratulations! You are now a member of the ""{0}"" organizational profile.",
             pr.Receiver.Profile.Organization.Name),
           Message2 = "You can now edit partnership information, search for partnerships and other partners.",
           LinkToAction = Url.Action("Detail", "Profile")
@@ -334,7 +334,7 @@ and/or view this user’s Organizational Profile for more information.",
         updateTempMessage("Profile member request accepted.");
       }
       else {
-        updateTempMessage("Can not accept this request. The requesting account already belongs to an organizational partnership.");
+        updateTempMessage("Can not accept this request. The requesting account already belongs to an organizational profile.");
       }
       _workUnit.ProfileRequestRepository.DeleteByID(profileRequestID);
       _workUnit.saveChanges();
@@ -362,7 +362,7 @@ and/or view this user’s Organizational Profile for more information.",
           var notification = new Notification() {
             Account = request.Sender,
             Category = "Profile Request Denied",
-            Message = string.Format(@"Unfortunately! Your request to join the ""{0}"" organizational partnership has been denied.",
+            Message = string.Format(@"Unfortunately! Your request to join the ""{0}"" organizational profile has been denied.",
               request.Receiver.Profile.Organization.Name),
             Message2 = "Please contact the partnership owner or re-send your request with more specific information for the owner to identify you.",
             LinkToAction = Url.Action("Index", "Home")
@@ -577,7 +577,11 @@ and/or view this user’s Organizational Profile for more information.",
     }
 
     public ActionResult JoinProfileRequest(int profileID) {
+      if (CurrentAccount.Contact == null) {
+        return RedirectToAction("Create", "Contact", new { returnUrl = Url.Action("index", "Profile") });
+      }
       var profile = _workUnit.ProfileRepository.GetEntityByID(profileID);
+      ViewBag.contact = CurrentAccount.Contact;
       return View(profile);
     }
     [HttpPost]
