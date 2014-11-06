@@ -64,6 +64,7 @@ namespace ESRGC.DLLR.EARN.Controllers
       try {
         _workUnit.FolderRepository.DeleteByID(folderID);
         _workUnit.saveChanges();
+        updateTempMessage("Folder deleted!");
       }
       catch (Exception ex) {
         
