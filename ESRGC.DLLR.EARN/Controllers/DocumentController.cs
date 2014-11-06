@@ -117,7 +117,7 @@ namespace ESRGC.DLLR.EARN.Controllers
     public ActionResult UploadDoc(HttpPostedFileBase data, int? folderID, string description, string returnUrl) {
       if (data == null) {
         updateTempMessage("No data was uploaded");
-        return RedirectToAction("Index");
+        return RedirectToAction("Index", new { folderID });
       }
       if (ModelState.IsValid) {
         var document = new Document {
