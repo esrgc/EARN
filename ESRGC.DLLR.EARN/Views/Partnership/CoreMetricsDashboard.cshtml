@@ -1,0 +1,22 @@
+﻿@{
+  ViewBag.Title = "Partnership";
+  ViewBag.Header = "Core Metrics Dashboard";
+}
+
+@section header{
+  <div class="container">
+    <header class="page-header">
+      <h3>@ViewBag.Header <i class="fa fa-dashboard"></i></h3>
+      @*<ul class="breadcrumb">
+                <li><a href="@Url.Action("index", "Home")">Home</a></li>
+                <li class="active">@ViewBag.Header</li>
+            </ul>*@
+    </header>
+  </div>
+}
+
+<div class="container">
+  <div class="col-md-12">
+    <embed src="~/Client/swf/EARNCoreMetrics.swf" id="core-metrics-dashboard"/>
+  </div>
+</div>

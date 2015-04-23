@@ -376,6 +376,7 @@
     <None Include="Client\css\PagedList.notusedcss" />
     <Content Include="Client\jsLib\wicket-leaflet\wicket-leaflet.js" />
     <Content Include="Client\jsLib\wicket-leaflet\wicket.js" />
+    <Content Include="Client\swf\EARNCoreMetrics.swf" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Client\jsLib\jquery-2.0.3\jquery-2.0.3-vsdoc.js" />
@@ -425,6 +426,7 @@
     <Content Include="Client\jsLib\jqueryValidate\jquery.validate.unobtrusive.min.js.map">
       <DependentUpon>jquery.validate.unobtrusive.js</DependentUpon>
     </Content>
+    <Content Include="Client\swf\EARNCoreMetricsQ1Q2.xlf" />
     <None Include="Properties\PublishProfiles\FTP.pubxml" />
     <None Include="Properties\PublishProfiles\P drive.pubxml" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
@@ -507,6 +509,7 @@
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Views\Document\Index.cshtml" />
     <Content Include="Views\Folder\Create.cshtml" />
+    <Content Include="Views\Partnership\CoreMetricsDashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

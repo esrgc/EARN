@@ -1,156 +1,161 @@
 ﻿@{
-    ViewBag.Title = "Home";
-    ViewBag.showSignin = true;
+  ViewBag.Title = "Home";
+  ViewBag.showSignin = true;
 }
 
 @section scripts {
-    <script type="text/javascript">
-        var startup = function() {
-            $(document).on('click', '#agreeTDChbox', function() {
-                if ($(this).is(':checked'))
-                    $('#proceedBtn').removeAttr('disabled');
-                else
-                    $('#proceedBtn').attr('disabled', 'disabled');
-            });
-            $(document).on('click', '#proceedBtn', function() {
-                $(this).attr('disabled', 'disabled');
-                $('form#quickSignupForm').submit();
-            });
-            $(document).on('keypress', 'form#quickSignupForm', function(e) {
-                if (e.keyCode == 13) {
-                    $('#agreeToSignup').modal('show');
-                }
-            });
+  <script type="text/javascript">
+    var startup = function() {
+      $(document).on('click', '#agreeTDChbox', function() {
+        if ($(this).is(':checked'))
+          $('#proceedBtn').removeAttr('disabled');
+        else
+          $('#proceedBtn').attr('disabled', 'disabled');
+      });
+      $(document).on('click', '#proceedBtn', function() {
+        $(this).attr('disabled', 'disabled');
+        $('form#quickSignupForm').submit();
+      });
+      $(document).on('keypress', 'form#quickSignupForm', function(e) {
+        if (e.keyCode == 13) {
+          $('#agreeToSignup').modal('show');
+        }
+      });
 
-        };
-    </script>
+    };
+  </script>
 }
 
 @section header {
-    <div class="">
-        <div class="jumbotron">
-            <div class="row">
-                <div class="col-sm-6 col-sm-offset-1">
-                    <h2>EARN MD CONNECT</h2>
-                    <h4>Industry-led Partnerships<br />
-                        <small>Bridging Maryland’s Skills Gap, Driving Growth</small>
-                    </h4>
-                    <div class="info-button-container">
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#about">
-                            <i class="fa fa-info"></i>&nbsp;&nbsp;About EARN MD CONNECT
-                        </button>
-                        <a class="btn btn-primary" target="_blank" href="http://www.dllr.maryland.gov/earn">
-                            <i class="fa fa-external-link"></i>&nbsp;&nbsp;About the EARN Maryland Program
-                        </a>
-                    </div>
-                    @if (!Request.IsAuthenticated) {
-                        <div class="info-button-container">
-                            <a href="@Url.Action("Profiles", "Public")"><small>Browse Organizations</small></a> | 
+  <div class="">
+    <div class="jumbotron">
+      <div class="row">
+        <div class="col-sm-6 col-sm-offset-1">
+          <h2>EARN MD CONNECT</h2>
+          <h4>Industry-led Partnerships<br />
+            <small>Bridging Maryland’s Skills Gap, Driving Growth</small>
+          </h4>
+          <div class="info-button-container">
+            <button class="btn btn-primary" data-toggle="modal" data-target="#about">
+              <i class="fa fa-info"></i>&nbsp;&nbsp;About EARN MD CONNECT
+            </button>
+            <a class="btn btn-primary" target="_blank" href="http://www.dllr.maryland.gov/earn">
+              <i class="fa fa-external-link"></i>&nbsp;&nbsp;About the EARN Maryland Program
+            </a>
+          </div>
+          @if (!Request.IsAuthenticated) {
+            <div class="info-button-container">
+              <a href="@Url.Action("Profiles", "Public")"><small>Browse Organizations</small></a> | 
                             <a href="@Url.Action("Partnerships", "Public")"><small>View Partnerships</small></a>
-                            <br />
-                            <span>Join EARN MD CONNECT to view full site content.
-                            </span>
-                        </div>
-                    }
-                </div>
-                @if (!Request.IsAuthenticated) {
-                    <div class="col-sm-4">
-                        @Html.Partial("quickSignup")
-                    </div>
-                }
-                else {
-                    <div class="col-sm-4">
-                        <div id="quicktask">
-                            @*Do a carosel here or something!*@
-                            <h5 class="text-justified">Welcome! You're now signed in as @User.Identity.Name</h5>
-                            <a class="btn btn-default btn-sm btn-block" href="@Url.Action("Basic", "Search")">Search for partners</a>
-                            <a class="btn btn-default btn-sm btn-block" href="@Url.Action("Index", "Partnership")">Find existing partnerships</a>
-                            <a class="btn btn-default btn-sm btn-block" href="@Url.Action("Detail", "Profile")">View/Edit my organizational
-                                profile</a>
-                            <a class="btn btn-default btn-sm btn-block" href="@Url.Action("MyPartnerships", "Partnership")">View my
-                                partnerships</a>
-                        </div>
-                    </div>
-                }
+              <br />
+              <span>Join EARN MD CONNECT to view full site content.
+              </span>
             </div>
+          }
         </div>
+        @if (!Request.IsAuthenticated) {
+          <div class="col-sm-4">
+            @Html.Partial("quickSignup")
+          </div>
+        }
+        else {
+          <div class="col-sm-4">
+            <div id="quicktask">
+              @*Do a carosel here or something!*@
+              <h5 class="text-justified">Welcome! You're now signed in as @User.Identity.Name</h5>
+              <a class="btn btn-default btn-sm btn-block" href="@Url.Action("Basic", "Search")">Search for partners</a>
+              <a class="btn btn-default btn-sm btn-block" href="@Url.Action("Index", "Partnership")">Find existing partnerships</a>
+              <a class="btn btn-default btn-sm btn-block" href="@Url.Action("Detail", "Profile")">View/Edit my organizational
+                profile</a>
+              <a class="btn btn-default btn-sm btn-block" href="@Url.Action("MyPartnerships", "Partnership")">View my
+                partnerships</a>
+              <a class="btn btn-default btn-sm btn-block" href="@Url.Action("CoreMetricsDashboard", "Partnership")">
+                View Core Metrics Dashboard
+              </a>
+            </div>
+          </div>
+        }
+      </div>
     </div>
+  </div>
 }
 <div class="container">
-    <div class="row">
-        <div class="col-sm-4 col-sm-offset-1">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="transparent-placeholder-panel">
-                        <h3 class="text-info">Promote</h3>
-                        <div>
-                            <p>&nbsp;&nbsp;Create a profile...</p>
-                        </div>
-                    </div>
-                </div>
+  <div class="row">
+    <div class="col-sm-4 col-sm-offset-1">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="transparent-placeholder-panel">
+            <h3 class="text-info">Promote</h3>
+            <div>
+              <p>&nbsp;&nbsp;Create a profile...</p>
             </div>
-            <div class="row">
-                <div class="col-sm-12 col-sm-offset-2">
-                    <div class="transparent-placeholder-panel">
-                        <h3 class="text-info">Partner</h3>
-                        <div>
-                            <p>&nbsp;&nbsp;Identify relationships...</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12 col-sm-offset-4">
-                    <div class="transparent-placeholder-panel">
-                        <h3 class="text-info">Progress</h3>
-                        <div>
-                            <p>&nbsp;&nbsp;Build opportunities...</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
-        <div class="col-sm-7">
-            <div class="transparent-placeholder-panel">
-                <div class="placeholder-pane-heading">About EARN MD CONNECT</div>
-                <div>
-                    <p>
-                        <strong>EARN MD CONNECT</strong> is dedicated to connecting organizations seeking to partner through
-                        the
-                        <a target="_blank" href="http://www.dllr.maryland.gov/earn/">EARN Maryland Program</a>.
-                    </p>
-                    <label>Organizations committed to bridging Maryland’s skills gap are encouraged to participate:</label>
-                    <ul>
-                        <li>Employers</li>
-                        <li>Industry Associations</li>
-                        <li>Nonprofits and Community-Based Organizations</li>
-                        <li>Institutions of Higher Education</li>
-                        <li>Local Workforce Boards</li>
-                        <li>Local government</li>
-                        <li>Local and regional economic development entities</li>
-                        <li>Labor Unions</li>
-                        <li>Philanthropic organizations</li>
-                        <li>K-12 programs</li>
-                        <li>Other Training Providers</li>
-                    </ul>
-                    <a href="#about" data-toggle="modal">Read more...</a>
-                </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 col-sm-offset-2">
+          <div class="transparent-placeholder-panel">
+            <h3 class="text-info">Partner</h3>
+            <div>
+              <p>&nbsp;&nbsp;Identify relationships...</p>
             </div>
-            <div class="transparent-placeholder-panel">
-                <div class="placeholder-pane-heading">Join Us</div>
-                <div>
-                    <p>
-                        Sign up. Create a profile. Members can search and connect with other EARN MD CONNECT users to form Strategic
-                        Industry Partnerships. 
-                        Promote your organization’s interest in joining a Partnership. Established Partnerships can use this
-                        site to share ideas, 
-                        best practices and challenges. EARN MD CONNECT: your one stop for building Strategic Industry Partnerships.
-                    </p>
-                </div>
-            </div>
+          </div>
         </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 col-sm-offset-4">
+          <div class="transparent-placeholder-panel">
+            <h3 class="text-info">Progress</h3>
+            <div>
+              <p>&nbsp;&nbsp;Build opportunities...</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    @*<div class="row">
+    <div class="col-sm-7">
+      <div class="transparent-placeholder-panel">
+        <div class="placeholder-pane-heading">About EARN MD CONNECT</div>
+        <div>
+          <p>
+            <strong>EARN MD CONNECT</strong> is dedicated to connecting organizations seeking to partner through
+            the
+                        <a target="_blank" href="http://www.dllr.maryland.gov/earn/">EARN Maryland Program</a>.
+          </p>
+          <label>Organizations committed to bridging Maryland’s skills gap are encouraged to participate:</label>
+          <ul>
+            <li>Employers</li>
+            <li>Industry Associations</li>
+            <li>Nonprofits and Community-Based Organizations</li>
+            <li>Institutions of Higher Education</li>
+            <li>Local Workforce Boards</li>
+            <li>Local government</li>
+            <li>Local and regional economic development entities</li>
+            <li>Labor Unions</li>
+            <li>Philanthropic organizations</li>
+            <li>K-12 programs</li>
+            <li>Other Training Providers</li>
+          </ul>
+          <a href="#about" data-toggle="modal">Read more...</a>
+        </div>
+      </div>
+      <div class="transparent-placeholder-panel">
+        <div class="placeholder-pane-heading">Join Us</div>
+        <div>
+          <p>
+            Sign up. Create a profile. Members can search and connect with other EARN MD CONNECT users to form Strategic
+            Industry Partnerships. 
+                        Promote your organization’s interest in joining a Partnership. Established Partnerships
+            can use this
+                        site to share ideas, 
+                        best practices and challenges. EARN MD CONNECT: your one stop for building Strategic Industry
+            Partnerships.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  @*<div class="row">
         <div class="col-sm-6">
             <div class="transparent-placeholder-panel">
                 <div class="placeholder-pane-heading">Latest News</div>
@@ -178,52 +183,52 @@
 
 <!-- Modal -->
 <div class="modal fade" id="agreeToSignup" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby=""
-    aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Terms and Conditions</h4>
-            </div>
-            <div class="modal-body">
-                @Html.Partial("termTextPartial")
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" name="agreed" id="agreeTDChbox" />
-                        <strong>I agree to the terms and conditions for "EARN MD CONNECT"</strong>
-                    </label>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button id="proceedBtn" data-loading-text="Signing up..." class="btn btn-primary btn-sm submit-button"
-                    type="button" disabled>
-                    Proceed</button>
-            </div>
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Terms and Conditions</h4>
+      </div>
+      <div class="modal-body">
+        @Html.Partial("termTextPartial")
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="agreed" id="agreeTDChbox" />
+            <strong>I agree to the terms and conditions for "EARN MD CONNECT"</strong>
+          </label>
         </div>
-        <!-- /.modal-content -->
+      </div>
+      <div class="modal-footer">
+        <button id="proceedBtn" data-loading-text="Signing up..." class="btn btn-primary btn-sm submit-button"
+          type="button" disabled>
+          Proceed</button>
+      </div>
     </div>
-    <!-- /.modal-dialog -->
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
 
 <!-- Modal -->
 <div class="modal fade" id="termCondition" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby=""
-    aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Terms and Conditions</h4>
-            </div>
-            <div class="modal-body">
-                @Html.Partial("termTextPartial")
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Terms and Conditions</h4>
+      </div>
+      <div class="modal-body">
+        @Html.Partial("termTextPartial")
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
     </div>
-    <!-- /.modal-dialog -->
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->

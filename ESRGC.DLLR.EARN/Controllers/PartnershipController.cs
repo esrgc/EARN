@@ -595,5 +595,9 @@ but should not be used to share proprietary or sensitive content.",
       //error has occurred   
       return View(partnership);
     }
+
+    public ActionResult CoreMetricsDashboard() {
+      return View();
+    }
   }
 }

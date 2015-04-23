@@ -1,11 +1,9 @@
-﻿#main {
+#main {
   /*margin-top: -10px;*/
-
   background: #fff;
 }
 #main .wrapper {
   /*margin: 0 10px 0 10px;*/
-
 }
 body {
   background-image: url(../../../Client/dllrContent/images/page/bodyBG2.gif);
@@ -18,15 +16,10 @@ body {
   padding: 0px;
   text-align: center;
   /* hides accessibility & handheld elements */
-
   /*********** Page Layout ***********/
-
   /* for IE6 and below */
-
   /*********** Horizontal Navigation  ***********/
-
   /*** Customize, and name <body> id for active state  ***/
-
   /*body#home #t-home a {
         background-position: 0% -48px;
         span {
@@ -71,9 +64,7 @@ body {
             background-position: 100% -48px;
             color: #000000;
         }*/
-
   /*********** Sidebar Navigation  ***********/
-
   /*.sideLinks {
         text-align: right;
         width: 148px;
@@ -130,53 +121,29 @@ body {
         .sideLinks p {
             color: #3300FF;
         }*/
-
   /*********** Content Layout ***********/
-
   /* allows for up to 11 unique Columns - (need to add letters in html if more than 1 of same is used) -  */
-
   /*********** BOX STYLES  ***********/
-
   /*********** For Left Sidebar  ***********/
-
   /*********** For Content Area (& Right Sidebar) ***********/
-
   /*********** Background = #CCCCCC ***********/
-
   /*********** GENERIC BOXES  ***********/
-
   /****** boxBlank ******/
-
   /****** boxGrey ******/
-
   /****** boxDkGrey ******/
-
   /****** boxWhite ******/
-
   /****** boxColor ******/
-
   /*********** SUBJECT BOXES  ***********/
-
   /****** boxNews ******/
-
   /****** boxServices ******/
-
   /****** boxFindit******/
-
   /****** boxPopular ******/
-
   /****** boxFAQ ******/
-
   /****** boxConnected ******/
-
   /****** boxMedia ******/
-
   /****** boxEvents ******/
-
   /****** boxDocs ******/
-
   /******** Document Types *****/
-
 }
 .dllr-content .hide {
   position: absolute;
@@ -297,38 +264,32 @@ body {
   padding: 0px 10px 10px 12px;
   *padding: 5px 10px 0px 10px;
   /* IE only padding */
-
 }
 .dllr-content #searchForm {
   float: right;
   padding: 20px 10px 0px 0px;
   *padding: 10px 10px 0px 0px;
   /* IE only padding */
-
 }
 .dllr-content .searchButton {
   left: -4px;
   *left: -8px;
   /* IE only position */
-
   position: relative;
   top: 8px;
   *top: 4px;
   /* IE only position */
-
 }
 .dllr-content .searchTextBox {
   height: 21px;
   font-size: .6875em;
   /* (10/16) */
-
 }
 .dllr-content #tools {
   float: right;
   clear: right;
   margin: 5px 15px 0px 0px;
   /*font-size: 85%;*/
-
 }
 .dllr-content #tools a {
   color: #fff;
@@ -421,9 +382,7 @@ body {
   padding: 0 2px 0 4px;
   text-decoration: none;
   /* Small hack for IE5-Mac \*/
-
   /* End IE5-Mac hack */
-
 }
 .dllr-content #navTab a span {
   float: left;
@@ -684,14 +643,12 @@ body {
 }
 .dllr-content .imgFloat {
   /* when using images INSTEAD of Columns - (width should be one of above) */
-
   position: relative;
   float: left;
   margin: 0px 0px 10px 10px;
 }
 .dllr-content .imgGov {
   /* rises 10px higher */
-
   position: relative;
   float: left;
   display: inline;
@@ -1349,7 +1306,6 @@ body {
 }
 .dllr .container .jumbotron {
   /*border-radius: 0;*/
-
 }
 .dllr .wrapper {
   max-width: 1040px;
@@ -1358,14 +1314,12 @@ body {
   height: 100%;
   margin: 0 auto -140px;
   /* the bottom margin is the negative value of the footer's height */
-
   background: #fff;
 }
 .dllr .footer,
 .dllr .push {
   height: 130px;
   /* .push must be the same height as .footer */
-
   margin-top: 10px;
 }
 .dllr .footer-container {
