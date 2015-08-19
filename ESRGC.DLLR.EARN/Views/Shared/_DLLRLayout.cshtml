@@ -2,292 +2,309 @@
 
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link href="@Url.Content("~/favicon.ico")" rel="Icon" />
-    <title>EARN MD CONNECT - @ViewBag.Title</title>
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="@Url.Content("~/Client/jsLib/bootstrap-3.0.2/css/bootstrap.min.css")" rel="stylesheet" />
-    @Styles.Render("~/Styles/css", "~/Styles/dllrContent/css/dllrCSS")
-    <!--Custom page CSS or extra javascript goes here-->
-    @RenderSection("headContent", required: false)
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="" />
+  <meta name="keywords" content="" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link href="@Url.Content("~/favicon.ico")" rel="Icon" />
+  <title>EARN MD CONNECT - @ViewBag.Title</title>
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="@Url.Content("~/Client/jsLib/bootstrap-3.0.2/css/bootstrap.min.css")" rel="stylesheet" />
+  @Styles.Render("~/Styles/css", "~/Styles/dllrContent/css/dllrCSS")
+  <!--Custom page CSS or extra javascript goes here-->
+  @RenderSection("headContent", required: false)
 
-    <!--[if lte IE 8]> 
+  <!--[if lte IE 8]> 
         <script src="@Url.Content("~/Client/jsLib/response/respond.min.js")"></script>
     <![endif]-->
 
-    @if (Server.MachineName == "ESRGC1") {
-        <!--Google analytics-->
-        <script type="text/javascript">
-            (function (i, s, o, g, r, a, m) {
-                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                    (i[r].q = i[r].q || []).push(arguments)
-                }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+  @if (Server.MachineName == "ESRGC1") {
+    <!--Google analytics-->
+    <script type="text/javascript">
+      (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function() {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-            ga('create', 'UA-20599539-4', 'salisbury.edu');
-            ga('send', 'pageview');
-        </script>
-    }
+      ga('create', 'UA-20599539-4', 'salisbury.edu');
+      ga('send', 'pageview');
+    </script>
+  }
 </head>
 <body lang="en" class="dllr">
-    <div class="wrapper" id="content">
-        <div class="">
-            <div class="">
-                <div class="dllr-content">
-                    <div class="banner">
-                        <div id="mdlogo">
-                            <a href="http://www.maryland.gov">
-                                <img src="@Url.Content("~/Client/dllrcontent/images/page/MDlogo.gif")" alt="maryland.gov"/>
-                            </a>
-                        </div>
-                        <div id="global">
-                            <!-- [Begin] Statewide Navigation -->
-                            <div class="statewide-navigation">
-                                <div class="">
-                                    <a href="http://www.maryland.gov" target="_blank">Maryland.gov</a>&nbsp;|&nbsp;
+  <div class="wrapper" id="content">
+    <div class="">
+      <div class="">
+        <div class="dllr-content">
+          <div class="banner">
+            <div id="mdlogo">
+              <a href="http://www.maryland.gov">
+                <img src="@Url.Content("~/Client/dllrcontent/images/page/MDlogo.gif")" alt="maryland.gov"/>
+              </a>
+            </div>
+            <div id="global">
+              <!-- [Begin] Statewide Navigation -->
+              <div class="statewide-navigation">
+                <div class="">
+                  <a href="http://www.maryland.gov" target="_blank">Maryland.gov</a>&nbsp;|&nbsp;
                                 <a href="http://www.doit.state.md.us/phonebook/" target="_blank">Phone Directory</a>&nbsp;|&nbsp;
-                                <a href="http://www.maryland.gov/pages/agency_directory.aspx?view=State%20Agencies" target="_blank">State Agencies</a>&nbsp;|&nbsp;
+                  <a href="http://www.maryland.gov/pages/agency_directory.aspx?view=State%20Agencies" target="_blank">State
+                    Agencies</a>&nbsp;|&nbsp;
                                 <a href="http://www.maryland.gov/pages/online_services.aspx" target="_blank">Online Services</a>
 
-                                </div>
-                            </div>
-                            <div class="hide">
-                                <h1>Department of Labor, Licensing and Regulation (for pda/handhelds)</h1>
-                                <a href="#content" title="Skip to content" accesskey="1">skip to content </a>| 
+                </div>
+              </div>
+              <div class="hide">
+                <h1>Department of Labor, Licensing and Regulation (for pda/handhelds)</h1>
+                <a href="#content" title="Skip to content" accesskey="1">skip to content </a>| 
                                 <a href="#footer" title="Access shortcuts" accesskey="0">access shortcuts </a>
-                            </div>
-                            <!-- [End] Statewide Navigation -->
-                        </div>
-                        <div id="global2">
-                            <!-- [Begin] Search Form -->
-                            <div>
-                                <form name="gs" method="get" action="http://search.maryland.gov/search" id="Form2">
-                                    <input type="text" class="searchTextBox" accesskey="4" name="q" id="q" size="30" maxlength="256" value="Search" onfocus="if(this.value=='Search'){this.value='';this.style.color='#000';}else{this.select();}" />
-                                    <!-- site collection name -->
-                                    <input type="hidden" name="site" value="YourSearchValueHere" id="site" />
-                                    <input type="image" class="searchButton" name="btnG" id="search" title="Search" alt="Search" src="@Url.Content("~/Client/dllrContent/images/page/searchButton.gif")" />
-                                    <input type="hidden" name="site" value="Labor_Licensing_and_Regulation" />
-                                    <input type="hidden" name="entqr" value="0" id="entqr" />
-                                    <input type="hidden" name="ud" value="1" id="ud" />
-                                    <input type="hidden" name="sort" value="date:D:L:d1" id="sort" />
-                                    <input type="hidden" name="output" value="xml_no_dtd" id="output" />
-                                    <input type="hidden" name="oe" value="UTF-8" id="oe" />
-                                    <input type="hidden" name="ie" value="UTF-8" id="ie" />
-                                    <input type="hidden" name="client" value="search_md_1" id="client" />
-                                    <input type="hidden" name="proxystylesheet" value="search_md_1" id="proxystylesheet" />
-                                </form>
-                            </div>
-                            <!-- [End] Search Form -->
-                        </div>
-                        <div id="tools">
-                            <ul>
-                                <li class="mail"><a href="Javascript:void(mailThisUrl())">E-mail Friend</a> </li>
-                                <li class="print"><a href="#" onclick="print_preview(); return false;">Print Page</a> </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+              </div>
+              <!-- [End] Statewide Navigation -->
             </div>
+            <div id="global2">
+              <!-- [Begin] Search Form -->
+              <div>
+                <form name="gs" method="get" action="http://search.maryland.gov/search" id="Form2">
+                  <input type="text" class="searchTextBox" accesskey="4" name="q" id="q" size="30" maxlength="256" value="Search"
+                    onfocus="if(this.value=='Search'){this.value='';this.style.color='#000';}else{this.select();}" />
+                  <!-- site collection name -->
+                  <input type="hidden" name="site" value="YourSearchValueHere" id="site" />
+                  <input type="image" class="searchButton" name="btnG" id="search" title="Search" alt="Search" src="@Url.Content("~/Client/dllrContent/images/page/searchButton.gif")" />
+                  <input type="hidden" name="site" value="Labor_Licensing_and_Regulation" />
+                  <input type="hidden" name="entqr" value="0" id="entqr" />
+                  <input type="hidden" name="ud" value="1" id="ud" />
+                  <input type="hidden" name="sort" value="date:D:L:d1" id="sort" />
+                  <input type="hidden" name="output" value="xml_no_dtd" id="output" />
+                  <input type="hidden" name="oe" value="UTF-8" id="oe" />
+                  <input type="hidden" name="ie" value="UTF-8" id="ie" />
+                  <input type="hidden" name="client" value="search_md_1" id="client" />
+                  <input type="hidden" name="proxystylesheet" value="search_md_1" id="proxystylesheet" />
+                </form>
+              </div>
+              <!-- [End] Search Form -->
+            </div>
+            <div id="tools">
+              <ul>
+                <li class="mail"><a href="Javascript:void(mailThisUrl())">E-mail Friend</a> </li>
+                <li class="print"><a href="#" onclick="print_preview(); return false;">Print Page</a> </li>
+              </ul>
+            </div>
+          </div>
         </div>
+      </div>
+    </div>
 
-        <div class="" id="main">
-            <div class="">
-                <!--nav bar-->
-                <div id="navigationBar">
-                    @Html.Partial("navBar")
+    <div class="" id="main">
+      <div class="">
+        <!--nav bar-->
+        <div id="navigationBar">
+          @Html.Partial("navBar")
+        </div>
+        <!--Page content-->
+        <div id="pageContent">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8 col-md-offset-2">
+                <div class="alert alert-warning">
+                  <p class="text-danger">
+                    <strong>Please be advised that the EARN Maryland Connect website will no longer be available effective November
+                    1, 2015. 
+                        If you have any questions please contact <a href="mailto:mary.keller@maryland.gov">Mary Keller</a>.</strong>
+                  </p>
                 </div>
-                <!--Page content-->
-                <div id="pageContent">
-                    @Html.Partial("messagePartial")
-                    <!--Logo-->
-                    @*<img src="@Url.Content("~/Content/images/MSGIC-logo.jpg")" class="site-logo" />*@
-                    <!--Header-->
-                    @RenderSection("header", required: false)
-                    <!--JavaScript isn't turned off warning-->
-                    <noscript>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-8 col-md-offset-2">
-                                    <div class="alert alert-warning">
-                                        <h4>JavaScript is turned off in your web browser</h4>
-                                        <p>
-                                            For full functionality of this site, it is necessary to enable JavaScript.
-                                            Here are the <a class="alert-link" href="http://www.enable-javascript.com/" target="_blank">
-                                            instructions how to enable JavaScript in your web browser</a>.
-                                            Please turn it on to take full advantage of this site, then refresh the page.                                       
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </noscript>
-                    @if (ViewBag.Title != "Cookie Not Enabled") { 
-                        <div class="container hidden-content" id="cookieWarning">
-                            <div class="row">
-                                <div class="col-md-8 col-md-offset-2">
-                                    <div class="alert alert-warning">
-                                        <h4>Cookies are not enabled</h4>
-                                        <p>
-                                            This web site uses cookies to track your account information.
+              </div>
+            </div>
+          </div>
+
+          @Html.Partial("messagePartial")
+          <!--Logo-->
+          @*<img src="@Url.Content("~/Content/images/MSGIC-logo.jpg")" class="site-logo" />*@
+          <!--Header-->
+          @RenderSection("header", required: false)
+          <!--JavaScript isn't turned off warning-->
+          <noscript>
+            <div class="container">
+              <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                  <div class="alert alert-warning">
+                    <h4>JavaScript is turned off in your web browser</h4>
+                    <p>
+                      For full functionality of this site, it is necessary to enable JavaScript.
+                                            Here are the <a class="alert-link" href="http://www.enable-javascript.com/" target="_blank">instructions
+                                              how to enable JavaScript in your web browser</a>.
+                                            Please turn it on to take full advantage of this site, then refresh the page.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </noscript>
+          @if (ViewBag.Title != "Cookie Not Enabled") { 
+            <div class="container hidden-content" id="cookieWarning">
+              <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                  <div class="alert alert-warning">
+                    <h4>Cookies are not enabled</h4>
+                    <p>
+                      This web site uses cookies to track your account information.
                                             If you are experiencing problems with signing in to the site,
                                             your browser might have blocked this site to set cookies.
                                             Please enable cookies (including third parties). Contact EARN MD CONNECT
                                             if you have any question. 
-                                            <a class="alert-link" target="_blank" href="http://www.dllr.maryland.gov/aboutdllr/cookies.shtml">Click here</a>
-                                            for instructions on how to enable cookies in your browser
+                                            <a class="alert-link" target="_blank" href="http://www.dllr.maryland.gov/aboutdllr/cookies.shtml">Click
+                                              here</a>
+                      for instructions on how to enable cookies in your browser
                                         <br />
-                                            This message will go away if cookies are enabled in your browser.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    }
-                    <section class="body-content">
-                        @RenderBody()
-                    </section>
+                      This message will go away if cookies are enabled in your browser.
+                    </p>
+                  </div>
                 </div>
+              </div>
             </div>
+          }
+          <section class="body-content">
+            @RenderBody()
+          </section>
         </div>
-        <div class="push">
-        </div>
+      </div>
     </div>
-    <div class="footer-container">
-        <div class="footer">
-            <div class="text-center">
-                @*@RenderSection("footer", required: false)*@
-                <a href="http://esrgc.org" target="_blank">
-                    <img class="site-logo" src="@Url.Content("~/Client/images/esrgc.png")" alt=""/></a>
-                @*<a  href="http://www.gov.state.md.us/" target="_blank"><img class="site-logo" src="@Url.Content("~/client/images/MDlogo.gif")" alt=""/></a>*@
-                <a href="http://www.dllr.maryland.gov/earn" target="_blank">
-                    <img class="site-logo" src="@Url.Content("~/client/images/EARN_logo_200w.jpg")" alt=""/></a>
-                <a href="http://www.salisbury.edu/" target="_blank">
-                    <img class="site-logo" src="@Url.Content("~/client/images/SalisburyUniversity.jpg")" alt=""/></a>
-            </div>
-            <div class="dllr-content">
-                <div id="footer">
-                    <!-- ACCESS KEY Include Recommended Here -->
-                    <a target="_blank" href="https://www.dllr.state.md.us/contactinfo/">Contact Us</a>&nbsp;|&nbsp;
+    <div class="push">
+    </div>
+  </div>
+  <div class="footer-container">
+    <div class="footer">
+      <div class="text-center">
+        @*@RenderSection("footer", required: false)*@
+        <a href="http://esrgc.org" target="_blank">
+          <img class="site-logo" src="@Url.Content("~/Client/images/esrgc.png")" alt=""/></a>
+        @*<a  href="http://www.gov.state.md.us/" target="_blank"><img class="site-logo" src="@Url.Content("~/client/images/MDlogo.gif")" alt=""/></a>*@
+        <a href="http://www.dllr.maryland.gov/earn" target="_blank">
+          <img class="site-logo" src="@Url.Content("~/client/images/EARN_logo_200w.jpg")" alt=""/></a>
+        <a href="http://www.salisbury.edu/" target="_blank">
+          <img class="site-logo" src="@Url.Content("~/client/images/SalisburyUniversity.jpg")" alt=""/></a>
+      </div>
+      <div class="dllr-content">
+        <div id="footer">
+          <!-- ACCESS KEY Include Recommended Here -->
+          <a target="_blank" href="https://www.dllr.state.md.us/contactinfo/">Contact Us</a>&nbsp;|&nbsp;
                     <a target="_blank" href="http://doit.maryland.gov/about/Pages/Accessibility.aspx">MD Accessibility Policy</a>&nbsp;|&nbsp;
-                    <a target="_blank" href="https://www.dllr.state.md.us/aboutdllr/privacystatement.shtml">Privacy Notice</a>&nbsp;|&nbsp;
-                    <a target="_blank" href="https://www.dllr.state.md.us/faq/">Frequently Asked Questions</a><br />
-                    <br />
-                    500 North Calvert Street #401 Baltimore, MD 21202 |
+          <a target="_blank" href="https://www.dllr.state.md.us/aboutdllr/privacystatement.shtml">Privacy Notice</a>&nbsp;|&nbsp;
+          <a target="_blank" href="https://www.dllr.state.md.us/faq/">Frequently Asked Questions</a><br />
+          <br />
+          500 North Calvert Street #401 Baltimore, MD 21202 |
                     General Information - 410-230-6001
-                </div>
-            </div>
         </div>
+      </div>
     </div>
-    @Scripts.Render("~/bundles/jsLibs", "~/bundles/dllrjs")
-    @RenderSection("scripts", required: false)
-    <!--Start up code-->
-    <script type="text/javascript">
-        $(function () {
-            //hilight current url
-            var url = window.location;
-            $('.navbar a').filter(function () {
-                return this.href == url;
-            }).parent().addClass('active');
-            //tooltip for nav bar
-            $('.navbar a[data-toggle!=popover]').tooltip({
-                toggle: "tooltip",
-                placement: "bottom",
-                container: 'body'
-            });
-            //tooltips for items in containers
-            $(document).tooltip({
-                toggle: 'tooltip',
-                placement: 'right',
-                container: 'body',
-                selector: '.container a[data-toggle!=popover]'
-            });
-            //navbar popover for notifications
-            $(document).popover({
-                container: 'body',
-                selector: '.navbar [data-toggle=popover]',
-                //trigger: 'manual',
-                html: true,
-                content: function () {
-                    //console.log($(this).siblings('.hidden-content').html());
-                    return $(this).siblings('.hidden-content').html();
-                }
-            });
-            //$('.navbar [data-toggle=popover]').on("mouseenter",  function () {
-            //    var _this = this;
-            //    //console.log(this);
-            //    $(this).popover('show');
-            //    $('.popover').find('.popover-content').html($(this).siblings('.hidden-content').html());
-            //    $(".popover").on("mouseleave", function () {
-            //        $(_this).popover('hide');
-            //    });
-            //}).on('mouseleave',  function () {
-            //    var _this = this;
-            //    setTimeout(function () {
-            //        if (!$('.popover:hover').length) {
-            //            $(_this).popover('hide')
-            //        }
-            //    }, 500);
-            //});
-            //partnership list
-            $('.partnership-container a[rel="popover"]').popover({
-                trigger: 'manual',
-                container: 'body',
-                html: true,
-                content: function () {
-                    //console.log($(this).siblings().html());
-                    return $(this).siblings('.hidden-content').html();
-                }
-            //});
-            }).on('mouseenter',  function () {
-                var _this = this;
-                //console.log(this);
-                $(this).popover('show');
-                //$('.popover').find('.popover-content').html($(this).siblings('.hidden-content').html());
-                $('.popover').on('mouseleave', function () {
-                    $(_this).popover('hide');
-                });
-            }).on('mouseleave',  function () {
-                var _this = this;
-                setTimeout(function () {
-                    if (!$('.popover:hover').length) {
-                        $(_this).popover('hide')
-                    }
-                }, 500);
-            });
-            
-            $(document).on('click', '.submit-button', function () {
-                $(this).button('loading');
-            });
-            //placeholder
-            $('input, textarea').placeholder();
-
-            //auto refresh nav bar for notifications
-            //var timer = setInterval(function () {
-            //    var url = $('#navBarRefreshLink').val();
-            //    if (typeof url == 'undefined')
-            //        return;
-            //    $.get(url, function (data) {
-            //        console.log('refreshing navbar');
-            //        //console.log($('#mainNavigation', data));
-            //        $('.navbar a#notifications').popover('hide');
-            //        $('#notificationArea').replaceWith($('#notificationArea', data));
-            //        $('#notificationContent').replaceWith($('#notificationContent',data));
-            //    });
-            //}, 1500);
-
-            //custom start up code
-            if (typeof startup == 'function')
-                startup();
-            //check cookies
-            if (!navigator.cookieEnabled) {
-                $('#cookieWarning').removeClass('hidden-content');
-            }
+  </div>
+  @Scripts.Render("~/bundles/jsLibs", "~/bundles/dllrjs")
+  @RenderSection("scripts", required: false)
+  <!--Start up code-->
+  <script type="text/javascript">
+    $(function() {
+      //hilight current url
+      var url = window.location;
+      $('.navbar a').filter(function() {
+        return this.href == url;
+      }).parent().addClass('active');
+      //tooltip for nav bar
+      $('.navbar a[data-toggle!=popover]').tooltip({
+        toggle: "tooltip",
+        placement: "bottom",
+        container: 'body'
+      });
+      //tooltips for items in containers
+      $(document).tooltip({
+        toggle: 'tooltip',
+        placement: 'right',
+        container: 'body',
+        selector: '.container a[data-toggle!=popover]'
+      });
+      //navbar popover for notifications
+      $(document).popover({
+        container: 'body',
+        selector: '.navbar [data-toggle=popover]',
+        //trigger: 'manual',
+        html: true,
+        content: function() {
+          //console.log($(this).siblings('.hidden-content').html());
+          return $(this).siblings('.hidden-content').html();
+        }
+      });
+      //$('.navbar [data-toggle=popover]').on("mouseenter",  function () {
+      //    var _this = this;
+      //    //console.log(this);
+      //    $(this).popover('show');
+      //    $('.popover').find('.popover-content').html($(this).siblings('.hidden-content').html());
+      //    $(".popover").on("mouseleave", function () {
+      //        $(_this).popover('hide');
+      //    });
+      //}).on('mouseleave',  function () {
+      //    var _this = this;
+      //    setTimeout(function () {
+      //        if (!$('.popover:hover').length) {
+      //            $(_this).popover('hide')
+      //        }
+      //    }, 500);
+      //});
+      //partnership list
+      $('.partnership-container a[rel="popover"]').popover({
+        trigger: 'manual',
+        container: 'body',
+        html: true,
+        content: function() {
+          //console.log($(this).siblings().html());
+          return $(this).siblings('.hidden-content').html();
+        }
+        //});
+      }).on('mouseenter', function() {
+        var _this = this;
+        //console.log(this);
+        $(this).popover('show');
+        //$('.popover').find('.popover-content').html($(this).siblings('.hidden-content').html());
+        $('.popover').on('mouseleave', function() {
+          $(_this).popover('hide');
         });
-    </script>
+      }).on('mouseleave', function() {
+        var _this = this;
+        setTimeout(function() {
+          if (!$('.popover:hover').length) {
+            $(_this).popover('hide')
+          }
+        }, 500);
+      });
+
+      $(document).on('click', '.submit-button', function() {
+        $(this).button('loading');
+      });
+      //placeholder
+      $('input, textarea').placeholder();
+
+      //auto refresh nav bar for notifications
+      //var timer = setInterval(function () {
+      //    var url = $('#navBarRefreshLink').val();
+      //    if (typeof url == 'undefined')
+      //        return;
+      //    $.get(url, function (data) {
+      //        console.log('refreshing navbar');
+      //        //console.log($('#mainNavigation', data));
+      //        $('.navbar a#notifications').popover('hide');
+      //        $('#notificationArea').replaceWith($('#notificationArea', data));
+      //        $('#notificationContent').replaceWith($('#notificationContent',data));
+      //    });
+      //}, 1500);
+
+      //custom start up code
+      if (typeof startup == 'function')
+        startup();
+      //check cookies
+      if (!navigator.cookieEnabled) {
+        $('#cookieWarning').removeClass('hidden-content');
+      }
+    });
+  </script>
 </body>
 </html>
